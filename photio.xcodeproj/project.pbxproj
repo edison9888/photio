@@ -14,7 +14,10 @@
 		05C99ECD14F0585C00D09F3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ECC14F0585C00D09F3E /* main.m */; };
 		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
 		05C99ED414F0585C00D09F3E /* PhotioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED314F0585C00D09F3E /* PhotioViewController.m */; };
-		05C99ED714F0585C00D09F3E /* PhotioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99ED514F0585C00D09F3E /* PhotioViewController.xib */; };
+		05C99EF114F05A5500D09F3E /* CameraOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99EED14F05A5500D09F3E /* CameraOverlayViewController.m */; };
+		05C99EF214F05A5500D09F3E /* CameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EEE14F05A5500D09F3E /* CameraOverlayViewController.xib */; };
+		05C99EF314F05A5500D09F3E /* ResizeCropUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99EF014F05A5500D09F3E /* ResizeCropUIImage.m */; };
+		05C99EF514F05B3B00D09F3E /* PhotioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +25,20 @@
 		05C99EC014F0585C00D09F3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05C99EC214F0585C00D09F3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05C99EC414F0585C00D09F3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		05C99EC814F0585C00D09F3E /* photio-Info.plist */ = {isa = PBXFileReference; path = "photio-Info.plist"; sourceTree = "<group>"; };
+		05C99EC814F0585C00D09F3E /* photio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "photio-Info.plist"; sourceTree = "<group>"; };
 		05C99ECA14F0585C00D09F3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		05C99ECC14F0585C00D09F3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */ = {isa = PBXFileReference; path = "photio-Prefix.pch"; sourceTree = "<group>"; };
-		05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */ = {isa = PBXFileReference; path = PhotioAppDelegate.h; sourceTree = "<group>"; };
+		05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "photio-Prefix.pch"; sourceTree = "<group>"; };
+		05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotioAppDelegate.h; sourceTree = "<group>"; };
 		05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioAppDelegate.m; sourceTree = "<group>"; };
-		05C99ED214F0585C00D09F3E /* PhotioViewController.h */ = {isa = PBXFileReference; path = PhotioViewController.h; sourceTree = "<group>"; };
+		05C99ED214F0585C00D09F3E /* PhotioViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotioViewController.h; sourceTree = "<group>"; };
 		05C99ED314F0585C00D09F3E /* PhotioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioViewController.m; sourceTree = "<group>"; };
-		05C99ED614F0585C00D09F3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PhotioViewController.xib; sourceTree = "<group>"; };
+		05C99EEC14F05A5500D09F3E /* CameraOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayViewController.h; sourceTree = "<group>"; };
+		05C99EED14F05A5500D09F3E /* CameraOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayViewController.m; sourceTree = "<group>"; };
+		05C99EEE14F05A5500D09F3E /* CameraOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayViewController.xib; sourceTree = "<group>"; };
+		05C99EEF14F05A5500D09F3E /* ResizeCropUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeCropUIImage.h; sourceTree = "<group>"; };
+		05C99EF014F05A5500D09F3E /* ResizeCropUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeCropUIImage.m; sourceTree = "<group>"; };
+		05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotioViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +85,12 @@
 		05C99EC614F0585C00D09F3E /* photio */ = {
 			isa = PBXGroup;
 			children = (
+				05C99EEB14F05A5500D09F3E /* photoAlbum */,
 				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
 				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
 				05C99ED214F0585C00D09F3E /* PhotioViewController.h */,
 				05C99ED314F0585C00D09F3E /* PhotioViewController.m */,
-				05C99ED514F0585C00D09F3E /* PhotioViewController.xib */,
+				05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */,
 				05C99EC714F0585C00D09F3E /* Supporting Files */,
 			);
 			path = photio;
@@ -96,6 +105,18 @@
 				05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05C99EEB14F05A5500D09F3E /* photoAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				05C99EEC14F05A5500D09F3E /* CameraOverlayViewController.h */,
+				05C99EED14F05A5500D09F3E /* CameraOverlayViewController.m */,
+				05C99EEE14F05A5500D09F3E /* CameraOverlayViewController.xib */,
+				05C99EEF14F05A5500D09F3E /* ResizeCropUIImage.h */,
+				05C99EF014F05A5500D09F3E /* ResizeCropUIImage.m */,
+			);
+			path = photoAlbum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +171,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
-				05C99ED714F0585C00D09F3E /* PhotioViewController.xib in Resources */,
+				05C99EF214F05A5500D09F3E /* CameraOverlayViewController.xib in Resources */,
+				05C99EF514F05B3B00D09F3E /* PhotioViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +186,8 @@
 				05C99ECD14F0585C00D09F3E /* main.m in Sources */,
 				05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */,
 				05C99ED414F0585C00D09F3E /* PhotioViewController.m in Sources */,
+				05C99EF114F05A5500D09F3E /* CameraOverlayViewController.m in Sources */,
+				05C99EF314F05A5500D09F3E /* ResizeCropUIImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,14 +202,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		05C99ED514F0585C00D09F3E /* PhotioViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				05C99ED614F0585C00D09F3E /* en */,
-			);
-			name = PhotioViewController.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -195,7 +211,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Troy Stribling (M8KL9DR9D4)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -210,6 +227,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5BF5655-359D-425E-83FB-4A7126E4B5E6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

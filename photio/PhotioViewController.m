@@ -7,54 +7,96 @@
 //
 
 #import "PhotioViewController.h"
+#import "ResizeCropUIImage.h"
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface PhotioViewController (PrivateAPI)
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation PhotioViewController
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
-}
+@synthesize myToolbar, overlayViewController, capturedImages;
 
-#pragma mark - View lifecycle
+#pragma mark -
+#pragma mark PhotioViewController (PrivateAPI)
 
-- (void)viewDidLoad
-{
+#pragma mark -
+#pragma mark UIViewController
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.overlayViewController = [[CameraOverlayViewController alloc] initWithNibName:@"CameraOverlayViewController" bundle:nil];
+    self.overlayViewController.overlay_delegate = self;    
+    self.capturedImages = [NSMutableArray array];
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        NSMutableArray *toolbarItems = [NSMutableArray arrayWithCapacity:self.myToolbar.items.count];
+        [toolbarItems addObjectsFromArray:self.myToolbar.items];
+        [toolbarItems removeObjectAtIndex:2];
+        [self.myToolbar setItems:toolbarItems animated:NO];
+    }
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark -
+#pragma mark Toolbar Actions
+
+- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
+    if (self.capturedImages.count > 0) {
+        [self.capturedImages removeAllObjects];
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        [self.overlayViewController setupImagePicker:sourceType];
+        [self presentModalViewController:self.overlayViewController.imagePickerController animated:YES];
+    }
+}
+
+- (IBAction)cameraAction:(id)sender { 
+    [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
+}
+
+#pragma mark -
+#pragma mark OverlayViewControllerDelegate
+
+- (void)didTakePicture:(UIImage*)picture { 
+    [self.capturedImages addObject:picture];
+}
+
+- (void)didFinishWithCamera { 
+    [self dismissModalViewControllerAnimated:YES];
+    for (UIImage* picture in self.capturedImages) {
+        UIImage* cropImage = [picture scaleBy:0.075 andCropWithRect:CGRectMake(100, 100, 200, 200)];
+        UIImageView* image = [[UIImageView alloc] initWithImage:cropImage];
+        [self.view addSubview:image];        
+    }
 }
 
 @end
