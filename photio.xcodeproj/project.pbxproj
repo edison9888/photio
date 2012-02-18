@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
+		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
+		05C99EC514F0585C00D09F3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC414F0585C00D09F3E /* CoreGraphics.framework */; };
+		05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EC914F0585C00D09F3E /* InfoPlist.strings */; };
+		05C99ECD14F0585C00D09F3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ECC14F0585C00D09F3E /* main.m */; };
+		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
+		05C99ED414F0585C00D09F3E /* PhotioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED314F0585C00D09F3E /* PhotioViewController.m */; };
+		05C99ED714F0585C00D09F3E /* PhotioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99ED514F0585C00D09F3E /* PhotioViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05C99EC014F0585C00D09F3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		05C99EC214F0585C00D09F3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		05C99EC414F0585C00D09F3E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		05C99EC814F0585C00D09F3E /* photio-Info.plist */ = {isa = PBXFileReference; path = "photio-Info.plist"; sourceTree = "<group>"; };
+		05C99ECA14F0585C00D09F3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		05C99ECC14F0585C00D09F3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */ = {isa = PBXFileReference; path = "photio-Prefix.pch"; sourceTree = "<group>"; };
+		05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */ = {isa = PBXFileReference; path = PhotioAppDelegate.h; sourceTree = "<group>"; };
+		05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioAppDelegate.m; sourceTree = "<group>"; };
+		05C99ED214F0585C00D09F3E /* PhotioViewController.h */ = {isa = PBXFileReference; path = PhotioViewController.h; sourceTree = "<group>"; };
+		05C99ED314F0585C00D09F3E /* PhotioViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioViewController.m; sourceTree = "<group>"; };
+		05C99ED614F0585C00D09F3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PhotioViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05C99EB914F0585C00D09F3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */,
+				05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */,
+				05C99EC514F0585C00D09F3E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05C99EB114F0585C00D09F3E = {
+			isa = PBXGroup;
+			children = (
+				05C99EC614F0585C00D09F3E /* photio */,
+				05C99EBF14F0585C00D09F3E /* Frameworks */,
+				05C99EBD14F0585C00D09F3E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		05C99EBD14F0585C00D09F3E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05C99EBC14F0585C00D09F3E /* photio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05C99EBF14F0585C00D09F3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05C99EC014F0585C00D09F3E /* UIKit.framework */,
+				05C99EC214F0585C00D09F3E /* Foundation.framework */,
+				05C99EC414F0585C00D09F3E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		05C99EC614F0585C00D09F3E /* photio */ = {
+			isa = PBXGroup;
+			children = (
+				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
+				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
+				05C99ED214F0585C00D09F3E /* PhotioViewController.h */,
+				05C99ED314F0585C00D09F3E /* PhotioViewController.m */,
+				05C99ED514F0585C00D09F3E /* PhotioViewController.xib */,
+				05C99EC714F0585C00D09F3E /* Supporting Files */,
+			);
+			path = photio;
+			sourceTree = "<group>";
+		};
+		05C99EC714F0585C00D09F3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05C99EC814F0585C00D09F3E /* photio-Info.plist */,
+				05C99EC914F0585C00D09F3E /* InfoPlist.strings */,
+				05C99ECC14F0585C00D09F3E /* main.m */,
+				05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05C99EBB14F0585C00D09F3E /* photio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05C99EDA14F0585C00D09F3E /* Build configuration list for PBXNativeTarget "photio" */;
+			buildPhases = (
+				05C99EB814F0585C00D09F3E /* Sources */,
+				05C99EB914F0585C00D09F3E /* Frameworks */,
+				05C99EBA14F0585C00D09F3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = photio;
+			productName = photio;
+			productReference = 05C99EBC14F0585C00D09F3E /* photio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05C99EB314F0585C00D09F3E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = imaginaryProducts;
+			};
+			buildConfigurationList = 05C99EB614F0585C00D09F3E /* Build configuration list for PBXProject "photio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05C99EB114F0585C00D09F3E;
+			productRefGroup = 05C99EBD14F0585C00D09F3E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05C99EBB14F0585C00D09F3E /* photio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05C99EBA14F0585C00D09F3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
+				05C99ED714F0585C00D09F3E /* PhotioViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05C99EB814F0585C00D09F3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05C99ECD14F0585C00D09F3E /* main.m in Sources */,
+				05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */,
+				05C99ED414F0585C00D09F3E /* PhotioViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		05C99EC914F0585C00D09F3E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05C99ECA14F0585C00D09F3E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		05C99ED514F0585C00D09F3E /* PhotioViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05C99ED614F0585C00D09F3E /* en */,
+			);
+			name = PhotioViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05C99ED814F0585C00D09F3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		05C99ED914F0585C00D09F3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		05C99EDB14F0585C00D09F3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "photio/photio-Prefix.pch";
+				INFOPLIST_FILE = "photio/photio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		05C99EDC14F0585C00D09F3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "photio/photio-Prefix.pch";
+				INFOPLIST_FILE = "photio/photio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05C99EB614F0585C00D09F3E /* Build configuration list for PBXProject "photio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05C99ED814F0585C00D09F3E /* Debug */,
+				05C99ED914F0585C00D09F3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05C99EDA14F0585C00D09F3E /* Build configuration list for PBXNativeTarget "photio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05C99EDB14F0585C00D09F3E /* Debug */,
+				05C99EDC14F0585C00D09F3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05C99EB314F0585C00D09F3E /* Project object */;
+}
