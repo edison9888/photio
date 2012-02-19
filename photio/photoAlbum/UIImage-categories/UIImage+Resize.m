@@ -9,14 +9,16 @@
 
 // Private helper methods
 @interface UIImage ()
-- (UIImage *)resizedImage:(CGSize)newSize
-                transform:(CGAffineTransform)transform
-           drawTransposed:(BOOL)transpose
-     interpolationQuality:(CGInterpolationQuality)quality;
+- (UIImage *)resizedImage:(CGSize)newSize transform:(CGAffineTransform)transform drawTransposed:(BOOL)transpose interpolationQuality:(CGInterpolationQuality)quality;
 - (CGAffineTransform)transformForOrientation:(CGSize)newSize;
 @end
 
 @implementation UIImage (Resize)
+
+- (UIImage*)scaleBy:(CGFloat)_scaleBy andCropToSize:(CGSize)_size {
+    UIImage* resizedImage = [self resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(_scaleBy*self.size.width, _scaleBy*self.size.height) interpolationQuality:kCGInterpolationHigh];
+    return [resizedImage croppedImage:CGRectMake((resizedImage.size.width - _size.width)/2, (resizedImage.size.height - _size.height)/2, _size.width, _size.height)];
+}
 
 // Returns a copy of this image that is cropped to the given bounds.
 // The bounds will be adjusted using CGRectIntegral.

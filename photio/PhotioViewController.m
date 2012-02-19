@@ -93,11 +93,10 @@
 - (void)didFinishWithCamera { 
     [self dismissModalViewControllerAnimated:YES];
     for (UIImage* picture in self.capturedImages) {
-        UIImage* saveImage = [picture resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(320, 427) interpolationQuality:kCGInterpolationHigh];
-        UIImage* cropedImage = [saveImage resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(160, 213) interpolationQuality:kCGInterpolationHigh];
-        CGSize cropSize = cropedImage.size;
-        UIImageView* image = [[UIImageView alloc] initWithImage:[cropedImage croppedImage:CGRectMake((cropSize.width - 160)/2, (cropSize.height - 160)/2, 160, 160)]];
-        image.frame = CGRectMake(0, 0, 160, 160);
+        UIImage* saveImage = [picture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
+        UIImage* cropedImage = [saveImage scaleBy:DISPLAYED_IMAGE_SCALE andCropToSize:DISPLAYED_IMAGE_CROP];
+        UIImageView* image = [[UIImageView alloc] initWithImage:cropedImage];
+        image.frame = CGRectMake(0, 0, 200, 200);
         image.contentMode = UIViewContentModeCenter;
         [self.view addSubview:image];        
     }

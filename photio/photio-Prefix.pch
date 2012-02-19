@@ -12,3 +12,9 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define SAVED_IMAGE_SCALE       0.13
+#define SAVED_IMAGE_CROP        CGSizeMake(320, 427)
+#define DISPLAYED_IMAGE_SCALE   0.625
+#define DISPLAYED_IMAGE_CROP    CGSizeMake(200, 200)
+
