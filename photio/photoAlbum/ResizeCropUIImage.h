@@ -9,6 +9,7 @@
 
 @interface UIImage (ResizeCropUIImage)
 
-- (UIImage*)scaleBy:(CGFloat)_scale andCropWithRect:(CGRect)_rectt;
+- (UIImage*)scaleBy:(CGFloat)_scale andCropWithRect:(CGRect)_rect;
+- (UIImage*)resize:(CGSize)_size;
 
 @end
