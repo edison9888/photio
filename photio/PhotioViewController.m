@@ -7,7 +7,7 @@
 //
 
 #import "PhotioViewController.h"
-#import "ResizeCropUIImage.h"
+#import "UIImage+Resize.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface PhotioViewController (PrivateAPI)
@@ -59,7 +59,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,10 +93,12 @@
 - (void)didFinishWithCamera { 
     [self dismissModalViewControllerAnimated:YES];
     for (UIImage* picture in self.capturedImages) {
-        UIImage* cropedImage = [picture resize:CGSizeMake(180, 163)];
-        UIImageView* image = [[UIImageView alloc] initWithImage:cropedImage];
-        image.frame = CGRectMake(10, 10, cropedImage.size.width, cropedImage.size.height);
-        image.contentMode = UIViewContentModeScaleAspectFit;
+        UIImage* saveImage = [picture resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(320, 427) interpolationQuality:kCGInterpolationHigh];
+        UIImage* cropedImage = [saveImage resizedImageWithContentMode:UIViewContentModeScaleAspectFill bounds:CGSizeMake(160, 213) interpolationQuality:kCGInterpolationHigh];
+        CGSize cropSize = cropedImage.size;
+        UIImageView* image = [[UIImageView alloc] initWithImage:[cropedImage croppedImage:CGRectMake((cropSize.width - 160)/2, (cropSize.height - 160)/2, 160, 160)]];
+        image.frame = CGRectMake(0, 0, 160, 160);
+        image.contentMode = UIViewContentModeCenter;
         [self.view addSubview:image];        
     }
 }

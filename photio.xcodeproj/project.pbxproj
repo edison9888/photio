@@ -16,8 +16,10 @@
 		05C99ED414F0585C00D09F3E /* PhotioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED314F0585C00D09F3E /* PhotioViewController.m */; };
 		05C99EF114F05A5500D09F3E /* CameraOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99EED14F05A5500D09F3E /* CameraOverlayViewController.m */; };
 		05C99EF214F05A5500D09F3E /* CameraOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EEE14F05A5500D09F3E /* CameraOverlayViewController.xib */; };
-		05C99EF314F05A5500D09F3E /* ResizeCropUIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99EF014F05A5500D09F3E /* ResizeCropUIImage.m */; };
 		05C99EF514F05B3B00D09F3E /* PhotioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */; };
+		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
+		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
+		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,9 +38,13 @@
 		05C99EEC14F05A5500D09F3E /* CameraOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayViewController.h; sourceTree = "<group>"; };
 		05C99EED14F05A5500D09F3E /* CameraOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayViewController.m; sourceTree = "<group>"; };
 		05C99EEE14F05A5500D09F3E /* CameraOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayViewController.xib; sourceTree = "<group>"; };
-		05C99EEF14F05A5500D09F3E /* ResizeCropUIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResizeCropUIImage.h; sourceTree = "<group>"; };
-		05C99EF014F05A5500D09F3E /* ResizeCropUIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResizeCropUIImage.m; sourceTree = "<group>"; };
 		05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotioViewController.xib; sourceTree = "<group>"; };
+		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		05DE436714F17503005FF6B0 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		05DE436814F17503005FF6B0 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,13 +116,25 @@
 		05C99EEB14F05A5500D09F3E /* photoAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				05DE436314F17503005FF6B0 /* UIImage-categories */,
 				05C99EEC14F05A5500D09F3E /* CameraOverlayViewController.h */,
 				05C99EED14F05A5500D09F3E /* CameraOverlayViewController.m */,
 				05C99EEE14F05A5500D09F3E /* CameraOverlayViewController.xib */,
-				05C99EEF14F05A5500D09F3E /* ResizeCropUIImage.h */,
-				05C99EF014F05A5500D09F3E /* ResizeCropUIImage.m */,
 			);
 			path = photoAlbum;
+			sourceTree = "<group>";
+		};
+		05DE436314F17503005FF6B0 /* UIImage-categories */ = {
+			isa = PBXGroup;
+			children = (
+				05DE436414F17503005FF6B0 /* UIImage+Alpha.h */,
+				05DE436514F17503005FF6B0 /* UIImage+Alpha.m */,
+				05DE436614F17503005FF6B0 /* UIImage+Resize.h */,
+				05DE436714F17503005FF6B0 /* UIImage+Resize.m */,
+				05DE436814F17503005FF6B0 /* UIImage+RoundedCorner.h */,
+				05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */,
+			);
+			path = "UIImage-categories";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +205,9 @@
 				05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */,
 				05C99ED414F0585C00D09F3E /* PhotioViewController.m in Sources */,
 				05C99EF114F05A5500D09F3E /* CameraOverlayViewController.m in Sources */,
-				05C99EF314F05A5500D09F3E /* ResizeCropUIImage.m in Sources */,
+				05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */,
+				05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */,
+				05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +313,7 @@
 				05C99EDC14F0585C00D09F3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
