@@ -10,12 +10,14 @@
 #import "CameraOverlayViewController.h"
 
 @interface PhotioViewController : UIViewController <UIImagePickerControllerDelegate, CameraOverlayViewControllerDelegate> {
-UIToolbar* myToolbar;    
-CameraOverlayViewController* overlayViewController;   
-NSMutableArray* capturedImages;
+    UIToolbar* myToolbar;    
+    UIImageView* imageView;
+    CameraOverlayViewController* overlayViewController;   
+    NSMutableArray* capturedImages;
 }
 
 @property (nonatomic, retain) IBOutlet UIToolbar* myToolbar;
+@property (nonatomic, retain) IBOutlet UIImageView* imageView;
 @property (nonatomic, retain) CameraOverlayViewController* overlayViewController;
 @property (nonatomic, retain) NSMutableArray* capturedImages;
 
