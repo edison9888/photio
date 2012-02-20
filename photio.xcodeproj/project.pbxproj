@@ -20,6 +20,14 @@
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
+		05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */; };
+		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
+		05DE437614F1E994005FF6B0 /* EntriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE437414F1E994005FF6B0 /* EntriesViewController.m */; };
+		05DE437714F1E994005FF6B0 /* EntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437514F1E994005FF6B0 /* EntriesViewController.xib */; };
+		05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE438714F1F46D005FF6B0 /* EntryViewController.m */; };
+		05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE438814F1F46D005FF6B0 /* EntryViewController.xib */; };
+		05DE439314F1F846005FF6B0 /* AddEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE439214F1F846005FF6B0 /* AddEntryView.m */; };
+		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +53,18 @@
 		05DE436714F17503005FF6B0 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		05DE436814F17503005FF6B0 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectViewController.h; sourceTree = "<group>"; };
+		05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectViewController.m; sourceTree = "<group>"; };
+		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
+		05DE437314F1E994005FF6B0 /* EntriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesViewController.h; sourceTree = "<group>"; };
+		05DE437414F1E994005FF6B0 /* EntriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesViewController.m; sourceTree = "<group>"; };
+		05DE437514F1E994005FF6B0 /* EntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntriesViewController.xib; sourceTree = "<group>"; };
+		05DE438614F1F46D005FF6B0 /* EntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryViewController.h; sourceTree = "<group>"; };
+		05DE438714F1F46D005FF6B0 /* EntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryViewController.m; sourceTree = "<group>"; };
+		05DE438814F1F46D005FF6B0 /* EntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryViewController.xib; sourceTree = "<group>"; };
+		05DE439114F1F845005FF6B0 /* AddEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEntryView.h; sourceTree = "<group>"; };
+		05DE439214F1F846005FF6B0 /* AddEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEntryView.m; sourceTree = "<group>"; };
+		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */,
 				05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */,
 				05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */,
 				05C99EC514F0585C00D09F3E /* CoreGraphics.framework in Frameworks */,
@@ -64,6 +85,7 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
+				05DE439414F20064005FF6B0 /* QuartzCore.framework */,
 				05C99EC614F0585C00D09F3E /* photio */,
 				05C99EBF14F0585C00D09F3E /* Frameworks */,
 				05C99EBD14F0585C00D09F3E /* Products */,
@@ -98,6 +120,14 @@
 				05C99ED314F0585C00D09F3E /* PhotioViewController.m */,
 				05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */,
 				05C99EC714F0585C00D09F3E /* Supporting Files */,
+				05DE437314F1E994005FF6B0 /* EntriesViewController.h */,
+				05DE437414F1E994005FF6B0 /* EntriesViewController.m */,
+				05DE437514F1E994005FF6B0 /* EntriesViewController.xib */,
+				05DE438614F1F46D005FF6B0 /* EntryViewController.h */,
+				05DE438714F1F46D005FF6B0 /* EntryViewController.m */,
+				05DE438814F1F46D005FF6B0 /* EntryViewController.xib */,
+				05DE439114F1F845005FF6B0 /* AddEntryView.h */,
+				05DE439214F1F846005FF6B0 /* AddEntryView.m */,
 			);
 			path = photio;
 			sourceTree = "<group>";
@@ -120,6 +150,9 @@
 				05C99EEC14F05A5500D09F3E /* CameraOverlayViewController.h */,
 				05C99EED14F05A5500D09F3E /* CameraOverlayViewController.m */,
 				05C99EEE14F05A5500D09F3E /* CameraOverlayViewController.xib */,
+				05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */,
+				05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */,
+				05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */,
 			);
 			path = photoAlbum;
 			sourceTree = "<group>";
@@ -191,6 +224,9 @@
 				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
 				05C99EF214F05A5500D09F3E /* CameraOverlayViewController.xib in Resources */,
 				05C99EF514F05B3B00D09F3E /* PhotioViewController.xib in Resources */,
+				05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */,
+				05DE437714F1E994005FF6B0 /* EntriesViewController.xib in Resources */,
+				05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +244,10 @@
 				05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */,
 				05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */,
 				05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */,
+				05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */,
+				05DE437614F1E994005FF6B0 /* EntriesViewController.m in Sources */,
+				05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */,
+				05DE439314F1F846005FF6B0 /* AddEntryView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

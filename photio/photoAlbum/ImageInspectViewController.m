@@ -1,16 +1,15 @@
 //
-//  PhotioViewController.m
+//  ImageInspectViewController.m
 //  photio
 //
-//  Created by Troy Stribling on 2/18/12.
+//  Created by Troy Stribling on 2/19/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
-
-#import "PhotioViewController.h"
+#import "ImageInspectViewController.h"
 #import "UIImage+Resize.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface PhotioViewController (PrivateAPI)
+@interface ImageInspectViewController (PrivateAPI)
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 - (void)loadFile:(NSString*)_fileName;
@@ -18,16 +17,16 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation PhotioViewController
+@implementation ImageInspectViewController
 
-@synthesize myToolbar, overlayViewController, capturedImages, imageView;
-
-#pragma mark -
-#pragma mark PhotioViewController
-
+@synthesize overlayViewController, capturedImages, imageView;
 
 #pragma mark -
-#pragma mark PhotioViewController (PrivateAPI)
+#pragma mark ImageInspectViewController
+
+
+#pragma mark -
+#pragma mark ImageInspectViewController (PrivateAPI)
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
     if (error != NULL) {
@@ -50,12 +49,6 @@
     self.overlayViewController.overlayDelegate = self;    
     self.capturedImages = [NSMutableArray array];
     [self loadFile:@"Documents/Test.png"];
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        NSMutableArray *toolbarItems = [NSMutableArray arrayWithCapacity:self.myToolbar.items.count];
-        [toolbarItems addObjectsFromArray:self.myToolbar.items];
-        [toolbarItems removeObjectAtIndex:2];
-        [self.myToolbar setItems:toolbarItems animated:NO];
-    }
 }
 
 - (void)viewDidUnload {

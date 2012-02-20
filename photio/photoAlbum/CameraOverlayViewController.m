@@ -2,7 +2,7 @@
 
 @implementation CameraOverlayViewController
 
-@synthesize overlay_delegate, takePictureButton, imagePickerController;
+@synthesize overlayDelegate, takePictureButton, imagePickerController;
 
 
 #pragma mark -
@@ -31,7 +31,7 @@
 }
 
 - (IBAction)done:(id)sender {
-    [self.overlay_delegate didFinishWithCamera];
+    [self.overlayDelegate didFinishWithCamera];
     self.takePictureButton.enabled = YES;
 }
 
@@ -59,12 +59,12 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    if (self.overlay_delegate)
-        [self.overlay_delegate didTakePicture:image];    
+    if (self.overlayDelegate)
+        [self.overlayDelegate didTakePicture:image];    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker { 
-    [self.overlay_delegate didFinishWithCamera];
+    [self.overlayDelegate didFinishWithCamera];
 }
 
 @end

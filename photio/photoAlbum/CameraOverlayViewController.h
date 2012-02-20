@@ -4,13 +4,13 @@
 @protocol CameraOverlayViewControllerDelegate;
 
 @interface CameraOverlayViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    id <CameraOverlayViewControllerDelegate> delegate;    
+    __weak id <CameraOverlayViewControllerDelegate> overlayDelegate;    
     UIImagePickerController* imagePickerController;    
 @private
     UIBarButtonItem *takePictureButton;
 }    
 
-@property (nonatomic, assign) id <CameraOverlayViewControllerDelegate> overlay_delegate;
+@property (nonatomic, weak) id <CameraOverlayViewControllerDelegate> overlayDelegate;
 @property (nonatomic, retain) UIImagePickerController* imagePickerController;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* takePictureButton;
 
