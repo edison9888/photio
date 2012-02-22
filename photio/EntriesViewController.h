@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EntriesViewController : UITableViewController
+@interface EntriesViewController : UITableViewController {
+    BOOL    isDragging;
+}   
+
+@property (nonatomic, assign) BOOL isDragging;
 
 @end

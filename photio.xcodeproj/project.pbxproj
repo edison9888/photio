@@ -26,7 +26,6 @@
 		05DE437714F1E994005FF6B0 /* EntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437514F1E994005FF6B0 /* EntriesViewController.xib */; };
 		05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE438714F1F46D005FF6B0 /* EntryViewController.m */; };
 		05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE438814F1F46D005FF6B0 /* EntryViewController.xib */; };
-		05DE439314F1F846005FF6B0 /* AddEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE439214F1F846005FF6B0 /* AddEntryView.m */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,8 +61,6 @@
 		05DE438614F1F46D005FF6B0 /* EntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryViewController.h; sourceTree = "<group>"; };
 		05DE438714F1F46D005FF6B0 /* EntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryViewController.m; sourceTree = "<group>"; };
 		05DE438814F1F46D005FF6B0 /* EntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryViewController.xib; sourceTree = "<group>"; };
-		05DE439114F1F845005FF6B0 /* AddEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEntryView.h; sourceTree = "<group>"; };
-		05DE439214F1F846005FF6B0 /* AddEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEntryView.m; sourceTree = "<group>"; };
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -82,6 +79,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05C59C1F14F31EF8009AC823 /* library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = library;
+			sourceTree = "<group>";
+		};
+		05C59C2314F331A6009AC823 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +124,8 @@
 		05C99EC614F0585C00D09F3E /* photio */ = {
 			isa = PBXGroup;
 			children = (
+				05C59C2314F331A6009AC823 /* images */,
+				05C59C1F14F31EF8009AC823 /* library */,
 				05C99EEB14F05A5500D09F3E /* photoAlbum */,
 				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
 				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
@@ -126,8 +139,6 @@
 				05DE438614F1F46D005FF6B0 /* EntryViewController.h */,
 				05DE438714F1F46D005FF6B0 /* EntryViewController.m */,
 				05DE438814F1F46D005FF6B0 /* EntryViewController.xib */,
-				05DE439114F1F845005FF6B0 /* AddEntryView.h */,
-				05DE439214F1F846005FF6B0 /* AddEntryView.m */,
 			);
 			path = photio;
 			sourceTree = "<group>";
@@ -247,7 +258,6 @@
 				05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */,
 				05DE437614F1E994005FF6B0 /* EntriesViewController.m in Sources */,
 				05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */,
-				05DE439314F1F846005FF6B0 /* AddEntryView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
