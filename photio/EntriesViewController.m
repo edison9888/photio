@@ -136,7 +136,6 @@
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
     if (scrollView.contentOffset.y < 0) {
-        CGFloat y = scrollView.contentOffset.y;
     }
 }
 

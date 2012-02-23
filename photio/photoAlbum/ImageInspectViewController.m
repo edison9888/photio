@@ -19,12 +19,20 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize overlayViewController, capturedImages, imageView;
+@synthesize overlayViewController, capture, imageView, toolBar;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
 
++ (id)inView:(UIView*)_containerView {
+    return [[ImageInspectViewController alloc] initWithNibName:@"ImageInspectViewController" bundle:nil inView:_containerView];;
+}
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    }
+    return self;
+}
 #pragma mark -
 #pragma mark ImageInspectViewController (PrivateAPI)
 
@@ -47,7 +55,6 @@
     [super viewDidLoad];
     self.overlayViewController = [[CameraOverlayViewController alloc] initWithNibName:@"CameraOverlayViewController" bundle:nil];
     self.overlayViewController.overlayDelegate = self;    
-    self.capturedImages = [NSMutableArray array];
     [self loadFile:@"Documents/Test.png"];
 }
 
@@ -83,9 +90,6 @@
 #pragma mark Toolbar Actions
 
 - (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
-    if (self.capturedImages.count > 0) {
-        [self.capturedImages removeAllObjects];
-    }
     if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
         [self.overlayViewController setupImagePicker:sourceType];
         [self presentModalViewController:self.overlayViewController.imagePickerController animated:YES];
@@ -100,19 +104,17 @@
 #pragma mark OverlayViewControllerDelegate
 
 - (void)didTakePicture:(UIImage*)picture { 
-    [self.capturedImages addObject:picture];
+    self.capture = picture;
 }
 
 - (void)didFinishWithCamera { 
     [self dismissModalViewControllerAnimated:YES];
-    for (UIImage* picture in self.capturedImages) {
-        UIImageWriteToSavedPhotosAlbum(picture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        UIImage* saveImage = [picture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
-        NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
-        [UIImagePNGRepresentation(saveImage) writeToFile:pngPath atomically:YES];
-        self.imageView.image = saveImage;
-        [self.view addSubview:imageView];        
-    }
+    UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    UIImage* saveImage = [self.capture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
+    NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
+    [UIImagePNGRepresentation(saveImage) writeToFile:pngPath atomically:YES];
+    self.imageView.image = saveImage;
+    [self.view addSubview:imageView];        
 }
 
 @end

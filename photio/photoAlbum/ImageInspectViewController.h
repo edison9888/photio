@@ -10,14 +10,19 @@
 #import "CameraOverlayViewController.h"
 
 @interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, CameraOverlayViewControllerDelegate> {
-    UIImageView* imageView;
+    UIToolbar*                   toolBar;    
+    UIImageView*                 imageView;
     CameraOverlayViewController* overlayViewController;   
-    NSMutableArray* capturedImages;
+    UIImage*                     capture;
 }
 
+@property (nonatomic, retain) IBOutlet UIToolbar* toolBar;
 @property (nonatomic, retain) IBOutlet UIImageView* imageView;
 @property (nonatomic, retain) CameraOverlayViewController* overlayViewController;
-@property (nonatomic, retain) NSMutableArray* capturedImages;
+@property (nonatomic, retain) UIImage* capture;
+
++ (id)inView:(UIView*)_containerView;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 
 - (IBAction)cameraAction:(id)sender;
 
