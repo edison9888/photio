@@ -12,10 +12,12 @@
 @interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, CameraOverlayViewControllerDelegate> {
     UIToolbar*                   toolBar;    
     UIImageView*                 imageView;
+    UIView*                      containerView;
     CameraOverlayViewController* overlayViewController;   
     UIImage*                     capture;
 }
 
+@property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) IBOutlet UIToolbar* toolBar;
 @property (nonatomic, retain) IBOutlet UIImageView* imageView;
 @property (nonatomic, retain) CameraOverlayViewController* overlayViewController;

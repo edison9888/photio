@@ -13,13 +13,14 @@
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 - (void)loadFile:(NSString*)_fileName;
+- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize overlayViewController, capture, imageView, toolBar;
+@synthesize overlayViewController, capture, imageView, toolBar, containerView;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -30,6 +31,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        self.containerView = _containerView;
+        self.view.frame = self.containerView.frame;
     }
     return self;
 }
@@ -48,6 +51,13 @@
     }
 }
 
+- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
+    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+        [self.overlayViewController setupImagePicker:sourceType];
+        [self presentModalViewController:self.overlayViewController.imagePickerController animated:YES];
+    }
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -55,7 +65,7 @@
     [super viewDidLoad];
     self.overlayViewController = [[CameraOverlayViewController alloc] initWithNibName:@"CameraOverlayViewController" bundle:nil];
     self.overlayViewController.overlayDelegate = self;    
-    [self loadFile:@"Documents/Test.png"];
+//    [self loadFile:@"Documents/Test.png"];
 }
 
 - (void)viewDidUnload {
@@ -88,13 +98,6 @@
 
 #pragma mark -
 #pragma mark Toolbar Actions
-
-- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
-    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        [self.overlayViewController setupImagePicker:sourceType];
-        [self presentModalViewController:self.overlayViewController.imagePickerController animated:YES];
-    }
-}
 
 - (IBAction)cameraAction:(id)sender { 
     [self showImagePicker:UIImagePickerControllerSourceTypeCamera];

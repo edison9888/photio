@@ -7,6 +7,7 @@
 //
 
 #import "EntriesViewController.h"
+#import "ViewControllerGeneral.h"
 
 @implementation EntriesViewController
 
@@ -135,7 +136,8 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
-    if (scrollView.contentOffset.y < 0) {
+    if (scrollView.contentOffset.y < -50) {
+        [[ViewControllerGeneral instance] showImageInspectView:self.view];
     }
 }
 
