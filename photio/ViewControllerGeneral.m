@@ -64,11 +64,4 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 }
 
 
-- (void)showCamera {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [self.overlayViewController setupImagePicker:UIImagePickerControllerSourceTypeCamera];
-        [self presentModalViewController:self.overlayViewController.imagePickerController animated:YES];
-    }
-}
-
 @end
