@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CF12614F96A9100A31059 /* ContainerViewController.m */; };
+		050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF12714F96A9100A31059 /* ContainerViewController.xib */; };
+		050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF14F14F9A27D00A31059 /* CameraViewController.xib */; };
 		05C59C3D14F5D157009AC823 /* ViewControllerGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewControllerGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -15,8 +18,6 @@
 		05C99ECD14F0585C00D09F3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ECC14F0585C00D09F3E /* main.m */; };
 		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
 		05C99EF114F05A5500D09F3E /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99EED14F05A5500D09F3E /* CameraViewController.m */; };
-		05C99EF214F05A5500D09F3E /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EEE14F05A5500D09F3E /* CameraViewController.xib */; };
-		05C99EF514F05B3B00D09F3E /* PhotioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */; };
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
@@ -30,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050CF12514F96A9100A31059 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		050CF12614F96A9100A31059 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
+		050CF12714F96A9100A31059 /* ContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerViewController.xib; sourceTree = "<group>"; };
+		050CF14F14F9A27D00A31059 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewControllerGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewControllerGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,10 +47,8 @@
 		05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "photio-Prefix.pch"; sourceTree = "<group>"; };
 		05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotioAppDelegate.h; sourceTree = "<group>"; };
 		05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioAppDelegate.m; sourceTree = "<group>"; };
-		05C99EEC14F05A5500D09F3E /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CameraViewController.h; sourceTree = "<group>"; };
+		05C99EEC14F05A5500D09F3E /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		05C99EED14F05A5500D09F3E /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
-		05C99EEE14F05A5500D09F3E /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
-		05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotioViewController.xib; sourceTree = "<group>"; };
 		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -129,7 +132,6 @@
 				05C99EEB14F05A5500D09F3E /* photoAlbum */,
 				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
 				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
-				05C99EF414F05B3B00D09F3E /* PhotioViewController.xib */,
 				05C99EC714F0585C00D09F3E /* Supporting Files */,
 				05DE437314F1E994005FF6B0 /* EntriesViewController.h */,
 				05DE437414F1E994005FF6B0 /* EntriesViewController.m */,
@@ -139,6 +141,9 @@
 				05DE438814F1F46D005FF6B0 /* EntryViewController.xib */,
 				05C59C3B14F5D157009AC823 /* ViewControllerGeneral.h */,
 				05C59C3C14F5D157009AC823 /* ViewControllerGeneral.m */,
+				050CF12514F96A9100A31059 /* ContainerViewController.h */,
+				050CF12614F96A9100A31059 /* ContainerViewController.m */,
+				050CF12714F96A9100A31059 /* ContainerViewController.xib */,
 			);
 			path = photio;
 			sourceTree = "<group>";
@@ -160,7 +165,7 @@
 				05DE436314F17503005FF6B0 /* UIImage-categories */,
 				05C99EEC14F05A5500D09F3E /* CameraViewController.h */,
 				05C99EED14F05A5500D09F3E /* CameraViewController.m */,
-				05C99EEE14F05A5500D09F3E /* CameraViewController.xib */,
+				050CF14F14F9A27D00A31059 /* CameraViewController.xib */,
 				05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */,
 				05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */,
 				05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */,
@@ -233,11 +238,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
-				05C99EF214F05A5500D09F3E /* CameraViewController.xib in Resources */,
-				05C99EF514F05B3B00D09F3E /* PhotioViewController.xib in Resources */,
 				05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */,
 				05DE437714F1E994005FF6B0 /* EntriesViewController.xib in Resources */,
 				05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */,
+				050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */,
+				050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +263,7 @@
 				05DE437614F1E994005FF6B0 /* EntriesViewController.m in Sources */,
 				05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */,
 				05C59C3D14F5D157009AC823 /* ViewControllerGeneral.m in Sources */,
+				050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

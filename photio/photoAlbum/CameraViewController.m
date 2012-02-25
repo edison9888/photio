@@ -8,10 +8,17 @@
 
 #import "CameraViewController.h"
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface CameraViewController (PrivateAPI)
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraViewController
 
 @synthesize cameraDelegate, takePictureButton, imagePickerController, containerView;
 
+#pragma mark -
+#pragma mark CameraViewController PrivateAPI
 
 #pragma mark -
 #pragma mark CameraViewController
@@ -26,12 +33,10 @@
         self.imagePickerController = [[UIImagePickerController alloc] init];
         self.imagePickerController.delegate = self;
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        self.imagePickerController.showsCameraControls = NO;        
-        CGRect overlayViewFrame = self.imagePickerController.cameraOverlayView.frame;
-        CGRect newFrame = CGRectMake(0.0, CGRectGetHeight(overlayViewFrame)-self.view.frame.size.height-10.0, CGRectGetWidth(overlayViewFrame), 
-                                     self.view.frame.size.height+10.0);
-        self.view.frame = newFrame;
-        [self.imagePickerController.cameraOverlayView addSubview:self.view];
+        self.imagePickerController.showsCameraControls = NO;  
+        self.imagePickerController.view.userInteractionEnabled = NO;
+        self.view.frame = self.containerView.frame;
+        [self.view addSubview:self.imagePickerController.view];
     }
     return self;
 }

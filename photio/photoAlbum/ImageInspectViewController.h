@@ -17,11 +17,11 @@
     UIImage*                     capture;
 }
 
-@property (nonatomic, weak) UIView* containerView;
-@property (nonatomic, retain) IBOutlet UIToolbar* toolBar;
+@property (nonatomic, weak) UIView*                 containerView;
+@property (nonatomic, retain) IBOutlet UIToolbar*   toolBar;
 @property (nonatomic, retain) IBOutlet UIImageView* imageView;
-@property (nonatomic, retain) CameraViewController*cameraViewController;
-@property (nonatomic, retain) UIImage* capture;
+@property (nonatomic, retain) CameraViewController* cameraViewController;
+@property (nonatomic, retain) UIImage*              capture;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

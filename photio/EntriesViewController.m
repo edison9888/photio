@@ -9,14 +9,36 @@
 #import "EntriesViewController.h"
 #import "ViewControllerGeneral.h"
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface EntriesViewController (PrivateAPI)
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation EntriesViewController
 
-@synthesize isDragging;
+@synthesize containerView;
 
+#pragma mark - 
+#pragma mark EntriesViewController PrivateAPI
+
+#pragma mark - 
+#pragma mark EntriesViewController
+
++ (id)inView:(UIView*)_containerView {
+    return [[EntriesViewController alloc] initWithNibName:@"EntriesViewController" bundle:nil inView:_containerView];;
+}
+
+- (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {        
+        self.containerView = _containerView;
+        self.view.frame = self.containerView.frame;
+    }
+    return self;
+}
+    
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -26,7 +48,7 @@
 }
 
 #pragma mark - 
-#pragma mark View lifecycle
+#pragma mark View 
 
 - (void)viewDidLoad { 
     [super viewDidLoad];
@@ -76,45 +98,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - 
 #pragma mark Table view delegate
 
@@ -131,18 +114,10 @@
 #pragma mark -
 #pragma mark UIScrollViewDelegate
 
-- (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView {
-    self.isDragging = YES;
-}
-
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
-    if (scrollView.contentOffset.y < -50) {
-        [[ViewControllerGeneral instance] showImageInspectView:self.view];
+    if (scrollView.contentOffset.y < 0) {
+        [[ViewControllerGeneral instance] transitionEntriesToImageInspect];
     }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView*)scrollView willDecelerate:(BOOL)decelerate {
-    self.isDragging = NO;
 }
 
 @end

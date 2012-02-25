@@ -64,8 +64,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cameraViewController = [[ViewControllerGeneral instance] showCameraView:self.view];
-    self.cameraViewController.cameraDelegate = self; 
 }
 
 - (void)viewDidUnload {
@@ -73,6 +71,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    self.cameraViewController = [[ViewControllerGeneral instance] createCameraView:self.view];
+    self.cameraViewController.cameraDelegate = self; 
     [super viewWillAppear:animated];
 }
 

@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class EntriesViewController;
+@class ContainerViewController;
 
 @interface PhotioAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) EntriesViewController *viewController;
+@property (strong, nonatomic) UIWindow*                 window;
+@property (strong, nonatomic) ContainerViewController*  viewController;
 
 @end

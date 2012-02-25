@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface EntriesViewController : UITableViewController {
-    BOOL    isDragging;
+    __weak UIView*               containerView;
 }   
 
-@property (nonatomic, assign) BOOL isDragging;
+@property (nonatomic, weak) UIView* containerView;
+
++ (id)inView:(UIView*)_containerView;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 
 @end

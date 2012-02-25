@@ -7,28 +7,41 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CameraViewController.h"
-#import "ImageInspectViewController.h"
+
+@class CameraViewController;
+@class ImageInspectViewController;
+@class EntriesViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewControllerGeneral : NSObject {
-    CameraViewController* cameraViewController;
+    CameraViewController*       cameraViewController;
     ImageInspectViewController* imageInspectViewController;
+    EntriesViewController*      entriesViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property(nonatomic, retain) ImageInspectViewController* imageInspectViewController;
-@property(nonatomic, retain) CameraViewController* cameraViewController;
+@property(nonatomic, retain) ImageInspectViewController*    imageInspectViewController;
+@property(nonatomic, retain) CameraViewController*          cameraViewController;
+@property(nonatomic, retain) EntriesViewController*         entriesViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerGeneral*)instance;
+- (void)createViews:(UIView*)_containerView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CameraViewController*)showCameraView:(UIView*)containerView;
-- (void)removeCameraView;
+- (EntriesViewController*)createEntriesView:(UIView*)_containerView;
+- (void)hideEntriesView;
+- (void)showEntriesView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (ImageInspectViewController*)showImageInspectView:(UIView*)containerView;
-- (void)removeImageInspectView;
+- (ImageInspectViewController*)createImageInspectView:(UIView*)_containerView;
+- (void)hideImageInspectView;
+- (void)showImageInspectView;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CameraViewController*)createCameraView:(UIView*)_containerView;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)transitionEntriesToImageInspect;
 
 @end

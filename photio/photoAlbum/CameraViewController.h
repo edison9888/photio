@@ -19,10 +19,10 @@
     UIBarButtonItem *takePictureButton;
 }    
 
-@property (nonatomic, weak) id <CameraViewControllerDelegate> cameraDelegate;
-@property (nonatomic, weak) UIView* containerView;
-@property (nonatomic, retain) UIImagePickerController* imagePickerController;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem* takePictureButton;
+@property (nonatomic, weak)     id <CameraViewControllerDelegate>   cameraDelegate;
+@property (nonatomic, weak)     UIView*                             containerView;
+@property (nonatomic, retain)   UIImagePickerController*            imagePickerController;
+@property (nonatomic, retain)   IBOutlet UIBarButtonItem*           takePictureButton;
 
 
 + (id)inView:(UIView*)_containerView;
