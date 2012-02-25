@@ -19,7 +19,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewControllerGeneral
  
-@synthesize imageInspectViewController;
+@synthesize imageInspectViewController, cameraViewController;
 
 #pragma mark - 
 #pragma mark ViewControllerGeneral PrivateApi
@@ -37,13 +37,34 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
-#pragma mark ImageInspectViewController PrivateApi
+#pragma mark CameraViewController
 
-- (ImageInspectViewController*)showImageInspectView:(UIView*)containerView {
-    if (self.imageInspectViewController == nil) {
-        self.imageInspectViewController = [ImageInspectViewController inView:containerView];
+- (CameraViewController*)showCameraView:(UIView*)_containerView {
+    if (self.cameraViewController == nil) {
+        self.cameraViewController = [CameraViewController inView:_containerView];
     } 
-    [containerView addSubview:self.imageInspectViewController.view];
+    [self.cameraViewController viewWillAppear:YES];
+    [_containerView addSubview:self.cameraViewController.imagePickerController.view];
+    [self.cameraViewController viewDidAppear:YES];
+    return self.cameraViewController;
+}
+
+- (void)removeCameraView {
+    if (self.cameraViewController) {
+        [self.cameraViewController viewWillDisappear:YES];
+        [self.cameraViewController.view removeFromSuperview];
+    }
+}
+
+
+#pragma mark - 
+#pragma mark ImageInspectViewController
+
+- (ImageInspectViewController*)showImageInspectView:(UIView*)_containerView {
+    if (self.imageInspectViewController == nil) {
+        self.imageInspectViewController = [ImageInspectViewController inView:_containerView];
+    } 
+    [_containerView addSubview:self.imageInspectViewController.view];
     [self.imageInspectViewController viewWillAppear:NO];
     return self.imageInspectViewController;
 }
@@ -54,14 +75,5 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
         [self.imageInspectViewController.view removeFromSuperview];
     }
 }
-
-- (void)imageInspectViewWillAppear {
-    [self.imageInspectViewController viewWillAppear:NO];
-}
-
-- (void)imageInspectWillDisappear {
-    [self.imageInspectViewController viewWillDisappear:NO];
-}
-
 
 @end

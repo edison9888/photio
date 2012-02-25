@@ -10,26 +10,19 @@
 
 @implementation CameraViewController
 
-@synthesize cameraDelegate, takePictureButton, imagePickerController;
+@synthesize cameraDelegate, takePictureButton, imagePickerController, containerView;
 
 
 #pragma mark -
 #pragma mark CameraViewController
 
-- (IBAction)takePhoto:(id)sender {
-    [self.imagePickerController takePicture];
++ (id)inView:(UIView*)_containerView {
+    return [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil inView:_containerView];;
 }
 
-- (IBAction)done:(id)sender {
-    [self.cameraDelegate didFinishWithCamera];
-    self.takePictureButton.enabled = YES;
-}
-
-#pragma mark -
-#pragma mark UIViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {        
+        self.containerView = _containerView;
         self.imagePickerController = [[UIImagePickerController alloc] init];
         self.imagePickerController.delegate = self;
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -42,6 +35,18 @@
     }
     return self;
 }
+
+- (IBAction)takePhoto:(id)sender {
+    [self.imagePickerController takePicture];
+}
+
+- (IBAction)done:(id)sender {
+    [self.cameraDelegate didFinishWithCamera];
+    self.takePictureButton.enabled = YES;
+}
+
+#pragma mark -
+#pragma mark UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

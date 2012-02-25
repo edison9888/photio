@@ -12,16 +12,21 @@
 @protocol CameraViewControllerDelegate;
 
 @interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    __weak id <CameraViewControllerDelegate> cameraDelegate;    
-    UIImagePickerController* imagePickerController;    
+    __weak id <CameraViewControllerDelegate> cameraDelegate;
+    __weak UIView*                           containerView; 
+    UIImagePickerController*                 imagePickerController;    
 @private
     UIBarButtonItem *takePictureButton;
 }    
 
 @property (nonatomic, weak) id <CameraViewControllerDelegate> cameraDelegate;
+@property (nonatomic, weak) UIView* containerView;
 @property (nonatomic, retain) UIImagePickerController* imagePickerController;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* takePictureButton;
 
+
++ (id)inView:(UIView*)_containerView;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (IBAction)done:(id)sender;
 - (IBAction)takePhoto:(id)sender;
 

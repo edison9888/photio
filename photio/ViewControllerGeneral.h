@@ -12,20 +12,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewControllerGeneral : NSObject {
+    CameraViewController* cameraViewController;
     ImageInspectViewController* imageInspectViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property(nonatomic, retain) ImageInspectViewController* imageInspectViewController;
+@property(nonatomic, retain) CameraViewController* cameraViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerGeneral*)instance;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (CameraViewController*)showCameraView:(UIView*)containerView;
+- (void)removeCameraView;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (ImageInspectViewController*)showImageInspectView:(UIView*)containerView;
 - (void)removeImageInspectView;
-- (void)imageInspectViewWillAppear;
-- (void)imageInspectWillDisappear;
-
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 #import "ImageInspectViewController.h"
+#import "ViewControllerGeneral.h"
 #import "UIImage+Resize.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +37,7 @@
     }
     return self;
 }
+
 #pragma mark -
 #pragma mark ImageInspectViewController (PrivateAPI)
 
@@ -62,9 +64,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.cameraViewController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
+    self.cameraViewController = [[ViewControllerGeneral instance] showCameraView:self.view];
     self.cameraViewController.cameraDelegate = self; 
-    [self.view addSubview:self.cameraViewController.imagePickerController.view];
 }
 
 - (void)viewDidUnload {
