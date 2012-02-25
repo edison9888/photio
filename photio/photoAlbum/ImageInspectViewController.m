@@ -13,14 +13,14 @@
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 - (void)loadFile:(NSString*)_fileName;
-- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType;
+- (void)showImagePicker;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize overlayViewController, capture, imageView, toolBar, containerView;
+@synthesize cameraViewController, capture, imageView, toolBar, containerView;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -51,10 +51,9 @@
     }
 }
 
-- (void)showImagePicker:(UIImagePickerControllerSourceType)sourceType {
-    if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
-        [self.overlayViewController setupImagePicker:sourceType];
-        [self presentModalViewController:self.overlayViewController.imagePickerController animated:YES];
+- (void)showImagePicker {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self.view addSubview:self.cameraViewController.imagePickerController.view];
     }
 }
 
@@ -63,9 +62,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.overlayViewController = [[CameraOverlayViewController alloc] initWithNibName:@"CameraOverlayViewController" bundle:nil];
-    self.overlayViewController.overlayDelegate = self;    
-//    [self loadFile:@"Documents/Test.png"];
+    self.cameraViewController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
+    self.cameraViewController.cameraDelegate = self; 
+    [self.view addSubview:self.cameraViewController.imagePickerController.view];
 }
 
 - (void)viewDidUnload {
@@ -100,11 +99,11 @@
 #pragma mark Toolbar Actions
 
 - (IBAction)cameraAction:(id)sender { 
-    [self showImagePicker:UIImagePickerControllerSourceTypeCamera];
+    [self showImagePicker];
 }
 
 #pragma mark -
-#pragma mark OverlayViewControllerDelegate
+#pragma mark OverlayControllerDelegate
 
 - (void)didTakePicture:(UIImage*)picture { 
     self.capture = picture;

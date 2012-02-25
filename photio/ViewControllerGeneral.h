@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CameraOverlayViewController.h"
+#import "CameraViewController.h"
 #import "ImageInspectViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
