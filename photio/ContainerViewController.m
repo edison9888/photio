@@ -27,7 +27,7 @@
     [super viewDidLoad];
     ViewControllerGeneral* general = [ViewControllerGeneral instance];
     [general createViews:self.view];
-    [general showEntriesView];
+    [general entriesViewPosition:[ViewControllerGeneral inWindow]];
 }
 
 - (void)viewDidUnload {

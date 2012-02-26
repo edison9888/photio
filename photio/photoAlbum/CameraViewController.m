@@ -61,12 +61,12 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.imagePickerController viewWillAppear:YES];
+    [self.imagePickerController viewWillAppear:animated];
     [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self.imagePickerController viewDidAppear:YES];
+    [self.imagePickerController viewDidAppear:animated];
     [super viewDidAppear:animated];
 }
 

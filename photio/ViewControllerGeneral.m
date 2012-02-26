@@ -40,106 +40,115 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     return thisViewControllerGeneral;
 }
 
++ (CGRect)screenBounds {
+    return [[UIScreen mainScreen] bounds];
+}
+
++ (CGRect)inWindow {
+    return [self screenBounds];
+}
+
++ (CGRect)overWindow {
+    CGRect screenBounds = [self screenBounds];
+    return CGRectMake(screenBounds.origin.x, -screenBounds.size.height, screenBounds.size.width, screenBounds.size.height);
+}
+
++ (CGRect)underWindow {
+    CGRect screenBounds = [self screenBounds];
+    return CGRectMake(screenBounds.origin.x, screenBounds.size.height, screenBounds.size.width, screenBounds.size.height);
+}
+
++ (CGRect)leftOfWindow {
+    CGRect screenBounds = [self screenBounds];
+    return CGRectMake(-screenBounds.size.width, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
+}
+
++ (CGRect)rightOfWindow {
+    CGRect screenBounds = [self screenBounds];
+    return CGRectMake(screenBounds.size.width, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
+}
+
 - (void)createViews:(UIView*)_containerView {
-    [self createEntriesView:_containerView];
-    [self createImageInspectView:_containerView];
-    [self createCameraView:_containerView];
+    [self initEntriesView:_containerView];
+    [self initImageInspectView:_containerView];
+    [self initCameraView:_containerView];
 }
 
 #pragma mark - 
 #pragma mark EntriesViewController
 
-- (EntriesViewController*)createEntriesView:(UIView*)_containerView {
+- (void)initEntriesView:(UIView*)_containerView {
     if (self.entriesViewController == nil) {
         self.entriesViewController = [EntriesViewController inView:_containerView];
     }
-    [self hideEntriesView];
+    [self entriesViewPosition:[self.class underWindow]];
     [self.entriesViewController viewWillAppear:NO];
     [_containerView addSubview:self.entriesViewController.view];
-    return self.entriesViewController;
 }
 
-- (void)hideEntriesView {
-    if (self.entriesViewController) {
-        self.entriesViewController.view.hidden = YES;
-    }
+- (void)entriesViewHidden:(BOOL)_hidden {
+    self.entriesViewController.view.hidden = _hidden;
 }
 
-- (void)showEntriesView {
-    if (self.entriesViewController) {
-        self.entriesViewController.view.hidden = NO;
-    }
+- (void)entriesViewPosition:(CGRect)_rect {
+    self.entriesViewController.view.frame = _rect;
 }
 
 #pragma mark - 
 #pragma mark ImageInspectViewController
 
-- (ImageInspectViewController*)createImageInspectView:(UIView*)_containerView {
+- (void)initImageInspectView:(UIView*)_containerView {
     if (self.imageInspectViewController == nil) {
         self.imageInspectViewController = [ImageInspectViewController inView:_containerView];
     } 
-    [self hideImageInspectView];
+    [self imageInspectViewPosition:[self.class rightOfWindow]];
     [self.imageInspectViewController viewWillAppear:NO];
     [_containerView addSubview:self.imageInspectViewController.view];
-    return self.imageInspectViewController;
 }
 
-- (void)hideImageInspectView {
-    if (self.imageInspectViewController) {
-        self.imageInspectViewController.view.hidden = YES;
-    }
+- (void)imageInspectViewHidden:(BOOL)_hidden {
+    self.imageInspectViewController.view.hidden = _hidden;
 }
 
-- (void)showImageInspectView {
-    if (self.imageInspectViewController) {
-        self.imageInspectViewController.view.hidden = NO;
-    }
+- (void)imageInspectViewPosition:(CGRect)_rect {
+    self.imageInspectViewController.view.frame = _rect;
 }
 
 #pragma mark - 
 #pragma mark CameraViewController
 
-- (CameraViewController*)createCameraView:(UIView*)_containerView {
+- (void)initCameraView:(UIView*)_containerView {
     if (self.cameraViewController == nil) {
         self.cameraViewController = [CameraViewController inView:_containerView];
     } 
-    [self hideCameraView];
+    [self cameraViewPosition:[self.class overWindow]];
     self.cameraViewController.cameraDelegate = self;
-    [self.cameraViewController viewWillAppear:YES];
+    [self.cameraViewController viewWillAppear:NO];
     [_containerView addSubview:self.cameraViewController.imagePickerController.view];
-    [self.cameraViewController viewDidAppear:YES];
-    return self.cameraViewController;
+    [self.cameraViewController viewDidAppear:NO];
 }
 
-- (void)hideCameraView {
-    if (self.imageInspectViewController) {
-        self.cameraViewController.imagePickerController.view.hidden = YES;
-    }
+- (void)camerViewHidden:(BOOL)_hidden {
+    self.cameraViewController.imagePickerController.view.hidden = _hidden;
 }
 
-- (void)showCameraView {
-    if (self.imageInspectViewController) {
-        self.cameraViewController.imagePickerController.view.hidden = NO;
-    }
+- (void)cameraViewPosition:(CGRect)_rect {
+    self.cameraViewController.imagePickerController.view.frame = _rect;
 }
 
 #pragma mark - 
 #pragma mark Transitions
-- (void)transitionEntriesToCamera; {
-	CATransition* transition = [CATransition animation];
-    transition.duration = 0.75;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromTop;
-    transition.delegate = self;
-    [self.cameraViewController.view.layer addAnimation:transition forKey:nil];
-    [self hideEntriesView];
-    [self showCameraView];
+- (void)transitionEntriesToCamera {
+    [UIView animateWithDuration:0.75
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
+        animations:^{
+            [self cameraViewPosition:[self.class inWindow]];
+            [self entriesViewPosition:[self.class underWindow]];
+        }
+        completion:^(BOOL _finished){
+        }];
 }
-
--(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
-}
-
 
 #pragma mark -
 #pragma mark OverlayControllerDelegate

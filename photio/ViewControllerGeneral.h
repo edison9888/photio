@@ -29,22 +29,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerGeneral*)instance;
++ (CGRect)screenBounds;
++ (CGRect)inWindow;
++ (CGRect)overWindow;
++ (CGRect)underWindow;
++ (CGRect)leftOfWindow;
++ (CGRect)rightOfWindow; 
 - (void)createViews:(UIView*)_containerView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (EntriesViewController*)createEntriesView:(UIView*)_containerView;
-- (void)hideEntriesView;
-- (void)showEntriesView;
+- (void)initEntriesView:(UIView*)_containerView;
+- (void)entriesViewPosition:(CGRect)_rect;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (ImageInspectViewController*)createImageInspectView:(UIView*)_containerView;
-- (void)hideImageInspectView;
-- (void)showImageInspectView;
+- (void)initImageInspectView:(UIView*)_containerView;
+- (void)imageInspectViewPosition:(CGRect)_rec;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CameraViewController*)createCameraView:(UIView*)_containerView;
-- (void)hideCameraView;
-- (void)showCameraView;
+- (void)initCameraView:(UIView*)_containerView;
+- (void)cameraViewPosition:(CGRect)_rec;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionEntriesToCamera;
