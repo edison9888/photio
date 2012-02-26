@@ -41,8 +41,8 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 
 - (void)createViews:(UIView*)_containerView {
     [self createEntriesView:_containerView];
-//    [self createImageInspectView:_containerView];
-//    [self createCameraView:_containerView];
+    [self createImageInspectView:_containerView];
+    [self createCameraView:_containerView];
 }
 
 #pragma mark - 
@@ -52,7 +52,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     if (self.entriesViewController == nil) {
         self.entriesViewController = [EntriesViewController inView:_containerView];
     }
-//    [self hideEntriesView];
+    [self hideEntriesView];
     [self.entriesViewController viewWillAppear:NO];
     [_containerView addSubview:self.entriesViewController.view];
     return self.entriesViewController;
@@ -102,7 +102,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     if (self.cameraViewController == nil) {
         self.cameraViewController = [CameraViewController inView:_containerView];
     } 
-//    [self hideCameraView];
+    [self hideCameraView];
     [self.cameraViewController viewWillAppear:YES];
     [_containerView addSubview:self.cameraViewController.imagePickerController.view];
     [self.cameraViewController viewDidAppear:YES];

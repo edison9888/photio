@@ -82,11 +82,11 @@
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,9 +115,9 @@
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
-//    if (scrollView.contentOffset.y < 0) {
-//        [[ViewControllerGeneral instance] transitionEntriesToCamera];
-//    }
+    if (scrollView.contentOffset.y < 0) {
+        [[ViewControllerGeneral instance] transitionEntriesToCamera];
+    }
 }
 
 @end

@@ -26,9 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     ViewControllerGeneral* general = [ViewControllerGeneral instance];
-    [general createCameraView:self.view];
-//    [general createViews:self.view];
-//    [general showEntriesView];
+    [general createViews:self.view];
+    [general showEntriesView];
 }
 
 - (void)viewDidUnload {
