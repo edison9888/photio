@@ -7,19 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CameraViewController.h"
 
 @class CameraViewController;
 @class ImageInspectViewController;
 @class EntriesViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@interface ViewControllerGeneral : NSObject {
+@interface ViewControllerGeneral : NSObject <CameraViewControllerDelegate> {
+    UIImage*                    capture;
     CameraViewController*       cameraViewController;
     ImageInspectViewController* imageInspectViewController;
     EntriesViewController*      entriesViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property(nonatomic, retain) UIImage*                       capture;
 @property(nonatomic, retain) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, retain) CameraViewController*          cameraViewController;
 @property(nonatomic, retain) EntriesViewController*         entriesViewController;

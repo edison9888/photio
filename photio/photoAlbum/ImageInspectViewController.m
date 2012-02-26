@@ -21,7 +21,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize cameraViewController, capture, imageView, toolBar, containerView;
+@synthesize capture, imageView, toolBar, containerView;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -53,12 +53,6 @@
     }
 }
 
-- (void)showImagePicker {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [self.view addSubview:self.cameraViewController.imagePickerController.view];
-    }
-}
-
 #pragma mark -
 #pragma mark UIViewController
 
@@ -71,8 +65,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.cameraViewController = [[ViewControllerGeneral instance] createCameraView:self.view];
-    self.cameraViewController.cameraDelegate = self; 
     [super viewWillAppear:animated];
 }
 
@@ -100,24 +92,6 @@
 #pragma mark Toolbar Actions
 
 - (IBAction)cameraAction:(id)sender { 
-    [self showImagePicker];
-}
-
-#pragma mark -
-#pragma mark OverlayControllerDelegate
-
-- (void)didTakePicture:(UIImage*)picture { 
-    self.capture = picture;
-}
-
-- (void)didFinishWithCamera { 
-    [self dismissModalViewControllerAnimated:YES];
-    UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    UIImage* saveImage = [self.capture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
-    NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
-    [UIImagePNGRepresentation(saveImage) writeToFile:pngPath atomically:YES];
-    self.imageView.image = saveImage;
-    [self.view addSubview:imageView];        
 }
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "ViewControllerGeneral.h"
-#import "CameraViewController.h"
 #import "ImageInspectViewController.h"
 #import "EntriesViewController.h"
 
@@ -23,6 +22,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 @implementation ViewControllerGeneral
  
 @synthesize imageInspectViewController, cameraViewController, entriesViewController;
+@synthesize capture;
 
 #pragma mark - 
 #pragma mark ViewControllerGeneral PrivateApi
@@ -103,6 +103,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
         self.cameraViewController = [CameraViewController inView:_containerView];
     } 
     [self hideCameraView];
+    self.cameraViewController.cameraDelegate = self;
     [self.cameraViewController viewWillAppear:YES];
     [_containerView addSubview:self.cameraViewController.imagePickerController.view];
     [self.cameraViewController viewDidAppear:YES];
@@ -111,13 +112,13 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 
 - (void)hideCameraView {
     if (self.imageInspectViewController) {
-        self.imageInspectViewController.view.hidden = YES;
+        self.cameraViewController.imagePickerController.view.hidden = YES;
     }
 }
 
 - (void)showCameraView {
     if (self.imageInspectViewController) {
-        self.imageInspectViewController.view.hidden = NO;
+        self.cameraViewController.imagePickerController.view.hidden = NO;
     }
 }
 
@@ -128,5 +129,21 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     [self showCameraView];
 }
 
+#pragma mark -
+#pragma mark OverlayControllerDelegate
+
+- (void)didTakePicture:(UIImage*)picture { 
+    self.capture = picture;
+}
+
+- (void)didFinishWithCamera { 
+//    [self dismissModalViewControllerAnimated:YES];
+//    UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+//    UIImage* saveImage = [self.capture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
+//    NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
+//    [UIImagePNGRepresentation(saveImage) writeToFile:pngPath atomically:YES];
+//    self.imageView.image = saveImage;
+//    [self.view addSubview:imageView];        
+}
 
 @end

@@ -7,20 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CameraViewController.h"
 
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, CameraViewControllerDelegate> {
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate> {
     __weak UIView*               containerView;
     UIToolbar*                   toolBar;    
     UIImageView*                 imageView;
-    CameraViewController*        cameraViewController; 
     UIImage*                     capture;
 }
 
 @property (nonatomic, weak) UIView*                 containerView;
 @property (nonatomic, retain) IBOutlet UIToolbar*   toolBar;
 @property (nonatomic, retain) IBOutlet UIImageView* imageView;
-@property (nonatomic, retain) CameraViewController* cameraViewController;
 @property (nonatomic, retain) UIImage*              capture;
 
 + (id)inView:(UIView*)_containerView;
