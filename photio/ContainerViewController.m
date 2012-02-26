@@ -25,8 +25,8 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[ViewControllerGeneral instance] createCameraView:self.view];
-    //    ViewControllerGeneral* general = [ViewControllerGeneral instance];
+    ViewControllerGeneral* general = [ViewControllerGeneral instance];
+    [general createCameraView:self.view];
 //    [general createViews:self.view];
 //    [general showEntriesView];
 }

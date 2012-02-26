@@ -115,9 +115,9 @@
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
-    if (scrollView.contentOffset.y < 0) {
-        [[ViewControllerGeneral instance] transitionEntriesToImageInspect];
-    }
+//    if (scrollView.contentOffset.y < 0) {
+//        [[ViewControllerGeneral instance] transitionEntriesToCamera];
+//    }
 }
 
 @end

@@ -40,8 +40,9 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)createViews:(UIView*)_containerView {
-//    [self createEntriesView:_containerView];
-    [self createImageInspectView:_containerView];
+    [self createEntriesView:_containerView];
+//    [self createImageInspectView:_containerView];
+//    [self createCameraView:_containerView];
 }
 
 #pragma mark - 
@@ -51,7 +52,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     if (self.entriesViewController == nil) {
         self.entriesViewController = [EntriesViewController inView:_containerView];
     }
-    [self hideEntriesView];
+//    [self hideEntriesView];
     [self.entriesViewController viewWillAppear:NO];
     [_containerView addSubview:self.entriesViewController.view];
     return self.entriesViewController;
@@ -76,7 +77,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     if (self.imageInspectViewController == nil) {
         self.imageInspectViewController = [ImageInspectViewController inView:_containerView];
     } 
-//    [self hideImageInspectView];
+    [self hideImageInspectView];
     [self.imageInspectViewController viewWillAppear:NO];
     [_containerView addSubview:self.imageInspectViewController.view];
     return self.imageInspectViewController;
@@ -101,17 +102,30 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     if (self.cameraViewController == nil) {
         self.cameraViewController = [CameraViewController inView:_containerView];
     } 
+//    [self hideCameraView];
     [self.cameraViewController viewWillAppear:YES];
-    [_containerView addSubview:self.cameraViewController.view];
+    [_containerView addSubview:self.cameraViewController.imagePickerController.view];
     [self.cameraViewController viewDidAppear:YES];
     return self.cameraViewController;
 }
 
+- (void)hideCameraView {
+    if (self.imageInspectViewController) {
+        self.imageInspectViewController.view.hidden = YES;
+    }
+}
+
+- (void)showCameraView {
+    if (self.imageInspectViewController) {
+        self.imageInspectViewController.view.hidden = NO;
+    }
+}
+
 #pragma mark - 
 #pragma mark Transitions
-- (void)transitionEntriesToImageInspect; {
+- (void)transitionEntriesToCamera; {
     [self hideEntriesView];
-    [self showImageInspectView];
+    [self showCameraView];
 }
 
 

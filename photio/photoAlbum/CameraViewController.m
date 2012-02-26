@@ -30,13 +30,16 @@
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {        
         self.containerView = _containerView;
+        self.view.frame = self.containerView.frame;
         self.imagePickerController = [[UIImagePickerController alloc] init];
         self.imagePickerController.delegate = self;
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.imagePickerController.showsCameraControls = NO;  
-        self.imagePickerController.view.userInteractionEnabled = NO;
-        self.view.frame = self.containerView.frame;
-        [self.view addSubview:self.imagePickerController.view];
+        self.imagePickerController.view.contentMode = UIViewContentModeScaleAspectFill;
+        self.imagePickerController.wantsFullScreenLayout = YES;
+        self.imagePickerController.cameraViewTransform = CGAffineTransformScale(self.imagePickerController.cameraViewTransform, 1.27, 1.27);
+        self.imagePickerController.view.frame = self.containerView.frame;
+        self.imagePickerController.cameraOverlayView = self.view;
     }
     return self;
 }

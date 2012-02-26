@@ -40,8 +40,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CameraViewController*)createCameraView:(UIView*)_containerView;
+- (void)hideCameraView;
+- (void)showCameraView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)transitionEntriesToImageInspect;
+- (void)transitionEntriesToCamera;
 
 @end
