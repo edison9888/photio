@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "ViewControllerGeneral.h"
 #import "ImageInspectViewController.h"
 #import "EntriesViewController.h"
@@ -125,9 +126,20 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 #pragma mark - 
 #pragma mark Transitions
 - (void)transitionEntriesToCamera; {
+	CATransition* transition = [CATransition animation];
+    transition.duration = 0.75;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromTop;
+    transition.delegate = self;
+    [self.cameraViewController.view.layer addAnimation:transition forKey:nil];
     [self hideEntriesView];
     [self showCameraView];
 }
+
+-(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag {
+}
+
 
 #pragma mark -
 #pragma mark OverlayControllerDelegate
