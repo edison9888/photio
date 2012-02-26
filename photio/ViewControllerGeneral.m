@@ -128,7 +128,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     [self.cameraViewController viewDidAppear:NO];
 }
 
-- (void)camerViewHidden:(BOOL)_hidden {
+- (void)cameraViewHidden:(BOOL)_hidden {
     self.cameraViewController.imagePickerController.view.hidden = _hidden;
 }
 

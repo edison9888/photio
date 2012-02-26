@@ -40,14 +40,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initEntriesView:(UIView*)_containerView;
 - (void)entriesViewPosition:(CGRect)_rect;
+- (void)entriesViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initImageInspectView:(UIView*)_containerView;
 - (void)imageInspectViewPosition:(CGRect)_rec;
+- (void)imageInspectViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initCameraView:(UIView*)_containerView;
 - (void)cameraViewPosition:(CGRect)_rec;
+- (void)cameraViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionEntriesToCamera;
