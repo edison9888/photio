@@ -7,7 +7,7 @@
 //
 
 #import "EntriesViewController.h"
-#import "ViewControllerGeneral.h"
+#import "ViewGeneral.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EntriesViewController (PrivateAPI)
@@ -116,7 +116,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
     if (scrollView.contentOffset.y < 0) {
-        [[ViewControllerGeneral instance] transitionEntriesToCamera];
+        [[ViewGeneral instance] transitionEntriesToCamera];
     }
 }
 

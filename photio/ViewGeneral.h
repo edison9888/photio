@@ -1,5 +1,5 @@
 //
-//  ViewControllerGeneral.h
+//  ViewGeneral.h
 //  photio
 //
 //  Created by Troy Stribling on 2/22/12.
@@ -14,21 +14,21 @@
 @class EntriesViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@interface ViewControllerGeneral : NSObject <CameraViewControllerDelegate> {
-    UIImage*                    capture;
+@interface ViewGeneral : NSObject <CameraViewControllerDelegate> {
     CameraViewController*       cameraViewController;
     ImageInspectViewController* imageInspectViewController;
     EntriesViewController*      entriesViewController;
+    NSMutableArray*             captures;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property(nonatomic, retain) UIImage*                       capture;
 @property(nonatomic, retain) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, retain) CameraViewController*          cameraViewController;
 @property(nonatomic, retain) EntriesViewController*         entriesViewController;
+@property(nonatomic, retain) NSMutableArray*                captures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (ViewControllerGeneral*)instance;
++ (ViewGeneral*)instance;
 + (CGRect)screenBounds;
 + (CGRect)inWindow;
 + (CGRect)overWindow;
@@ -54,5 +54,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionEntriesToCamera;
+- (void)transitionCameraToEntries;
+- (void)transitionCameraToInspectImage;
+- (void)transitionInspectImageToCamera;
 
 @end

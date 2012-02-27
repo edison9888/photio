@@ -7,7 +7,7 @@
 //
 
 #import "ContainerViewController.h"
-#import "ViewControllerGeneral.h"
+#import "ViewGeneral.h"
 
 @implementation ContainerViewController
 
@@ -25,9 +25,9 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    ViewControllerGeneral* general = [ViewControllerGeneral instance];
+    ViewGeneral* general = [ViewGeneral instance];
     [general createViews:self.view];
-    [general entriesViewPosition:[ViewControllerGeneral inWindow]];
+    [general entriesViewPosition:[ViewGeneral inWindow]];
 }
 
 - (void)viewDidUnload {

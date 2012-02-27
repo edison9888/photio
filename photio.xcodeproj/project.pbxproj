@@ -10,7 +10,7 @@
 		050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CF12614F96A9100A31059 /* ContainerViewController.m */; };
 		050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF12714F96A9100A31059 /* ContainerViewController.xib */; };
 		050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF14F14F9A27D00A31059 /* CameraViewController.xib */; };
-		05C59C3D14F5D157009AC823 /* ViewControllerGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewControllerGeneral.m */; };
+		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
 		05C99EC514F0585C00D09F3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC414F0585C00D09F3E /* CoreGraphics.framework */; };
@@ -35,8 +35,8 @@
 		050CF12614F96A9100A31059 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		050CF12714F96A9100A31059 /* ContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerViewController.xib; sourceTree = "<group>"; };
 		050CF14F14F9A27D00A31059 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
-		05C59C3B14F5D157009AC823 /* ViewControllerGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerGeneral.h; sourceTree = "<group>"; };
-		05C59C3C14F5D157009AC823 /* ViewControllerGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerGeneral.m; sourceTree = "<group>"; };
+		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
+		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C99EC014F0585C00D09F3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05C99EC214F0585C00D09F3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -139,8 +139,8 @@
 				05DE438614F1F46D005FF6B0 /* EntryViewController.h */,
 				05DE438714F1F46D005FF6B0 /* EntryViewController.m */,
 				05DE438814F1F46D005FF6B0 /* EntryViewController.xib */,
-				05C59C3B14F5D157009AC823 /* ViewControllerGeneral.h */,
-				05C59C3C14F5D157009AC823 /* ViewControllerGeneral.m */,
+				05C59C3B14F5D157009AC823 /* ViewGeneral.h */,
+				05C59C3C14F5D157009AC823 /* ViewGeneral.m */,
 				050CF12514F96A9100A31059 /* ContainerViewController.h */,
 				050CF12614F96A9100A31059 /* ContainerViewController.m */,
 				050CF12714F96A9100A31059 /* ContainerViewController.xib */,
@@ -262,7 +262,7 @@
 				05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */,
 				05DE437614F1E994005FF6B0 /* EntriesViewController.m in Sources */,
 				05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */,
-				05C59C3D14F5D157009AC823 /* ViewControllerGeneral.m in Sources */,
+				05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */,
 				050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

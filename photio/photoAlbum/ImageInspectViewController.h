@@ -9,20 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate> {
-    __weak UIView*               containerView;
-    UIToolbar*                   toolBar;    
-    UIImageView*                 imageView;
-    UIImage*                     capture;
+    __weak UIView*      containerView;
+    UIToolbar*          toolBar;    
+    UIImageView*        imageView;
+    NSMutableArray*     captures;            
 }
 
-@property (nonatomic, weak) UIView*                 containerView;
-@property (nonatomic, retain) IBOutlet UIToolbar*   toolBar;
-@property (nonatomic, retain) IBOutlet UIImageView* imageView;
-@property (nonatomic, retain) UIImage*              capture;
+@property(nonatomic, weak)   UIView*                containerView;
+@property(nonatomic, retain) IBOutlet UIToolbar*    toolBar;
+@property(nonatomic, retain) IBOutlet UIImageView*  imageView;
+@property(nonatomic, retain) NSMutableArray*        captures;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
-
+- (void)loadCaptures:(NSMutableArray*)_captures;
 - (IBAction)cameraAction:(id)sender;
 
 @end

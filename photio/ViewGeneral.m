@@ -1,5 +1,5 @@
 //
-//  ViewControllerGeneral.m
+//  ViewGeneral.m
 //  photio
 //
 //  Created by Troy Stribling on 2/22/12.
@@ -7,34 +7,35 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import "ViewControllerGeneral.h"
+#import "ViewGeneral.h"
 #import "ImageInspectViewController.h"
 #import "EntriesViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-static ViewControllerGeneral* thisViewControllerGeneral = nil;
+static ViewGeneral* thisViewControllerGeneral = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@interface ViewControllerGeneral (PrivateAPI)
+@interface ViewGeneral (PrivateAPI)
 
 @end
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@implementation ViewControllerGeneral
+@implementation ViewGeneral
  
 @synthesize imageInspectViewController, cameraViewController, entriesViewController;
-@synthesize capture;
+@synthesize captures;
 
 #pragma mark - 
-#pragma mark ViewControllerGeneral PrivateApi
+#pragma mark ViewGeneral PrivateApi
 
 #pragma mark - 
-#pragma mark ViewControllerGeneral PrivateApi
+#pragma mark ViewGeneral PrivateApi
 
-+ (ViewControllerGeneral*)instance {	
++ (ViewGeneral*)instance {	
     @synchronized(self) {
         if (thisViewControllerGeneral == nil) {
             thisViewControllerGeneral = [[self alloc] init]; 
+            thisViewControllerGeneral.captures = [NSMutableArray arrayWithCapacity:10];
         }
     }
     return thisViewControllerGeneral;
@@ -82,7 +83,6 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
         self.entriesViewController = [EntriesViewController inView:_containerView];
     }
     [self entriesViewPosition:[self.class underWindow]];
-    [self.entriesViewController viewWillAppear:NO];
     [_containerView addSubview:self.entriesViewController.view];
 }
 
@@ -102,7 +102,6 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
         self.imageInspectViewController = [ImageInspectViewController inView:_containerView];
     } 
     [self imageInspectViewPosition:[self.class rightOfWindow]];
-    [self.imageInspectViewController viewWillAppear:NO];
     [_containerView addSubview:self.imageInspectViewController.view];
 }
 
@@ -123,9 +122,7 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
     } 
     [self cameraViewPosition:[self.class overWindow]];
     self.cameraViewController.cameraDelegate = self;
-    [self.cameraViewController viewWillAppear:NO];
     [_containerView addSubview:self.cameraViewController.imagePickerController.view];
-    [self.cameraViewController viewDidAppear:NO];
 }
 
 - (void)cameraViewHidden:(BOOL)_hidden {
@@ -139,32 +136,67 @@ static ViewControllerGeneral* thisViewControllerGeneral = nil;
 #pragma mark - 
 #pragma mark Transitions
 - (void)transitionEntriesToCamera {
-    [UIView animateWithDuration:0.75
+    if ([CameraViewController cameraIsAvailable]) {
+        [UIView animateWithDuration:0.5
+            delay:0
+            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
+            animations:^{
+                [self cameraViewPosition:[self.class inWindow]];
+                [self entriesViewPosition:[self.class underWindow]];
+            }
+            completion:^(BOOL _finished){
+            }];
+    }
+}
+
+- (void)transitionCameraToEntries {
+    [UIView animateWithDuration:0.5
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
         animations:^{
-            [self cameraViewPosition:[self.class inWindow]];
-            [self entriesViewPosition:[self.class underWindow]];
+            [self cameraViewPosition:[self.class overWindow]];
+            [self entriesViewPosition:[self.class inWindow]];
         }
         completion:^(BOOL _finished){
         }];
 }
 
+- (void)transitionCameraToInspectImage {
+    [UIView animateWithDuration:0.5
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+        animations:^{
+            [self cameraViewPosition:[self.class overWindow]];
+            [self imageInspectViewPosition:[self.class inWindow]];
+        }
+        completion:^(BOOL _finished){
+        }];
+}
+
+- (void)transitionInspectImageToCamera {
+    [UIView animateWithDuration:0.5
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+        animations:^{
+           [self cameraViewPosition:[self.class overWindow]];
+           [self imageInspectViewPosition:[self.class inWindow]];
+        }
+        completion:^(BOOL _finished){
+        }];
+}
+
+
 #pragma mark -
 #pragma mark OverlayControllerDelegate
 
 - (void)didTakePicture:(UIImage*)picture { 
-    self.capture = picture;
+    [self.captures addObject:picture];
+    [self didFinishWithCamera];
 }
 
-- (void)didFinishWithCamera { 
-//    [self dismissModalViewControllerAnimated:YES];
-//    UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-//    UIImage* saveImage = [self.capture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
-//    NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
-//    [UIImagePNGRepresentation(saveImage) writeToFile:pngPath atomically:YES];
-//    self.imageView.image = saveImage;
-//    [self.view addSubview:imageView];        
+- (void)didFinishWithCamera {
+    [self.imageInspectViewController loadCaptures:self.captures];
+    [self transitionCameraToInspectImage];
 }
 
 @end

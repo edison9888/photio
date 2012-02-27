@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 #import "ImageInspectViewController.h"
-#import "ViewControllerGeneral.h"
+#import "ViewGeneral.h"
 #import "UIImage+Resize.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -14,14 +14,16 @@
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 - (void)loadFile:(NSString*)_fileName;
-- (void)showImagePicker;
+- (void)saveToCameraRole:(NSInteger)_captureIndex;
+- (void)saveToFile:(UIImage*)_image;
+- (UIImage*)saveImage:(NSInteger)_captureIndex;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize capture, imageView, toolBar, containerView;
+@synthesize imageView, toolBar, containerView, captures;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -34,23 +36,46 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
+        self.captures = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
 
-#pragma mark -
-#pragma mark ImageInspectViewController (PrivateAPI)
-
-- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
-    if (error != NULL) {
+- (void)loadCaptures:(NSMutableArray*)_captures {
+    self.captures = _captures;
+    if ([self.captures count] > 0) {
+        self.imageView.image = [self saveImage:0];
     }
 }
+
+#pragma mark -
+#pragma mark ImageInspectViewController (PrivateAPI)
 
 - (void)loadFile:(NSString*)_fileName {
     NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:_fileName];
     if ([[NSFileManager defaultManager] fileExistsAtPath:pngPath]) {
         self.imageView.image = [UIImage imageWithContentsOfFile:pngPath];
     }
+}
+
+- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
+    if (error != NULL) {
+    }
+}
+
+- (void)saveToCameraRole:(NSInteger)_captureIndex {
+    UIImage* capture = [self.captures objectAtIndex:_captureIndex];
+    UIImageWriteToSavedPhotosAlbum(capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)saveToFile:(UIImage*)_image {
+    NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
+    [UIImagePNGRepresentation(_image) writeToFile:pngPath atomically:YES];    
+}
+
+-(UIImage*)saveImage:(NSInteger)_captureIndex {
+    UIImage* capture = [self.captures objectAtIndex:_captureIndex];
+    return [capture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
 }
 
 #pragma mark -

@@ -15,20 +15,20 @@
     __weak id <CameraViewControllerDelegate> cameraDelegate;
     __weak UIView*                           containerView; 
     UIImagePickerController*                 imagePickerController;    
-@private
-    UIBarButtonItem *takePictureButton;
 }    
 
 @property (nonatomic, weak)     id <CameraViewControllerDelegate>   cameraDelegate;
 @property (nonatomic, weak)     UIView*                             containerView;
 @property (nonatomic, retain)   UIImagePickerController*            imagePickerController;
-@property (nonatomic, retain)   IBOutlet UIBarButtonItem*           takePictureButton;
 
 
 + (id)inView:(UIView*)_containerView;
++ (BOOL)cameraIsAvailable;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (IBAction)done:(id)sender;
 - (IBAction)takePhoto:(id)sender;
+- (IBAction)toEntries:(id)sender;
+- (IBAction)switchCamera:(id)sender;
 
 @end
 

@@ -7,6 +7,9 @@
 //
 
 #import "CameraViewController.h"
+#import "ViewGeneral.h"
+
+#define PICKER_SOURCE_TYPE UIImagePickerControllerSourceTypeCamera
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CameraViewController (PrivateAPI)
@@ -15,7 +18,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraViewController
 
-@synthesize cameraDelegate, takePictureButton, imagePickerController, containerView;
+@synthesize cameraDelegate, imagePickerController, containerView;
 
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI
@@ -27,13 +30,17 @@
     return [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil inView:_containerView];;
 }
 
++ (BOOL)cameraIsAvailable {
+    return [UIImagePickerController isSourceTypeAvailable:PICKER_SOURCE_TYPE];
+}
+
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {        
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
         self.imagePickerController = [[UIImagePickerController alloc] init];
         self.imagePickerController.delegate = self;
-        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.imagePickerController.sourceType = PICKER_SOURCE_TYPE;
         self.imagePickerController.showsCameraControls = NO;  
         self.imagePickerController.view.contentMode = UIViewContentModeScaleAspectFill;
         self.imagePickerController.wantsFullScreenLayout = YES;
@@ -50,7 +57,21 @@
 
 - (IBAction)done:(id)sender {
     [self.cameraDelegate didFinishWithCamera];
-    self.takePictureButton.enabled = YES;
+}
+
+- (IBAction)toEntries:(id)sender {
+    [[ViewGeneral instance] transitionCameraToEntries];
+}
+
+- (IBAction)switchCamera:(id)sender {
+    switch (self.imagePickerController.cameraDevice) {
+        case UIImagePickerControllerCameraDeviceRear:
+            self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            break;
+        case UIImagePickerControllerCameraDeviceFront:
+            self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            break;
+    }
 }
 
 #pragma mark -
