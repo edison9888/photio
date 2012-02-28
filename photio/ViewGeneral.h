@@ -36,6 +36,7 @@
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow; 
 - (void)createViews:(UIView*)_containerView;
+- (BOOL)hasCaptures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initEntriesView:(UIView*)_containerView;

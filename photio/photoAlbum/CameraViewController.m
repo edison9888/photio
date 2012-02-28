@@ -18,10 +18,24 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraViewController
 
-@synthesize cameraDelegate, imagePickerController, containerView;
+@synthesize cameraDelegate, imagePickerController, containerView, flashEnabled;
 
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI
+
+- (void)setFlashImage {
+    switch (self.imagePickerController.cameraFlashMode) {
+        case UIImagePickerControllerCameraFlashModeAuto:
+            self.flashEnabled.hidden = YES;
+            break;
+        case UIImagePickerControllerCameraFlashModeOn:
+            self.flashEnabled.hidden = NO;
+            break;
+        case UIImagePickerControllerCameraFlashModeOff:
+            self.flashEnabled.hidden = NO;
+            break;
+    }    
+}
 
 #pragma mark -
 #pragma mark CameraViewController
@@ -51,12 +65,17 @@
     return self;
 }
 
+#pragma mark -
+#pragma mark CameraViewController Events
+
 - (IBAction)takePhoto:(id)sender {
     [self.imagePickerController takePicture];
 }
 
 - (IBAction)done:(id)sender {
-    [self.cameraDelegate didFinishWithCamera];
+    if ([[ViewGeneral instance] hasCaptures]) {
+        [self.cameraDelegate didFinishWithCamera];
+    }
 }
 
 - (IBAction)toEntries:(id)sender {
@@ -74,15 +93,32 @@
     }
 }
 
+- (IBAction)changeFlashMode:(id)sender {
+    switch (self.imagePickerController.cameraFlashMode) {
+        case UIImagePickerControllerCameraFlashModeAuto:
+            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
+            break;
+        case UIImagePickerControllerCameraFlashModeOn:
+            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+            break;
+        case UIImagePickerControllerCameraFlashModeOff:
+            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+            break;
+    }    
+    [self setFlashImage];
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setFlashImage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.imagePickerController viewWillAppear:animated];
+    [self setFlashImage];
     [super viewWillAppear:animated];
 }
 
@@ -104,8 +140,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    if (self.cameraDelegate)
-        [self.cameraDelegate didTakePicture:image];    
+    if (self.cameraDelegate) {
+        [self.cameraDelegate didTakePicture:image];
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker { 

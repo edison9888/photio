@@ -12,13 +12,16 @@
 @protocol CameraViewControllerDelegate;
 
 @interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    __weak id <CameraViewControllerDelegate> cameraDelegate;
-    __weak UIView*                           containerView; 
-    UIImagePickerController*                 imagePickerController;    
+    __weak id <CameraViewControllerDelegate>    cameraDelegate;
+    __weak UIView*                              containerView; 
+    UIImageView*                                flashEnabled;
+    UIImagePickerController*                    imagePickerController;  
+    
 }    
 
 @property (nonatomic, weak)     id <CameraViewControllerDelegate>   cameraDelegate;
 @property (nonatomic, weak)     UIView*                             containerView;
+@property (nonatomic, retain)   IBOutlet UIImageView*               flashEnabled;
 @property (nonatomic, retain)   UIImagePickerController*            imagePickerController;
 
 
@@ -29,6 +32,8 @@
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)toEntries:(id)sender;
 - (IBAction)switchCamera:(id)sender;
+- (IBAction)changeFlashMode:(id)sender;
+- (void)setFlashImage;
 
 @end
 

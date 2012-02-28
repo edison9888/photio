@@ -75,6 +75,10 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initCameraView:_containerView];
 }
 
+- (BOOL)hasCaptures {
+    return [self.captures count] != 0;
+}
+
 #pragma mark - 
 #pragma mark EntriesViewController
 
@@ -136,6 +140,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark - 
 #pragma mark Transitions
 - (void)transitionEntriesToCamera {
+    [self.cameraViewController setFlashImage];
     if ([CameraViewController cameraIsAvailable]) {
         [UIView animateWithDuration:0.5
             delay:0
