@@ -23,6 +23,7 @@
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (void)loadCaptures:(NSMutableArray*)_captures;
-- (IBAction)cameraAction:(id)sender;
+- (IBAction)toCamera:(id)sender;
+- (IBAction)toEntries:(id)sender;
 
 @end

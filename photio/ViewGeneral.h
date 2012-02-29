@@ -58,5 +58,6 @@
 - (void)transitionCameraToEntries;
 - (void)transitionCameraToInspectImage;
 - (void)transitionInspectImageToCamera;
+- (void)transitionInspectImageToEntries;
 
 @end

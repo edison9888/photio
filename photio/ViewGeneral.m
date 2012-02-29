@@ -139,6 +139,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 #pragma mark - 
 #pragma mark Transitions
+
 - (void)transitionEntriesToCamera {
     [self.cameraViewController setFlashImage];
     if ([CameraViewController cameraIsAvailable]) {
@@ -150,7 +151,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
                 [self entriesViewPosition:[self.class underWindow]];
             }
             completion:^(BOOL _finished){
-            }];
+            }
+        ];
     }
 }
 
@@ -163,7 +165,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
             [self entriesViewPosition:[self.class inWindow]];
         }
         completion:^(BOOL _finished){
-        }];
+        }
+    ];
 }
 
 - (void)transitionCameraToInspectImage {
@@ -175,7 +178,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
             [self imageInspectViewPosition:[self.class inWindow]];
         }
         completion:^(BOOL _finished){
-        }];
+        }
+    ];
 }
 
 - (void)transitionInspectImageToCamera {
@@ -183,13 +187,26 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
         animations:^{
-           [self cameraViewPosition:[self.class overWindow]];
-           [self imageInspectViewPosition:[self.class inWindow]];
+           [self cameraViewPosition:[self.class inWindow]];
+           [self imageInspectViewPosition:[self.class rightOfWindow]];
         }
         completion:^(BOOL _finished){
-        }];
+        }
+    ];
 }
 
+- (void)transitionInspectImageToEntries {
+    [UIView animateWithDuration:0.5
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+        animations:^{
+            [self entriesViewPosition:[self.class inWindow]];
+            [self imageInspectViewPosition:[self.class rightOfWindow]];
+        }
+        completion:^(BOOL _finished){
+        }
+    ];
+}
 
 #pragma mark -
 #pragma mark OverlayControllerDelegate

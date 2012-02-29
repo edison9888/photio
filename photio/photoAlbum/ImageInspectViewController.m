@@ -49,6 +49,17 @@
 }
 
 #pragma mark -
+#pragma mark ImageInspectViewController Events
+
+- (IBAction)toCamera:(id)sender {
+    [[ViewGeneral instance] transitionInspectImageToCamera];
+}
+
+- (IBAction)toEntries:(id)sender {
+    [[ViewGeneral instance] transitionInspectImageToEntries];
+}
+
+#pragma mark -
 #pragma mark ImageInspectViewController (PrivateAPI)
 
 - (void)loadFile:(NSString*)_fileName {
@@ -75,7 +86,10 @@
 
 -(UIImage*)saveImage:(NSInteger)_captureIndex {
     UIImage* capture = [self.captures objectAtIndex:_captureIndex];
-    return [capture scaleBy:SAVED_IMAGE_SCALE andCropToSize:SAVED_IMAGE_CROP];
+    CGSize imageSize = capture.size;
+    CGRect screenBounds = [ViewGeneral screenBounds];
+    CGFloat scaleImage = screenBounds.size.height / imageSize.height;
+    return [capture scaleBy:scaleImage andCropToSize:screenBounds.size];
 }
 
 #pragma mark -
@@ -111,12 +125,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-#pragma mark -
-#pragma mark Toolbar Actions
-
-- (IBAction)cameraAction:(id)sender { 
 }
 
 @end

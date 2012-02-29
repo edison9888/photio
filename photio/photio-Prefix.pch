@@ -13,8 +13,6 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define SAVED_IMAGE_SCALE       0.13
-#define SAVED_IMAGE_CROP        CGSizeMake(320, 424)
-#define DISPLAYED_IMAGE_SCALE   0.625
-#define DISPLAYED_IMAGE_CROP    CGSizeMake(200, 200)
+#define DISPLAYED_IMAGE_SCALE               0.625
+#define DISPLAYED_IMAGE_CROP                CGSizeMake(200, 200)
 
