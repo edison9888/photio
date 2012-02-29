@@ -14,16 +14,17 @@
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 - (void)loadFile:(NSString*)_fileName;
-- (void)saveToCameraRole:(NSInteger)_captureIndex;
+- (void)saveToCameraRole:(UIImage*)_capture;
 - (void)saveToFile:(UIImage*)_image;
-- (UIImage*)saveImage:(NSInteger)_captureIndex;
+- (UIImage*)saveImage:(UIImage*)_capture;
+- (void)setCurrentImage;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, toolBar, containerView, captures;
+@synthesize imageView, toolBar, containerView, captures, captureIndex;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -42,9 +43,10 @@
 }
 
 - (void)loadCaptures:(NSMutableArray*)_captures {
-    self.captures = _captures;
+    [self.captures addObjectsFromArray:_captures];
     if ([self.captures count] > 0) {
-        self.imageView.image = [self saveImage:0];
+        self.captureIndex = [self.captures count] - 1;
+        [self setCurrentImage];
     }
 }
 
@@ -57,6 +59,20 @@
 
 - (IBAction)toEntries:(id)sender {
     [[ViewGeneral instance] transitionInspectImageToEntries];
+}
+
+- (IBAction)newImages:(id)sender {
+    if (self.captureIndex < [self.captures count] - 1) {
+        self.captureIndex++;
+        [self setCurrentImage];
+    }
+}
+
+- (IBAction)oldImages:(id)sender {
+    if (self.captureIndex > 0) {
+        self.captureIndex--;
+        [self setCurrentImage];
+   }
 }
 
 #pragma mark -
@@ -74,9 +90,8 @@
     }
 }
 
-- (void)saveToCameraRole:(NSInteger)_captureIndex {
-    UIImage* capture = [self.captures objectAtIndex:_captureIndex];
-    UIImageWriteToSavedPhotosAlbum(capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+- (void)saveToCameraRole:(UIImage*)_capture {
+    UIImageWriteToSavedPhotosAlbum(_capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)saveToFile:(UIImage*)_image {
@@ -84,12 +99,15 @@
     [UIImagePNGRepresentation(_image) writeToFile:pngPath atomically:YES];    
 }
 
--(UIImage*)saveImage:(NSInteger)_captureIndex {
-    UIImage* capture = [self.captures objectAtIndex:_captureIndex];
-    CGSize imageSize = capture.size;
+- (UIImage*)saveImage:(UIImage*)_capture {
+    CGSize imageSize = _capture.size;
     CGRect screenBounds = [ViewGeneral screenBounds];
     CGFloat scaleImage = screenBounds.size.height / imageSize.height;
-    return [capture scaleBy:scaleImage andCropToSize:screenBounds.size];
+    return [_capture scaleBy:scaleImage andCropToSize:screenBounds.size];
+}
+
+- (void)setCurrentImage {
+    self.imageView.image = [self saveImage:[self.captures objectAtIndex:self.captureIndex]];
 }
 
 #pragma mark -

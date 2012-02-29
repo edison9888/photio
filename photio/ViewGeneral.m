@@ -143,7 +143,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)transitionEntriesToCamera {
     [self.cameraViewController setFlashImage];
     if ([CameraViewController cameraIsAvailable]) {
-        [UIView animateWithDuration:0.5
+        [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
             delay:0
             options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
             animations:^{
@@ -157,7 +157,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)transitionCameraToEntries {
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
         animations:^{
@@ -170,7 +170,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)transitionCameraToInspectImage {
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
         animations:^{
@@ -183,7 +183,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)transitionInspectImageToCamera {
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
         animations:^{
@@ -196,7 +196,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)transitionInspectImageToEntries {
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
         animations:^{
