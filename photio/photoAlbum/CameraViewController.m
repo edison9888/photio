@@ -159,14 +159,10 @@
 }
 
 - (void)didDragUp:(CGPoint)_drag {
-    
+    [[ViewGeneral instance] dragCameraToEntries:_drag];
 }
 
 - (void)didDragDown:(CGPoint)_drag {
-    CGRect newFrame = self.imagePickerController.view.frame;
-    newFrame.origin.x += _drag.x;
-    newFrame.origin.y += _drag.y;
-    self.imagePickerController.view.frame = newFrame;    
 }
 
 - (void)didReleaseRight {
@@ -178,7 +174,7 @@
 }
 
 - (void)didReleaseUp {
-    
+    [[ViewGeneral instance] releaseCameraToEntries];
 }
 
 - (void)didReleaseDown {

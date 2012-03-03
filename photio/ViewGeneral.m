@@ -138,7 +138,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
-#pragma mark Transitions
+#pragma mark Entries To Camera
 
 - (void)transitionEntriesToCamera {
     [self.cameraViewController setFlashImage];
@@ -156,6 +156,9 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     }
 }
 
+#pragma mark - 
+#pragma mark Camera To Entries
+
 - (void)transitionCameraToEntries {
     [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
         delay:0
@@ -167,6 +170,30 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         completion:^(BOOL _finished){
         }
     ];
+}
+
+- (void)dragCameraToEntries:(CGPoint)_drag {
+    CGRect newFrame = self.cameraViewController.imagePickerController.view.frame;
+    newFrame.origin.x += _drag.x;
+    newFrame.origin.y += _drag.y;
+    self.cameraViewController.imagePickerController.view.frame = newFrame;
+    newFrame = self.entriesViewController.view.frame;
+    newFrame.origin.x += _drag.x;
+    newFrame.origin.y += _drag.y;
+    self.entriesViewController.view.frame = newFrame;
+}
+
+- (void)releaseCameraToEntries {
+    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
+        animations:^{
+             [self cameraViewPosition:[self.class inWindow]];
+             [self entriesViewPosition:[self.class underWindow]];
+        }
+        completion:^(BOOL _finished){
+        }
+     ];    
 }
 
 - (void)transitionCameraToInspectImage {

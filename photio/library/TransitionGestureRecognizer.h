@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    DragDirectionLeft,
     DragDirectionRight,
+    DragDirectionLeft,
     DragDirectionUp,
     DragDirectionDown
 } DragDirection;
@@ -24,6 +24,7 @@ typedef enum {
     __weak UIView*                                  relativeView;
     CGPoint                                         lastTouch;
     CGPoint                                         totalDragDistance;
+    DragDirection                                   dragDirection;
 }
 
 @property (nonatomic, weak)   id<TransitionGestureRecognizerDelegate>   delegate;
@@ -32,6 +33,7 @@ typedef enum {
 @property (nonatomic, weak)   UIView*                                   relativeView;
 @property (nonatomic, retain) UIPanGestureRecognizer*                   gestureRecognizer;
 @property (nonatomic, assign) CGPoint                                   totalDragDistance;
+@property (nonatomic, assign) DragDirection                             dragDirection;
 
 + (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
 - (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;

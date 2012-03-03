@@ -55,9 +55,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionEntriesToCamera;
+
 - (void)transitionCameraToEntries;
+- (void)dragCameraToEntries:(CGPoint)_drag;
+- (void)releaseCameraToEntries;
+
 - (void)transitionCameraToInspectImage;
+
 - (void)transitionInspectImageToCamera;
+
 - (void)transitionInspectImageToEntries;
 
 @end
