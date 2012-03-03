@@ -15,14 +15,15 @@
     __weak id <CameraViewControllerDelegate>    cameraDelegate;
     __weak UIView*                              containerView; 
     UIImageView*                                flashEnabled;
-    UIImagePickerController*                    imagePickerController;  
-    
+    UIImagePickerController*                    imagePickerController;
+    CGPoint lastTouch;
 }    
 
 @property (nonatomic, weak)     id <CameraViewControllerDelegate>   cameraDelegate;
 @property (nonatomic, weak)     UIView*                             containerView;
 @property (nonatomic, retain)   IBOutlet UIImageView*               flashEnabled;
 @property (nonatomic, retain)   UIImagePickerController*            imagePickerController;
+@property (nonatomic, assign)   CGPoint lastTouch;
 
 
 + (id)inView:(UIView*)_containerView;

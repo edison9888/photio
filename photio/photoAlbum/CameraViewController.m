@@ -19,6 +19,7 @@
 @implementation CameraViewController
 
 @synthesize cameraDelegate, imagePickerController, containerView, flashEnabled;
+@synthesize lastTouch;
 
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI
@@ -78,8 +79,28 @@
     }
 }
 
-- (IBAction)toEntries:(id)sender {
-    [[ViewGeneral instance] transitionCameraToEntries];
+- (IBAction)toEntries:(UIPanGestureRecognizer*)sender {
+    CGPoint velocity = [sender velocityInView:self.containerView];
+    CGPoint touchPoint = [sender locationInView:self.containerView];
+    CGRect newFrame;
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+            self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
+            break;
+        case UIGestureRecognizerStateChanged:
+            newFrame = self.imagePickerController.view.frame;
+            newFrame.origin.x += touchPoint.x - self.lastTouch.x;
+            newFrame.origin.y += touchPoint.y - self.lastTouch.y;
+            self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
+            self.imagePickerController.view.frame = newFrame;
+            break;
+        case UIGestureRecognizerStateEnded:
+            break;
+        default:
+            break;
+    }
+
+//    [[ViewGeneral instance] transitionCameraToEntries];
 }
 
 - (IBAction)switchCamera:(id)sender {
