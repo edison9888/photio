@@ -8,26 +8,55 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    DragDirectionLeft,
+    DragDirectionRight,
+    DragDirectionUp,
+    DragDirectionDown
+} DragDirection;
+
+@protocol TransitionGestureRecognizerDelegate;
+
 @interface TransitionGestureRecognizer : NSObject {
-    UIView*     currentView;
-    UIView*     nextView;
-    CGPoint     lastTouch;
+    __weak id<TransitionGestureRecognizerDelegate>  delegate;
+    UIPanGestureRecognizer*                         gestureRecognizer;
+    __weak UIView*                                  view;
+    __weak UIView*                                  relativeView;
+    CGPoint                                         lastTouch;
+    CGPoint                                         totalDragDistance;
 }
 
-@property (nonatomic, assign) CGPoint   lastTouch;
-@property (nonatomic, retain) UIView*   currentView;
-@property (nonatomic, retain) UIView*   nextView;
+@property (nonatomic, weak)   id<TransitionGestureRecognizerDelegate>   delegate;
+@property (nonatomic, assign) CGPoint                                   lastTouch;
+@property (nonatomic, weak)   UIView*                                   view;
+@property (nonatomic, weak)   UIView*                                   relativeView;
+@property (nonatomic, retain) UIPanGestureRecognizer*                   gestureRecognizer;
+@property (nonatomic, assign) CGPoint                                   totalDragDistance;
 
-+ (id)initInView:(UIView*)_view andTransitionTo:(UIView*)_nextview;
++ (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
+- (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
 - (void)touched:(UIPanGestureRecognizer*)_recognizer;
 
 @end
 
+
 @protocol TransitionGestureRecognizerDelegate <NSObject>
 
-- (void)swipeRight;
-- (void)swipeLeft;
-- (void)swipeUp;
-- (void)swipeDown;
+@optional
+
+- (void)didDragRight:(CGPoint)_drag;
+- (void)didDragLeft:(CGPoint)_drag;
+- (void)didDragUp:(CGPoint)_drag;
+- (void)didDragDown:(CGPoint)_drag;
+
+- (void)didReleaseRight;
+- (void)didReleaseLeft;
+- (void)didReleaseUp;
+- (void)didReleaseDown;
+
+- (void)didSwipeRight;
+- (void)didSwipeLeft;
+- (void)didSwipeUp;
+- (void)didSwipeDown;
 
 @end

@@ -7,23 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AudioToolbox/AudioServices.h>
+#import "TransitionGestureRecognizer.h"
 
 @protocol CameraViewControllerDelegate;
+@class TransitionGestureRecognizer;
 
-@interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, TransitionGestureRecognizerDelegate> {
     __weak id <CameraViewControllerDelegate>    cameraDelegate;
-    __weak UIView*                              containerView; 
+    __weak UIView*                              containerView;
+    TransitionGestureRecognizer*                transitionGestureRecognizer;
     UIImageView*                                flashEnabled;
     UIImagePickerController*                    imagePickerController;
-    CGPoint lastTouch;
 }    
 
 @property (nonatomic, weak)     id <CameraViewControllerDelegate>   cameraDelegate;
 @property (nonatomic, weak)     UIView*                             containerView;
 @property (nonatomic, retain)   IBOutlet UIImageView*               flashEnabled;
 @property (nonatomic, retain)   UIImagePickerController*            imagePickerController;
-@property (nonatomic, assign)   CGPoint lastTouch;
+@property (nonatomic, retain)   TransitionGestureRecognizer*        transitionGestureRecognizer;
 
 
 + (id)inView:(UIView*)_containerView;
@@ -31,7 +32,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (IBAction)done:(id)sender;
 - (IBAction)takePhoto:(id)sender;
-- (IBAction)toEntries:(id)sender;
 - (IBAction)switchCamera:(id)sender;
 - (IBAction)changeFlashMode:(id)sender;
 - (void)setFlashImage;

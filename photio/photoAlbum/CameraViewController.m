@@ -7,6 +7,7 @@
 //
 
 #import "CameraViewController.h"
+#import "TransitionGestureRecognizer.h"
 #import "ViewGeneral.h"
 
 #define PICKER_SOURCE_TYPE UIImagePickerControllerSourceTypeCamera
@@ -19,7 +20,7 @@
 @implementation CameraViewController
 
 @synthesize cameraDelegate, imagePickerController, containerView, flashEnabled;
-@synthesize lastTouch;
+@synthesize transitionGestureRecognizer;
 
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI
@@ -62,6 +63,7 @@
         self.imagePickerController.cameraViewTransform = CGAffineTransformScale(self.imagePickerController.cameraViewTransform, 1.27, 1.27);
         self.imagePickerController.view.frame = self.containerView.frame;
         self.imagePickerController.cameraOverlayView = self.view;
+        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:self.containerView];
     }
     return self;
 }
@@ -77,30 +79,6 @@
     if ([[ViewGeneral instance] hasCaptures]) {
         [self.cameraDelegate didFinishWithCamera];
     }
-}
-
-- (IBAction)toEntries:(UIPanGestureRecognizer*)sender {
-    CGPoint velocity = [sender velocityInView:self.containerView];
-    CGPoint touchPoint = [sender locationInView:self.containerView];
-    CGRect newFrame;
-    switch (sender.state) {
-        case UIGestureRecognizerStateBegan:
-            self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
-            break;
-        case UIGestureRecognizerStateChanged:
-            newFrame = self.imagePickerController.view.frame;
-            newFrame.origin.x += touchPoint.x - self.lastTouch.x;
-            newFrame.origin.y += touchPoint.y - self.lastTouch.y;
-            self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
-            self.imagePickerController.view.frame = newFrame;
-            break;
-        case UIGestureRecognizerStateEnded:
-            break;
-        default:
-            break;
-    }
-
-//    [[ViewGeneral instance] transitionCameraToEntries];
 }
 
 - (IBAction)switchCamera:(id)sender {
@@ -168,6 +146,60 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker { 
     [self.cameraDelegate didFinishWithCamera];
+}
+
+#pragma mark -
+#pragma mark TransitionGestureRecognizerDelegate
+
+- (void)didDragRight:(CGPoint)_drag {
+}
+
+- (void)didDragLeft:(CGPoint)_drag {
+    
+}
+
+- (void)didDragUp:(CGPoint)_drag {
+    
+}
+
+- (void)didDragDown:(CGPoint)_drag {
+    CGRect newFrame = self.imagePickerController.view.frame;
+    newFrame.origin.x += _drag.x;
+    newFrame.origin.y += _drag.y;
+    self.imagePickerController.view.frame = newFrame;    
+}
+
+- (void)didReleaseRight {
+    
+}
+
+- (void)didReleaseLeft {
+    
+}
+
+- (void)didReleaseUp {
+    
+}
+
+- (void)didReleaseDown {
+    
+}
+
+
+- (void)didSwipeRight {
+    
+}
+
+- (void)didSwipeLeft {
+    
+}
+
+- (void)didSwipeUp {
+    
+}
+
+- (void)didSwipeDown {
+    [[ViewGeneral instance] transitionCameraToEntries];  
 }
 
 @end
