@@ -11,20 +11,20 @@
 
 @class CameraViewController;
 @class ImageInspectViewController;
-@class EntriesViewController;
+@class EntryViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral : NSObject <CameraViewControllerDelegate> {
     CameraViewController*       cameraViewController;
     ImageInspectViewController* imageInspectViewController;
-    EntriesViewController*      entriesViewController;
+    EntryViewController*        entriesViewController;
     NSMutableArray*             captures;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property(nonatomic, retain) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, retain) CameraViewController*          cameraViewController;
-@property(nonatomic, retain) EntriesViewController*         entriesViewController;
+@property(nonatomic, retain) EntryViewController*           entryViewController;
 @property(nonatomic, retain) NSMutableArray*                captures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -39,9 +39,9 @@
 - (BOOL)hasCaptures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initEntriesView:(UIView*)_containerView;
-- (void)entriesViewPosition:(CGRect)_rect;
-- (void)entriesViewHidden:(BOOL)_hidden;
+- (void)initEntryView:(UIView*)_containerView;
+- (void)entryViewPosition:(CGRect)_rect;
+- (void)entryViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initImageInspectView:(UIView*)_containerView;
@@ -54,16 +54,16 @@
 - (void)cameraViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)transitionEntriesToCamera;
+- (void)transitionEntryToCamera;
+- (void)dragEntryToCamera:(CGPoint)_drag;
+- (void)releaseEntryToCamera;
 
-- (void)transitionCameraToEntries;
-- (void)dragCameraToEntries:(CGPoint)_drag;
-- (void)releaseCameraToEntries;
+- (void)transitionCameraToEntry;
+- (void)dragCameraToEntry:(CGPoint)_drag;
+- (void)releaseCameraToEntry;
 
 - (void)transitionCameraToInspectImage;
 
 - (void)transitionInspectImageToCamera;
-
-- (void)transitionInspectImageToEntries;
 
 @end

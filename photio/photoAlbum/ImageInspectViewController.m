@@ -57,8 +57,7 @@
     [[ViewGeneral instance] transitionInspectImageToCamera];
 }
 
-- (IBAction)toEntries:(id)sender {
-    [[ViewGeneral instance] transitionInspectImageToEntries];
+- (IBAction)toCalendar:(id)sender {
 }
 
 - (IBAction)newImages:(id)sender {

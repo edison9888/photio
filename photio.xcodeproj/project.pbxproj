@@ -24,8 +24,6 @@
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
 		05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */; };
 		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
-		05DE437614F1E994005FF6B0 /* EntriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE437414F1E994005FF6B0 /* EntriesViewController.m */; };
-		05DE437714F1E994005FF6B0 /* EntriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437514F1E994005FF6B0 /* EntriesViewController.xib */; };
 		05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE438714F1F46D005FF6B0 /* EntryViewController.m */; };
 		05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE438814F1F46D005FF6B0 /* EntryViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
@@ -62,9 +60,6 @@
 		05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectViewController.h; sourceTree = "<group>"; };
 		05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectViewController.m; sourceTree = "<group>"; };
 		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
-		05DE437314F1E994005FF6B0 /* EntriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntriesViewController.h; sourceTree = "<group>"; };
-		05DE437414F1E994005FF6B0 /* EntriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntriesViewController.m; sourceTree = "<group>"; };
-		05DE437514F1E994005FF6B0 /* EntriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntriesViewController.xib; sourceTree = "<group>"; };
 		05DE438614F1F46D005FF6B0 /* EntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryViewController.h; sourceTree = "<group>"; };
 		05DE438714F1F46D005FF6B0 /* EntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryViewController.m; sourceTree = "<group>"; };
 		05DE438814F1F46D005FF6B0 /* EntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryViewController.xib; sourceTree = "<group>"; };
@@ -141,9 +136,6 @@
 				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
 				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
 				05C99EC714F0585C00D09F3E /* Supporting Files */,
-				05DE437314F1E994005FF6B0 /* EntriesViewController.h */,
-				05DE437414F1E994005FF6B0 /* EntriesViewController.m */,
-				05DE437514F1E994005FF6B0 /* EntriesViewController.xib */,
 				05DE438614F1F46D005FF6B0 /* EntryViewController.h */,
 				05DE438714F1F46D005FF6B0 /* EntryViewController.m */,
 				05DE438814F1F46D005FF6B0 /* EntryViewController.xib */,
@@ -247,7 +239,6 @@
 			files = (
 				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
 				05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */,
-				05DE437714F1E994005FF6B0 /* EntriesViewController.xib in Resources */,
 				05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */,
 				050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */,
 				050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */,
@@ -269,7 +260,6 @@
 				05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */,
 				05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */,
 				05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */,
-				05DE437614F1E994005FF6B0 /* EntriesViewController.m in Sources */,
 				05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */,
 				05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */,
 				050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */,

@@ -12,8 +12,7 @@
 @implementation ContainerViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
     }
     return self;
 }
@@ -27,7 +26,7 @@
     [super viewDidLoad];
     ViewGeneral* general = [ViewGeneral instance];
     [general createViews:self.view];
-    [general entriesViewPosition:[ViewGeneral inWindow]];
+    [general entryViewPosition:[ViewGeneral inWindow]];
 }
 
 - (void)viewDidUnload {

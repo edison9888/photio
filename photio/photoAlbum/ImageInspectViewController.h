@@ -26,7 +26,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (void)loadCaptures:(NSMutableArray*)_captures;
 - (IBAction)toCamera:(id)sender;
-- (IBAction)toEntries:(id)sender;
+- (IBAction)toCalendar:(id)sender;
 - (IBAction)newImages:(id)sender;
 - (IBAction)oldImages:(id)sender;
 

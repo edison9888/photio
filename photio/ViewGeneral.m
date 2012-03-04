@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ViewGeneral.h"
 #import "ImageInspectViewController.h"
-#import "EntriesViewController.h"
+#import "EntryViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
@@ -22,11 +22,21 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewGeneral
  
-@synthesize imageInspectViewController, cameraViewController, entriesViewController;
+@synthesize imageInspectViewController, cameraViewController, entryViewController;
 @synthesize captures;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
+
+- (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation {
+    [UIView animateWithDuration:_duration
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+        animations:_animation
+        completion:^(BOOL _finished){
+        }
+    ];
+}
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
@@ -70,7 +80,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)createViews:(UIView*)_containerView {
-    [self initEntriesView:_containerView];
+    [self initEntryView:_containerView];
     [self initImageInspectView:_containerView];
     [self initCameraView:_containerView];
 }
@@ -82,20 +92,20 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark - 
 #pragma mark EntriesViewController
 
-- (void)initEntriesView:(UIView*)_containerView {
-    if (self.entriesViewController == nil) {
-        self.entriesViewController = [EntriesViewController inView:_containerView];
+- (void)initEntryView:(UIView*)_containerView {
+    if (self.entryViewController == nil) {
+        self.entryViewController = [EntryViewController inView:_containerView];
     }
-    [self entriesViewPosition:[self.class underWindow]];
-    [_containerView addSubview:self.entriesViewController.view];
+    [self entryViewPosition:[self.class underWindow]];
+    [_containerView addSubview:self.entryViewController.view];
 }
 
-- (void)entriesViewHidden:(BOOL)_hidden {
-    self.entriesViewController.view.hidden = _hidden;
+- (void)entryViewHidden:(BOOL)_hidden {
+    self.entryViewController.view.hidden = _hidden;
 }
 
-- (void)entriesViewPosition:(CGRect)_rect {
-    self.entriesViewController.view.frame = _rect;
+- (void)entryViewPosition:(CGRect)_rect {
+    self.entryViewController.view.frame = _rect;
 }
 
 #pragma mark - 
@@ -138,103 +148,91 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
-#pragma mark Entries To Camera
+#pragma mark Entry To Camera
 
-- (void)transitionEntriesToCamera {
+- (void)transitionEntryToCamera {
     [self.cameraViewController setFlashImage];
     if ([CameraViewController cameraIsAvailable]) {
-        [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
-            delay:0
-            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
-            animations:^{
+        [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
                 [self cameraViewPosition:[self.class inWindow]];
-                [self entriesViewPosition:[self.class underWindow]];
+                [self entryViewPosition:[self.class underWindow]];
             }
-            completion:^(BOOL _finished){
-            }
-        ];
+        ];    
     }
 }
 
-#pragma mark - 
-#pragma mark Camera To Entries
+- (void)dragEntryToCamera:(CGPoint)_drag {
+    CGRect newFrame = self.cameraViewController.imagePickerController.view.frame;
+    newFrame.origin.x -= _drag.x;
+    newFrame.origin.y -= _drag.y;
+    self.cameraViewController.imagePickerController.view.frame = newFrame;
+    newFrame = self.entryViewController.view.frame;
+    newFrame.origin.x -= _drag.x;
+    newFrame.origin.y -= _drag.y;
+    self.entryViewController.view.frame = newFrame;
+}
 
-- (void)transitionCameraToEntries {
-    CGFloat delta = abs([self.class screenBounds].size.height + self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
-    [UIView animateWithDuration:delta*TRANSITION_ANIMATION_DURATION
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
-        animations:^{
-            [self cameraViewPosition:[self.class overWindow]];
-            [self entriesViewPosition:[self.class inWindow]];
+- (void)releaseEntryToCamera {
+    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+            [self cameraViewPosition:[self.class inWindow]];
+            [self entryViewPosition:[self.class underWindow]];
         }
-        completion:^(BOOL _finished){
+    ];    
+}
+
+#pragma mark - 
+#pragma mark Camera To Entry
+
+- (void)transitionCameraToEntry {
+    CGFloat delta = abs([self.class screenBounds].size.height + self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+            [self cameraViewPosition:[self.class overWindow]];
+            [self entryViewPosition:[self.class inWindow]];
         }
     ];
 }
 
-- (void)dragCameraToEntries:(CGPoint)_drag {
+- (void)dragCameraToEntry:(CGPoint)_drag {
     CGRect newFrame = self.cameraViewController.imagePickerController.view.frame;
     newFrame.origin.x += _drag.x;
     newFrame.origin.y += _drag.y;
     self.cameraViewController.imagePickerController.view.frame = newFrame;
-    newFrame = self.entriesViewController.view.frame;
+    newFrame = self.entryViewController.view.frame;
     newFrame.origin.x += _drag.x;
     newFrame.origin.y += _drag.y;
-    self.entriesViewController.view.frame = newFrame;
+    self.entryViewController.view.frame = newFrame;
 }
 
-- (void)releaseCameraToEntries {
+- (void)releaseCameraToEntry {
     CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
-    [UIView animateWithDuration:delta*TRANSITION_ANIMATION_DURATION
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
-        animations:^{
-             [self cameraViewPosition:[self.class inWindow]];
-             [self entriesViewPosition:[self.class underWindow]];
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+            [self cameraViewPosition:[self.class inWindow]];
+            [self entryViewPosition:[self.class underWindow]];
         }
-        completion:^(BOOL _finished){
-        }
-     ];    
+    ];    
 }
+
+#pragma mark - 
+#pragma mark Camera To Inspect Image
 
 - (void)transitionCameraToInspectImage {
-    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
-        animations:^{
+    [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class overWindow]];
             [self imageInspectViewPosition:[self.class inWindow]];
         }
-        completion:^(BOOL _finished){
-        }
-    ];
+    ];    
 }
+
+#pragma mark - 
+#pragma mark Inspect Image To Camera
 
 - (void)transitionInspectImageToCamera {
-    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
-        animations:^{
-           [self cameraViewPosition:[self.class inWindow]];
-           [self imageInspectViewPosition:[self.class rightOfWindow]];
-        }
-        completion:^(BOOL _finished){
-        }
-    ];
-}
-
-- (void)transitionInspectImageToEntries {
-    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
-        animations:^{
-            [self entriesViewPosition:[self.class inWindow]];
+    [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
+            [self cameraViewPosition:[self.class inWindow]];
             [self imageInspectViewPosition:[self.class rightOfWindow]];
         }
-        completion:^(BOOL _finished){
-        }
-    ];
+    ];    
 }
 
 #pragma mark -

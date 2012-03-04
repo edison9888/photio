@@ -17,5 +17,5 @@
 #define DISPLAYED_IMAGE_SCALE               0.625
 #define DISPLAYED_IMAGE_CROP                CGSizeMake(200, 200)
 
-#define DETECT_SWIPE_SPEED                  700
+#define DETECT_SWIPE_SPEED                  500
 #define MAX_TOUCH_DELTA                     15

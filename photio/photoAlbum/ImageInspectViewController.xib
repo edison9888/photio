@@ -142,11 +142,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">toEntries:</string>
+						<string key="label">toCalendar:</string>
 						<reference key="source" ref="157329556"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
-					<int key="connectionID">16</int>
+					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -207,7 +207,7 @@
 						<int key="objectID">14</int>
 						<reference key="object" ref="157329556"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">to entries</string>
+						<string key="objectName">to calendar</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
@@ -239,7 +239,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">23</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -249,8 +249,8 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="newImages:">id</string>
 						<string key="oldImages:">id</string>
+						<string key="toCalendar:">id</string>
 						<string key="toCamera:">id</string>
-						<string key="toEntries:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="newImages:">
@@ -261,12 +261,12 @@
 							<string key="name">oldImages:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="toCamera:">
-							<string key="name">toCamera:</string>
+						<object class="IBActionInfo" key="toCalendar:">
+							<string key="name">toCalendar:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="toEntries:">
-							<string key="name">toEntries:</string>
+						<object class="IBActionInfo" key="toCamera:">
+							<string key="name">toCamera:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

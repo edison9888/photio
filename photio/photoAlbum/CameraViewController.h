@@ -10,7 +10,6 @@
 #import "TransitionGestureRecognizer.h"
 
 @protocol CameraViewControllerDelegate;
-@class TransitionGestureRecognizer;
 
 @interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, TransitionGestureRecognizerDelegate> {
     __weak id <CameraViewControllerDelegate>    cameraDelegate;

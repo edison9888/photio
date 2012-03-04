@@ -7,7 +7,6 @@
 //
 
 #import "CameraViewController.h"
-#import "TransitionGestureRecognizer.h"
 #import "ViewGeneral.h"
 
 #define PICKER_SOURCE_TYPE UIImagePickerControllerSourceTypeCamera
@@ -154,46 +153,31 @@
 - (void)didDragRight:(CGPoint)_drag {
 }
 
-- (void)didDragLeft:(CGPoint)_drag {
-    
+- (void)didDragLeft:(CGPoint)_drag {    
 }
 
 - (void)didDragUp:(CGPoint)_drag {
-    [[ViewGeneral instance] dragCameraToEntries:_drag];
+    [[ViewGeneral instance] dragCameraToEntry:_drag];
 }
 
-- (void)didDragDown:(CGPoint)_drag {
-}
-
-- (void)didReleaseRight {
-    
+- (void)didReleaseRight {    
 }
 
 - (void)didReleaseLeft {
-    
 }
 
 - (void)didReleaseUp {
-    [[ViewGeneral instance] releaseCameraToEntries];
-}
-
-- (void)didReleaseDown {
-    
+    [[ViewGeneral instance] releaseCameraToEntry];
 }
 
 - (void)didSwipeRight {
-    
 }
 
 - (void)didSwipeLeft {
-    
 }
 
 - (void)didSwipeUp {
-    [[ViewGeneral instance] transitionCameraToEntries];    
-}
-
-- (void)didSwipeDown {
+    [[ViewGeneral instance] transitionCameraToEntry];    
 }
 
 @end

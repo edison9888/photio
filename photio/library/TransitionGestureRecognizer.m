@@ -215,4 +215,12 @@
     }
 }
 
+- (BOOL)enabled {
+    return self.gestureRecognizer.enabled;
+}
+
+- (void)enabled:(BOOL)_enabled {
+    self.gestureRecognizer.enabled = _enabled;
+}
+
 @end

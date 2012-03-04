@@ -40,6 +40,8 @@ typedef enum {
 + (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
 - (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
 - (void)touched:(UIPanGestureRecognizer*)_recognizer;
+- (BOOL)enabled;
+- (void)enabled:(BOOL)_enabled;
 
 @end
 
