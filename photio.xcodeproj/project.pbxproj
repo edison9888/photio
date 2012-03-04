@@ -13,6 +13,8 @@
 		0529A7C71501D41900235B95 /* TransitionGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */; };
 		0529A7D41503B35400235B95 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7D21503B35400235B95 /* CalendarViewController.m */; };
 		0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0529A7D31503B35400235B95 /* CalendarViewController.xib */; };
+		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
+		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -42,6 +44,10 @@
 		0529A7D11503B35400235B95 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		0529A7D21503B35400235B95 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		0529A7D31503B35400235B95 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
+		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
+		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
+		0554A47E1503DDFE00B9C76D /* DragRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragRowView.m; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +98,10 @@
 			children = (
 				0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */,
 				0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */,
+				0554A4791503DDD000B9C76D /* DragGridView.h */,
+				0554A47A1503DDD000B9C76D /* DragGridView.m */,
+				0554A47D1503DDFE00B9C76D /* DragRowView.h */,
+				0554A47E1503DDFE00B9C76D /* DragRowView.m */,
 			);
 			path = library;
 			sourceTree = "<group>";
@@ -274,6 +284,8 @@
 				050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */,
 				0529A7C71501D41900235B95 /* TransitionGestureRecognizer.m in Sources */,
 				0529A7D41503B35400235B95 /* CalendarViewController.m in Sources */,
+				0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */,
+				0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
