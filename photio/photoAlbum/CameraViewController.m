@@ -181,7 +181,6 @@
     
 }
 
-
 - (void)didSwipeRight {
     
 }
@@ -191,11 +190,10 @@
 }
 
 - (void)didSwipeUp {
-    
+    [[ViewGeneral instance] transitionCameraToEntries];    
 }
 
 - (void)didSwipeDown {
-    [[ViewGeneral instance] transitionCameraToEntries];  
 }
 
 @end

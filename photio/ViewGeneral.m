@@ -160,7 +160,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Camera To Entries
 
 - (void)transitionCameraToEntries {
-    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
+    CGFloat delta = abs([self.class screenBounds].size.height + self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
+    [UIView animateWithDuration:delta*TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
         animations:^{
@@ -184,7 +185,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)releaseCameraToEntries {
-    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
+    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
+    [UIView animateWithDuration:delta*TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction
         animations:^{

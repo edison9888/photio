@@ -19,21 +19,23 @@ typedef enum {
 
 @interface TransitionGestureRecognizer : NSObject {
     __weak id<TransitionGestureRecognizerDelegate>  delegate;
-    UIPanGestureRecognizer*                         gestureRecognizer;
     __weak UIView*                                  view;
     __weak UIView*                                  relativeView;
+    UIPanGestureRecognizer*                         gestureRecognizer;
     CGPoint                                         lastTouch;
     CGPoint                                         totalDragDistance;
     DragDirection                                   dragDirection;
+    BOOL                                            acceptTouches;
 }
 
 @property (nonatomic, weak)   id<TransitionGestureRecognizerDelegate>   delegate;
-@property (nonatomic, assign) CGPoint                                   lastTouch;
 @property (nonatomic, weak)   UIView*                                   view;
 @property (nonatomic, weak)   UIView*                                   relativeView;
 @property (nonatomic, retain) UIPanGestureRecognizer*                   gestureRecognizer;
+@property (nonatomic, assign) CGPoint                                   lastTouch;
 @property (nonatomic, assign) CGPoint                                   totalDragDistance;
 @property (nonatomic, assign) DragDirection                             dragDirection;
+@property (nonatomic, assign) BOOL                                      acceptTouches;
 
 + (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
 - (id)initWithDelegate:(id<TransitionGestureRecognizerDelegate>)_delegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
