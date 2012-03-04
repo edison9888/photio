@@ -12,12 +12,14 @@
 @class CameraViewController;
 @class ImageInspectViewController;
 @class EntryViewController;
+@class CalendarViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral : NSObject <CameraViewControllerDelegate> {
     CameraViewController*       cameraViewController;
     ImageInspectViewController* imageInspectViewController;
     EntryViewController*        entriesViewController;
+    CalendarViewController*     calendarViewController;
     NSMutableArray*             captures;
 }
 
@@ -25,6 +27,7 @@
 @property(nonatomic, retain) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, retain) CameraViewController*          cameraViewController;
 @property(nonatomic, retain) EntryViewController*           entryViewController;
+@property(nonatomic, retain) CalendarViewController*        calendarViewController;
 @property(nonatomic, retain) NSMutableArray*                captures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -35,6 +38,7 @@
 + (CGRect)underWindow;
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow; 
++ (void)drag:(CGPoint)_drag view:(UIView*)_view;
 - (void)createViews:(UIView*)_containerView;
 - (BOOL)hasCaptures;
 
@@ -54,16 +58,24 @@
 - (void)cameraViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)transitionEntryToCamera;
-- (void)dragEntryToCamera:(CGPoint)_drag;
-- (void)releaseEntryToCamera;
+- (void)initCalendarView:(UIView*)_containerView;
+- (void)calendarViewPosition:(CGRect)_rec;
+- (void)calendarViewHidden:(BOOL)_hidden;
 
-- (void)transitionCameraToEntry;
-- (void)dragCameraToEntry:(CGPoint)_drag;
-- (void)releaseCameraToEntry;
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)transitionCalendarToCamera;
+- (void)releaseCalendarToCamera;
+- (void)dragCalendarToCamera:(CGPoint)_drag;
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)transitionCameraToCalendar;
+- (void)releaseCameraToCalendar;
+- (void)dragCameraToCalendar:(CGPoint)_drag;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCameraToInspectImage;
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionInspectImageToCamera;
 
 @end

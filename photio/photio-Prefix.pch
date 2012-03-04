@@ -13,7 +13,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define TRANSITION_ANIMATION_DURATION       0.75
+#define TRANSITION_ANIMATION_DURATION       0.5
 #define DISPLAYED_IMAGE_SCALE               0.625
 #define DISPLAYED_IMAGE_CROP                CGSizeMake(200, 200)
 

@@ -11,6 +11,8 @@
 		050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF12714F96A9100A31059 /* ContainerViewController.xib */; };
 		050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF14F14F9A27D00A31059 /* CameraViewController.xib */; };
 		0529A7C71501D41900235B95 /* TransitionGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */; };
+		0529A7D41503B35400235B95 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7D21503B35400235B95 /* CalendarViewController.m */; };
+		0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0529A7D31503B35400235B95 /* CalendarViewController.xib */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -37,6 +39,9 @@
 		050CF14F14F9A27D00A31059 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionGestureRecognizer.h; sourceTree = "<group>"; };
 		0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionGestureRecognizer.m; sourceTree = "<group>"; };
+		0529A7D11503B35400235B95 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		0529A7D21503B35400235B95 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		0529A7D31503B35400235B95 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +149,9 @@
 				050CF12514F96A9100A31059 /* ContainerViewController.h */,
 				050CF12614F96A9100A31059 /* ContainerViewController.m */,
 				050CF12714F96A9100A31059 /* ContainerViewController.xib */,
+				0529A7D11503B35400235B95 /* CalendarViewController.h */,
+				0529A7D21503B35400235B95 /* CalendarViewController.m */,
+				0529A7D31503B35400235B95 /* CalendarViewController.xib */,
 			);
 			path = photio;
 			sourceTree = "<group>";
@@ -243,6 +251,7 @@
 				050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */,
 				050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */,
 				05E836C314FC69E100FAF35D /* flash-on.png in Resources */,
+				0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +273,7 @@
 				05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */,
 				050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */,
 				0529A7C71501D41900235B95 /* TransitionGestureRecognizer.m in Sources */,
+				0529A7D41503B35400235B95 /* CalendarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

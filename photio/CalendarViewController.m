@@ -1,28 +1,28 @@
 //
-//  EntryViewController.m
+//  CalendarViewController.m
 //  photio
 //
-//  Created by Troy Stribling on 2/19/12.
+//  Created by Troy Stribling on 3/4/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "EntryViewController.h"
+#import "CalendarViewController.h"
 #import "ViewGeneral.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface EntryViewController (PrivateAPI)
+@interface CalendarViewController (PrivateAPI)
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation EntryViewController
+@implementation CalendarViewController
 
-@synthesize imageView, transitionGestureRecognizer, containerView;
+@synthesize transitionGestureRecognizer, containerView;
 
 + (id)inView:(UIView*)_containerView {
-    return [[EntryViewController alloc] initWithNibName:@"EntryViewController" bundle:nil inView:_containerView];;
+    return [[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil inView:_containerView];;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:_containerView {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
@@ -38,14 +38,6 @@
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidUnload {
     [super viewDidUnload];
 }
@@ -57,6 +49,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate

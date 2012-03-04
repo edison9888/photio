@@ -10,6 +10,7 @@
 #import "ViewGeneral.h"
 #import "ImageInspectViewController.h"
 #import "EntryViewController.h"
+#import "CalendarViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
@@ -22,7 +23,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewGeneral
  
-@synthesize imageInspectViewController, cameraViewController, entryViewController;
+@synthesize imageInspectViewController, cameraViewController, entryViewController, calendarViewController;
 @synthesize captures;
 
 #pragma mark - 
@@ -79,10 +80,18 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return CGRectMake(screenBounds.size.width, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
 }
 
++ (void)drag:(CGPoint)_drag view:(UIView*)_view {
+    CGRect newFrame = _view.frame;
+    newFrame.origin.x += _drag.x;
+    newFrame.origin.y += _drag.y;
+    _view.frame = newFrame;
+}
+
 - (void)createViews:(UIView*)_containerView {
     [self initEntryView:_containerView];
-    [self initImageInspectView:_containerView];
     [self initCameraView:_containerView];
+    [self initImageInspectView:_containerView];
+    [self initCalendarView:_containerView];
 }
 
 - (BOOL)hasCaptures {
@@ -90,7 +99,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
-#pragma mark EntriesViewController
+#pragma mark EntryViewController
 
 - (void)initEntryView:(UIView*)_containerView {
     if (self.entryViewController == nil) {
@@ -148,70 +157,79 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
-#pragma mark Entry To Camera
+#pragma mark CalendarViewController
 
-- (void)transitionEntryToCamera {
+- (void)initCalendarView:(UIView*)_containerView {
+    if (self.calendarViewController == nil) {
+        self.calendarViewController = [CalendarViewController inView:_containerView];
+    } 
+    [self calendarViewPosition:[self.class inWindow]];
+    [_containerView addSubview:self.calendarViewController.view];
+}
+
+- (void)calendarViewHidden:(BOOL)_hidden {
+    self.calendarViewController.view.hidden = _hidden;
+}
+
+- (void)calendarViewPosition:(CGRect)_rect {
+    self.calendarViewController.view.frame = _rect;
+}
+
+#pragma mark - 
+#pragma mark Calendar To Camera
+
+- (void)transitionCalendarToCamera {
     [self.cameraViewController setFlashImage];
     if ([CameraViewController cameraIsAvailable]) {
         [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
                 [self cameraViewPosition:[self.class inWindow]];
-                [self entryViewPosition:[self.class underWindow]];
+                [self calendarViewPosition:[self.class underWindow]];
             }
         ];    
     }
 }
 
-- (void)dragEntryToCamera:(CGPoint)_drag {
-    CGRect newFrame = self.cameraViewController.imagePickerController.view.frame;
-    newFrame.origin.x -= _drag.x;
-    newFrame.origin.y -= _drag.y;
-    self.cameraViewController.imagePickerController.view.frame = newFrame;
-    newFrame = self.entryViewController.view.frame;
-    newFrame.origin.x -= _drag.x;
-    newFrame.origin.y -= _drag.y;
-    self.entryViewController.view.frame = newFrame;
-}
-
-- (void)releaseEntryToCamera {
+- (void)releaseCalendarToCamera {
     CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-            [self cameraViewPosition:[self.class inWindow]];
-            [self entryViewPosition:[self.class underWindow]];
+            [self cameraViewPosition:[self.class overWindow]];
+            [self calendarViewPosition:[self.class inWindow]];
         }
     ];    
 }
 
-#pragma mark - 
-#pragma mark Camera To Entry
+- (void)dragCalendarToCamera:(CGPoint)_drag {
+    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+    [self.class drag:_drag view:self.calendarViewController.view];
+}
 
-- (void)transitionCameraToEntry {
-    CGFloat delta = abs([self.class screenBounds].size.height + self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
+#pragma mark - 
+#pragma mark Camera To Calendar
+
+- (void)transitionCameraToCalendar {
+    CGFloat screenHeight = [self.class screenBounds].size.height;
+    CGFloat delta = abs(screenHeight + self.cameraViewController.imagePickerController.view.frame.origin.y)/screenHeight;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class overWindow]];
-            [self entryViewPosition:[self.class inWindow]];
+            [self calendarViewPosition:[self.class inWindow]];
         }
     ];
 }
 
-- (void)dragCameraToEntry:(CGPoint)_drag {
-    CGRect newFrame = self.cameraViewController.imagePickerController.view.frame;
-    newFrame.origin.x += _drag.x;
-    newFrame.origin.y += _drag.y;
-    self.cameraViewController.imagePickerController.view.frame = newFrame;
-    newFrame = self.entryViewController.view.frame;
-    newFrame.origin.x += _drag.x;
-    newFrame.origin.y += _drag.y;
-    self.entryViewController.view.frame = newFrame;
-}
-
-- (void)releaseCameraToEntry {
+- (void)releaseCameraToCalendar {
     CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
-            [self entryViewPosition:[self.class underWindow]];
+            [self calendarViewPosition:[self.class underWindow]];
         }
     ];    
 }
+
+- (void)dragCameraToCalendar:(CGPoint)_drag {
+    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+    [self.class drag:_drag view:self.calendarViewController.view];
+}
+
 
 #pragma mark - 
 #pragma mark Camera To Inspect Image
