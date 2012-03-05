@@ -11,14 +11,12 @@
 @class DragGridView;
 
 @interface DragRowView : UIView {
-    __weak DragGridView*            gridView;
-    NSArray*                        items;
+    __weak NSArray*         items;
 }
 
-@property (nonatomic, weak)   DragGridView*     gridView;
-@property (nonatomic, retain) NSArray*          items;
+@property (nonatomic, weak)     NSArray*        items;
 
-+ (id)withFrame:(CGRect)_rect inGridView:(DragGridView*)_gridView withItems:(NSArray*)_items;
-- (id)initWithFrame:(CGRect)frame inGridView:(DragGridView*)_gridView withItems:(NSArray*)_items;
++ (id)withFrame:(CGRect)_rect andItems:(NSArray*)_items;
+- (id)initWithFrame:(CGRect)_frame andItems:(NSArray*)_items;
 
 @end

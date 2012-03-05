@@ -16,29 +16,29 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragRowView
 
-@synthesize gridView, items;
+@synthesize items;
 
 #pragma mark -
 #pragma mark UIViewController
 
 
-+ (id)withFrame:(CGRect)_rect inGridView:(DragGridView*)_gridView withItems:(NSArray*)_items {
-    return [[DragRowView alloc] initWithFrame:_rect];;
++ (id)withFrame:(CGRect)_rect andItems:(NSArray*)_items {
+    return [[DragRowView alloc] initWithFrame:_rect andItems:(NSArray*)_items];
 }
 
-- (id)initWithFrame:(CGRect)_frame inGridView:(DragGridView*)_gridView withItems:(NSArray*)_items {
+- (id)initWithFrame:(CGRect)_frame andItems:(NSArray*)_items {
     if ((self = [super initWithFrame:_frame])) {
-        self.gridView = _gridView;
         self.items = _items;
         UIView* firstItem = [self.items objectAtIndex:0];
         CGFloat itemWidth = firstItem.frame.size.width;
-        for (int i = 0; i < [items count]; i++) {
+        CGFloat itemOffset = (_frame.size.width - itemWidth * [self.items count]) / 2.0;
+        for (int i = 0; i < [self.items count]; i++) {
             UIView* itemView = [self.items objectAtIndex:i];
             CGRect newFrame = itemView.frame;
-            newFrame.origin.x = i * itemWidth;
+            newFrame.origin.x = itemOffset + itemWidth * i;
             itemView.frame = newFrame;
             [self addSubview:itemView];
-        }
+       }
     }
     return self;
 }
