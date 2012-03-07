@@ -27,33 +27,35 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragGridView
 
-@synthesize delegate, transitionGestureRecognizer, centerRows, leftRows, rightRows, indexOffset, rowHeight, rowOffset;
+@synthesize delegate, transitionGestureRecognizer, centerRows, leftRows, rightRows, topRowIndexOffset, rowHeight, rowsInWindow, rowPixelOffset;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
 
 - (void)initRows:(NSArray*)_rows {
-    [self createRows:self.leftRows from:_rows start:0 end:[_rows count] - 2 * self.indexOffset copy:0];
-    [self createRows:self.centerRows from:_rows start:self.indexOffset end:[_rows count] - self.indexOffset copy:1];
-    [self createRows:self.rightRows from:_rows start:2 * self.indexOffset end:[_rows count] copy:2];
+    [self createRows:self.leftRows from:_rows start:0 end:(self.rowsInWindow + self.topRowIndexOffset) copy:0];
+    [self createRows:self.centerRows from:_rows start:(self.topRowIndexOffset + 1) end:(self.rowsInWindow + self.topRowIndexOffset +1) copy:1];
+    [self createRows:self.rightRows from:_rows start:(self.topRowIndexOffset + 2) end:([_rows count] - 1) copy:2];
 }
 
 - (void)initRowParams:(NSArray*)_rows {
     UIView* item = [[[_rows objectAtIndex:0] objectAtIndex:0] objectAtIndex:0];
+    CGRect bounds = [[UIScreen mainScreen] bounds];
     self.rowHeight = item.frame.size.height;
-    self.rowOffset = (self.frame.size.height - ([_rows count] - self.indexOffset) * self.rowHeight / 2);
+    self.rowsInWindow = bounds.size.height / self.rowHeight;
+    self.rowPixelOffset = (self.frame.size.height - self.rowsInWindow * self.rowHeight / 2);
 }
 
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source start:(NSInteger)_start end:(NSInteger)_end copy:(NSInteger)_copy {
     for (int i = _start; i < _end; i++) {
-        CGRect rowFrame = CGRectMake(0.0, (i - _start) * self.rowHeight + self.rowOffset, self.frame.size.width, self.rowHeight);
+        CGRect rowFrame = CGRectMake(0.0, (i - _start) * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
         [_destination addObject:[DragRowView withFrame:rowFrame andItems:[[_source objectAtIndex:i] objectAtIndex:_copy]]];
     }
 }
 
 - (void)dragRows:(CGPoint)_drag {
     for (int i = 0; i < [self.centerRows count]; i++) {
-        [self drag:_drag row:[self.leftRows objectAtIndex:i]];
+        [self drag:_drag row:[self.leftRows objectAtIndex:(self.topRowIndexOffset + 1)]];
         [self drag:_drag row:[self.centerRows objectAtIndex:i]];
         [self drag:_drag row:[self.rightRows objectAtIndex:i]];
     }
@@ -81,16 +83,16 @@
 #pragma mark DragGridView
 
 + (id)withFrame:(CGRect)_rect andRows:(NSArray*)_rows {
-    return [[DragGridView alloc] initWithFrame:_rect rows:_rows andIndexOffset:0];
+    return [[DragGridView alloc] initWithFrame:_rect rows:_rows andTopIndexOffset:0];
 }
 
-+ (id)withFrame:(CGRect)_rect rows:(NSArray*)_rows andIndexOffset:(NSInteger)_indexOffset {
-    return [[DragGridView alloc] initWithFrame:_rect rows:_rows andIndexOffset:_indexOffset];
++ (id)withFrame:(CGRect)_rect rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
+    return [[DragGridView alloc] initWithFrame:_rect rows:_rows andTopIndexOffset:_indexOffset];
 }
 
-- (id)initWithFrame:(CGRect)_frame rows:(NSArray*)_rows andIndexOffset:(NSInteger)_indexOffset {
+- (id)initWithFrame:(CGRect)_frame rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
     if ((self = [super initWithFrame:_frame])) {
-        self.indexOffset = _indexOffset;
+        self.topRowIndexOffset = _indexOffset;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:self];
         self.centerRows = [NSMutableArray arrayWithCapacity:10];
         self.leftRows = [NSMutableArray arrayWithCapacity:10];

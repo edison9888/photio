@@ -54,12 +54,6 @@
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
-- (void)didDragRight:(CGPoint)_drag {
-}
-
-- (void)didDragLeft:(CGPoint)_drag {    
-}
-
 - (void)didDragUp:(CGPoint)_drag {
 }
 
@@ -67,23 +61,11 @@
     [[ViewGeneral instance] dragCalendarToCamera:_drag];
 }
 
-- (void)didReleaseRight {    
-}
-
-- (void)didReleaseLeft {
-}
-
 - (void)didReleaseUp {
 }
 
 - (void)didReleaseDown {
     [[ViewGeneral instance] releaseCalendarToCamera];
-}
-
-- (void)didSwipeRight {
-}
-
-- (void)didSwipeLeft {
 }
 
 - (void)didSwipeUp {

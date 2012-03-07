@@ -17,9 +17,10 @@
     NSMutableArray*                 centerRows;
     NSMutableArray*                 leftRows;
     NSMutableArray*                 rightRows;
-    NSInteger                       indexOffset;
+    NSInteger                       topRowIndexOffset;
     CGFloat                         rowHeight;
-    NSInteger                       rowOffset;
+    NSInteger                       rowsInWindow;
+    NSInteger                       rowPixelOffset;
 }
 
 @property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
@@ -27,13 +28,14 @@
 @property (nonatomic, retain)   NSMutableArray*                 centerRows;
 @property (nonatomic, retain)   NSMutableArray*                 leftRows;
 @property (nonatomic, retain)   NSMutableArray*                 rightRows;
-@property (nonatomic, assign)   NSInteger                       indexOffset;
+@property (nonatomic, assign)   NSInteger                       topRowIndexOffset;
 @property (nonatomic, assign)   CGFloat                         rowHeight;
-@property (nonatomic, assign)   NSInteger                       rowOffset;
+@property (nonatomic, assign)   NSInteger                       rowsInWindow;
+@property (nonatomic, assign)   NSInteger                       rowPixelOffset;
 
 + (id)withFrame:(CGRect)_rect andRows:(NSArray*)_rows;
-+ (id)withFrame:(CGRect)_rect rows:(NSArray*)_rows andIndexOffset:(NSInteger)_indexOffset;
-- (id)initWithFrame:(CGRect)_frame rows:(NSArray*)_rows andIndexOffset:(NSInteger)_indexOffset;
++ (id)withFrame:(CGRect)_rect rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset;
+- (id)initWithFrame:(CGRect)_frame rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset;
 
 @end
 
@@ -41,6 +43,6 @@
 
 @required
 
-- (NSArray*)nextRow;
+- (NSArray*)needRows;
 
 @end
