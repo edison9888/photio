@@ -19,3 +19,5 @@
 
 #define DETECT_SWIPE_SPEED                  500
 #define MAX_TOUCH_DELTA                     15
+
+#define CALENDAR_INIT_DAYS                  112

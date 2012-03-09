@@ -12,8 +12,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
 
--(NSArray*)initDayViews;
--(NSInteger)dayOfWeek;
+-(NSArray*)setDayViews;
+-(NSDate*)endOfWeek;
 
 @end
 
@@ -25,15 +25,21 @@
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
 
--(NSArray*)initDayViews {
-    NSInteger day =[self dayOfWeek];
-    
+- (NSArray*)setDayViews {
+    NSDate* endOfWeeKDate = [self endOfWeek];
+    for (int i = 0; i < CALENDAR_INIT_DAYS; i++) {
+        NSDateComponents* dateInterval =[[NSDateComponents alloc] init];
+    }
+    return [NSMutableArray arrayWithCapacity:10];
 }
 
--(NSInteger)dayOfWeek {
+- (NSDate*)endOfWeek {
     NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents* comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    return [comps weekday];
+    NSInteger daysToEndOfWeek = 7 - [comps weekday];
+    NSDateComponents* endOfWeekDate = [[NSDateComponents alloc] init];
+    [endOfWeekDate setDay:daysToEndOfWeek];
+    return [gregorian dateByAddingComponents:endOfWeekDate toDate:[NSDate date] options:0];
 }
 
 #pragma mark -
@@ -48,6 +54,7 @@
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:self.containerView];
+        [self setDayViews];
     }
     return self;
 }
