@@ -17,9 +17,10 @@
     NSMutableArray*                 centerRows;
     NSMutableArray*                 leftRows;
     NSMutableArray*                 rightRows;
-    NSInteger                       topRowIndexOffset;
+    NSInteger                       rowIndexOffset;
     CGFloat                         rowHeight;
-    NSInteger                       rowsInWindow;
+    NSInteger                       rowsInView;
+    NSInteger                       rowStartView;
     NSInteger                       rowPixelOffset;
 }
 
@@ -28,9 +29,10 @@
 @property (nonatomic, retain)   NSMutableArray*                 centerRows;
 @property (nonatomic, retain)   NSMutableArray*                 leftRows;
 @property (nonatomic, retain)   NSMutableArray*                 rightRows;
-@property (nonatomic, assign)   NSInteger                       topRowIndexOffset;
+@property (nonatomic, assign)   NSInteger                       rowIndexOffset;
 @property (nonatomic, assign)   CGFloat                         rowHeight;
-@property (nonatomic, assign)   NSInteger                       rowsInWindow;
+@property (nonatomic, assign)   NSInteger                       rowsInView;
+@property (nonatomic, assign)   NSInteger                       rowStartView;
 @property (nonatomic, assign)   NSInteger                       rowPixelOffset;
 
 + (id)withFrame:(CGRect)_rect andRows:(NSArray*)_rows;

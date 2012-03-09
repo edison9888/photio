@@ -13,7 +13,7 @@
 @interface DragGridView (PrivateAPI)
 
 - (void)initRowParams:(NSArray*)_rows;
-- (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source start:(NSInteger)_start end:(NSInteger)_end copy:(NSInteger)_copy;
+- (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy;
 - (void)dragRows:(CGPoint)_drag;
 - (void)dragRow:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
@@ -27,35 +27,38 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragGridView
 
-@synthesize delegate, transitionGestureRecognizer, centerRows, leftRows, rightRows, topRowIndexOffset, rowHeight, rowsInWindow, rowPixelOffset;
+@synthesize delegate, transitionGestureRecognizer, centerRows, leftRows, rightRows, 
+            rowIndexOffset, rowHeight, rowsInView, rowStartView, rowPixelOffset;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
 
 - (void)initRows:(NSArray*)_rows {
-    [self createRows:self.leftRows from:_rows start:0 end:(self.rowsInWindow + self.topRowIndexOffset) copy:0];
-    [self createRows:self.centerRows from:_rows start:(self.topRowIndexOffset + 1) end:(self.rowsInWindow + self.topRowIndexOffset +1) copy:1];
-    [self createRows:self.rightRows from:_rows start:(self.topRowIndexOffset + 2) end:([_rows count] - 1) copy:2];
+    [self createRows:self.leftRows from:_rows forCopy:0];
+    [self createRows:self.centerRows from:_rows forCopy:1];
+    [self createRows:self.rightRows from:_rows forCopy:2];
 }
 
 - (void)initRowParams:(NSArray*)_rows {
     UIView* item = [[[_rows objectAtIndex:0] objectAtIndex:0] objectAtIndex:0];
-    CGRect bounds = [[UIScreen mainScreen] bounds];
     self.rowHeight = item.frame.size.height;
-    self.rowsInWindow = bounds.size.height / self.rowHeight;
-    self.rowPixelOffset = (self.frame.size.height - self.rowsInWindow * self.rowHeight / 2);
+    self.rowsInView = self.frame.size.height / self.rowHeight;
+    self.rowStartView = self.rowIndexOffset;
+    self.rowPixelOffset = (self.frame.size.height - self.rowsInView * self.rowHeight) / (self.rowsInView *2);
 }
 
-- (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source start:(NSInteger)_start end:(NSInteger)_end copy:(NSInteger)_copy {
-    for (int i = _start; i < _end; i++) {
-        CGRect rowFrame = CGRectMake(0.0, (i - _start) * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
-        [_destination addObject:[DragRowView withFrame:rowFrame andItems:[[_source objectAtIndex:i] objectAtIndex:_copy]]];
+- (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy {
+    for (int i = 0; i < [_source count]; i++) {
+        CGRect rowFrame = CGRectMake((_copy - 1) * self.frame.size.width, (self.rowIndexOffset + i + _copy) * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
+        DragRowView* row = [DragRowView withFrame:rowFrame andItems:[[_source objectAtIndex:i] objectAtIndex:_copy]];
+        [self addSubview:row];
+        [_destination addObject:row];
     }
 }
 
 - (void)dragRows:(CGPoint)_drag {
     for (int i = 0; i < [self.centerRows count]; i++) {
-        [self drag:_drag row:[self.leftRows objectAtIndex:(self.topRowIndexOffset + 1)]];
+        [self drag:_drag row:[self.leftRows objectAtIndex:(self.rowIndexOffset + 1)]];
         [self drag:_drag row:[self.centerRows objectAtIndex:i]];
         [self drag:_drag row:[self.rightRows objectAtIndex:i]];
     }
@@ -92,7 +95,7 @@
 
 - (id)initWithFrame:(CGRect)_frame rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
     if ((self = [super initWithFrame:_frame])) {
-        self.topRowIndexOffset = _indexOffset;
+        self.rowIndexOffset = _indexOffset;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:self];
         self.centerRows = [NSMutableArray arrayWithCapacity:10];
         self.leftRows = [NSMutableArray arrayWithCapacity:10];

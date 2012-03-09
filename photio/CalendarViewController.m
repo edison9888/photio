@@ -11,12 +11,33 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
+
+-(NSArray*)initDayViews;
+-(NSInteger)dayOfWeek;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
 @synthesize transitionGestureRecognizer, containerView;
+
+#pragma mark -
+#pragma mark CalendarViewController PrivateAPI
+
+-(NSArray*)initDayViews {
+    NSInteger day =[self dayOfWeek];
+    
+}
+
+-(NSInteger)dayOfWeek {
+    NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    return [comps weekday];
+}
+
+#pragma mark -
+#pragma mark CalendarViewController
 
 + (id)inView:(UIView*)_containerView {
     return [[CalendarViewController alloc] initWithNibName:@"CalendarViewController" bundle:nil inView:_containerView];;
