@@ -20,4 +20,6 @@
 #define DETECT_SWIPE_SPEED                  500
 #define MAX_TOUCH_DELTA                     15
 
-#define CALENDAR_INTERVAL_DAYS              56
+#define CALENDAR_DAYS_IN_WEEK               7
+#define DAY_VIEW_ASPECT_RATIO               1.33333
+#define DAY_VIEW_DATE_SCALE_FACTOR          0.5

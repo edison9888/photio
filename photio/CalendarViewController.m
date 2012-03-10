@@ -8,44 +8,87 @@
 
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
+#import "DragGridView.h"
+#import "CalendarDayView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
 
--(NSArray*)setDayViews;
--(NSDate*)endOfWeek;
+- (NSArray*)setDayViews;
+- (void)setDateFormatters;
+- (NSDate*)endOfWeek;
+- (CGRect)dayViewRect:(NSInteger)_weeks;
+- (UIView*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo;
+- (NSInteger)weeksInView;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize transitionGestureRecognizer, containerView, calendar;
+@synthesize containerView, transitionGestureRecognizer, dragGridView, calendar, firstMonth, lastMonth, year,
+            yearFormatter, dayFormatter, monthFormatter;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
 
 - (NSArray*)setDayViews {
     NSDate* endOfWeeKDate = [self endOfWeek];
-    for (int i = 0; i < 2 * CALENDAR_INTERVAL_DAYS; i++) {
+    NSInteger weeks = [self weeksInView];
+    NSInteger daysInView = 2 * weeks * CALENDAR_DAYS_IN_WEEK;
+    CGRect calendarDateViewRect = [self dayViewRect:weeks];
+    for (int i = 0; i < daysInView; i++) {
         NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
         [dateInterval setDay:-i];
         NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:endOfWeeKDate options:0];
         NSDateComponents* nextDayComponents = 
             [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:previoustDay];
         NSDate* calendarDate = [self.calendar dateFromComponents:nextDayComponents];
-        
+        NSString* day = [self.dayFormatter stringFromDate:calendarDate];
+        if (i == 0) {
+            self.year = [self.yearFormatter stringFromDate:calendarDate];
+            self.firstMonth = [self.monthFormatter stringFromDate:calendarDate];
+        }
+        if (i == daysInView / 2) {
+            self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
+        }
+        UIView* calendarDateView = [self dayView:calendarDateViewRect withDate:day andPhoto:nil];
     }
     return [NSMutableArray arrayWithCapacity:10];
 }
 
+- (void)setDateFormatters {
+    self.dayFormatter = [[NSDateFormatter alloc] init];
+    [self.dayFormatter setDateFormat:@"d"];
+    self.yearFormatter = [[NSDateFormatter alloc] init];
+    [self.yearFormatter setDateFormat:@"yyyy"];
+    self.monthFormatter = [[NSDateFormatter alloc] init];
+    [self.monthFormatter setDateFormat:@"MMMM"];
+}
+
+
 - (NSDate*)endOfWeek {
-    NSCalendar* gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents* comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    NSDateComponents* comps = [self.calendar components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
     NSInteger daysToEndOfWeek = 7 - [comps weekday];
     NSDateComponents* endOfWeekDate = [[NSDateComponents alloc] init];
     [endOfWeekDate setDay:daysToEndOfWeek];
-    return [gregorian dateByAddingComponents:endOfWeekDate toDate:[NSDate date] options:0];
+    return [self.calendar dateByAddingComponents:endOfWeekDate toDate:[NSDate date] options:0];
+}
+
+-(CGRect)dayViewRect:(NSInteger)_weeks {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_WEEK, bounds.size.height / _weeks);
+}
+
+-(UIView*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo {
+    return [CalendarDayView withFrame:_frame date:_date andPhoto:_photo];
+}
+
+- (NSInteger)weeksInView {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_WEEK;
+    NSInteger weeks = bounds.size.height / (DAY_VIEW_ASPECT_RATIO * viewWidth);
+    return weeks;
 }
 
 #pragma mark -
@@ -61,6 +104,7 @@
         self.view.frame = self.containerView.frame;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:self.containerView];
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        [self setDateFormatters];
         [self setDayViews];
     }
     return self;
