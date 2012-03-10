@@ -12,10 +12,12 @@
 @interface CalendarViewController : UIViewController <TransitionGestureRecognizerDelegate> {
     __weak UIView*                  containerView;
     TransitionGestureRecognizer*    transitionGestureRecognizer;
+    NSCalendar*                     calendar;
 }
 
 @property (nonatomic, weak)   UIView*                           containerView;
 @property (nonatomic, retain) TransitionGestureRecognizer*      transitionGestureRecognizer;
+@property (nonatomic, retain) NSCalendar*                       calendar;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

@@ -20,15 +20,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize transitionGestureRecognizer, containerView;
+@synthesize transitionGestureRecognizer, containerView, calendar;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
 
 - (NSArray*)setDayViews {
     NSDate* endOfWeeKDate = [self endOfWeek];
-    for (int i = 0; i < CALENDAR_INIT_DAYS; i++) {
-        NSDateComponents* dateInterval =[[NSDateComponents alloc] init];
+    for (int i = 0; i < 2 * CALENDAR_INTERVAL_DAYS; i++) {
+        NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
+        [dateInterval setDay:-i];
+        NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:endOfWeeKDate options:0];
+        NSDateComponents* nextDayComponents = 
+            [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:previoustDay];
+        NSDate* calendarDate = [self.calendar dateFromComponents:nextDayComponents];
+        
     }
     return [NSMutableArray arrayWithCapacity:10];
 }
@@ -54,6 +60,7 @@
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:self.containerView];
+        self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         [self setDayViews];
     }
     return self;
