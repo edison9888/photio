@@ -18,7 +18,7 @@
 - (void)setDateFormatters;
 - (NSDate*)endOfWeek;
 - (CGRect)dayViewRect:(NSInteger)_weeks;
-- (UIView*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo;
+- (NSArray*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo;
 - (NSInteger)weeksInView;
 
 @end
@@ -35,26 +35,32 @@
 - (NSArray*)setDayViews {
     NSDate* endOfWeeKDate = [self endOfWeek];
     NSInteger weeks = [self weeksInView];
-    NSInteger daysInView = 2 * weeks * CALENDAR_DAYS_IN_WEEK;
+    NSMutableArray* dayViews = [NSMutableArray arrayWithCapacity:2 * weeks];
+    NSInteger currentDay = 0;
     CGRect calendarDateViewRect = [self dayViewRect:weeks];
-    for (int i = 0; i < daysInView; i++) {
-        NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
-        [dateInterval setDay:-i];
-        NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:endOfWeeKDate options:0];
-        NSDateComponents* nextDayComponents = 
-            [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:previoustDay];
-        NSDate* calendarDate = [self.calendar dateFromComponents:nextDayComponents];
-        NSString* day = [self.dayFormatter stringFromDate:calendarDate];
-        if (i == 0) {
-            self.year = [self.yearFormatter stringFromDate:calendarDate];
-            self.firstMonth = [self.monthFormatter stringFromDate:calendarDate];
+    for (int i = 0; i < 2 * weeks; i++) {
+        NSMutableArray* daysOfWeekViews = [NSMutableArray arrayWithCapacity:7];
+        for (int j = 0; j < CALENDAR_DAYS_IN_WEEK; j++) {
+            NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
+            [dateInterval setDay:-i];
+            NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:endOfWeeKDate options:0];
+            NSDateComponents* nextDayComponents = 
+                [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:previoustDay];
+            NSDate* calendarDate = [self.calendar dateFromComponents:nextDayComponents];
+            NSString* day = [self.dayFormatter stringFromDate:calendarDate];
+            if (currentDay == 0) {
+                self.year = [self.yearFormatter stringFromDate:calendarDate];
+                self.firstMonth = [self.monthFormatter stringFromDate:calendarDate];
+            }
+            if (currentDay == weeks * CALENDAR_DAYS_IN_WEEK) {
+                self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
+            }
+            [daysOfWeekViews addObject:[self dayView:calendarDateViewRect withDate:day andPhoto:nil]];
+            currentDay++;
         }
-        if (i == daysInView / 2) {
-            self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
-        }
-        UIView* calendarDateView = [self dayView:calendarDateViewRect withDate:day andPhoto:nil];
+        [dayViews addObject:daysOfWeekViews];
     }
-    return [NSMutableArray arrayWithCapacity:10];
+    return dayViews;
 }
 
 - (void)setDateFormatters {
@@ -80,8 +86,12 @@
     return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_WEEK, bounds.size.height / _weeks);
 }
 
--(UIView*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo {
-    return [CalendarDayView withFrame:_frame date:_date andPhoto:_photo];
+-(NSArray*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo {
+    NSMutableArray* copies = [NSMutableArray arrayWithCapacity:3];
+    for (int i = 0; i < CALENDAR_VIEW_COPIES; i++) {
+        [copies addObject:[CalendarDayView withFrame:_frame date:_date andPhoto:_photo]];
+    }
+    return copies;
 }
 
 - (NSInteger)weeksInView {

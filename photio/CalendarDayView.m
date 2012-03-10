@@ -41,8 +41,8 @@
         CGRect dateFrame = [self dayViewRect];
         self.dayView = [[UITextField alloc] initWithFrame:dateFrame];
         self.dayView.text = _date;
-        if (_photo) {            
-            self.photoView.image = _photo;
+        if (_photo) {   
+            self.photoView = [[UIImageView alloc] initWithImage:_photo];
             [self addSubview:self.photoView];
             [self.photoView addSubview:self.dayView];
         } else {

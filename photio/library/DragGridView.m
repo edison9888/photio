@@ -50,9 +50,15 @@
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy {
     for (int i = 0; i < [_source count]; i++) {
         CGRect rowFrame = CGRectMake((_copy - 1) * self.frame.size.width, (i - self.rowIndexOffset) * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
-        DragRowView* row = [DragRowView withFrame:rowFrame andItems:[[_source objectAtIndex:i] objectAtIndex:_copy]];
-        [self addSubview:row];
-        [_destination addObject:row];
+        NSMutableArray* rowForCopy = [NSMutableArray arrayWithCapacity:10];
+        NSArray* row = [_source objectAtIndex:i];
+        for (int j = 0; j < [row count]; j++) {
+            NSArray* itemCopies = [row objectAtIndex:j];
+            [rowForCopy addObject:[itemCopies objectAtIndex:_copy]];
+        }
+        DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:[[_source objectAtIndex:i] objectAtIndex:_copy]];
+        [self addSubview:dragRow];
+        [_destination addObject:dragRow];
     }
 }
 
