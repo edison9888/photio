@@ -22,5 +22,12 @@
 
 #define CALENDAR_DAYS_IN_WEEK               7
 #define CALENDAR_VIEW_COPIES                3
+
 #define DAY_VIEW_ASPECT_RATIO               1.33333
-#define DAY_VIEW_DATE_SCALE_FACTOR          0.5
+#define DAY_VIEW_DATE_X_OFFSET_SCALE        0.65
+#define DAY_VIEW_DATE_HEIGHT                22
+#define DAY_VIEW_BORDER                     2
+#define DAY_VIEW_DATE_X_OFFSET              5.0
+#define DAY_VIEW_DATE_Y_OFFSET              -2.0
+#define DAY_VIEW_DATE_IPHONE_FONT_SIZE      22.0
+

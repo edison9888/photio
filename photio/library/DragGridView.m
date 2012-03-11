@@ -117,9 +117,11 @@
 #pragma mark TransitionGestureRecognizerDelegate
 
 - (void)didDragRight:(CGPoint)_drag {
+    [self dragRows:_drag];
 }
 
 - (void)didDragLeft:(CGPoint)_drag {    
+    [self dragRows:_drag];
 }
 
 - (void)didDragUp:(CGPoint)_drag {
