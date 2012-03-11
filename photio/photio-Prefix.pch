@@ -22,6 +22,7 @@
 
 #define CALENDAR_DAYS_IN_WEEK               7
 #define CALENDAR_VIEW_COPIES                3
+#define CALENDAR_INITIAL_WEEK_OFFSET        1
 
 #define DAY_VIEW_ASPECT_RATIO               1.33333
 #define DAY_VIEW_DATE_X_OFFSET_SCALE        0.65

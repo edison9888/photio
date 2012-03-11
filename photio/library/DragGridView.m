@@ -49,8 +49,8 @@
 
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy {
     for (int i = 0; i < [_source count]; i++) {
-        CGRect rowFrame = CGRectMake((_copy - 1) * self.frame.size.width, (i - self.rowIndexOffset) * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
-        NSMutableArray* rowForCopy = [NSMutableArray arrayWithCapacity:10];
+        CGRect rowFrame = CGRectMake((_copy - 1) * self.frame.size.width, (i - self.rowIndexOffset - (_copy - 1)) * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
+        NSMutableArray* rowForCopy = [NSMutableArray arrayWithCapacity:10]; 
         NSArray* row = [_source objectAtIndex:i];
         for (int j = 0; j < [row count]; j++) {
             NSArray* itemCopies = [row objectAtIndex:j];
@@ -64,7 +64,7 @@
 
 - (void)dragRows:(CGPoint)_drag {
     for (int i = 0; i < [self.centerRows count]; i++) {
-        [self drag:_drag row:[self.leftRows objectAtIndex:(self.rowIndexOffset + 1)]];
+        [self drag:_drag row:[self.leftRows objectAtIndex:i]];
         [self drag:_drag row:[self.centerRows objectAtIndex:i]];
         [self drag:_drag row:[self.rightRows objectAtIndex:i]];
     }
@@ -91,7 +91,7 @@
 #pragma mark -
 #pragma mark DragGridView
 
-+ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate andRows:(NSArray*)_rows relativeView:(UIView*)_relativeView {
++ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andRelativeView:(UIView*)_relativeView {
     return [[DragGridView alloc] initWithFrame:_frame delegate:_delegate rows:_rows relativeView:_relativeView andTopIndexOffset:0];
 }
 

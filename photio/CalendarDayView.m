@@ -48,6 +48,7 @@
         self.dayView.textAlignment = UITextAlignmentRight;
         self.dayView.text = _date;
         self.dayView.font = [self.dayView.font fontWithSize:DAY_VIEW_DATE_IPHONE_FONT_SIZE];
+        self.dayView.enabled = NO;
         if (_photo) {   
             self.photoView = [[UIImageView alloc] initWithImage:_photo];
             [contentView addSubview:self.photoView];
