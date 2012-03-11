@@ -41,7 +41,7 @@
         NSMutableArray* daysOfWeekViews = [NSMutableArray arrayWithCapacity:7];
         for (int j = 0; j < CALENDAR_DAYS_IN_WEEK; j++) {
             NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
-            [dateInterval setDay:-i];
+            [dateInterval setDay:-currentDay];
             NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:endOfWeeKDate options:0];
             NSDateComponents* nextDayComponents = 
                 [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:previoustDay];

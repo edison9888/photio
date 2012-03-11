@@ -56,7 +56,7 @@
             NSArray* itemCopies = [row objectAtIndex:j];
             [rowForCopy addObject:[itemCopies objectAtIndex:_copy]];
         }
-        DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:[[_source objectAtIndex:i] objectAtIndex:_copy]];
+        DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:rowForCopy];
         [self addSubview:dragRow];
         [_destination addObject:dragRow];
     }
