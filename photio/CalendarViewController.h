@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TransitionGestureRecognizer.h"
+#import "DragGridView.h"
 
 @class DragGridView;
 
-@interface CalendarViewController : UIViewController <TransitionGestureRecognizerDelegate> {
+@interface CalendarViewController : UIViewController <DragGridViewDelegate> {
     __weak UIView*                  containerView;
-    TransitionGestureRecognizer*    transitionGestureRecognizer;
     DragGridView*                   dragGridView;
     NSCalendar*                     calendar;
     NSString*                       firstMonth;
@@ -25,7 +24,6 @@
 }
 
 @property (nonatomic, weak)   UIView*                           containerView;
-@property (nonatomic, retain) TransitionGestureRecognizer*      transitionGestureRecognizer;
 @property (nonatomic, retain) DragGridView*                     dragGridView;
 @property (nonatomic, retain) NSCalendar*                       calendar;
 @property (nonatomic, retain) NSString*                         firstMonth;

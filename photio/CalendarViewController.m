@@ -8,7 +8,6 @@
 
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
-#import "DragGridView.h"
 #import "CalendarDayView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +25,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize containerView, transitionGestureRecognizer, dragGridView, calendar, firstMonth, lastMonth, year,
+@synthesize containerView, dragGridView, calendar, firstMonth, lastMonth, year,
             yearFormatter, dayFormatter, monthFormatter;
 
 #pragma mark -
@@ -112,10 +111,11 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:self.containerView];
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         [self setDateFormatters];
-        [self setDayViews];
+        self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self andRows:[self setDayViews]];
+        self.dragGridView.userInteractionEnabled = YES;
+        [self.view addSubview:self.dragGridView];
     }
     return self;
 }
@@ -139,9 +139,12 @@
     [super didReceiveMemoryWarning];
 }
 
-
 #pragma mark -
-#pragma mark TransitionGestureRecognizerDelegate
+#pragma mark DragGridViewDelegate
+
+- (NSArray*)needRows {
+    return [[NSArray alloc] init];
+}
 
 - (void)didDragUp:(CGPoint)_drag {
 }

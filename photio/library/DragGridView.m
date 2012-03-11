@@ -91,16 +91,17 @@
 #pragma mark -
 #pragma mark DragGridView
 
-+ (id)withFrame:(CGRect)_rect andRows:(NSArray*)_rows {
-    return [[DragGridView alloc] initWithFrame:_rect rows:_rows andTopIndexOffset:0];
++ (id)withFrame:(CGRect)_rect delegate:(id<DragGridViewDelegate>)_delegate andRows:(NSArray*)_rows {
+    return [[DragGridView alloc] initWithFrame:_rect delegate:_delegate rows:_rows andTopIndexOffset:0];
 }
 
-+ (id)withFrame:(CGRect)_rect rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
-    return [[DragGridView alloc] initWithFrame:_rect rows:_rows andTopIndexOffset:_indexOffset];
++ (id)withFrame:(CGRect)_rect delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
+    return [[DragGridView alloc] initWithFrame:_rect delegate:_delegate rows:_rows andTopIndexOffset:_indexOffset];
 }
 
-- (id)initWithFrame:(CGRect)_frame rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
+- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
     if ((self = [super initWithFrame:_frame])) {
+        self.delegate = _delegate;
         self.rowIndexOffset = _indexOffset;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:self];
         self.centerRows = [NSMutableArray arrayWithCapacity:10];
@@ -121,16 +122,52 @@
 - (void)didDragLeft:(CGPoint)_drag {    
 }
 
+- (void)didDragUp:(CGPoint)_drag {
+    if ([self.delegate respondsToSelector:@selector(didDragUp:)]) {
+        [self.delegate didDragUp:_drag];
+    }
+}
+
+- (void)didDragDown:(CGPoint)_drag {
+    if ([self.delegate respondsToSelector:@selector(didDragDown:)]) {
+        [self.delegate didDragDown:_drag];
+    }
+}
+
 - (void)didReleaseRight {    
 }
 
 - (void)didReleaseLeft {
 }
 
+- (void)didReleaseUp {    
+    if ([self.delegate respondsToSelector:@selector(didReleaseUp)]) {
+        [self.delegate didReleaseUp];
+    }
+}
+
+- (void)didReleaseDown {
+    if ([self.delegate respondsToSelector:@selector(didReleaseDown)]) {
+        [self.delegate didReleaseDown];
+    }
+}
+
 - (void)didSwipeRight {
 }
 
 - (void)didSwipeLeft {
+}
+
+- (void)didSwipeUp {
+    if ([self.delegate respondsToSelector:@selector(didSwipeUp)]) {
+        [self.delegate didSwipeUp];
+    }
+}
+
+- (void)didSwipeDown {
+    if ([self.delegate respondsToSelector:@selector(didSwipeDown)]) {
+        [self.delegate didSwipeDown];
+    }
 }
 
 @end
