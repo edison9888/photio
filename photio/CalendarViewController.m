@@ -113,7 +113,7 @@
         self.view.frame = self.containerView.frame;
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         [self setDateFormatters];
-        self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self andRows:[self setDayViews]];
+        self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self andRows:[self setDayViews] relativeView:self.containerView];
         self.dragGridView.userInteractionEnabled = YES;
         [self.view addSubview:self.dragGridView];
     }

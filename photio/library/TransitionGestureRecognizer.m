@@ -107,7 +107,7 @@
 - (CGPoint)dragDelta:(CGPoint)_touchPoint {
     CGFloat deltaX = _touchPoint.x - self.lastTouch.x;
     CGFloat deltaY = _touchPoint.y - self.lastTouch.y;
-    return CGPointMake(deltaX > MAX_TOUCH_DELTA ? MAX_TOUCH_DELTA : deltaX, deltaY > MAX_TOUCH_DELTA ? MAX_TOUCH_DELTA : deltaY);
+    return CGPointMake(deltaX, deltaY);
 }
 
 - (void)determineDragDirection:(CGPoint)_velocity {
@@ -155,13 +155,13 @@
     switch (self.dragDirection) {
         case DragDirectionRight:
         case DragDirectionLeft:
-            if (abs(self.totalDragDistance.x) < screenBounds.size.width/2.0) {
+            if (abs(self.totalDragDistance.x) < screenBounds.size.width * MAX_DRAG_FACTOR) {
                 atMaximumDrag = NO;
             }
             break;
         case DragDirectionUp:
         case DragDirectionDown:
-            if (abs(self.totalDragDistance.y) < screenBounds.size.height/2.0) {
+            if (abs(self.totalDragDistance.y) < screenBounds.size.height * MAX_DRAG_FACTOR) {
                 atMaximumDrag = NO;
             }
             break;

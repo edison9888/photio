@@ -18,8 +18,7 @@
 #define DISPLAYED_IMAGE_CROP                CGSizeMake(200, 200)
 
 #define DETECT_SWIPE_SPEED                  500
-#define MAX_TOUCH_DELTA                     15
-#define MIN_TOUCH_DELTA                     5
+#define MAX_DRAG_FACTOR                     0.35
 
 #define CALENDAR_DAYS_IN_WEEK               7
 #define CALENDAR_VIEW_COPIES                3

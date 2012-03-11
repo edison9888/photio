@@ -35,9 +35,9 @@
 @property (nonatomic, assign)   NSInteger                       rowStartView;
 @property (nonatomic, assign)   NSInteger                       rowPixelOffset;
 
-+ (id)withFrame:(CGRect)_rect delegate:(id<DragGridViewDelegate>)_delegate andRows:(NSArray*)_rows;
-+ (id)withFrame:(CGRect)_rect delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset;
-- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset;
++ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate andRows:(NSArray*)_rows relativeView:(UIView*)_relativeView;
++ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset;
+- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset;
 
 @end
 

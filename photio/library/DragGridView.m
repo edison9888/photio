@@ -91,19 +91,19 @@
 #pragma mark -
 #pragma mark DragGridView
 
-+ (id)withFrame:(CGRect)_rect delegate:(id<DragGridViewDelegate>)_delegate andRows:(NSArray*)_rows {
-    return [[DragGridView alloc] initWithFrame:_rect delegate:_delegate rows:_rows andTopIndexOffset:0];
++ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate andRows:(NSArray*)_rows relativeView:(UIView*)_relativeView {
+    return [[DragGridView alloc] initWithFrame:_frame delegate:_delegate rows:_rows relativeView:_relativeView andTopIndexOffset:0];
 }
 
-+ (id)withFrame:(CGRect)_rect delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
-    return [[DragGridView alloc] initWithFrame:_rect delegate:_delegate rows:_rows andTopIndexOffset:_indexOffset];
++ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset {
+    return [[DragGridView alloc] initWithFrame:_frame delegate:_delegate rows:_rows relativeView:_relativeView andTopIndexOffset:_indexOffset];
 }
 
-- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andTopIndexOffset:(NSInteger)_indexOffset {
+- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset {
     if ((self = [super initWithFrame:_frame])) {
         self.delegate = _delegate;
         self.rowIndexOffset = _indexOffset;
-        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:self];
+        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
         self.centerRows = [NSMutableArray arrayWithCapacity:10];
         self.leftRows = [NSMutableArray arrayWithCapacity:10];
         self.rightRows = [NSMutableArray arrayWithCapacity:10];
