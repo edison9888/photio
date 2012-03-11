@@ -146,10 +146,10 @@
     return [[NSArray alloc] init];
 }
 
-- (void)didDragUp:(CGPoint)_drag {
+- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location {
 }
 
-- (void)didDragDown:(CGPoint)_drag {
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location {
     [[ViewGeneral instance] dragCalendarToCamera:_drag];
 }
 

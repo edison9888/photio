@@ -11,7 +11,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TransitionGestureRecognizer (PrivateAPI)
 
-- (void)delegateDrag:(CGPoint)_delta;
+- (void)delegateDrag:(CGPoint)_delta from:(CGPoint)_location;
 - (void)delegateRelease;
 - (void)delegateSwipe;
 - (CGPoint)dragDelta:(CGPoint)_touchPoint;
@@ -29,26 +29,26 @@
 #pragma mark -
 #pragma mark TransitionGestureRecognizer PrivateAPI
 
-- (void)delegateDrag:(CGPoint)_delta {
+- (void)delegateDrag:(CGPoint)_delta from:(CGPoint)_location {
     switch (self.dragDirection) {
         case DragDirectionRight:
-            if ([self.delegate respondsToSelector:@selector(didDragRight:)]) {
-                [self.delegate didDragRight:CGPointMake(_delta.x, 0.0)];
+            if ([self.delegate respondsToSelector:@selector(didDragRight:from:)]) {
+                [self.delegate didDragRight:CGPointMake(_delta.x, 0.0) from:_location];
             }
             break;
         case DragDirectionLeft:
-            if ([self.delegate respondsToSelector:@selector(didDragLeft:)]) {
-                [self.delegate didDragLeft:CGPointMake(_delta.x, 0.0)];
+            if ([self.delegate respondsToSelector:@selector(didDragLeft:from:)]) {
+                [self.delegate didDragLeft:CGPointMake(_delta.x, 0.0) from:_location];
             }
             break;
         case DragDirectionUp:
-            if ([self.delegate respondsToSelector:@selector(didDragUp:)]) {
-                [self.delegate didDragUp:CGPointMake(0.0, _delta.y)];
+            if ([self.delegate respondsToSelector:@selector(didDragUp:from:)]) {
+                [self.delegate didDragUp:CGPointMake(0.0, _delta.y) from:_location];
             }
             break;
         case DragDirectionDown:
-            if ([self.delegate respondsToSelector:@selector(didDragDown:)]) {
-                [self.delegate didDragDown:CGPointMake(0.0, _delta.y)];
+            if ([self.delegate respondsToSelector:@selector(didDragDown:from:)]) {
+                [self.delegate didDragDown:CGPointMake(0.0, _delta.y) from:_location];
             }
             break;
     }
@@ -202,7 +202,7 @@
             break;
         case UIGestureRecognizerStateChanged:
             self.totalDragDistance = CGPointMake(self.totalDragDistance.x + delta.x, self.totalDragDistance.y + delta.y);
-            [self detectedMaximumDrag] ? [self delegateSwipe] : [self delegateDrag:delta];
+            [self detectedMaximumDrag] ? [self delegateSwipe] : [self delegateDrag:delta from:touchPoint];
             self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
             break;
         case UIGestureRecognizerStateEnded:

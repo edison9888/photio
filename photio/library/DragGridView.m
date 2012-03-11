@@ -14,7 +14,8 @@
 
 - (void)initRowParams:(NSArray*)_rows;
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy;
-- (void)dragRows:(CGPoint)_drag;
+- (void)dragRowsLeft:(CGPoint)_drag;
+- (void)dragRowsRight:(CGPoint)_drag;
 - (void)dragRow:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
 - (void)releaseRowsLeft;
@@ -62,12 +63,11 @@
     }
 }
 
-- (void)dragRows:(CGPoint)_drag {
-    for (int i = 0; i < [self.centerRows count]; i++) {
-        [self drag:_drag row:[self.leftRows objectAtIndex:i]];
-        [self drag:_drag row:[self.centerRows objectAtIndex:i]];
-        [self drag:_drag row:[self.rightRows objectAtIndex:i]];
-    }
+- (void)dragRowsLeft:(CGPoint)_drag {
+    [self drag:_drag row:[self.centerRows objectAtIndex:self.rowStartView]];
+}
+
+- (void)dragRowsRight:(CGPoint)_drag {
 }
 
 - (void)drag:(CGPoint)_drag row:(UIView*)_row {
@@ -116,23 +116,23 @@
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
-- (void)didDragRight:(CGPoint)_drag {
-    [self dragRows:_drag];
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location {
+    [self dragRowsRight:_drag];
 }
 
-- (void)didDragLeft:(CGPoint)_drag {    
-    [self dragRows:_drag];
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location{    
+    [self dragRowsLeft:_drag];
 }
 
-- (void)didDragUp:(CGPoint)_drag {
-    if ([self.delegate respondsToSelector:@selector(didDragUp:)]) {
-        [self.delegate didDragUp:_drag];
+- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location{
+    if ([self.delegate respondsToSelector:@selector(didDragUp:from:)]) {
+        [self.delegate didDragUp:_drag from:(CGPoint)_location];
     }
 }
 
-- (void)didDragDown:(CGPoint)_drag {
-    if ([self.delegate respondsToSelector:@selector(didDragDown:)]) {
-        [self.delegate didDragDown:_drag];
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location{
+    if ([self.delegate respondsToSelector:@selector(didDragDown:from:)]) {
+        [self.delegate didDragDown:_drag from:(CGPoint)_location];
     }
 }
 

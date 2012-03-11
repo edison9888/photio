@@ -50,10 +50,10 @@ typedef enum {
 
 @optional
 
-- (void)didDragRight:(CGPoint)_drag;
-- (void)didDragLeft:(CGPoint)_drag;
-- (void)didDragUp:(CGPoint)_drag;
-- (void)didDragDown:(CGPoint)_drag;
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location;
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location;
+- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location;
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location;
 
 - (void)didReleaseRight;
 - (void)didReleaseLeft;
