@@ -13,6 +13,10 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CameraViewController (PrivateAPI)
+
+- (void)switchCamera;
+- (void)setFlashImage;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +41,19 @@
             break;
     }    
 }
+
+- (void)switchCamera {
+    switch (self.imagePickerController.cameraDevice) {
+        case UIImagePickerControllerCameraDeviceRear:
+            self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+            break;
+        case UIImagePickerControllerCameraDeviceFront:
+            self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            break;
+    }
+}
+
+
 
 #pragma mark -
 #pragma mark CameraViewController
@@ -80,24 +97,13 @@
     }
 }
 
-- (IBAction)switchCamera:(id)sender {
-    switch (self.imagePickerController.cameraDevice) {
-        case UIImagePickerControllerCameraDeviceRear:
-            self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-            break;
-        case UIImagePickerControllerCameraDeviceFront:
-            self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-            break;
-    }
-}
-
 - (IBAction)changeFlashMode:(id)sender {
     switch (self.imagePickerController.cameraFlashMode) {
         case UIImagePickerControllerCameraFlashModeAuto:
             self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
             break;
         case UIImagePickerControllerCameraFlashModeOn:
-            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
             break;
         case UIImagePickerControllerCameraFlashModeOff:
             self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
@@ -151,6 +157,7 @@
 #pragma mark TransitionGestureRecognizerDelegate
 
 - (void)didDragRight:(CGPoint)_drag {
+    [self switchCamera];
 }
 
 - (void)didDragLeft:(CGPoint)_drag {    
@@ -161,6 +168,7 @@
 }
 
 - (void)didReleaseRight {    
+    [self switchCamera];
 }
 
 - (void)didReleaseLeft {
@@ -171,6 +179,7 @@
 }
 
 - (void)didSwipeRight {
+    [self switchCamera];
 }
 
 - (void)didSwipeLeft {

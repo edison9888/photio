@@ -31,7 +31,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (IBAction)done:(id)sender;
 - (IBAction)takePhoto:(id)sender;
-- (IBAction)switchCamera:(id)sender;
 - (IBAction)changeFlashMode:(id)sender;
 - (void)setFlashImage;
 
