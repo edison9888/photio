@@ -14,6 +14,7 @@
 
 - (void)initRowParams:(NSArray*)_rows;
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy;
+- (void)hideRowIfOffScreen:(UIView*)_row;
 - (void)dragRowsLeft:(CGPoint)_drag;
 - (void)dragRowsRight:(CGPoint)_drag;
 - (void)dragRow:(CGPoint)_drag;
@@ -50,7 +51,9 @@
 
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy {
     for (int i = 0; i < [_source count]; i++) {
-        CGRect rowFrame = CGRectMake((_copy - 1) * self.frame.size.width, (i - self.rowIndexOffset - (_copy - 1)) * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
+        CGRect rowFrame = CGRectMake((_copy - 1) * self.frame.size.width, 
+                                     (i - self.rowIndexOffset - (_copy - 1)) * self.rowHeight + self.rowPixelOffset, 
+                                     self.frame.size.width, self.rowHeight);
         NSMutableArray* rowForCopy = [NSMutableArray arrayWithCapacity:10]; 
         NSArray* row = [_source objectAtIndex:i];
         for (int j = 0; j < [row count]; j++) {
@@ -58,8 +61,16 @@
             [rowForCopy addObject:[itemCopies objectAtIndex:_copy]];
         }
         DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:rowForCopy];
+        [self hideRowIfOffScreen:dragRow];
         [self addSubview:dragRow];
         [_destination addObject:dragRow];
+    }
+}
+
+- (void)hideRowIfOffScreen:(UIView*)_row {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    if (_row.frame.origin.y < 0 || _row.frame.origin.y > bounds.size.height) {
+        _row.hidden = YES;
     }
 }
 
