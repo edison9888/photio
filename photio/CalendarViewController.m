@@ -39,7 +39,7 @@
     CGRect calendarDateViewRect = [self dayViewRect:weeks];
     for (int i = 0; i < (2 * weeks + CALENDAR_INITIAL_WEEK_OFFSET); i++) {
         NSMutableArray* daysOfWeekViews = [NSMutableArray arrayWithCapacity:7];
-        for (int j = 0; j < CALENDAR_DAYS_IN_WEEK; j++) {
+        for (int j = 0; j < CALENDAR_DAYS_IN_ROW; j++) {
             NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
             [dateInterval setDay:-currentDay];
             NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:startDate options:0];
@@ -51,7 +51,7 @@
                 self.year = [self.yearFormatter stringFromDate:calendarDate];
                 self.firstMonth = [self.monthFormatter stringFromDate:calendarDate];
             }
-            if (currentDay == weeks * CALENDAR_DAYS_IN_WEEK) {
+            if (currentDay == weeks * CALENDAR_DAYS_IN_ROW) {
                 self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
             }
             [daysOfWeekViews addObject:[self dayView:calendarDateViewRect withDate:day andPhoto:nil]];
@@ -82,7 +82,7 @@
 
 -(CGRect)dayViewRect:(NSInteger)_weeks {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_WEEK, bounds.size.height / _weeks);
+    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_ROW, bounds.size.height / _weeks);
 }
 
 -(NSArray*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo {
@@ -95,7 +95,7 @@
 
 - (NSInteger)weeksInView {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_WEEK;
+    NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_ROW;
     NSInteger weeks = bounds.size.height / (DAY_VIEW_ASPECT_RATIO * viewWidth);
     return weeks;
 }

@@ -19,10 +19,10 @@
 - (void)dragRowsRight:(CGPoint)_drag from:(CGPoint)_location;
 - (void)dragRow:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
-- (void)releaseRowsLeft;
-- (void)releaseRowsRight;
-- (void)moveRowsLeft;
-- (void)moveRowsRight;
+- (void)releaseRowsLeft:(CGPoint)_location;
+- (void)releaseRowsRight:(CGPoint)_location;
+- (void)moveRowsLeft:(CGPoint)_location;
+- (void)moveRowsRight:(CGPoint)_location;
 - (CGRect)rowInWindow:(CGRect)_rowFrame;
 - (CGRect)rowLeftOfWindow:(CGRect)_rowFrame;
 - (CGRect)rowRightOfWindow:(CGRect)_rowFrame;
@@ -93,25 +93,29 @@
     _row.frame = newRect;
 }
 
-- (void)releaseRowsLeft {
+- (void)releaseRowsLeft:(CGPoint)_location {
     [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut
         animations:^{
-            
+            NSInteger rowTouched = _location.y / self.rowHeight + 1;
+            for (int i = 0; i < rowTouched; i++) {
+                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
+                row.frame = [self rowInWindow:row.frame];
+            }
         }
         completion:^(BOOL _finished){
         }
     ];
 }
 
-- (void)releaseRowsRight {
+- (void)releaseRowsRight:(CGPoint)_location {
 }
 
-- (void)moveRowsLeft {
+- (void)moveRowsLeft:(CGPoint)_location {
 }
 
-- (void)moveRowsRight {
+- (void)moveRowsRight:(CGPoint)_location {
 }
 
 - (CGRect)rowInWindow:(CGRect)_rowFrame {
@@ -174,10 +178,11 @@
     }
 }
 
-- (void)didReleaseRight:(CGPoint)_location {    
+- (void)didReleaseRight:(CGPoint)_location {  
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
+    [self releaseRowsLeft:_location];
 }
 
 - (void)didReleaseUp:(CGPoint)_location {    

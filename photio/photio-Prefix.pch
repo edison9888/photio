@@ -20,7 +20,7 @@
 #define DETECT_SWIPE_SPEED                  500
 #define MAX_DRAG_FACTOR                     0.35
 
-#define CALENDAR_DAYS_IN_WEEK               7
+#define CALENDAR_DAYS_IN_ROW                7
 #define CALENDAR_VIEW_COPIES                3
 #define CALENDAR_INITIAL_WEEK_OFFSET        1
 
