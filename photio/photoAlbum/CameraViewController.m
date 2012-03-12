@@ -167,25 +167,25 @@
     [[ViewGeneral instance] dragCameraToCalendar:_drag];
 }
 
-- (void)didReleaseRight {    
+- (void)didReleaseRight:(CGPoint)_location {    
     [self switchCamera];
 }
 
-- (void)didReleaseLeft {
+- (void)didReleaseLeft:(CGPoint)_location {
 }
 
-- (void)didReleaseUp {
+- (void)didReleaseUp:(CGPoint)_location {
     [[ViewGeneral instance] releaseCameraToCalendar];
 }
 
-- (void)didSwipeRight {
+- (void)didSwipeRight:(CGPoint)_location {
     [self switchCamera];
 }
 
-- (void)didSwipeLeft {
+- (void)didSwipeLeft:(CGPoint)_location {
 }
 
-- (void)didSwipeUp {
+- (void)didSwipeUp:(CGPoint)_location {
     [[ViewGeneral instance] transitionCameraToCalendar];    
 }
 

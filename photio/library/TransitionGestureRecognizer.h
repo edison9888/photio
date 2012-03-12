@@ -55,14 +55,14 @@ typedef enum {
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location;
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location;
 
-- (void)didReleaseRight;
-- (void)didReleaseLeft;
-- (void)didReleaseUp;
-- (void)didReleaseDown;
+- (void)didReleaseRight:(CGPoint)_location;
+- (void)didReleaseLeft:(CGPoint)_location;
+- (void)didReleaseUp:(CGPoint)_location;
+- (void)didReleaseDown:(CGPoint)_location;
 
-- (void)didSwipeRight;
-- (void)didSwipeLeft;
-- (void)didSwipeUp;
-- (void)didSwipeDown;
+- (void)didSwipeRight:(CGPoint)_location;
+- (void)didSwipeLeft:(CGPoint)_location;
+- (void)didSwipeUp:(CGPoint)_location;
+- (void)didSwipeDown:(CGPoint)_location;
 
 @end

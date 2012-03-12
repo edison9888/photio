@@ -12,8 +12,8 @@
 @interface TransitionGestureRecognizer (PrivateAPI)
 
 - (void)delegateDrag:(CGPoint)_delta from:(CGPoint)_location;
-- (void)delegateRelease;
-- (void)delegateSwipe;
+- (void)delegateRelease:(CGPoint)_location;
+- (void)delegateSwipe:(CGPoint)_location;
 - (CGPoint)dragDelta:(CGPoint)_touchPoint;
 - (void)determineDragDirection:(CGPoint)_velocity;
 - (BOOL)detectedSwipe:(CGPoint)_velocity;
@@ -54,51 +54,51 @@
     }
 }
 
-- (void)delegateRelease {
+- (void)delegateRelease:(CGPoint)_location {
     switch (self.dragDirection) {
         case DragDirectionRight:
-            if ([self.delegate respondsToSelector:@selector(didReleaseRight)]) {
-                [self.delegate didReleaseLeft];
+            if ([self.delegate respondsToSelector:@selector(didReleaseRight:)]) {
+                [self.delegate didReleaseLeft:_location];
             }
             break;
         case DragDirectionLeft:
-            if ([self.delegate respondsToSelector:@selector(didReleaseLeft)]) {
-                [self.delegate didReleaseLeft];
+            if ([self.delegate respondsToSelector:@selector(didReleaseLeft:)]) {
+                [self.delegate didReleaseLeft:_location];
             }
             break;
         case DragDirectionUp:
-            if ([self.delegate respondsToSelector:@selector(didReleaseUp)]) {
-                [self.delegate didReleaseUp];
+            if ([self.delegate respondsToSelector:@selector(didReleaseUp:)]) {
+                [self.delegate didReleaseUp:_location];
             }
             break;
         case DragDirectionDown:
-            if ([self.delegate respondsToSelector:@selector(didReleaseDown)]) {
-                [self.delegate didReleaseDown];
+            if ([self.delegate respondsToSelector:@selector(didReleaseDown:)]) {
+                [self.delegate didReleaseDown:_location];
             }
             break;
     }    
 }
 
-- (void)delegateSwipe {
+- (void)delegateSwipe:(CGPoint)_location {
     switch (self.dragDirection) {
         case DragDirectionRight:
-            if ([self.delegate respondsToSelector:@selector(didSwipeRight)]) {
-                [self.delegate didSwipeRight];
+            if ([self.delegate respondsToSelector:@selector(didSwipeRight:)]) {
+                [self.delegate didSwipeRight:_location];
             }
             break;
         case DragDirectionLeft:
-            if ([self.delegate respondsToSelector:@selector(didSwipeLeft)]) {
-                [self.delegate didSwipeLeft];
+            if ([self.delegate respondsToSelector:@selector(didSwipeLeft:)]) {
+                [self.delegate didSwipeLeft:_location];
             }
             break;
         case DragDirectionUp:
-            if ([self.delegate respondsToSelector:@selector(didSwipeUp)]) {
-                [self.delegate didSwipeUp];
+            if ([self.delegate respondsToSelector:@selector(didSwipeUp:)]) {
+                [self.delegate didSwipeUp:_location];
             }
             break;
         case DragDirectionDown:
-            if ([self.delegate respondsToSelector:@selector(didSwipeDown)]) {
-                [self.delegate didSwipeDown];
+            if ([self.delegate respondsToSelector:@selector(didSwipeDown:)]) {
+                [self.delegate didSwipeDown:_location];
             }
             break;
     }    
@@ -202,12 +202,12 @@
             break;
         case UIGestureRecognizerStateChanged:
             self.totalDragDistance = CGPointMake(self.totalDragDistance.x + delta.x, self.totalDragDistance.y + delta.y);
-            [self detectedMaximumDrag] ? [self delegateSwipe] : [self delegateDrag:delta from:touchPoint];
+            [self detectedMaximumDrag] ? [self delegateSwipe:touchPoint] : [self delegateDrag:delta from:touchPoint];
             self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
             break;
         case UIGestureRecognizerStateEnded:
             if (self.acceptTouches) {
-                [self detectedSwipe:velocity] ?  [self delegateSwipe] : [self delegateRelease];
+                [self detectedSwipe:velocity] ?  [self delegateSwipe:touchPoint] : [self delegateRelease:touchPoint];
             }
             break;
         default:

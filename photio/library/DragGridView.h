@@ -51,9 +51,9 @@
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location;
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location;
-- (void)didReleaseUp;
-- (void)didReleaseDown;
-- (void)didSwipeUp;
-- (void)didSwipeDown;
+- (void)didReleaseUp:(CGPoint)_location;
+- (void)didReleaseDown:(CGPoint)_location;
+- (void)didSwipeUp:(CGPoint)_location;
+- (void)didSwipeDown:(CGPoint)_location;
 
 @end
