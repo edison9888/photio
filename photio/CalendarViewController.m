@@ -15,10 +15,11 @@
 
 - (NSArray*)setDayViews;
 - (void)setDateFormatters;
+- (NSDate*)startDay;
 - (NSDate*)startWeek:(NSInteger)_weekOffset;
 - (CGRect)dayViewRect:(NSInteger)_weeks;
 - (NSArray*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo;
-- (NSInteger)weeksInView;
+- (NSInteger)rowsInView;
 
 @end
 
@@ -32,12 +33,12 @@
 #pragma mark CalendarViewController PrivateAPI
 
 - (NSArray*)setDayViews {
-    NSDate* startDate = [self startWeek:CALENDAR_INITIAL_WEEK_OFFSET];
-    NSInteger weeks = [self weeksInView];
-    NSMutableArray* dayViews = [NSMutableArray arrayWithCapacity:2 * weeks];
+    NSDate* startDate = [self startDay];
+    NSInteger rows = [self rowsInView];
+    NSMutableArray* dayViews = [NSMutableArray arrayWithCapacity:2 * rows];
     NSInteger currentDay = 0;
-    CGRect calendarDateViewRect = [self dayViewRect:weeks];
-    for (int i = 0; i < (2 * weeks + CALENDAR_INITIAL_WEEK_OFFSET); i++) {
+    CGRect calendarDateViewRect = [self dayViewRect:rows];
+    for (int i = 0; i < (2 * rows + CALENDAR_INITIAL_ROW_OFFSET); i++) {
         NSMutableArray* daysOfWeekViews = [NSMutableArray arrayWithCapacity:7];
         for (int j = 0; j < CALENDAR_DAYS_IN_ROW; j++) {
             NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
@@ -51,7 +52,7 @@
                 self.year = [self.yearFormatter stringFromDate:calendarDate];
                 self.firstMonth = [self.monthFormatter stringFromDate:calendarDate];
             }
-            if (currentDay == weeks * CALENDAR_DAYS_IN_ROW) {
+            if (currentDay == rows * CALENDAR_DAYS_IN_ROW) {
                 self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
             }
             [daysOfWeekViews addObject:[self dayView:calendarDateViewRect withDate:day andPhoto:nil]];
@@ -72,9 +73,14 @@
 }
 
 
+- (NSDate*)startDay {
+    NSDateComponents* comps = [self.calendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:[NSDate date]];
+    return [self.calendar dateFromComponents:comps];
+}
+
 - (NSDate*)startWeek:(NSInteger)_weekOffset {
     NSDateComponents* comps = [self.calendar components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    NSInteger daysToEndOfWeek = (_weekOffset + 1) * 7 - [comps weekday];
+    NSInteger daysToEndOfWeek = (_weekOffset + 1) * CALENDAR_DAYS_IN_ROW - [comps weekday];
     NSDateComponents* endOfWeekDate = [[NSDateComponents alloc] init];
     [endOfWeekDate setDay:daysToEndOfWeek];
     return [self.calendar dateByAddingComponents:endOfWeekDate toDate:[NSDate date] options:0];
@@ -93,7 +99,7 @@
     return copies;
 }
 
-- (NSInteger)weeksInView {
+- (NSInteger)rowsInView {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_ROW;
     NSInteger weeks = bounds.size.height / (DAY_VIEW_ASPECT_RATIO * viewWidth);
@@ -113,7 +119,7 @@
         self.view.frame = self.containerView.frame;
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         [self setDateFormatters];
-        self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self setDayViews] relativeView:self.containerView andTopIndexOffset:CALENDAR_INITIAL_WEEK_OFFSET];
+        self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self setDayViews] relativeView:self.containerView andTopIndexOffset:CALENDAR_INITIAL_ROW_OFFSET];
         self.dragGridView.userInteractionEnabled = YES;
         [self.view addSubview:self.dragGridView];
     }

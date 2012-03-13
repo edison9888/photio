@@ -15,14 +15,15 @@
 - (void)initRowParams:(NSArray*)_rows;
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy;
 - (void)hideRowIfOffScreen:(UIView*)_row;
+- (void)showRowIfOnScreen:(UIView*)_row withOffSet:(NSInteger)_offset;
 - (void)dragRowsLeft:(CGPoint)_drag from:(CGPoint)_location;
 - (void)dragRowsRight:(CGPoint)_drag from:(CGPoint)_location;
 - (void)dragRow:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
 - (void)releaseRowsLeft:(CGPoint)_location;
 - (void)releaseRowsRight:(CGPoint)_location;
-- (void)moveRowsLeft:(CGPoint)_location;
-- (void)moveRowsRight:(CGPoint)_location;
+- (void)swipeRowsLeft:(CGPoint)_location;
+- (void)swipeRowsRight:(CGPoint)_location;
 - (CGRect)rowInWindow:(CGRect)_rowFrame;
 - (CGRect)rowLeftOfWindow:(CGRect)_rowFrame;
 - (CGRect)rowRightOfWindow:(CGRect)_rowFrame;
@@ -72,8 +73,17 @@
 
 - (void)hideRowIfOffScreen:(UIView*)_row {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    if (_row.frame.origin.y < 0 || _row.frame.origin.y > bounds.size.height) {
+    if (_row.frame.origin.y < 0 || _row.frame.origin.y > bounds.size.height || _row.frame.origin.x < 0 || _row.frame.origin.x > bounds.size.width) {
         _row.hidden = YES;
+    }
+}
+
+- (void)showRowIfOnScreen:(UIView*)_row withOffSet:(CGPoint)_offset {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    CGFloat y = _offset.y * self.rowHeight + _row.frame.origin.y;
+    CGFloat x = _offset.x * _row.frame.size.width + _row.frame.origin.x;
+    if (y >= 0.0f && y <= bounds.size.height && x >= 0.0f && x <= bounds.size.width) {
+        _row.hidden = NO;
     }
 }
 
@@ -94,7 +104,8 @@
 }
 
 - (void)releaseRowsLeft:(CGPoint)_location {
-    [UIView animateWithDuration:TRANSITION_ANIMATION_DURATION
+    CGFloat delta = abs(_location.x)/self.frame.size.width;
+    [UIView animateWithDuration:delta * TRANSITION_ANIMATION_DURATION
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut
         animations:^{
@@ -112,10 +123,33 @@
 - (void)releaseRowsRight:(CGPoint)_location {
 }
 
-- (void)moveRowsLeft:(CGPoint)_location {
+- (void)swipeRowsLeft:(CGPoint)_location {
+    CGFloat delta = abs(_location.x)/self.frame.size.width;
+    __block NSInteger rowTouched = _location.y / self.rowHeight + 1;
+    [UIView animateWithDuration:delta * TRANSITION_ANIMATION_DURATION
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut
+        animations:^{
+            for (int i = 0; i < rowTouched; i++) {
+                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
+                row.frame = [self rowLeftOfWindow:row.frame];
+            }
+        }
+        completion:^(BOOL _finished){
+            for (int i = 0; i < rowTouched; i++) {
+                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
+                [self hideRowIfOffScreen:row];
+            }
+            self.rowStartView += rowTouched;
+            for (int i = self.rowStartView; i < self.rowStartView + rowTouched; i++) {
+                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
+                [self showRowIfOnScreen:row withOffSet:i];
+            }
+        }
+    ];
 }
 
-- (void)moveRowsRight:(CGPoint)_location {
+- (void)swipeRowsRight:(CGPoint)_location {
 }
 
 - (CGRect)rowInWindow:(CGRect)_rowFrame {
@@ -201,6 +235,7 @@
 }
 
 - (void)didSwipeLeft:(CGPoint)_location {
+    [self swipeRowsLeft:_location];
 }
 
 - (void)didSwipeUp:(CGPoint)_location {

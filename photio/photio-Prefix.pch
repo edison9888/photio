@@ -13,22 +13,22 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define TRANSITION_ANIMATION_DURATION       0.5
-#define DISPLAYED_IMAGE_SCALE               0.625
+#define TRANSITION_ANIMATION_DURATION       0.5f
+#define DISPLAYED_IMAGE_SCALE               0.625f
 #define DISPLAYED_IMAGE_CROP                CGSizeMake(200, 200)
 
 #define DETECT_SWIPE_SPEED                  500
-#define MAX_DRAG_FACTOR                     0.35
+#define MAX_DRAG_FACTOR                     0.4f
 
-#define CALENDAR_DAYS_IN_ROW                7
+#define CALENDAR_DAYS_IN_ROW                5
 #define CALENDAR_VIEW_COPIES                3
-#define CALENDAR_INITIAL_WEEK_OFFSET        1
+#define CALENDAR_INITIAL_ROW_OFFSET         0
 
-#define DAY_VIEW_ASPECT_RATIO               1.33333
-#define DAY_VIEW_DATE_X_OFFSET_SCALE        0.65
+#define DAY_VIEW_ASPECT_RATIO               1.33333f
+#define DAY_VIEW_DATE_X_OFFSET_SCALE        0.65f
 #define DAY_VIEW_DATE_HEIGHT                22
 #define DAY_VIEW_BORDER                     1
-#define DAY_VIEW_DATE_X_OFFSET              5.0
-#define DAY_VIEW_DATE_Y_OFFSET              -2.0
-#define DAY_VIEW_DATE_IPHONE_FONT_SIZE      22.0
+#define DAY_VIEW_DATE_X_OFFSET              5.0f
+#define DAY_VIEW_DATE_Y_OFFSET              -2.0f
+#define DAY_VIEW_DATE_IPHONE_FONT_SIZE      22.0f
 
