@@ -86,9 +86,9 @@
     return [self.calendar dateByAddingComponents:endOfWeekDate toDate:[NSDate date] options:0];
 }
 
--(CGRect)dayViewRect:(NSInteger)_weeks {
+-(CGRect)dayViewRect:(NSInteger)_rows {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_ROW, bounds.size.height / _weeks);
+    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_ROW, bounds.size.height / _rows);
 }
 
 -(NSArray*)dayView:(CGRect)_frame withDate:(NSString*)_date andPhoto:(UIImage*)_photo {
@@ -102,8 +102,8 @@
 - (NSInteger)rowsInView {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_ROW;
-    NSInteger weeks = bounds.size.height / (DAY_VIEW_ASPECT_RATIO * viewWidth);
-    return weeks;
+    NSInteger rows = bounds.size.height / (DAY_VIEW_ASPECT_RATIO * viewWidth);
+    return rows;
 }
 
 #pragma mark -

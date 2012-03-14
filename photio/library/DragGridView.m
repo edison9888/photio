@@ -15,8 +15,9 @@
 - (void)initRowParams:(NSArray*)_rows;
 - (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy;
 - (void)hideRowIfOffScreen:(UIView*)_row;
-- (void)showRowIfOnScreen:(UIView*)_row withOffSet:(NSInteger)_offset;
+- (void)showRowIfOnScreen:(UIView*)_row withYOffSet:(NSInteger)_offset;
 - (void)dragRowsLeft:(CGPoint)_drag from:(CGPoint)_location;
+- (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
 - (void)dragRowsRight:(CGPoint)_drag from:(CGPoint)_location;
 - (void)dragRow:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
@@ -78,13 +79,17 @@
     }
 }
 
-- (void)showRowIfOnScreen:(UIView*)_row withOffSet:(CGPoint)_offset {
+- (void)showRowIfOnScreen:(UIView*)_row withYOffSet:(NSInteger)_offset {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    CGFloat y = _offset.y * self.rowHeight + _row.frame.origin.y;
-    CGFloat x = _offset.x * _row.frame.size.width + _row.frame.origin.x;
-    if (y >= 0.0f && y <= bounds.size.height && x >= 0.0f && x <= bounds.size.width) {
+    CGRect offsetRect = [self rect:_row.frame withYOffset:_offset];
+    if (offsetRect.origin.x >= 0.0f && offsetRect.origin.x <= bounds.size.width && offsetRect.origin.y >= 0.0f && offsetRect.origin.y <= bounds.size.height) {
         _row.hidden = NO;
     }
+}
+
+- (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset {
+    CGFloat y = _rect.origin.y + _offset * self.rowHeight;
+    return CGRectMake(_rect.origin.x, y, _rect.size.width, _rect.size.width);
 }
 
 - (void)dragRowsLeft:(CGPoint)_drag from:(CGPoint)_location {
@@ -141,10 +146,22 @@
                 [self hideRowIfOffScreen:row];
             }
             self.rowStartView += rowTouched;
-            for (int i = self.rowStartView; i < self.rowStartView + rowTouched; i++) {
+            for (int i = 0; i < self.rowsInView; i++) {
                 UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
-                [self showRowIfOnScreen:row withOffSet:i];
+                [self showRowIfOnScreen:row withYOffSet:(i - rowTouched)];
             }
+            [UIView animateWithDuration:delta * TRANSITION_ANIMATION_DURATION
+                delay:0
+                options:UIViewAnimationOptionCurveEaseInOut
+                animations:^{
+                    for (int i = 0; i < self.rowsInView; i++) {
+                        UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
+                        row.frame = [self rect:row.frame withYOffset:(i - rowTouched)];
+                    }
+                }
+                completion:^(BOOL _finished){
+                }
+            ];
         }
     ];
 }
