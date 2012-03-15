@@ -14,10 +14,7 @@
 @interface DragGridView : UIView <TransitionGestureRecognizerDelegate> {
     __weak id<DragGridViewDelegate> delegate;
     TransitionGestureRecognizer*    transitionGestureRecognizer;
-    NSMutableArray*                 centerRows;
-    NSMutableArray*                 leftRows;
-    NSMutableArray*                 rightRows;
-    NSInteger                       rowIndexOffset;
+    NSMutableArray*                 rowViews;
     CGFloat                         rowHeight;
     NSInteger                       rowsInView;
     NSInteger                       rowStartView;
@@ -26,18 +23,14 @@
 
 @property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
 @property (nonatomic, retain)   TransitionGestureRecognizer*    transitionGestureRecognizer;
-@property (nonatomic, retain)   NSMutableArray*                 centerRows;
-@property (nonatomic, retain)   NSMutableArray*                 leftRows;
-@property (nonatomic, retain)   NSMutableArray*                 rightRows;
-@property (nonatomic, assign)   NSInteger                       rowIndexOffset;
+@property (nonatomic, retain)   NSMutableArray*                 rowViews;
 @property (nonatomic, assign)   CGFloat                         rowHeight;
 @property (nonatomic, assign)   NSInteger                       rowsInView;
 @property (nonatomic, assign)   NSInteger                       rowStartView;
 @property (nonatomic, assign)   NSInteger                       rowPixelOffset;
 
-+ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andRelativeView:(UIView*)_relativeView;
-+ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset;
-- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset;
++ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
+- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
 
 @end
 
@@ -49,10 +42,16 @@
 
 @optional
 
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location;
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location;
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location;
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location;
+- (void)didReleaseRight:(CGPoint)_location;
+- (void)didReleaseLeft:(CGPoint)_location;
 - (void)didReleaseUp:(CGPoint)_location;
 - (void)didReleaseDown:(CGPoint)_location;
+- (void)didSwipeRight:(CGPoint)_location;
+- (void)didSwipeLeft:(CGPoint)_location;
 - (void)didSwipeUp:(CGPoint)_location;
 - (void)didSwipeDown:(CGPoint)_location;
 

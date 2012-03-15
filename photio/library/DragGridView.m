@@ -12,8 +12,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DragGridView (PrivateAPI)
 
-- (void)initRowParams:(NSArray*)_rows;
-- (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy;
+- (void)initRowParams:(NSMutableArray*)_rows;
+- (void)createRows:(NSMutableArray*)_rows;
 - (void)hideRowIfOffScreen:(UIView*)_row;
 - (void)showRowIfOnScreen:(UIView*)_row withYOffSet:(NSInteger)_offset;
 - (void)dragRowsLeft:(CGPoint)_drag from:(CGPoint)_location;
@@ -26,49 +26,32 @@
 - (void)swipeRowsLeft:(CGPoint)_location;
 - (void)swipeRowsRight:(CGPoint)_location;
 - (CGRect)rowInWindow:(CGRect)_rowFrame;
-- (CGRect)rowLeftOfWindow:(CGRect)_rowFrame;
-- (CGRect)rowRightOfWindow:(CGRect)_rowFrame;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragGridView
 
-@synthesize delegate, transitionGestureRecognizer, centerRows, leftRows, rightRows, 
-            rowIndexOffset, rowHeight, rowsInView, rowStartView, rowPixelOffset;
+@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
 
-- (void)initRows:(NSArray*)_rows {
-    [self createRows:self.leftRows from:_rows forCopy:0];
-    [self createRows:self.centerRows from:_rows forCopy:1];
-    [self createRows:self.rightRows from:_rows forCopy:2];
-}
-
-- (void)initRowParams:(NSArray*)_rows {
-    UIView* item = [[[_rows objectAtIndex:0] objectAtIndex:0] objectAtIndex:0];
+- (void)initRowParams:(NSMutableArray*)_rows {
+    UIView* item = [[_rows objectAtIndex:0] objectAtIndex:0];
     self.rowHeight = item.frame.size.height;
     self.rowsInView = self.frame.size.height / self.rowHeight;
-    self.rowStartView = self.rowIndexOffset;
     self.rowPixelOffset = (self.frame.size.height - self.rowsInView * self.rowHeight) / (self.rowsInView *2);
 }
 
-- (void)createRows:(NSMutableArray*)_destination from:(NSArray*)_source forCopy:(NSInteger)_copy {
-    for (int i = 0; i < [_source count]; i++) {
-        CGRect rowFrame = CGRectMake((_copy - 1) * self.frame.size.width, 
-                                     (i - self.rowIndexOffset - (_copy - 1)) * self.rowHeight + self.rowPixelOffset, 
-                                     self.frame.size.width, self.rowHeight);
-        NSMutableArray* rowForCopy = [NSMutableArray arrayWithCapacity:10]; 
-        NSArray* row = [_source objectAtIndex:i];
-        for (int j = 0; j < [row count]; j++) {
-            NSArray* itemCopies = [row objectAtIndex:j];
-            [rowForCopy addObject:[itemCopies objectAtIndex:_copy]];
-        }
-        DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:rowForCopy];
+- (void)createRows:(NSMutableArray*)_rows {
+    for (int i = 0; i < [_rows count]; i++) {
+        CGRect rowFrame = CGRectMake(0.0, i  * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
+        NSArray* row = [_rows objectAtIndex:i];
+        DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:row];
         [self hideRowIfOffScreen:dragRow];
         [self addSubview:dragRow];
-        [_destination addObject:dragRow];
+        [self.rowViews addObject:dragRow];
     }
 }
 
@@ -92,14 +75,10 @@
     return CGRectMake(_rect.origin.x, y, _rect.size.width, _rect.size.width);
 }
 
-- (void)dragRowsLeft:(CGPoint)_drag from:(CGPoint)_location {
-    NSInteger rowTouched = _location.y / self.rowHeight + 1;
-    for (int i = 0; i < rowTouched; i++) {
-        [self drag:_drag row:[self.centerRows objectAtIndex:self.rowStartView + i]];
+- (void)dragRows:(CGPoint)_drag from:(CGPoint)_location {
+    for (int i = 0; i < [self.rowViews count]; i++) {
+        [self drag:_drag row:[self.rowViews objectAtIndex:i]];
     }
-}
-
-- (void)dragRowsRight:(CGPoint)_drag from:(CGPoint)_location {
 }
 
 - (void)drag:(CGPoint)_drag row:(UIView*)_row {
@@ -108,62 +87,13 @@
     _row.frame = newRect;
 }
 
-- (void)releaseRowsLeft:(CGPoint)_location {
-    CGFloat delta = abs(_location.x)/self.frame.size.width;
-    [UIView animateWithDuration:delta * TRANSITION_ANIMATION_DURATION
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut
-        animations:^{
-            NSInteger rowTouched = _location.y / self.rowHeight + 1;
-            for (int i = 0; i < rowTouched; i++) {
-                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
-                row.frame = [self rowInWindow:row.frame];
-            }
-        }
-        completion:^(BOOL _finished){
-        }
-    ];
+- (void)releaseRowsUp:(CGPoint)_location {
 }
 
-- (void)releaseRowsRight:(CGPoint)_location {
+- (void)releaseRowsDown:(CGPoint)_location {
 }
 
 - (void)swipeRowsLeft:(CGPoint)_location {
-    CGFloat delta = abs(_location.x)/self.frame.size.width;
-    __block NSInteger rowTouched = _location.y / self.rowHeight + 1;
-    [UIView animateWithDuration:delta * TRANSITION_ANIMATION_DURATION
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut
-        animations:^{
-            for (int i = 0; i < rowTouched; i++) {
-                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
-                row.frame = [self rowLeftOfWindow:row.frame];
-            }
-        }
-        completion:^(BOOL _finished){
-            for (int i = 0; i < rowTouched; i++) {
-                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
-                [self hideRowIfOffScreen:row];
-            }
-            self.rowStartView += rowTouched;
-            for (int i = 0; i < self.rowsInView; i++) {
-                UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
-                [self showRowIfOnScreen:row withYOffSet:(i - rowTouched)];
-            }
-            [UIView animateWithDuration:delta * TRANSITION_ANIMATION_DURATION
-                delay:0
-                options:UIViewAnimationOptionCurveEaseInOut
-                animations:^{
-                    for (int i = 0; i < self.rowsInView; i++) {
-                        UIView* row = [self.centerRows objectAtIndex:self.rowStartView + i];
-                        row.frame = [self rect:row.frame withYOffset:(i - rowTouched)];
-                    }
-                }
-                completion:^(BOOL _finished){
-                }
-            ];
-        }
-    ];
 }
 
 - (void)swipeRowsRight:(CGPoint)_location {
@@ -173,35 +103,19 @@
     return CGRectMake(0.0, _rowFrame.origin.y, _rowFrame.size.width, _rowFrame.size.height);
 }
 
-- (CGRect)rowLeftOfWindow:(CGRect)_rowFrame {
-    return CGRectMake(-_rowFrame.size.width, _rowFrame.origin.y, _rowFrame.size.width, _rowFrame.size.height);
-}
-
-- (CGRect)rowRightOfWindow:(CGRect)_rowFrame {
-    return CGRectMake(_rowFrame.size.width, _rowFrame.origin.y, _rowFrame.size.width, _rowFrame.size.height);
-}
-
 #pragma mark -
 #pragma mark DragGridView
 
-+ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows andRelativeView:(UIView*)_relativeView {
-    return [[DragGridView alloc] initWithFrame:_frame delegate:_delegate rows:_rows relativeView:_relativeView andTopIndexOffset:0];
++ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView {
+    return [[DragGridView alloc] initWithFrame:_frame delegate:_delegate rows:_rows andRelativeView:_relativeView];
 }
 
-+ (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset {
-    return [[DragGridView alloc] initWithFrame:_frame delegate:_delegate rows:_rows relativeView:_relativeView andTopIndexOffset:_indexOffset];
-}
-
-- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSArray*)_rows relativeView:(UIView*)_relativeView andTopIndexOffset:(NSInteger)_indexOffset {
+- (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView {
     if ((self = [super initWithFrame:_frame])) {
         self.delegate = _delegate;
-        self.rowIndexOffset = _indexOffset;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
-        self.centerRows = [NSMutableArray arrayWithCapacity:10];
-        self.leftRows = [NSMutableArray arrayWithCapacity:10];
-        self.rightRows = [NSMutableArray arrayWithCapacity:10];
         [self initRowParams:_rows];
-        [self initRows:_rows];
+        [self createRows:_rows];
     }
     return self;
 }

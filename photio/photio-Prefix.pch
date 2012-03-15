@@ -21,8 +21,7 @@
 #define MAX_DRAG_FACTOR                     0.4f
 
 #define CALENDAR_DAYS_IN_ROW                5
-#define CALENDAR_VIEW_COPIES                3
-#define CALENDAR_INITIAL_ROW_OFFSET         0
+#define CALENDAR_VIEW_COUNT                 3
 
 #define DAY_VIEW_ASPECT_RATIO               1.33333f
 #define DAY_VIEW_DATE_X_OFFSET_SCALE        0.65f
