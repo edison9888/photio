@@ -142,24 +142,24 @@
     return [[NSArray alloc] init];
 }
 
-- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location {
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location {
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] dragCalendarToCamera:_drag];
 }
 
-- (void)didReleaseUp:(CGPoint)_location {
+- (void)didReleaseRight:(CGPoint)_location {
 }
 
-- (void)didReleaseDown:(CGPoint)_location {
+- (void)didReleaseLeft:(CGPoint)_location {
     [[ViewGeneral instance] releaseCalendarToCamera];
 }
 
-- (void)didSwipeUp:(CGPoint)_location {
+- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
-- (void)didSwipeDown:(CGPoint)_location {
+- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] transitionCalendarToCamera];
 }
 

@@ -42,17 +42,17 @@
 
 @optional
 
-- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location;
-- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location;
-- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location;
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location;
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didReleaseRight:(CGPoint)_location;
 - (void)didReleaseLeft:(CGPoint)_location;
-- (void)didReleaseUp:(CGPoint)_location;
-- (void)didReleaseDown:(CGPoint)_location;
-- (void)didSwipeRight:(CGPoint)_location;
-- (void)didSwipeLeft:(CGPoint)_location;
-- (void)didSwipeUp:(CGPoint)_location;
-- (void)didSwipeDown:(CGPoint)_location;
+- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+
+- (void)didReachTop;
+- (void)didReachBottom;
+
+- (void)didReleaseTop;
+- (void)didReleaseBottom;
 
 @end

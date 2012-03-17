@@ -16,9 +16,9 @@
 - (void)createRows:(NSMutableArray*)_rows;
 - (void)hideRowIfOffScreen:(UIView*)_row;
 - (void)showRowIfOnScreen:(UIView*)_row withYOffSet:(NSInteger)_offset;
-- (void)dragRowsLeft:(CGPoint)_drag from:(CGPoint)_location;
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
-- (void)dragRowsRight:(CGPoint)_drag from:(CGPoint)_location;
+- (void)dragRowsUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)dragRowsDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)dragRow:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
 - (void)releaseRowsLeft:(CGPoint)_location;
@@ -75,6 +75,14 @@
     return CGRectMake(_rect.origin.x, y, _rect.size.width, _rect.size.width);
 }
 
+- (void)dragRowsUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    
+}
+
+- (void)dragRowsDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    
+}
+
 - (void)dragRows:(CGPoint)_drag from:(CGPoint)_location {
     for (int i = 0; i < [self.rowViews count]; i++) {
         [self drag:_drag row:[self.rowViews objectAtIndex:i]];
@@ -123,62 +131,61 @@
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
-- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location {
-    [self dragRowsRight:_drag from:(CGPoint)_location];
-}
-
-- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location{    
-    [self dragRowsLeft:_drag from:(CGPoint)_location];
-}
-
-- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location{
-    if ([self.delegate respondsToSelector:@selector(didDragUp:from:)]) {
-        [self.delegate didDragUp:_drag from:(CGPoint)_location];
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self.delegate respondsToSelector:@selector(didDragRight:from:withVelocity:)]) {
+        [self.delegate didDragRight:_drag from:(CGPoint)_location withVelocity:_velocity];
     }
 }
 
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location{
-    if ([self.delegate respondsToSelector:@selector(didDragDown:from:)]) {
-        [self.delegate didDragDown:_drag from:(CGPoint)_location];
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    if ([self.delegate respondsToSelector:@selector(didDragLeft:from:withVelocity:)]) {
+        [self.delegate didDragLeft:_drag from:(CGPoint)_location withVelocity:_velocity];
     }
+}
+
+- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self dragRowsUp:_drag from:(CGPoint)_location withVelocity:_velocity];
+}
+
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self dragRowsDown:_drag from:(CGPoint)_location withVelocity:_velocity];
 }
 
 - (void)didReleaseRight:(CGPoint)_location {  
+    if ([self.delegate respondsToSelector:@selector(didReleaseRight:)]) {
+        [self.delegate didReleaseRight:_location];
+    }
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
-    [self releaseRowsLeft:_location];
+    if ([self.delegate respondsToSelector:@selector(didReleaseLeft:)]) {
+        [self.delegate didReleaseLeft:_location];
+    }
 }
 
 - (void)didReleaseUp:(CGPoint)_location {    
-    if ([self.delegate respondsToSelector:@selector(didReleaseUp:)]) {
-        [self.delegate didReleaseUp:_location];
-    }
+    [self releaseRowsLeft:_location];
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
-    if ([self.delegate respondsToSelector:@selector(didReleaseDown:)]) {
-        [self.delegate didReleaseDown:_location];
+}
+
+- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self.delegate respondsToSelector:@selector(didSwipeRight:withVelocity:)]) {
+        [self.delegate didSwipeRight:_location withVelocity:_velocity];
     }
 }
 
-- (void)didSwipeRight:(CGPoint)_location {
-}
-
-- (void)didSwipeLeft:(CGPoint)_location {
-    [self swipeRowsLeft:_location];
-}
-
-- (void)didSwipeUp:(CGPoint)_location {
-    if ([self.delegate respondsToSelector:@selector(didSwipeUp:)]) {
-        [self.delegate didSwipeUp:_location];
+- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self.delegate respondsToSelector:@selector(didSwipeLeft:withVelocity:)]) {
+        [self.delegate didSwipeLeft:_location withVelocity:_velocity];
     }
 }
 
-- (void)didSwipeDown:(CGPoint)_location {
-    if ([self.delegate respondsToSelector:@selector(didSwipeDown:)]) {
-        [self.delegate didSwipeDown:_location];
-    }
+- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
 @end

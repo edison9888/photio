@@ -143,7 +143,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (self.cameraViewController == nil) {
         self.cameraViewController = [CameraViewController inView:_containerView];
     } 
-    [self cameraViewPosition:[self.class overWindow]];
+    [self cameraViewPosition:[self.class rightOfWindow]];
     self.cameraViewController.cameraDelegate = self;
     [_containerView addSubview:self.cameraViewController.imagePickerController.view];
 }
@@ -179,20 +179,21 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Calendar To Camera
 
 - (void)transitionCalendarToCamera {
-    [self.cameraViewController setFlashImage];
+    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
     if ([CameraViewController cameraIsAvailable]) {
-        [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
+        [self.cameraViewController setFlashImage];
+        [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
                 [self cameraViewPosition:[self.class inWindow]];
-                [self calendarViewPosition:[self.class underWindow]];
+                [self calendarViewPosition:[self.class leftOfWindow]];
             }
         ];    
     }
 }
 
 - (void)releaseCalendarToCamera {
-    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
+    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-            [self cameraViewPosition:[self.class overWindow]];
+            [self cameraViewPosition:[self.class rightOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
     ];    
@@ -210,7 +211,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     CGFloat screenHeight = [self.class screenBounds].size.height;
     CGFloat delta = abs(screenHeight + self.cameraViewController.imagePickerController.view.frame.origin.y)/screenHeight;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-            [self cameraViewPosition:[self.class overWindow]];
+            [self cameraViewPosition:[self.class rightOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
     ];
@@ -220,7 +221,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
-            [self calendarViewPosition:[self.class underWindow]];
+            [self calendarViewPosition:[self.class leftOfWindow]];
         }
     ];    
 }

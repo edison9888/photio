@@ -156,37 +156,35 @@
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
-- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location {
-    [self switchCamera];
-}
-
-- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location {    
-}
-
-- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location {
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
     [[ViewGeneral instance] dragCameraToCalendar:_drag];
 }
 
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {    
+}
+
+- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+}
+
 - (void)didReleaseRight:(CGPoint)_location {    
-    [self switchCamera];
+    [[ViewGeneral instance] releaseCameraToCalendar];
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
 }
 
 - (void)didReleaseUp:(CGPoint)_location {
-    [[ViewGeneral instance] releaseCameraToCalendar];
 }
 
-- (void)didSwipeRight:(CGPoint)_location {
+- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+    [[ViewGeneral instance] transitionCameraToCalendar];    
+}
+
+- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocit {
     [self switchCamera];
 }
 
-- (void)didSwipeLeft:(CGPoint)_location {
-}
-
-- (void)didSwipeUp:(CGPoint)_location {
-    [[ViewGeneral instance] transitionCameraToCalendar];    
+- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocit {
 }
 
 @end
