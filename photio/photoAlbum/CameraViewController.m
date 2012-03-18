@@ -187,5 +187,15 @@
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocit {
 }
 
+- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] transitionCameraToCalendar];    
+}
+
+- (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+}
+
+- (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+}
+
 @end
 

@@ -54,6 +54,8 @@
 - (void)didReleaseLeft:(CGPoint)_location;
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 
 - (void)didReachTop;
 - (void)didReachBottom;

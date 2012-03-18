@@ -14,6 +14,7 @@
 - (void)delegateDrag:(CGPoint)_delta from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)delegateRelease:(CGPoint)_location;
 - (void)delegateSwipe:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)delegateReachedMaxDrag:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (CGPoint)dragDelta:(CGPoint)_touchPoint;
 - (void)determineDragDirection:(CGPoint)_velocity;
 - (BOOL)detectedSwipe:(CGPoint)_velocity;
@@ -58,7 +59,7 @@
     switch (self.dragDirection) {
         case DragDirectionRight:
             if ([self.delegate respondsToSelector:@selector(didReleaseRight:)]) {
-                [self.delegate didReleaseLeft:_location];
+                [self.delegate didReleaseRight:_location];
             }
             break;
         case DragDirectionLeft:
@@ -99,6 +100,31 @@
         case DragDirectionDown:
             if ([self.delegate respondsToSelector:@selector(didSwipeDown:withVelocity:)]) {
                 [self.delegate didSwipeDown:_location withVelocity:_velocity];
+            }
+            break;
+    }    
+}
+
+- (void)delegateReachedMaxDrag:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    switch (self.dragDirection) {
+        case DragDirectionRight:
+            if ([self.delegate respondsToSelector:@selector(didReachMaxDragRight:from:withVelocity:)]) {
+                [self.delegate didReachMaxDragRight:_drag from:_location withVelocity:_velocity];
+            }
+            break;
+        case DragDirectionLeft:
+            if ([self.delegate respondsToSelector:@selector(didReachMaxDragLeft:from:withVelocity:)]) {
+                [self.delegate didReachMaxDragLeft:_drag from:_location withVelocity:_velocity];
+            }
+            break;
+        case DragDirectionUp:
+            if ([self.delegate respondsToSelector:@selector(didReachMaxDragUp:from:withVelocity:)]) {
+                [self.delegate didReachMaxDragUp:_drag from:_location withVelocity:_velocity];
+            }
+            break;
+        case DragDirectionDown:
+            if ([self.delegate respondsToSelector:@selector(didReachMaxDragDown:from:withVelocity:)]) {
+                [self.delegate didReachMaxDragDown:_drag from:_location withVelocity:_velocity];
             }
             break;
     }    
@@ -202,7 +228,7 @@
             break;
         case UIGestureRecognizerStateChanged:
             self.totalDragDistance = CGPointMake(self.totalDragDistance.x + delta.x, self.totalDragDistance.y + delta.y);
-            [self detectedMaximumDrag] ? [self delegateSwipe:touchPoint withVelocity:velocity] : [self delegateDrag:delta from:touchPoint withVelocity:velocity];
+            [self detectedMaximumDrag] ? [self delegateReachedMaxDrag:delta from:touchPoint withVelocity:velocity] : [self delegateDrag:delta from:touchPoint withVelocity:velocity];
             self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
             break;
         case UIGestureRecognizerStateEnded:

@@ -163,4 +163,11 @@
     [[ViewGeneral instance] transitionCalendarToCamera];
 }
 
+- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] transitionCalendarToCamera];    
+}
+
 @end

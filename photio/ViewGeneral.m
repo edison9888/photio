@@ -81,10 +81,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 + (void)drag:(CGPoint)_drag view:(UIView*)_view {
-    CGRect newFrame = _view.frame;
-    newFrame.origin.x += _drag.x;
-    newFrame.origin.y += _drag.y;
-    _view.frame = newFrame;
+    _view.transform = CGAffineTransformTranslate(_view.transform, _drag.x, _drag.y);
 }
 
 - (void)createViews:(UIView*)_containerView {
@@ -218,7 +215,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)releaseCameraToCalendar {
-    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.y)/[self.class screenBounds].size.height;
+    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self calendarViewPosition:[self.class leftOfWindow]];

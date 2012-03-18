@@ -255,4 +255,25 @@
     [self swipeRowsDown:_location withVelocity:_velocity];
 }
 
+- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self.delegate respondsToSelector:@selector(didReachMaxDragRight: from:withVelocity:)]) {
+        [self.delegate didReachMaxDragRight:_drag from:_location withVelocity:_velocity];
+    }    
+}
+
+- (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self.delegate respondsToSelector:@selector(didReachMaxDragLeft: from:withVelocity:)]) {
+        [self.delegate didReachMaxDragLeft:_drag from:_location withVelocity:_velocity];
+    }
+}
+
+- (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self dragRowsUp:_drag];
+}
+
+- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self dragRowsDown:_drag];
+}
+
+
 @end

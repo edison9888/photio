@@ -65,4 +65,10 @@ typedef enum {
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 
+- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+
+
 @end
