@@ -14,22 +14,26 @@
 @interface DragGridView : UIView <TransitionGestureRecognizerDelegate> {
     __weak id<DragGridViewDelegate> delegate;
     TransitionGestureRecognizer*    transitionGestureRecognizer;
+    UIView*                         rowContainerView;
     NSMutableArray*                 rowViews;
     CGFloat                         rowHeight;
+    CGFloat                         deltaTime;
     NSInteger                       rowsInView;
     NSInteger                       rowStartView;
     NSInteger                       rowPixelOffset;
-    BOOL                            isScrolling;
+    NSInteger                       swipeSteps;
 }
 
 @property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
 @property (nonatomic, retain)   TransitionGestureRecognizer*    transitionGestureRecognizer;
+@property (nonatomic, retain)   UIView*                         rowContainerView;
 @property (nonatomic, retain)   NSMutableArray*                 rowViews;
 @property (nonatomic, assign)   CGFloat                         rowHeight;
+@property (nonatomic, assign)   CGFloat                         deltaTime;
 @property (nonatomic, assign)   NSInteger                       rowsInView;
 @property (nonatomic, assign)   NSInteger                       rowStartView;
 @property (nonatomic, assign)   NSInteger                       rowPixelOffset;
-@property (nonatomic, assign)   BOOL                            isScrolling;
+@property (nonatomic, assign)   NSInteger                       swipeSteps;
 
 + (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
