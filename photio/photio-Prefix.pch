@@ -31,3 +31,5 @@
 #define DAY_VIEW_DATE_Y_OFFSET              -2.0f
 #define DAY_VIEW_DATE_IPHONE_FONT_SIZE      22.0f
 
+#define DRAG_GRID_ACCELERATION              10000.0f
+#define DRAG_GRID_SWIPE_STEPS               20

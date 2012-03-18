@@ -14,25 +14,28 @@
 
 - (void)initRowParams:(NSMutableArray*)_rows;
 - (void)createRows:(NSMutableArray*)_rows;
-- (void)hideRowIfOffScreen:(UIView*)_row;
-- (void)showRowIfOnScreen:(UIView*)_row withYOffSet:(NSInteger)_offset;
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
-- (void)dragRowsUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)dragRowsDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)dragRow:(CGPoint)_drag;
+- (void)dragRowsUp:(NSValue*)_drag;
+- (void)dragRowsDown:(NSValue*)_drag;
+- (void)dragRows:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
-- (void)releaseRowsLeft:(CGPoint)_location;
-- (void)releaseRowsRight:(CGPoint)_location;
-- (void)swipeRowsLeft:(CGPoint)_location;
-- (void)swipeRowsRight:(CGPoint)_location;
-- (CGRect)rowInWindow:(CGRect)_rowFrame;
+- (void)releaseRowsUp:(CGPoint)_location;
+- (void)releaseRowsDown:(CGPoint)_location;
+- (void)swipeRowsUp:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)swipeRowsDown:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)scrollRowsDown:(CGPoint)_velocity;
+- (void)scrollRowsUp:(CGPoint)_velocity;
+- (CGFloat)offsetDistance;
+- (CGFloat)deltaDistance:(CGPoint)_velocity;
+- (BOOL)canScrollUp;
+- (BOOL)canScrollDown;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragGridView
 
-@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset;
+@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, isScrolling;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
@@ -45,28 +48,13 @@
 }
 
 - (void)createRows:(NSMutableArray*)_rows {
+    self.rowViews = [NSMutableArray arrayWithCapacity:[_rows count]];
     for (int i = 0; i < [_rows count]; i++) {
         CGRect rowFrame = CGRectMake(0.0, i  * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
         NSArray* row = [_rows objectAtIndex:i];
         DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:row];
-        [self hideRowIfOffScreen:dragRow];
         [self addSubview:dragRow];
         [self.rowViews addObject:dragRow];
-    }
-}
-
-- (void)hideRowIfOffScreen:(UIView*)_row {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    if (_row.frame.origin.y < 0 || _row.frame.origin.y > bounds.size.height || _row.frame.origin.x < 0 || _row.frame.origin.x > bounds.size.width) {
-        _row.hidden = YES;
-    }
-}
-
-- (void)showRowIfOnScreen:(UIView*)_row withYOffSet:(NSInteger)_offset {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    CGRect offsetRect = [self rect:_row.frame withYOffset:_offset];
-    if (offsetRect.origin.x >= 0.0f && offsetRect.origin.x <= bounds.size.width && offsetRect.origin.y >= 0.0f && offsetRect.origin.y <= bounds.size.height) {
-        _row.hidden = NO;
     }
 }
 
@@ -75,15 +63,29 @@
     return CGRectMake(_rect.origin.x, y, _rect.size.width, _rect.size.width);
 }
 
-- (void)dragRowsUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    
+- (void)dragRowsUp:(NSValue*)_drag {
+    CGPoint drag = [_drag CGPointValue];
+    if ([self canScrollDown]) {
+        [self dragRows:drag];
+    } else {        
+        if ([self.delegate respondsToSelector:@selector(didReachBottom:)]) {
+            [self.delegate didReachBottom];
+        }
+    }
 }
 
-- (void)dragRowsDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    
+- (void)dragRowsDown:(NSValue*)_drag {
+    CGPoint drag = [_drag CGPointValue];
+    if ([self canScrollUp]) {      
+        [self dragRows:drag];
+    } else {        
+        if ([self.delegate respondsToSelector:@selector(didReachTop:)]) {
+            [self.delegate didReachTop];
+        }
+    }    
 }
 
-- (void)dragRows:(CGPoint)_drag from:(CGPoint)_location {
+- (void)dragRows:(CGPoint)_drag {
     for (int i = 0; i < [self.rowViews count]; i++) {
         [self drag:_drag row:[self.rowViews objectAtIndex:i]];
     }
@@ -91,7 +93,7 @@
 
 - (void)drag:(CGPoint)_drag row:(UIView*)_row {
     CGRect newRect = _row.frame;
-    newRect.origin.x += _drag.x;
+    newRect.origin.y += _drag.y;
     _row.frame = newRect;
 }
 
@@ -101,15 +103,60 @@
 - (void)releaseRowsDown:(CGPoint)_location {
 }
 
-- (void)swipeRowsLeft:(CGPoint)_location {
+- (void)swipeRowsUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self scrollRowsUp:_velocity];
 }
 
-- (void)swipeRowsRight:(CGPoint)_location {
+- (void)scrollRowsUp:(CGPoint)_velocity {
+    CGFloat dDistance = -[self deltaDistance:_velocity];
+    CGFloat dTime = [self deltaTime:_velocity];
+    [self performSelector:@selector(dragRowsUp:) withObject:[NSValue valueWithCGPoint:CGPointMake(0.0, dDistance)] afterDelay:dTime];
 }
 
-- (CGRect)rowInWindow:(CGRect)_rowFrame {
-    return CGRectMake(0.0, _rowFrame.origin.y, _rowFrame.size.width, _rowFrame.size.height);
+- (void)swipeRowsDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self scrollRowsDown:_velocity];
 }
+
+- (void)scrollRowsDown:(CGPoint)_velocity {
+    CGFloat dDistance = [self deltaDistance:_velocity];
+    CGFloat dTime = [self deltaTime:_velocity];
+    [self performSelector:@selector(dragRowsDown:) withObject:[NSValue valueWithCGPoint:CGPointMake(0.0, dDistance)] afterDelay:dTime];
+}
+
+- (CGFloat)deltaDistance:(CGPoint)_velocity {
+    CGFloat distance = pow(_velocity.y, 2.0) / ( 2 * DRAG_GRID_ACCELERATION);
+    return distance / DRAG_GRID_SWIPE_STEPS;
+}
+
+- (CGFloat)deltaTime:(CGPoint)_velocity {
+    CGFloat time = fabs(_velocity.y) / DRAG_GRID_ACCELERATION;
+    return time / DRAG_GRID_SWIPE_STEPS;
+}
+
+- (CGFloat)offsetDistance {
+    UIView* firstRow = [self.rowViews objectAtIndex:0];
+    return firstRow.frame.origin.y;
+}
+
+
+- (BOOL)canScrollUp {
+    BOOL canScroll = YES;
+    if ([self offsetDistance] > 0.0) {
+        canScroll = NO;
+    }
+    return canScroll;
+}
+
+- (BOOL)canScrollDown {
+    BOOL canScroll = YES;
+    CGFloat totalViewHeight = self.rowHeight * [self.rowViews count];
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    if ((bounds.size.height - [self offsetDistance]) > totalViewHeight) {
+        canScroll = NO;
+    }
+    return canScroll;    
+}
+
 
 #pragma mark -
 #pragma mark DragGridView
@@ -122,6 +169,7 @@
     if ((self = [super initWithFrame:_frame])) {
         self.delegate = _delegate;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
+        self.isScrolling = NO;
         [self initRowParams:_rows];
         [self createRows:_rows];
     }
@@ -133,22 +181,22 @@
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     if ([self.delegate respondsToSelector:@selector(didDragRight:from:withVelocity:)]) {
-        [self.delegate didDragRight:_drag from:(CGPoint)_location withVelocity:_velocity];
+        [self.delegate didDragRight:_drag from:_location withVelocity:_velocity];
     }
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
     if ([self.delegate respondsToSelector:@selector(didDragLeft:from:withVelocity:)]) {
-        [self.delegate didDragLeft:_drag from:(CGPoint)_location withVelocity:_velocity];
+        [self.delegate didDragLeft:_drag from:_location withVelocity:_velocity];
     }
 }
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragRowsUp:_drag from:(CGPoint)_location withVelocity:_velocity];
+    [self dragRowsUp:[NSValue valueWithCGPoint:_drag]];
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragRowsDown:_drag from:(CGPoint)_location withVelocity:_velocity];
+    [self dragRowsDown:[NSValue valueWithCGPoint:_drag]];
 }
 
 - (void)didReleaseRight:(CGPoint)_location {  
@@ -164,7 +212,6 @@
 }
 
 - (void)didReleaseUp:(CGPoint)_location {    
-    [self releaseRowsLeft:_location];
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
@@ -183,9 +230,11 @@
 }
 
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self swipeRowsUp:_location withVelocity:_velocity];
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self swipeRowsDown:_location withVelocity:_velocity];
 }
 
 @end

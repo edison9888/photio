@@ -19,6 +19,7 @@
     NSInteger                       rowsInView;
     NSInteger                       rowStartView;
     NSInteger                       rowPixelOffset;
+    BOOL                            isScrolling;
 }
 
 @property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
@@ -28,6 +29,7 @@
 @property (nonatomic, assign)   NSInteger                       rowsInView;
 @property (nonatomic, assign)   NSInteger                       rowStartView;
 @property (nonatomic, assign)   NSInteger                       rowPixelOffset;
+@property (nonatomic, assign)   BOOL                            isScrolling;
 
 + (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
