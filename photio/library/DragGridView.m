@@ -21,8 +21,8 @@
 - (void)dragRows:(CGPoint)_drag;
 - (void)drag:(CGPoint)_drag row:(UIView*)_row;
 
-- (void)releaseRowsUp:(CGPoint)_location;
-- (void)releaseRowsDown:(CGPoint)_location;
+- (void)releaseRowsUp;
+- (void)releaseRowsDown;
 
 - (void)swipeRowsUp:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)scrollRowsUp:(NSValue*)_velocityValue;
@@ -36,13 +36,19 @@
 
 - (BOOL)canScrollUp;
 - (BOOL)canScrollDown;
+- (BOOL)atMaximumUpScroll;
+- (BOOL)atMaximumDownScroll;
+- (BOOL)canScrollUp:(CGFloat)_offset;
+- (BOOL)canScrollDown:(CGFloat)_offset;
+
+- (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragGridView
 
-@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, swipeSteps, 
+@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, scrollSteps, 
             rowContainerView, deltaTime;
 
 #pragma mark -
@@ -77,6 +83,12 @@
     } else {        
         if ([self.delegate respondsToSelector:@selector(didReachBottom:)]) {
             [self.delegate didReachBottom];
+        } else {
+            if ([self atMaximumDownScroll]) { 
+                [self releaseRowsDown];
+            } else {
+                [self dragRows:_drag];
+            }
         }
     }
 }
@@ -87,6 +99,12 @@
     } else {        
         if ([self.delegate respondsToSelector:@selector(didReachTop:)]) {
             [self.delegate didReachTop];
+        } else {
+            if ([self atMaximumUpScroll]) { 
+                [self releaseRowsUp]; 
+            } else {
+                [self dragRows:_drag];
+            }
         }
     }    
 }
@@ -95,10 +113,27 @@
     self.rowContainerView.transform = CGAffineTransformTranslate(self.rowContainerView.transform, 0.0, _drag.y);
 }
 
-- (void)releaseRowsUp:(CGPoint)_location {
+- (void)releaseRowsUp {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    CGFloat delta = abs(self.rowContainerView.frame.origin.y)/bounds.size.height;
+    CGRect newRect = self.rowContainerView.frame;
+    newRect = CGRectMake(newRect.origin.x, 0.0, newRect.size.width, newRect.size.height);
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+            self.rowContainerView.frame = newRect;
+        }
+    ];    
 }
 
-- (void)releaseRowsDown:(CGPoint)_location {
+- (void)releaseRowsDown {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    CGFloat offset = bounds.size.height - self.rowContainerView.frame.size.height;
+    CGFloat delta = abs(offset - self.rowContainerView.frame.origin.y)/bounds.size.width;
+    CGRect newRect = self.rowContainerView.frame;
+    newRect = CGRectMake(newRect.origin.x, offset, newRect.size.width, newRect.size.height);
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+            self.rowContainerView.frame = newRect;
+        }
+    ];    
 }
 
 - (void)swipeRowsUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -112,10 +147,10 @@
     CGPoint drag = [self nextDragWithVelocity:velocity andAcceleration:acceleration];
     [self dragRowsUp:drag];
     velocity = [self nextVelocity:velocity withAcceleration:acceleration];
-    if (self.swipeSteps < DRAG_GRID_SWIPE_STEPS) {
+    if (self.scrollSteps < DRAG_GRID_SWIPE_STEPS) {
         [self performSelector:@selector(scrollRowsUp:) withObject:[NSValue valueWithCGPoint:velocity] afterDelay:self.deltaTime];
     }
-    self.swipeSteps++;
+    self.scrollSteps++;
 }
 
 - (void)swipeRowsDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -129,16 +164,16 @@
     CGPoint drag = [self nextDragWithVelocity:velocity andAcceleration:acceleration];
     [self dragRowsDown:drag];
     velocity = [self nextVelocity:velocity withAcceleration:acceleration];
-    if (self.swipeSteps < DRAG_GRID_SWIPE_STEPS) {
+    if (self.scrollSteps < DRAG_GRID_SWIPE_STEPS) {
         [self performSelector:@selector(scrollRowsDown:) withObject:[NSValue valueWithCGPoint:velocity] afterDelay:self.deltaTime];
     }
-    self.swipeSteps++;
+    self.scrollSteps++;
 }
 
 - (void)startScroll:(CGPoint)_velocity {
     CGFloat time = logb(fabs(_velocity.y) / DRAG_GRID_MIN_VELOCITY) / DRAG_GRID_ACCELERATION;
     self.deltaTime =  time / DRAG_GRID_SWIPE_STEPS;
-    self.swipeSteps = 0;
+    self.scrollSteps = 0;
 }
 
 - (CGPoint)nextDragWithVelocity:(CGPoint)_velocity andAcceleration:(CGFloat)_acceleration {
@@ -157,23 +192,50 @@
 }
 
 - (BOOL)canScrollUp {
+    return [self canScrollUp:0.0];
+}
+
+- (BOOL)canScrollDown{
+    return [self canScrollDown:0.0];
+}
+
+- (BOOL)atMaximumUpScroll {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    return [self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
+}
+
+- (BOOL)atMaximumDownScroll {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    return [self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
+}
+
+- (BOOL)canScrollUp:(CGFloat)_offset {
     BOOL canScroll = YES;
-    if (self.rowContainerView.frame.origin.y > 0.0) {
+    if (self.rowContainerView.frame.origin.y > _offset) {
         canScroll = NO;
     }
     return canScroll;
 }
 
-- (BOOL)canScrollDown {
+- (BOOL)canScrollDown:(CGFloat)_offset {
     BOOL canScroll = YES;
     CGFloat totalViewHeight = self.rowHeight * [self.rowViews count];
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    if ((bounds.size.height - self.rowContainerView.frame.origin.y) > totalViewHeight) {
+    if ((bounds.size.height - self.rowContainerView.frame.origin.y - _offset) > totalViewHeight) {
         canScroll = NO;
     }
     return canScroll;    
 }
 
+- (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation {
+    [UIView animateWithDuration:_duration
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+        animations:_animation
+        completion:^(BOOL _finished){
+        }
+     ];
+}
 
 #pragma mark -
 #pragma mark DragGridView
@@ -227,12 +289,6 @@
     if ([self.delegate respondsToSelector:@selector(didReleaseLeft:)]) {
         [self.delegate didReleaseLeft:_location];
     }
-}
-
-- (void)didReleaseUp:(CGPoint)_location {    
-}
-
-- (void)didReleaseDown:(CGPoint)_location {
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {

@@ -34,3 +34,4 @@
 #define DRAG_GRID_ACCELERATION              5.0f
 #define DRAG_GRID_SWIPE_STEPS               50
 #define DRAG_GRID_MIN_VELOCITY              7.0f
+#define DRAG_VIEW_MAX_SCROLL_FACTOR         0.4f
