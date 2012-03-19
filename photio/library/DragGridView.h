@@ -22,6 +22,7 @@
     NSInteger                       rowStartView;
     NSInteger                       rowPixelOffset;
     NSInteger                       scrollSteps;
+    BOOL                            inAnimation;
 }
 
 @property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
@@ -34,6 +35,7 @@
 @property (nonatomic, assign)   NSInteger                       rowStartView;
 @property (nonatomic, assign)   NSInteger                       rowPixelOffset;
 @property (nonatomic, assign)   NSInteger                       scrollSteps;
+@property (nonatomic, assign)   BOOL                            inAnimation;
 
 + (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;

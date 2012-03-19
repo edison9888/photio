@@ -1,4 +1,4 @@
-//
+self//
 //  DragGridView.m
 //  photio
 //
@@ -49,7 +49,7 @@
 @implementation DragGridView
 
 @synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, scrollSteps, 
-            rowContainerView, deltaTime;
+            rowContainerView, deltaTime, inAnimation;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
@@ -85,7 +85,7 @@
             [self.delegate didReachBottom];
         } else {
             if ([self atMaximumDownScroll]) { 
-                [self releaseRowsDown];
+                [self releaseRowsUp];
             } else {
                 [self dragRows:_drag];
             }
@@ -101,7 +101,7 @@
             [self.delegate didReachTop];
         } else {
             if ([self atMaximumUpScroll]) { 
-                [self releaseRowsUp]; 
+                [self releaseRowsDown]; 
             } else {
                 [self dragRows:_drag];
             }
@@ -110,7 +110,9 @@
 }
 
 - (void)dragRows:(CGPoint)_drag {
-    self.rowContainerView.transform = CGAffineTransformTranslate(self.rowContainerView.transform, 0.0, _drag.y);
+    if (!self.inAnimation) {
+        self.rowContainerView.transform = CGAffineTransformTranslate(self.rowContainerView.transform, 0.0, _drag.y);
+    }
 }
 
 - (void)releaseRowsUp {
@@ -128,7 +130,7 @@
     CGRect bounds = [[UIScreen mainScreen] bounds];
     CGFloat offset = bounds.size.height - self.rowContainerView.frame.size.height;
     CGFloat delta = abs(offset - self.rowContainerView.frame.origin.y)/bounds.size.width;
-    CGRect newRect = self.rowContainerView.frame;
+    __block CGRect newRect = self.rowContainerView.frame;
     newRect = CGRectMake(newRect.origin.x, offset, newRect.size.width, newRect.size.height);
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             self.rowContainerView.frame = newRect;
@@ -201,12 +203,12 @@
 
 - (BOOL)atMaximumUpScroll {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    return [self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
+    return ![self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
 }
 
 - (BOOL)atMaximumDownScroll {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    return [self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
+    return ![self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
 }
 
 - (BOOL)canScrollUp:(CGFloat)_offset {
@@ -228,11 +230,13 @@
 }
 
 - (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation {
+    self.inAnimation = YES;
     [UIView animateWithDuration:_duration
         delay:0
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
         animations:_animation
-        completion:^(BOOL _finished){
+        completion:^(BOOL _finished) {
+            self.inAnimation = NO;
         }
      ];
 }
@@ -250,6 +254,7 @@
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
         self.rowContainerView = [[UIView alloc] initWithFrame:_frame];
         [self addSubview:self.rowContainerView];
+        self.inAnimation = NO;
         [self initRowParams:_rows];
         [self createRows:_rows];
     }
@@ -289,6 +294,14 @@
     if ([self.delegate respondsToSelector:@selector(didReleaseLeft:)]) {
         [self.delegate didReleaseLeft:_location];
     }
+}
+
+- (void)didReleaseUp:(CGPoint)_location {
+    [self releaseRowsUp]; 
+}
+
+- (void)didReleaseDown:(CGPoint)_location {
+    [self releaseRowsDown]; 
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {

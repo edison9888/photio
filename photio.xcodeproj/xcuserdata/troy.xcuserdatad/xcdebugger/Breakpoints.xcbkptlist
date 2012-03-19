@@ -7,13 +7,26 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "photio/library/DragGridView.m"
-         timestampString = "353810233.927486"
+         filePath = "photio/library/TransitionGestureRecognizer.m"
+         timestampString = "353819556.638709"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "103"
-         endingLineNumber = "103"
-         landmarkName = "-dragRowsDown:"
+         startingLineNumber = "152"
+         endingLineNumber = "152"
+         landmarkName = "-detectedSwipe:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "photio/library/DragGridView.m"
+         timestampString = "353821014.289798"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "233"
+         endingLineNumber = "233"
+         landmarkName = "-transition:withAnimation:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
