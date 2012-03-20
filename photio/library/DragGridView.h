@@ -14,7 +14,7 @@
 @interface DragGridView : UIView <TransitionGestureRecognizerDelegate> {
     __weak id<DragGridViewDelegate> delegate;
     TransitionGestureRecognizer*    transitionGestureRecognizer;
-    UIView*                         rowContainerView;
+    UIScrollView*                   rowContainerView;
     NSMutableArray*                 rowViews;
     CGFloat                         rowHeight;
     CGFloat                         deltaTime;
@@ -27,7 +27,7 @@
 
 @property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
 @property (nonatomic, retain)   TransitionGestureRecognizer*    transitionGestureRecognizer;
-@property (nonatomic, retain)   UIView*                         rowContainerView;
+@property (nonatomic, retain)   UIScrollView*                   rowContainerView;
 @property (nonatomic, retain)   NSMutableArray*                 rowViews;
 @property (nonatomic, assign)   CGFloat                         rowHeight;
 @property (nonatomic, assign)   CGFloat                         deltaTime;

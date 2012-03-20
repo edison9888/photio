@@ -1,4 +1,4 @@
-self//
+//
 //  DragGridView.m
 //  photio
 //
@@ -15,33 +15,6 @@ self//
 - (void)initRowParams:(NSMutableArray*)_rows;
 - (void)createRows:(NSMutableArray*)_rows;
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
-
-- (void)dragRowsUp:(CGPoint)_drag;
-- (void)dragRowsDown:(CGPoint)_drag;
-- (void)dragRows:(CGPoint)_drag;
-- (void)drag:(CGPoint)_drag row:(UIView*)_row;
-
-- (void)releaseRowsUp;
-- (void)releaseRowsDown;
-
-- (void)swipeRowsUp:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)scrollRowsUp:(NSValue*)_velocityValue;
-- (void)swipeRowsDown:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)scrollRowsDown:(NSValue*)_params;
-- (void)startScroll:(CGPoint)_velocityValue;
-
-- (CGPoint)nextDragWithVelocity:(CGPoint)_velocity andAcceleration:(CGFloat)_acceleration;
-- (CGPoint)nextVelocity:(CGPoint)_velocity withAcceleration:(CGFloat)_acceleration;
-- (CGFloat)accelerationWithVelocity:(CGPoint)_velocity;
-
-- (BOOL)canScrollUp;
-- (BOOL)canScrollDown;
-- (BOOL)atMaximumUpScroll;
-- (BOOL)atMaximumDownScroll;
-- (BOOL)canScrollUp:(CGFloat)_offset;
-- (BOOL)canScrollDown:(CGFloat)_offset;
-
-- (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation;
 
 @end
 
@@ -70,175 +43,12 @@ self//
         [self.rowContainerView addSubview:dragRow];
         [self.rowViews addObject:dragRow];
     }
+    self.rowContainerView.contentSize = CGSizeMake(self.frame.size.width, self.rowHeight * [self.rowViews count]);
 }
 
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset {
     CGFloat y = _rect.origin.y + _offset * self.rowHeight;
     return CGRectMake(_rect.origin.x, y, _rect.size.width, _rect.size.width);
-}
-
-- (void)dragRowsUp:(CGPoint)_drag {
-    if ([self canScrollDown]) {
-        [self dragRows:_drag];
-    } else {        
-        if ([self.delegate respondsToSelector:@selector(didReachBottom:)]) {
-            [self.delegate didReachBottom];
-        } else {
-            if ([self atMaximumDownScroll]) { 
-                [self releaseRowsUp];
-            } else {
-                [self dragRows:_drag];
-            }
-        }
-    }
-}
-
-- (void)dragRowsDown:(CGPoint)_drag {
-    if ([self canScrollUp]) {      
-        [self dragRows:_drag];
-    } else {        
-        if ([self.delegate respondsToSelector:@selector(didReachTop:)]) {
-            [self.delegate didReachTop];
-        } else {
-            if ([self atMaximumUpScroll]) { 
-                [self releaseRowsDown]; 
-            } else {
-                [self dragRows:_drag];
-            }
-        }
-    }    
-}
-
-- (void)dragRows:(CGPoint)_drag {
-    if (!self.inAnimation) {
-        self.rowContainerView.transform = CGAffineTransformTranslate(self.rowContainerView.transform, 0.0, _drag.y);
-    }
-}
-
-- (void)releaseRowsUp {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    CGFloat delta = abs(self.rowContainerView.frame.origin.y)/bounds.size.height;
-    CGRect newRect = self.rowContainerView.frame;
-    newRect = CGRectMake(newRect.origin.x, 0.0, newRect.size.width, newRect.size.height);
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-            self.rowContainerView.frame = newRect;
-        }
-    ];    
-}
-
-- (void)releaseRowsDown {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    CGFloat offset = bounds.size.height - self.rowContainerView.frame.size.height;
-    CGFloat delta = abs(offset - self.rowContainerView.frame.origin.y)/bounds.size.width;
-    __block CGRect newRect = self.rowContainerView.frame;
-    newRect = CGRectMake(newRect.origin.x, offset, newRect.size.width, newRect.size.height);
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-            self.rowContainerView.frame = newRect;
-        }
-    ];    
-}
-
-- (void)swipeRowsUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self startScroll:_velocity];
-    [self scrollRowsUp:[NSValue valueWithCGPoint:_velocity]];
-}
-
-- (void)scrollRowsUp:(NSValue*)_velocityValue {
-    CGPoint velocity = [_velocityValue CGPointValue];
-    CGFloat acceleration = [self accelerationWithVelocity:velocity];
-    CGPoint drag = [self nextDragWithVelocity:velocity andAcceleration:acceleration];
-    [self dragRowsUp:drag];
-    velocity = [self nextVelocity:velocity withAcceleration:acceleration];
-    if (self.scrollSteps < DRAG_GRID_SWIPE_STEPS) {
-        [self performSelector:@selector(scrollRowsUp:) withObject:[NSValue valueWithCGPoint:velocity] afterDelay:self.deltaTime];
-    }
-    self.scrollSteps++;
-}
-
-- (void)swipeRowsDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self startScroll:_velocity];
-    [self scrollRowsDown:[NSValue valueWithCGPoint:_velocity]];
-}
-
-- (void)scrollRowsDown:(NSValue*)_velocityValue {
-    CGPoint velocity = [_velocityValue CGPointValue];
-    CGFloat acceleration = [self accelerationWithVelocity:velocity];
-    CGPoint drag = [self nextDragWithVelocity:velocity andAcceleration:acceleration];
-    [self dragRowsDown:drag];
-    velocity = [self nextVelocity:velocity withAcceleration:acceleration];
-    if (self.scrollSteps < DRAG_GRID_SWIPE_STEPS) {
-        [self performSelector:@selector(scrollRowsDown:) withObject:[NSValue valueWithCGPoint:velocity] afterDelay:self.deltaTime];
-    }
-    self.scrollSteps++;
-}
-
-- (void)startScroll:(CGPoint)_velocity {
-    CGFloat time = logb(fabs(_velocity.y) / DRAG_GRID_MIN_VELOCITY) / DRAG_GRID_ACCELERATION;
-    self.deltaTime =  time / DRAG_GRID_SWIPE_STEPS;
-    self.scrollSteps = 0;
-}
-
-- (CGPoint)nextDragWithVelocity:(CGPoint)_velocity andAcceleration:(CGFloat)_acceleration {
-    CGFloat drag = _velocity.y * self.deltaTime + 0.5 * _acceleration * pow(self.deltaTime, 2.0);
-    return CGPointMake(0.0, drag);
-}
-
-- (CGPoint)nextVelocity:(CGPoint)_velocity withAcceleration:(CGFloat)_acceleration {
-    CGFloat vel = _velocity.y + _acceleration * self.deltaTime;
-    return CGPointMake(_velocity.x, vel);
-}
-
-- (CGFloat)accelerationWithVelocity:(CGPoint)_velocity {
-    CGFloat acc = -_velocity.y * DRAG_GRID_ACCELERATION;
-    return acc;
-}
-
-- (BOOL)canScrollUp {
-    return [self canScrollUp:0.0];
-}
-
-- (BOOL)canScrollDown{
-    return [self canScrollDown:0.0];
-}
-
-- (BOOL)atMaximumUpScroll {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    return ![self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
-}
-
-- (BOOL)atMaximumDownScroll {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    return ![self canScrollUp:DRAG_VIEW_MAX_SCROLL_FACTOR * bounds.size.height];
-}
-
-- (BOOL)canScrollUp:(CGFloat)_offset {
-    BOOL canScroll = YES;
-    if (self.rowContainerView.frame.origin.y > _offset) {
-        canScroll = NO;
-    }
-    return canScroll;
-}
-
-- (BOOL)canScrollDown:(CGFloat)_offset {
-    BOOL canScroll = YES;
-    CGFloat totalViewHeight = self.rowHeight * [self.rowViews count];
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    if ((bounds.size.height - self.rowContainerView.frame.origin.y - _offset) > totalViewHeight) {
-        canScroll = NO;
-    }
-    return canScroll;    
-}
-
-- (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation {
-    self.inAnimation = YES;
-    [UIView animateWithDuration:_duration
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
-        animations:_animation
-        completion:^(BOOL _finished) {
-            self.inAnimation = NO;
-        }
-     ];
 }
 
 #pragma mark -
@@ -252,7 +62,8 @@ self//
     if ((self = [super initWithFrame:_frame])) {
         self.delegate = _delegate;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
-        self.rowContainerView = [[UIView alloc] initWithFrame:_frame];
+        self.rowContainerView = [[UIScrollView alloc] initWithFrame:_frame];
+        self.rowContainerView.showsVerticalScrollIndicator = NO;
         [self addSubview:self.rowContainerView];
         self.inAnimation = NO;
         [self initRowParams:_rows];
@@ -276,14 +87,6 @@ self//
     }
 }
 
-- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragRowsUp:_drag];
-}
-
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragRowsDown:_drag];
-}
-
 - (void)didReleaseRight:(CGPoint)_location {  
     if ([self.delegate respondsToSelector:@selector(didReleaseRight:)]) {
         [self.delegate didReleaseRight:_location];
@@ -294,14 +97,6 @@ self//
     if ([self.delegate respondsToSelector:@selector(didReleaseLeft:)]) {
         [self.delegate didReleaseLeft:_location];
     }
-}
-
-- (void)didReleaseUp:(CGPoint)_location {
-    [self releaseRowsUp]; 
-}
-
-- (void)didReleaseDown:(CGPoint)_location {
-    [self releaseRowsDown]; 
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -316,14 +111,6 @@ self//
     }
 }
 
-- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self swipeRowsUp:_location withVelocity:_velocity];
-}
-
-- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self swipeRowsDown:_location withVelocity:_velocity];
-}
-
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     if ([self.delegate respondsToSelector:@selector(didReachMaxDragRight: from:withVelocity:)]) {
         [self.delegate didReachMaxDragRight:_drag from:_location withVelocity:_velocity];
@@ -335,14 +122,5 @@ self//
         [self.delegate didReachMaxDragLeft:_drag from:_location withVelocity:_velocity];
     }
 }
-
-- (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragRowsUp:_drag];
-}
-
-- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragRowsDown:_drag];
-}
-
 
 @end
