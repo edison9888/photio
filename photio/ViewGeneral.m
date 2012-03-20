@@ -121,7 +121,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (self.imageInspectViewController == nil) {
         self.imageInspectViewController = [ImageInspectViewController inView:_containerView];
     } 
-    [self imageInspectViewPosition:[self.class rightOfWindow]];
+    [self imageInspectViewPosition:[self.class overWindow]];
     [_containerView addSubview:self.imageInspectViewController.view];
 }
 
@@ -140,7 +140,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (self.cameraViewController == nil) {
         self.cameraViewController = [CameraViewController inView:_containerView];
     } 
-    [self cameraViewPosition:[self.class rightOfWindow]];
+    [self cameraViewPosition:[self.class inWindow]];
     self.cameraViewController.cameraDelegate = self;
     [_containerView addSubview:self.cameraViewController.imagePickerController.view];
 }
@@ -160,7 +160,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (self.calendarViewController == nil) {
         self.calendarViewController = [CalendarViewController inView:_containerView];
     } 
-    [self calendarViewPosition:[self.class inWindow]];
+    [self calendarViewPosition:[self.class rightOfWindow]];
     [_containerView addSubview:self.calendarViewController.view];
 }
 
@@ -181,7 +181,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         [self.cameraViewController setFlashImage];
         [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
                 [self cameraViewPosition:[self.class inWindow]];
-                [self calendarViewPosition:[self.class leftOfWindow]];
+                [self calendarViewPosition:[self.class rightOfWindow]];
             }
         ];    
     }
@@ -190,7 +190,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)releaseCalendarToCamera {
     CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-            [self cameraViewPosition:[self.class rightOfWindow]];
+            [self cameraViewPosition:[self.class leftOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
     ];    
@@ -208,7 +208,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     CGFloat screenHeight = [self.class screenBounds].size.height;
     CGFloat delta = abs(screenHeight + self.cameraViewController.imagePickerController.view.frame.origin.y)/screenHeight;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-            [self cameraViewPosition:[self.class rightOfWindow]];
+            [self cameraViewPosition:[self.class leftOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
     ];
@@ -218,7 +218,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
-            [self calendarViewPosition:[self.class leftOfWindow]];
+            [self calendarViewPosition:[self.class rightOfWindow]];
         }
     ];    
 }
@@ -234,7 +234,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)transitionCameraToInspectImage {
     [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
-            [self cameraViewPosition:[self.class overWindow]];
+            [self cameraViewPosition:[self.class underWindow]];
             [self imageInspectViewPosition:[self.class inWindow]];
         }
     ];    
@@ -246,7 +246,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)transitionInspectImageToCamera {
     [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
-            [self imageInspectViewPosition:[self.class rightOfWindow]];
+            [self imageInspectViewPosition:[self.class overWindow]];
         }
     ];    
 }

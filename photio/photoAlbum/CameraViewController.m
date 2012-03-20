@@ -157,44 +157,56 @@
 #pragma mark TransitionGestureRecognizerDelegate
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
-    [[ViewGeneral instance] dragCameraToCalendar:_drag];
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {    
+    [[ViewGeneral instance] dragCameraToCalendar:_drag];
 }
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
 }
 
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+}
+
 - (void)didReleaseRight:(CGPoint)_location {    
-    [[ViewGeneral instance] releaseCameraToCalendar];
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
+    [[ViewGeneral instance] releaseCameraToCalendar];
 }
 
 - (void)didReleaseUp:(CGPoint)_location {
 }
 
+- (void)didReleaseDown:(CGPoint)_location {
+}
+
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocit {
-    [[ViewGeneral instance] transitionCameraToCalendar];    
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocit {
-    [self switchCamera];
-}
-
-- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocit {
-}
-
-- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] transitionCameraToCalendar];    
 }
 
+- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+    [self switchCamera];
+}
+
+- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+}
+
+- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    [[ViewGeneral instance] transitionCameraToCalendar];    
 }
 
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+}
+
+- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
 }
 
 @end

@@ -26,7 +26,7 @@
     [super viewDidLoad];
     ViewGeneral* general = [ViewGeneral instance];
     [general createViews:self.view];
-    [general calendarViewPosition:[ViewGeneral inWindow]];
+    [general cameraViewPosition:[ViewGeneral inWindow]];
 }
 
 - (void)viewDidUnload {
