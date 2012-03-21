@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DragGridView.h"
 
-@class DragGridView;
-
 @interface CalendarViewController : UIViewController <DragGridViewDelegate> {
     __weak UIView*                  containerView;
     DragGridView*                   dragGridView;

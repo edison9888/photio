@@ -157,10 +157,10 @@
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] transitionCalendarToCamera];
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionCalendarToCamera];
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
