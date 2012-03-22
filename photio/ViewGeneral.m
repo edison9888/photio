@@ -8,6 +8,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "ViewGeneral.h"
+#import "UIImage+Resize.h"
+
 #import "ImageInspectViewController.h"
 #import "EntryViewController.h"
 #import "CalendarViewController.h"
@@ -329,16 +331,27 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark -
-#pragma mark OverlayControllerDelegate
+#pragma mark CameraViewControllerDelegate
 
-- (void)didTakePicture:(UIImage*)picture { 
-    [self.captures addObject:picture];
-    [self didFinishWithCamera];
+- (void)didTakePicture:(UIImage*)_picture { 
+    [self.captures addObject:_picture];
+    UIImageView* snapshot = [[UIImageView alloc] initWithImage:[self scaleImage:_picture]];
+    [self.cameraViewController.imagePickerController.view addSubview:snapshot];
 }
 
 - (void)didFinishWithCamera {
     [self.imageInspectViewController loadCaptures:self.captures];
     [self transitionCameraToInspectImage];
+}
+
+#pragma mark -
+#pragma mark image processing
+
+- (UIImage*)scaleImage:(UIImage*)_capture {
+    CGSize imageSize = _capture.size;
+    CGRect screenBounds = [self.class screenBounds];
+    CGFloat scaleImage = screenBounds.size.height / imageSize.height;
+    return [_capture scaleBy:scaleImage andCropToSize:screenBounds.size];
 }
 
 @end

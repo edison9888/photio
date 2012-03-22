@@ -37,6 +37,6 @@
 @end
 
 @protocol CameraViewControllerDelegate
-- (void)didTakePicture:(UIImage*)picture;
+- (void)didTakePicture:(UIImage*)_picture;
 - (void)didFinishWithCamera;
 @end
