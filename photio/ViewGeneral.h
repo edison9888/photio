@@ -13,6 +13,7 @@
 @class ImageInspectViewController;
 @class EntryViewController;
 @class CalendarViewController;
+@class LocalesViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral : NSObject <CameraViewControllerDelegate> {
@@ -20,6 +21,7 @@
     ImageInspectViewController* imageInspectViewController;
     EntryViewController*        entriesViewController;
     CalendarViewController*     calendarViewController;
+    LocalesViewController*      localesViewController;
     NSMutableArray*             captures;
 }
 
@@ -28,6 +30,7 @@
 @property(nonatomic, retain) CameraViewController*          cameraViewController;
 @property(nonatomic, retain) EntryViewController*           entryViewController;
 @property(nonatomic, retain) CalendarViewController*        calendarViewController;
+@property(nonatomic, retain) LocalesViewController*         localesViewController;
 @property(nonatomic, retain) NSMutableArray*                captures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -63,6 +66,11 @@
 - (void)calendarViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initLocalesView:(UIView*)_containerView;
+- (void)localesViewPosition:(CGRect)_rec;
+- (void)localesViewHidden:(BOOL)_hidden;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCalendarToCamera;
 - (void)releaseCalendarToCamera;
 - (void)dragCalendarToCamera:(CGPoint)_drag;
@@ -71,6 +79,16 @@
 - (void)transitionCameraToCalendar;
 - (void)releaseCameraToCalendar;
 - (void)dragCameraToCalendar:(CGPoint)_drag;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)transitionCameraToLocales;
+- (void)releaseCameraToLocales;
+- (void)dragCameraToLocales:(CGPoint)_drag;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)transitionLocalesToCamera;
+- (void)releaseLocalesToCamera;
+- (void)dragLocalesToCamera:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCameraToInspectImage;

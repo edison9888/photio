@@ -11,6 +11,7 @@
 #import "ImageInspectViewController.h"
 #import "EntryViewController.h"
 #import "CalendarViewController.h"
+#import "LocalesViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
@@ -23,7 +24,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewGeneral
  
-@synthesize imageInspectViewController, cameraViewController, entryViewController, calendarViewController;
+@synthesize imageInspectViewController, cameraViewController, entryViewController, calendarViewController, localesViewController;
 @synthesize captures;
 
 #pragma mark - 
@@ -89,6 +90,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initCameraView:_containerView];
     [self initImageInspectView:_containerView];
     [self initCalendarView:_containerView];
+    [self initLocalesView:_containerView];
 }
 
 - (BOOL)hasCaptures {
@@ -173,6 +175,25 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
+#pragma mark LocalesViewController
+
+- (void)initLocalesView:(UIView*)_containerView {
+    if (self.localesViewController == nil) {
+        self.localesViewController = [LocalesViewController inView:_containerView];
+    } 
+    [self localesViewPosition:[self.class leftOfWindow]];
+    [_containerView addSubview:self.localesViewController.view];
+}
+
+- (void)localesViewHidden:(BOOL)_hidden {
+    self.localesViewController.view.hidden = _hidden;
+}
+
+- (void)localesViewPosition:(CGRect)_rect {
+    self.localesViewController.view.frame = _rect;
+}
+
+#pragma mark - 
 #pragma mark Calendar To Camera
 
 - (void)transitionCalendarToCamera {
@@ -205,8 +226,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Camera To Calendar
 
 - (void)transitionCameraToCalendar {
-    CGFloat screenHeight = [self.class screenBounds].size.height;
-    CGFloat delta = abs(screenHeight + self.cameraViewController.imagePickerController.view.frame.origin.y)/screenHeight;
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = abs(screenWidth + self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class leftOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
@@ -215,7 +236,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)releaseCameraToCalendar {
-    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = abs(screenWidth + self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self calendarViewPosition:[self.class rightOfWindow]];
@@ -228,6 +250,61 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self.class drag:_drag view:self.calendarViewController.view];
 }
 
+#pragma mark - 
+#pragma mark Camera To Locales
+
+- (void)transitionCameraToLocales {
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = abs(screenWidth - self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+            [self cameraViewPosition:[self.class rightOfWindow]];
+            [self localesViewPosition:[self.class inWindow]];
+        }
+    ];
+}
+
+- (void)releaseCameraToLocales {
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = abs(screenWidth - self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+            [self cameraViewPosition:[self.class inWindow]];
+            [self localesViewPosition:[self.class leftOfWindow]];
+        }
+    ];    
+}
+
+- (void)dragCameraToLocales:(CGPoint)_drag {
+    [self.class drag:_drag view:self.localesViewController.view];
+    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+}
+
+#pragma mark - 
+#pragma mark Locales To Camera
+
+- (void)transitionLocalesToCamera {
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = abs(screenWidth + self.localesViewController.view.frame.origin.x)/screenWidth;
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+        [self cameraViewPosition:[self.class inWindow]];
+        [self localesViewPosition:[self.class leftOfWindow]];
+    }
+     ];
+}
+
+- (void)releaseLocalesToCamera {
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = abs(screenWidth + self.localesViewController.view.frame.origin.x)/screenWidth;
+    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+        [self cameraViewPosition:[self.class rightOfWindow]];
+        [self localesViewPosition:[self.class inWindow]];
+    }
+     ];    
+}
+
+- (void)dragLocalesToCamera:(CGPoint)_drag {
+    [self.class drag:_drag view:self.localesViewController.view];
+    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+}
 
 #pragma mark - 
 #pragma mark Camera To Inspect Image

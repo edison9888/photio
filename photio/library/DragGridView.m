@@ -28,10 +28,12 @@
 #pragma mark DragGridView PrivatAPI
 
 - (void)initRowParams:(NSMutableArray*)_rows {
-    UIView* item = [[_rows objectAtIndex:0] objectAtIndex:0];
-    self.rowHeight = item.frame.size.height;
-    self.rowsInView = self.frame.size.height / self.rowHeight;
-    self.rowPixelOffset = (self.frame.size.height - self.rowsInView * self.rowHeight) / (self.rowsInView *2);
+    if ([_rows count] > 0) {
+        UIView* item = [[_rows objectAtIndex:0] objectAtIndex:0];
+        self.rowHeight = item.frame.size.height;
+        self.rowsInView = self.frame.size.height / self.rowHeight;
+        self.rowPixelOffset = (self.frame.size.height - self.rowsInView * self.rowHeight) / (self.rowsInView *2);
+    }
 }
 
 - (void)createRows:(NSMutableArray*)_rows {

@@ -157,6 +157,7 @@
 #pragma mark TransitionGestureRecognizerDelegate
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+    [[ViewGeneral instance] dragCameraToLocales:_drag];
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {    
@@ -170,6 +171,7 @@
 }
 
 - (void)didReleaseRight:(CGPoint)_location {    
+    [[ViewGeneral instance] releaseCameraToLocales];
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
@@ -183,6 +185,7 @@
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+    [[ViewGeneral instance] transitionCameraToLocales];    
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocit {
@@ -197,6 +200,7 @@
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] transitionCameraToLocales];    
 }
 
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
