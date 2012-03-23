@@ -95,8 +95,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCameraToInspectImage;
+- (void)releaseCameraToInspectImage;
+- (void)dragCameraToInspectImage:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionInspectImageToCamera;
+- (void)releaseInspectImageToCamera;
+- (void)dragInspectImageToCamera:(CGPoint)_drag;
 
 @end

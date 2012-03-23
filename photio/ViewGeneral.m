@@ -319,23 +319,57 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Camera To Inspect Image
 
 - (void)transitionCameraToInspectImage {
-    [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat screenHeight = [self.class screenBounds].size.height;
+    CGFloat delta = abs(screenHeight + self.imageInspectViewController.view.frame.origin.y)/screenHeight;
+    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class underWindow]];
             [self imageInspectViewPosition:[self.class inWindow]];
         }
     ];    
 }
 
+- (void)releaseCameraToInspectImage {
+    CGFloat screenHeight = [self.class screenBounds].size.height;
+    CGFloat delta = abs(screenHeight + self.imageInspectViewController.view.frame.origin.y)/screenHeight;
+    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
+        [self cameraViewPosition:[self.class inWindow]];
+        [self imageInspectViewPosition:[self.class overWindow]];
+    }
+     ];    
+}
+
+- (void)dragCameraToInspectImage:(CGPoint)_drag {
+    [self.class drag:_drag view:self.imageInspectViewController.view];
+    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+}
+
+
 #pragma mark - 
 #pragma mark Inspect Image To Camera
 
 - (void)transitionInspectImageToCamera {
-    [self transition:TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = self.cameraViewController.imagePickerController.view.frame.origin.y / [self.class screenBounds].size.height;
+    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self imageInspectViewPosition:[self.class overWindow]];
         }
     ];    
 }
+
+- (void)releaseInspectImageToCamera {
+    CGFloat delta = self.cameraViewController.imagePickerController.view.frame.origin.y / [self.class screenBounds].size.height;
+    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
+        [self cameraViewPosition:[self.class underWindow]];
+        [self imageInspectViewPosition:[self.class inWindow]];
+    }
+     ];    
+}
+
+- (void)dragInspectImageToCamera:(CGPoint)_drag {
+    [self.class drag:_drag view:self.imageInspectViewController.view];
+    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+}
+
 
 #pragma mark -
 #pragma mark CameraViewControllerDelegate

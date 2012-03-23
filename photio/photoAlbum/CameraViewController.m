@@ -168,6 +168,7 @@
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+    [[ViewGeneral instance] dragCameraToInspectImage:_drag];
 }
 
 - (void)didReleaseRight:(CGPoint)_location {    
@@ -182,6 +183,7 @@
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
+    [[ViewGeneral instance] releaseCameraToInspectImage];
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocit {
@@ -197,6 +199,7 @@
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+    [[ViewGeneral instance] transitionCameraToInspectImage];
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -211,6 +214,7 @@
 }
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    [[ViewGeneral instance] transitionCameraToInspectImage];
 }
 
 @end
