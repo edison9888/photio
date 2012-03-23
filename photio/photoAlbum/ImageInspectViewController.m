@@ -98,15 +98,8 @@
     [UIImagePNGRepresentation(_image) writeToFile:pngPath atomically:YES];    
 }
 
-- (UIImage*)saveImage:(UIImage*)_capture {
-    CGSize imageSize = _capture.size;
-    CGRect screenBounds = [ViewGeneral screenBounds];
-    CGFloat scaleImage = screenBounds.size.height / imageSize.height;
-    return [_capture scaleBy:scaleImage andCropToSize:screenBounds.size];
-}
-
 - (void)setCurrentImage {
-    self.imageView.image = [self saveImage:[self.captures objectAtIndex:self.captureIndex]];
+    self.imageView.image = [ViewGeneral scaleImageTScreen:[self.captures objectAtIndex:self.captureIndex]];
 }
 
 #pragma mark -

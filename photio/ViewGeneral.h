@@ -46,6 +46,9 @@
 - (BOOL)hasCaptures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (UIImage*)scaleImageTScreen:(UIImage*)_capture;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initEntryView:(UIView*)_containerView;
 - (void)entryViewPosition:(CGRect)_rect;
 - (void)entryViewHidden:(BOOL)_hidden;

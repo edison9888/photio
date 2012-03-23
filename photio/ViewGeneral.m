@@ -99,6 +99,13 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return [self.captures count] != 0;
 }
 
++ (UIImage*)scaleImageTScreen:(UIImage*)_capture {
+    CGSize imageSize = _capture.size;
+    CGRect screenBounds = [self.class screenBounds];
+    CGFloat scaleImage = screenBounds.size.height / imageSize.height;
+    return [_capture scaleBy:scaleImage andCropToSize:screenBounds.size];
+}
+
 #pragma mark - 
 #pragma mark EntryViewController
 
@@ -335,23 +342,24 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)didTakePicture:(UIImage*)_picture { 
     [self.captures addObject:_picture];
-    UIImageView* snapshot = [[UIImageView alloc] initWithImage:[self scaleImage:_picture]];
+    __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[self.class scaleImageTScreen:_picture]];
     [self.cameraViewController.imagePickerController.view addSubview:snapshot];
+    [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
+        delay:0
+        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp
+        animations:^{
+            snapshot.frame = [self.class overWindow];
+        }
+        completion:^(BOOL _finished){
+            [snapshot removeFromSuperview];
+        }
+     ];
+
 }
 
 - (void)didFinishWithCamera {
     [self.imageInspectViewController loadCaptures:self.captures];
     [self transitionCameraToInspectImage];
-}
-
-#pragma mark -
-#pragma mark image processing
-
-- (UIImage*)scaleImage:(UIImage*)_capture {
-    CGSize imageSize = _capture.size;
-    CGRect screenBounds = [self.class screenBounds];
-    CGFloat scaleImage = screenBounds.size.height / imageSize.height;
-    return [_capture scaleBy:scaleImage andCropToSize:screenBounds.size];
 }
 
 @end

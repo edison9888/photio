@@ -30,3 +30,5 @@
 #define DAY_VIEW_DATE_X_OFFSET              5.0f
 #define DAY_VIEW_DATE_Y_OFFSET              -2.0f
 #define DAY_VIEW_DATE_IPHONE_FONT_SIZE      22.0f
+
+#define CAMERA_NEW_PHOTO_TRANSITION         0.5f
