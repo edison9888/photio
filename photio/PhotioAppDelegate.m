@@ -8,6 +8,7 @@
 
 #import "PhotioAppDelegate.h"
 #import "ContainerViewController.h"
+#import "Dbi.h"
 
 @implementation PhotioAppDelegate
 
@@ -15,6 +16,11 @@
 @synthesize viewController = _viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    if (![Dbi copyDbFile:@"photio.db"]) {
+		NSLog (@"Database inilaization failed");
+		return NO;
+	}	
+	[Dbi open];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.viewController = [[ContainerViewController alloc] initWithNibName:@"ContainerViewController" bundle:nil];
     self.window.rootViewController = self.viewController;

@@ -21,6 +21,7 @@
 		05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D694150BC86A009C9A11 /* CalendarDayView.m */; };
 		05A70135151E243B00BBA79E /* Dbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70134151E243B00BBA79E /* Dbi.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
+		05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70143151E4BD000BBA79E /* CaptureModel.m */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -64,6 +65,8 @@
 		05A70133151E243B00BBA79E /* Dbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dbi.h; sourceTree = "<group>"; };
 		05A70134151E243B00BBA79E /* Dbi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dbi.m; sourceTree = "<group>"; };
 		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		05A70142151E4BD000BBA79E /* CaptureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureModel.h; sourceTree = "<group>"; };
+		05A70143151E4BD000BBA79E /* CaptureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureModel.m; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,27 +171,29 @@
 				05C59C2314F331A6009AC823 /* images */,
 				05C59C1F14F31EF8009AC823 /* library */,
 				05C99EEB14F05A5500D09F3E /* photoAlbum */,
-				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
-				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
 				05C99EC714F0585C00D09F3E /* Supporting Files */,
-				05DE438614F1F46D005FF6B0 /* EntryViewController.h */,
-				05DE438714F1F46D005FF6B0 /* EntryViewController.m */,
-				05DE438814F1F46D005FF6B0 /* EntryViewController.xib */,
-				05C59C3B14F5D157009AC823 /* ViewGeneral.h */,
-				05C59C3C14F5D157009AC823 /* ViewGeneral.m */,
-				050CF12514F96A9100A31059 /* ContainerViewController.h */,
-				050CF12614F96A9100A31059 /* ContainerViewController.m */,
-				050CF12714F96A9100A31059 /* ContainerViewController.xib */,
 				0529A7D11503B35400235B95 /* CalendarViewController.h */,
 				0529A7D21503B35400235B95 /* CalendarViewController.m */,
 				0529A7D31503B35400235B95 /* CalendarViewController.xib */,
 				05A1D693150BC86A009C9A11 /* CalendarDayView.h */,
 				05A1D694150BC86A009C9A11 /* CalendarDayView.m */,
+				05A70142151E4BD000BBA79E /* CaptureModel.h */,
+				05A70143151E4BD000BBA79E /* CaptureModel.m */,
+				050CF12514F96A9100A31059 /* ContainerViewController.h */,
+				050CF12614F96A9100A31059 /* ContainerViewController.m */,
+				050CF12714F96A9100A31059 /* ContainerViewController.xib */,
+				05DE438614F1F46D005FF6B0 /* EntryViewController.h */,
+				05DE438714F1F46D005FF6B0 /* EntryViewController.m */,
+				05DE438814F1F46D005FF6B0 /* EntryViewController.xib */,
 				058B4FB415196B1F0087F717 /* LocalesViewController.h */,
 				058B4FB515196B1F0087F717 /* LocalesViewController.m */,
 				058B4FB615196B1F0087F717 /* LocalesViewController.xib */,
 				058B4FBA15196D840087F717 /* LocaleView.h */,
 				058B4FBB15196D840087F717 /* LocaleView.m */,
+				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
+				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
+				05C59C3B14F5D157009AC823 /* ViewGeneral.h */,
+				05C59C3C14F5D157009AC823 /* ViewGeneral.m */,
 			);
 			path = photio;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 				058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */,
 				058B4FBC15196D840087F717 /* LocaleView.m in Sources */,
 				05A70135151E243B00BBA79E /* Dbi.m in Sources */,
+				05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
