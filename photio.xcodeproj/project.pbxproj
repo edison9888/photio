@@ -19,6 +19,8 @@
 		058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058B4FB615196B1F0087F717 /* LocalesViewController.xib */; };
 		058B4FBC15196D840087F717 /* LocaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FBB15196D840087F717 /* LocaleView.m */; };
 		05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D694150BC86A009C9A11 /* CalendarDayView.m */; };
+		05A70135151E243B00BBA79E /* Dbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70134151E243B00BBA79E /* Dbi.m */; };
+		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -59,6 +61,9 @@
 		058B4FBB15196D840087F717 /* LocaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaleView.m; sourceTree = "<group>"; };
 		05A1D693150BC86A009C9A11 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayView.h; sourceTree = "<group>"; };
 		05A1D694150BC86A009C9A11 /* CalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayView.m; sourceTree = "<group>"; };
+		05A70133151E243B00BBA79E /* Dbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dbi.h; sourceTree = "<group>"; };
+		05A70134151E243B00BBA79E /* Dbi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dbi.m; sourceTree = "<group>"; };
+		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */,
 				05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */,
 				05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */,
 				05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */,
@@ -107,6 +113,8 @@
 		05C59C1F14F31EF8009AC823 /* library */ = {
 			isa = PBXGroup;
 			children = (
+				05A70133151E243B00BBA79E /* Dbi.h */,
+				05A70134151E243B00BBA79E /* Dbi.m */,
 				0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */,
 				0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */,
 				0554A4791503DDD000B9C76D /* DragGridView.h */,
@@ -128,6 +136,7 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
+				05A7013A151E2CB400BBA79E /* libsqlite3.dylib */,
 				05DE439414F20064005FF6B0 /* QuartzCore.framework */,
 				05C99EC614F0585C00D09F3E /* photio */,
 				05C99EBF14F0585C00D09F3E /* Frameworks */,
@@ -308,6 +317,7 @@
 				05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */,
 				058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */,
 				058B4FBC15196D840087F717 /* LocaleView.m in Sources */,
+				05A70135151E243B00BBA79E /* Dbi.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

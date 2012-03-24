@@ -392,4 +392,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 }
 
+- (void)didFinishWithCamera {    
+}
+
 @end
