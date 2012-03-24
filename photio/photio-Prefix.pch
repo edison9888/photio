@@ -32,3 +32,4 @@
 #define DAY_VIEW_DATE_IPHONE_FONT_SIZE      22.0f
 
 #define CAMERA_NEW_PHOTO_TRANSITION         0.5f
+#define CAMERA_NEW_PHOTO_DELAY              0.5f

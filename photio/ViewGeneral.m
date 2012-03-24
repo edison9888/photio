@@ -304,10 +304,10 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     CGFloat screenWidth = [self.class screenBounds].size.width;
     CGFloat delta = abs(screenWidth + self.localesViewController.view.frame.origin.x)/screenWidth;
     [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
-        [self cameraViewPosition:[self.class rightOfWindow]];
-        [self localesViewPosition:[self.class inWindow]];
-    }
-     ];    
+            [self cameraViewPosition:[self.class rightOfWindow]];
+            [self localesViewPosition:[self.class inWindow]];
+        }
+    ];    
 }
 
 - (void)dragLocalesToCamera:(CGPoint)_drag {
@@ -332,10 +332,10 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     CGFloat screenHeight = [self.class screenBounds].size.height;
     CGFloat delta = abs(screenHeight + self.imageInspectViewController.view.frame.origin.y)/screenHeight;
     [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
-        [self cameraViewPosition:[self.class inWindow]];
-        [self imageInspectViewPosition:[self.class overWindow]];
-    }
-     ];    
+            [self cameraViewPosition:[self.class inWindow]];
+            [self imageInspectViewPosition:[self.class overWindow]];
+        }
+    ];    
 }
 
 - (void)dragCameraToInspectImage:(CGPoint)_drag {
@@ -359,10 +359,10 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)releaseInspectImageToCamera {
     CGFloat delta = self.cameraViewController.imagePickerController.view.frame.origin.y / [self.class screenBounds].size.height;
     [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
-        [self cameraViewPosition:[self.class underWindow]];
-        [self imageInspectViewPosition:[self.class inWindow]];
-    }
-     ];    
+            [self cameraViewPosition:[self.class underWindow]];
+            [self imageInspectViewPosition:[self.class inWindow]];
+        }
+    ];    
 }
 
 - (void)dragInspectImageToCamera:(CGPoint)_drag {
@@ -379,21 +379,17 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[self.class scaleImageTScreen:_picture]];
     [self.cameraViewController.imagePickerController.view addSubview:snapshot];
     [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
-        delay:0
+        delay:CAMERA_NEW_PHOTO_DELAY
         options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp
         animations:^{
             snapshot.frame = [self.class overWindow];
         }
         completion:^(BOOL _finished){
+            [self.imageInspectViewController loadCaptures:self.captures];
             [snapshot removeFromSuperview];
         }
      ];
 
-}
-
-- (void)didFinishWithCamera {
-    [self.imageInspectViewController loadCaptures:self.captures];
-    [self transitionCameraToInspectImage];
 }
 
 @end
