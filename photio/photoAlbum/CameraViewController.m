@@ -22,8 +22,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraViewController
 
-@synthesize cameraDelegate, imagePickerController, containerView, flashEnabled;
-@synthesize transitionGestureRecognizer;
+@synthesize cameraDelegate, imagePickerController, containerView, flashEnabled, transitionGestureRecognizer;
 
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI

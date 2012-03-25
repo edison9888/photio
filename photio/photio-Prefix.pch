@@ -14,6 +14,7 @@
 #endif
 
 #define TRANSITION_ANIMATION_DURATION       0.5f
+#define RELEASE_ANIMATION_DURATION          2.0f
 #define DISPLAYED_IMAGE_SCALE               0.625f
 #define DISPLAYED_IMAGE_CROP                CGSizeMake(200, 200)
 

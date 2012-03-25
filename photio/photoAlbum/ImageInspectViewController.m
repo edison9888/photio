@@ -24,7 +24,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, toolBar, containerView, captures, captureIndex;
+@synthesize imageView, containerView, captures, captureIndex, transitionGestureRecognizer;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -36,6 +36,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
+        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:_containerView];
         self.view.frame = self.containerView.frame;
         self.captures = [NSMutableArray arrayWithCapacity:10];
     }
@@ -48,30 +49,6 @@
         self.captureIndex = [self.captures count] - 1;
         [self setCurrentImage];
     }
-}
-
-#pragma mark -
-#pragma mark ImageInspectViewController Events
-
-- (IBAction)toCamera:(id)sender {
-    [[ViewGeneral instance] transitionInspectImageToCamera];
-}
-
-- (IBAction)toCalendar:(id)sender {
-}
-
-- (IBAction)newImages:(id)sender {
-    if (self.captureIndex < [self.captures count] - 1) {
-        self.captureIndex++;
-        [self setCurrentImage];
-    }
-}
-
-- (IBAction)oldImages:(id)sender {
-    if (self.captureIndex > 0) {
-        self.captureIndex--;
-        [self setCurrentImage];
-   }
 }
 
 #pragma mark -
@@ -100,6 +77,20 @@
 
 - (void)setCurrentImage {
     self.imageView.image = [ViewGeneral scaleImageTScreen:[self.captures objectAtIndex:self.captureIndex]];
+}
+
+- (void)newImages:(id)sender {
+    if (self.captureIndex < [self.captures count] - 1) {
+        self.captureIndex++;
+        [self setCurrentImage];
+    }
+}
+
+- (void)oldImages:(id)sender {
+    if (self.captureIndex > 0) {
+        self.captureIndex--;
+        [self setCurrentImage];
+    }
 }
 
 #pragma mark -
@@ -135,6 +126,61 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark -
+#pragma mark TransitionGestureRecognizerDelegate
+
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+}
+
+- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] dragCameraToInspectImage:_drag];
+}
+
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didReleaseRight:(CGPoint)_location {    
+}
+
+- (void)didReleaseLeft:(CGPoint)_location {
+}
+
+- (void)didReleaseUp:(CGPoint)_location {
+    [[ViewGeneral instance] releaseInspectImageToCamera];
+}
+
+- (void)didReleaseDown:(CGPoint)_location {
+}
+
+- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] transitionInspectImageToCamera];
+}
+
+- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+}
+
+- (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+}
+
+- (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    [[ViewGeneral instance] transitionInspectImageToCamera];
+}
+
+- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
 }
 
 @end

@@ -206,7 +206,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Calendar To Camera
 
 - (void)transitionCalendarToCamera {
-    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = (screenWidth - self.calendarViewController.view.frame.origin.x) / screenWidth;
     if ([CameraViewController cameraIsAvailable]) {
         [self.cameraViewController setFlashImage];
         [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
@@ -218,8 +219,9 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)releaseCalendarToCamera {
-    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/[self.class screenBounds].size.width;
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat screenWidth = [self.class screenBounds].size.width;
+    CGFloat delta = self.calendarViewController.view.frame.origin.x / screenWidth;
+    [self transition:delta * RELEASE_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class leftOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
@@ -236,8 +238,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)transitionCameraToCalendar {
     CGFloat screenWidth = [self.class screenBounds].size.width;
-    CGFloat delta = abs(screenWidth + self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = (screenWidth + self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
+    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class leftOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
@@ -246,8 +248,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)releaseCameraToCalendar {
     CGFloat screenWidth = [self.class screenBounds].size.width;
-    CGFloat delta = abs(screenWidth + self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
+    [self transition:delta * RELEASE_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self calendarViewPosition:[self.class rightOfWindow]];
         }
@@ -264,8 +266,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)transitionCameraToLocales {
     CGFloat screenWidth = [self.class screenBounds].size.width;
-    CGFloat delta = abs(screenWidth - self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = (screenWidth - self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
+    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class rightOfWindow]];
             [self localesViewPosition:[self.class inWindow]];
         }
@@ -274,8 +276,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)releaseCameraToLocales {
     CGFloat screenWidth = [self.class screenBounds].size.width;
-    CGFloat delta = abs(screenWidth - self.cameraViewController.imagePickerController.view.frame.origin.x)/screenWidth;
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = abs(self.cameraViewController.imagePickerController.view.frame.origin.x) / screenWidth;
+    [self transition:delta * RELEASE_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self localesViewPosition:[self.class leftOfWindow]];
         }
@@ -292,8 +294,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)transitionLocalesToCamera {
     CGFloat screenWidth = [self.class screenBounds].size.width;
-    CGFloat delta = abs(screenWidth + self.localesViewController.view.frame.origin.x)/screenWidth;
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = (screenWidth + self.localesViewController.view.frame.origin.x)/screenWidth;
+    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
         [self cameraViewPosition:[self.class inWindow]];
         [self localesViewPosition:[self.class leftOfWindow]];
     }
@@ -302,8 +304,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)releaseLocalesToCamera {
     CGFloat screenWidth = [self.class screenBounds].size.width;
-    CGFloat delta = abs(screenWidth + self.localesViewController.view.frame.origin.x)/screenWidth;
-    [self transition:delta*TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = abs(self.localesViewController.view.frame.origin.x)/screenWidth;
+    [self transition:delta * RELEASE_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class rightOfWindow]];
             [self localesViewPosition:[self.class inWindow]];
         }
@@ -320,7 +322,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)transitionCameraToInspectImage {
     CGFloat screenHeight = [self.class screenBounds].size.height;
-    CGFloat delta = abs(screenHeight + self.imageInspectViewController.view.frame.origin.y)/screenHeight;
+    CGFloat delta = (screenHeight - self.cameraViewController.imagePickerController.view.frame.origin.y) / screenHeight;
     [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class underWindow]];
             [self imageInspectViewPosition:[self.class inWindow]];
@@ -330,8 +332,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)releaseCameraToInspectImage {
     CGFloat screenHeight = [self.class screenBounds].size.height;
-    CGFloat delta = abs(screenHeight + self.imageInspectViewController.view.frame.origin.y)/screenHeight;
-    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat delta = self.cameraViewController.imagePickerController.view.frame.origin.y / screenHeight;
+    [self transition:delta * RELEASE_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self imageInspectViewPosition:[self.class overWindow]];
         }
@@ -348,7 +350,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Inspect Image To Camera
 
 - (void)transitionInspectImageToCamera {
-    CGFloat delta = self.cameraViewController.imagePickerController.view.frame.origin.y / [self.class screenBounds].size.height;
+    CGFloat screenHeight = [self.class screenBounds].size.height;
+    CGFloat delta = (screenHeight + self.imageInspectViewController.view.frame.origin.y) / screenHeight;
     [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self imageInspectViewPosition:[self.class overWindow]];
@@ -357,8 +360,9 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)releaseInspectImageToCamera {
-    CGFloat delta = self.cameraViewController.imagePickerController.view.frame.origin.y / [self.class screenBounds].size.height;
-    [self transition:delta * TRANSITION_ANIMATION_DURATION withAnimation:^{
+    CGFloat screenHeight = [self.class screenBounds].size.height;
+    CGFloat delta = abs(self.imageInspectViewController.view.frame.origin.y) / screenHeight;
+    [self transition:delta * RELEASE_ANIMATION_DURATION withAnimation:^{
             [self cameraViewPosition:[self.class underWindow]];
             [self imageInspectViewPosition:[self.class inWindow]];
         }
