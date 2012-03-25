@@ -22,6 +22,7 @@
 		05A70135151E243B00BBA79E /* Dbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70134151E243B00BBA79E /* Dbi.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
 		05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70143151E4BD000BBA79E /* CaptureModel.m */; };
+		05A70150151EAFCB00BBA79E /* photio.db in Resources */ = {isa = PBXBuildFile; fileRef = 05A7014F151EAFCB00BBA79E /* photio.db */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -67,6 +68,7 @@
 		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		05A70142151E4BD000BBA79E /* CaptureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureModel.h; sourceTree = "<group>"; };
 		05A70143151E4BD000BBA79E /* CaptureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureModel.m; sourceTree = "<group>"; };
+		05A7014F151EAFCB00BBA79E /* photio.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = photio.db; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +203,7 @@
 		05C99EC714F0585C00D09F3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				05A7014F151EAFCB00BBA79E /* photio.db */,
 				05C99EC814F0585C00D09F3E /* photio-Info.plist */,
 				05C99EC914F0585C00D09F3E /* InfoPlist.strings */,
 				05C99ECC14F0585C00D09F3E /* main.m */,
@@ -295,6 +298,7 @@
 				05E836C314FC69E100FAF35D /* flash-on.png in Resources */,
 				0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */,
 				058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */,
+				05A70150151EAFCB00BBA79E /* photio.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
