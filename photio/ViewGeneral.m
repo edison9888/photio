@@ -63,9 +63,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return abs(_offset) / TRANSITION_ANIMATION_SPEED;    
 }
 
-#pragma mark - 
-#pragma mark ViewGeneral PrivateApi
-
 + (ViewGeneral*)instance {	
     @synchronized(self) {
         if (thisViewControllerGeneral == nil) {
@@ -123,8 +120,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 + (UIImage*)scaleImageTScreen:(UIImage*)_capture {
     CGSize imageSize = _capture.size;
     CGRect screenBounds = [self.class screenBounds];
-    CGFloat scaleImage = screenBounds.size.height / imageSize.height;
-    return [_capture scaleBy:scaleImage andCropToSize:screenBounds.size];
+    CGFloat scaleImage = 1.1 * screenBounds.size.height / imageSize.height;
+    return [_capture scaleBy:scaleImage andCropToSize:CGSizeMake(screenBounds.size.width, screenBounds.size.height)];
 }
 
 #pragma mark - 
@@ -326,7 +323,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Camera To Inspect Image
 
 - (void)transitionCameraToInspectImage {
-    if ([self.captures count] > 0) {
+    if ([self hasCaptures]) {
         [self transition:[self verticalTransitionDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
                 [self cameraViewPosition:[self.class underWindow]];
                 [self imageInspectViewPosition:[self.class inWindow]];
@@ -336,7 +333,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)releaseCameraToInspectImage {
-    if ([self.captures count] > 0) {
+    if ([self hasCaptures]) {
         [self transition:[self verticalReleaseDuration:self.cameraViewController.imagePickerController.view.frame.origin.y] withAnimation:^{
                 [self cameraViewPosition:[self.class inWindow]];
                 [self imageInspectViewPosition:[self.class overWindow]];
@@ -346,7 +343,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)dragCameraToInspectImage:(CGPoint)_drag {
-    if ([self.captures count] > 0) {
+    if ([self hasCaptures]) {
         [self.class drag:_drag view:self.imageInspectViewController.view];
         [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
     }
@@ -397,9 +394,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         }
      ];
 
-}
-
-- (void)didFinishWithCamera {    
 }
 
 @end

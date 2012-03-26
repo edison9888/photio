@@ -22,7 +22,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraViewController
 
-@synthesize cameraDelegate, imagePickerController, containerView, flashEnabled, transitionGestureRecognizer;
+@synthesize cameraDelegate, imagePickerController, containerView, flash, transitionGestureRecognizer;
 
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI
@@ -30,13 +30,13 @@
 - (void)setFlashImage {
     switch (self.imagePickerController.cameraFlashMode) {
         case UIImagePickerControllerCameraFlashModeAuto:
-            self.flashEnabled.hidden = YES;
+            self.flash.image = [UIImage imageNamed:@"flash-white-auto.png"];
             break;
         case UIImagePickerControllerCameraFlashModeOn:
-            self.flashEnabled.hidden = NO;
+            self.flash.image = [UIImage imageNamed:@"flash-white-on.png"];
             break;
         case UIImagePickerControllerCameraFlashModeOff:
-            self.flashEnabled.hidden = NO;
+            self.flash.image = [UIImage imageNamed:@"flash-white-off.png"];
             break;
     }    
 }
@@ -88,12 +88,6 @@
 
 - (IBAction)takePhoto:(id)sender {
     [self.imagePickerController takePicture];
-}
-
-- (IBAction)done:(id)sender {
-    if ([[ViewGeneral instance] hasCaptures]) {
-        [self.cameraDelegate didFinishWithCamera];
-    }
 }
 
 - (IBAction)changeFlashMode:(id)sender {
@@ -149,7 +143,6 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker { 
-    [self.cameraDelegate didFinishWithCamera];
 }
 
 #pragma mark -

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
+		<int key="IBDocument.SystemTarget">1296</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1181</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUITapGestureRecognizer</string>
@@ -39,33 +39,16 @@
 					<object class="IBUIView" id="698850454">
 						<reference key="NSNextResponder" ref="142320705"/>
 						<int key="NSvFlags">274</int>
-						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUIImageView" id="393904638">
-								<reference key="NSNextResponder" ref="698850454"/>
-								<int key="NSvFlags">-2147483356</int>
-								<string key="NSFrame">{{20, 11}, {37, 38}}</string>
-								<reference key="NSSuperview" ref="698850454"/>
-								<reference key="NSWindow"/>
-								<string key="NSReuseIdentifierKey">_NS:567</string>
-								<int key="IBUIContentMode">4</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">flash-on.png</string>
-								</object>
-							</object>
-						</array>
 						<string key="NSFrame">{{0, 420}, {320, 60}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="42933554"/>
 						<string key="NSReuseIdentifierKey">_NS:196</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						<object class="NSColor" key="IBUIBackgroundColor" id="623993182">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
 						</object>
-						<float key="IBUIAlpha">0.30000001192092896</float>
+						<float key="IBUIAlpha">0.10000000149011612</float>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -75,19 +58,35 @@
 						<string key="NSFrame">{{0, 420}, {320, 1}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:196</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC4xNDk4ODY1OTI3AA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="623993182"/>
+						<float key="IBUIAlpha">0.20000000298023224</float>
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIImageView" id="393904638">
+						<reference key="NSNextResponder" ref="142320705"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{20, 20}, {37, 38}}</string>
+						<reference key="NSSuperview" ref="142320705"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="698850454"/>
+						<string key="NSReuseIdentifierKey">_NS:567</string>
+						<float key="IBUIAlpha">0.15000000596046448</float>
+						<int key="IBUIContentMode">4</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">flash-white-auto.png</string>
+						</object>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="698850454"/>
+				<reference key="NSNextKeyView" ref="393904638"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -97,7 +96,9 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="848899834"/>
-			<object class="IBUITapGestureRecognizer" id="729777438"/>
+			<object class="IBUITapGestureRecognizer" id="729777438">
+				<int key="IBUINumberOfTapsRequired">2</int>
+			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -111,11 +112,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">flashEnabled</string>
+						<string key="label">flash</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="393904638"/>
 					</object>
-					<int key="connectionID">39</int>
+					<int key="connectionID">48</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -179,17 +180,16 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="698850454"/>
 							<reference ref="42933554"/>
+							<reference ref="393904638"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
 						<reference key="object" ref="698850454"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="393904638"/>
-						</array>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="142320705"/>
-						<string key="objectName">touch pad</string>
+						<string key="objectName">take photo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
@@ -199,21 +199,22 @@
 						<string key="objectName">edge</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">38</int>
-						<reference key="object" ref="393904638"/>
-						<reference key="parent" ref="698850454"/>
+						<int key="objectID">14</int>
+						<reference key="object" ref="848899834"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">take photo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
 						<reference key="object" ref="729777438"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">flash on/off</string>
+						<string key="objectName">flash</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="848899834"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">take photo</string>
+						<int key="objectID">38</int>
+						<reference key="object" ref="393904638"/>
+						<reference key="parent" ref="142320705"/>
+						<string key="objectName">flash</string>
 					</object>
 				</array>
 			</object>
@@ -233,7 +234,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">46</int>
+			<int key="maxID">48</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -242,41 +243,26 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="changeFlashMode:">id</string>
-						<string key="done:">id</string>
-						<string key="switchCamera:">id</string>
 						<string key="takePhoto:">id</string>
-						<string key="toEntries:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="changeFlashMode:">
 							<string key="name">changeFlashMode:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="done:">
-							<string key="name">done:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="switchCamera:">
-							<string key="name">switchCamera:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="takePhoto:">
 							<string key="name">takePhoto:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="toEntries:">
-							<string key="name">toEntries:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
 					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">flashEnabled</string>
+						<string key="NS.key.0">flash</string>
 						<string key="NS.object.0">UIImageView</string>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">flashEnabled</string>
+						<string key="NS.key.0">flash</string>
 						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">flashEnabled</string>
+							<string key="name">flash</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 					</object>
@@ -289,12 +275,16 @@
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
+			<real value="1296" key="NS.object.0"/>
+		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">flash-on.png</string>
-			<string key="NS.object.0">{12, 24}</string>
+			<string key="NS.key.0">flash-white-auto.png</string>
+			<string key="NS.object.0">{45, 45}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>
