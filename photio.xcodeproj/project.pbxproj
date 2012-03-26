@@ -15,6 +15,7 @@
 		0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0529A7D31503B35400235B95 /* CalendarViewController.xib */; };
 		0542DADF151FE952002C62A0 /* flash-white-auto.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DADD151FE952002C62A0 /* flash-white-auto.png */; };
 		0542DAE0151FE952002C62A0 /* flash-white-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DADE151FE952002C62A0 /* flash-white-off.png */; };
+		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
@@ -56,6 +57,8 @@
 		0529A7D31503B35400235B95 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
 		0542DADD151FE952002C62A0 /* flash-white-auto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-auto.png"; sourceTree = "<group>"; };
 		0542DADE151FE952002C62A0 /* flash-white-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-off.png"; sourceTree = "<group>"; };
+		0542DAE4151FFD85002C62A0 /* StreamOfViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamOfViews.h; sourceTree = "<group>"; };
+		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
 		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 				0554A47A1503DDD000B9C76D /* DragGridView.m */,
 				0554A47D1503DDFE00B9C76D /* DragRowView.h */,
 				0554A47E1503DDFE00B9C76D /* DragRowView.m */,
+				0542DAE4151FFD85002C62A0 /* StreamOfViews.h */,
+				0542DAE5151FFD85002C62A0 /* StreamOfViews.m */,
 			);
 			path = library;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 				058B4FBC15196D840087F717 /* LocaleView.m in Sources */,
 				05A70135151E243B00BBA79E /* Dbi.m in Sources */,
 				05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */,
+				0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

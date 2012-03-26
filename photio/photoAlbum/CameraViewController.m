@@ -148,18 +148,18 @@
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
-- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] dragCameraToLocales:_drag];
 }
 
-- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {    
+- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
     [[ViewGeneral instance] dragCameraToCalendar:_drag];
 }
 
-- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] dragCameraToInspectImage:_drag];
 }
 
@@ -178,19 +178,19 @@
     [[ViewGeneral instance] releaseCameraToInspectImage];
 }
 
-- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] transitionCameraToLocales];    
 }
 
-- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] transitionCameraToCalendar];    
 }
 
-- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [self switchCamera];
 }
 
-- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocit {
+- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] transitionCameraToInspectImage];
 }
 
