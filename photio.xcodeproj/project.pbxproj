@@ -16,6 +16,7 @@
 		0542DADF151FE952002C62A0 /* flash-white-auto.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DADD151FE952002C62A0 /* flash-white-auto.png */; };
 		0542DAE0151FE952002C62A0 /* flash-white-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DADE151FE952002C62A0 /* flash-white-off.png */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
+		0542DAE815215EAF002C62A0 /* flash-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAE715215EAF002C62A0 /* flash-background.png */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
@@ -59,6 +60,7 @@
 		0542DADE151FE952002C62A0 /* flash-white-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-off.png"; sourceTree = "<group>"; };
 		0542DAE4151FFD85002C62A0 /* StreamOfViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamOfViews.h; sourceTree = "<group>"; };
 		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
+		0542DAE715215EAF002C62A0 /* flash-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-background.png"; sourceTree = "<group>"; };
 		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		05C59C2314F331A6009AC823 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0542DAE715215EAF002C62A0 /* flash-background.png */,
 				0542DADD151FE952002C62A0 /* flash-white-auto.png */,
 				0542DADE151FE952002C62A0 /* flash-white-off.png */,
 				05E836C214FC69E100FAF35D /* flash-white-on.png */,
@@ -312,6 +315,7 @@
 				05A70150151EAFCB00BBA79E /* photio.db in Resources */,
 				0542DADF151FE952002C62A0 /* flash-white-auto.png in Resources */,
 				0542DAE0151FE952002C62A0 /* flash-white-off.png in Resources */,
+				0542DAE815215EAF002C62A0 /* flash-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

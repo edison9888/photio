@@ -15,6 +15,8 @@
 - (void)moveViewsRight;
 - (BOOL)canMoveLeft;
 - (BOOL)canMoveRight;
+- (void)dragViewsLeft:(CGFloat)_drag;
+- (void)dragViewsRight:(CGFloat)_drag;
 
 @end
 
@@ -42,8 +44,20 @@
 }
 
 - (void)setViewStream:(NSMutableArray*)_views {
-    self.streamOfViews = _views;
     self.inViewIndex = 0;
+    UIView* firstView = [_views objectAtIndex:0];
+    CGRect bounds = firstView.frame;
+    for (int i = 0; i < [_views count]; i++) {
+        UIView* viewItem = [_views objectAtIndex:i];
+        viewItem.frame = CGRectMake(i * bounds.origin.x, 0.0, bounds.size.width, bounds.size.height);
+        [self.streamOfViews addObject:viewItem];
+    }
+}
+
+- (void)dragViewsLeft:(CGFloat)_drag {
+}
+
+- (void)dragViewsRight:(CGFloat)_drag {
 }
 
 - (void)moveViewsLeft {
