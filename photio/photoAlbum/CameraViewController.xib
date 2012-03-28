@@ -68,13 +68,13 @@
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIImageView" id="318647472">
+					<object class="IBUIImageView" id="427155712">
 						<reference key="NSNextResponder" ref="142320705"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 20}, {70, 35}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="393904638"/>
+						<reference key="NSNextKeyView" ref="556044839"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<float key="IBUIAlpha">0.15000000596046448</float>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -84,13 +84,28 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">flash-background.png</string>
+							<string key="NSResourceName">flash-white-background.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="556044839">
+						<reference key="NSNextResponder" ref="142320705"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{20, 20}, {70, 35}}</string>
+						<reference key="NSSuperview" ref="142320705"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="393904638"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">flash-white-edge.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="393904638">
 						<reference key="NSNextResponder" ref="142320705"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 20}, {70, 35}}</string>
+						<string key="NSFrame">{{20, 19}, {70, 35}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="698850454"/>
@@ -107,7 +122,7 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="318647472"/>
+				<reference key="NSNextKeyView" ref="427155712"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -201,7 +216,8 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="698850454"/>
 							<reference ref="42933554"/>
-							<reference ref="318647472"/>
+							<reference ref="427155712"/>
+							<reference ref="556044839"/>
 							<reference ref="393904638"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -218,7 +234,7 @@
 						<reference key="object" ref="42933554"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="142320705"/>
-						<string key="objectName">edge</string>
+						<string key="objectName">take photo edge</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
@@ -240,9 +256,15 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
-						<reference key="object" ref="318647472"/>
+						<reference key="object" ref="427155712"/>
 						<reference key="parent" ref="142320705"/>
 						<string key="objectName">flash background</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">50</int>
+						<reference key="object" ref="556044839"/>
+						<reference key="parent" ref="142320705"/>
+						<string key="objectName">flash edge</string>
 					</object>
 				</array>
 			</object>
@@ -258,12 +280,13 @@
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="49.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="50.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -307,8 +330,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="flash-background.png">{90, 45}</string>
-			<string key="flash-white-auto.png">{90, 45}</string>
+			<string key="flash-white-auto.png">{70, 35}</string>
+			<string key="flash-white-background.png">{70, 35}</string>
+			<string key="flash-white-edge.png">{70, 35}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
