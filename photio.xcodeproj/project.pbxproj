@@ -13,16 +13,9 @@
 		0529A7C71501D41900235B95 /* TransitionGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */; };
 		0529A7D41503B35400235B95 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7D21503B35400235B95 /* CalendarViewController.m */; };
 		0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0529A7D31503B35400235B95 /* CalendarViewController.xib */; };
-		0542DADF151FE952002C62A0 /* flash-white-auto.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DADD151FE952002C62A0 /* flash-white-auto.png */; };
-		0542DAE0151FE952002C62A0 /* flash-white-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DADE151FE952002C62A0 /* flash-white-off.png */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
-		0542DAF01522AD2B002C62A0 /* flash-white-auto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAE91522AD2B002C62A0 /* flash-white-auto@2x.png */; };
-		0542DAF11522AD2B002C62A0 /* flash-white-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAEA1522AD2B002C62A0 /* flash-white-background.png */; };
-		0542DAF21522AD2B002C62A0 /* flash-white-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAEB1522AD2B002C62A0 /* flash-white-background@2x.png */; };
-		0542DAF31522AD2B002C62A0 /* flash-white-edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAEC1522AD2B002C62A0 /* flash-white-edge.png */; };
-		0542DAF41522AD2B002C62A0 /* flash-white-edge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAED1522AD2B002C62A0 /* flash-white-edge@2x.png */; };
-		0542DAF51522AD2B002C62A0 /* flash-white-off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAEE1522AD2B002C62A0 /* flash-white-off@2x.png */; };
-		0542DAF61522AD2B002C62A0 /* flash-white-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAEF1522AD2B002C62A0 /* flash-white-on@2x.png */; };
+		0542DAF91523EDA7002C62A0 /* flash-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF71523EDA7002C62A0 /* flash-on.png */; };
+		0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF81523EDA7002C62A0 /* flash-on@2x.png */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
@@ -49,7 +42,6 @@
 		05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE438714F1F46D005FF6B0 /* EntryViewController.m */; };
 		05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE438814F1F46D005FF6B0 /* EntryViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
-		05E836C314FC69E100FAF35D /* flash-white-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E836C214FC69E100FAF35D /* flash-white-on.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,17 +54,10 @@
 		0529A7D11503B35400235B95 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		0529A7D21503B35400235B95 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		0529A7D31503B35400235B95 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
-		0542DADD151FE952002C62A0 /* flash-white-auto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-auto.png"; sourceTree = "<group>"; };
-		0542DADE151FE952002C62A0 /* flash-white-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-off.png"; sourceTree = "<group>"; };
 		0542DAE4151FFD85002C62A0 /* StreamOfViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamOfViews.h; sourceTree = "<group>"; };
 		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
-		0542DAE91522AD2B002C62A0 /* flash-white-auto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-auto@2x.png"; sourceTree = "<group>"; };
-		0542DAEA1522AD2B002C62A0 /* flash-white-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-background.png"; sourceTree = "<group>"; };
-		0542DAEB1522AD2B002C62A0 /* flash-white-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-background@2x.png"; sourceTree = "<group>"; };
-		0542DAEC1522AD2B002C62A0 /* flash-white-edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-edge.png"; sourceTree = "<group>"; };
-		0542DAED1522AD2B002C62A0 /* flash-white-edge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-edge@2x.png"; sourceTree = "<group>"; };
-		0542DAEE1522AD2B002C62A0 /* flash-white-off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-off@2x.png"; sourceTree = "<group>"; };
-		0542DAEF1522AD2B002C62A0 /* flash-white-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-on@2x.png"; sourceTree = "<group>"; };
+		0542DAF71523EDA7002C62A0 /* flash-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-on.png"; sourceTree = "<group>"; };
+		0542DAF81523EDA7002C62A0 /* flash-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-on@2x.png"; sourceTree = "<group>"; };
 		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
@@ -117,7 +102,6 @@
 		05DE438714F1F46D005FF6B0 /* EntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryViewController.m; sourceTree = "<group>"; };
 		05DE438814F1F46D005FF6B0 /* EntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryViewController.xib; sourceTree = "<group>"; };
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		05E836C214FC69E100FAF35D /* flash-white-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-white-on.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,16 +140,8 @@
 		05C59C2314F331A6009AC823 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				0542DAE91522AD2B002C62A0 /* flash-white-auto@2x.png */,
-				0542DAEA1522AD2B002C62A0 /* flash-white-background.png */,
-				0542DAEB1522AD2B002C62A0 /* flash-white-background@2x.png */,
-				0542DAEC1522AD2B002C62A0 /* flash-white-edge.png */,
-				0542DAED1522AD2B002C62A0 /* flash-white-edge@2x.png */,
-				0542DAEE1522AD2B002C62A0 /* flash-white-off@2x.png */,
-				0542DAEF1522AD2B002C62A0 /* flash-white-on@2x.png */,
-				0542DADD151FE952002C62A0 /* flash-white-auto.png */,
-				0542DADE151FE952002C62A0 /* flash-white-off.png */,
-				05E836C214FC69E100FAF35D /* flash-white-on.png */,
+				0542DAF71523EDA7002C62A0 /* flash-on.png */,
+				0542DAF81523EDA7002C62A0 /* flash-on@2x.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -327,19 +303,11 @@
 				05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */,
 				050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */,
 				050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */,
-				05E836C314FC69E100FAF35D /* flash-white-on.png in Resources */,
 				0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */,
 				058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */,
 				05A70150151EAFCB00BBA79E /* photio.db in Resources */,
-				0542DADF151FE952002C62A0 /* flash-white-auto.png in Resources */,
-				0542DAE0151FE952002C62A0 /* flash-white-off.png in Resources */,
-				0542DAF01522AD2B002C62A0 /* flash-white-auto@2x.png in Resources */,
-				0542DAF11522AD2B002C62A0 /* flash-white-background.png in Resources */,
-				0542DAF21522AD2B002C62A0 /* flash-white-background@2x.png in Resources */,
-				0542DAF31522AD2B002C62A0 /* flash-white-edge.png in Resources */,
-				0542DAF41522AD2B002C62A0 /* flash-white-edge@2x.png in Resources */,
-				0542DAF51522AD2B002C62A0 /* flash-white-off@2x.png in Resources */,
-				0542DAF61522AD2B002C62A0 /* flash-white-on@2x.png in Resources */,
+				0542DAF91523EDA7002C62A0 /* flash-on.png in Resources */,
+				0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

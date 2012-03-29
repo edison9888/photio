@@ -29,14 +29,14 @@
 
 - (void)setFlashImage {
     switch (self.imagePickerController.cameraFlashMode) {
-        case UIImagePickerControllerCameraFlashModeAuto:
-            self.flash.image = [UIImage imageNamed:@"flash-white-auto.png"];
-            break;
         case UIImagePickerControllerCameraFlashModeOn:
-            self.flash.image = [UIImage imageNamed:@"flash-white-on.png"];
+            self.flash.image = [UIImage imageNamed:@"flash-on.png"];
+            self.flash.hidden = NO;
             break;
         case UIImagePickerControllerCameraFlashModeOff:
-            self.flash.image = [UIImage imageNamed:@"flash-white-off.png"];
+            self.flash.hidden = YES;
+            break;
+        default:
             break;
     }    
 }
@@ -93,13 +93,13 @@
 - (IBAction)changeFlashMode:(id)sender {
     switch (self.imagePickerController.cameraFlashMode) {
         case UIImagePickerControllerCameraFlashModeAuto:
-            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
+            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
             break;
         case UIImagePickerControllerCameraFlashModeOn:
             self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
             break;
         case UIImagePickerControllerCameraFlashModeOff:
-            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeAuto;
+            self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
             break;
     }    
     [self setFlashImage];
