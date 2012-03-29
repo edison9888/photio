@@ -5,6 +5,7 @@
 //  Created by Troy Stribling on 2/19/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
+
 #import "ImageInspectViewController.h"
 #import "ViewGeneral.h"
 #import "UIImage+Resize.h"
@@ -37,6 +38,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:_containerView];
+        self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeView:_containerView];
         self.view.frame = self.containerView.frame;
         self.captures = [NSMutableArray arrayWithCapacity:10];
     }
@@ -44,11 +46,14 @@
 }
 
 - (void)loadCaptures:(NSMutableArray*)_captures {
-    [self.captures addObjectsFromArray:_captures];
-    if ([self.captures count] > 0) {
-        self.captureIndex = [self.captures count] - 1;
-        [self setCurrentImage];
+    NSMutableArray* captureViews = [NSMutableArray arrayWithCapacity:10];
+    for (int i = 0; i < [_captures count]; i++) {
+        UIImage* capture = [_captures objectAtIndex:i];
+        [self.captures addObject:capture];
+        UIImageView* captureView = [[UIImageView alloc] initWithImage:capture];
+        [captureViews addObject:captureView];
     }
+    [self.imageView setViewStream:captureViews];
 }
 
 #pragma mark -
@@ -57,7 +62,6 @@
 - (void)loadFile:(NSString*)_fileName {
     NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:_fileName];
     if ([[NSFileManager defaultManager] fileExistsAtPath:pngPath]) {
-        self.imageView.image = [UIImage imageWithContentsOfFile:pngPath];
     }
 }
 
@@ -73,24 +77,6 @@
 - (void)saveToFile:(UIImage*)_image {
     NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
     [UIImagePNGRepresentation(_image) writeToFile:pngPath atomically:YES];    
-}
-
-- (void)setCurrentImage {
-    self.imageView.image = [ViewGeneral scaleImageTScreen:[self.captures objectAtIndex:self.captureIndex]];
-}
-
-- (void)newImages:(id)sender {
-    if (self.captureIndex < [self.captures count] - 1) {
-        self.captureIndex++;
-        [self setCurrentImage];
-    }
-}
-
-- (void)oldImages:(id)sender {
-    if (self.captureIndex > 0) {
-        self.captureIndex--;
-        [self setCurrentImage];
-    }
 }
 
 #pragma mark -
@@ -182,5 +168,8 @@
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
 }
+
+#pragma mark -
+#pragma mark TransitionGestureRecognizerDelegate
 
 @end

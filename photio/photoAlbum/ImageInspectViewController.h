@@ -8,18 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "TransitionGestureRecognizer.h"
-
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, TransitionGestureRecognizerDelegate> {
+#import "StreamOfViews.h"
+ 
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, TransitionGestureRecognizerDelegate, StreamOfViewsDelegate> {
     __weak UIView*                  containerView;
     TransitionGestureRecognizer*    transitionGestureRecognizer;
-    UIImageView*                    imageView;
+    StreamOfViews*                  imageView;
     NSMutableArray*                 captures;
     NSInteger                       captureIndex;
 }
 
 @property(nonatomic, weak)      UIView*                         containerView;
 @property (nonatomic, retain)   TransitionGestureRecognizer*    transitionGestureRecognizer;
-@property(nonatomic, retain)    IBOutlet UIImageView*           imageView;
+@property(nonatomic, retain)    StreamOfViews*                  imageView;
 @property(nonatomic, retain)    NSMutableArray*                 captures;
 @property(nonatomic, assign)    NSInteger                       captureIndex;
 
