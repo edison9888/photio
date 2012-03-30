@@ -11,12 +11,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StreamOfViews (PrivateAPI)
 
+- (void)dragViews:(CGPoint)_drag;
 - (void)moveViewsLeft;
 - (void)moveViewsRight;
 - (BOOL)canMoveLeft;
 - (BOOL)canMoveRight;
-- (void)dragViewsLeft:(CGFloat)_drag;
-- (void)dragViewsRight:(CGFloat)_drag;
 
 @end
 
@@ -38,26 +37,23 @@
     if ((self = [super initWithFrame:_frame])) {
         self.delegate = _delegate;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
+        self.streamOfViews = [NSMutableArray arrayWithCapacity:10];
         self.inViewIndex = 0;
+        self.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
 
-- (void)setViewStream:(NSMutableArray*)_views {
-    self.inViewIndex = 0;
-    UIView* firstView = [_views objectAtIndex:0];
-    CGRect bounds = firstView.frame;
-    for (int i = 0; i < [_views count]; i++) {
-        UIView* viewItem = [_views objectAtIndex:i];
-        viewItem.frame = CGRectMake(i * bounds.origin.x, 0.0, bounds.size.width, bounds.size.height);
-        [self.streamOfViews addObject:viewItem];
-    }
+- (void)addView:(UIView*)_view {
+    NSInteger viewCount = [self.streamOfViews count] + 1;
+    self.frame = CGRectMake(0.0, 0.0, viewCount * self.frame.size.width, self.frame.size.height);
+    _view.frame = CGRectMake((viewCount - 1) * _view.frame.size.width, 0.0, _view.frame.size.width, _view.frame.size.height);
+    [self addSubview:_view];
+    [self.streamOfViews addObject:_view];
 }
 
-- (void)dragViewsLeft:(CGFloat)_drag {
-}
-
-- (void)dragViewsRight:(CGFloat)_drag {
+- (void)dragViews:(CGPoint)_drag {
+    self.transform = CGAffineTransformTranslate(self.transform, _drag.x, _drag.y);
 }
 
 - (void)moveViewsLeft {
@@ -67,20 +63,22 @@
 }
 
 - (BOOL)canMoveLeft {
-    return YES;
+    return self.inViewIndex < [self.streamOfViews count];
 }
 
 - (BOOL)canMoveRight {
-    return YES;
+    return self.inViewIndex > 0;
 }
 
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self dragViews:_drag];
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    [self dragViews:_drag];
 }
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

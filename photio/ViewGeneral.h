@@ -22,7 +22,6 @@
     EntryViewController*        entriesViewController;
     CalendarViewController*     calendarViewController;
     LocalesViewController*      localesViewController;
-    NSMutableArray*             captures;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -31,7 +30,6 @@
 @property(nonatomic, retain) EntryViewController*           entryViewController;
 @property(nonatomic, retain) CalendarViewController*        calendarViewController;
 @property(nonatomic, retain) LocalesViewController*         localesViewController;
-@property(nonatomic, retain) NSMutableArray*                captures;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewGeneral*)instance;
@@ -43,10 +41,6 @@
 + (CGRect)rightOfWindow; 
 + (void)drag:(CGPoint)_drag view:(UIView*)_view;
 - (void)createViews:(UIView*)_containerView;
-- (BOOL)hasCaptures;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIImage*)scaleImageTScreen:(UIImage*)_capture;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initEntryView:(UIView*)_containerView;

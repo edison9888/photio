@@ -25,7 +25,7 @@
 
 + (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeView:(UIView*)_relativeView;
-- (void)setViewStream:(NSMutableArray*)_views;
+- (void)addView:(UIView*)_view;
 
 @end
 

@@ -76,9 +76,11 @@
         self.imagePickerController.view.contentMode = UIViewContentModeScaleAspectFill;
         self.imagePickerController.wantsFullScreenLayout = YES;
         self.imagePickerController.cameraViewTransform = CGAffineTransformScale(self.imagePickerController.cameraViewTransform, 1.27, 1.27);
+        self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
         self.imagePickerController.view.frame = self.containerView.frame;
         self.imagePickerController.cameraOverlayView = self.view;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:self.containerView];
+        [self setFlashImage];
     }
     return self;
 }
@@ -110,12 +112,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setFlashImage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.imagePickerController viewWillAppear:animated];
-    [self setFlashImage];
     [super viewWillAppear:animated];
 }
 

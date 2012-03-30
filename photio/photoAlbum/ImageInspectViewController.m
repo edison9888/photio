@@ -25,7 +25,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, captures, captureIndex, transitionGestureRecognizer;
+@synthesize imageView, containerView, captures, transitionGestureRecognizer;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -38,22 +38,22 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:_containerView];
-        self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeView:_containerView];
         self.view.frame = self.containerView.frame;
+        self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeView:_containerView];
+        [self.view addSubview:self.imageView];
         self.captures = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
 
-- (void)loadCaptures:(NSMutableArray*)_captures {
-    NSMutableArray* captureViews = [NSMutableArray arrayWithCapacity:10];
-    for (int i = 0; i < [_captures count]; i++) {
-        UIImage* capture = [_captures objectAtIndex:i];
-        [self.captures addObject:capture];
-        UIImageView* captureView = [[UIImageView alloc] initWithImage:capture];
-        [captureViews addObject:captureView];
-    }
-    [self.imageView setViewStream:captureViews];
+- (void)addImage:(UIImage*)_picture {
+    [self.captures addObject:_picture];
+    UIImageView* pictureView = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
+    [self.imageView addView:pictureView];
+}
+
+- (BOOL)hasCaptures {
+    return [self.captures count] > 0;
 }
 
 #pragma mark -

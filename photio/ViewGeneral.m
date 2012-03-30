@@ -32,7 +32,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize imageInspectViewController, cameraViewController, entryViewController, calendarViewController, localesViewController;
-@synthesize captures;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
@@ -67,7 +66,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     @synchronized(self) {
         if (thisViewControllerGeneral == nil) {
             thisViewControllerGeneral = [[self alloc] init]; 
-            thisViewControllerGeneral.captures = [NSMutableArray arrayWithCapacity:10];
         }
     }
     return thisViewControllerGeneral;
@@ -111,17 +109,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initCameraView:_containerView];
     [self initCalendarView:_containerView];
     [self initLocalesView:_containerView];
-}
-
-- (BOOL)hasCaptures {
-    return [self.captures count] != 0;
-}
-
-+ (UIImage*)scaleImageTScreen:(UIImage*)_capture {
-    CGSize imageSize = _capture.size;
-    CGRect screenBounds = [self.class screenBounds];
-    CGFloat scaleImage = 1.1 * screenBounds.size.height / imageSize.height;
-    return [_capture scaleBy:scaleImage andCropToSize:CGSizeMake(screenBounds.size.width, screenBounds.size.height)];
 }
 
 #pragma mark - 
@@ -323,7 +310,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Camera To Inspect Image
 
 - (void)transitionCameraToInspectImage {
-    if ([self hasCaptures]) {
+    if ([self.imageInspectViewController hasCaptures]) {
         [self transition:[self verticalTransitionDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
                 [self cameraViewPosition:[self.class underWindow]];
                 [self imageInspectViewPosition:[self.class inWindow]];
@@ -333,7 +320,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)releaseCameraToInspectImage {
-    if ([self hasCaptures]) {
+    if ([self.imageInspectViewController hasCaptures]) {
         [self transition:[self verticalReleaseDuration:self.cameraViewController.imagePickerController.view.frame.origin.y] withAnimation:^{
                 [self cameraViewPosition:[self.class inWindow]];
                 [self imageInspectViewPosition:[self.class overWindow]];
@@ -343,7 +330,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)dragCameraToInspectImage:(CGPoint)_drag {
-    if ([self hasCaptures]) {
+    if ([self.imageInspectViewController hasCaptures]) {
         [self.class drag:_drag view:self.imageInspectViewController.view];
         [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
     }
@@ -379,8 +366,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark CameraViewControllerDelegate
 
 - (void)didTakePicture:(UIImage*)_picture { 
-    [self.captures addObject:_picture];
-    __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[self.class scaleImageTScreen:_picture]];
+    [self.imageInspectViewController addImage:_picture];
+    __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
     [self.cameraViewController.imagePickerController.view addSubview:snapshot];
     [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
         delay:CAMERA_NEW_PHOTO_DELAY
@@ -389,7 +376,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
             snapshot.frame = [self.class overWindow];
         }
         completion:^(BOOL _finished){
-            [self.imageInspectViewController loadCaptures:self.captures];
             [snapshot removeFromSuperview];
         }
      ];
