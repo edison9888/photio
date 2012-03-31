@@ -23,8 +23,8 @@
 @property (nonatomic, retain)  NSMutableArray*                 streamOfViews;
 @property (nonatomic, assign)  NSInteger                       inViewIndex;
 
-+ (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeView:(UIView*)_relativeView;
-- (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeView:(UIView*)_relativeView;
++ (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate;
+- (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate;
 - (void)addView:(UIView*)_view;
 
 @end
