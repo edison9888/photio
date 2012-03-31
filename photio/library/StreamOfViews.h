@@ -25,8 +25,8 @@
 @property (nonatomic, assign)  NSInteger                        inViewIndex;
 @property (nonatomic, assign)  BOOL                             notAnimating;
 
-+ (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate;
-- (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate;
++ (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView;
+- (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView;
 - (void)addView:(UIView*)_view;
 
 @end

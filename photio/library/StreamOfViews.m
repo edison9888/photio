@@ -48,20 +48,26 @@
 }
 
 - (void)dragView:(CGPoint)_drag {
-    UIView* viewItem = [self displayedView];
-    viewItem.transform = CGAffineTransformTranslate(viewItem.transform, _drag.x, _drag.y);
+    if (self.notAnimating) {
+        UIView* viewItem = [self displayedView];
+        viewItem.transform = CGAffineTransformTranslate(viewItem.transform, _drag.x, _drag.y);
+    }
 }
 
 - (void)releaseView {
-    [UIView animateWithDuration:[self releaseDuration]
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
-        animations:^{
-            [self displayedView].frame = [self inWindow];
-        }
-        completion:^(BOOL _finished){
-        }
-     ];
+    if (self.notAnimating) {
+        self.notAnimating = NO;
+        [UIView animateWithDuration:[self releaseDuration]
+            delay:0
+            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+            animations:^{
+                [self displayedView].frame = [self inWindow];
+            }
+            completion:^(BOOL _finished){
+                self.notAnimating = YES;
+            }
+         ];
+    }
  }
 
 - (void)moveViewsLeft {
@@ -123,24 +129,24 @@
 }
 
 - (CGRect)leftOfWindow {
-    return CGRectMake(-self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+    return CGRectMake(-self.frame.size.width - VIEW_MIN_SPACING, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
 }
 
 - (CGRect)rightOfWindow {
-    return CGRectMake(self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+    return CGRectMake(self.frame.size.width + VIEW_MIN_SPACING, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
 }
 
 #pragma mark -
 #pragma mark StreamOfViews
 
-+ (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate {
-    return [[StreamOfViews alloc] initWithFrame:_frame delegate:_delegate];
++ (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView {
+    return [[StreamOfViews alloc] initWithFrame:_frame delegate:_delegate relativeToView:(UIView*)_relativeView];
 }
 
-- (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate {
+- (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView {
     if ((self = [super initWithFrame:_frame])) {
         self.delegate = _delegate;
-        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:self];
+        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
         self.streamOfViews = [NSMutableArray arrayWithCapacity:10];
         self.inViewIndex = 0;
         self.notAnimating = YES;
@@ -203,11 +209,19 @@
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self moveViewsRight];
+    if ([self canMoveRight]) {
+        [self moveViewsRight];
+    } else {
+        [self releaseView];
+    }
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self moveViewsLeft];
+    if ([self canMoveLeft]) {
+        [self moveViewsLeft];
+    } else {
+        [self releaseView];
+    }        
 }
 
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {

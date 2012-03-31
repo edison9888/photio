@@ -39,7 +39,7 @@
         self.containerView = _containerView;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:_containerView];
         self.view.frame = self.containerView.frame;
-        self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self];
+        self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
         [self.view addSubview:self.imageView];
         self.captures = [NSMutableArray arrayWithCapacity:10];
     }
