@@ -21,6 +21,8 @@
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
 		058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058B4FB615196B1F0087F717 /* LocalesViewController.xib */; };
 		058B4FBC15196D840087F717 /* LocaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FBB15196D840087F717 /* LocaleView.m */; };
+		059772E71527961B008F3A1B /* take-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 059772E61527961B008F3A1B /* take-photo.png */; };
+		059772E9152798BA008F3A1B /* take-photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059772E8152798BA008F3A1B /* take-photo@2x.png */; };
 		05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D694150BC86A009C9A11 /* CalendarDayView.m */; };
 		05A70135151E243B00BBA79E /* Dbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70134151E243B00BBA79E /* Dbi.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
@@ -67,6 +69,8 @@
 		058B4FB615196B1F0087F717 /* LocalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalesViewController.xib; sourceTree = "<group>"; };
 		058B4FBA15196D840087F717 /* LocaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaleView.h; sourceTree = "<group>"; };
 		058B4FBB15196D840087F717 /* LocaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaleView.m; sourceTree = "<group>"; };
+		059772E61527961B008F3A1B /* take-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "take-photo.png"; sourceTree = "<group>"; };
+		059772E8152798BA008F3A1B /* take-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "take-photo@2x.png"; sourceTree = "<group>"; };
 		05A1D693150BC86A009C9A11 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayView.h; sourceTree = "<group>"; };
 		05A1D694150BC86A009C9A11 /* CalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayView.m; sourceTree = "<group>"; };
 		05A70133151E243B00BBA79E /* Dbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dbi.h; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 		05C59C2314F331A6009AC823 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				059772E8152798BA008F3A1B /* take-photo@2x.png */,
+				059772E61527961B008F3A1B /* take-photo.png */,
 				0542DAF71523EDA7002C62A0 /* flash-on.png */,
 				0542DAF81523EDA7002C62A0 /* flash-on@2x.png */,
 			);
@@ -316,6 +322,8 @@
 				05A70150151EAFCB00BBA79E /* photio.db in Resources */,
 				0542DAF91523EDA7002C62A0 /* flash-on.png in Resources */,
 				0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */,
+				059772E71527961B008F3A1B /* take-photo.png in Resources */,
+				059772E9152798BA008F3A1B /* take-photo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
