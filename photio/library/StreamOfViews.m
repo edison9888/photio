@@ -23,18 +23,28 @@
 - (CGRect)inWindow;
 - (CGRect)leftOfWindow;
 - (CGRect)rightOfWindow;
+- (UIView*)leftView;
+- (UIView*)rightView;
 
 @end
 
 @implementation StreamOfViews
 
-@synthesize delegate, transitionGestureRecognizer, streamOfViews, inViewIndex;
+@synthesize delegate, transitionGestureRecognizer, streamOfViews, inViewIndex, notAnimating;
 
 #pragma mark -
 #pragma mark StreamOfViews PrivatAPI
 
 - (UIView*)displayedView {
     return [self.streamOfViews objectAtIndex:self.inViewIndex];
+}
+
+- (UIView*)leftView {
+    return [self.streamOfViews objectAtIndex:(self.inViewIndex - 1)];
+}
+
+- (UIView*)rightView {
+    return [self.streamOfViews objectAtIndex:(self.inViewIndex + 1)];
 }
 
 - (void)dragView:(CGPoint)_drag {
@@ -55,35 +65,43 @@
  }
 
 - (void)moveViewsLeft {
-    if ([self canMoveLeft]) {
+    if ([self canMoveLeft] && self.notAnimating) {
+        self.notAnimating = NO;
         [UIView animateWithDuration:[self transitionDuration]
             delay:0
             options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
             animations:^{
+                [self rightView].frame = [self inWindow];
+                [self displayedView].frame = [self leftOfWindow];
             }
             completion:^(BOOL _finished) {
                 self.inViewIndex++;
+                self.notAnimating = YES;
             }
          ];
     }
 }
 
 - (void)moveViewsRight {
-    if ([self canMoveRight]) {
+    if ([self canMoveRight] && self.notAnimating) {
+        self.notAnimating = NO;
         [UIView animateWithDuration:[self transitionDuration]
             delay:0
             options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
             animations:^{
+                [self leftView].frame = [self inWindow];
+                [self displayedView].frame = [self rightOfWindow];
             }
             completion:^(BOOL _finished) {
                 self.inViewIndex--;
+                self.notAnimating = YES;
             }
         ];
     }
 }
 
 - (BOOL)canMoveLeft {
-    return self.inViewIndex < [self.streamOfViews count];
+    return self.inViewIndex < [self.streamOfViews count] - 1;
 }
 
 - (BOOL)canMoveRight {
@@ -105,13 +123,11 @@
 }
 
 - (CGRect)leftOfWindow {
-    CGRect bounds = self.frame;
-    return CGRectMake(-bounds.size.width, bounds.origin.y, bounds.size.width, bounds.size.height);
+    return CGRectMake(-self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
 }
 
 - (CGRect)rightOfWindow {
-    CGRect bounds = self.frame;
-    return CGRectMake(bounds.size.width, bounds.origin.y, bounds.size.width, bounds.size.height);
+    return CGRectMake(self.frame.size.width, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
 }
 
 #pragma mark -
@@ -127,13 +143,18 @@
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:self];
         self.streamOfViews = [NSMutableArray arrayWithCapacity:10];
         self.inViewIndex = 0;
+        self.notAnimating = YES;
         self.backgroundColor = [UIColor blackColor];
     }
     return self;
 }
 
 - (void)addView:(UIView*)_view {
-    _view.frame = CGRectMake([self.streamOfViews count] * _view.frame.size.width, 0.0, _view.frame.size.width, _view.frame.size.height);
+    if ([self.streamOfViews count] == 0) {
+        _view.frame = [self inWindow];
+    } else {
+        _view.frame = [self rightOfWindow];
+    }
     [self addSubview:_view];
     [self.streamOfViews addObject:_view];
 }
@@ -182,9 +203,11 @@
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self moveViewsRight];
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self moveViewsLeft];
 }
 
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -200,9 +223,19 @@
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self canMoveRight]) {
+        [self moveViewsRight];
+    } else {
+        [self releaseView];
+    }
 }
 
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    if ([self canMoveLeft]) {
+        [self moveViewsLeft];
+    } else {
+        [self releaseView];
+    }        
 }
 
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    

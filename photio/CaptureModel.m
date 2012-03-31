@@ -19,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CaptureModel
 
-@synthesize pk, createdAt, localePk;
+@synthesize pk, createdAt, localePk, comment;
 
 #pragma mark -
 #pragma mark CaptureModel PrivatAPI
@@ -40,7 +40,7 @@
 }
 
 + (void)create {
-	[Dbi  updateWithStatement:@"CREATE TABLE captures (pk integer primary key, createdAt date, localePk integer, FOREIGN KEY (localePk) REFERENCES locales(pk))"];
+	[Dbi  updateWithStatement:@"CREATE TABLE captures (pk integer primary key, createdAt date, localePk integer, comment text, FOREIGN KEY (localePk) REFERENCES locales(pk))"];
 }
 
 + (NSMutableArray*)findAll {
@@ -51,7 +51,7 @@
 
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO captures (createdAt, localePk) values ('%@', %d)", 
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO captures (createdAt, localePk, comment) values ('%@', %d, '%@')", 
                           [self createdAtAsString], self.localePk];	
 	[Dbi  updateWithStatement:insertStatement];
 }
@@ -71,8 +71,8 @@
 }
 
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE captures SET createdAt = '%@', localePk = %d WHERE pk = %d", 
-                                   [self createdAtAsString], self.localePk];	
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE captures SET createdAt = '%@', localePk = %d, comment = '%@' WHERE pk = %d", 
+                                   [self createdAtAsString], self.localePk, self.comment];	
 	[Dbi updateWithStatement:updateStatement];
 }
 

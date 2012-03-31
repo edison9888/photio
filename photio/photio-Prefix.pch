@@ -17,6 +17,7 @@
 #define RELEASE_ANIMATION_SPEED             300.0f
 #define DISPLAYED_IMAGE_SCALE               0.625f
 #define DISPLAYED_IMAGE_CROP                CGSizeMake(200, 200)
+#define VIEW_SPACING                        75
 
 #define DETECT_SWIPE_SPEED                  500
 #define MAX_DRAG_FACTOR                     0.4f

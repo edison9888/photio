@@ -16,12 +16,14 @@
     TransitionGestureRecognizer*    transitionGestureRecognizer;
     NSMutableArray*                 streamOfViews;
     NSInteger                       inViewIndex;
+    BOOL                            notAnimating;
 }
 
-@property (nonatomic, weak)    id<StreamOfViewsDelegate>       delegate;
-@property (nonatomic, retain)  TransitionGestureRecognizer*    transitionGestureRecognizer;
-@property (nonatomic, retain)  NSMutableArray*                 streamOfViews;
-@property (nonatomic, assign)  NSInteger                       inViewIndex;
+@property (nonatomic, weak)    id<StreamOfViewsDelegate>        delegate;
+@property (nonatomic, retain)  TransitionGestureRecognizer*     transitionGestureRecognizer;
+@property (nonatomic, retain)  NSMutableArray*                  streamOfViews;
+@property (nonatomic, assign)  NSInteger                        inViewIndex;
+@property (nonatomic, assign)  BOOL                             notAnimating;
 
 + (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate;
