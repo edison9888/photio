@@ -70,20 +70,23 @@
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] dragLocales:_drag];
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragLocalesToCamera:_drag];
+    [[ViewGeneral instance] dragLocales:_drag];
 }
 
 - (void)didReleaseRight:(CGPoint)_location {
+    [[ViewGeneral instance] releaseLocales];
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
-    [[ViewGeneral instance] releaseLocalesToCamera];
+    [[ViewGeneral instance] releaseLocales];
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] releaseLocales];
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -91,6 +94,7 @@
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] releaseLocales];
 }
 
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

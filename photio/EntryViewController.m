@@ -71,7 +71,6 @@
 }
 
 - (void)didDragDown:(CGPoint)_drag {
-    [[ViewGeneral instance] dragCalendarToCamera:_drag];
 }
 
 - (void)didReleaseRight {    
@@ -84,7 +83,6 @@
 }
 
 - (void)didReleaseDown {
-    [[ViewGeneral instance] releaseCalendarToCamera];
 }
 
 - (void)didSwipeRight {
@@ -97,7 +95,6 @@
 }
 
 - (void)didSwipeDown {
-    [[ViewGeneral instance] transitionCalendarToCamera];
 }
 
 @end

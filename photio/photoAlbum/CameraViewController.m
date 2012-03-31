@@ -149,33 +149,33 @@
 #pragma mark TransitionGestureRecognizerDelegate
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragCameraToLocales:_drag];
+    [[ViewGeneral instance] dragCamera:_drag];
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    [[ViewGeneral instance] dragCameraToCalendar:_drag];
+    [[ViewGeneral instance] dragCamera:_drag];
 }
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragCameraToInspectImage:_drag];
+    [[ViewGeneral instance] dragCamera:_drag];
 }
 
 - (void)didReleaseRight:(CGPoint)_location {    
-    [[ViewGeneral instance] releaseCameraToLocales];
+    [[ViewGeneral instance] releaseCamera];
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
-    [[ViewGeneral instance] releaseCameraToCalendar];
+    [[ViewGeneral instance] releaseCamera];
 }
 
 - (void)didReleaseUp:(CGPoint)_location {
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
-    [[ViewGeneral instance] releaseCameraToInspectImage];
+    [[ViewGeneral instance] releaseCamera];
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {

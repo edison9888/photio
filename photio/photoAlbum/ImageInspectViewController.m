@@ -124,7 +124,7 @@
 }
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragCameraToInspectImage:_drag];
+    [[ViewGeneral instance] dragInspectImage:_drag];
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -137,7 +137,7 @@
 }
 
 - (void)didReleaseUp:(CGPoint)_location {
-    [[ViewGeneral instance] releaseInspectImageToCamera];
+    [[ViewGeneral instance] releaseInspectImage];
 }
 
 - (void)didReleaseDown:(CGPoint)_location {

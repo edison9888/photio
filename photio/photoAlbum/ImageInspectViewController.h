@@ -17,10 +17,10 @@
     NSMutableArray*                 captures;
 }
 
-@property(nonatomic, weak)     UIView*                         containerView;
-@property(nonatomic, retain)   TransitionGestureRecognizer*    transitionGestureRecognizer;
-@property(nonatomic, retain)   StreamOfViews*                  imageView;
-@property(nonatomic, retain)   NSMutableArray*                 captures; 
+@property(nonatomic, weak)     UIView*                          containerView;
+@property(nonatomic, retain)   TransitionGestureRecognizer*     transitionGestureRecognizer;
+@property(nonatomic, retain)   StreamOfViews*                   imageView;
+@property(nonatomic, retain)   NSMutableArray*                  captures; 
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

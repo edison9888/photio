@@ -17,6 +17,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral : NSObject <CameraViewControllerDelegate> {
+    BOOL                        notAnimating;
     CameraViewController*       cameraViewController;
     ImageInspectViewController* imageInspectViewController;
     EntryViewController*        entriesViewController;
@@ -25,6 +26,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property(nonatomic, assign) BOOL                           notAnimating;
 @property(nonatomic, retain) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, retain) CameraViewController*          cameraViewController;
 @property(nonatomic, retain) EntryViewController*           entryViewController;
@@ -39,7 +41,6 @@
 + (CGRect)underWindow;
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow; 
-+ (void)drag:(CGPoint)_drag view:(UIView*)_view;
 - (void)createViews:(UIView*)_containerView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -69,32 +70,28 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCalendarToCamera;
-- (void)releaseCalendarToCamera;
-- (void)dragCalendarToCamera:(CGPoint)_drag;
+- (void)releaseCalendar;
+- (void)dragCalendar:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCameraToCalendar;
-- (void)releaseCameraToCalendar;
-- (void)dragCameraToCalendar:(CGPoint)_drag;
+- (void)releaseCamera;
+- (void)dragCamera:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCameraToLocales;
-- (void)releaseCameraToLocales;
-- (void)dragCameraToLocales:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionLocalesToCamera;
-- (void)releaseLocalesToCamera;
-- (void)dragLocalesToCamera:(CGPoint)_drag;
+- (void)releaseLocales;
+- (void)dragLocales:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCameraToInspectImage;
-- (void)releaseCameraToInspectImage;
-- (void)dragCameraToInspectImage:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionInspectImageToCamera;
-- (void)releaseInspectImageToCamera;
-- (void)dragInspectImageToCamera:(CGPoint)_drag;
+- (void)releaseInspectImage;
+- (void)dragInspectImage:(CGPoint)_drag;
 
 @end

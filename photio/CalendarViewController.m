@@ -143,17 +143,19 @@
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragCalendarToCamera:_drag];
+    [[ViewGeneral instance] dragCalendar:_drag];
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] dragCalendar:_drag];
 }
 
 - (void)didReleaseRight:(CGPoint)_location {
-    [[ViewGeneral instance] releaseCalendarToCamera];
+    [[ViewGeneral instance] releaseCalendar];
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
+    [[ViewGeneral instance] releaseCalendar];
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -161,6 +163,7 @@
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] releaseCalendar];
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -168,6 +171,7 @@
 }
 
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [[ViewGeneral instance] releaseCalendar];
 }
 
 @end

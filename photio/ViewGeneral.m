@@ -21,6 +21,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral (PrivateAPI)
 
+- (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation;
+- (void)drag:(CGPoint)_drag view:(UIView*)_view;
 - (CGFloat)verticalReleaseDuration:(CGFloat)_offset;
 - (CGFloat)horizontaltReleaseDuration:(CGFloat)_offset;
 - (CGFloat)verticalTransitionDuration:(CGFloat)_offset;
@@ -31,19 +33,30 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewGeneral
  
+@synthesize notAnimating;
 @synthesize imageInspectViewController, cameraViewController, entryViewController, calendarViewController, localesViewController;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
 
 - (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation {
-    [UIView animateWithDuration:_duration
-        delay:0
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
-        animations:_animation
-        completion:^(BOOL _finished){
-        }
-    ];
+    if (self.notAnimating) {
+        self.notAnimating = NO;
+        [UIView animateWithDuration:_duration
+            delay:0
+            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+            animations:_animation
+            completion:^(BOOL _finished){
+                self.notAnimating = YES;
+            }
+        ];
+    }
+}
+
+- (void)drag:(CGPoint)_drag view:(UIView*)_view {
+    if (self.notAnimating) {
+        _view.transform = CGAffineTransformTranslate(_view.transform, _drag.x, _drag.y);
+    }
 }
 
 - (CGFloat)verticalReleaseDuration:(CGFloat)_offset  {
@@ -55,17 +68,20 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (CGFloat)verticalTransitionDuration:(CGFloat)_offset {
-    return abs(_offset) / TRANSITION_ANIMATION_SPEED;    
+    CGRect screenBounds = [self.class screenBounds];
+    return (screenBounds.size.height - abs(_offset)) / TRANSITION_ANIMATION_SPEED;    
 }
 
 - (CGFloat)horizontalTransitionDuration:(CGFloat)_offset {
-    return abs(_offset) / TRANSITION_ANIMATION_SPEED;    
+    CGRect screenBounds = [self.class screenBounds];
+    return (screenBounds.size.width  - abs(_offset)) / TRANSITION_ANIMATION_SPEED;    
 }
 
 + (ViewGeneral*)instance {	
     @synchronized(self) {
         if (thisViewControllerGeneral == nil) {
             thisViewControllerGeneral = [[self alloc] init]; 
+            thisViewControllerGeneral.notAnimating = YES;
         }
     }
     return thisViewControllerGeneral;
@@ -81,26 +97,22 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 + (CGRect)overWindow {
     CGRect screenBounds = [self screenBounds];
-    return CGRectMake(screenBounds.origin.x, -screenBounds.size.height, screenBounds.size.width, screenBounds.size.height);
+    return CGRectMake(screenBounds.origin.x, -screenBounds.size.height - VIEW_MIN_SPACING, screenBounds.size.width, screenBounds.size.height);
 }
 
 + (CGRect)underWindow {
     CGRect screenBounds = [self screenBounds];
-    return CGRectMake(screenBounds.origin.x, screenBounds.size.height, screenBounds.size.width, screenBounds.size.height);
+    return CGRectMake(screenBounds.origin.x, screenBounds.size.height + VIEW_MIN_SPACING, screenBounds.size.width, screenBounds.size.height);
 }
 
 + (CGRect)leftOfWindow {
     CGRect screenBounds = [self screenBounds];
-    return CGRectMake(-screenBounds.size.width, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
+    return CGRectMake(-screenBounds.size.width - VIEW_MIN_SPACING, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
 }
 
 + (CGRect)rightOfWindow {
     CGRect screenBounds = [self screenBounds];
-    return CGRectMake(screenBounds.size.width, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
-}
-
-+ (void)drag:(CGPoint)_drag view:(UIView*)_view {
-    _view.transform = CGAffineTransformTranslate(_view.transform, _drag.x, _drag.y);
+    return CGRectMake(screenBounds.size.width + VIEW_MIN_SPACING, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
 }
 
 - (void)createViews:(UIView*)_containerView {
@@ -213,7 +225,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)transitionCalendarToCamera {
     if ([CameraViewController cameraIsAvailable]) {
         [self.cameraViewController setFlashImage];
-        [self transition:[self horizontalTransitionDuration:self.cameraViewController.imagePickerController.view.frame.origin.x] withAnimation:^{
+        [self transition:[self horizontalTransitionDuration:self.calendarViewController.view.frame.origin.x] withAnimation:^{
                 [self cameraViewPosition:[self.class inWindow]];
                 [self calendarViewPosition:[self.class rightOfWindow]];
             }
@@ -221,89 +233,70 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     }
 }
 
-- (void)releaseCalendarToCamera {
+- (void)releaseCalendar {
     [self transition:[self horizontaltReleaseDuration:self.calendarViewController.view.frame.origin.x] withAnimation:^{
-            [self cameraViewPosition:[self.class leftOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
     ];    
 }
 
-- (void)dragCalendarToCamera:(CGPoint)_drag {
-    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
-    [self.class drag:_drag view:self.calendarViewController.view];
+- (void)dragCalendar:(CGPoint)_drag {
+    [self drag:_drag view:self.calendarViewController.view];
 }
 
 #pragma mark - 
 #pragma mark Camera To Calendar
 
 - (void)transitionCameraToCalendar {
-    [self transition:[self horizontalTransitionDuration:self.calendarViewController.view.frame.origin.x] withAnimation:^{
+    [self transition:[self horizontalTransitionDuration:self.cameraViewController.imagePickerController.view.frame.origin.x] withAnimation:^{
             [self cameraViewPosition:[self.class leftOfWindow]];
             [self calendarViewPosition:[self.class inWindow]];
         }
     ];
 }
 
-- (void)releaseCameraToCalendar {
+- (void)releaseCamera {
     [self transition:[self horizontaltReleaseDuration:self.cameraViewController.imagePickerController.view.frame.origin.x] withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
-            [self calendarViewPosition:[self.class rightOfWindow]];
         }
     ];    
 }
 
-- (void)dragCameraToCalendar:(CGPoint)_drag {
-    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
-    [self.class drag:_drag view:self.calendarViewController.view];
+- (void)dragCamera:(CGPoint)_drag {
+    [self drag:_drag view:self.cameraViewController.imagePickerController.view];
 }
 
 #pragma mark - 
 #pragma mark Camera To Locales
 
 - (void)transitionCameraToLocales {
-    [self transition:[self horizontalTransitionDuration:self.localesViewController.view.frame.origin.x] withAnimation:^{
+    [self transition:[self horizontalTransitionDuration:self.cameraViewController.imagePickerController.view.frame.origin.x] withAnimation:^{
             [self cameraViewPosition:[self.class rightOfWindow]];
             [self localesViewPosition:[self.class inWindow]];
         }
     ];
 }
 
-- (void)releaseCameraToLocales {
-    [self transition:[self horizontaltReleaseDuration:self.cameraViewController.imagePickerController.view.frame.origin.x] withAnimation:^{
-            [self cameraViewPosition:[self.class inWindow]];
-            [self localesViewPosition:[self.class leftOfWindow]];
-        }
-    ];    
-}
-
-- (void)dragCameraToLocales:(CGPoint)_drag {
-    [self.class drag:_drag view:self.localesViewController.view];
-    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
-}
-
 #pragma mark - 
 #pragma mark Locales To Camera
 
 - (void)transitionLocalesToCamera {
-    [self transition:[self horizontalTransitionDuration:self.cameraViewController.imagePickerController.view.frame.origin.x] withAnimation:^{
+    [self transition:[self horizontalTransitionDuration:self.localesViewController.view.frame.origin.x] withAnimation:^{
         [self cameraViewPosition:[self.class inWindow]];
         [self localesViewPosition:[self.class leftOfWindow]];
     }
      ];
 }
 
-- (void)releaseLocalesToCamera {
+- (void)releaseLocales {
     [self transition:[self horizontaltReleaseDuration:self.localesViewController.view.frame.origin.x] withAnimation:^{
-            [self cameraViewPosition:[self.class rightOfWindow]];
             [self localesViewPosition:[self.class inWindow]];
         }
     ];    
 }
 
-- (void)dragLocalesToCamera:(CGPoint)_drag {
-    [self.class drag:_drag view:self.localesViewController.view];
-    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+- (void)dragLocales:(CGPoint)_drag {
+    [self drag:_drag view:self.localesViewController.view];
 }
 
 #pragma mark - 
@@ -311,7 +304,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)transitionCameraToInspectImage {
     if ([self.imageInspectViewController hasCaptures]) {
-        [self transition:[self verticalTransitionDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
+        [self transition:[self verticalTransitionDuration:self.cameraViewController.imagePickerController.view.frame.origin.y] withAnimation:^{
                 [self cameraViewPosition:[self.class underWindow]];
                 [self imageInspectViewPosition:[self.class inWindow]];
             }
@@ -319,48 +312,33 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     }
 }
 
-- (void)releaseCameraToInspectImage {
-    if ([self.imageInspectViewController hasCaptures]) {
-        [self transition:[self verticalReleaseDuration:self.cameraViewController.imagePickerController.view.frame.origin.y] withAnimation:^{
-                [self cameraViewPosition:[self.class inWindow]];
-                [self imageInspectViewPosition:[self.class overWindow]];
-            }
-        ];
-    }
-}
-
 - (void)dragCameraToInspectImage:(CGPoint)_drag {
     if ([self.imageInspectViewController hasCaptures]) {
-        [self.class drag:_drag view:self.imageInspectViewController.view];
-        [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+        [self drag:_drag view:self.cameraViewController.imagePickerController.view];
     }
 }
-
 
 #pragma mark - 
 #pragma mark Inspect Image To Camera
 
 - (void)transitionInspectImageToCamera {
-    [self transition:[self verticalTransitionDuration:self.cameraViewController.imagePickerController.view.frame.origin.y] withAnimation:^{
+    [self transition:[self verticalTransitionDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self imageInspectViewPosition:[self.class overWindow]];
         }
     ];    
 }
 
-- (void)releaseInspectImageToCamera {
+- (void)releaseInspectImage {
     [self transition:[self verticalReleaseDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
-            [self cameraViewPosition:[self.class underWindow]];
             [self imageInspectViewPosition:[self.class inWindow]];
         }
     ];    
 }
 
-- (void)dragInspectImageToCamera:(CGPoint)_drag {
-    [self.class drag:_drag view:self.imageInspectViewController.view];
-    [self.class drag:_drag view:self.cameraViewController.imagePickerController.view];
+- (void)dragInspectImage:(CGPoint)_drag {
+    [self drag:_drag view:self.imageInspectViewController.view];
 }
-
 
 #pragma mark -
 #pragma mark CameraViewControllerDelegate
@@ -369,17 +347,20 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self.imageInspectViewController addImage:_picture];
     __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
     [self.cameraViewController.imagePickerController.view addSubview:snapshot];
-    [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
-        delay:CAMERA_NEW_PHOTO_DELAY
-        options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp
-        animations:^{
-            snapshot.frame = [self.class overWindow];
-        }
-        completion:^(BOOL _finished){
-            [snapshot removeFromSuperview];
-        }
-     ];
-
+    if (self.notAnimating) {
+        self.notAnimating = NO;
+        [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
+            delay:CAMERA_NEW_PHOTO_DELAY
+            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp
+            animations:^{
+                snapshot.frame = [self.class overWindow];
+            }
+            completion:^(BOOL _finished){
+                [snapshot removeFromSuperview];
+                self.notAnimating = YES;
+            }
+         ];
+    }
 }
 
 @end
