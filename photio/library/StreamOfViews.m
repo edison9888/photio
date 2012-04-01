@@ -59,7 +59,7 @@
         self.notAnimating = NO;
         [UIView animateWithDuration:[self releaseDuration]
             delay:0
-            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+            options:UIViewAnimationOptionCurveEaseOut
             animations:^{
                 [self displayedView].frame = [self inWindow];
             }
@@ -75,7 +75,7 @@
         self.notAnimating = NO;
         [UIView animateWithDuration:[self transitionDuration]
             delay:0
-            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+            options:UIViewAnimationOptionCurveEaseOut
             animations:^{
                 [self rightView].frame = [self inWindow];
                 [self displayedView].frame = [self leftOfWindow];
@@ -93,7 +93,7 @@
         self.notAnimating = NO;
         [UIView animateWithDuration:[self transitionDuration]
             delay:0
-            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+            options:UIViewAnimationOptionCurveEaseOut
             animations:^{
                 [self leftView].frame = [self inWindow];
                 [self displayedView].frame = [self rightOfWindow];

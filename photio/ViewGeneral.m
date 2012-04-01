@@ -44,7 +44,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         self.notAnimating = NO;
         [UIView animateWithDuration:_duration
             delay:0
-            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionFlipFromLeft
+            options:UIViewAnimationOptionCurveEaseOut
             animations:_animation
             completion:^(BOOL _finished){
                 self.notAnimating = YES;
@@ -351,7 +351,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         self.notAnimating = NO;
         [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
             delay:CAMERA_NEW_PHOTO_DELAY
-            options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp
+            options:UIViewAnimationOptionCurveEaseOut
             animations:^{
                 snapshot.frame = [self.class overWindow];
             }
