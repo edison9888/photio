@@ -206,14 +206,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     });
 }
 
-- (void)cameraStillImageCaptured:(Camera*)_camera {
-    CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^(void) {
-    });
-}
-
-- (void)cameraDeviceConfigurationChanged:(Camera*)_camera {
-}
-
 @end
 
 #pragma mark -

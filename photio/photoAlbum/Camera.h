@@ -37,7 +37,5 @@
 @optional
 
 - (void)camera:(Camera*)_camera didFailWithError:(NSError *)error;
-- (void)cameraStillImageCaptured:(Camera*)_camera;
-- (void)cameraDeviceConfigurationChanged:(Camera*)_camera;
 
 @end

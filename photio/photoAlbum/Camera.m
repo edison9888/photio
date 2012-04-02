@@ -60,9 +60,6 @@
                     }
 				}				
 			}
-			if ([self.delegate respondsToSelector:@selector(captureManagerDeviceConfigurationChanged:)]) {
-				[self.delegate cameraDeviceConfigurationChanged:self];
-			}			
         };
         
         void (^deviceDisconnectedBlock)(NSNotification*) = ^(NSNotification* notification) {
@@ -73,9 +70,6 @@
 				[weakSelf setVideoInput:nil];
 			}
 			
-			if ([self.delegate respondsToSelector:@selector(captureManagerDeviceConfigurationChanged:)]) {
-				[self.delegate cameraDeviceConfigurationChanged:self];
-			}			
         };
         
         NSNotificationCenter* notificationCenter = [NSNotificationCenter defaultCenter];
@@ -122,14 +116,11 @@
             };
             if (imageDataSampleBuffer != NULL) {
                 NSData* imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
                 UIImage* image = [[UIImage alloc] initWithData:imageData];
+                ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
                 [library writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:completionBlock];
             } else {
                 completionBlock(nil, error);
-            }
-            if ([self.delegate respondsToSelector:@selector(captureManagerStillImageCaptured:)]) {
-                [self.delegate cameraStillImageCaptured:self];
             }
         }
      ];
