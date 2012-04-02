@@ -38,7 +38,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="393904638">
 						<reference key="NSNextResponder" ref="142320705"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{20, 20}, {45, 45}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
@@ -53,10 +53,11 @@
 					</object>
 					<object class="IBUIImageView" id="760511041">
 						<reference key="NSNextResponder" ref="142320705"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{0, 420}, {320, 60}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -78,10 +79,10 @@
 				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
+			<object class="IBUITapGestureRecognizer" id="848899834"/>
 			<object class="IBUITapGestureRecognizer" id="729777438">
 				<int key="IBUINumberOfTapsRequired">2</int>
 			</object>
-			<object class="IBUITapGestureRecognizer" id="848899834"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -91,33 +92,15 @@
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="142320705"/>
 					</object>
-					<int key="connectionID">11</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">flash</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="393904638"/>
-					</object>
-					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
-						<string key="label">gestureRecognizers</string>
-						<reference key="source" ref="142320705"/>
-						<reference key="destination" ref="729777438"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
-						<bool key="addsContentToExistingCollection">YES</bool>
-					</object>
-					<int key="connectionID">41</int>
+					<int key="connectionID">58</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">takePhoto:</string>
+						<string key="label">captureStillImage:</string>
 						<reference key="source" ref="848899834"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
-					<int key="connectionID">54</int>
+					<int key="connectionID">59</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -125,7 +108,7 @@
 						<reference key="source" ref="729777438"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
-					<int key="connectionID">43</int>
+					<int key="connectionID">60</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -167,12 +150,6 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">40</int>
-						<reference key="object" ref="729777438"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">flash</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">38</int>
 						<reference key="object" ref="393904638"/>
 						<reference key="parent" ref="142320705"/>
@@ -191,6 +168,12 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">take photo</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">40</int>
+						<reference key="object" ref="729777438"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">flash</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -208,7 +191,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">55</int>
+			<int key="maxID">60</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -216,30 +199,19 @@
 					<string key="className">CameraViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="captureStillImage:">id</string>
 						<string key="changeFlashMode:">id</string>
-						<string key="takePhoto:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="captureStillImage:">
+							<string key="name">captureStillImage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="changeFlashMode:">
 							<string key="name">changeFlashMode:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="takePhoto:">
-							<string key="name">takePhoto:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 					</dictionary>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">flash</string>
-						<string key="NS.object.0">UIImageView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">flash</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">flash</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/CameraViewController.h</string>

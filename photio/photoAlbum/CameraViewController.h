@@ -1,8 +1,8 @@
 //
-//  CameraViewController.h
+//  CameraViewController.m
 //  photio
 //
-//  Created by Troy Stribling on 2/19/12.
+//  Created by Troy Stribling on 3/2/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -10,33 +10,28 @@
 #import "TransitionGestureRecognizer.h"
 
 @protocol CameraViewControllerDelegate;
+@class Camera, AVCamPreviewView, AVCaptureVideoPreviewLayer;
 
-@interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, TransitionGestureRecognizerDelegate> {
-    __weak id <CameraViewControllerDelegate>    cameraDelegate;
-    __weak UIView*                              containerView;
-    TransitionGestureRecognizer*                transitionGestureRecognizer;
-    UIImageView*                                flash;
-    UIImagePickerController*                    imagePickerController;
-}    
+@interface CameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+}
 
-@property (nonatomic, weak)     id <CameraViewControllerDelegate>   cameraDelegate;
-@property (nonatomic, weak)     UIView*                             containerView;
-@property (nonatomic, retain)   IBOutlet UIImageView*               flash;
-@property (nonatomic, retain)   UIImagePickerController*            imagePickerController;
-@property (nonatomic, retain)   TransitionGestureRecognizer*        transitionGestureRecognizer;
-
+@property (nonatomic, weak)   UIView*                           containerView;
+@property (nonatomic, weak)   id <CameraViewControllerDelegate> cameraDelegate;
+@property (nonatomic, retain) Camera*                           camera;
+@property (nonatomic, retain) AVCaptureVideoPreviewLayer*       captureVideoPreviewLayer;
+@property (nonatomic, retain) TransitionGestureRecognizer*      transitionGestureRecognizer;
 
 + (id)inView:(UIView*)_containerView;
-+ (BOOL)cameraIsAvailable;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
-- (IBAction)takePhoto:(id)sender;
-- (IBAction)changeFlashMode:(id)sender;
 - (void)setFlashImage;
+- (IBAction)captureStillImage:(id)sender;
+- (IBAction)changeFlashMode:(id)sender;
 
 @end
 
-@protocol CameraViewControllerDelegate
+@protocol CameraViewControllerDelegate <NSObject>
 
 - (void)didTakePicture:(UIImage*)_picture;
 
 @end
+

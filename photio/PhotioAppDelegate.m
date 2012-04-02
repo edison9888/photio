@@ -7,7 +7,7 @@
 //
 
 #import "PhotioAppDelegate.h"
-#import "ContainerViewController.h"
+#import "CameraViewController.h"
 #import "Dbi.h"
 
 @implementation PhotioAppDelegate
@@ -22,7 +22,7 @@
 	}	
 	[Dbi open];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.viewController = [[ContainerViewController alloc] initWithNibName:@"ContainerViewController" bundle:nil];
+    self.viewController = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

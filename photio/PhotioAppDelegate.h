@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class ContainerViewController;
+@class CameraViewController;
 
 @interface PhotioAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow*                 window;
-@property (strong, nonatomic) ContainerViewController*  viewController;
+@property (strong, nonatomic) CameraViewController*     viewController;
 
 @end

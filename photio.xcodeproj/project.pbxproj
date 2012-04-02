@@ -13,6 +13,9 @@
 		0529A7C71501D41900235B95 /* TransitionGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */; };
 		0529A7D41503B35400235B95 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7D21503B35400235B95 /* CalendarViewController.m */; };
 		0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0529A7D31503B35400235B95 /* CalendarViewController.xib */; };
+		052AE17B1528941F005D57B1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17A1528941F005D57B1 /* AssetsLibrary.framework */; };
+		052AE17E1528943E005D57B1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17D1528943E005D57B1 /* CoreMedia.framework */; };
+		052AE1801528944F005D57B1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17F1528944F005D57B1 /* CoreVideo.framework */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
 		0542DAF91523EDA7002C62A0 /* flash-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF71523EDA7002C62A0 /* flash-on.png */; };
 		0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF81523EDA7002C62A0 /* flash-on@2x.png */; };
@@ -23,6 +26,9 @@
 		058B4FBC15196D840087F717 /* LocaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FBB15196D840087F717 /* LocaleView.m */; };
 		059772E71527961B008F3A1B /* take-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 059772E61527961B008F3A1B /* take-photo.png */; };
 		059772E9152798BA008F3A1B /* take-photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059772E8152798BA008F3A1B /* take-photo@2x.png */; };
+		059772F51527D787008F3A1B /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F01527D787008F3A1B /* Camera.m */; };
+		059772F71527D787008F3A1B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* CameraViewController.m */; };
+		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
 		05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D694150BC86A009C9A11 /* CalendarDayView.m */; };
 		05A70135151E243B00BBA79E /* Dbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70134151E243B00BBA79E /* Dbi.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
@@ -35,7 +41,6 @@
 		05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EC914F0585C00D09F3E /* InfoPlist.strings */; };
 		05C99ECD14F0585C00D09F3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ECC14F0585C00D09F3E /* main.m */; };
 		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
-		05C99EF114F05A5500D09F3E /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99EED14F05A5500D09F3E /* CameraViewController.m */; };
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
@@ -56,6 +61,9 @@
 		0529A7D11503B35400235B95 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		0529A7D21503B35400235B95 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		0529A7D31503B35400235B95 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		052AE17A1528941F005D57B1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		052AE17D1528943E005D57B1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		052AE17F1528944F005D57B1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		0542DAE4151FFD85002C62A0 /* StreamOfViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamOfViews.h; sourceTree = "<group>"; };
 		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
 		0542DAF71523EDA7002C62A0 /* flash-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash-on.png"; sourceTree = "<group>"; };
@@ -71,6 +79,11 @@
 		058B4FBB15196D840087F717 /* LocaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaleView.m; sourceTree = "<group>"; };
 		059772E61527961B008F3A1B /* take-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "take-photo.png"; sourceTree = "<group>"; };
 		059772E8152798BA008F3A1B /* take-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "take-photo@2x.png"; sourceTree = "<group>"; };
+		059772EF1527D787008F3A1B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		059772F01527D787008F3A1B /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
+		059772F31527D787008F3A1B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		059772F41527D787008F3A1B /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		059772F81527D7B5008F3A1B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		05A1D693150BC86A009C9A11 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayView.h; sourceTree = "<group>"; };
 		05A1D694150BC86A009C9A11 /* CalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayView.m; sourceTree = "<group>"; };
 		05A70133151E243B00BBA79E /* Dbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dbi.h; sourceTree = "<group>"; };
@@ -91,8 +104,6 @@
 		05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "photio-Prefix.pch"; sourceTree = "<group>"; };
 		05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotioAppDelegate.h; sourceTree = "<group>"; };
 		05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioAppDelegate.m; sourceTree = "<group>"; };
-		05C99EEC14F05A5500D09F3E /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
-		05C99EED14F05A5500D09F3E /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -114,6 +125,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */,
+				052AE17B1528941F005D57B1 /* AssetsLibrary.framework in Frameworks */,
+				059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */,
+				052AE17E1528943E005D57B1 /* CoreMedia.framework in Frameworks */,
+				052AE1801528944F005D57B1 /* CoreVideo.framework in Frameworks */,
 				05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */,
 				05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */,
 				05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */,
@@ -164,6 +179,10 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
+				052AE17F1528944F005D57B1 /* CoreVideo.framework */,
+				052AE17D1528943E005D57B1 /* CoreMedia.framework */,
+				052AE17A1528941F005D57B1 /* AssetsLibrary.framework */,
+				059772F81527D7B5008F3A1B /* AVFoundation.framework */,
 				05A7013A151E2CB400BBA79E /* libsqlite3.dylib */,
 				05DE439414F20064005FF6B0 /* QuartzCore.framework */,
 				05C99EC614F0585C00D09F3E /* photio */,
@@ -238,8 +257,10 @@
 			isa = PBXGroup;
 			children = (
 				05DE436314F17503005FF6B0 /* UIImage-categories */,
-				05C99EEC14F05A5500D09F3E /* CameraViewController.h */,
-				05C99EED14F05A5500D09F3E /* CameraViewController.m */,
+				059772EF1527D787008F3A1B /* Camera.h */,
+				059772F01527D787008F3A1B /* Camera.m */,
+				059772F31527D787008F3A1B /* CameraViewController.h */,
+				059772F41527D787008F3A1B /* CameraViewController.m */,
 				050CF14F14F9A27D00A31059 /* CameraViewController.xib */,
 				05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */,
 				05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */,
@@ -336,7 +357,6 @@
 			files = (
 				05C99ECD14F0585C00D09F3E /* main.m in Sources */,
 				05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */,
-				05C99EF114F05A5500D09F3E /* CameraViewController.m in Sources */,
 				05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */,
 				05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */,
 				05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */,
@@ -354,6 +374,8 @@
 				05A70135151E243B00BBA79E /* Dbi.m in Sources */,
 				05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */,
 				0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */,
+				059772F51527D787008F3A1B /* Camera.m in Sources */,
+				059772F71527D787008F3A1B /* CameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
