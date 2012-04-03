@@ -34,7 +34,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @implementation CameraViewController
 
-@synthesize camera, containerView, transitionGestureRecognizer, cameraDelegate, captureVideoPreviewLayer;
+@synthesize camera, containerView, transitionGestureRecognizer, delegate, captureVideoPreviewLayer,
+            takePhotoView, flashView;
 
 #pragma mark -
 #pragma mark UIView
@@ -62,7 +63,9 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[self.camera session] startRunning];
         });
-                    
+             
+        self.takePhotoView.hidden = NO;
+        
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToAutoFocus:)];
         [singleTap setDelegate:self];
         [singleTap setNumberOfTapsRequired:1];
@@ -101,6 +104,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 }
 
 - (IBAction)changeFlashMode:(id)sender {
+}
+
+- (void)saveImage:(UIImage*)_image {
+    [self.camera saveImage:_image];
 }
 
 @end
@@ -206,11 +213,15 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     });
 }
 
+- (void)camera:(Camera*)_camera didCaptureImage:(UIImage*)_image {
+    [self.delegate didCaptureImage:_image];
+}
+
 @end
 
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
-@implementation CameraViewController (TransitionGestureRecognizerDelegatez)
+@implementation CameraViewController (TransitionGestureRecognizerDelegate)
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] dragCamera:_drag];

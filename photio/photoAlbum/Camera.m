@@ -24,6 +24,7 @@
 
 
 #pragma mark -
+#pragma mark Camera
 @implementation Camera
 
 @synthesize session, orientation, videoInput, stillImageOutput, deviceConnectedObserver, deviceDisconnectedObserver,
@@ -101,7 +102,7 @@
 }
 
 - (void)captureStillImage {
-    AVCaptureConnection *stillImageConnection = [self.class connectionWithMediaType:AVMediaTypeVideo fromConnections:[self.stillImageOutput connections]];
+    AVCaptureConnection* stillImageConnection = [self.class connectionWithMediaType:AVMediaTypeVideo fromConnections:[self.stillImageOutput connections]];
     if ([stillImageConnection isVideoOrientationSupported]) {
         [stillImageConnection setVideoOrientation:orientation];
     }
@@ -109,7 +110,7 @@
         completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError* error) {
             ALAssetsLibraryWriteImageCompletionBlock completionBlock = ^(NSURL *assetURL, NSError *error) {
                 if (error) {
-                    if ([self.delegate respondsToSelector:@selector(captureManager:didFailWithError:)]) {
+                    if ([self.delegate respondsToSelector:@selector(camera:didFailWithError:)]) {
                         [self.delegate camera:self didFailWithError:error];
                     }
                 }
@@ -117,8 +118,9 @@
             if (imageDataSampleBuffer != NULL) {
                 NSData* imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 UIImage* image = [[UIImage alloc] initWithData:imageData];
-                ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-                [library writeImageToSavedPhotosAlbum:[image CGImage] orientation:(ALAssetOrientation)[image imageOrientation] completionBlock:completionBlock];
+                if ([self.delegate respondsToSelector:@selector(camera:didCaptureImage:)]) {
+                    [self.delegate camera:self didCaptureImage:image];
+                }
             } else {
                 completionBlock(nil, error);
             }
@@ -151,7 +153,7 @@
             [self.session commitConfiguration];
             success = YES;
         } else if (error) {
-            if ([self.delegate respondsToSelector:@selector(captureManager:didFailWithError:)]) {
+            if ([self.delegate respondsToSelector:@selector(camera:didFailWithError:)]) {
                 [self.delegate camera:self didFailWithError:error];
             }
         }
@@ -173,7 +175,7 @@
             [device setFocusMode:AVCaptureFocusModeAutoFocus];
             [device unlockForConfiguration];
         } else {
-            if ([self.delegate respondsToSelector:@selector(captureManager:didFailWithError:)]) {
+            if ([self.delegate respondsToSelector:@selector(camera:didFailWithError:)]) {
                 [self.delegate camera:self didFailWithError:error];
             }
         }        
@@ -189,11 +191,23 @@
 			[device setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
 			[device unlockForConfiguration];
 		} else {
-			if ([self.delegate respondsToSelector:@selector(captureManager:didFailWithError:)]) {
+			if ([self.delegate respondsToSelector:@selector(camera:didFailWithError:)]) {
                 [self.delegate camera:self didFailWithError:error];
 			}
 		}
 	}
+}
+
+- (void)saveImage:(UIImage*)_image {
+    ALAssetsLibraryWriteImageCompletionBlock completionBlock = ^(NSURL *assetURL, NSError *error) {
+        if (error) {
+            if ([self.delegate respondsToSelector:@selector(camera:didFailWithError:)]) {
+                [self.delegate camera:self didFailWithError:error];
+            }
+        }
+    };
+    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+    [library writeImageToSavedPhotosAlbum:[_image CGImage] orientation:(ALAssetOrientation)[_image imageOrientation] completionBlock:completionBlock];
 }
 
 @end
@@ -251,7 +265,7 @@
     if ([fileManager fileExistsAtPath:filePath]) {
         NSError *error;
         if ([fileManager removeItemAtPath:filePath error:&error] == NO) {
-            if ([self.delegate respondsToSelector:@selector(captureManager:didFailWithError:)]) {
+            if ([self.delegate respondsToSelector:@selector(camera:didFailWithError:)]) {
                 [self.delegate camera:self didFailWithError:error];
             }            
         }
@@ -265,7 +279,7 @@
 	NSString *destinationPath = [documentsDirectory stringByAppendingFormat:@"/output_%@.mov", [dateFormatter stringFromDate:[NSDate date]]];
 	NSError	*error;
 	if (![[NSFileManager defaultManager] copyItemAtURL:fileURL toURL:[NSURL fileURLWithPath:destinationPath] error:&error]) {
-		if ([self.delegate respondsToSelector:@selector(captureManager:didFailWithError:)]) {
+		if ([self.delegate respondsToSelector:@selector(camera:didFailWithError:)]) {
 			[self.delegate camera:self didFailWithError:error];
 		}
 	}

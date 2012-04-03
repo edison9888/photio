@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "ViewGeneral.h"
 #import "UIImage+Resize.h"
 
@@ -75,6 +76,11 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (CGFloat)horizontalTransitionDuration:(CGFloat)_offset {
     CGRect screenBounds = [self.class screenBounds];
     return (screenBounds.size.width  - abs(_offset)) / TRANSITION_ANIMATION_SPEED;    
+}
+
+- (void)saveImage:(UIImage*)_image {
+    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+    [library writeImageToSavedPhotosAlbum:[_image CGImage] orientation:(ALAssetOrientation)[_image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error){}];
 }
 
 + (ViewGeneral*)instance {	
@@ -169,7 +175,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         self.cameraViewController = [CameraViewController inView:_containerView];
     } 
     [self cameraViewPosition:[self.class inWindow]];
-    self.cameraViewController.cameraDelegate = self;
+    self.cameraViewController.delegate = self;
     [_containerView addSubview:self.cameraViewController.view];
 }
 
@@ -341,7 +347,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark -
 #pragma mark CameraViewControllerDelegate
 
-- (void)didTakePicture:(UIImage*)_picture { 
+- (void)didCaptureImage:(UIImage*)_picture { 
     [self.imageInspectViewController addImage:_picture];
     __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
     [self.cameraViewController.view addSubview:snapshot];

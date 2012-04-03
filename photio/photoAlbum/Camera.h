@@ -29,13 +29,15 @@
 - (NSUInteger)cameraCount;
 - (void)autoFocusAtPoint:(CGPoint)point;
 - (void)continuousFocusAtPoint:(CGPoint)point;
+- (void)saveImage:(UIImage*)_image;
 
 @end
 
 @protocol CameraDelegate <NSObject>
 
-@optional
+@required
 
-- (void)camera:(Camera*)_camera didFailWithError:(NSError *)error;
+- (void)camera:(Camera*)_camera didFailWithError:(NSError*)_error;
+- (void)camera:(Camera*)_camera didCaptureImage:(UIImage*)_image;
 
 @end
