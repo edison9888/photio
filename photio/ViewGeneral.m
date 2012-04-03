@@ -316,6 +316,13 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     }
 }
 
+- (void)releaseCameraInspectImage {
+    [self transition:[self horizontaltReleaseDuration:self.cameraViewController.view.frame.origin.y] withAnimation:^{
+        [self cameraViewPosition:[self.class inWindow]];
+    }
+     ];    
+}
+
 - (void)dragCameraToInspectImage:(CGPoint)_drag {
     if ([self.imageInspectViewController hasCaptures]) {
         [self drag:_drag view:self.cameraViewController.view];
@@ -366,6 +373,54 @@ static ViewGeneral* thisViewControllerGeneral = nil;
             }
          ];
     }
+}
+
+- (void)didDragCameraRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity{
+    [self dragCamera:_drag];    
+}
+
+- (void)didDragCameraLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self dragCamera:_drag];
+}
+
+- (void)didDragCameraDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self dragCameraToInspectImage:_drag];
+}
+
+- (void)didReleaseCameraRight:(CGPoint)_location {
+    [self releaseCamera];
+}
+
+- (void)didReleaseCameraLeft:(CGPoint)_location {
+    [self releaseCamera];
+}
+
+- (void)didReleaseCameraDown:(CGPoint)_location {
+    [self releaseCameraInspectImage];
+}
+
+- (void)didSwipeCameraRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self transitionCameraToLocales];    
+}
+
+- (void)didSwipeCameraLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self transitionCameraToCalendar];    
+}
+
+- (void)didSwipeCameraDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self transitionCameraToInspectImage];
+}
+
+- (void)didReachCameraMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self transitionCameraToLocales];    
+}
+
+- (void)didReachCameraMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self transitionCameraToCalendar];    
+}
+
+- (void)didReachCameraMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self transitionCameraToInspectImage];
 }
 
 @end

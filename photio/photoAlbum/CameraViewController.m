@@ -224,63 +224,87 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @implementation CameraViewController (TransitionGestureRecognizerDelegate)
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragCamera:_drag];
+    if ([self.delegate respondsToSelector:@selector(didDragCameraRight:from:withVelocity:)]) {
+        [self.delegate didDragCameraRight:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    [[ViewGeneral instance] dragCamera:_drag];
+    if ([self.delegate respondsToSelector:@selector(didDragCameraLeft:from:withVelocity:)]) {
+        [self.delegate didDragCameraLeft:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragCameraToInspectImage:_drag];
+    if ([self.delegate respondsToSelector:@selector(didDragCameraDown:from:withVelocity:)]) {
+        [self.delegate didDragCameraDown:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didReleaseRight:(CGPoint)_location {    
-    [[ViewGeneral instance] releaseCamera];
+    if ([self.delegate respondsToSelector:@selector(didReleaseCameraRight:)]) {
+        [self.delegate didReleaseCameraRight:_location];
+    }
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
-    [[ViewGeneral instance] releaseCamera];
+    if ([self.delegate respondsToSelector:@selector(didReleaseCameraLeft:)]) {
+        [self.delegate didReleaseCameraLeft:_location];
+    }
 }
 
 - (void)didReleaseUp:(CGPoint)_location {
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
-    [[ViewGeneral instance] releaseCamera];
+    if ([self.delegate respondsToSelector:@selector(didReleaseCameraDown:)]) {
+        [self.delegate didReleaseCameraDown:_location];
+    }
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionCameraToLocales];    
+    if ([self.delegate respondsToSelector:@selector(didSwipeCameraRight:withVelocity:)]) {
+        [self.delegate didSwipeCameraRight:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionCameraToCalendar];    
+    if ([self.delegate respondsToSelector:@selector(didSwipeCameraLeft:withVelocity:)]) {
+        [self.delegate didSwipeCameraLeft:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionCameraToInspectImage];
+    if ([self.delegate respondsToSelector:@selector(didSwipeCameraDown:withVelocity:)]) {
+        [self.delegate didSwipeCameraDown:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionCameraToLocales];    
+    if ([self.delegate respondsToSelector:@selector(didReachCameraMaxDragRight:from:withVelocity:)]) {
+        [self.delegate didReachCameraMaxDragRight:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    [[ViewGeneral instance] transitionCameraToCalendar];    
+    if ([self.delegate respondsToSelector:@selector(didReachCameraMaxDragLeft:from:withVelocity:)]) {
+        [self.delegate didReachCameraMaxDragLeft:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
 }
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    [[ViewGeneral instance] transitionCameraToInspectImage];
+    if ([self.delegate respondsToSelector:@selector(didReachCameraMaxDragDown:from:withVelocity:)]) {
+        [self.delegate didReachCameraMaxDragDown:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 @end

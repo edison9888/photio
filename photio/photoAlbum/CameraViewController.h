@@ -38,5 +38,23 @@
 
 - (void)didCaptureImage:(UIImage*)_image;
 
+@optional
+
+- (void)didDragCameraRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didDragCameraLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didDragCameraDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+
+- (void)didReleaseCameraRight:(CGPoint)_location;
+- (void)didReleaseCameraLeft:(CGPoint)_location;
+- (void)didReleaseCameraDown:(CGPoint)_location;
+
+- (void)didSwipeCameraRight:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didSwipeCameraLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didSwipeCameraDown:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+
+- (void)didReachCameraMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachCameraMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachCameraMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+
 @end
 
