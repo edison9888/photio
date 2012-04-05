@@ -156,13 +156,13 @@
 }
 
 - (void)addView:(UIView*)_view {
-    if ([self.streamOfViews count] == 0) {
-        _view.frame = [self inWindow];
-    } else {
-        _view.frame = [self rightOfWindow];
+    if ([self.streamOfViews count] > 0) {
+        UIView* currentView = [self.streamOfViews lastObject];
+        currentView.frame = [self rightOfWindow];
     }
+    _view.frame = [self inWindow];
     [self addSubview:_view];
-    [self.streamOfViews addObject:_view];
+    [self.streamOfViews insertObject:_view atIndex:self.inViewIndex];
 }
 
 #pragma mark -
