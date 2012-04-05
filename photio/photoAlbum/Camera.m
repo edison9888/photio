@@ -128,12 +128,12 @@
      ];
 }
 
-- (BOOL) toggleCamera {
+- (BOOL)toggleCamera {
     BOOL success = NO;
     if ([self cameraCount] > 1) {
         NSError *error;
         AVCaptureDeviceInput* newVideoInput;
-        AVCaptureDevicePosition position = [[self.videoInput device] position];        
+        AVCaptureDevicePosition position = self.videoInput.device.position;        
         if (position == AVCaptureDevicePositionBack) {
             newVideoInput = [[AVCaptureDeviceInput alloc] initWithDevice:[self frontFacingCamera] error:&error];
         } else if (position == AVCaptureDevicePositionFront) {
@@ -148,7 +148,7 @@
                 [self.session addInput:newVideoInput];
                 self.videoInput = newVideoInput;
             } else {
-                [self.session addInput:[self videoInput]];
+                [self.session addInput:self.videoInput];
             }
             [self.session commitConfiguration];
             success = YES;
@@ -161,6 +161,9 @@
     return success;
 }
 
+- (AVCaptureDevicePosition)selectedCamera {
+    return self.videoInput.device.position;
+}
 
 - (NSUInteger) cameraCount {
     return [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo] count];
@@ -208,6 +211,21 @@
     };
     ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
     [library writeImageToSavedPhotosAlbum:[_image CGImage] orientation:(ALAssetOrientation)[_image imageOrientation] completionBlock:completionBlock];
+}
+
+- (void)setFlashMode:(AVCaptureFlashMode)_flashmode {
+    if ([self.backFacingCamera hasFlash]) {
+		if ([self.backFacingCamera lockForConfiguration:nil]) {
+			if ([self.backFacingCamera isFlashModeSupported:_flashmode]) {
+				self.backFacingCamera.flashMode = _flashmode;
+			}
+			[self.backFacingCamera unlockForConfiguration];
+		}
+	}
+}
+
+- (AVCaptureFlashMode)flashMode {
+    return self.backFacingCamera.flashMode;
 }
 
 @end

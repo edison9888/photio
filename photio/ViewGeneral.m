@@ -11,7 +11,6 @@
 #import "ViewGeneral.h"
 #import "UIImage+Resize.h"
 
-#import "ImageInspectViewController.h"
 #import "EntryViewController.h"
 #import "CalendarViewController.h"
 #import "LocalesViewController.h"
@@ -153,7 +152,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)initImageInspectView:(UIView*)_containerView {
     if (self.imageInspectViewController == nil) {
-        self.imageInspectViewController = [ImageInspectViewController inView:_containerView];
+        self.imageInspectViewController = [ImageInspectViewController inView:_containerView withDelegate:self];
     } 
     [self imageInspectViewPosition:[self.class overWindow]];
     [_containerView addSubview:self.imageInspectViewController.view];
@@ -229,7 +228,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Calendar To Camera
 
 - (void)transitionCalendarToCamera {
-    [self.cameraViewController setFlashImage];
+    [self.cameraViewController continouslyAutoFocus];
     [self transition:[self horizontalTransitionDuration:self.calendarViewController.view.frame.origin.x] withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self calendarViewPosition:[self.class rightOfWindow]];
@@ -285,6 +284,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Locales To Camera
 
 - (void)transitionLocalesToCamera {
+    [self.cameraViewController continouslyAutoFocus];
     [self transition:[self horizontalTransitionDuration:self.localesViewController.view.frame.origin.x] withAnimation:^{
         [self cameraViewPosition:[self.class inWindow]];
         [self localesViewPosition:[self.class leftOfWindow]];
@@ -327,28 +327,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if ([self.imageInspectViewController hasCaptures]) {
         [self drag:_drag view:self.cameraViewController.view];
     }
-}
-
-#pragma mark - 
-#pragma mark Inspect Image To Camera
-
-- (void)transitionInspectImageToCamera {
-    [self transition:[self verticalTransitionDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
-            [self cameraViewPosition:[self.class inWindow]];
-            [self imageInspectViewPosition:[self.class overWindow]];
-        }
-    ];    
-}
-
-- (void)releaseInspectImage {
-    [self transition:[self verticalReleaseDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
-            [self imageInspectViewPosition:[self.class inWindow]];
-        }
-    ];    
-}
-
-- (void)dragInspectImage:(CGPoint)_drag {
-    [self drag:_drag view:self.imageInspectViewController.view];
 }
 
 #pragma mark -
@@ -421,6 +399,29 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)didReachCameraMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [self transitionCameraToInspectImage];
+}
+
+#pragma mark -
+#pragma mark CameraViewControllerDelegate
+
+- (void)dragInspectImage:(CGPoint)_drag {
+    [self drag:_drag view:self.imageInspectViewController.view];
+}
+
+- (void)releaseInspectImage {
+    [self transition:[self verticalReleaseDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
+            [self imageInspectViewPosition:[self.class inWindow]];
+        }
+    ];    
+}
+
+- (void)transitionFromInspectImage {
+    [self.cameraViewController continouslyAutoFocus];
+    [self transition:[self verticalTransitionDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
+            [self cameraViewPosition:[self.class inWindow]];
+            [self imageInspectViewPosition:[self.class overWindow]];
+        }
+    ];    
 }
 
 @end

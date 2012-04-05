@@ -9,7 +9,6 @@
 #import "CameraViewController.h"
 #import "Camera.h"
 #import "TransitionGestureRecognizer.h"
-#import "ViewGeneral.h"
 #import <AVFoundation/AVFoundation.h>
 
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
@@ -20,9 +19,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @interface CameraViewController (PrivateAPI)
 
 - (CGPoint)convertToPointOfInterestFromViewCoordinates:(CGPoint)viewCoordinates;
-- (void)tapToAutoFocus:(UIGestureRecognizer*)gestureRecognizer;
-- (void)tapToContinouslyAutoFocus:(UIGestureRecognizer*)gestureRecognizer;
-- (void)toggleCamera:(id)sender;
+- (void)setFlashImage;
+- (void)toggleCamera;
 
 @end
 
@@ -35,7 +33,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @implementation CameraViewController
 
 @synthesize camera, containerView, transitionGestureRecognizer, delegate, captureVideoPreviewLayer,
-            takePhotoView, flashView;
+            takePhotoView, flashView, focusGesture, flashGesture;
 
 #pragma mark -
 #pragma mark UIView
@@ -63,20 +61,12 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[self.camera session] startRunning];
         });
-             
+        [self.focusGesture requireGestureRecognizerToFail:self.flashGesture];
+        [self continouslyAutoFocus];
+        [self setFlashImage];
+        [self.camera setFlashMode:AVCaptureFlashModeOff];
         self.takePhotoView.hidden = NO;
-        
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToAutoFocus:)];
-        [singleTap setDelegate:self];
-        [singleTap setNumberOfTapsRequired:1];
-        [self.view addGestureRecognizer:singleTap];
-        
-        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToContinouslyAutoFocus:)];
-        [doubleTap setDelegate:self];
-        [doubleTap setNumberOfTapsRequired:2];
-        [singleTap requireGestureRecognizerToFail:doubleTap];
-        [self.view addGestureRecognizer:doubleTap];
-	}
+    }
     [super viewDidLoad];
 }
 
@@ -96,18 +86,40 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     return self;
 }
 
+- (void)saveImage:(UIImage*)_image {
+    [self.camera saveImage:_image];
+}
+
+- (void)continouslyAutoFocus {
+    if ([self.camera.videoInput.device isFocusPointOfInterestSupported])
+        [self.camera continuousFocusAtPoint:CGPointMake(.5f, .5f)];
+}
+
 - (IBAction)captureStillImage:(id)sender {
     [self.camera captureStillImage];
 }
 
-- (void)setFlashImage {
-}
-
 - (IBAction)changeFlashMode:(id)sender {
+    switch ([self.camera flashMode]) {
+        case AVCaptureFlashModeOff:
+            [self.camera setFlashMode:AVCaptureFlashModeOn];
+            break;
+        case AVCaptureFlashModeOn:
+            [self.camera setFlashMode:AVCaptureFlashModeOff];
+            break;
+        case AVCaptureFlashModeAuto:
+            [self.camera setFlashMode:AVCaptureFlashModeOn];
+            break;
+    }
+    [self setFlashImage];
 }
 
-- (void)saveImage:(UIImage*)_image {
-    [self.camera saveImage:_image];
+- (IBAction)autoFocus:(UIGestureRecognizer*)gestureRecognizer {
+    if ([self.camera.videoInput.device isFocusPointOfInterestSupported]) {
+        CGPoint tapPoint = [gestureRecognizer locationInView:self.view];
+        CGPoint convertedFocusPoint = [self convertToPointOfInterestFromViewCoordinates:tapPoint];
+        [self.camera autoFocusAtPoint:convertedFocusPoint];
+    }
 }
 
 @end
@@ -179,22 +191,27 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     return pointOfInterest;
 }
 
-- (void)tapToAutoFocus:(UIGestureRecognizer *)gestureRecognizer {
-    if ([self.camera.videoInput.device isFocusPointOfInterestSupported]) {
-        CGPoint tapPoint = [gestureRecognizer locationInView:self.view];
-        CGPoint convertedFocusPoint = [self convertToPointOfInterestFromViewCoordinates:tapPoint];
-        [self.camera autoFocusAtPoint:convertedFocusPoint];
+- (void)setFlashImage {
+    if ([self.camera selectedCamera] == AVCaptureDevicePositionBack) {
+        switch ([self.camera flashMode]) {
+            case AVCaptureFlashModeOff:
+                self.flashView.hidden = YES;
+                break;
+            case AVCaptureFlashModeOn:
+                self.flashView.hidden = NO;
+                break;
+            case AVCaptureFlashModeAuto:
+                self.flashView.hidden = NO;
+                break;
+        }
+    } else {
+        self.flashView.hidden = YES;
     }
 }
 
-- (void)tapToContinouslyAutoFocus:(UIGestureRecognizer *)gestureRecognizer {
-    if ([self.camera.videoInput.device isFocusPointOfInterestSupported])
-        [self.camera continuousFocusAtPoint:CGPointMake(.5f, .5f)];
-}
-
-- (void)toggleCamera:(id)sender {
+- (void)toggleCamera {
     [self.camera toggleCamera];
-    [self.camera continuousFocusAtPoint:CGPointMake(.5f, .5f)];
+    [self continouslyAutoFocus];
 }
 
 @end
@@ -278,6 +295,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 }
 
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    [self toggleCamera];
+    [self setFlashImage];
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {

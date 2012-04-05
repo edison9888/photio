@@ -27,9 +27,12 @@
 - (void)captureStillImage;
 - (BOOL)toggleCamera;
 - (NSUInteger)cameraCount;
-- (void)autoFocusAtPoint:(CGPoint)point;
-- (void)continuousFocusAtPoint:(CGPoint)point;
+- (void)autoFocusAtPoint:(CGPoint)_point;
+- (void)continuousFocusAtPoint:(CGPoint)_point;
 - (void)saveImage:(UIImage*)_image;
+- (AVCaptureFlashMode)flashMode;
+- (void)setFlashMode:(AVCaptureFlashMode)_flashmode;
+- (AVCaptureDevicePosition)selectedCamera;
 
 @end
 

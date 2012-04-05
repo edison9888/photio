@@ -7,7 +7,6 @@
 //
 
 #import "ImageInspectViewController.h"
-#import "ViewGeneral.h"
 #import "UIImage+Resize.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,18 +24,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, captures, transitionGestureRecognizer;
+@synthesize imageView, containerView, captures, transitionGestureRecognizer, delegate;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
 
-+ (id)inView:(UIView*)_containerView {
-    return [[ImageInspectViewController alloc] initWithNibName:@"ImageInspectViewController" bundle:nil inView:_containerView];;
++ (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate {
+    return [[ImageInspectViewController alloc] initWithNibName:@"ImageInspectViewController" bundle:nil inView:_containerView withDelegate:_delegate];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
+        self.delegate = _delegate;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:_containerView];
         self.view.frame = self.containerView.frame;
         self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
@@ -117,59 +117,40 @@
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
-- (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-}
-
-- (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-}
-
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] dragInspectImage:_drag];
+    if ([self.delegate respondsToSelector:@selector(dragInspectImage:)]) {
+        [self.delegate dragInspectImage:_drag];
+    }
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
-- (void)didReleaseRight:(CGPoint)_location {    
-}
-
-- (void)didReleaseLeft:(CGPoint)_location {
-}
-
 - (void)didReleaseUp:(CGPoint)_location {
-    [[ViewGeneral instance] releaseInspectImage];
+    if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
+        [self.delegate releaseInspectImage];
+    }
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
 }
 
-- (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-}
-
-- (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-}
-
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionInspectImageToCamera];
+    if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
+        [self.delegate transitionFromInspectImage];
+    }
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
-- (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-}
-
-- (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-}
-
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    [[ViewGeneral instance] transitionInspectImageToCamera];
+    if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
+        [self.delegate transitionFromInspectImage];
+    }
 }
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
 }
-
-#pragma mark -
-#pragma mark TransitionGestureRecognizerDelegate
 
 @end

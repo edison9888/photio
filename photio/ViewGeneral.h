@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CameraViewController.h"
+#import "ImageInspectViewController.h"
 
 @class CameraViewController;
 @class ImageInspectViewController;
@@ -16,7 +17,7 @@
 @class LocalesViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@interface ViewGeneral : NSObject <CameraViewControllerDelegate> {
+@interface ViewGeneral : NSObject <CameraViewControllerDelegate, ImageInspectViewControllerDelegate> {
     BOOL                        notAnimating;
     CameraViewController*       cameraViewController;
     ImageInspectViewController* imageInspectViewController;
@@ -90,10 +91,5 @@
 - (void)transitionCameraToInspectImage;
 - (void)releaseCameraInspectImage;
 - (void)dragCameraToInspectImage:(CGPoint)_drag;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)transitionInspectImageToCamera;
-- (void)releaseInspectImage;
-- (void)dragInspectImage:(CGPoint)_drag;
 
 @end

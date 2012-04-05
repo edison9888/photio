@@ -18,6 +18,8 @@
 @property (nonatomic, weak)   UIView*                           containerView;
 @property (nonatomic, retain) IBOutlet UIView*                  takePhotoView;
 @property (nonatomic, retain) IBOutlet UIView*                  flashView;
+@property (nonatomic, retain) IBOutlet UIGestureRecognizer*     focusGesture;
+@property (nonatomic, retain) IBOutlet UIGestureRecognizer*     flashGesture;
 @property (nonatomic, weak)   id <CameraViewControllerDelegate> delegate;
 @property (nonatomic, retain) Camera*                           camera;
 @property (nonatomic, retain) AVCaptureVideoPreviewLayer*       captureVideoPreviewLayer;
@@ -25,10 +27,11 @@
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
-- (void)setFlashImage;
 - (void)saveImage:(UIImage*)_image;
 - (IBAction)captureStillImage:(id)sender;
 - (IBAction)changeFlashMode:(id)sender;
+- (IBAction)autoFocus:(UIGestureRecognizer*)gestureRecognizer;
+- (void)continouslyAutoFocus;
 
 @end
 

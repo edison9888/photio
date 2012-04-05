@@ -54,10 +54,9 @@
 					<object class="IBUIImageView" id="760511041">
 						<reference key="NSNextResponder" ref="142320705"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{0, 420}, {320, 60}}</string>
+						<string key="NSFrame">{{100, 412}, {120, 60}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -80,7 +79,13 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="848899834"/>
+			<object class="IBUITapGestureRecognizer" id="932958160">
+				<bool key="IBUIDelaysTouchesBegan">YES</bool>
+				<bool key="IBUIDelaysTouchesEnded">NO</bool>
+			</object>
 			<object class="IBUITapGestureRecognizer" id="729777438">
+				<bool key="IBUIDelaysTouchesBegan">YES</bool>
+				<bool key="IBUIDelaysTouchesEnded">NO</bool>
 				<int key="IBUINumberOfTapsRequired">2</int>
 			</object>
 		</array>
@@ -111,6 +116,42 @@
 					<int key="connectionID">62</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">focusGesture</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="932958160"/>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">flashGesture</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="729777438"/>
+					</object>
+					<int key="connectionID">68</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="142320705"/>
+						<reference key="destination" ref="932958160"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">64</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="142320705"/>
+						<reference key="destination" ref="729777438"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">captureStillImage:</string>
 						<reference key="source" ref="848899834"/>
@@ -135,6 +176,14 @@
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">52</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">autoFocus:</string>
+						<reference key="source" ref="932958160"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">65</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -185,6 +234,12 @@
 						<string key="objectName">take photo</string>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">63</int>
+						<reference key="object" ref="932958160"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">auto focus</string>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
 						<reference key="object" ref="729777438"/>
 						<reference key="parent" ref="0"/>
@@ -202,12 +257,13 @@
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">62</int>
+			<int key="maxID">68</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -215,10 +271,15 @@
 					<string key="className">CameraViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="autoFocus:">UIGestureRecognizer</string>
 						<string key="captureStillImage:">id</string>
 						<string key="changeFlashMode:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="autoFocus:">
+							<string key="name">autoFocus:</string>
+							<string key="candidateClassName">UIGestureRecognizer</string>
+						</object>
 						<object class="IBActionInfo" key="captureStillImage:">
 							<string key="name">captureStillImage:</string>
 							<string key="candidateClassName">id</string>
@@ -229,13 +290,23 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="flashGesture">UIGestureRecognizer</string>
 						<string key="flashView">UIView</string>
+						<string key="focusGesture">UIGestureRecognizer</string>
 						<string key="takePhotoView">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="flashGesture">
+							<string key="name">flashGesture</string>
+							<string key="candidateClassName">UIGestureRecognizer</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="flashView">
 							<string key="name">flashView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="focusGesture">
+							<string key="name">focusGesture</string>
+							<string key="candidateClassName">UIGestureRecognizer</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="takePhotoView">
 							<string key="name">takePhotoView</string>
@@ -259,7 +330,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="flash-on.png">{45, 45}</string>
-			<string key="take-photo.png">{320, 60}</string>
+			<string key="take-photo.png">{120, 60}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
