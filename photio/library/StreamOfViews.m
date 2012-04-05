@@ -157,7 +157,7 @@
 
 - (void)addView:(UIView*)_view {
     if ([self.streamOfViews count] > 0) {
-        UIView* currentView = [self.streamOfViews lastObject];
+        UIView* currentView = [self.streamOfViews objectAtIndex:self.inViewIndex];
         currentView.frame = [self rightOfWindow];
     }
     _view.frame = [self inWindow];

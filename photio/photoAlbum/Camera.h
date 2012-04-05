@@ -14,14 +14,14 @@
 @interface Camera : NSObject {
 }
 
-@property (nonatomic,retain) AVCaptureSession*                  session;
-@property (nonatomic,assign) AVCaptureVideoOrientation          orientation;
-@property (nonatomic,retain) AVCaptureDeviceInput*              videoInput;
-@property (nonatomic,retain) AVCaptureStillImageOutput*         stillImageOutput;
-@property (nonatomic,assign) id                                 deviceConnectedObserver;
-@property (nonatomic,assign) id                                 deviceDisconnectedObserver;
-@property (nonatomic,assign) UIBackgroundTaskIdentifier         backgroundRecordingID;
-@property (nonatomic,assign) id <CameraDelegate>                delegate;
+@property (nonatomic, retain) AVCaptureSession*                 session;
+@property (nonatomic, assign) AVCaptureVideoOrientation         orientation;
+@property (nonatomic, retain) AVCaptureDeviceInput*             videoInput;
+@property (nonatomic, retain) AVCaptureStillImageOutput*        stillImageOutput;
+@property (nonatomic, assign) id                                deviceConnectedObserver;
+@property (nonatomic, assign) id                                deviceDisconnectedObserver;
+@property (nonatomic, assign) UIBackgroundTaskIdentifier        backgroundRecordingID;
+@property (nonatomic, assign) id <CameraDelegate>               delegate;
 
 - (void)setupSession;
 - (void)captureStillImage;

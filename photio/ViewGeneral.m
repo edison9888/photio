@@ -333,12 +333,12 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark CameraViewControllerDelegate
 
 - (void)didCaptureImage:(UIImage*)_picture { 
-    [self.imageInspectViewController addImage:_picture];
-    __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
-    snapshot.frame = self.cameraViewController.view.frame;
-    [self.cameraViewController.view addSubview:snapshot];
     if (self.notAnimating) {
         self.notAnimating = NO;
+        [self.imageInspectViewController addImage:_picture];
+        __block UIImageView* snapshot = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
+        snapshot.frame = self.cameraViewController.view.frame;
+        [self.cameraViewController.view addSubview:snapshot];
         [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
             delay:CAMERA_NEW_PHOTO_DELAY
             options:UIViewAnimationOptionCurveEaseOut

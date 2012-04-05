@@ -49,6 +49,7 @@
 - (void)addImage:(UIImage*)_picture {
     [self.captures addObject:_picture];
     UIImageView* pictureView = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
+    pictureView.contentMode = UIViewContentModeScaleAspectFill;
     [self.imageView addView:pictureView];
 }
 
