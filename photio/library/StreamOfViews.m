@@ -165,6 +165,9 @@
     [self.streamOfViews insertObject:_view atIndex:self.inViewIndex];
 }
 
+- (void)removeCurrentImage {
+}
+
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 

@@ -12,11 +12,6 @@
 @protocol StreamOfViewsDelegate;
 
 @interface StreamOfViews : UIView <TransitionGestureRecognizerDelegate> {
-    __weak id<StreamOfViewsDelegate> delegate;
-    TransitionGestureRecognizer*    transitionGestureRecognizer;
-    NSMutableArray*                 streamOfViews;
-    NSInteger                       inViewIndex;
-    BOOL                            notAnimating;
 }
 
 @property (nonatomic, weak)    id<StreamOfViewsDelegate>        delegate;
@@ -32,6 +27,8 @@
 @end
 
 @protocol StreamOfViewsDelegate <NSObject>
+
+@required
 
 @optional
 

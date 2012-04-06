@@ -172,10 +172,9 @@
 }
 
 // Returns image scaled to screen size
-- (UIImage*)scaleImageToScreen {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGFloat scaleImage = screenBounds.size.height / self.size.height;
-    return [self scaleBy:scaleImage andCropToSize:CGSizeMake(screenBounds.size.width, screenBounds.size.height)];
+- (UIImage*)scaleToFrame:(CGRect)_frame {
+    CGFloat scaleImage = _frame.size.height / self.size.height;
+    return [self scaleBy:scaleImage andCropToSize:CGSizeMake(_frame.size.width, _frame.size.height)];
 }
 
 #pragma clang diagnostic pop

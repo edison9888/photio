@@ -34,6 +34,7 @@
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
 		05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70143151E4BD000BBA79E /* CaptureModel.m */; };
 		05A70150151EAFCB00BBA79E /* photio.db in Resources */ = {isa = PBXBuildFile; fileRef = 05A7014F151EAFCB00BBA79E /* photio.db */; };
+		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -92,6 +93,8 @@
 		05A70142151E4BD000BBA79E /* CaptureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureModel.h; sourceTree = "<group>"; };
 		05A70143151E4BD000BBA79E /* CaptureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureModel.m; sourceTree = "<group>"; };
 		05A7014F151EAFCB00BBA79E /* photio.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = photio.db; sourceTree = "<group>"; };
+		05B83718152E6C5F00D99A40 /* ImageInspectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectView.h; sourceTree = "<group>"; };
+		05B83719152E6C5F00D99A40 /* ImageInspectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectView.m; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +265,8 @@
 				059772F31527D787008F3A1B /* CameraViewController.h */,
 				059772F41527D787008F3A1B /* CameraViewController.m */,
 				050CF14F14F9A27D00A31059 /* CameraViewController.xib */,
+				05B83718152E6C5F00D99A40 /* ImageInspectView.h */,
+				05B83719152E6C5F00D99A40 /* ImageInspectView.m */,
 				05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */,
 				05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */,
 				05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */,
@@ -376,6 +381,7 @@
 				0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */,
 				059772F51527D787008F3A1B /* Camera.m in Sources */,
 				059772F71527D787008F3A1B /* CameraViewController.m in Sources */,
+				05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

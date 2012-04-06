@@ -7,7 +7,7 @@
 //
 
 #import "ImageInspectViewController.h"
-#import "UIImage+Resize.h"
+#import "ImageInspectView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageInspectViewController (PrivateAPI)
@@ -24,7 +24,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, captures, transitionGestureRecognizer, delegate;
+@synthesize imageView, containerView, transitionGestureRecognizer, delegate;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -41,20 +41,16 @@
         self.view.frame = self.containerView.frame;
         self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
         [self.view addSubview:self.imageView];
-        self.captures = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
 
 - (void)addImage:(UIImage*)_picture {
-    [self.captures addObject:_picture];
-    UIImageView* pictureView = [[UIImageView alloc] initWithImage:[_picture scaleImageToScreen]];
-    pictureView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.imageView addView:pictureView];
+    [self.imageView addView:[ImageInspectView withFrame:self.view.frame andCapture:_picture]];
 }
 
 - (BOOL)hasCaptures {
-    return [self.captures count] > 0;
+    return [self.imageView.streamOfViews count] > 0;
 }
 
 #pragma mark -
