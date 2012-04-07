@@ -17,7 +17,7 @@
 
 @property(nonatomic, weak)     UIView*                                  containerView;
 @property(nonatomic, weak)     id<ImageInspectViewControllerDelegate>   delegate;
-@property(nonatomic, retain)   StreamOfViews*                           imageView;
+@property(nonatomic, strong)   StreamOfViews*                           imageView;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;

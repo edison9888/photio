@@ -10,7 +10,7 @@
 
 @interface ImageInspectView : UIImageView
 
-@property(nonatomic, retain) UIImage* capture;
+@property(nonatomic, strong) UIImage* capture;
 
 + (id)withFrame:(CGRect)_frame andCapture:(UIImage*)_capture;
 - (id)initWithFrame:(CGRect)_frame andCapture:(UIImage*)_capture;

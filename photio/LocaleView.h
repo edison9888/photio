@@ -13,8 +13,8 @@
     NSMutableArray*     photoViews;
 }
 
-@property (nonatomic, retain) UITextField*    localeNameView;
-@property (nonatomic, retain) NSMutableArray* photoViews;
+@property (nonatomic, strong) UITextField*    localeNameView;
+@property (nonatomic, strong) NSMutableArray* photoViews;
 
 + (id)withFrame:(CGRect)_frame andLocale:(NSString*)_locale;
 - (id)initWithFrame:(CGRect)_frame andLocale:(NSString*)_locale;

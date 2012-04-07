@@ -15,8 +15,8 @@
 }
 
 @property (nonatomic, weak)    id<StreamOfViewsDelegate>        delegate;
-@property (nonatomic, retain)  TransitionGestureRecognizer*     transitionGestureRecognizer;
-@property (nonatomic, retain)  NSMutableArray*                  streamOfViews;
+@property (nonatomic, strong)  TransitionGestureRecognizer*     transitionGestureRecognizer;
+@property (nonatomic, strong)  NSMutableArray*                  streamOfViews;
 @property (nonatomic, assign)  NSInteger                        inViewIndex;
 @property (nonatomic, assign)  BOOL                             notAnimating;
 

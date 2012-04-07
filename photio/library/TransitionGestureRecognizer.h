@@ -31,7 +31,7 @@ typedef enum {
 @property (nonatomic, weak)   id<TransitionGestureRecognizerDelegate>   delegate;
 @property (nonatomic, weak)   UIView*                                   view;
 @property (nonatomic, weak)   UIView*                                   relativeView;
-@property (nonatomic, retain) UIPanGestureRecognizer*                   gestureRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer*                   gestureRecognizer;
 @property (nonatomic, assign) CGPoint                                   lastTouch;
 @property (nonatomic, assign) CGPoint                                   totalDragDistance;
 @property (nonatomic, assign) DragDirection                             dragDirection;

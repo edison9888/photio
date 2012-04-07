@@ -13,8 +13,8 @@
     UIImageView*    photoView;
 }
 
-@property (nonatomic, retain) UITextField* dayView;
-@property (nonatomic, retain) UIImageView* photoView;
+@property (nonatomic, strong) UITextField* dayView;
+@property (nonatomic, strong) UIImageView* photoView;
 
 + (id)withFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo;
 - (id)initWithFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo;

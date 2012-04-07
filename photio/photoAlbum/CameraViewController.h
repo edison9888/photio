@@ -16,14 +16,14 @@
 }
 
 @property (nonatomic, weak)   UIView*                           containerView;
-@property (nonatomic, retain) IBOutlet UIView*                  takePhotoView;
-@property (nonatomic, retain) IBOutlet UIView*                  flashView;
-@property (nonatomic, retain) IBOutlet UIGestureRecognizer*     focusGesture;
-@property (nonatomic, retain) IBOutlet UIGestureRecognizer*     flashGesture;
+@property (nonatomic, strong) IBOutlet UIView*                  takePhotoView;
+@property (nonatomic, strong) IBOutlet UIView*                  flashView;
+@property (nonatomic, strong) IBOutlet UIGestureRecognizer*     focusGesture;
+@property (nonatomic, strong) IBOutlet UIGestureRecognizer*     flashGesture;
 @property (nonatomic, weak)   id <CameraViewControllerDelegate> delegate;
-@property (nonatomic, retain) Camera*                           camera;
-@property (nonatomic, retain) AVCaptureVideoPreviewLayer*       captureVideoPreviewLayer;
-@property (nonatomic, retain) TransitionGestureRecognizer*      transitionGestureRecognizer;
+@property (nonatomic, strong) Camera*                           camera;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer*       captureVideoPreviewLayer;
+@property (nonatomic, strong) TransitionGestureRecognizer*      transitionGestureRecognizer;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

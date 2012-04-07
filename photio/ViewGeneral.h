@@ -18,21 +18,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral : NSObject <CameraViewControllerDelegate, ImageInspectViewControllerDelegate> {
-    BOOL                        notAnimating;
-    CameraViewController*       cameraViewController;
-    ImageInspectViewController* imageInspectViewController;
-    EntryViewController*        entriesViewController;
-    CalendarViewController*     calendarViewController;
-    LocalesViewController*      localesViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property(nonatomic, assign) BOOL                           notAnimating;
-@property(nonatomic, retain) ImageInspectViewController*    imageInspectViewController;
-@property(nonatomic, retain) CameraViewController*          cameraViewController;
-@property(nonatomic, retain) EntryViewController*           entryViewController;
-@property(nonatomic, retain) CalendarViewController*        calendarViewController;
-@property(nonatomic, retain) LocalesViewController*         localesViewController;
+@property(nonatomic, strong) NSManagedObjectContext*        managedObjectContext;
+@property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
+@property(nonatomic, strong) CameraViewController*          cameraViewController;
+@property(nonatomic, strong) EntryViewController*           entryViewController;
+@property(nonatomic, strong) CalendarViewController*        calendarViewController;
+@property(nonatomic, strong) LocalesViewController*         localesViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewGeneral*)instance;

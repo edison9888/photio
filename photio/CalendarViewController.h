@@ -22,14 +22,14 @@
 }
 
 @property (nonatomic, weak)   UIView*                           containerView;
-@property (nonatomic, retain) DragGridView*                     dragGridView;
-@property (nonatomic, retain) NSCalendar*                       calendar;
-@property (nonatomic, retain) NSString*                         firstMonth;
-@property (nonatomic, retain) NSString*                         lastMonth;
-@property (nonatomic, retain) NSString*                         year;
-@property (nonatomic, retain) NSDateFormatter*                  dayFormatter;
-@property (nonatomic, retain) NSDateFormatter*                  yearFormatter;
-@property (nonatomic, retain) NSDateFormatter*                  monthFormatter;
+@property (nonatomic, strong) DragGridView*                     dragGridView;
+@property (nonatomic, strong) NSCalendar*                       calendar;
+@property (nonatomic, strong) NSString*                         firstMonth;
+@property (nonatomic, strong) NSString*                         lastMonth;
+@property (nonatomic, strong) NSString*                         year;
+@property (nonatomic, strong) NSDateFormatter*                  dayFormatter;
+@property (nonatomic, strong) NSDateFormatter*                  yearFormatter;
+@property (nonatomic, strong) NSDateFormatter*                  monthFormatter;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

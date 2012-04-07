@@ -15,7 +15,7 @@
 }
 
 @property (nonatomic, weak)   UIView*          containerView;
-@property (nonatomic, retain) DragGridView*    dragGridView;
+@property (nonatomic, strong) DragGridView*    dragGridView;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

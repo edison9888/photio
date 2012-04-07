@@ -15,7 +15,6 @@
 		0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0529A7D31503B35400235B95 /* CalendarViewController.xib */; };
 		052AE17B1528941F005D57B1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17A1528941F005D57B1 /* AssetsLibrary.framework */; };
 		052AE17E1528943E005D57B1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17D1528943E005D57B1 /* CoreMedia.framework */; };
-		052AE1801528944F005D57B1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17F1528944F005D57B1 /* CoreVideo.framework */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
 		0542DAF91523EDA7002C62A0 /* flash-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF71523EDA7002C62A0 /* flash-on.png */; };
 		0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF81523EDA7002C62A0 /* flash-on@2x.png */; };
@@ -30,11 +29,10 @@
 		059772F71527D787008F3A1B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* CameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
 		05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D694150BC86A009C9A11 /* CalendarDayView.m */; };
-		05A70135151E243B00BBA79E /* Dbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70134151E243B00BBA79E /* Dbi.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
-		05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A70143151E4BD000BBA79E /* CaptureModel.m */; };
-		05A70150151EAFCB00BBA79E /* photio.db in Resources */ = {isa = PBXBuildFile; fileRef = 05A7014F151EAFCB00BBA79E /* photio.db */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
+		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
+		05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05B837601530B5B500D99A40 /* photio.xcdatamodeld */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -87,14 +85,11 @@
 		059772F81527D7B5008F3A1B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		05A1D693150BC86A009C9A11 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayView.h; sourceTree = "<group>"; };
 		05A1D694150BC86A009C9A11 /* CalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayView.m; sourceTree = "<group>"; };
-		05A70133151E243B00BBA79E /* Dbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dbi.h; sourceTree = "<group>"; };
-		05A70134151E243B00BBA79E /* Dbi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dbi.m; sourceTree = "<group>"; };
 		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		05A70142151E4BD000BBA79E /* CaptureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureModel.h; sourceTree = "<group>"; };
-		05A70143151E4BD000BBA79E /* CaptureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureModel.m; sourceTree = "<group>"; };
-		05A7014F151EAFCB00BBA79E /* photio.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = photio.db; sourceTree = "<group>"; };
 		05B83718152E6C5F00D99A40 /* ImageInspectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectView.h; sourceTree = "<group>"; };
 		05B83719152E6C5F00D99A40 /* ImageInspectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectView.m; sourceTree = "<group>"; };
+		05B8372715309FB400D99A40 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		05B837611530B5B500D99A40 /* photio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photio.xcdatamodel; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,11 +122,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */,
 				05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */,
 				052AE17B1528941F005D57B1 /* AssetsLibrary.framework in Frameworks */,
 				059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */,
 				052AE17E1528943E005D57B1 /* CoreMedia.framework in Frameworks */,
-				052AE1801528944F005D57B1 /* CoreVideo.framework in Frameworks */,
 				05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */,
 				05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */,
 				05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */,
@@ -145,8 +140,7 @@
 		059772E415277EE1008F3A1B /* models */ = {
 			isa = PBXGroup;
 			children = (
-				05A70142151E4BD000BBA79E /* CaptureModel.h */,
-				05A70143151E4BD000BBA79E /* CaptureModel.m */,
+				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -154,8 +148,6 @@
 		05C59C1F14F31EF8009AC823 /* library */ = {
 			isa = PBXGroup;
 			children = (
-				05A70133151E243B00BBA79E /* Dbi.h */,
-				05A70134151E243B00BBA79E /* Dbi.m */,
 				0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */,
 				0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */,
 				0554A4791503DDD000B9C76D /* DragGridView.h */,
@@ -182,11 +174,12 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
+				05A7013A151E2CB400BBA79E /* libsqlite3.dylib */,
+				05B8372715309FB400D99A40 /* CoreData.framework */,
 				052AE17F1528944F005D57B1 /* CoreVideo.framework */,
 				052AE17D1528943E005D57B1 /* CoreMedia.framework */,
 				052AE17A1528941F005D57B1 /* AssetsLibrary.framework */,
 				059772F81527D7B5008F3A1B /* AVFoundation.framework */,
-				05A7013A151E2CB400BBA79E /* libsqlite3.dylib */,
 				05DE439414F20064005FF6B0 /* QuartzCore.framework */,
 				05C99EC614F0585C00D09F3E /* photio */,
 				05C99EBF14F0585C00D09F3E /* Frameworks */,
@@ -247,7 +240,6 @@
 		05C99EC714F0585C00D09F3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				05A7014F151EAFCB00BBA79E /* photio.db */,
 				05C99EC814F0585C00D09F3E /* photio-Info.plist */,
 				05C99EC914F0585C00D09F3E /* InfoPlist.strings */,
 				05C99ECC14F0585C00D09F3E /* main.m */,
@@ -345,7 +337,6 @@
 				050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */,
 				0529A7D51503B35400235B95 /* CalendarViewController.xib in Resources */,
 				058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */,
-				05A70150151EAFCB00BBA79E /* photio.db in Resources */,
 				0542DAF91523EDA7002C62A0 /* flash-on.png in Resources */,
 				0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */,
 				059772E71527961B008F3A1B /* take-photo.png in Resources */,
@@ -376,12 +367,11 @@
 				05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */,
 				058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */,
 				058B4FBC15196D840087F717 /* LocaleView.m in Sources */,
-				05A70135151E243B00BBA79E /* Dbi.m in Sources */,
-				05A70144151E4BD000BBA79E /* CaptureModel.m in Sources */,
 				0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */,
 				059772F51527D787008F3A1B /* Camera.m in Sources */,
 				059772F71527D787008F3A1B /* CameraViewController.m in Sources */,
 				05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */,
+				05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +480,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		05B837601530B5B500D99A40 /* photio.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				05B837611530B5B500D99A40 /* photio.xcdatamodel */,
+			);
+			currentVersion = 05B837611530B5B500D99A40 /* photio.xcdatamodel */;
+			path = photio.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 05C99EB314F0585C00D09F3E /* Project object */;
 }

@@ -223,7 +223,6 @@
 }
 
 - (CGFloat)removeTransitionDuration {
-    UIView* viewItem = [self displayedView];
     return self.frame.size.width / HORIZONTAL_TRANSITION_ANIMATION_SPEED;    
 }
 

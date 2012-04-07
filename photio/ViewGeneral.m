@@ -33,7 +33,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewGeneral
  
-@synthesize notAnimating;
+@synthesize notAnimating, managedObjectContext;
 @synthesize imageInspectViewController, cameraViewController, entryViewController, calendarViewController, localesViewController;
 
 #pragma mark - 

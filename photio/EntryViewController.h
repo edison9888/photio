@@ -16,8 +16,8 @@
 }
 
 @property (nonatomic, weak)   UIView*                           containerView;
-@property (nonatomic, retain) IBOutlet UIImageView*             imageView;
-@property (nonatomic, retain) TransitionGestureRecognizer*      transitionGestureRecognizer;
+@property (nonatomic, strong) IBOutlet UIImageView*             imageView;
+@property (nonatomic, strong) TransitionGestureRecognizer*      transitionGestureRecognizer;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

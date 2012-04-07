@@ -26,9 +26,9 @@
 }
 
 @property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
-@property (nonatomic, retain)   TransitionGestureRecognizer*    transitionGestureRecognizer;
-@property (nonatomic, retain)   UIScrollView*                   rowContainerView;
-@property (nonatomic, retain)   NSMutableArray*                 rowViews;
+@property (nonatomic, strong)   TransitionGestureRecognizer*    transitionGestureRecognizer;
+@property (nonatomic, strong)   UIScrollView*                   rowContainerView;
+@property (nonatomic, strong)   NSMutableArray*                 rowViews;
 @property (nonatomic, assign)   CGFloat                         rowHeight;
 @property (nonatomic, assign)   CGFloat                         deltaTime;
 @property (nonatomic, assign)   NSInteger                       rowsInView;
