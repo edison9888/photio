@@ -17,7 +17,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectView
 
-@synthesize capture;
+@synthesize capture, latitude, longitude, createdAt;
 
 #pragma mark -
 #pragma mark ImageInspectViewController PrivateAPI
@@ -25,13 +25,16 @@
 #pragma mark -
 #pragma mark ImageInspectViewController
 
-+ (id)withFrame:(CGRect)_frame andCapture:(UIImage*)_capture {
-    return [[ImageInspectView alloc] initWithFrame:_frame andCapture:_capture];
++ (id)withFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
+    return [[ImageInspectView alloc] initWithFrame:_frame capture:_capture andLocation:_location];
 }
 
-- (id)initWithFrame:(CGRect)_frame andCapture:(UIImage*)_capture {
+- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
     if ((self = [super initWithFrame:(CGRect)_frame])) {
         self.capture = _capture;
+        self.latitude = [NSNumber numberWithDouble:_location.latitude];
+        self.longitude = [NSNumber numberWithDouble:_location.longitude];
+        self.createdAt = [NSDate date];
         BOOL retina = NO;
         CGRect imageFrame = _frame;
         CGFloat imageScale = 1.0;

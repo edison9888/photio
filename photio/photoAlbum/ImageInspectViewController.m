@@ -16,15 +16,14 @@
 - (void)loadFile:(NSString*)_fileName;
 - (void)saveToCameraRole:(UIImage*)_capture;
 - (void)saveToFile:(UIImage*)_image;
-- (UIImage*)saveImage:(UIImage*)_capture;
-- (void)setCurrentImage;
+- (CLLocationManager*)locationManager;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, delegate;
+@synthesize imageView, containerView, delegate, locationManager;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -40,12 +39,13 @@
         self.view.frame = self.containerView.frame;
         self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
         [self.view addSubview:self.imageView];
+        [[self locationManager] startUpdatingLocation];
     }
     return self;
 }
 
 - (void)addImage:(UIImage*)_picture {
-    [self.imageView addView:[ImageInspectView withFrame:self.view.frame andCapture:_picture]];
+    [self.imageView addView:[ImageInspectView withFrame:self.view.frame capture:_picture andLocation:[[self.locationManager location] coordinate]]];
 }
 
 - (BOOL)hasCaptures {
@@ -73,6 +73,16 @@
 - (void)saveToFile:(UIImage*)_image {
     NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
     [UIImagePNGRepresentation(_image) writeToFile:pngPath atomically:YES];    
+}
+
+- (CLLocationManager*)locationManager {
+    if (locationManager != nil) {
+		return locationManager;
+	}	
+	locationManager = [[CLLocationManager alloc] init];
+	[locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+	[locationManager setDelegate:self];	
+	return locationManager;
 }
 
 #pragma mark -

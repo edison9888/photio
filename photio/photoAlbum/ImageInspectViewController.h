@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "TransitionGestureRecognizer.h"
 #import "StreamOfViews.h"
 
 @protocol ImageInspectViewControllerDelegate;
  
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate> {
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate> {
 }
 
-@property(nonatomic, weak)     UIView*                                  containerView;
-@property(nonatomic, weak)     id<ImageInspectViewControllerDelegate>   delegate;
-@property(nonatomic, strong)   StreamOfViews*                           imageView;
+@property(nonatomic, weak)      UIView*                                 containerView;
+@property(nonatomic, weak)      id<ImageInspectViewControllerDelegate>  delegate;
+@property(nonatomic, strong)    StreamOfViews*                          imageView;
+@property(nonatomic, strong)    CLLocationManager*                      locationManager;
+
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
