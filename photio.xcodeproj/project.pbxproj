@@ -33,6 +33,9 @@
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
 		05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05B837601530B5B500D99A40 /* photio.xcdatamodeld */; };
+		05B837731530C45100D99A40 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B837721530C45100D99A40 /* UIImageToDataTransformer.m */; };
+		05B837761530C6A600D99A40 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B837751530C6A600D99A40 /* Capture.m */; };
+		05B837791530C6B800D99A40 /* Locale.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B837781530C6B800D99A40 /* Locale.m */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -90,6 +93,12 @@
 		05B83719152E6C5F00D99A40 /* ImageInspectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectView.m; sourceTree = "<group>"; };
 		05B8372715309FB400D99A40 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05B837611530B5B500D99A40 /* photio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photio.xcdatamodel; sourceTree = "<group>"; };
+		05B837711530C45100D99A40 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageToDataTransformer.h; sourceTree = "<group>"; };
+		05B837721530C45100D99A40 /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageToDataTransformer.m; sourceTree = "<group>"; };
+		05B837741530C6A600D99A40 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		05B837751530C6A600D99A40 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		05B837771530C6B800D99A40 /* Locale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locale.h; sourceTree = "<group>"; };
+		05B837781530C6B800D99A40 /* Locale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locale.m; sourceTree = "<group>"; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,21 +150,36 @@
 			isa = PBXGroup;
 			children = (
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
+				05B837771530C6B800D99A40 /* Locale.h */,
+				05B837781530C6B800D99A40 /* Locale.m */,
+				05B837741530C6A600D99A40 /* Capture.h */,
+				05B837751530C6A600D99A40 /* Capture.m */,
 			);
 			name = models;
+			sourceTree = "<group>";
+		};
+		05B837701530C33700D99A40 /* application */ = {
+			isa = PBXGroup;
+			children = (
+				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
+				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
+			);
+			name = application;
 			sourceTree = "<group>";
 		};
 		05C59C1F14F31EF8009AC823 /* library */ = {
 			isa = PBXGroup;
 			children = (
-				0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */,
-				0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */,
 				0554A4791503DDD000B9C76D /* DragGridView.h */,
 				0554A47A1503DDD000B9C76D /* DragGridView.m */,
 				0554A47D1503DDFE00B9C76D /* DragRowView.h */,
 				0554A47E1503DDFE00B9C76D /* DragRowView.m */,
 				0542DAE4151FFD85002C62A0 /* StreamOfViews.h */,
 				0542DAE5151FFD85002C62A0 /* StreamOfViews.m */,
+				0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */,
+				0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */,
+				05B837711530C45100D99A40 /* UIImageToDataTransformer.h */,
+				05B837721530C45100D99A40 /* UIImageToDataTransformer.m */,
 			);
 			path = library;
 			sourceTree = "<group>";
@@ -208,6 +232,7 @@
 		05C99EC614F0585C00D09F3E /* photio */ = {
 			isa = PBXGroup;
 			children = (
+				05B837701530C33700D99A40 /* application */,
 				05C59C2314F331A6009AC823 /* images */,
 				05C59C1F14F31EF8009AC823 /* library */,
 				059772E415277EE1008F3A1B /* models */,
@@ -229,8 +254,6 @@
 				058B4FB615196B1F0087F717 /* LocalesViewController.xib */,
 				058B4FBA15196D840087F717 /* LocaleView.h */,
 				058B4FBB15196D840087F717 /* LocaleView.m */,
-				05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */,
-				05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */,
 				05C59C3B14F5D157009AC823 /* ViewGeneral.h */,
 				05C59C3C14F5D157009AC823 /* ViewGeneral.m */,
 			);
@@ -372,6 +395,9 @@
 				059772F71527D787008F3A1B /* CameraViewController.m in Sources */,
 				05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */,
 				05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */,
+				05B837731530C45100D99A40 /* UIImageToDataTransformer.m in Sources */,
+				05B837761530C6A600D99A40 /* Capture.m in Sources */,
+				05B837791530C6B800D99A40 /* Locale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

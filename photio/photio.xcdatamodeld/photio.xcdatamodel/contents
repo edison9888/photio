@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Capture" syncable="YES">
-        <attribute name="attributecreatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+    <entity name="Capture" representedClassName="Capture" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="logitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
+    </entity>
+    <entity name="Locale" representedClassName="Locale" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="captures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Capture" inverseName="locale" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Capture" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="Capture" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>
