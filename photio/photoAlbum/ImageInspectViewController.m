@@ -24,7 +24,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, transitionGestureRecognizer, delegate;
+@synthesize imageView, containerView, delegate;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -37,7 +37,6 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.delegate = _delegate;
-        self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:_containerView];
         self.view.frame = self.containerView.frame;
         self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
         [self.view addSubview:self.imageView];
@@ -112,15 +111,12 @@
 }
 
 #pragma mark -
-#pragma mark TransitionGestureRecognizerDelegate
+#pragma mark StreamOfViewsDelegate
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     if ([self.delegate respondsToSelector:@selector(dragInspectImage:)]) {
         [self.delegate dragInspectImage:_drag];
     }
-}
-
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
 - (void)didReleaseUp:(CGPoint)_location {
@@ -129,16 +125,10 @@
     }
 }
 
-- (void)didReleaseDown:(CGPoint)_location {
-}
-
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
         [self.delegate transitionFromInspectImage];
     }
-}
-
-- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
 }
 
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
@@ -147,7 +137,16 @@
     }
 }
 
-- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+- (void)didPinchView:(UIView*)_view {
+}
+
+- (void)didSwipeView:(UIView*)_view {
+}
+
+- (void)didRemoveAllViews {
+    if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
+        [self.delegate transitionFromInspectImage];
+    }
 }
 
 @end

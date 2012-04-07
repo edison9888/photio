@@ -12,12 +12,11 @@
 
 @protocol ImageInspectViewControllerDelegate;
  
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, TransitionGestureRecognizerDelegate, StreamOfViewsDelegate> {
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate> {
 }
 
 @property(nonatomic, weak)     UIView*                                  containerView;
 @property(nonatomic, weak)     id<ImageInspectViewControllerDelegate>   delegate;
-@property(nonatomic, retain)   TransitionGestureRecognizer*             transitionGestureRecognizer;
 @property(nonatomic, retain)   StreamOfViews*                           imageView;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;

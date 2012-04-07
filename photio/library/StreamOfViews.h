@@ -33,12 +33,11 @@
 @optional
 
 - (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didReleaseUp:(CGPoint)_location;
-- (void)didReleaseDown:(CGPoint)_location;
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didPinchView:(UIView*)_view;
+- (void)didSwipeView:(UIView*)_view;
+- (void)didRemoveAllViews;
 
 @end

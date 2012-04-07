@@ -13,18 +13,27 @@
 
 - (UIView*)displayedView;
 - (void)dragView:(CGPoint)_drag;
-- (void)releaseView;
+- (void)releaseView:(CGFloat)_duration;
 - (void)moveViewsLeft;
 - (void)moveViewsRight;
+- (void)moveViewDown;
+- (void)pinchCurrentView;
+- (void)replaceRemovedView;
+- (UIView*)removeDisplayedView;
 - (BOOL)canMoveLeft;
 - (BOOL)canMoveRight;
-- (CGFloat)releaseDuration;
+- (CGFloat)releaseHorizontalDuration;
+- (CGFloat)releaseVerticalDuration;
 - (CGFloat)transitionDuration;
+- (CGFloat)pinchTransitionDuration;
+- (CGFloat)swipeTransitionDuration;
 - (CGRect)inWindow;
 - (CGRect)leftOfWindow;
 - (CGRect)rightOfWindow;
+- (CGRect)pointCenter;
 - (UIView*)leftView;
 - (UIView*)rightView;
+- (CGRect)underWindow;
 
 @end
 
@@ -54,10 +63,10 @@
     }
 }
 
-- (void)releaseView {
+- (void)releaseView:(CGFloat)_duration {
     if (self.notAnimating) {
         self.notAnimating = NO;
-        [UIView animateWithDuration:[self releaseDuration]
+        [UIView animateWithDuration:_duration
             delay:0
             options:UIViewAnimationOptionCurveEaseOut
             animations:^{
@@ -106,6 +115,84 @@
     }
 }
 
+- (void)moveViewDown {
+    if (self.notAnimating) {
+        self.notAnimating = NO;
+        [UIView animateWithDuration:[self swipeTransitionDuration]
+            delay:0
+            options:UIViewAnimationOptionCurveEaseOut
+            animations:^{
+                [self displayedView].frame = [self underWindow];
+            }
+            completion:^(BOOL _finished) {
+                UIView* removedView = [self removeDisplayedView];
+                if (removedView) {
+                    if ([self.delegate respondsToSelector:@selector(didSwipeView:)]) {
+                        [self.delegate didSwipeView:removedView];
+                    }
+                    [self replaceRemovedView];
+                } else {
+                    self.notAnimating = YES;
+                }
+            }
+        ];
+    }
+}
+
+- (void)pinchCurrentView {
+    if (self.notAnimating) {
+        self.notAnimating = NO;
+        [UIView animateWithDuration:[self pinchTransitionDuration]
+            delay:0
+            options:UIViewAnimationOptionCurveEaseOut
+            animations:^{
+                [self displayedView].frame = [self pointCenter];
+            }
+            completion:^(BOOL _finished) {
+                UIView* removedView = [self removeDisplayedView];
+                if (removedView) {
+                    if ([self.delegate respondsToSelector:@selector(didPinchView:)]) {
+                        [self.delegate didPinchView:removedView];
+                    }
+                    [self replaceRemovedView];
+                } else {
+                    self.notAnimating = YES;
+                }
+            }
+         ];
+        
+    }
+}
+
+- (void)replaceRemovedView {
+    self.notAnimating = NO;
+    [UIView animateWithDuration:[self transitionDuration]
+        delay:0
+        options:UIViewAnimationOptionCurveEaseOut
+        animations:^{
+            [self displayedView].frame = [self inWindow];
+        }
+        completion:^(BOOL _finished) {
+            self.notAnimating = YES;
+        }
+     ];    
+}
+
+- (UIView*)removeDisplayedView {
+    UIView* viewToRemove = [self displayedView];
+    [self.streamOfViews removeObjectAtIndex:self.inViewIndex];
+    [viewToRemove removeFromSuperview];
+    if ([self.streamOfViews count] == 0) {
+        if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
+            [self.delegate didRemoveAllViews];
+        }
+        viewToRemove = nil;
+    } else if ((self.inViewIndex == [self.streamOfViews count] - 1) && self.inViewIndex != 0) {
+        self.inViewIndex--;
+    }
+    return viewToRemove;
+}
+
 - (BOOL)canMoveLeft {
     return self.inViewIndex < [self.streamOfViews count] - 1;
 }
@@ -114,14 +201,27 @@
     return self.inViewIndex > 0;
 }
 
-- (CGFloat)releaseDuration  {
+- (CGFloat)releaseHorizontalDuration  {
     UIView* viewItem = [self displayedView];
     return abs(viewItem.frame.origin.x) / RELEASE_ANIMATION_SPEED;    
 }
- 
+
+- (CGFloat)releaseVerticalDuration  {
+    UIView* viewItem = [self displayedView];
+    return abs(viewItem.frame.origin.y) / RELEASE_ANIMATION_SPEED;    
+}
+
 - (CGFloat)transitionDuration {
     UIView* viewItem = [self displayedView];
     return (self.frame.size.width - abs(viewItem.frame.origin.x)) / TRANSITION_ANIMATION_SPEED;    
+}
+
+- (CGFloat)pinchTransitionDuration {
+    return self.frame.size.width / (2.0 * TRANSITION_ANIMATION_SPEED);
+}
+
+- (CGFloat)swipeTransitionDuration {
+    return self.frame.size.width / TRANSITION_ANIMATION_SPEED;
 }
 
 - (CGRect)inWindow {
@@ -134,6 +234,14 @@
 
 - (CGRect)rightOfWindow {
     return CGRectMake(self.frame.size.width + VIEW_MIN_SPACING, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+}
+
+- (CGRect)underWindow {
+    return CGRectMake(self.frame.size.width + VIEW_MIN_SPACING, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+}
+
+- (CGRect)pointCenter {
+    return CGRectMake(self.frame.size.width/2.0, self.frame.size.height/2.0, 0.0, 0.0);
 }
 
 #pragma mark -
@@ -151,6 +259,7 @@
         self.inViewIndex = 0;
         self.notAnimating = YES;
         self.backgroundColor = [UIColor blackColor];
+        [self addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchCurrentView)]];
     }
     return self;
 }
@@ -163,9 +272,6 @@
     _view.frame = [self inWindow];
     [self addSubview:_view];
     [self.streamOfViews insertObject:_view atIndex:self.inViewIndex];
-}
-
-- (void)removeCurrentImage {
 }
 
 #pragma mark -
@@ -186,17 +292,15 @@
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    if ([self.delegate respondsToSelector:@selector(didDragDown:from:withVelocity:)]) {
-        [self.delegate didDragDown:_drag from:_location withVelocity:_velocity];
-    }
+    [self dragView:_drag];
 }
 
 - (void)didReleaseRight:(CGPoint)_location { 
-    [self releaseView];
+    [self releaseView:[self releaseHorizontalDuration]];
 }
 
 - (void)didReleaseLeft:(CGPoint)_location {
-    [self releaseView];
+    [self releaseView:[self releaseHorizontalDuration]];
 }
 
 - (void)didReleaseUp:(CGPoint)_location {
@@ -206,16 +310,14 @@
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
-    if ([self.delegate respondsToSelector:@selector(didReleaseDown:)]) {
-        [self.delegate didReleaseDown:_location];
-    }
+    [self releaseView:[self releaseVerticalDuration]];
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     if ([self canMoveRight]) {
         [self moveViewsRight];
     } else {
-        [self releaseView];
+        [self releaseView:[self releaseHorizontalDuration]];
     }
 }
 
@@ -223,7 +325,7 @@
     if ([self canMoveLeft]) {
         [self moveViewsLeft];
     } else {
-        [self releaseView];
+        [self releaseView:[self releaseHorizontalDuration]];
     }        
 }
 
@@ -234,16 +336,13 @@
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    if ([self.delegate respondsToSelector:@selector(didSwipeDown:withVelocity:)]) {
-        [self.delegate didSwipeDown:_location withVelocity:_velocity];
-    }
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     if ([self canMoveRight]) {
         [self moveViewsRight];
     } else {
-        [self releaseView];
+        [self releaseView:[self releaseHorizontalDuration]];
     }
 }
 
@@ -251,7 +350,7 @@
     if ([self canMoveLeft]) {
         [self moveViewsLeft];
     } else {
-        [self releaseView];
+        [self releaseView:[self releaseHorizontalDuration]];
     }        
 }
 
@@ -262,9 +361,6 @@
 }
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    if ([self.delegate respondsToSelector:@selector(didReachMaxDragDown:from:withVelocity:)]) {
-        [self.delegate didReachMaxDragDown:_drag from:_location withVelocity:_velocity];
-    }
 }
 
 
