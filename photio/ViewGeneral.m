@@ -69,12 +69,12 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (CGFloat)verticalTransitionDuration:(CGFloat)_offset {
     CGRect screenBounds = [self.class screenBounds];
-    return (screenBounds.size.height - abs(_offset)) / TRANSITION_ANIMATION_SPEED;    
+    return (screenBounds.size.height - abs(_offset)) / VERTICAL_TRANSITION_ANIMATION_SPEED;    
 }
 
 - (CGFloat)horizontalTransitionDuration:(CGFloat)_offset {
     CGRect screenBounds = [self.class screenBounds];
-    return (screenBounds.size.width  - abs(_offset)) / TRANSITION_ANIMATION_SPEED;    
+    return (screenBounds.size.width  - abs(_offset)) / HORIZONTAL_TRANSITION_ANIMATION_SPEED;    
 }
 
 - (void)saveImage:(UIImage*)_image {
