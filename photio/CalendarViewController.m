@@ -8,7 +8,7 @@
 
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
-#import "CalendarDayView.h"
+#import "CalendarEntryView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
@@ -60,7 +60,7 @@
             if (currentDay == totalRowsInView * CALENDAR_DAYS_IN_ROW) {
                 self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
             }
-            [daysInRowViews addObject:[CalendarDayView withFrame:calendarDateViewRect date:day andPhoto:nil]];
+            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarDateViewRect date:day andPhoto:nil]];
             currentDay++;
         }
         [dayViews addObject:daysInRowViews];

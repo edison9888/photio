@@ -1,27 +1,28 @@
 //
-//  CalendarDayView.m
+//  CalendarEntryView.m
 //  photio
 //
 //  Created by Troy Stribling on 3/10/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "CalendarDayView.h"
+#import "CalendarEntryView.h"
+#import "CalandarDateView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface CalendarDayView (PrivateAPI)
+@interface CalendarEntryView (PrivateAPI)
 
 - (CGRect)dateViewRect:(CGRect)_cotentFrame;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation CalendarDayView
+@implementation CalendarEntryView
 
-@synthesize dayView, photoView;
+@synthesize dateView, photoView;
 
 #pragma mark -
-#pragma mark CalendarDayView PrivatAPI
+#pragma mark CalendarEntryView PrivatAPI
 
 - (CGRect)dateViewRect:(CGRect)_cotentFrame {
     CGSize dateViewSize = CGSizeMake(DAY_VIEW_DATE_X_OFFSET_SCALE * self.frame.size.width, DAY_VIEW_DATE_HEIGHT);
@@ -30,10 +31,10 @@
 }
 
 #pragma mark -
-#pragma mark CalendarDayView
+#pragma mark CalendarEntryView
 
 + (id)withFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo {
-    return [[CalendarDayView alloc] initWithFrame:_frame date:_date andPhoto:_photo];
+    return [[CalendarEntryView alloc] initWithFrame:_frame date:_date andPhoto:_photo];
 }
 
 - (id)initWithFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo {
@@ -42,19 +43,14 @@
         CGRect contentFrame = CGRectMake(DAY_VIEW_BORDER, DAY_VIEW_BORDER, self.frame.size.width - DAY_VIEW_BORDER, self.frame.size.height - DAY_VIEW_BORDER);
         UIView* contentView = [[UIView alloc] initWithFrame:contentFrame];
         contentView.backgroundColor = [UIColor whiteColor];
-        CGRect dateFrame = [self dateViewRect:contentFrame];
+        self.dateView = [CalandarDateView withFrame:[self dateViewRect:contentFrame] andDate:_date];
         [self addSubview:contentView];
-        self.dayView = [[UITextField alloc] initWithFrame:dateFrame];
-        self.dayView.textAlignment = UITextAlignmentRight;
-        self.dayView.text = _date;
-        self.dayView.font = [self.dayView.font fontWithSize:DAY_VIEW_DATE_IPHONE_FONT_SIZE];
-        self.dayView.enabled = NO;
         if (_photo) {   
             self.photoView = [[UIImageView alloc] initWithImage:_photo];
             [contentView addSubview:self.photoView];
-            [self.photoView addSubview:self.dayView];
+            [self.photoView addSubview:self.dateView];
         } else {
-            [contentView addSubview:self.dayView];
+            [contentView addSubview:self.dateView];
         }
     }
     return self;    

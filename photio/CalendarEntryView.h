@@ -1,5 +1,5 @@
 //
-//  CalendarDayView.h
+//  CalendarEntryView.h
 //  photio
 //
 //  Created by Troy Stribling on 3/10/12.
@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CalendarDayView : UIView {
-    UITextField*    dayView;
-    UIImageView*    photoView;
-}
+@class CalandarDateView;
 
-@property (nonatomic, strong) UITextField* dayView;
-@property (nonatomic, strong) UIImageView* photoView;
+@interface CalendarEntryView : UIView 
+
+@property(nonatomic, strong) CalandarDateView*  dateView; 
+@property(nonatomic, strong) UIImageView*       photoView;
 
 + (id)withFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo;
 - (id)initWithFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo;
