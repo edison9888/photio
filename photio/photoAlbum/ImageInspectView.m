@@ -48,6 +48,7 @@
         UIImage* scaledImage = [self.capture scaleToFrame:imageFrame];
         self.image = [UIImage imageWithCGImage:[scaledImage CGImage] scale:imageScale orientation:scaledImage.imageOrientation];
         self.contentMode = UIViewContentModeScaleAspectFill;
+        self.clipsToBounds = YES;
     }
     return self;
 }
