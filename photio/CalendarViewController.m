@@ -23,9 +23,16 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface CalendarViewController (CoreData)
+
+- (NSMutableArray*)fetchThumbnails;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize containerView, dragGridView, calendar, firstMonth, lastMonth, year,
+@synthesize containerView, thumbnails, dragGridView, calendar, firstMonth, lastMonth, year,
             yearFormatter, dayFormatter, monthFormatter;
 
 #pragma mark -
@@ -97,6 +104,24 @@
 }
 
 #pragma mark -
+#pragma mark CalendarViewController CoreData
+
+- (NSMutableArray*)fetchThumbnails {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    NSError* error = nil;
+	NSMutableArray* fetchResults = [[[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
+	if (fetchResults == nil) {
+		// TODO: handle error the error.
+	}
+    return fetchResults;
+}
+
+#pragma mark -
 #pragma mark CalendarViewController
 
 + (id)inView:(UIView*)_containerView {
@@ -121,6 +146,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.thumbnails = [self fetchThumbnails];
 }
 
 - (void)viewDidUnload {

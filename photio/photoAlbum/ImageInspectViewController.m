@@ -103,6 +103,8 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    self.locationManager = nil;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
