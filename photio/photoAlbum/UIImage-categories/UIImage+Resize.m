@@ -172,9 +172,16 @@
 }
 
 // Returns image scaled to screen size
-- (UIImage*)scaleToFrame:(CGRect)_frame {
-    CGFloat scaleImage = _frame.size.height / self.size.height;
-    return [self scaleBy:scaleImage andCropToSize:CGSizeMake(_frame.size.width, _frame.size.height)];
+- (UIImage*)scaleToSize:(CGSize)_cropSize {
+    CGFloat imageScaleFactor = _cropSize.height / self.size.height;
+    CGFloat imageScale = 1.0;
+    if([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        if ([[UIScreen mainScreen] scale] == 2.0) {
+            imageScale = 2.0;
+         }
+    }
+    UIImage* scaledImage = [self scaleBy:imageScale*imageScaleFactor andCropToSize:CGSizeMake(imageScale*_cropSize.width, imageScale*_cropSize.height)];
+    return [self.class imageWithCGImage:[scaledImage CGImage] scale:imageScale orientation:scaledImage.imageOrientation];;
 }
 
 #pragma clang diagnostic pop

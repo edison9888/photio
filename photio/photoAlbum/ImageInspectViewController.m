@@ -8,14 +8,16 @@
 
 #import "ImageInspectViewController.h"
 #import "ImageInspectView.h"
+#import "UIImage+Resize.h"
+#import "Capture.h"
+#import "ViewGeneral.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageInspectViewController (PrivateAPI)
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 - (void)loadFile:(NSString*)_fileName;
-- (void)saveToCameraRole:(UIImage*)_capture;
-- (void)saveToFile:(UIImage*)_image;
+- (void)saveCapture:(ImageInspectView*)_selectedView;
 - (CLLocationManager*)locationManager;
 
 @end
@@ -23,7 +25,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, delegate, locationManager;
+@synthesize imageView, containerView, managedObjectContext, delegate, locationManager;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -66,13 +68,14 @@
     }
 }
 
-- (void)saveToCameraRole:(UIImage*)_capture {
-    UIImageWriteToSavedPhotosAlbum(_capture, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-}
-
-- (void)saveToFile:(UIImage*)_image {
-    NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Test.png"];
-    [UIImagePNGRepresentation(_image) writeToFile:pngPath atomically:YES];    
+- (void)saveCapture:(ImageInspectView*)_selectedView {
+    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" 
+                                                      inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    capture.latitude  = _selectedView.latitude;
+    capture.longitude = _selectedView.longitude;
+    capture.image     = _selectedView.capture;
+    capture.createdAt = _selectedView.createdAt;
+    capture.thumbnail = [_selectedView.capture scaleToSize:DISPLAYED_IMAGE_CROP];
 }
 
 - (CLLocationManager*)locationManager {
@@ -147,10 +150,11 @@
     }
 }
 
-- (void)didPinchView:(UIView*)_view {
+- (void)didPinchView:(UIView*)_selectedView {
 }
 
-- (void)didSwipeView:(UIView*)_view {
+- (void)didSwipeView:(UIView*)_selectedView {
+    [self saveCapture:(ImageInspectView*)_selectedView];
 }
 
 - (void)didRemoveAllViews {

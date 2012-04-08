@@ -30,11 +30,11 @@
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
 		05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D694150BC86A009C9A11 /* CalendarDayView.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
+		05AED929153119EF00E277BE /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED928153119EF00E277BE /* Capture.m */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
 		05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05B837601530B5B500D99A40 /* photio.xcdatamodeld */; };
 		05B837731530C45100D99A40 /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B837721530C45100D99A40 /* UIImageToDataTransformer.m */; };
-		05B837761530C6A600D99A40 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B837751530C6A600D99A40 /* Capture.m */; };
 		05B837791530C6B800D99A40 /* Locale.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B837781530C6B800D99A40 /* Locale.m */; };
 		05B8377B1530DA1300D99A40 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8377A1530DA1200D99A40 /* CoreLocation.framework */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
@@ -90,14 +90,14 @@
 		05A1D693150BC86A009C9A11 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayView.h; sourceTree = "<group>"; };
 		05A1D694150BC86A009C9A11 /* CalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayView.m; sourceTree = "<group>"; };
 		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		05AED927153119EF00E277BE /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		05AED928153119EF00E277BE /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		05B83718152E6C5F00D99A40 /* ImageInspectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectView.h; sourceTree = "<group>"; };
 		05B83719152E6C5F00D99A40 /* ImageInspectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectView.m; sourceTree = "<group>"; };
 		05B8372715309FB400D99A40 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		05B837611530B5B500D99A40 /* photio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = photio.xcdatamodel; sourceTree = "<group>"; };
 		05B837711530C45100D99A40 /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageToDataTransformer.h; sourceTree = "<group>"; };
 		05B837721530C45100D99A40 /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageToDataTransformer.m; sourceTree = "<group>"; };
-		05B837741530C6A600D99A40 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
-		05B837751530C6A600D99A40 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		05B837771530C6B800D99A40 /* Locale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Locale.h; sourceTree = "<group>"; };
 		05B837781530C6B800D99A40 /* Locale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Locale.m; sourceTree = "<group>"; };
 		05B8377A1530DA1200D99A40 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -152,11 +152,11 @@
 		059772E415277EE1008F3A1B /* models */ = {
 			isa = PBXGroup;
 			children = (
+				05AED927153119EF00E277BE /* Capture.h */,
+				05AED928153119EF00E277BE /* Capture.m */,
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
 				05B837771530C6B800D99A40 /* Locale.h */,
 				05B837781530C6B800D99A40 /* Locale.m */,
-				05B837741530C6A600D99A40 /* Capture.h */,
-				05B837751530C6A600D99A40 /* Capture.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -400,8 +400,8 @@
 				05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */,
 				05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */,
 				05B837731530C45100D99A40 /* UIImageToDataTransformer.m in Sources */,
-				05B837761530C6A600D99A40 /* Capture.m in Sources */,
 				05B837791530C6B800D99A40 /* Locale.m in Sources */,
+				05AED929153119EF00E277BE /* Capture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Locale;
 
 @interface Capture : NSManagedObject
 
-@property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * comment;
-@property (nonatomic, retain) id thumbnail;
+@property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) id image;
+@property (nonatomic, retain) NSNumber * latitude;
+@property (nonatomic, retain) NSNumber * longitude;
+@property (nonatomic, retain) id thumbnail;
+@property (nonatomic, retain) Locale *locale;
 
 @end

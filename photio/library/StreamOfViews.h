@@ -36,8 +36,8 @@
 - (void)didReleaseUp:(CGPoint)_location;
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)didPinchView:(UIView*)_view;
-- (void)didSwipeView:(UIView*)_view;
+- (void)didPinchView:(UIView*)_selectedView;
+- (void)didSwipeView:(UIView*)_selectedView;
 - (void)didRemoveAllViews;
 
 @end

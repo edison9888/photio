@@ -7,13 +7,25 @@
 //
 
 #import "Capture.h"
+#import "Locale.h"
+#import "UIImageToDataTransformer.h"
 
 
 @implementation Capture
 
-@dynamic createdAt;
 @dynamic comment;
-@dynamic thumbnail;
+@dynamic createdAt;
 @dynamic image;
+@dynamic latitude;
+@dynamic longitude;
+@dynamic thumbnail;
+@dynamic locale;
+
++ (void)initialize {
+	if (self == [Capture class]) {
+		UIImageToDataTransformer *transformer = [[UIImageToDataTransformer alloc] init];
+		[NSValueTransformer setValueTransformer:transformer forName:@"UIImageToDataTransformer"];
+	}
+}
 
 @end

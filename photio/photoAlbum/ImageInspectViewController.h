@@ -16,10 +16,11 @@
 @interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate> {
 }
 
-@property(nonatomic, weak)      UIView*                                 containerView;
-@property(nonatomic, weak)      id<ImageInspectViewControllerDelegate>  delegate;
-@property(nonatomic, strong)    StreamOfViews*                          imageView;
-@property(nonatomic, strong)    CLLocationManager*                      locationManager;
+@property(nonatomic, weak)   UIView*                                 containerView;
+@property(nonatomic, weak)   id<ImageInspectViewControllerDelegate>  delegate;
+@property(nonatomic, weak)   NSManagedObjectContext*                 managedObjectContext;
+@property(nonatomic, strong) StreamOfViews*                          imageView;
+@property(nonatomic, strong) CLLocationManager*                      locationManager;
 
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
