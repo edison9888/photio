@@ -76,6 +76,12 @@
     capture.image     = _selectedView.capture;
     capture.createdAt = _selectedView.createdAt;
     capture.thumbnail = [_selectedView.capture scaleToSize:DISPLAYED_IMAGE_CROP];
+	NSError *error = nil;
+    if (![[ViewGeneral instance].managedObjectContext save:&error]) {
+		// TODO: Handle the error.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+	}
 }
 
 - (CLLocationManager*)locationManager {

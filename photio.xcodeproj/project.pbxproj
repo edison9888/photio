@@ -31,6 +31,7 @@
 		05A1D695150BC86A009C9A11 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D694150BC86A009C9A11 /* CalendarDayView.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
 		05AED929153119EF00E277BE /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED928153119EF00E277BE /* Capture.m */; };
+		05AED9311531E7F500E277BE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED9301531E7F500E277BE /* Tag.m */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
 		05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05B837601530B5B500D99A40 /* photio.xcdatamodeld */; };
@@ -92,6 +93,8 @@
 		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		05AED927153119EF00E277BE /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		05AED928153119EF00E277BE /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		05AED92F1531E7F500E277BE /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		05AED9301531E7F500E277BE /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		05B83718152E6C5F00D99A40 /* ImageInspectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectView.h; sourceTree = "<group>"; };
 		05B83719152E6C5F00D99A40 /* ImageInspectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectView.m; sourceTree = "<group>"; };
 		05B8372715309FB400D99A40 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -155,6 +158,8 @@
 				05AED927153119EF00E277BE /* Capture.h */,
 				05AED928153119EF00E277BE /* Capture.m */,
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
+				05AED92F1531E7F500E277BE /* Tag.h */,
+				05AED9301531E7F500E277BE /* Tag.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
 				05B837781530C6B800D99A40 /* Locale.m */,
 			);
@@ -402,6 +407,7 @@
 				05B837731530C45100D99A40 /* UIImageToDataTransformer.m in Sources */,
 				05B837791530C6B800D99A40 /* Locale.m in Sources */,
 				05AED929153119EF00E277BE /* Capture.m in Sources */,
+				05AED9311531E7F500E277BE /* Tag.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
