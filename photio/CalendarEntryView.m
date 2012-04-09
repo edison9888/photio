@@ -8,11 +8,10 @@
 
 #import "CalendarEntryView.h"
 #import "CalandarDateView.h"
+#import "ViewGeneral.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarEntryView (PrivateAPI)
-
-- (CGRect)dateViewRect:(CGRect)_cotentFrame;
 
 @end
 
@@ -24,12 +23,6 @@
 #pragma mark -
 #pragma mark CalendarEntryView PrivatAPI
 
-- (CGRect)dateViewRect:(CGRect)_cotentFrame {
-    CGSize dateViewSize = CGSizeMake(DAY_VIEW_DATE_X_OFFSET_SCALE * self.frame.size.width, DAY_VIEW_DATE_HEIGHT);
-    CGPoint dateViewOffset = CGPointMake(self.frame.size.width - dateViewSize.width - DAY_VIEW_DATE_X_OFFSET, DAY_VIEW_DATE_Y_OFFSET);
-    return CGRectMake(dateViewOffset.x, dateViewOffset.y, dateViewSize.width, dateViewSize.height);
-}
-
 #pragma mark -
 #pragma mark CalendarEntryView
 
@@ -40,10 +33,10 @@
 - (id)initWithFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo {
     if ((self = [super initWithFrame:_frame])) {
         self.backgroundColor = [UIColor blackColor];
-        CGRect contentFrame = CGRectMake(DAY_VIEW_BORDER, DAY_VIEW_BORDER, self.frame.size.width - DAY_VIEW_BORDER, self.frame.size.height - DAY_VIEW_BORDER);
+        CGRect contentFrame = CGRectMake(CALENDAR_ENTRY_BORDER, CALENDAR_ENTRY_BORDER, self.frame.size.width - CALENDAR_ENTRY_BORDER, self.frame.size.height - CALENDAR_ENTRY_BORDER);
         UIView* contentView = [[UIView alloc] initWithFrame:contentFrame];
         contentView.backgroundColor = [UIColor whiteColor];
-        self.dateView = [CalandarDateView withFrame:[self dateViewRect:contentFrame] andDate:_date];
+        self.dateView = [CalandarDateView withFrame:[ViewGeneral calendarDateViewRect:contentFrame] andDate:_date];
         [self addSubview:contentView];
         if (_photo) {   
             self.photoView = [[UIImageView alloc] initWithImage:_photo];

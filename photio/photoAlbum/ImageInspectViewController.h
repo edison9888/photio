@@ -12,6 +12,7 @@
 #import "StreamOfViews.h"
 
 @protocol ImageInspectViewControllerDelegate;
+@class ImageInspectView;
  
 @interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate> {
 }
@@ -37,5 +38,6 @@
 - (void)dragInspectImage:(CGPoint)_drag;
 - (void)releaseInspectImage;
 - (void)transitionFromInspectImage;
+- (void)saveImage:(ImageInspectView*)_imageInspectView;
 
 @end

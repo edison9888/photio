@@ -17,8 +17,6 @@
 - (void)setDateFormatters;
 - (NSDate*)startDay;
 - (NSDate*)startWeek:(NSInteger)_weekOffset;
-- (CGRect)dayViewRect:(NSInteger)_weeks;
-- (NSInteger)rowsInView;
 
 @end
 
@@ -40,10 +38,10 @@
 
 - (NSMutableArray*)setDayViews {
     NSDate* startDate = [self startDay];
-    NSInteger totalRowsInView = [self rowsInView];
+    NSInteger totalRowsInView = [ViewGeneral calendarRowsInView];
     NSMutableArray* dayViews = [NSMutableArray arrayWithCapacity:CALENDAR_VIEW_COUNT * totalRowsInView];
     NSInteger currentDay = 0;
-    CGRect calendarDateViewRect = [self dayViewRect:totalRowsInView];
+    CGRect calendarEntryViewRect = [ViewGeneral calendarEntryViewRect:totalRowsInView];
     for (int i = 0; i < (CALENDAR_VIEW_COUNT * totalRowsInView); i++) {
         NSMutableArray* daysInRowViews = [NSMutableArray arrayWithCapacity:CALENDAR_DAYS_IN_ROW];
         for (int j = 0; j < CALENDAR_DAYS_IN_ROW; j++) {
@@ -60,7 +58,7 @@
             if (currentDay == totalRowsInView * CALENDAR_DAYS_IN_ROW) {
                 self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
             }
-            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarDateViewRect date:day andPhoto:nil]];
+            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarEntryViewRect date:day andPhoto:nil]];
             currentDay++;
         }
         [dayViews addObject:daysInRowViews];
@@ -89,18 +87,6 @@
     NSDateComponents* endOfWeekDate = [[NSDateComponents alloc] init];
     [endOfWeekDate setDay:daysToEndOfWeek];
     return [self.calendar dateByAddingComponents:endOfWeekDate toDate:[NSDate date] options:0];
-}
-
--(CGRect)dayViewRect:(NSInteger)_rows {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_ROW, bounds.size.height / _rows);
-}
-
-- (NSInteger)rowsInView {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_ROW;
-    NSInteger rows = bounds.size.height / (DAY_VIEW_ASPECT_RATIO * viewWidth);
-    return rows;
 }
 
 #pragma mark -

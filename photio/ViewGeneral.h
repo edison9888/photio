@@ -36,7 +36,11 @@
 + (CGRect)overWindow;
 + (CGRect)underWindow;
 + (CGRect)leftOfWindow;
-+ (CGRect)rightOfWindow; 
++ (CGRect)rightOfWindow;
++ (CGRect)calendarImageThumbnail;
++ (CGRect)calendarDateViewRect:(CGRect)_cotentFrame;
++ (CGRect)calendarEntryViewRect:(NSInteger)_rows;
++ (NSInteger)calendarRowsInView;
 - (void)createViews:(UIView*)_containerView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

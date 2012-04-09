@@ -68,22 +68,6 @@
     }
 }
 
-- (void)saveCapture:(ImageInspectView*)_selectedView {
-    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" 
-                                                      inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-    capture.latitude  = _selectedView.latitude;
-    capture.longitude = _selectedView.longitude;
-    capture.image     = _selectedView.capture;
-    capture.createdAt = _selectedView.createdAt;
-    capture.thumbnail = [_selectedView.capture scaleToSize:DISPLAYED_IMAGE_CROP];
-	NSError *error = nil;
-    if (![[ViewGeneral instance].managedObjectContext save:&error]) {
-		// TODO: Handle the error.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-	}
-}
-
 - (CLLocationManager*)locationManager {
     if (locationManager != nil) {
 		return locationManager;
@@ -162,7 +146,9 @@
 }
 
 - (void)didSwipeView:(UIView*)_selectedView {
-    [self saveCapture:(ImageInspectView*)_selectedView];
+    if ([self.delegate respondsToSelector:@selector(saveImage:)]) {
+        [self.delegate saveImage:(ImageInspectView*)_selectedView];
+    }
 }
 
 - (void)didRemoveAllViews {

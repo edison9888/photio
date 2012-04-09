@@ -10,6 +10,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ViewGeneral.h"
 #import "UIImage+Resize.h"
+#import "ImageInspectView.h"
+#import "Capture.h"
 
 #import "EntryViewController.h"
 #import "CalendarViewController.h"
@@ -77,10 +79,13 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return (screenBounds.size.width  - abs(_offset)) / HORIZONTAL_TRANSITION_ANIMATION_SPEED;    
 }
 
-- (void)saveImage:(UIImage*)_image {
+- (void)saveImageToPhotoAlbum:(UIImage*)_image {
     ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
     [library writeImageToSavedPhotosAlbum:[_image CGImage] orientation:(ALAssetOrientation)[_image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error){}];
 }
+
+#pragma mark - 
+#pragma mark ViewGeneral
 
 + (ViewGeneral*)instance {	
     @synchronized(self) {
@@ -118,6 +123,28 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 + (CGRect)rightOfWindow {
     CGRect screenBounds = [self screenBounds];
     return CGRectMake(screenBounds.size.width + VIEW_MIN_SPACING, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
+}
+
++ (CGRect)calendarImageThumbnail {
+    return [self calendarDateViewRect:[self calendarEntryViewRect:[self calendarRowsInView]]];
+}
+
++ (CGRect)calendarDateViewRect:(CGRect)_cotentFrame {
+    CGSize dateViewSize = CGSizeMake(CALENDAR_DATE_SCALE_FACTOR * _cotentFrame.size.width, CALENDAR_DATE_SCALE_FACTOR * _cotentFrame.size.width);
+    CGPoint dateViewOffset = CGPointMake(_cotentFrame.size.width - dateViewSize.width * (1.0 - CALENDAR_DATE_OFFSET_FACTOR), dateViewSize.width * CALENDAR_DATE_OFFSET_FACTOR);
+    return CGRectMake(dateViewOffset.x, dateViewOffset.y, dateViewSize.width, dateViewSize.height);
+}
+
++ (CGRect)calendarEntryViewRect:(NSInteger)_rows {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_ROW, bounds.size.height / _rows);
+}
+
++ (NSInteger)calendarRowsInView {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_ROW;
+    NSInteger rows = bounds.size.height / (CALENDAR_ENTRY_VIEW_ASPECT_RATIO * viewWidth);
+    return rows;
 }
 
 - (void)createViews:(UIView*)_containerView {
@@ -402,7 +429,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark -
-#pragma mark CameraViewControllerDelegate
+#pragma mark ImageInspectViewControllerDelegate
 
 - (void)dragInspectImage:(CGPoint)_drag {
     [self drag:_drag view:self.imageInspectViewController.view];
@@ -422,6 +449,22 @@ static ViewGeneral* thisViewControllerGeneral = nil;
             [self imageInspectViewPosition:[self.class overWindow]];
         }
     ];    
+}
+
+- (void)saveImage:(ImageInspectView*)_imageInspectView {
+    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" 
+                                                               inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    capture.latitude  = _imageInspectView.latitude;
+    capture.longitude = _imageInspectView.longitude;
+    capture.image     = _imageInspectView.capture;
+    capture.createdAt = _imageInspectView.createdAt;
+    capture.thumbnail = [_imageInspectView.capture scaleToSize:[self.class calendarImageThumbnail].size];
+	NSError *error = nil;
+    if (![[ViewGeneral instance].managedObjectContext save:&error]) {
+		// TODO: Handle the error.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+	}
 }
 
 @end
