@@ -26,7 +26,7 @@
         self.dayView.font = [self.dayView.font fontWithSize:DAY_VIEW_DATE_IPHONE_FONT_SIZE];
         self.layer.cornerRadius = 5.0f;
         self.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.layer.borderWidth = 1.5f;
+        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2];
     }
     return self;

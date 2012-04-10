@@ -33,6 +33,7 @@
 		05ACEF4B1532491B007F538E /* CalandarDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ACEF4A1532491B007F538E /* CalandarDateView.m */; };
 		05AED929153119EF00E277BE /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED928153119EF00E277BE /* Capture.m */; };
 		05AED9311531E7F500E277BE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED9301531E7F500E277BE /* Tag.m */; };
+		05B2A7561533BBFC00499F6F /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B2A7551533BBFC00499F6F /* Image.m */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
 		05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05B837601530B5B500D99A40 /* photio.xcdatamodeld */; };
@@ -98,6 +99,8 @@
 		05AED928153119EF00E277BE /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		05AED92F1531E7F500E277BE /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		05AED9301531E7F500E277BE /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		05B2A7541533BBFC00499F6F /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		05B2A7551533BBFC00499F6F /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		05B83718152E6C5F00D99A40 /* ImageInspectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectView.h; sourceTree = "<group>"; };
 		05B83719152E6C5F00D99A40 /* ImageInspectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectView.m; sourceTree = "<group>"; };
 		05B8372715309FB400D99A40 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -161,6 +164,8 @@
 				05AED927153119EF00E277BE /* Capture.h */,
 				05AED928153119EF00E277BE /* Capture.m */,
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
+				05B2A7541533BBFC00499F6F /* Image.h */,
+				05B2A7551533BBFC00499F6F /* Image.m */,
 				05AED92F1531E7F500E277BE /* Tag.h */,
 				05AED9301531E7F500E277BE /* Tag.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
@@ -414,6 +419,7 @@
 				05AED929153119EF00E277BE /* Capture.m in Sources */,
 				05AED9311531E7F500E277BE /* Tag.m in Sources */,
 				05ACEF4B1532491B007F538E /* CalandarDateView.m in Sources */,
+				05B2A7561533BBFC00499F6F /* Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

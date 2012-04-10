@@ -9,6 +9,7 @@
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
 #import "CalendarEntryView.h"
+#import "Capture.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
@@ -58,7 +59,12 @@
             if (currentDay == totalRowsInView * CALENDAR_DAYS_IN_ROW) {
                 self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
             }
-            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarEntryViewRect date:day andPhoto:nil]];
+            UIImage* thumbnail = nil;
+            if (currentDay < [self.thumbnails count]) {
+                Capture* capture = [self.thumbnails objectAtIndex:currentDay];
+                thumbnail = capture.thumbnail;
+            }
+            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarEntryViewRect date:day andPhoto:thumbnail]];
             currentDay++;
         }
         [dayViews addObject:daysInRowViews];
@@ -120,9 +126,6 @@
         self.view.frame = self.containerView.frame;
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         [self setDateFormatters];
-        self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self setDayViews] andRelativeView:self.containerView];
-        self.dragGridView.userInteractionEnabled = YES;
-        [self.view addSubview:self.dragGridView];
     }
     return self;
 }
@@ -133,6 +136,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.thumbnails = [self fetchThumbnails];
+    self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self setDayViews] andRelativeView:self.containerView];
+    self.dragGridView.userInteractionEnabled = YES;
+    [self.view addSubview:self.dragGridView];
 }
 
 - (void)viewDidUnload {

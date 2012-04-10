@@ -12,6 +12,7 @@
 #import "UIImage+Resize.h"
 #import "ImageInspectView.h"
 #import "Capture.h"
+#import "Image.h"
 
 #import "EntryViewController.h"
 #import "CalendarViewController.h"
@@ -126,7 +127,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 + (CGRect)calendarImageThumbnail {
-    return [self calendarDateViewRect:[self calendarEntryViewRect:[self calendarRowsInView]]];
+    return [self calendarEntryViewRect:[self calendarRowsInView]];
 }
 
 + (CGRect)calendarDateViewRect:(CGRect)_cotentFrame {
@@ -456,9 +457,11 @@ static ViewGeneral* thisViewControllerGeneral = nil;
                                                                inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
     capture.latitude  = _imageInspectView.latitude;
     capture.longitude = _imageInspectView.longitude;
-    capture.image     = _imageInspectView.capture;
     capture.createdAt = _imageInspectView.createdAt;
-    capture.thumbnail = [_imageInspectView.capture scaleToSize:[self.class calendarImageThumbnail].size];
+    capture.thumbnail = [_imageInspectView.capture thumbnailImage:[self.class calendarImageThumbnail].size.width];
+    Image* image = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+	image.image = _imageInspectView.capture;
+	capture.image = image;	
 	NSError *error = nil;
     if (![[ViewGeneral instance].managedObjectContext save:&error]) {
 		// TODO: Handle the error.

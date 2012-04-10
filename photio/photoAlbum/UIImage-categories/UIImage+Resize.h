@@ -8,7 +8,7 @@
 
 - (UIImage*)scaleBy:(CGFloat)_scaleBy andCropToSize:(CGSize)_size;
 - (UIImage*)croppedImage:(CGRect)bounds;
-- (UIImage*)thumbnailImage:(NSInteger)thumbnailSize transparentBorder:(NSUInteger)borderSize cornerRadius:(NSUInteger)cornerRadius interpolationQuality:(CGInterpolationQuality)quality;
+- (UIImage*)thumbnailImage:(NSInteger)thumbnailSize;
 - (UIImage*)resizedImage:(CGSize)newSize interpolationQuality:(CGInterpolationQuality)quality;
 - (UIImage*)resizedImageWithContentMode:(UIViewContentMode)contentMode bounds:(CGSize)bounds interpolationQuality:(CGInterpolationQuality)quality;
 - (UIImage*)scaleToSize:(CGSize)_frame;
