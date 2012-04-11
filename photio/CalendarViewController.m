@@ -42,7 +42,7 @@
     NSInteger totalRowsInView = [ViewGeneral calendarRowsInView];
     NSMutableArray* dayViews = [NSMutableArray arrayWithCapacity:CALENDAR_VIEW_COUNT * totalRowsInView];
     NSInteger currentDay = 0;
-    CGRect calendarEntryViewRect = [ViewGeneral calendarEntryViewRect:totalRowsInView];
+    CGRect calendarEntryViewRect = [ViewGeneral calendarEntryViewRect];
     for (int i = 0; i < (CALENDAR_VIEW_COUNT * totalRowsInView); i++) {
         NSMutableArray* daysInRowViews = [NSMutableArray arrayWithCapacity:CALENDAR_DAYS_IN_ROW];
         for (int j = 0; j < CALENDAR_DAYS_IN_ROW; j++) {
@@ -122,9 +122,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:_containerView {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.containerView = _containerView;
-        self.view.frame = self.containerView.frame;
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        self.containerView = _containerView;
         [self setDateFormatters];
     }
     return self;

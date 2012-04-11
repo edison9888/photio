@@ -127,24 +127,24 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 + (CGRect)calendarImageThumbnail {
-    return [self calendarEntryViewRect:[self calendarRowsInView]];
+    return [self calendarEntryViewRect];
 }
 
 + (CGRect)calendarDateViewRect:(CGRect)_cotentFrame {
     CGSize dateViewSize = CGSizeMake(CALENDAR_DATE_SCALE_FACTOR * _cotentFrame.size.width, CALENDAR_DATE_SCALE_FACTOR * _cotentFrame.size.width);
-    CGPoint dateViewOffset = CGPointMake(_cotentFrame.size.width - dateViewSize.width * (1.0 - CALENDAR_DATE_OFFSET_FACTOR), dateViewSize.width * CALENDAR_DATE_OFFSET_FACTOR);
+    CGPoint dateViewOffset = CGPointMake(_cotentFrame.size.width - dateViewSize.width * (1.0 + 1.0 * CALENDAR_DATE_OFFSET_FACTOR), dateViewSize.width * CALENDAR_DATE_OFFSET_FACTOR);
     return CGRectMake(dateViewOffset.x, dateViewOffset.y, dateViewSize.width, dateViewSize.height);
 }
 
-+ (CGRect)calendarEntryViewRect:(NSInteger)_rows {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    return CGRectMake(0.0, 0.0, bounds.size.width / CALENDAR_DAYS_IN_ROW, bounds.size.height / _rows);
++ (CGRect)calendarEntryViewRect {
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width / CALENDAR_DAYS_IN_ROW;
+    return CGRectMake(0.0, 0.0, width, width);
 }
 
 + (NSInteger)calendarRowsInView {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     NSInteger viewWidth = bounds.size.width / CALENDAR_DAYS_IN_ROW;
-    NSInteger rows = bounds.size.height / (CALENDAR_ENTRY_VIEW_ASPECT_RATIO * viewWidth);
+    NSInteger rows = bounds.size.height / viewWidth;
     return rows;
 }
 

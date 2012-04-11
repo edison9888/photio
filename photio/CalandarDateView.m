@@ -24,10 +24,13 @@
         self.dayView.textAlignment = UITextAlignmentRight;
         self.dayView.text = _date;
         self.dayView.font = [self.dayView.font fontWithSize:DAY_VIEW_DATE_IPHONE_FONT_SIZE];
+        self.dayView.textColor = [UIColor whiteColor];
+        self.dayView.enabled = NO;
+        [self addSubview:self.dayView];
         self.layer.cornerRadius = 5.0f;
         self.layer.borderColor = [UIColor whiteColor].CGColor;
         self.layer.borderWidth = 1.0f;
-        self.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2];
+        self.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
     }
     return self;
 }

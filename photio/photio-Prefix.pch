@@ -18,18 +18,17 @@
 #define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
 #define PINCH_TRANSITION_ANIMATION_SPEED                250.0f
 #define RELEASE_ANIMATION_SPEED                         150.0f
-#define VIEW_MIN_SPACING                                50
+#define VIEW_MIN_SPACING                                25
 
-#define DETECT_SWIPE_SPEED                              500
-#define MAX_DRAG_FACTOR                                 0.4f
+#define DETECT_SWIPE_SPEED                              400
+#define MAX_DRAG_FACTOR                                 0.3f
 
 #define CALENDAR_DAYS_IN_ROW                            3
 #define CALENDAR_VIEW_COUNT                             3
-#define CALENDAR_ENTRY_VIEW_ASPECT_RATIO                1.0f
 #define CALENDAR_ENTRY_BORDER                           4.0f
-#define CALENDAR_DATE_SCALE_FACTOR                      0.4f
+#define CALENDAR_DATE_SCALE_FACTOR                      0.45f
 #define CALENDAR_DATE_OFFSET_FACTOR                     0.05f
-#define DAY_VIEW_DATE_IPHONE_FONT_SIZE                  22.0f
+#define DAY_VIEW_DATE_IPHONE_FONT_SIZE                  21.0f
 
 #define CAMERA_NEW_PHOTO_TRANSITION                     0.5f
 #define CAMERA_NEW_PHOTO_DELAY                          0.0f
