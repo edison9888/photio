@@ -26,7 +26,7 @@
 #define CALENDAR_DAYS_IN_ROW                            3
 #define CALENDAR_VIEW_COUNT                             3
 #define CALENDAR_ENTRY_BORDER                           4.0f
-#define CALENDAR_DATE_SCALE_FACTOR                      0.45f
+#define CALENDAR_DATE_SCALE_FACTOR                      0.4f
 #define CALENDAR_DATE_OFFSET_FACTOR                     0.05f
 #define DAY_VIEW_DATE_IPHONE_FONT_SIZE                  21.0f
 

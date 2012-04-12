@@ -8,6 +8,7 @@
 
 #import "CalendarEntryView.h"
 #import "CalandarDateView.h"
+#import "CalendarDayBackgroundView.h"
 #import "ViewGeneral.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarEntryView
 
-@synthesize dateView, photoView;
+@synthesize dateView, backgroundView, photoView;
 
 #pragma mark -
 #pragma mark CalendarEntryView PrivatAPI
@@ -36,21 +37,16 @@
         CGRect contentFrame = CGRectMake(CALENDAR_ENTRY_BORDER, CALENDAR_ENTRY_BORDER, self.frame.size.width - CALENDAR_ENTRY_BORDER, self.frame.size.height - CALENDAR_ENTRY_BORDER);
         UIView* contentView = [[UIView alloc] initWithFrame:contentFrame];
         contentView.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
-        self.dateView = [CalandarDateView withFrame:[ViewGeneral calendarDateViewRect:contentFrame] andDate:_date];
+        CGRect dateRect = [ViewGeneral calendarDateViewRect:contentFrame];
+        self.dateView = [CalandarDateView withFrame:dateRect andDate:_date];
+        self.backgroundView = [CalendarDayBackgroundView withFrame:dateRect];
         [self addSubview:contentView];
         if (_photo) {   
             self.photoView = [[UIImageView alloc] initWithImage:_photo];
             [contentView addSubview:self.photoView];
-            [self.photoView addSubview:self.dateView];
-        } else {
-            [contentView addSubview:self.dateView];
         }
-        UITextField* dayView = [[UITextField alloc] initWithFrame:_frame];
-        dayView.textAlignment = UITextAlignmentRight;
-        dayView.text = _date;
-        dayView.font = [dayView.font fontWithSize:DAY_VIEW_DATE_IPHONE_FONT_SIZE];
-        dayView.textColor = [UIColor whiteColor];
-        [self addSubview:dayView];
+        [contentView addSubview:self.backgroundView];
+        [contentView addSubview:self.dateView];
     }
     return self;    
 }

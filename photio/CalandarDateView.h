@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CalandarDateView : UIView
-
-@property(nonatomic, strong) UITextField*   dayView;
+@interface CalandarDateView : UITextField
 
 + (id)withFrame:(CGRect)_frame andDate:(NSString*)_date;
 - (id)initWithFrame:(CGRect)_frame andDate:(NSString*)_date;

@@ -55,6 +55,7 @@
 		05DE438914F1F46E005FF6B0 /* EntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE438714F1F46D005FF6B0 /* EntryViewController.m */; };
 		05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE438814F1F46D005FF6B0 /* EntryViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
+		05EE0E8315365AC400E5E541 /* CalendarDayBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE0E8215365AC400E5E541 /* CalendarDayBackgroundView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +136,8 @@
 		05DE438714F1F46D005FF6B0 /* EntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryViewController.m; sourceTree = "<group>"; };
 		05DE438814F1F46D005FF6B0 /* EntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EntryViewController.xib; sourceTree = "<group>"; };
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		05EE0E8115365AC400E5E541 /* CalendarDayBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayBackgroundView.h; sourceTree = "<group>"; };
+		05EE0E8215365AC400E5E541 /* CalendarDayBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayBackgroundView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +260,8 @@
 				05C99EC714F0585C00D09F3E /* Supporting Files */,
 				05ACEF491532491B007F538E /* CalandarDateView.h */,
 				05ACEF4A1532491B007F538E /* CalandarDateView.m */,
+				05EE0E8115365AC400E5E541 /* CalendarDayBackgroundView.h */,
+				05EE0E8215365AC400E5E541 /* CalendarDayBackgroundView.m */,
 				05A1D693150BC86A009C9A11 /* CalendarEntryView.h */,
 				05A1D694150BC86A009C9A11 /* CalendarEntryView.m */,
 				0529A7D11503B35400235B95 /* CalendarViewController.h */,
@@ -420,6 +425,7 @@
 				05AED9311531E7F500E277BE /* Tag.m in Sources */,
 				05ACEF4B1532491B007F538E /* CalandarDateView.m in Sources */,
 				05B2A7561533BBFC00499F6F /* Image.m in Sources */,
+				05EE0E8315365AC400E5E541 /* CalendarDayBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
