@@ -18,6 +18,13 @@
 #import "CalendarViewController.h"
 #import "LocalesViewController.h"
 
+#define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
+#define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
+#define RELEASE_ANIMATION_SPEED                         150.0f
+#define VIEW_MIN_SPACING                                25
+#define CAMERA_NEW_PHOTO_TRANSITION                     0.5f
+#define CAMERA_NEW_PHOTO_DELAY                          0.0f
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
 

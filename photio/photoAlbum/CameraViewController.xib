@@ -57,6 +57,7 @@
 						<string key="NSFrame">{{100, 412}, {120, 60}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -78,7 +79,9 @@
 				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUITapGestureRecognizer" id="848899834"/>
+			<object class="IBUITapGestureRecognizer" id="848899834">
+				<bool key="IBUIDelaysTouchesEnded">NO</bool>
+			</object>
 			<object class="IBUITapGestureRecognizer" id="932958160">
 				<bool key="IBUIDelaysTouchesBegan">YES</bool>
 				<bool key="IBUIDelaysTouchesEnded">NO</bool>

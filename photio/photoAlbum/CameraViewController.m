@@ -9,7 +9,6 @@
 #import "CameraViewController.h"
 #import "Camera.h"
 #import "TransitionGestureRecognizer.h"
-#import <AVFoundation/AVFoundation.h>
 
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 

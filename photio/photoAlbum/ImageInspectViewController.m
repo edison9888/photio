@@ -41,6 +41,7 @@
         self.view.frame = self.containerView.frame;
         self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
         self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
+        [self.imageView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
         [self.view addGestureRecognizer:self.diagonalGestures];
         [self.view addSubview:self.imageView];
         [[self locationManager] startUpdatingLocation];
@@ -150,6 +151,12 @@
     }
 }
 
+- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
+        [self.delegate releaseInspectImage];
+    }
+}
+
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
     if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
         [self.delegate transitionFromInspectImage];
@@ -176,6 +183,7 @@
 }
 
 -(void)didDiagonalSwipe {
+    UIView* currentImage = [self.imageView displayedView];
 }
 
 

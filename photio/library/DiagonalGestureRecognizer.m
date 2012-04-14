@@ -8,13 +8,22 @@
 
 #import "DiagonalGestureRecognizer.h"
 
+#define DETECT_DIAGONAL_SWIPE_MIN_SLOPE       0.5
+#define DETECT_DIAGONAL_SWIPE_MAX_SLOPE       4.0
+
 @interface DiagonalGestureRecognizer (PrivateAPI)
+
+- (BOOL)diagonalSwipeFor:(CGFloat)_deltaX and:(CGFloat)_deltaY;
+- (void)diagonalStateInit;
 
 @end
 
 @implementation DiagonalGestureRecognizer
 
-@synthesize gestureDelegate, strokeUp, midPoint; 
+@synthesize gestureDelegate, strokeUp, midPoint, diagonalSwipe, firstTouch; 
+
+#pragma mark -
+#pragma mark DiagonalGestureRecognizer
 
 + (id)initWithDelegate:(id<DiagonalGestureRecognizerDelegate>)_checkDelegate {
     return [[DiagonalGestureRecognizer alloc] initWithDelegate:_checkDelegate];
@@ -23,19 +32,42 @@
 - (id)initWithDelegate:(id<DiagonalGestureRecognizerDelegate>)_gestureDelegate {
     if (self = [super init]) {
         self.gestureDelegate = _gestureDelegate;
-        self.strokeUp = NO;
+        [self diagonalStateInit];
     }
     return self;
 }
 
-- (void)reset {
-    [super reset];
+#pragma mark -
+#pragma mark DiagonalGestureRecognizer PrivateAPI
+
+- (BOOL)diagonalSwipeFor:(CGFloat)_deltaX and:(CGFloat)_deltaY {
+    if (!self.diagonalSwipe) {
+        CGFloat slope = fabsf(_deltaY / _deltaX);
+        if (slope > DETECT_DIAGONAL_SWIPE_MIN_SLOPE && slope < DETECT_DIAGONAL_SWIPE_MAX_SLOPE) {
+            self.diagonalSwipe = YES;
+        }
+    }
+    return self.diagonalSwipe;
+}
+
+- (void)diagonalStateInit {
     self.midPoint = CGPointZero;
     self.strokeUp = NO;
+    self.diagonalSwipe = NO;
+    self.firstTouch = YES;
+}
+
+#pragma mark -
+#pragma mark UIGestureRecognizer
+
+- (void)reset {
+    [super reset];
+    [self diagonalStateInit];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
+    [self diagonalStateInit];
     if ([touches count] != 1) {
         self.state = UIGestureRecognizerStateFailed;
         return;
@@ -47,31 +79,47 @@
     if (self.state == UIGestureRecognizerStateFailed) return;
     CGPoint nowPoint = [[touches anyObject] locationInView:self.view];
     CGPoint prevPoint = [[touches anyObject] previousLocationInView:self.view];
-    if (!self.strokeUp) {
-        if (nowPoint.x >= prevPoint.x && nowPoint.y >= prevPoint.y) {
-            self.midPoint = nowPoint;
-        } else if (nowPoint.x >= prevPoint.x && nowPoint.y <= prevPoint.y) {
-            strokeUp = YES;
-        } else {
-            self.state = UIGestureRecognizerStateFailed;
+    CGFloat deltaX = nowPoint.x - prevPoint.x;
+    CGFloat deltaY = nowPoint.y - prevPoint.y;
+    if (self.firstTouch) {
+        [self diagonalSwipeFor:deltaX and:deltaY];
+        self.firstTouch = NO;
+    }
+    if (self.diagonalSwipe) {
+        if (!self.strokeUp) {
+            if (fabsf(deltaX) > 0.0 && deltaY > 0.0) {
+                self.midPoint = nowPoint;
+            } else if (deltaX >= 0.0 && deltaY <= 0.0) {
+                strokeUp = YES;
+            } else {
+                self.state = UIGestureRecognizerStateFailed;
+            }
         }
+    } else {
+        self.state = UIGestureRecognizerStateFailed;
     }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    if ((self.state == UIGestureRecognizerStatePossible) && strokeUp) {
-        if ([self.gestureDelegate respondsToSelector:@selector(didCheck)]) {
-            [self.gestureDelegate didCheck];
+    if (self.state == UIGestureRecognizerStatePossible) {
+        if (self.strokeUp) {
+            if ([self.gestureDelegate respondsToSelector:@selector(didCheck)]) {
+                [self.gestureDelegate didCheck];
+            }
+        } else if (self.diagonalSwipe) {
+            if ([self.gestureDelegate respondsToSelector:@selector(didDiagonalSwipe)]) {
+                [self.gestureDelegate didDiagonalSwipe];
+            }
         }
         self.state = UIGestureRecognizerStateRecognized;
-    }    
+    }
+    [self diagonalStateInit];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
-    self.midPoint = CGPointZero;
-    self.strokeUp = NO;
+    [self diagonalStateInit];
     self.state = UIGestureRecognizerStateFailed;
 }
 

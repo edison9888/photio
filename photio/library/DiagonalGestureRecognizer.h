@@ -16,6 +16,8 @@
 
 @property(nonatomic, weak)   id<DiagonalGestureRecognizerDelegate>      gestureDelegate;
 @property(nonatomic, assign) BOOL                                       strokeUp;
+@property(nonatomic, assign) BOOL                                       diagonalSwipe;
+@property(nonatomic, assign) BOOL                                       firstTouch;
 @property(nonatomic, assign) CGPoint                                    midPoint;
 
 + (id)initWithDelegate:(id<DiagonalGestureRecognizerDelegate>)_gestureDelegate;

@@ -8,6 +8,12 @@
 
 #import "StreamOfViews.h"
 
+#define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
+#define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
+#define PINCH_TRANSITION_ANIMATION_SPEED                250.0f
+#define RELEASE_ANIMATION_SPEED                         150.0f
+#define VIEW_MIN_SPACING                                25
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StreamOfViews (PrivateAPI)
 
