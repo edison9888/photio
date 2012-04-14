@@ -1,34 +1,38 @@
 //
-//  CheckMarkGestrureRecognizer.m
+//  DiagonalGestrureRecognizer.m
 //  photio
 //
 //  Created by Troy Stribling on 4/11/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "CheckMarkGestrureRecognizer.h"
+#import "DiagonalGestrureRecognizer.h"
 
-@interface CheckMarkGestrureRecognizer (PrivateAPI)
+@interface DiagonalGestrureRecognizer (PrivateAPI)
 
 @end
 
-@implementation CheckMarkGestrureRecognizer
+@implementation DiagonalGestrureRecognizer
 
-@synthesize relativeView, checkDelegate, strokeUp, midPoint; 
+@synthesize relativeView, gestureDelegate, strokeUp, midPoint; 
 
-+ (id)initWithDelegate:(id<CheckMarkGestrureRecognizerDelegate>)_checkDelegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView {
-    return [[CheckMarkGestrureRecognizer alloc] initWithDelegate:_checkDelegate inView:_view relativeToView:_relativeView];
++ (id)initWithDelegate:(id<DiagonalGestrureRecognizerDelegate>)_checkDelegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView {
+    return [[DiagonalGestrureRecognizer alloc] initWithDelegate:_checkDelegate inView:_view relativeToView:_relativeView];
 }
 
-- (id)initWithDelegate:(id<CheckMarkGestrureRecognizerDelegate>)_checkDelegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView {
+- (id)initWithDelegate:(id<DiagonalGestrureRecognizerDelegate>)_gestureDelegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView {
     if (self = [super init]) {
         self.relativeView = _relativeView;
-        self.checkDelegate = _checkDelegate;
+        self.gestureDelegate = _gestureDelegate;
+        self.strokeUp = NO;
     }
     return self;
 }
 
 - (void)reset {
+    [super reset];
+    self.midPoint = CGPointZero;
+    self.strokeUp = NO;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -58,6 +62,9 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     if ((self.state == UIGestureRecognizerStatePossible) && strokeUp) {
+        if ([self.gestureDelegate respondsToSelector:@selector(didCheck)]) {
+            [self.gestureDelegate didCheck];
+        }
         self.state = UIGestureRecognizerStateRecognized;
     }    
 }
@@ -65,7 +72,7 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
     self.midPoint = CGPointZero;
-    strokeUp = NO;
+    self.strokeUp = NO;
     self.state = UIGestureRecognizerStateFailed;
 }
 

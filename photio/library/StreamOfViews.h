@@ -23,6 +23,10 @@
 + (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView;
 - (void)addView:(UIView*)_view;
+- (UIView*)displayedView;
+- (UIView*)removeDisplayedView;
+- (void)moveViewDownAndReplace:(UIView*)_movedView andOnComplete:(void(^)(void))_onComplete;
+- (void)fadeViewAndReplace:(UIView*)_fadedView andOnComplete:(void(^)(void))_onComplete;
 
 @end
 
@@ -36,8 +40,10 @@
 - (void)didReleaseUp:(CGPoint)_location;
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
-- (void)didPinchView:(UIView*)_selectedView;
-- (void)didSwipeView:(UIView*)_selectedView;
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReleaseDown:(CGPoint)_location;
+- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity;
+- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didRemoveAllViews;
 
 @end

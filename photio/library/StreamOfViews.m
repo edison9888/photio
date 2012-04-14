@@ -11,7 +11,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StreamOfViews (PrivateAPI)
 
-- (UIView*)displayedView;
 - (void)dragView:(CGPoint)_drag;
 - (void)releaseView:(CGFloat)_duration;
 - (void)moveViewsLeft;
@@ -19,7 +18,6 @@
 - (void)moveViewDown;
 - (void)pinchCurrentView;
 - (void)replaceRemovedView;
-- (UIView*)removeDisplayedView;
 - (BOOL)canMoveLeft;
 - (BOOL)canMoveRight;
 - (CGFloat)horizontalReleaseDuration;
@@ -44,10 +42,6 @@
 
 #pragma mark -
 #pragma mark StreamOfViews PrivatAPI
-
-- (UIView*)displayedView {
-    return [self.streamOfViews objectAtIndex:self.inViewIndex];
-}
 
 - (UIView*)leftView {
     return [self.streamOfViews objectAtIndex:(self.inViewIndex - 1)];
@@ -116,55 +110,6 @@
     }
 }
 
-- (void)moveViewDown {
-    if (self.notAnimating) {
-        self.notAnimating = NO;
-        [UIView animateWithDuration:[self verticalTransitionDuration]
-            delay:0
-            options:UIViewAnimationOptionCurveEaseOut
-            animations:^{
-                [self displayedView].frame = [self underWindow];
-            }
-            completion:^(BOOL _finished) {
-                UIView* removedView = [self removeDisplayedView];
-                if (removedView) {
-                    if ([self.delegate respondsToSelector:@selector(didSwipeView:)]) {
-                        [self.delegate didSwipeView:removedView];
-                    }
-                    [self replaceRemovedView];
-                } else {
-                    self.notAnimating = YES;
-                }
-            }
-        ];
-    }
-}
-
-- (void)pinchCurrentView {
-    if (self.notAnimating) {
-        self.notAnimating = NO;
-        [UIView animateWithDuration:[self pinchTransitionDuration]
-            delay:0
-            options:UIViewAnimationOptionCurveEaseOut
-            animations:^{
-                [self displayedView].frame = [self pointCenter];
-            }
-            completion:^(BOOL _finished) {
-                UIView* removedView = [self removeDisplayedView];
-                if (removedView) {
-                    if ([self.delegate respondsToSelector:@selector(didPinchView:)]) {
-                        [self.delegate didPinchView:removedView];
-                    }
-                    [self replaceRemovedView];
-                } else {
-                    self.notAnimating = YES;
-                }
-            }
-         ];
-        
-    }
-}
-
 - (void)replaceRemovedView {
     self.notAnimating = NO;
     [UIView animateWithDuration:[self removeTransitionDuration]
@@ -177,21 +122,6 @@
             self.notAnimating = YES;
         }
      ];    
-}
-
-- (UIView*)removeDisplayedView {
-    UIView* viewToRemove = [self displayedView];
-    [self.streamOfViews removeObjectAtIndex:self.inViewIndex];
-    [viewToRemove removeFromSuperview];
-    if ([self.streamOfViews count] == 0) {
-        if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
-            [self.delegate didRemoveAllViews];
-        }
-        viewToRemove = nil;
-    } else if ((self.inViewIndex == [self.streamOfViews count]) && self.inViewIndex != 0) {
-        self.inViewIndex--;
-    }
-    return viewToRemove;
 }
 
 - (BOOL)canMoveLeft {
@@ -280,6 +210,59 @@
     [self.streamOfViews insertObject:_view atIndex:self.inViewIndex];
 }
 
+- (UIView*)displayedView {
+    return [self.streamOfViews objectAtIndex:self.inViewIndex];
+}
+
+- (UIView*)removeDisplayedView {
+    UIView* viewToRemove = [self displayedView];
+    [self.streamOfViews removeObjectAtIndex:self.inViewIndex];
+    [viewToRemove removeFromSuperview];
+    if ([self.streamOfViews count] == 0) {
+        if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
+            [self.delegate didRemoveAllViews];
+        }
+        viewToRemove = nil;
+    } else if ((self.inViewIndex == [self.streamOfViews count]) && self.inViewIndex != 0) {
+        self.inViewIndex--;
+    }
+    return viewToRemove;
+}
+
+- (void)moveViewDownAndReplace:(UIView*)_movedView andOnComplete:(void(^)(void))_onComplete {
+    if (self.notAnimating) {
+        self.notAnimating = NO;
+        [UIView animateWithDuration:[self verticalTransitionDuration]
+            delay:0
+            options:UIViewAnimationOptionCurveEaseOut
+            animations:^{
+                _movedView.frame = [self underWindow];
+            }
+            completion:^(BOOL _finished) {
+                _onComplete();
+                [self replaceRemovedView];
+            }
+         ];
+    }
+}
+
+- (void)fadeViewAndReplace:(UIView*)_fadedView andOnComplete:(void(^)(void))_onComplete {
+    if (self.notAnimating) {
+        self.notAnimating = NO;
+        [UIView animateWithDuration:[self verticalTransitionDuration]
+            delay:0
+            options:UIViewAnimationOptionCurveEaseOut
+            animations:^{
+                _fadedView.alpha = 0.0;
+            }
+            completion:^(BOOL _finished) {
+                _onComplete();
+                [self replaceRemovedView];
+            }
+        ];
+    }
+}
+
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 
@@ -298,7 +281,9 @@
 }
 
 - (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragView:_drag];
+    if ([self.delegate respondsToSelector:@selector(didDragDown:from:withVelocity:)]) {
+        [self.delegate didDragDown:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didReleaseRight:(CGPoint)_location { 
@@ -316,7 +301,9 @@
 }
 
 - (void)didReleaseDown:(CGPoint)_location {
-    [self releaseView:[self verticalReleaseDuration]];
+    if ([self.delegate respondsToSelector:@selector(didReleaseDown:)]) {
+        [self.delegate didReleaseDown:_location];
+    }
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -342,7 +329,9 @@
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self moveViewDown];
+    if ([self.delegate respondsToSelector:@selector(didSwipeDown:withVelocity:)]) {
+        [self.delegate didSwipeDown:_location withVelocity:_velocity];
+    }
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -368,7 +357,9 @@
 }
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    [self moveViewDown];
+    if ([self.delegate respondsToSelector:@selector(didReachMaxDragDown:from:withVelocity:)]) {
+        [self.delegate didReachMaxDragDown:_drag from:_location withVelocity:_velocity];
+    }
 }
 
 

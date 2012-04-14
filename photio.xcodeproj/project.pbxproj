@@ -56,7 +56,7 @@
 		05DE438A14F1F46E005FF6B0 /* EntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE438814F1F46D005FF6B0 /* EntryViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
 		05EE0E8315365AC400E5E541 /* CalendarDayBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE0E8215365AC400E5E541 /* CalendarDayBackgroundView.m */; };
-		05EE0E8715366ACF00E5E541 /* CheckMarkGestrureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE0E8615366ACF00E5E541 /* CheckMarkGestrureRecognizer.m */; };
+		05EE0E8715366ACF00E5E541 /* DiagonalGestrureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE0E8615366ACF00E5E541 /* DiagonalGestrureRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,8 +139,8 @@
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		05EE0E8115365AC400E5E541 /* CalendarDayBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayBackgroundView.h; sourceTree = "<group>"; };
 		05EE0E8215365AC400E5E541 /* CalendarDayBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayBackgroundView.m; sourceTree = "<group>"; };
-		05EE0E8515366ACF00E5E541 /* CheckMarkGestrureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckMarkGestrureRecognizer.h; sourceTree = "<group>"; };
-		05EE0E8615366ACF00E5E541 /* CheckMarkGestrureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckMarkGestrureRecognizer.m; sourceTree = "<group>"; };
+		05EE0E8515366ACF00E5E541 /* DiagonalGestrureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DiagonalGestrureRecognizer.h; sourceTree = "<group>"; };
+		05EE0E8615366ACF00E5E541 /* DiagonalGestrureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagonalGestrureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,8 +192,8 @@
 		05C59C1F14F31EF8009AC823 /* library */ = {
 			isa = PBXGroup;
 			children = (
-				05EE0E8515366ACF00E5E541 /* CheckMarkGestrureRecognizer.h */,
-				05EE0E8615366ACF00E5E541 /* CheckMarkGestrureRecognizer.m */,
+				05EE0E8515366ACF00E5E541 /* DiagonalGestrureRecognizer.h */,
+				05EE0E8615366ACF00E5E541 /* DiagonalGestrureRecognizer.m */,
 				0554A4791503DDD000B9C76D /* DragGridView.h */,
 				0554A47A1503DDD000B9C76D /* DragGridView.m */,
 				0554A47D1503DDFE00B9C76D /* DragRowView.h */,
@@ -431,7 +431,7 @@
 				05ACEF4B1532491B007F538E /* CalandarDateView.m in Sources */,
 				05B2A7561533BBFC00499F6F /* Image.m in Sources */,
 				05EE0E8315365AC400E5E541 /* CalendarDayBackgroundView.m in Sources */,
-				05EE0E8715366ACF00E5E541 /* CheckMarkGestrureRecognizer.m in Sources */,
+				05EE0E8715366ACF00E5E541 /* DiagonalGestrureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

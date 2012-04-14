@@ -124,7 +124,19 @@
     }
 }
 
+- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+    if ([self.delegate respondsToSelector:@selector(dragInspectImage:)]) {
+        [self.delegate dragInspectImage:_drag];
+    }
+}
+
 - (void)didReleaseUp:(CGPoint)_location {
+    if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
+        [self.delegate releaseInspectImage];
+    }
+}
+
+- (void)didReleaseDown:(CGPoint)_location {
     if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
         [self.delegate releaseInspectImage];
     }
@@ -142,12 +154,9 @@
     }
 }
 
-- (void)didPinchView:(UIView*)_selectedView {
-}
-
-- (void)didSwipeView:(UIView*)_selectedView {
-    if ([self.delegate respondsToSelector:@selector(saveImage:)]) {
-        [self.delegate saveImage:(ImageInspectView*)_selectedView];
+- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
+        [self.delegate releaseInspectImage];
     }
 }
 
@@ -156,5 +165,15 @@
         [self.delegate transitionFromInspectImage];
     }
 }
+
+#pragma mark -
+#pragma mark DiagonalGestrureRecognizerDelegate
+
+-(void)didCheck {
+}
+
+-(void)didDiagonalSwipe {
+}
+
 
 @end

@@ -10,11 +10,12 @@
 #import <CoreLocation/CoreLocation.h>
 #import "TransitionGestureRecognizer.h"
 #import "StreamOfViews.h"
+#import "DiagonalGestrureRecognizer.h"
 
 @protocol ImageInspectViewControllerDelegate;
 @class ImageInspectView;
  
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate> {
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate, DiagonalGestrureRecognizerDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                                 containerView;
