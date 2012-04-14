@@ -25,7 +25,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, managedObjectContext, delegate, locationManager;
+@synthesize imageView, containerView, delegate, diagonalGestures, locationManager;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -40,6 +40,8 @@
         self.delegate = _delegate;
         self.view.frame = self.containerView.frame;
         self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
+        self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
+        [self.view addGestureRecognizer:self.diagonalGestures];
         [self.view addSubview:self.imageView];
         [[self locationManager] startUpdatingLocation];
     }
@@ -170,6 +172,7 @@
 #pragma mark DiagonalGestrureRecognizerDelegate
 
 -(void)didCheck {
+    UIView* currentImage = [self.imageView displayedView];
 }
 
 -(void)didDiagonalSwipe {

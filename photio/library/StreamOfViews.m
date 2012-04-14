@@ -24,7 +24,6 @@
 - (CGFloat)verticalReleaseDuration;
 - (CGFloat)horizontalTransitionDuration;
 - (CGFloat)verticalTransitionDuration;
-- (CGFloat)pinchTransitionDuration;
 - (CGFloat)removeTransitionDuration;
 - (CGRect)inWindow;
 - (CGRect)leftOfWindow;
@@ -154,10 +153,6 @@
 
 - (CGFloat)removeTransitionDuration {
     return self.frame.size.width / HORIZONTAL_TRANSITION_ANIMATION_SPEED;    
-}
-
-- (CGFloat)pinchTransitionDuration {
-    return self.frame.size.width / (2.0 * PINCH_TRANSITION_ANIMATION_SPEED);
 }
 
 - (CGRect)inWindow {

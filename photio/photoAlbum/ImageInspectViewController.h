@@ -10,19 +10,20 @@
 #import <CoreLocation/CoreLocation.h>
 #import "TransitionGestureRecognizer.h"
 #import "StreamOfViews.h"
-#import "DiagonalGestrureRecognizer.h"
+#import "DiagonalGestureRecognizer.h"
 
 @protocol ImageInspectViewControllerDelegate;
 @class ImageInspectView;
+@class DiagonalGestureRecognizer;
  
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate, DiagonalGestrureRecognizerDelegate> {
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate, DiagonalGestureRecognizerDelegate> {
 }
 
-@property(nonatomic, weak)   UIView*                                 containerView;
-@property(nonatomic, weak)   id<ImageInspectViewControllerDelegate>  delegate;
-@property(nonatomic, weak)   NSManagedObjectContext*                 managedObjectContext;
-@property(nonatomic, strong) StreamOfViews*                          imageView;
-@property(nonatomic, strong) CLLocationManager*                      locationManager;
+@property(nonatomic, weak)   UIView*                                containerView;
+@property(nonatomic, weak)   id<ImageInspectViewControllerDelegate> delegate;
+@property(nonatomic, strong) DiagonalGestureRecognizer*             diagonalGestures;
+@property(nonatomic, strong) StreamOfViews*                         imageView;
+@property(nonatomic, strong) CLLocationManager*                     locationManager;
 
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;

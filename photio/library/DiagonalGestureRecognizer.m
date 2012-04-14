@@ -1,28 +1,27 @@
 //
-//  DiagonalGestrureRecognizer.m
+//  DiagonalGestureRecognizer.m
 //  photio
 //
 //  Created by Troy Stribling on 4/11/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "DiagonalGestrureRecognizer.h"
+#import "DiagonalGestureRecognizer.h"
 
-@interface DiagonalGestrureRecognizer (PrivateAPI)
+@interface DiagonalGestureRecognizer (PrivateAPI)
 
 @end
 
-@implementation DiagonalGestrureRecognizer
+@implementation DiagonalGestureRecognizer
 
-@synthesize relativeView, gestureDelegate, strokeUp, midPoint; 
+@synthesize gestureDelegate, strokeUp, midPoint; 
 
-+ (id)initWithDelegate:(id<DiagonalGestrureRecognizerDelegate>)_checkDelegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView {
-    return [[DiagonalGestrureRecognizer alloc] initWithDelegate:_checkDelegate inView:_view relativeToView:_relativeView];
++ (id)initWithDelegate:(id<DiagonalGestureRecognizerDelegate>)_checkDelegate {
+    return [[DiagonalGestureRecognizer alloc] initWithDelegate:_checkDelegate];
 }
 
-- (id)initWithDelegate:(id<DiagonalGestrureRecognizerDelegate>)_gestureDelegate inView:(UIView*)_view relativeToView:(UIView*)_relativeView {
+- (id)initWithDelegate:(id<DiagonalGestureRecognizerDelegate>)_gestureDelegate {
     if (self = [super init]) {
-        self.relativeView = _relativeView;
         self.gestureDelegate = _gestureDelegate;
         self.strokeUp = NO;
     }
