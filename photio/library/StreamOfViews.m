@@ -22,7 +22,7 @@
 - (void)moveViewsLeft;
 - (void)moveViewsRight;
 - (void)moveViewDown;
-- (void)pinchCurrentView;
+- (UIView*)removeDisplayedView;
 - (void)replaceRemovedView;
 - (BOOL)canMoveLeft;
 - (BOOL)canMoveRight;
@@ -114,6 +114,22 @@
         ];
     }
 }
+
+- (UIView*)removeDisplayedView {
+    UIView* viewToRemove = [self displayedView];
+    [self.streamOfViews removeObjectAtIndex:self.inViewIndex];
+    [viewToRemove removeFromSuperview];
+    if ([self.streamOfViews count] == 0) {
+        if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
+            [self.delegate didRemoveAllViews];
+        }
+        viewToRemove = nil;
+    } else if ((self.inViewIndex == [self.streamOfViews count]) && self.inViewIndex != 0) {
+        self.inViewIndex--;
+    }
+    return viewToRemove;
+}
+
 
 - (void)replaceRemovedView {
     self.notAnimating = NO;
@@ -215,50 +231,43 @@
     return [self.streamOfViews objectAtIndex:self.inViewIndex];
 }
 
-- (UIView*)removeDisplayedView {
-    UIView* viewToRemove = [self displayedView];
-    [self.streamOfViews removeObjectAtIndex:self.inViewIndex];
-    [viewToRemove removeFromSuperview];
-    if ([self.streamOfViews count] == 0) {
-        if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
-            [self.delegate didRemoveAllViews];
-        }
-        viewToRemove = nil;
-    } else if ((self.inViewIndex == [self.streamOfViews count]) && self.inViewIndex != 0) {
-        self.inViewIndex--;
-    }
-    return viewToRemove;
-}
-
-- (void)moveViewDownAndReplace:(UIView*)_movedView andOnComplete:(void(^)(void))_onComplete {
+- (void)moveDisplayedViewDownAndRemove {
     if (self.notAnimating) {
         self.notAnimating = NO;
         [UIView animateWithDuration:[self verticalTransitionDuration]
             delay:0
             options:UIViewAnimationOptionCurveEaseOut
             animations:^{
-                _movedView.frame = [self underWindow];
+                [self displayedView].frame = [self underWindow];
             }
             completion:^(BOOL _finished) {
-                _onComplete();
-                [self replaceRemovedView];
+                UIView* removedView = [self removeDisplayedView];
+                if (removedView) {
+                    [self replaceRemovedView];
+                } else {
+                    self.notAnimating = YES;
+                }
             }
-         ];
+        ];
     }
 }
 
-- (void)fadeViewAndReplace:(UIView*)_fadedView andOnComplete:(void(^)(void))_onComplete {
+- (void)fadeDisplayedViewAndRemove {
     if (self.notAnimating) {
         self.notAnimating = NO;
         [UIView animateWithDuration:[self verticalTransitionDuration]
             delay:0
             options:UIViewAnimationOptionCurveEaseOut
             animations:^{
-                _fadedView.alpha = 0.0;
+                [self displayedView].alpha = 0.0;
             }
             completion:^(BOOL _finished) {
-                _onComplete();
-                [self replaceRemovedView];
+                UIView* removedView = [self removeDisplayedView];
+                if (removedView) {
+                    [self replaceRemovedView];
+                } else {
+                    self.notAnimating = YES;
+                }
             }
         ];
     }

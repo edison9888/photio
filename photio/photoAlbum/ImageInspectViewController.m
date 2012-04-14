@@ -179,11 +179,15 @@
 #pragma mark DiagonalGestrureRecognizerDelegate
 
 -(void)didCheck {
-    UIView* currentImage = [self.imageView displayedView];
+    ImageInspectView* displayedView = (ImageInspectView*)[self.imageView displayedView];
+    [self.imageView moveDisplayedViewDownAndRemove];
+    if ([self.delegate respondsToSelector:@selector(saveImage:)]) {
+        [self.delegate saveImage:displayedView];
+    }
 }
 
 -(void)didDiagonalSwipe {
-    UIView* currentImage = [self.imageView displayedView];
+    [self.imageView fadeDisplayedViewAndRemove];
 }
 
 

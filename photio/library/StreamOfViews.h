@@ -24,9 +24,8 @@
 - (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView;
 - (void)addView:(UIView*)_view;
 - (UIView*)displayedView;
-- (UIView*)removeDisplayedView;
-- (void)moveViewDownAndReplace:(UIView*)_movedView andOnComplete:(void(^)(void))_onComplete;
-- (void)fadeViewAndReplace:(UIView*)_fadedView andOnComplete:(void(^)(void))_onComplete;
+- (void)moveDisplayedViewDownAndRemove;
+- (void)fadeDisplayedViewAndRemove;
 
 @end
 
