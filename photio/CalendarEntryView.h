@@ -17,7 +17,7 @@
 @property(nonatomic, strong) CalendarDayBackgroundView* backgroundView;
 @property(nonatomic, strong) UIImageView*               photoView;
 
-+ (id)withFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo;
-- (id)initWithFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo;
++ (id)withFrame:(CGRect)_frame date:(NSString*)_date dayOfWeek:(NSString*)_dayOfWeek andPhoto:(UIImage*)_photo;
+- (id)initWithFrame:(CGRect)_frame date:(NSString*)_date dayOfWeek:(NSString*)_dayOfWeek andPhoto:(UIImage*)_photo;
 
 @end

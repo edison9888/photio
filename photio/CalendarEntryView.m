@@ -27,11 +27,11 @@
 #pragma mark -
 #pragma mark CalendarEntryView
 
-+ (id)withFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo {
-    return [[CalendarEntryView alloc] initWithFrame:_frame date:_date andPhoto:_photo];
++ (id)withFrame:(CGRect)_frame date:(NSString*)_date dayOfWeek:(NSString*)_dayOfWeek andPhoto:(UIImage*)_photo {
+    return [[CalendarEntryView alloc] initWithFrame:_frame date:_date dayOfWeek:_dayOfWeek andPhoto:_photo];
 }
 
-- (id)initWithFrame:(CGRect)_frame date:(NSString*)_date andPhoto:(UIImage*)_photo {
+- (id)initWithFrame:(CGRect)_frame date:(NSString*)_date dayOfWeek:(NSString*)_dayOfWeek andPhoto:(UIImage*)_photo {
     if ((self = [super initWithFrame:_frame])) {
         self.backgroundColor = [UIColor blackColor];
         CGRect contentFrame = CGRectMake(CALENDAR_ENTRY_BORDER, CALENDAR_ENTRY_BORDER, self.frame.size.width - CALENDAR_ENTRY_BORDER, self.frame.size.height - CALENDAR_ENTRY_BORDER);

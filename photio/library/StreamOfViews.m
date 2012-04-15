@@ -13,6 +13,7 @@
 #define FADE_TRANSITION_DURATUION                       1.0f
 #define RELEASE_ANIMATION_SPEED                         150.0f
 #define VIEW_MIN_SPACING                                25
+#define REMOVE_DISPLAYED_VIEW_DOWN_DURATION             0.5
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StreamOfViews (PrivateAPI)
@@ -234,7 +235,7 @@
 - (void)moveDisplayedViewDownAndRemove {
     if (self.notAnimating) {
         self.notAnimating = NO;
-        [UIView animateWithDuration:[self verticalTransitionDuration]
+        [UIView animateWithDuration:REMOVE_DISPLAYED_VIEW_DOWN_DURATION
             delay:0
             options:UIViewAnimationOptionCurveEaseOut
             animations:^{

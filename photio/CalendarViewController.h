@@ -20,6 +20,7 @@
 @property(nonatomic, strong) NSString*                          lastMonth;
 @property(nonatomic, strong) NSString*                          year;
 @property(nonatomic, strong) NSDateFormatter*                   dayFormatter;
+@property(nonatomic, strong) NSDateFormatter*                   dayOfWeekFormatter;
 @property(nonatomic, strong) NSDateFormatter*                   yearFormatter;
 @property(nonatomic, strong) NSDateFormatter*                   monthFormatter;
 

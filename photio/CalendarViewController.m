@@ -32,7 +32,7 @@
 @implementation CalendarViewController
 
 @synthesize containerView, thumbnails, dragGridView, calendar, firstMonth, lastMonth, year,
-            yearFormatter, dayFormatter, monthFormatter;
+            yearFormatter, dayFormatter, dayOfWeekFormatter, monthFormatter;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
@@ -49,9 +49,10 @@
             NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
             [dateInterval setDay:-currentDay];
             NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:startDate options:0];
-            NSDateComponents* nextDayComponents = [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:previoustDay];
+            NSDateComponents* nextDayComponents = [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit) fromDate:previoustDay];
             NSDate* calendarDate = [self.calendar dateFromComponents:nextDayComponents];
             NSString* day = [self.dayFormatter stringFromDate:calendarDate];
+            NSString* dayOfWeek = [[self.dayOfWeekFormatter stringFromDate:calendarDate] uppercaseString];
             if (currentDay == 0) {
                 self.year = [self.yearFormatter stringFromDate:calendarDate];
                 self.firstMonth = [self.monthFormatter stringFromDate:calendarDate];
@@ -64,7 +65,7 @@
                 Capture* capture = [self.thumbnails objectAtIndex:currentDay];
                 thumbnail = capture.thumbnail;
             }
-            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarEntryViewRect date:day andPhoto:thumbnail]];
+            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarEntryViewRect date:day dayOfWeek:dayOfWeek andPhoto:thumbnail]];
             currentDay++;
         }
         [dayViews addObject:daysInRowViews];
@@ -75,6 +76,8 @@
 - (void)setDateFormatters {
     self.dayFormatter = [[NSDateFormatter alloc] init];
     [self.dayFormatter setDateFormat:@"d"];
+    self.dayOfWeekFormatter = [[NSDateFormatter alloc] init];
+    [self.dayOfWeekFormatter setDateFormat:@"EEE"];
     self.yearFormatter = [[NSDateFormatter alloc] init];
     [self.yearFormatter setDateFormat:@"yyyy"];
     self.monthFormatter = [[NSDateFormatter alloc] init];

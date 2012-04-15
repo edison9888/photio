@@ -24,7 +24,7 @@
 #define VIEW_MIN_SPACING                                25
 #define CAMERA_NEW_PHOTO_TRANSITION                     0.5f
 #define CAMERA_NEW_PHOTO_DELAY                          0.0f
-#define SAVE_IMAGE_DELAY                                1.5f
+#define SAVE_IMAGE_DELAY                                0.65f
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
