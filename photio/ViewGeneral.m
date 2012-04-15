@@ -24,6 +24,7 @@
 #define VIEW_MIN_SPACING                                25
 #define CAMERA_NEW_PHOTO_TRANSITION                     0.5f
 #define CAMERA_NEW_PHOTO_DELAY                          0.0f
+#define SAVE_IMAGE_DELAY                                1.5f
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
@@ -37,6 +38,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (CGFloat)horizontaltReleaseDuration:(CGFloat)_offset;
 - (CGFloat)verticalTransitionDuration:(CGFloat)_offset;
 - (CGFloat)horizontalTransitionDuration:(CGFloat)_offset;
+- (void)saveImageLater:(ImageInspectView*)_imageInspectView;
 
 @end
 
@@ -460,6 +462,10 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)saveImage:(ImageInspectView*)_imageInspectView {
+    [self performSelector:@selector(saveImageLater:) withObject:_imageInspectView afterDelay:SAVE_IMAGE_DELAY];
+}
+
+- (void)saveImageLater:(ImageInspectView*)_imageInspectView {
     Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" 
                                                                inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
     capture.latitude  = _imageInspectView.latitude;

@@ -10,7 +10,7 @@
 
 #define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
 #define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
-#define PINCH_TRANSITION_ANIMATION_SPEED                250.0f
+#define FADE_TRANSITION_DURATUION                       1.0f
 #define RELEASE_ANIMATION_SPEED                         150.0f
 #define VIEW_MIN_SPACING                                25
 
@@ -255,7 +255,7 @@
 - (void)fadeDisplayedViewAndRemove {
     if (self.notAnimating) {
         self.notAnimating = NO;
-        [UIView animateWithDuration:[self verticalTransitionDuration]
+        [UIView animateWithDuration:FADE_TRANSITION_DURATUION
             delay:0
             options:UIViewAnimationOptionCurveEaseOut
             animations:^{
