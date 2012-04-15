@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DragGridView.h"
 
-@interface CalendarViewController : UIViewController <DragGridViewDelegate> {
+@interface CalendarViewController : UIViewController <DragGridViewDelegate, NSFetchedResultsControllerDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                            containerView;

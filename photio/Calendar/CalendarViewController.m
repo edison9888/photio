@@ -22,7 +22,9 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface CalendarViewController (CoreData)
+@interface CalendarViewController ()
+
+@property(nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
 
 - (NSMutableArray*)fetchThumbnails;
 
@@ -31,6 +33,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
+@synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize containerView, thumbnails, dragGridView, calendar, firstMonth, lastMonth, year,
             yearFormatter, dayFormatter, dayOfWeekFormatter, monthFormatter;
 
@@ -131,6 +134,25 @@
     }
     return self;
 }
+
+- (NSFetchedResultsController*)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *authorDescriptor = [[NSSortDescriptor alloc] initWithKey:@"author" ascending:YES];
+    NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:authorDescriptor, titleDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[ViewGeneral instance].managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+}    
 
 #pragma mark -
 #pragma mark UIViewController

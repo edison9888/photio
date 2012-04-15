@@ -477,9 +477,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 	capture.image = image;	
 	NSError *error = nil;
     if (![[ViewGeneral instance].managedObjectContext save:&error]) {
-		// TODO: Handle the error.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+		[[[UIAlertView alloc] initWithTitle:@"Error Saving Photo" message:@"Your photo was not saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
 }
 
