@@ -8,6 +8,7 @@
 
 #import "CalendarEntryView.h"
 #import "CalandarDateView.h"
+#import "CalendarDayOfWeekView.h"
 #import "CalendarDayBackgroundView.h"
 #import "ViewGeneral.h"
 
@@ -19,7 +20,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarEntryView
 
-@synthesize dateView, backgroundView, photoView;
+@synthesize dateView, backgroundView, dayOfWeekView, photoView;
 
 #pragma mark -
 #pragma mark CalendarEntryView PrivatAPI
@@ -40,6 +41,7 @@
         CGRect dateRect = [ViewGeneral calendarDateViewRect:contentFrame];
         self.dateView = [CalandarDateView withFrame:dateRect andDate:_date];
         self.backgroundView = [CalendarDayBackgroundView withFrame:dateRect];
+        self.dayOfWeekView = [CalendarDayOfWeekView withFrame:dateRect andDayOfWeek:_dayOfWeek];
         [self addSubview:contentView];
         if (_photo) {   
             self.photoView = [[UIImageView alloc] initWithImage:_photo];

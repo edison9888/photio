@@ -47,6 +47,7 @@
 		05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EC914F0585C00D09F3E /* InfoPlist.strings */; };
 		05C99ECD14F0585C00D09F3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ECC14F0585C00D09F3E /* main.m */; };
 		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
+		05CE11DC153A886700ECC9A0 /* CalendarDayOfWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE11DB153A886700ECC9A0 /* CalendarDayOfWeekView.m */; };
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
@@ -124,6 +125,8 @@
 		05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "photio-Prefix.pch"; sourceTree = "<group>"; };
 		05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotioAppDelegate.h; sourceTree = "<group>"; };
 		05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioAppDelegate.m; sourceTree = "<group>"; };
+		05CE11DA153A886700ECC9A0 /* CalendarDayOfWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayOfWeekView.h; sourceTree = "<group>"; };
+		05CE11DB153A886700ECC9A0 /* CalendarDayOfWeekView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayOfWeekView.m; sourceTree = "<group>"; };
 		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -139,7 +142,7 @@
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		05EE0E8115365AC400E5E541 /* CalendarDayBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayBackgroundView.h; sourceTree = "<group>"; };
 		05EE0E8215365AC400E5E541 /* CalendarDayBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayBackgroundView.m; sourceTree = "<group>"; };
-		05EE0E8515366ACF00E5E541 /* DiagonalGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DiagonalGestureRecognizer.h; sourceTree = "<group>"; };
+		05EE0E8515366ACF00E5E541 /* DiagonalGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagonalGestureRecognizer.h; sourceTree = "<group>"; };
 		05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagonalGestureRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,6 +270,8 @@
 				05ACEF4A1532491B007F538E /* CalandarDateView.m */,
 				05EE0E8115365AC400E5E541 /* CalendarDayBackgroundView.h */,
 				05EE0E8215365AC400E5E541 /* CalendarDayBackgroundView.m */,
+				05CE11DA153A886700ECC9A0 /* CalendarDayOfWeekView.h */,
+				05CE11DB153A886700ECC9A0 /* CalendarDayOfWeekView.m */,
 				05A1D693150BC86A009C9A11 /* CalendarEntryView.h */,
 				05A1D694150BC86A009C9A11 /* CalendarEntryView.m */,
 				0529A7D11503B35400235B95 /* CalendarViewController.h */,
@@ -432,6 +437,7 @@
 				05B2A7561533BBFC00499F6F /* Image.m in Sources */,
 				05EE0E8315365AC400E5E541 /* CalendarDayBackgroundView.m in Sources */,
 				05EE0E8715366ACF00E5E541 /* DiagonalGestureRecognizer.m in Sources */,
+				05CE11DC153A886700ECC9A0 /* CalendarDayOfWeekView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

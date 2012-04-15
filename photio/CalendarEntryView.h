@@ -10,11 +10,13 @@
 
 @class CalandarDateView;
 @class CalendarDayBackgroundView;
+@class CalendarDayOfWeekView;
 
 @interface CalendarEntryView : UIView 
 
 @property(nonatomic, strong) CalandarDateView*          dateView; 
 @property(nonatomic, strong) CalendarDayBackgroundView* backgroundView;
+@property(nonatomic, strong) CalendarDayOfWeekView*     dayOfWeekView;
 @property(nonatomic, strong) UIImageView*               photoView;
 
 + (id)withFrame:(CGRect)_frame date:(NSString*)_date dayOfWeek:(NSString*)_dayOfWeek andPhoto:(UIImage*)_photo;
