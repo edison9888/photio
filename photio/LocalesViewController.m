@@ -69,6 +69,9 @@
     return [[NSArray alloc] init];
 }
 
+- (void)topRowChanged:(NSInteger)_newFirstRow {    
+}
+
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] dragLocales:_drag];
 }

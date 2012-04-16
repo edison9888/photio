@@ -11,31 +11,23 @@
 
 @protocol DragGridViewDelegate;
 
-@interface DragGridView : UIView <TransitionGestureRecognizerDelegate> {
-    __weak id<DragGridViewDelegate> delegate;
-    TransitionGestureRecognizer*    transitionGestureRecognizer;
-    UIScrollView*                   rowContainerView;
-    NSMutableArray*                 rowViews;
-    CGFloat                         rowHeight;
-    CGFloat                         deltaTime;
-    NSInteger                       rowsInView;
-    NSInteger                       rowStartView;
-    NSInteger                       rowPixelOffset;
-    NSInteger                       scrollSteps;
-    BOOL                            inAnimation;
+@interface DragGridView : UIView <TransitionGestureRecognizerDelegate, UIScrollViewDelegate> {
 }
 
-@property (nonatomic, weak)     id<DragGridViewDelegate>        delegate;
-@property (nonatomic, strong)   TransitionGestureRecognizer*    transitionGestureRecognizer;
-@property (nonatomic, strong)   UIScrollView*                   rowContainerView;
-@property (nonatomic, strong)   NSMutableArray*                 rowViews;
-@property (nonatomic, assign)   CGFloat                         rowHeight;
-@property (nonatomic, assign)   CGFloat                         deltaTime;
-@property (nonatomic, assign)   NSInteger                       rowsInView;
-@property (nonatomic, assign)   NSInteger                       rowStartView;
-@property (nonatomic, assign)   NSInteger                       rowPixelOffset;
-@property (nonatomic, assign)   NSInteger                       scrollSteps;
-@property (nonatomic, assign)   BOOL                            inAnimation;
+@property(nonatomic, weak)     id<DragGridViewDelegate>        delegate;
+@property(nonatomic, strong)   TransitionGestureRecognizer*    transitionGestureRecognizer;
+@property(nonatomic, strong)   UIScrollView*                   rowContainerView;
+@property(nonatomic, strong)   NSMutableArray*                 rowViews;
+@property(nonatomic, assign)   CGFloat                         rowHeight;
+@property(nonatomic, assign)   CGFloat                         deltaTime;
+@property(nonatomic, assign)   NSInteger                       rowsInView;
+@property(nonatomic, assign)   NSInteger                       rowStartView;
+@property(nonatomic, assign)   NSInteger                       rowPixelOffset;
+@property(nonatomic, assign)   NSInteger                       scrollSteps;
+@property(nonatomic, assign)   NSInteger                       topRow;  
+@property(nonatomic, assign)   NSInteger                       bottomRowBuffer;
+@property(nonatomic, assign)   NSInteger                       topRowBuffer;
+@property (nonatomic, assign)  BOOL                            inAnimation;
 
 + (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
@@ -47,6 +39,7 @@
 @required
 
 - (NSArray*)needRows;
+- (void)topRowChanged:(NSInteger)_newFirstRow;
 
 @optional
 

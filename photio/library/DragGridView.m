@@ -22,7 +22,7 @@
 @implementation DragGridView
 
 @synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, scrollSteps, 
-            rowContainerView, deltaTime, inAnimation;
+            rowContainerView, deltaTime, topRow, bottomRowBuffer, topRowBuffer, inAnimation;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
@@ -32,7 +32,8 @@
         UIView* item = [[_rows objectAtIndex:0] objectAtIndex:0];
         self.rowHeight = item.frame.size.height;
         self.rowsInView = self.frame.size.height / self.rowHeight;
-        self.rowPixelOffset = (self.frame.size.height - self.rowsInView * self.rowHeight) / (self.rowsInView *2);
+        self.rowPixelOffset = (self.frame.size.height - self.rowsInView * self.rowHeight) / (self.rowsInView * 2);
+        self.topRow = 0;
     }
 }
 
@@ -66,13 +67,35 @@
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
         self.rowContainerView = [[UIScrollView alloc] initWithFrame:_frame];
         self.rowContainerView.showsVerticalScrollIndicator = NO;
+        self.rowContainerView.delegate = self;
         self.userInteractionEnabled = YES;
         [self addSubview:self.rowContainerView];
         self.inAnimation = NO;
+        self.bottomRowBuffer = 0;
+        self.topRowBuffer = 0;
         [self initRowParams:_rows];
         [self createRows:_rows];
     }
     return self;
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView*)scrollView {
+    NSInteger yOffSet =  scrollView.contentOffset.y;
+    if (yOffSet > 0) {
+        NSInteger currentTopRow = yOffSet / self.rowHeight;
+        if (currentTopRow != self.topRow) {
+            self.topRow = currentTopRow;
+            [self.delegate topRowChanged:self.topRow];
+            NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
+            if (rowsFromBottom < self.bottomRowBuffer) {
+                [self.delegate needRows];
+            }
+        }
+    } else {
+    }
 }
 
 #pragma mark -
