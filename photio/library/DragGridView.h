@@ -38,7 +38,8 @@
 
 @required
 
-- (NSArray*)needRows;
+- (NSArray*)needBottomRows;
+- (NSArray*)needTopRows;
 - (void)topRowChanged:(NSInteger)_newFirstRow;
 
 @optional

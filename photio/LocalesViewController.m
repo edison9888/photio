@@ -65,7 +65,11 @@
 #pragma mark -
 #pragma mark DragGridViewDelegate
 
-- (NSArray*)needRows {
+- (NSArray*)needBottomRows {
+    return [[NSArray alloc] init];
+}
+
+- (NSArray*)needTopRows {
     return [[NSArray alloc] init];
 }
 

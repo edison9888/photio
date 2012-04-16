@@ -15,6 +15,8 @@
 - (void)initRowParams:(NSMutableArray*)_rows;
 - (void)createRows:(NSMutableArray*)_rows;
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
+- (void)removeTopRows;
+- (void)removeBottomRows;
 
 @end
 
@@ -54,6 +56,12 @@
     return CGRectMake(_rect.origin.x, y, _rect.size.width, _rect.size.width);
 }
 
+- (void)removeRowsFromBottom {
+}
+
+- (void)removeRowsFromTop {    
+}
+
 #pragma mark -
 #pragma mark DragGridView
 
@@ -91,7 +99,13 @@
             [self.delegate topRowChanged:self.topRow];
             NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
             if (rowsFromBottom < self.bottomRowBuffer) {
-                [self.delegate needRows];
+                [self.delegate needBottomRows];
+            } else if (self.topRow < self.topRowBuffer) {
+                [self.delegate needTopRows];
+            } else if (rowsFromBottom > self.bottomRowBuffer) {
+                [self removeRowsFromBottom];
+            } else if (self.topRow > self.topRowBuffer) {
+                [self removeRowsFromTop];
             }
         }
     } else {

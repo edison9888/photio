@@ -18,6 +18,8 @@
 @interface CalendarViewController (PrivateAPI)
 
 - (NSMutableArray*)inititializeDayViews;
+- (NSMutableArray*)addViewRows;
+- (NSMutableArray*)addDayViewsForRow;
 - (void)initializeDateFormatters;
 - (void)initializeCalendarRowsInView;
 - (void)initializeCalendarEntryViewRect;
@@ -148,6 +150,8 @@
     [super viewDidLoad];
     self.thumbnails = [self fetchThumbnails];
     self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self inititializeDayViews] andRelativeView:self.containerView];
+    self.dragGridView.bottomRowBuffer = self.rowsInView * self.viewCount;
+    self.dragGridView.topRowBuffer = self.rowsInView * self.viewCount;
     [self.view addSubview:self.dragGridView];
 }
 
@@ -166,7 +170,11 @@
 #pragma mark -
 #pragma mark DragGridViewDelegate
 
-- (NSArray*)needRows {
+- (NSArray*)needBottomRows {
+    return [[NSArray alloc] init];
+}
+
+- (NSArray*)needTopRows {
     return [[NSArray alloc] init];
 }
 
