@@ -11,20 +11,22 @@
 #import "CalendarEntryView.h"
 #import "Capture.h"
 
+#define CALENDAR_DAYS_IN_ROW                            3
+#define CALENDAR_VIEW_COUNT                             3
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
 
-- (NSMutableArray*)setDayViews;
-- (void)setDateFormatters;
-- (NSDate*)startDay;
-- (NSDate*)startWeek:(NSInteger)_weekOffset;
+- (NSMutableArray*)inititializeDayViews;
+- (void)initializeDateFormatters;
+- (void)initializeCalendarRowsInView;
+- (void)initializeCalendarEntryViewRect;
+- (void)initializeOldestDate;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface CalendarViewController ()
-
-@property(nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
+@interface CalendarViewController (CoreData)
 
 - (NSMutableArray*)fetchThumbnails;
 
@@ -33,72 +35,66 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize containerView, thumbnails, dragGridView, calendar, firstMonth, lastMonth, year,
-            yearFormatter, dayFormatter, dayOfWeekFormatter, monthFormatter;
+@synthesize containerView, thumbnails, oldestDate, dragGridView, calendar, firstMonth, lastMonth, firstYear, lastYear,
+            yearFormatter, monthFormatter, viewCount, daysInRow, rowsInView, totalDays, calendarEntryViewRect;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
 
-- (NSMutableArray*)setDayViews {
-    NSDate* startDate = [self startDay];
-    NSInteger totalRowsInView = [ViewGeneral calendarRowsInView];
-    NSMutableArray* dayViews = [NSMutableArray arrayWithCapacity:CALENDAR_VIEW_COUNT * totalRowsInView];
-    NSInteger currentDay = 0;
-    CGRect calendarEntryViewRect = [ViewGeneral calendarEntryViewRect];
-    for (int i = 0; i < (CALENDAR_VIEW_COUNT * totalRowsInView); i++) {
-        NSMutableArray* daysInRowViews = [NSMutableArray arrayWithCapacity:CALENDAR_DAYS_IN_ROW];
-        for (int j = 0; j < CALENDAR_DAYS_IN_ROW; j++) {
-            NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
-            [dateInterval setDay:-currentDay];
-            NSDate* previoustDay = [self.calendar dateByAddingComponents:dateInterval toDate:startDate options:0];
-            NSDateComponents* nextDayComponents = [self.calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit) fromDate:previoustDay];
-            NSDate* calendarDate = [self.calendar dateFromComponents:nextDayComponents];
-            NSString* day = [self.dayFormatter stringFromDate:calendarDate];
-            NSString* dayOfWeek = [[self.dayOfWeekFormatter stringFromDate:calendarDate] uppercaseString];
-            if (currentDay == 0) {
-                self.year = [self.yearFormatter stringFromDate:calendarDate];
-                self.firstMonth = [self.monthFormatter stringFromDate:calendarDate];
-            }
-            if (currentDay == totalRowsInView * CALENDAR_DAYS_IN_ROW) {
-                self.lastMonth = [self.monthFormatter stringFromDate:calendarDate];            
-            }
-            UIImage* thumbnail = nil;
-            if (currentDay < [self.thumbnails count]) {
-                Capture* capture = [self.thumbnails objectAtIndex:currentDay];
-                thumbnail = capture.thumbnail;
-            }
-            [daysInRowViews addObject:[CalendarEntryView withFrame:calendarEntryViewRect date:day dayOfWeek:dayOfWeek andPhoto:thumbnail]];
-            currentDay++;
-        }
-        [dayViews addObject:daysInRowViews];
+- (NSMutableArray*)inititializeDayViews {
+    NSMutableArray* initialDayViews = [NSMutableArray arrayWithCapacity:self.viewCount * self.rowsInView];
+    for (int i = 0; i < self.viewCount; i++) {
+        [initialDayViews addObjectsFromArray:[self addViewRows]];
     }
-    return dayViews;
+    return initialDayViews;
 }
 
-- (void)setDateFormatters {
-    self.dayFormatter = [[NSDateFormatter alloc] init];
-    [self.dayFormatter setDateFormat:@"d"];
-    self.dayOfWeekFormatter = [[NSDateFormatter alloc] init];
-    [self.dayOfWeekFormatter setDateFormat:@"EEE"];
+- (NSMutableArray*)addViewRows {
+    NSMutableArray* rowsOfViews = [NSMutableArray arrayWithCapacity:self.rowsInView];
+    for (int i = 0; i < self.rowsInView; i++) {
+        [rowsOfViews addObject:[self addDayViewsForRow]];
+    }
+    return rowsOfViews;
+}
+
+- (NSMutableArray*)addDayViewsForRow {
+    NSMutableArray* rowViews = [NSMutableArray arrayWithCapacity:self.daysInRow];
+    for (int j = 0; j < self.daysInRow; j++) {
+        NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
+        [dateInterval setDay:-1];
+        UIImage* thumbnail = nil;
+        if (self.totalDays < [self.thumbnails count]) {
+            Capture* capture = [self.thumbnails objectAtIndex:self.totalDays];
+            thumbnail = capture.thumbnail;
+        }
+        [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate andPhoto:thumbnail]];
+        self.oldestDate = [self.calendar dateByAddingComponents:dateInterval toDate:self.oldestDate options:0];
+        self.totalDays++;
+    }
+    return rowViews;
+}
+
+- (void)initializeOldestDate {
+    NSDateComponents* comps = [self.calendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:[NSDate date]];
+    self.oldestDate = [self.calendar dateFromComponents:comps];
+}
+
+- (void)initializeDateFormatters {
     self.yearFormatter = [[NSDateFormatter alloc] init];
     [self.yearFormatter setDateFormat:@"yyyy"];
     self.monthFormatter = [[NSDateFormatter alloc] init];
     [self.monthFormatter setDateFormat:@"MMMM"];
 }
 
-
-- (NSDate*)startDay {
-    NSDateComponents* comps = [self.calendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:[NSDate date]];
-    return [self.calendar dateFromComponents:comps];
+- (void)initializeRowsInView {
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    NSInteger viewWidth = bounds.size.width / self.daysInRow;
+    self.rowsInView = bounds.size.height / viewWidth;
 }
 
-- (NSDate*)startWeek:(NSInteger)_weekOffset {
-    NSDateComponents* comps = [self.calendar components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    NSInteger daysToEndOfWeek = (_weekOffset + 1) * CALENDAR_DAYS_IN_ROW - [comps weekday];
-    NSDateComponents* endOfWeekDate = [[NSDateComponents alloc] init];
-    [endOfWeekDate setDay:daysToEndOfWeek];
-    return [self.calendar dateByAddingComponents:endOfWeekDate toDate:[NSDate date] options:0];
+- (void)initializeCalendarEntryViewRect {
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width / self.daysInRow;
+    self.calendarEntryViewRect =  CGRectMake(0.0, 0.0, width, width);
 }
 
 #pragma mark -
@@ -114,7 +110,7 @@
     NSError* error = nil;
 	NSMutableArray* fetchResults = [[[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
 	if (fetchResults == nil) {
-		// TODO: handle error the error.
+		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
     return fetchResults;
 }
@@ -130,29 +126,20 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         self.containerView = _containerView;
-        [self setDateFormatters];
+        self.daysInRow = CALENDAR_DAYS_IN_ROW;
+        self.viewCount = CALENDAR_VIEW_COUNT;
+        self.totalDays = 0;
+        [self initializeRowsInView];
+        [self initializeDateFormatters];
+        [self initializeCalendarEntryViewRect];
+        [self initializeOldestDate];
     }
     return self;
 }
 
-- (NSFetchedResultsController*)fetchedResultsController {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    NSSortDescriptor *authorDescriptor = [[NSSortDescriptor alloc] initWithKey:@"author" ascending:YES];
-    NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:authorDescriptor, titleDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[ViewGeneral instance].managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
-    _fetchedResultsController.delegate = self;
-    
-    return _fetchedResultsController;
-}    
+- (CGRect)calendarImageThumbnailRect {
+    return self.calendarEntryViewRect;
+}
 
 #pragma mark -
 #pragma mark UIViewController
@@ -160,8 +147,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.thumbnails = [self fetchThumbnails];
-    self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self setDayViews] andRelativeView:self.containerView];
-    self.dragGridView.userInteractionEnabled = YES;
+    self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self inititializeDayViews] andRelativeView:self.containerView];
     [self.view addSubview:self.dragGridView];
 }
 

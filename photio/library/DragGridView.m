@@ -66,6 +66,7 @@
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
         self.rowContainerView = [[UIScrollView alloc] initWithFrame:_frame];
         self.rowContainerView.showsVerticalScrollIndicator = NO;
+        self.userInteractionEnabled = YES;
         [self addSubview:self.rowContainerView];
         self.inAnimation = NO;
         [self initRowParams:_rows];
