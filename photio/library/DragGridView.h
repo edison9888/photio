@@ -25,8 +25,8 @@
 @property(nonatomic, assign)   NSInteger                       rowPixelOffset;
 @property(nonatomic, assign)   NSInteger                       scrollSteps;
 @property(nonatomic, assign)   NSInteger                       topRow;  
-@property(nonatomic, assign)   NSInteger                       bottomRowBuffer;
-@property(nonatomic, assign)   NSInteger                       topRowBuffer;
+@property(nonatomic, assign)   NSInteger                       rowBuffer;
+@property(nonatomic, assign)   NSInteger                       viewYOffset;
 @property (nonatomic, assign)  BOOL                            inAnimation;
 
 + (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
@@ -40,9 +40,11 @@
 
 - (NSArray*)needBottomRows;
 - (NSArray*)needTopRows;
-- (void)topRowChanged:(NSInteger)_newFirstRow;
 
 @optional
+
+- (void)removedTopRow:(NSArray*)_row;
+- (void)removedBottomRow:(NSArray*)_row;
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;

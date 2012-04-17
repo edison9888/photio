@@ -13,10 +13,14 @@
 @interface DragGridView (PrivateAPI)
 
 - (void)initRowParams:(NSMutableArray*)_rows;
-- (void)createRows:(NSMutableArray*)_rows;
+- (void)setContentSize;
+- (NSMutableArray*)createRows:(NSArray*)_rows withOffSet:(NSInteger)_offset;
+- (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex withOffSet:(NSInteger)_offset;
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
-- (void)removeTopRows;
-- (void)removeBottomRows;
+- (void)addTopRows:(NSArray*)_rows;
+- (void)addBottomRows:(NSArray *)_rows;
+- (void)removeTopRows:(NSInteger)_rows;
+- (void)removeBottomRows:(NSInteger)_rows;
 
 @end
 
@@ -24,7 +28,7 @@
 @implementation DragGridView
 
 @synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, scrollSteps, 
-            rowContainerView, deltaTime, topRow, bottomRowBuffer, topRowBuffer, inAnimation;
+            rowContainerView, deltaTime, topRow, rowBuffer, inAnimation, viewYOffset;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
@@ -39,16 +43,23 @@
     }
 }
 
-- (void)createRows:(NSMutableArray*)_rows {
-    self.rowViews = [NSMutableArray arrayWithCapacity:[_rows count]];
-    for (int i = 0; i < [_rows count]; i++) {
-        CGRect rowFrame = CGRectMake(0.0, i  * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
-        NSArray* row = [_rows objectAtIndex:i];
-        DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:row];
-        [self.rowContainerView addSubview:dragRow];
-        [self.rowViews addObject:dragRow];
-    }
+- (void)setContentSize {
     self.rowContainerView.contentSize = CGSizeMake(self.frame.size.width, self.rowHeight * [self.rowViews count]);
+}
+
+- (NSMutableArray*)createRows:(NSArray*)_rows withOffSet:(NSInteger)_offset {
+    NSMutableArray* dragRows = [NSMutableArray arrayWithCapacity:10];
+    for (int i = 0; i < [_rows count]; i++) {
+        [dragRows addObject:[self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:_offset]];
+    }
+    return dragRows;
+}
+
+- (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex withOffSet:(NSInteger)_offset {
+    CGRect rowFrame = CGRectMake(0.0, _rowIndex  * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
+    DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:_row];
+    [self.rowContainerView addSubview:dragRow];
+    return dragRow;
 }
 
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset {
@@ -56,10 +67,39 @@
     return CGRectMake(_rect.origin.x, y, _rect.size.width, _rect.size.width);
 }
 
-- (void)removeRowsFromBottom {
+- (void)addTopRows:(NSArray*)_rows {
+    for (int i = 0; i < [_rows count]; i++) {
+        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:(self.viewYOffset + i * self.rowHeight + self.rowPixelOffset)];
+        [self.rowViews insertObject:dragView atIndex:0];
+    }
 }
 
-- (void)removeRowsFromTop {    
+- (void)addBottomRows:(NSArray *)_rows {
+    NSInteger totalRows = [self.rowViews count];
+    for (int i = 0; i < [_rows count]; i++) {
+        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:(self.viewYOffset + (i + totalRows) * self.rowHeight + self.rowPixelOffset)];
+        [self.rowViews addObject:dragView];
+    }
+}
+
+- (void)removeRowsFromBottom:(NSInteger)_rows {
+    for (int i = 0; i < _rows; i++) {
+        if ([self.delegate respondsToSelector:@selector(removedBottomRow:)]) {
+            DragRowView* dragRow = [self.rowViews lastObject];
+            [self.delegate removedBottomRow:dragRow.items];
+        }
+        [self.rowViews removeLastObject];
+    }
+}
+
+- (void)removeRowsFromTop:(NSInteger)_rows {
+    for (int i = 0; i < _rows; i++) {
+        if ([self.delegate respondsToSelector:@selector(removedTopRow:)]) {
+            DragRowView* dragRow = [self.rowViews objectAtIndex:i];
+            [self.delegate removedTopRow:dragRow.items];
+        }
+        [self.rowViews removeObjectAtIndex:i];
+    }
 }
 
 #pragma mark -
@@ -79,10 +119,10 @@
         self.userInteractionEnabled = YES;
         [self addSubview:self.rowContainerView];
         self.inAnimation = NO;
-        self.bottomRowBuffer = 0;
-        self.topRowBuffer = 0;
+        self.rowBuffer = 0;
         [self initRowParams:_rows];
-        [self createRows:_rows];
+        self.rowViews = [self createRows:_rows withOffSet:0];
+        [self setContentSize];
     }
     return self;
 }
@@ -91,21 +131,20 @@
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView {
-    NSInteger yOffSet =  scrollView.contentOffset.y;
-    if (yOffSet > 0) {
-        NSInteger currentTopRow = yOffSet / self.rowHeight;
+    self.viewYOffset =  scrollView.contentOffset.y;
+    if (self.viewYOffset > 0) {
+        NSInteger currentTopRow = self.viewYOffset / self.rowHeight;
         if (currentTopRow != self.topRow) {
             self.topRow = currentTopRow;
-            [self.delegate topRowChanged:self.topRow];
             NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
-            if (rowsFromBottom < self.bottomRowBuffer) {
-                [self.delegate needBottomRows];
-            } else if (self.topRow < self.topRowBuffer) {
-                [self.delegate needTopRows];
-            } else if (rowsFromBottom > self.bottomRowBuffer) {
-                [self removeRowsFromBottom];
-            } else if (self.topRow > self.topRowBuffer) {
-                [self removeRowsFromTop];
+            if (rowsFromBottom < self.rowBuffer) {
+                [self addTopRows:[self.delegate needBottomRows]];
+            } else if (self.topRow < self.rowBuffer) {
+                [self addTopRows:[self.delegate needTopRows]];
+            } else if (rowsFromBottom > self.rowBuffer) {
+                [self removeRowsFromBottom:(rowsFromBottom - self.rowBuffer)];
+            } else if (self.topRow > self.rowBuffer) {
+                [self removeRowsFromTop:(self.topRow - self.rowBuffer)];
             }
         }
     } else {

@@ -150,8 +150,7 @@
     [super viewDidLoad];
     self.thumbnails = [self fetchThumbnails];
     self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self inititializeDayViews] andRelativeView:self.containerView];
-    self.dragGridView.bottomRowBuffer = self.rowsInView * self.viewCount;
-    self.dragGridView.topRowBuffer = self.rowsInView * self.viewCount;
+    self.dragGridView.rowBuffer = self.rowsInView * self.viewCount;
     [self.view addSubview:self.dragGridView];
 }
 
