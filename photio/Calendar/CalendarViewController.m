@@ -37,8 +37,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize containerView, thumbnails, oldestDate, dragGridView, calendar, firstMonth, lastMonth, firstYear, lastYear,
-            yearFormatter, monthFormatter, viewCount, daysInRow, rowsInView, totalDays, calendarEntryViewRect;
+@synthesize containerView, thumbnails, oldestDate, dragGridView, calendar, firstDate, lastDate,
+            yearFormatter, monthFormatter, viewCount, daysInRow, totalDays, rowsInView, calendarEntryViewRect;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
@@ -170,14 +170,19 @@
 #pragma mark DragGridViewDelegate
 
 - (NSArray*)needBottomRows {
-    return [[NSArray alloc] init];
+    return [self addViewRows];
 }
 
 - (NSArray*)needTopRows {
-    return [[NSArray alloc] init];
+    return [self addViewRows];
 }
 
-- (void)topRowChanged:(NSInteger)_newFirstRow {
+- (void)removedTopRow:(NSArray*)_row {
+    CalendarEntryView* entryView = [_row objectAtIndex:0];
+}
+
+- (void)removedBottomRow:(NSArray*)_row {
+    CalendarEntryView* entryView = [_row lastObject];
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

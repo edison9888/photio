@@ -69,17 +69,21 @@
 
 - (void)addTopRows:(NSArray*)_rows {
     for (int i = 0; i < [_rows count]; i++) {
-        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:(self.viewYOffset + i * self.rowHeight + self.rowPixelOffset)];
+        NSInteger offset = -(self.viewYOffset + i * self.rowHeight + self.rowPixelOffset);
+        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:offset];
         [self.rowViews insertObject:dragView atIndex:0];
     }
+    [self setContentSize];
 }
 
 - (void)addBottomRows:(NSArray *)_rows {
     NSInteger totalRows = [self.rowViews count];
     for (int i = 0; i < [_rows count]; i++) {
-        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:(self.viewYOffset + (i + totalRows) * self.rowHeight + self.rowPixelOffset)];
+        NSInteger offset = (self.viewYOffset + (i + totalRows) * self.rowHeight + self.rowPixelOffset);
+        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:offset];
         [self.rowViews addObject:dragView];
     }
+    [self setContentSize];
 }
 
 - (void)removeRowsFromBottom:(NSInteger)_rows {
@@ -90,6 +94,7 @@
         }
         [self.rowViews removeLastObject];
     }
+    [self setContentSize];
 }
 
 - (void)removeRowsFromTop:(NSInteger)_rows {
@@ -100,6 +105,7 @@
         }
         [self.rowViews removeObjectAtIndex:i];
     }
+    [self setContentSize];
 }
 
 #pragma mark -
@@ -138,7 +144,7 @@
             self.topRow = currentTopRow;
             NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
             if (rowsFromBottom < self.rowBuffer) {
-                [self addTopRows:[self.delegate needBottomRows]];
+                [self addBottomRows:[self.delegate needBottomRows]];
             } else if (self.topRow < self.rowBuffer) {
                 [self addTopRows:[self.delegate needTopRows]];
             } else if (rowsFromBottom > self.rowBuffer) {
