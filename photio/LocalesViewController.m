@@ -69,8 +69,7 @@
     return [[NSArray alloc] init];
 }
 
-- (NSArray*)needTopRows {
-    return [[NSArray alloc] init];
+- (void)removedBottomRow:(NSArray *)_row {
 }
 
 - (void)topRowChanged:(NSInteger)_newFirstRow {    

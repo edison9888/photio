@@ -173,16 +173,8 @@
     return [self addViewRows];
 }
 
-- (NSArray*)needTopRows {
-    return [self addViewRows];
-}
-
-- (void)removedTopRow:(NSArray*)_row {
-    CalendarEntryView* entryView = [_row objectAtIndex:0];
-}
-
 - (void)removedBottomRow:(NSArray*)_row {
-    CalendarEntryView* entryView = [_row lastObject];
+//    CalendarEntryView* entryView = [_row lastObject];
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

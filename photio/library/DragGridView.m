@@ -9,6 +9,9 @@
 #import "DragGridView.h"
 #import "DragRowView.h"
 
+#define DETECT_DRAG_BOUNCE      20.0
+#define BOUNCE_OFFSET           75.0
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DragGridView (PrivateAPI)
 
@@ -28,7 +31,7 @@
 @implementation DragGridView
 
 @synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, scrollSteps, 
-            rowContainerView, deltaTime, topRow, rowBuffer, inAnimation, viewYOffset;
+            rowContainerView, deltaTime, topRow, rowBuffer, bouncing;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
@@ -44,7 +47,7 @@
 }
 
 - (void)setContentSize {
-    self.rowContainerView.contentSize = CGSizeMake(self.frame.size.width, self.rowHeight * [self.rowViews count]);
+    self.rowContainerView.contentSize = CGSizeMake(self.frame.size.width, self.rowHeight * [self.rowViews count] + self.rowPixelOffset);
 }
 
 - (NSMutableArray*)createRows:(NSArray*)_rows withOffSet:(NSInteger)_offset {
@@ -69,18 +72,16 @@
 
 - (void)addTopRows:(NSArray*)_rows {
     for (int i = 0; i < [_rows count]; i++) {
-        NSInteger offset = -(self.viewYOffset + i * self.rowHeight + self.rowPixelOffset);
+        NSInteger offset = -(i * self.rowHeight + self.rowPixelOffset);
         DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:offset];
         [self.rowViews insertObject:dragView atIndex:0];
     }
-    [self setContentSize];
 }
 
 - (void)addBottomRows:(NSArray *)_rows {
     NSInteger totalRows = [self.rowViews count];
     for (int i = 0; i < [_rows count]; i++) {
-        NSInteger offset = (self.viewYOffset + (i + totalRows) * self.rowHeight + self.rowPixelOffset);
-        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:offset];
+        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:(i + totalRows) withOffSet:0];
         [self.rowViews addObject:dragView];
     }
     [self setContentSize];
@@ -90,22 +91,22 @@
     for (int i = 0; i < _rows; i++) {
         if ([self.delegate respondsToSelector:@selector(removedBottomRow:)]) {
             DragRowView* dragRow = [self.rowViews lastObject];
+            [dragRow removeFromSuperview];
             [self.delegate removedBottomRow:dragRow.items];
         }
         [self.rowViews removeLastObject];
     }
-    [self setContentSize];
 }
 
 - (void)removeRowsFromTop:(NSInteger)_rows {
     for (int i = 0; i < _rows; i++) {
         if ([self.delegate respondsToSelector:@selector(removedTopRow:)]) {
             DragRowView* dragRow = [self.rowViews objectAtIndex:i];
+            [dragRow removeFromSuperview];
             [self.delegate removedTopRow:dragRow.items];
         }
         [self.rowViews removeObjectAtIndex:i];
     }
-    [self setContentSize];
 }
 
 #pragma mark -
@@ -124,8 +125,8 @@
         self.rowContainerView.delegate = self;
         self.userInteractionEnabled = YES;
         [self addSubview:self.rowContainerView];
-        self.inAnimation = NO;
         self.rowBuffer = 0;
+        self.bouncing = NO;
         [self initRowParams:_rows];
         self.rowViews = [self createRows:_rows withOffSet:0];
         [self setContentSize];
@@ -136,25 +137,33 @@
 #pragma mark -
 #pragma mark UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView*)scrollView {
-    self.viewYOffset =  scrollView.contentOffset.y;
-    if (self.viewYOffset > 0) {
-        NSInteger currentTopRow = self.viewYOffset / self.rowHeight;
-        if (currentTopRow != self.topRow) {
-            self.topRow = currentTopRow;
-            NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
-            if (rowsFromBottom < self.rowBuffer) {
-                [self addBottomRows:[self.delegate needBottomRows]];
-            } else if (self.topRow < self.rowBuffer) {
+- (void)scrollViewDidEndDecelerating:(UIScrollView*)_scrollView {
+    NSInteger currentTopRow = _scrollView.contentOffset.y / self.rowHeight;
+    if (currentTopRow != self.topRow) {
+        self.topRow = currentTopRow;
+        NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
+        if (rowsFromBottom < self.rowBuffer && !self.bouncing) {
+            [self addBottomRows:[self.delegate needBottomRows]];
+        } else if (self.topRow < self.rowBuffer) {
+            if ([self.delegate respondsToSelector:@selector(needTopRows)]) {
                 [self addTopRows:[self.delegate needTopRows]];
-            } else if (rowsFromBottom > self.rowBuffer) {
-                [self removeRowsFromBottom:(rowsFromBottom - self.rowBuffer)];
-            } else if (self.topRow > self.rowBuffer) {
+            }
+        } else if (rowsFromBottom > self.rowBuffer) {
+            [self removeRowsFromBottom:(rowsFromBottom - self.rowBuffer)];
+        } else if (self.topRow > self.rowBuffer) {
+            if ([self.delegate respondsToSelector:@selector(removeTopRows:)]) {
                 [self removeRowsFromTop:(self.topRow - self.rowBuffer)];
             }
         }
-    } else {
     }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView*)_scrollView {
+//    CGFloat bounceDetect =  _scrollView.contentOffset.y + _scrollView.frame.size.height - DETECT_DRAG_BOUNCE;
+//    if (bounceDetect > self.rowContainerView.contentSize.height && !self.bouncing) {
+//        self.bouncing = YES;
+//        self.rowContainerView.contentOffset = CGPointMake(_scrollView.contentOffset.x, _scrollView.contentOffset.y + 500.0);
+//    }
 }
 
 #pragma mark -
