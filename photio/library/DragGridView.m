@@ -11,14 +11,15 @@
 
 #define DETECT_DRAG_BOUNCE      20.0
 #define BOUNCE_OFFSET           75.0
-#define BOUNCE_DURATION         0.1
-#define BOUNCE_DELAY            0.0
+#define BOUNCE_DURATION         0.25
+#define BOUNCE_DELAY            0.25
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DragGridView (PrivateAPI)
 
 - (void)initRowParams:(NSMutableArray*)_rows;
 - (void)setContentSize;
+- (void)buildLoadingView;
 - (NSMutableArray*)createRows:(NSArray*)_rows withOffSet:(NSInteger)_offset;
 - (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex withOffSet:(NSInteger)_offset;
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
@@ -53,6 +54,18 @@
 - (void)setContentSize {
     self.rowContainerView.contentSize = CGSizeMake(self.frame.size.width, self.rowHeight * [self.rowViews count] + self.rowPixelOffset);
 }
+
+- (void)buildLoadingView {
+    self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.frame.size.height, self.frame.size.width, BOUNCE_OFFSET)];
+    self.loadingView.backgroundColor = [UIColor blackColor];    
+    UILabel* loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(150.0, 0.25*BOUNCE_OFFSET, 0.25*self.frame.size.width, 0.5*BOUNCE_OFFSET)];
+    loadingLabel.text = @"Loading";
+    loadingLabel.backgroundColor = [UIColor blackColor];
+    loadingLabel.textColor = [UIColor whiteColor];
+    loadingLabel.font = [loadingLabel.font fontWithSize:22.0];
+    [self.loadingView addSubview:loadingLabel];
+}
+
 
 - (NSMutableArray*)createRows:(NSArray*)_rows withOffSet:(NSInteger)_offset {
     NSMutableArray* dragRows = [NSMutableArray arrayWithCapacity:10];
@@ -114,27 +127,29 @@
 }
 
 - (void)bounceViewDown {
-    __block CGRect oldFrame = self.rowContainerView.frame;
     [UIView animateWithDuration:BOUNCE_DURATION 
         delay:BOUNCE_DELAY 
         options:UIViewAnimationOptionCurveEaseOut 
         animations:^{
-             self.rowContainerView.frame = CGRectMake(0.0, 0.0, oldFrame.size.width, oldFrame.size.height);
+            self.rowContainerView.frame = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
+            self.loadingView.frame = CGRectMake(0.0, self.frame.size.height, self.frame.size.width, BOUNCE_OFFSET);
          }
          completion:^(BOOL _finished){
              self.bouncing = NO;
              self.rowContainerView.bounces = YES;
+             [self.loadingView removeFromSuperview];
          }
      ];
 }
 
 - (void)bounceViewUp {
-    __block CGRect oldFrame = self.rowContainerView.frame;
+    [self addSubview:self.loadingView];
     [UIView animateWithDuration:BOUNCE_DURATION 
         delay:0.0 
         options:UIViewAnimationOptionCurveEaseOut 
         animations:^{
-            self.rowContainerView.frame = CGRectMake(0.0, -BOUNCE_OFFSET, oldFrame.size.width, oldFrame.size.height);
+            self.rowContainerView.frame = CGRectMake(0.0, -BOUNCE_OFFSET, self.frame.size.width, self.frame.size.height);
+            self.loadingView.frame = CGRectMake(0.0, self.frame.size.height - BOUNCE_OFFSET, self.frame.size.width, BOUNCE_OFFSET);
         }
         completion:^(BOOL _finished){
             [self bounceViewDown];
@@ -156,10 +171,9 @@
         self.rowContainerView = [[UIScrollView alloc] initWithFrame:_frame];
         self.rowContainerView.showsVerticalScrollIndicator = NO;
         self.rowContainerView.delegate = self;
-        self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.frame.size.width, BOUNCE_OFFSET)];
-        self.loadingView.backgroundColor = [UIColor grayColor];
         self.userInteractionEnabled = YES;
         [self addSubview:self.rowContainerView];
+        [self buildLoadingView];
         self.rowBuffer = 0;
         self.bouncing = NO;
         [self initRowParams:_rows];
