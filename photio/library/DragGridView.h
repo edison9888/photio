@@ -17,6 +17,7 @@
 @property(nonatomic, weak)     id<DragGridViewDelegate>        delegate;
 @property(nonatomic, strong)   TransitionGestureRecognizer*    transitionGestureRecognizer;
 @property(nonatomic, strong)   UIScrollView*                   rowContainerView;
+@property(nonatomic, strong)   UIView*                         loadingView;
 @property(nonatomic, strong)   NSMutableArray*                 rowViews;
 @property(nonatomic, assign)   CGFloat                         rowHeight;
 @property(nonatomic, assign)   CGFloat                         deltaTime;
@@ -44,6 +45,7 @@
 
 - (NSArray*)needTopRows;
 - (void)removedTopRow:(NSArray*)_row;
+- (void)rowChanged:(NSInteger)_row;
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;

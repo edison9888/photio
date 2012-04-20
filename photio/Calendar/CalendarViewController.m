@@ -11,8 +11,8 @@
 #import "CalendarEntryView.h"
 #import "Capture.h"
 
-#define CALENDAR_DAYS_IN_ROW                            3
-#define CALENDAR_VIEW_COUNT                             3
+#define CALENDAR_DAYS_IN_ROW    3
+#define CALENDAR_VIEW_COUNT     4
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
@@ -175,6 +175,9 @@
 
 - (void)removedBottomRow:(NSArray*)_row {
 //    CalendarEntryView* entryView = [_row lastObject];
+}
+
+- (void)rowChanged:(NSInteger)_row {
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

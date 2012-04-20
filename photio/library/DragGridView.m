@@ -11,6 +11,8 @@
 
 #define DETECT_DRAG_BOUNCE      20.0
 #define BOUNCE_OFFSET           75.0
+#define BOUNCE_DURATION         0.1
+#define BOUNCE_DELAY            0.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DragGridView (PrivateAPI)
@@ -24,6 +26,8 @@
 - (void)addBottomRows:(NSArray *)_rows;
 - (void)removeTopRows:(NSInteger)_rows;
 - (void)removeBottomRows:(NSInteger)_rows;
+- (void)bounceViewUp;
+- (void)bounceViewDown;
 
 @end
 
@@ -31,7 +35,7 @@
 @implementation DragGridView
 
 @synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, scrollSteps, 
-            rowContainerView, deltaTime, topRow, rowBuffer, bouncing;
+            rowContainerView, loadingView, deltaTime, topRow, rowBuffer, bouncing;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
@@ -109,6 +113,35 @@
     }
 }
 
+- (void)bounceViewDown {
+    __block CGRect oldFrame = self.rowContainerView.frame;
+    [UIView animateWithDuration:BOUNCE_DURATION 
+        delay:BOUNCE_DELAY 
+        options:UIViewAnimationOptionCurveEaseOut 
+        animations:^{
+             self.rowContainerView.frame = CGRectMake(0.0, 0.0, oldFrame.size.width, oldFrame.size.height);
+         }
+         completion:^(BOOL _finished){
+             self.bouncing = NO;
+             self.rowContainerView.bounces = YES;
+         }
+     ];
+}
+
+- (void)bounceViewUp {
+    __block CGRect oldFrame = self.rowContainerView.frame;
+    [UIView animateWithDuration:BOUNCE_DURATION 
+        delay:0.0 
+        options:UIViewAnimationOptionCurveEaseOut 
+        animations:^{
+            self.rowContainerView.frame = CGRectMake(0.0, -BOUNCE_OFFSET, oldFrame.size.width, oldFrame.size.height);
+        }
+        completion:^(BOOL _finished){
+            [self bounceViewDown];
+        }
+     ];
+}
+
 #pragma mark -
 #pragma mark DragGridView
 
@@ -123,6 +156,8 @@
         self.rowContainerView = [[UIScrollView alloc] initWithFrame:_frame];
         self.rowContainerView.showsVerticalScrollIndicator = NO;
         self.rowContainerView.delegate = self;
+        self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.frame.size.width, BOUNCE_OFFSET)];
+        self.loadingView.backgroundColor = [UIColor grayColor];
         self.userInteractionEnabled = YES;
         [self addSubview:self.rowContainerView];
         self.rowBuffer = 0;
@@ -159,11 +194,14 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView*)_scrollView {
-//    CGFloat bounceDetect =  _scrollView.contentOffset.y + _scrollView.frame.size.height - DETECT_DRAG_BOUNCE;
-//    if (bounceDetect > self.rowContainerView.contentSize.height && !self.bouncing) {
-//        self.bouncing = YES;
-//        self.rowContainerView.contentOffset = CGPointMake(_scrollView.contentOffset.x, _scrollView.contentOffset.y + 500.0);
-//    }
+    CGFloat bounceDetect =  _scrollView.contentOffset.y + _scrollView.frame.size.height;
+    if (bounceDetect > _scrollView.contentSize.height && !self.bouncing) {
+        self.bouncing = YES;
+        _scrollView.bounces = NO;
+        CGPoint offset = CGPointMake(_scrollView.contentOffset.x, self.rowContainerView.contentSize.height - _scrollView.frame.size.height);
+        [_scrollView setContentOffset:offset animated:NO];
+        [self bounceViewUp];
+    }
 }
 
 #pragma mark -
