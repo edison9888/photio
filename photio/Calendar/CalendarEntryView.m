@@ -7,7 +7,7 @@
 //
 
 #import "CalendarEntryView.h"
-#import "CalandarDateView.h"
+#import "CalendarDayView.h"
 #import "CalendarDayOfWeekView.h"
 #import "CalendarDayBackgroundView.h"
 #import "ViewGeneral.h"
@@ -27,7 +27,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarEntryView
 
-@synthesize dateView, backgroundView, dayOfWeekView, photoView, dayFormatter, dayOfWeekFormatter;
+@synthesize dayView, backgroundView, dayOfWeekView, photoView, dayFormatter, dayOfWeekFormatter, date;
 
 #pragma mark -
 #pragma mark CalendarEntryView PrivatAPI
@@ -58,20 +58,21 @@
         [self initializeDateFormatters];
         CGRect contentFrame = CGRectMake(CALENDAR_ENTRY_BORDER, CALENDAR_ENTRY_BORDER, self.frame.size.width - CALENDAR_ENTRY_BORDER, self.frame.size.height - CALENDAR_ENTRY_BORDER);
         UIView* contentView = [[UIView alloc] initWithFrame:contentFrame];
+        self.date = _date;
         contentView.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
-        CGRect dateRect = [self calendarDateViewRect:contentFrame];
-        NSString* date = [self.dayFormatter stringFromDate:_date];
-        self.dateView = [CalandarDateView withFrame:dateRect andDate:date];
-        self.backgroundView = [CalendarDayBackgroundView withFrame:dateRect];
+        CGRect dayRect = [self calendarDateViewRect:contentFrame];
+        NSString* day = [self.dayFormatter stringFromDate:_date];
+        self.dayView = [CalendarDayView withFrame:dayRect andDay:day];
+        self.backgroundView = [CalendarDayBackgroundView withFrame:dayRect];
         NSString* dayOfWeek = [self.dayOfWeekFormatter stringFromDate:_date];
-        self.dayOfWeekView = [CalendarDayOfWeekView withFrame:dateRect andDayOfWeek:dayOfWeek];
+        self.dayOfWeekView = [CalendarDayOfWeekView withFrame:dayRect andDayOfWeek:dayOfWeek];
         [self addSubview:contentView];
         if (_photo) {   
             self.photoView = [[UIImageView alloc] initWithImage:_photo];
             [contentView addSubview:self.photoView];
         }
         [contentView addSubview:self.backgroundView];
-        [contentView addSubview:self.dateView];
+        [contentView addSubview:self.dayView];
     }
     return self;    
 }

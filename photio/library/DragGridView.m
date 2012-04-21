@@ -13,6 +13,7 @@
 #define BOUNCE_OFFSET           75.0
 #define BOUNCE_DURATION         0.25
 #define BOUNCE_DELAY            0.25
+#define SCROLL_UP_DURATION      1.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DragGridView (PrivateAPI)
@@ -36,8 +37,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragGridView
 
-@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowStartView, rowPixelOffset, scrollSteps, 
-            rowContainerView, loadingView, deltaTime, topRow, rowBuffer, bouncing;
+@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowPixelOffset,
+            rowContainerView, loadingView, loadingSpinnerView, deltaTime, topRow, rowBuffer, bouncing;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI
@@ -62,9 +63,13 @@
     UILabel* loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(150.0, 0.25*BOUNCE_OFFSET, 0.25*self.frame.size.width, 0.5*BOUNCE_OFFSET)];
     loadingLabel.text = @"Loading";
     loadingLabel.backgroundColor = [UIColor blackColor];
-    loadingLabel.textColor = [UIColor whiteColor];
+    loadingLabel.textColor = [UIColor grayColor];
     loadingLabel.font = [loadingLabel.font fontWithSize:22.0];
     [self.loadingView addSubview:loadingLabel];
+    self.loadingSpinnerView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.loadingSpinnerView.frame = CGRectMake(110.0, 0.25*BOUNCE_OFFSET, 0.5*BOUNCE_OFFSET, 0.5*BOUNCE_OFFSET);
+    self.loadingSpinnerView.color = [UIColor grayColor];
+    [self.loadingView addSubview:self.loadingSpinnerView];
 }
 
 
@@ -105,7 +110,7 @@
     [self setContentSize];
 }
 
-- (void)removeRowsFromBottom:(NSInteger)_rows {
+- (void)removeBottomRows:(NSInteger)_rows {
     for (int i = 0; i < _rows; i++) {
         if ([self.delegate respondsToSelector:@selector(removedBottomRow:)]) {
             DragRowView* dragRow = [self.rowViews lastObject];
@@ -114,6 +119,7 @@
         }
         [self.rowViews removeLastObject];
     }
+    [self setContentSize];
 }
 
 - (void)removeRowsFromTop:(NSInteger)_rows {
@@ -135,18 +141,19 @@
             self.rowContainerView.frame = CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height);
             self.loadingView.frame = CGRectMake(0.0, self.frame.size.height, self.frame.size.width, BOUNCE_OFFSET);
          }
-         completion:^(BOOL _finished){
+         completion:^(BOOL _finished) {
              [self addBottomRows:[self.delegate needBottomRows]];
-             CGPoint currentContentOffset = self.rowContainerView.contentOffset;
-             [self.rowContainerView setContentOffset:CGPointMake(currentContentOffset.x, currentContentOffset.y + self.frame.size.height) animated:YES];
+             [self scrollViewUp];
              self.bouncing = NO;
              self.rowContainerView.bounces = YES;
              [self.loadingView removeFromSuperview];
+             [self.loadingSpinnerView stopAnimating];
          }
      ];
 }
 
 - (void)bounceViewUp {
+    [self.loadingSpinnerView startAnimating];
     [self addSubview:self.loadingView];
     [UIView animateWithDuration:BOUNCE_DURATION 
         delay:0.0 
@@ -155,8 +162,21 @@
             self.rowContainerView.frame = CGRectMake(0.0, -BOUNCE_OFFSET, self.frame.size.width, self.frame.size.height);
             self.loadingView.frame = CGRectMake(0.0, self.frame.size.height - BOUNCE_OFFSET, self.frame.size.width, BOUNCE_OFFSET);
         }
-        completion:^(BOOL _finished){
+        completion:^(BOOL _finished) {
             [self bounceViewDown];
+        }
+     ];
+}
+
+- (void)scrollViewUp {
+    __block CGPoint currentContentOffset = self.rowContainerView.contentOffset;
+    [UIView animateWithDuration:SCROLL_UP_DURATION 
+        delay:0.0 
+        options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
+        animations:^{
+            [self.rowContainerView setContentOffset:CGPointMake(currentContentOffset.x, currentContentOffset.y + self.rowHeight) animated:NO];
+        }
+        completion:^(BOOL _finished) {
         }
      ];
 }
@@ -191,27 +211,31 @@
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView*)_scrollView {
-    NSInteger currentTopRow = _scrollView.contentOffset.y / self.rowHeight;
-    if (currentTopRow != self.topRow) {
-        self.topRow = currentTopRow;
-        NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
-        if (rowsFromBottom < self.rowBuffer && !self.bouncing) {
-            [self addBottomRows:[self.delegate needBottomRows]];
-        } else if (self.topRow < self.rowBuffer) {
-            if ([self.delegate respondsToSelector:@selector(needTopRows)]) {
-                [self addTopRows:[self.delegate needTopRows]];
-            }
-        } else if (rowsFromBottom > self.rowBuffer) {
-            [self removeRowsFromBottom:(rowsFromBottom - self.rowBuffer)];
-        } else if (self.topRow > self.rowBuffer) {
-            if ([self.delegate respondsToSelector:@selector(removeTopRows:)]) {
-                [self removeRowsFromTop:(self.topRow - self.rowBuffer)];
-            }
+    NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
+    if (rowsFromBottom < self.rowBuffer && !self.bouncing) {
+        [self addBottomRows:[self.delegate needBottomRows]];
+    } else if (rowsFromBottom > self.rowBuffer) {
+        [self removeBottomRows:(rowsFromBottom - self.rowBuffer)];
+    }
+    if (self.topRow < self.rowBuffer) {
+        if ([self.delegate respondsToSelector:@selector(needTopRows)]) {
+            [self addTopRows:[self.delegate needTopRows]];
+        }
+    } else if (self.topRow > self.rowBuffer) {
+        if ([self.delegate respondsToSelector:@selector(removeTopRows:)]) {
+            [self removeRowsFromTop:(self.topRow - self.rowBuffer)];
         }
     }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView*)_scrollView {
+    NSInteger currentTopRow = _scrollView.contentOffset.y / self.rowHeight;
+    if (self.topRow != currentTopRow) {
+        self.topRow = currentTopRow;
+        if ([self.delegate respondsToSelector:@selector(topRowChanged:)]) {
+            [self.delegate topRowChanged:self.topRow];
+        }
+    }
     CGFloat bounceDetect =  _scrollView.contentOffset.y + _scrollView.frame.size.height;
     if (bounceDetect > _scrollView.contentSize.height && !self.bouncing) {
         self.bouncing = YES;

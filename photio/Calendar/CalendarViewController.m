@@ -20,6 +20,7 @@
 - (NSMutableArray*)addViews;
 - (NSMutableArray*)addViewRows;
 - (NSMutableArray*)addDayViewsForRow;
+- (NSDate*)incrementDate:(NSDate*)_date by:(NSInteger)_interval;
 - (void)initializeDateFormatters;
 - (void)initializeCalendarRowsInView;
 - (void)initializeCalendarEntryViewRect;
@@ -62,18 +63,22 @@
 - (NSMutableArray*)addDayViewsForRow {
     NSMutableArray* rowViews = [NSMutableArray arrayWithCapacity:self.daysInRow];
     for (int j = 0; j < self.daysInRow; j++) {
-        NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
-        [dateInterval setDay:-1];
         UIImage* thumbnail = nil;
         if (self.totalDays < [self.thumbnails count]) {
             Capture* capture = [self.thumbnails objectAtIndex:self.totalDays];
             thumbnail = capture.thumbnail;
         }
         [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate andPhoto:thumbnail]];
-        self.oldestDate = [self.calendar dateByAddingComponents:dateInterval toDate:self.oldestDate options:0];
+        self.oldestDate = [self incrementDate:self.oldestDate by:-1];
         self.totalDays++;
     }
     return rowViews;
+}
+
+- (NSDate*)incrementDate:(NSDate*)_date by:(NSInteger)_interval {
+    NSDateComponents* dateInterval = [[NSDateComponents alloc] init];
+    [dateInterval setDay:_interval];
+    return [self.calendar dateByAddingComponents:dateInterval toDate:_date options:0];
 }
 
 - (void)initializeOldestDate {
@@ -174,10 +179,12 @@
 }
 
 - (void)removedBottomRow:(NSArray*)_row {
-//    CalendarEntryView* entryView = [_row lastObject];
+    self.totalDays -= [_row count];
+    CalendarEntryView* entryView = [_row objectAtIndex:0];
+    self.oldestDate = [self incrementDate:entryView.date by:1];
 }
 
-- (void)rowChanged:(NSInteger)_row {
+- (void)topRowChanged:(NSInteger)_row {
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

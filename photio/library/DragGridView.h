@@ -18,13 +18,12 @@
 @property(nonatomic, strong)   TransitionGestureRecognizer*    transitionGestureRecognizer;
 @property(nonatomic, strong)   UIScrollView*                   rowContainerView;
 @property(nonatomic, strong)   UIView*                         loadingView;
+@property(nonatomic, strong)   UIActivityIndicatorView*        loadingSpinnerView;
 @property(nonatomic, strong)   NSMutableArray*                 rowViews;
 @property(nonatomic, assign)   CGFloat                         rowHeight;
 @property(nonatomic, assign)   CGFloat                         deltaTime;
 @property(nonatomic, assign)   NSInteger                       rowsInView;
-@property(nonatomic, assign)   NSInteger                       rowStartView;
 @property(nonatomic, assign)   NSInteger                       rowPixelOffset;
-@property(nonatomic, assign)   NSInteger                       scrollSteps;
 @property(nonatomic, assign)   NSInteger                       topRow;  
 @property(nonatomic, assign)   NSInteger                       rowBuffer;
 @property(nonatomic, assign)   BOOL                            bouncing;
@@ -39,13 +38,13 @@
 @required
 
 - (NSArray*)needBottomRows;
-- (void)removedBottomRow:(NSArray*)_row;
 
 @optional
 
 - (NSArray*)needTopRows;
 - (void)removedTopRow:(NSArray*)_row;
-- (void)rowChanged:(NSInteger)_row;
+- (void)removedBottomRow:(NSArray*)_row;
+- (void)topRowChanged:(NSInteger)_row;
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;

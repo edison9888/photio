@@ -21,7 +21,7 @@
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
 		058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058B4FB615196B1F0087F717 /* LocalesViewController.xib */; };
 		058B4FBC15196D840087F717 /* LocaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FBB15196D840087F717 /* LocaleView.m */; };
-		0590C743153B3D8F0065AB42 /* CalandarDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C739153B3D8F0065AB42 /* CalandarDateView.m */; };
+		0590C743153B3D8F0065AB42 /* CalendarDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C739153B3D8F0065AB42 /* CalendarDayView.m */; };
 		0590C744153B3D8F0065AB42 /* CalendarDayBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C73B153B3D8F0065AB42 /* CalendarDayBackgroundView.m */; };
 		0590C745153B3D8F0065AB42 /* CalendarDayOfWeekView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C73D153B3D8F0065AB42 /* CalendarDayOfWeekView.m */; };
 		0590C746153B3D8F0065AB42 /* CalendarEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C73F153B3D8F0065AB42 /* CalendarEntryView.m */; };
@@ -83,8 +83,8 @@
 		058B4FB615196B1F0087F717 /* LocalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalesViewController.xib; sourceTree = "<group>"; };
 		058B4FBA15196D840087F717 /* LocaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaleView.h; sourceTree = "<group>"; };
 		058B4FBB15196D840087F717 /* LocaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaleView.m; sourceTree = "<group>"; };
-		0590C738153B3D8F0065AB42 /* CalandarDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalandarDateView.h; sourceTree = "<group>"; };
-		0590C739153B3D8F0065AB42 /* CalandarDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalandarDateView.m; sourceTree = "<group>"; };
+		0590C738153B3D8F0065AB42 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CalendarDayView.h; sourceTree = "<group>"; };
+		0590C739153B3D8F0065AB42 /* CalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayView.m; sourceTree = "<group>"; };
 		0590C73A153B3D8F0065AB42 /* CalendarDayBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayBackgroundView.h; sourceTree = "<group>"; };
 		0590C73B153B3D8F0065AB42 /* CalendarDayBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayBackgroundView.m; sourceTree = "<group>"; };
 		0590C73C153B3D8F0065AB42 /* CalendarDayOfWeekView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayOfWeekView.h; sourceTree = "<group>"; };
@@ -170,8 +170,8 @@
 		0590C737153B3D8F0065AB42 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				0590C738153B3D8F0065AB42 /* CalandarDateView.h */,
-				0590C739153B3D8F0065AB42 /* CalandarDateView.m */,
+				0590C738153B3D8F0065AB42 /* CalendarDayView.h */,
+				0590C739153B3D8F0065AB42 /* CalendarDayView.m */,
 				0590C73A153B3D8F0065AB42 /* CalendarDayBackgroundView.h */,
 				0590C73B153B3D8F0065AB42 /* CalendarDayBackgroundView.m */,
 				0590C73C153B3D8F0065AB42 /* CalendarDayOfWeekView.h */,
@@ -444,7 +444,7 @@
 				05AED9311531E7F500E277BE /* Tag.m in Sources */,
 				05B2A7561533BBFC00499F6F /* Image.m in Sources */,
 				05EE0E8715366ACF00E5E541 /* DiagonalGestureRecognizer.m in Sources */,
-				0590C743153B3D8F0065AB42 /* CalandarDateView.m in Sources */,
+				0590C743153B3D8F0065AB42 /* CalendarDayView.m in Sources */,
 				0590C744153B3D8F0065AB42 /* CalendarDayBackgroundView.m in Sources */,
 				0590C745153B3D8F0065AB42 /* CalendarDayOfWeekView.m in Sources */,
 				0590C746153B3D8F0065AB42 /* CalendarEntryView.m in Sources */,
