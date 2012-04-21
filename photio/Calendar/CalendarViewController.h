@@ -9,16 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "DragGridView.h"
 
+@class CalendarMonthAndYearView;
+
 @interface CalendarViewController : UIViewController <DragGridViewDelegate, NSFetchedResultsControllerDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                    containerView;
+@property(nonatomic, strong) CalendarMonthAndYearView*  monthAndYearView;
 @property(nonatomic, strong) NSMutableArray*            thumbnails;
 @property(nonatomic, strong) NSDate*                    oldestDate;
 @property(nonatomic, strong) DragGridView*              dragGridView;
 @property(nonatomic, strong) NSCalendar*                calendar;
-@property(nonatomic, strong) NSDateFormatter*           yearFormatter;
-@property(nonatomic, strong) NSDateFormatter*           monthFormatter;
 @property(nonatomic, assign) NSInteger                  viewCount;
 @property(nonatomic, assign) NSInteger                  daysInRow;
 @property(nonatomic, assign) NSInteger                  totalDays;

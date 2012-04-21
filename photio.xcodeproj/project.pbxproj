@@ -32,6 +32,7 @@
 		059772F51527D787008F3A1B /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F01527D787008F3A1B /* Camera.m */; };
 		059772F71527D787008F3A1B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* CameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
+		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
 		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
 		05AED929153119EF00E277BE /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED928153119EF00E277BE /* Capture.m */; };
 		05AED9311531E7F500E277BE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED9301531E7F500E277BE /* Tag.m */; };
@@ -83,7 +84,7 @@
 		058B4FB615196B1F0087F717 /* LocalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalesViewController.xib; sourceTree = "<group>"; };
 		058B4FBA15196D840087F717 /* LocaleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocaleView.h; sourceTree = "<group>"; };
 		058B4FBB15196D840087F717 /* LocaleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocaleView.m; sourceTree = "<group>"; };
-		0590C738153B3D8F0065AB42 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CalendarDayView.h; sourceTree = "<group>"; };
+		0590C738153B3D8F0065AB42 /* CalendarDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayView.h; sourceTree = "<group>"; };
 		0590C739153B3D8F0065AB42 /* CalendarDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayView.m; sourceTree = "<group>"; };
 		0590C73A153B3D8F0065AB42 /* CalendarDayBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarDayBackgroundView.h; sourceTree = "<group>"; };
 		0590C73B153B3D8F0065AB42 /* CalendarDayBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarDayBackgroundView.m; sourceTree = "<group>"; };
@@ -101,6 +102,8 @@
 		059772F31527D787008F3A1B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		059772F41527D787008F3A1B /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		059772F81527D7B5008F3A1B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		05A0F0B7154354410082947D /* CalendarMonthAndYearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthAndYearView.h; sourceTree = "<group>"; };
+		05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthAndYearView.m; sourceTree = "<group>"; };
 		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		05AED927153119EF00E277BE /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		05AED928153119EF00E277BE /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 				0590C73D153B3D8F0065AB42 /* CalendarDayOfWeekView.m */,
 				0590C73E153B3D8F0065AB42 /* CalendarEntryView.h */,
 				0590C73F153B3D8F0065AB42 /* CalendarEntryView.m */,
+				05A0F0B7154354410082947D /* CalendarMonthAndYearView.h */,
+				05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */,
 				0590C740153B3D8F0065AB42 /* CalendarViewController.h */,
 				0590C741153B3D8F0065AB42 /* CalendarViewController.m */,
 				0590C742153B3D8F0065AB42 /* CalendarViewController.xib */,
@@ -449,6 +454,7 @@
 				0590C745153B3D8F0065AB42 /* CalendarDayOfWeekView.m in Sources */,
 				0590C746153B3D8F0065AB42 /* CalendarEntryView.m in Sources */,
 				0590C747153B3D8F0065AB42 /* CalendarViewController.m in Sources */,
+				05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

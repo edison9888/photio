@@ -11,8 +11,9 @@
 #import "CalendarEntryView.h"
 #import "Capture.h"
 
-#define CALENDAR_DAYS_IN_ROW    3
-#define CALENDAR_VIEW_COUNT     2
+#define CALENDAR_DAYS_IN_ROW                3
+#define CALENDAR_VIEW_COUNT                 2
+#define CALENDAR_MONTH_YEAR_VIEW_HEIGHT     50
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
@@ -38,7 +39,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize containerView, thumbnails, oldestDate, dragGridView, calendar, yearFormatter, monthFormatter, 
+@synthesize containerView, monthAndYearView, thumbnails, oldestDate, dragGridView, calendar, 
             viewCount, daysInRow, totalDays, rowsInView, topRow, calendarEntryViewRect;
 
 #pragma mark -
@@ -84,13 +85,6 @@
 - (void)initializeOldestDate {
     NSDateComponents* comps = [self.calendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:[NSDate date]];
     self.oldestDate = [self.calendar dateFromComponents:comps];
-}
-
-- (void)initializeDateFormatters {
-    self.yearFormatter = [[NSDateFormatter alloc] init];
-    [self.yearFormatter setDateFormat:@"yyyy"];
-    self.monthFormatter = [[NSDateFormatter alloc] init];
-    [self.monthFormatter setDateFormat:@"MMMM"];
 }
 
 - (void)initializeRowsInView {
