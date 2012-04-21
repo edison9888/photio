@@ -29,6 +29,7 @@
 - (void)removeBottomRows:(NSInteger)_rows;
 - (void)bounceViewUp;
 - (void)bounceViewDown;
+- (void)scrollViewUp;
 
 @end
 
@@ -135,6 +136,9 @@
             self.loadingView.frame = CGRectMake(0.0, self.frame.size.height, self.frame.size.width, BOUNCE_OFFSET);
          }
          completion:^(BOOL _finished){
+             [self addBottomRows:[self.delegate needBottomRows]];
+             CGPoint currentContentOffset = self.rowContainerView.contentOffset;
+             [self.rowContainerView setContentOffset:CGPointMake(currentContentOffset.x, currentContentOffset.y + self.frame.size.height) animated:YES];
              self.bouncing = NO;
              self.rowContainerView.bounces = YES;
              [self.loadingView removeFromSuperview];

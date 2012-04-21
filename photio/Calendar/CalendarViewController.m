@@ -12,12 +12,12 @@
 #import "Capture.h"
 
 #define CALENDAR_DAYS_IN_ROW    3
-#define CALENDAR_VIEW_COUNT     4
+#define CALENDAR_VIEW_COUNT     2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
 
-- (NSMutableArray*)inititializeDayViews;
+- (NSMutableArray*)addViews;
 - (NSMutableArray*)addViewRows;
 - (NSMutableArray*)addDayViewsForRow;
 - (void)initializeDateFormatters;
@@ -43,7 +43,7 @@
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
 
-- (NSMutableArray*)inititializeDayViews {
+- (NSMutableArray*)addViews {
     NSMutableArray* initialDayViews = [NSMutableArray arrayWithCapacity:self.viewCount * self.rowsInView];
     for (int i = 0; i < self.viewCount; i++) {
         [initialDayViews addObjectsFromArray:[self addViewRows]];
@@ -149,7 +149,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.thumbnails = [self fetchThumbnails];
-    self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self inititializeDayViews] andRelativeView:self.containerView];
+    self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self addViews] andRelativeView:self.containerView];
     self.dragGridView.rowBuffer = self.rowsInView * self.viewCount;
     [self.view addSubview:self.dragGridView];
 }
@@ -170,7 +170,7 @@
 #pragma mark DragGridViewDelegate
 
 - (NSArray*)needBottomRows {
-    return [self addViewRows];
+    return [self addViews];
 }
 
 - (void)removedBottomRow:(NSArray*)_row {
