@@ -17,14 +17,13 @@
 @property(nonatomic, strong) NSDate*                    oldestDate;
 @property(nonatomic, strong) DragGridView*              dragGridView;
 @property(nonatomic, strong) NSCalendar*                calendar;
-@property(nonatomic, strong) NSDate*                    firstDate;
-@property(nonatomic, strong) NSDate*                    lastDate;
 @property(nonatomic, strong) NSDateFormatter*           yearFormatter;
 @property(nonatomic, strong) NSDateFormatter*           monthFormatter;
 @property(nonatomic, assign) NSInteger                  viewCount;
 @property(nonatomic, assign) NSInteger                  daysInRow;
 @property(nonatomic, assign) NSInteger                  totalDays;
 @property(nonatomic, assign) NSInteger                  rowsInView;
+@property(nonatomic, assign) NSInteger                  topRow;
 @property(nonatomic, assign) CGRect                     calendarEntryViewRect;
 
 + (id)inView:(UIView*)_containerView;

@@ -112,11 +112,11 @@
 
 - (void)removeBottomRows:(NSInteger)_rows {
     for (int i = 0; i < _rows; i++) {
+        DragRowView* dragRow = [self.rowViews lastObject];
         if ([self.delegate respondsToSelector:@selector(removedBottomRow:)]) {
-            DragRowView* dragRow = [self.rowViews lastObject];
-            [dragRow removeFromSuperview];
             [self.delegate removedBottomRow:dragRow.items];
         }
+        [dragRow removeFromSuperview];
         [self.rowViews removeLastObject];
     }
     [self setContentSize];

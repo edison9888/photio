@@ -38,8 +38,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize containerView, thumbnails, oldestDate, dragGridView, calendar, firstDate, lastDate,
-            yearFormatter, monthFormatter, viewCount, daysInRow, totalDays, rowsInView, calendarEntryViewRect;
+@synthesize containerView, thumbnails, oldestDate, dragGridView, calendar, yearFormatter, monthFormatter, 
+            viewCount, daysInRow, totalDays, rowsInView, topRow, calendarEntryViewRect;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
@@ -181,10 +181,11 @@
 - (void)removedBottomRow:(NSArray*)_row {
     self.totalDays -= [_row count];
     CalendarEntryView* entryView = [_row objectAtIndex:0];
-    self.oldestDate = [self incrementDate:entryView.date by:1];
+    self.oldestDate = entryView.date;
 }
 
 - (void)topRowChanged:(NSInteger)_row {
+    self.topRow = _row;
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
