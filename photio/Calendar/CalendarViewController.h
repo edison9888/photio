@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DragGridView.h"
+#import "CalendarMonthAndYearView.h"
 
 @class CalendarMonthAndYearView;
 
-@interface CalendarViewController : UIViewController <DragGridViewDelegate, NSFetchedResultsControllerDelegate> {
+@interface CalendarViewController : UIViewController <DragGridViewDelegate, CalendarMonthAndYearViewDelegate, NSFetchedResultsControllerDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                    containerView;
@@ -29,5 +30,6 @@
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (CGRect)calendarImageThumbnailRect;
+- (void)scrollToTop;
 
 @end

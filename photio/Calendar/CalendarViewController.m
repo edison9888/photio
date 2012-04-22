@@ -9,12 +9,11 @@
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
 #import "CalendarEntryView.h"
-#import "CalendarMonthAndYearView.h"
 #import "Capture.h"
 
 #define CALENDAR_DAYS_IN_ROW                3
-#define CALENDAR_VIEW_COUNT                 2
-#define CALENDAR_MONTH_YEAR_VIEW_HEIGHT     30.0
+#define CALENDAR_VIEW_COUNT                 10
+#define CALENDAR_MONTH_YEAR_VIEW_HEIGHT     25.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
@@ -141,13 +140,17 @@
     return self.calendarEntryViewRect;
 }
 
+- (void)scrollToTop {
+    
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
-    self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect startDate:[NSDate date] andEndDate:[self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow)]];
+    CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
+    self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect delegate:self startDate:[NSDate date] andEndDate:[self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow)]];
     [self.view addSubview:self.monthAndYearView];
     self.thumbnails = [self fetchThumbnails];
     CGRect dragGridRect = CGRectMake(0.0, CALENDAR_MONTH_YEAR_VIEW_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
@@ -216,5 +219,13 @@
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     [[ViewGeneral instance] releaseCalendar];
 }
+
+#pragma mark -
+#pragma mark CalendarMonthAndYearViewDelegate
+
+- (void)didTouchCalendarMonthAndYearView {
+    [self.dragGridView scrollToTop];
+}
+
 
 @end

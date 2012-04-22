@@ -9,11 +9,12 @@
 #import "DragGridView.h"
 #import "DragRowView.h"
 
-#define DETECT_DRAG_BOUNCE      20.0
-#define BOUNCE_OFFSET           75.0
-#define BOUNCE_DURATION         0.25
-#define BOUNCE_DELAY            0.25
-#define SCROLL_UP_DURATION      1.0
+#define DETECT_DRAG_BOUNCE          20.0
+#define BOUNCE_OFFSET               75.0
+#define BOUNCE_DURATION             0.25
+#define BOUNCE_DELAY                0.25
+#define SCROLL_UP_DURATION          1.0
+#define SCROLL_TO_TOP_VELOCITY      0.00025
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DragGridView (PrivateAPI)
@@ -205,6 +206,18 @@
         [self setContentSize];
     }
     return self;
+}
+
+- (void)scrollToTop {
+    [UIView animateWithDuration:SCROLL_TO_TOP_VELOCITY * fabsf(self.rowContainerView.contentOffset.y)
+        delay:0.0 
+        options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
+        animations:^{
+            [self.rowContainerView setContentOffset:CGPointZero animated:NO];
+        }
+        completion:^(BOOL _finished) {
+        }
+     ];
 }
 
 #pragma mark -

@@ -33,7 +33,6 @@
 		059772F71527D787008F3A1B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* CameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
-		05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A7013A151E2CB400BBA79E /* libsqlite3.dylib */; };
 		05AED929153119EF00E277BE /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED928153119EF00E277BE /* Capture.m */; };
 		05AED9311531E7F500E277BE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED9301531E7F500E277BE /* Tag.m */; };
 		05B2A7561533BBFC00499F6F /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B2A7551533BBFC00499F6F /* Image.m */; };
@@ -104,7 +103,6 @@
 		059772F81527D7B5008F3A1B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		05A0F0B7154354410082947D /* CalendarMonthAndYearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthAndYearView.h; sourceTree = "<group>"; };
 		05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthAndYearView.m; sourceTree = "<group>"; };
-		05A7013A151E2CB400BBA79E /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		05AED927153119EF00E277BE /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		05AED928153119EF00E277BE /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		05AED92F1531E7F500E277BE /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 			files = (
 				05B8377B1530DA1300D99A40 /* CoreLocation.framework in Frameworks */,
 				05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */,
-				05A7013B151E2CB400BBA79E /* libsqlite3.dylib in Frameworks */,
 				052AE17B1528941F005D57B1 /* AssetsLibrary.framework in Frameworks */,
 				059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */,
 				052AE17E1528943E005D57B1 /* CoreMedia.framework in Frameworks */,
@@ -250,7 +247,6 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
-				05A7013A151E2CB400BBA79E /* libsqlite3.dylib */,
 				05B8377A1530DA1200D99A40 /* CoreLocation.framework */,
 				05B8372715309FB400D99A40 /* CoreData.framework */,
 				052AE17F1528944F005D57B1 /* CoreVideo.framework */,
