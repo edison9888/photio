@@ -24,7 +24,6 @@
 @property(nonatomic, assign) NSInteger                  daysInRow;
 @property(nonatomic, assign) NSInteger                  totalDays;
 @property(nonatomic, assign) NSInteger                  rowsInView;
-@property(nonatomic, assign) NSInteger                  topRow;
 @property(nonatomic, assign) CGRect                     calendarEntryViewRect;
 
 + (id)inView:(UIView*)_containerView;

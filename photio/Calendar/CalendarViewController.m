@@ -41,7 +41,7 @@
 @implementation CalendarViewController
 
 @synthesize containerView, monthAndYearView, thumbnails, oldestDate, dragGridView, calendar, 
-            viewCount, daysInRow, totalDays, rowsInView, topRow, calendarEntryViewRect;
+            viewCount, daysInRow, totalDays, rowsInView, calendarEntryViewRect;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
@@ -147,7 +147,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
-    self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect startDate:[NSDate date] andEndDate:[self incrementDate:[NSDate date] by:self.totalDays]];
+    self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect startDate:[NSDate date] andEndDate:[self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow)]];
     [self.view addSubview:self.monthAndYearView];
     self.thumbnails = [self fetchThumbnails];
     CGRect dragGridRect = CGRectMake(0.0, CALENDAR_MONTH_YEAR_VIEW_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
@@ -182,7 +182,7 @@
 }
 
 - (void)topRowChanged:(NSInteger)_row {
-    self.topRow = _row;
+    [self.monthAndYearView updateStartDate:[self incrementDate:[NSDate date] by:-_row*self.daysInRow] andEndDate:[self incrementDate:[NSDate date] by:-self.daysInRow*(_row + self.rowsInView)]];
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

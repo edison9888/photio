@@ -229,7 +229,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView*)_scrollView {
-    NSInteger currentTopRow = _scrollView.contentOffset.y / self.rowHeight;
+    NSInteger currentTopRow = (_scrollView.contentOffset.y + 0.5*self.rowHeight)/ self.rowHeight;
     if (self.topRow != currentTopRow) {
         self.topRow = currentTopRow;
         if ([self.delegate respondsToSelector:@selector(topRowChanged:)]) {
