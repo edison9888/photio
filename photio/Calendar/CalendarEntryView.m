@@ -15,6 +15,7 @@
 #define CALENDAR_ENTRY_DATE_OFFSET_FACTOR     0.05f
 #define CALENDAR_ENTRY_DATE_SCALE_FACTOR      0.4f
 #define CALENDAR_ENTRY_BORDER                 4.0f
+#define CALENDAR_ASPECT_RATIO                 1.2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarEntryView (PrivateAPI)
@@ -33,7 +34,7 @@
 #pragma mark CalendarEntryView PrivatAPI
 
 - (CGRect)calendarDateViewRect:(CGRect)_cotentFrame {
-    CGSize dateViewSize = CGSizeMake(CALENDAR_ENTRY_DATE_SCALE_FACTOR * _cotentFrame.size.width, CALENDAR_ENTRY_DATE_SCALE_FACTOR * _cotentFrame.size.width);
+    CGSize dateViewSize = CGSizeMake(CALENDAR_ENTRY_DATE_SCALE_FACTOR * _cotentFrame.size.width, CALENDAR_ASPECT_RATIO * CALENDAR_ENTRY_DATE_SCALE_FACTOR * _cotentFrame.size.width);
     CGPoint dateViewOffset = CGPointMake(_cotentFrame.size.width - dateViewSize.width * (1.0 + 1.0 * CALENDAR_ENTRY_DATE_OFFSET_FACTOR), dateViewSize.width * CALENDAR_ENTRY_DATE_OFFSET_FACTOR);
     return CGRectMake(dateViewOffset.x, dateViewOffset.y, dateViewSize.width, dateViewSize.height);
 }
@@ -56,23 +57,29 @@
     if ((self = [super initWithFrame:_frame])) {
         self.backgroundColor = [UIColor blackColor];
         [self initializeDateFormatters];
+        self.date = _date;
+
         CGRect contentFrame = CGRectMake(CALENDAR_ENTRY_BORDER, CALENDAR_ENTRY_BORDER, self.frame.size.width - CALENDAR_ENTRY_BORDER, self.frame.size.height - CALENDAR_ENTRY_BORDER);
         UIView* contentView = [[UIView alloc] initWithFrame:contentFrame];
-        self.date = _date;
         contentView.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
+
         CGRect dayRect = [self calendarDateViewRect:contentFrame];
         NSString* day = [self.dayFormatter stringFromDate:_date];
         self.dayView = [CalendarDayView withFrame:dayRect andDay:day];
         self.backgroundView = [CalendarDayBackgroundView withFrame:dayRect];
+  
         NSString* dayOfWeek = [self.dayOfWeekFormatter stringFromDate:_date];
         self.dayOfWeekView = [CalendarDayOfWeekView withFrame:dayRect andDayOfWeek:dayOfWeek];
+
         [self addSubview:contentView];
         if (_photo) {   
             self.photoView = [[UIImageView alloc] initWithImage:_photo];
             [contentView addSubview:self.photoView];
         }
+
         [contentView addSubview:self.backgroundView];
         [contentView addSubview:self.dayView];
+        [contentView addSubview:self.dayOfWeekView];
     }
     return self;    
 }

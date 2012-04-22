@@ -15,12 +15,12 @@
 }
 
 - (id)initWithFrame:(CGRect)_frame andDayOfWeek:(NSString*)_dayOfWeek {
-    CGRect dayFrame = CGRectMake(_frame.origin.x, _frame.origin.y + 0.05*_frame.size.height, 0.9*_frame.size.width, 0.9*_frame.size.height);
+    CGRect dayFrame = CGRectMake(_frame.origin.x + 0.15 * _frame.size.width, _frame.origin.y + 0.025*_frame.size.height, 0.9*_frame.size.width, 0.35*_frame.size.height);
     self = [super initWithFrame:dayFrame];
     if (self) {
-        self.textAlignment = UITextAlignmentRight;
+        self.textAlignment = UITextAlignmentLeft;
         self.text = _dayOfWeek;
-        self.font = [self.font fontWithSize:0.7*_frame.size.height];
+        self.font = [self.font fontWithSize:0.3*_frame.size.height];
         self.textColor = [UIColor whiteColor];
     }
     return self;
