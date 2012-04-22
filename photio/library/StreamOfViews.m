@@ -261,6 +261,7 @@
             options:UIViewAnimationOptionCurveEaseOut
             animations:^{
                 [self displayedView].alpha = 0.0;
+                [self displayedView].frame = CGRectMake(self.frame.size.width, self.frame.size.height, 0.0, 0.0);
             }
             completion:^(BOOL _finished) {
                 UIView* removedView = [self removeDisplayedView];

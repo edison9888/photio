@@ -23,7 +23,6 @@
 @property(nonatomic, assign)   CGFloat                         rowHeight;
 @property(nonatomic, assign)   CGFloat                         deltaTime;
 @property(nonatomic, assign)   NSInteger                       rowsInView;
-@property(nonatomic, assign)   NSInteger                       rowPixelOffset;
 @property(nonatomic, assign)   NSInteger                       topRow;  
 @property(nonatomic, assign)   NSInteger                       rowBuffer;
 @property(nonatomic, assign)   BOOL                            bouncing;

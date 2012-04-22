@@ -9,11 +9,12 @@
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
 #import "CalendarEntryView.h"
+#import "CalendarMonthAndYearView.h"
 #import "Capture.h"
 
 #define CALENDAR_DAYS_IN_ROW                3
 #define CALENDAR_VIEW_COUNT                 2
-#define CALENDAR_MONTH_YEAR_VIEW_HEIGHT     50
+#define CALENDAR_MONTH_YEAR_VIEW_HEIGHT     30.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (PrivateAPI)
@@ -105,7 +106,6 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
     [fetchRequest setEntity:entity];
-    
     NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     NSError* error = nil;
@@ -131,7 +131,6 @@
         self.viewCount = CALENDAR_VIEW_COUNT;
         self.totalDays = 0;
         [self initializeRowsInView];
-        [self initializeDateFormatters];
         [self initializeCalendarEntryViewRect];
         [self initializeOldestDate];
     }
@@ -147,8 +146,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+    self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect startDate:[NSDate date] andEndDate:[self incrementDate:[NSDate date] by:self.totalDays]];
+    [self.view addSubview:self.monthAndYearView];
     self.thumbnails = [self fetchThumbnails];
-    self.dragGridView = [DragGridView withFrame:self.view.frame delegate:self rows:[self addViews] andRelativeView:self.containerView];
+    CGRect dragGridRect = CGRectMake(0.0, CALENDAR_MONTH_YEAR_VIEW_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
+    self.dragGridView = [DragGridView withFrame:dragGridRect delegate:self rows:[self addViews] andRelativeView:self.containerView];
     self.dragGridView.rowBuffer = self.rowsInView * self.viewCount;
     [self.view addSubview:self.dragGridView];
 }

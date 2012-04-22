@@ -37,7 +37,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation DragGridView
 
-@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView, rowPixelOffset,
+@synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView,
             rowContainerView, loadingView, loadingSpinnerView, deltaTime, topRow, rowBuffer, bouncing;
 
 #pragma mark -
@@ -48,26 +48,25 @@
         UIView* item = [[_rows objectAtIndex:0] objectAtIndex:0];
         self.rowHeight = item.frame.size.height;
         self.rowsInView = self.frame.size.height / self.rowHeight;
-        self.rowPixelOffset = (self.frame.size.height - self.rowsInView * self.rowHeight) / (self.rowsInView * 2);
         self.topRow = 0;
     }
 }
 
 - (void)setContentSize {
-    self.rowContainerView.contentSize = CGSizeMake(self.frame.size.width, self.rowHeight * [self.rowViews count] + self.rowPixelOffset);
+    self.rowContainerView.contentSize = CGSizeMake(self.frame.size.width, self.rowHeight * [self.rowViews count]);
 }
 
 - (void)buildLoadingView {
     self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.frame.size.height, self.frame.size.width, BOUNCE_OFFSET)];
     self.loadingView.backgroundColor = [UIColor blackColor];    
-    UILabel* loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(150.0, 0.25*BOUNCE_OFFSET, 0.25*self.frame.size.width, 0.5*BOUNCE_OFFSET)];
+    UILabel* loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(150.0, 0.3*BOUNCE_OFFSET, 0.25*self.frame.size.width, 0.5*BOUNCE_OFFSET)];
     loadingLabel.text = @"Loading";
     loadingLabel.backgroundColor = [UIColor blackColor];
     loadingLabel.textColor = [UIColor grayColor];
     loadingLabel.font = [loadingLabel.font fontWithSize:22.0];
     [self.loadingView addSubview:loadingLabel];
     self.loadingSpinnerView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    self.loadingSpinnerView.frame = CGRectMake(110.0, 0.25*BOUNCE_OFFSET, 0.5*BOUNCE_OFFSET, 0.5*BOUNCE_OFFSET);
+    self.loadingSpinnerView.frame = CGRectMake(110.0, 0.3*BOUNCE_OFFSET, 0.5*BOUNCE_OFFSET, 0.5*BOUNCE_OFFSET);
     self.loadingSpinnerView.color = [UIColor grayColor];
     [self.loadingView addSubview:self.loadingSpinnerView];
 }
@@ -82,7 +81,7 @@
 }
 
 - (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex withOffSet:(NSInteger)_offset {
-    CGRect rowFrame = CGRectMake(0.0, _rowIndex  * self.rowHeight + self.rowPixelOffset, self.frame.size.width, self.rowHeight);
+    CGRect rowFrame = CGRectMake(0.0, _rowIndex  * self.rowHeight, self.frame.size.width, self.rowHeight);
     DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:_row];
     [self.rowContainerView addSubview:dragRow];
     return dragRow;
@@ -95,7 +94,7 @@
 
 - (void)addTopRows:(NSArray*)_rows {
     for (int i = 0; i < [_rows count]; i++) {
-        NSInteger offset = -(i * self.rowHeight + self.rowPixelOffset);
+        NSInteger offset = -(i * self.rowHeight);
         DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:offset];
         [self.rowViews insertObject:dragView atIndex:0];
     }
@@ -191,8 +190,9 @@
 - (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView {
     if ((self = [super initWithFrame:_frame])) {
         self.delegate = _delegate;
+        self.clipsToBounds = YES;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self relativeToView:_relativeView];
-        self.rowContainerView = [[UIScrollView alloc] initWithFrame:_frame];
+        self.rowContainerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, _frame.size.width, _frame.size.height)];
         self.rowContainerView.showsVerticalScrollIndicator = NO;
         self.rowContainerView.delegate = self;
         self.userInteractionEnabled = YES;

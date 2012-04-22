@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CalendarDayView : UITextField
+@interface CalendarDayView : UILabel
 
 + (id)withFrame:(CGRect)_frame andDay:(NSString*)_day;
 - (id)initWithFrame:(CGRect)_frame andDay:(NSString*)_day;
