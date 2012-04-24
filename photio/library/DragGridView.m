@@ -142,7 +142,7 @@
             self.loadingView.frame = CGRectMake(0.0, self.frame.size.height, self.frame.size.width, BOUNCE_OFFSET);
          }
          completion:^(BOOL _finished) {
-             [self addBottomRows:[self.delegate needBottomRows]];
+             [self addBottomRows:[self.delegate needBottomRows:self.topRow]];
              [self scrollViewUp];
              self.bouncing = NO;
              self.rowContainerView.bounces = YES;
@@ -226,7 +226,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView*)_scrollView {
     NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
     if (rowsFromBottom < self.rowBuffer && !self.bouncing) {
-        [self addBottomRows:[self.delegate needBottomRows]];
+        [self addBottomRows:[self.delegate needBottomRows:self.topRow]];
     } else if (rowsFromBottom > self.rowBuffer) {
         [self removeBottomRows:(rowsFromBottom - self.rowBuffer)];
     }

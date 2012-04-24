@@ -65,14 +65,14 @@
 #pragma mark -
 #pragma mark DragGridViewDelegate
 
-- (NSArray*)needBottomRows {
+- (NSArray*)needBottomRows:(NSInteger)_row {
     return [[NSArray alloc] init];
 }
 
-- (void)removedBottomRow:(NSArray *)_row {
+- (void)removedBottomRow:(NSArray*)_row {
 }
 
-- (void)topRowChanged:(NSInteger)_newFirstRow {    
+- (void)topRowChanged:(NSInteger)_row {    
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {

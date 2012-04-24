@@ -37,7 +37,7 @@
 
 @required
 
-- (NSArray*)needBottomRows;
+- (NSArray*)needBottomRows:(NSInteger)_row;
 
 @optional
 

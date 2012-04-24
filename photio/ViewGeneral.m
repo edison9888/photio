@@ -449,6 +449,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     capture.latitude  = _imageInspectView.latitude;
     capture.longitude = _imageInspectView.longitude;
     capture.createdAt = _imageInspectView.createdAt;
+    capture.createdAtDay = [self.calendarViewController julianDay:_imageInspectView.createdAt];
     capture.thumbnail = [_imageInspectView.capture thumbnailImage:[self.calendarViewController calendarImageThumbnailRect].size.width];
     Image* image = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
 	image.image = _imageInspectView.capture;

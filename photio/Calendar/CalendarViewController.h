@@ -16,11 +16,12 @@
 }
 
 @property(nonatomic, weak)   UIView*                    containerView;
+@property(nonatomic, strong) NSMutableArray*            captures;
 @property(nonatomic, strong) CalendarMonthAndYearView*  monthAndYearView;
-@property(nonatomic, strong) NSMutableArray*            thumbnails;
 @property(nonatomic, strong) NSDate*                    oldestDate;
 @property(nonatomic, strong) DragGridView*              dragGridView;
 @property(nonatomic, strong) NSCalendar*                calendar;
+@property(nonatomic, strong) NSDateFormatter*           julianDayFormatter;
 @property(nonatomic, assign) NSInteger                  viewCount;
 @property(nonatomic, assign) NSInteger                  daysInRow;
 @property(nonatomic, assign) NSInteger                  totalDays;
@@ -30,6 +31,6 @@
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (CGRect)calendarImageThumbnailRect;
-- (void)scrollToTop;
+- (NSString*)julianDay:(NSDate*)_date;
 
 @end
