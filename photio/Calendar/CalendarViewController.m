@@ -119,13 +119,19 @@
     
     NSSortDescriptor* sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate];
+    [fetchRequest setPredicate:predicate];
+    
     NSError* error = nil;
 	NSMutableArray* fetchResults = [[[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
 	if (fetchResults == nil) {
 		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
-    return fetchResults;
+    
+    NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.createdAtDay"];
+//    return fetchResults;
+    return [NSMutableArray arrayWithCapacity:1];
 }
 
 #pragma mark -
@@ -164,8 +170,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
-    NSDate* startDate = [NSDate date];
-    NSDate* endDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow)];
+    NSDate* endDate = [NSDate date];
+    NSDate* startDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow)];
     self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect delegate:self startDate:startDate andEndDate:endDate];
     [self.view addSubview:self.monthAndYearView];
     CGRect dragGridRect = CGRectMake(0.0, CALENDAR_MONTH_YEAR_VIEW_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
