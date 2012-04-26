@@ -10,6 +10,7 @@
 #import "ViewGeneral.h"
 #import "CalendarEntryView.h"
 #import "Capture.h"
+#import "NSArray+Extensions.h"
 
 #define CALENDAR_DAYS_IN_ROW                3
 #define CALENDAR_VIEW_COUNT                 10
@@ -64,12 +65,17 @@
 }
 
 - (NSMutableArray*)addDayViewsForRow {
+    NSInteger captureIndex = 0;
     NSMutableArray* rowViews = [NSMutableArray arrayWithCapacity:self.daysInRow];
     for (int j = 0; j < self.daysInRow; j++) {
         UIImage* thumbnail = nil;
-//        if (self.captures < [self.thumbnails count]) {
-//            Capture* capture = [self.thumbnails objectAtIndex:self.totalDays];
+        NSString* oldestDay = [self julianDay:self.oldestDate];
+        Capture* capture= [self.captures objectAtIndex:captureIndex];
+//        NSLog(@"%@", capture);
+//        NSString* captureDay = capture.createdAtDay;
+//        if ([captureDay isEqualToString:oldestDay]) {
 //            thumbnail = capture.thumbnail;
+//            captureIndex++;
 //        }
         [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate andPhoto:thumbnail]];
         self.oldestDate = [self incrementDate:self.oldestDate by:-1];
@@ -109,7 +115,7 @@
 #pragma mark -
 #pragma mark CalendarViewController CoreData
 
-- (NSMutableArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
+- (NSArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
 
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     fetchRequest.resultType = NSDictionaryResultType;
@@ -124,14 +130,20 @@
     [fetchRequest setPredicate:predicate];
     
     NSError* error = nil;
-	NSMutableArray* fetchResults = [[[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
+	__block NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
 	if (fetchResults == nil) {
 		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
     
     NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.createdAtDay"];
-//    return fetchResults;
-    return [NSMutableArray arrayWithCapacity:1];
+    NSArray* aggregatedResults = [days mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
+        NSString* day = _obj;
+        NSArray* dayValues = [fetchResults filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"createdAtDay == %@", day]];
+        NSDate* latestDate = [dayValues valueForKeyPath:@"@max.createdAt"];
+        return [[dayValues filteredArrayUsingPredicate:[NSPredicate predicateWithFormat: @"createdAt = %@", latestDate]] objectAtIndex:0];
+    }];
+    
+    return aggregatedResults;
 }
 
 #pragma mark -
