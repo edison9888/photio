@@ -27,6 +27,7 @@
 - (void)initializeCalendarRowsInView;
 - (void)initializeCalendarEntryViewRect;
 - (void)initializeOldestDate;
+- (void)addCaptureObserver;
 
 @end
 
@@ -34,6 +35,7 @@
 @interface CalendarViewController (CoreData)
 
 - (NSMutableArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate;
+- (void)updateLatestCapture;
 
 @end
 
@@ -111,6 +113,11 @@
     self.calendarEntryViewRect =  CGRectMake(0.0, 0.0, width, width);
 }
 
+- (void)addCaptureObserver {
+    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    [capture addObserver:self forKeyPath:@"createdAt" options:NSKeyValueObservingOptionNew context:nil];
+}
+
 #pragma mark -
 #pragma mark CalendarViewController CoreData
 
@@ -144,6 +151,20 @@
     return aggregatedResults;
 }
 
+- (void)updateLatestCapture {
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];    
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError* error = nil;
+	__block NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	if (fetchResults == nil) {
+		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+	}
+}
+
 #pragma mark -
 #pragma mark CalendarViewController
 
@@ -162,6 +183,7 @@
         [self initializeRowsInView];
         [self initializeCalendarEntryViewRect];
         [self initializeOldestDate];
+        [self addCaptureObserver];
     }
     return self;
 }
@@ -200,6 +222,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark -
+#pragma mark NSKeyValueObserving
+
+- (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
+    [self updateLatestCapture];
 }
 
 #pragma mark -

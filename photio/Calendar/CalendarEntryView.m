@@ -12,7 +12,7 @@
 #import "CalendarDayBackgroundView.h"
 #import "ViewGeneral.h"
 
-#define CALENDAR_ENTRY_DATE_OFFSET_FACTOR     0.05f
+#define CALENDAR_ENTRY_DATE_OFFSET_FACTOR     0.075f
 #define CALENDAR_ENTRY_DATE_SCALE_FACTOR      0.4f
 #define CALENDAR_ENTRY_BORDER                 4.0f
 #define CALENDAR_ASPECT_RATIO                 1.2
@@ -35,7 +35,7 @@
 
 - (CGRect)calendarDateViewRect:(CGRect)_cotentFrame {
     CGSize dateViewSize = CGSizeMake(CALENDAR_ENTRY_DATE_SCALE_FACTOR * _cotentFrame.size.width, CALENDAR_ASPECT_RATIO * CALENDAR_ENTRY_DATE_SCALE_FACTOR * _cotentFrame.size.width);
-    CGPoint dateViewOffset = CGPointMake(_cotentFrame.size.width - dateViewSize.width * (1.0 + 1.0 * CALENDAR_ENTRY_DATE_OFFSET_FACTOR), dateViewSize.width * CALENDAR_ENTRY_DATE_OFFSET_FACTOR);
+    CGPoint dateViewOffset = CGPointMake(_cotentFrame.size.width - dateViewSize.width * (1.0 + CALENDAR_ENTRY_DATE_OFFSET_FACTOR), dateViewSize.width * CALENDAR_ENTRY_DATE_OFFSET_FACTOR);
     return CGRectMake(dateViewOffset.x, dateViewOffset.y, dateViewSize.width, dateViewSize.height);
 }
 
