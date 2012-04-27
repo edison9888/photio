@@ -71,12 +71,11 @@
         UIImage* thumbnail = nil;
         NSString* oldestDay = [self julianDay:self.oldestDate];
         Capture* capture= [self.captures objectAtIndex:captureIndex];
-//        NSLog(@"%@", capture);
-//        NSString* captureDay = capture.createdAtDay;
-//        if ([captureDay isEqualToString:oldestDay]) {
-//            thumbnail = capture.thumbnail;
-//            captureIndex++;
-//        }
+        NSString* captureDay = capture.createdAtDay;
+        if ([captureDay isEqualToString:oldestDay]) {
+            thumbnail = capture.thumbnail;
+            captureIndex++;
+        }
         [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate andPhoto:thumbnail]];
         self.oldestDate = [self incrementDate:self.oldestDate by:-1];
         self.totalDays++;
@@ -118,7 +117,6 @@
 - (NSArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
 
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    fetchRequest.resultType = NSDictionaryResultType;
     
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
     [fetchRequest setEntity:entity];
