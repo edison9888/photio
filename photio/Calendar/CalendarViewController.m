@@ -37,19 +37,22 @@
 - (NSMutableArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate;
 - (void)updateLatestCapture;
 
+NSInteger descendingSort(id num1, id num2, void *context);
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
 @synthesize containerView, monthAndYearView, oldestDate, julianDayFormatter, dragGridView, calendar, captures, 
-            viewCount, daysInRow, totalDays, rowsInView, calendarEntryViewRect;
+            viewCount, daysInRow, totalDays, captureIndex, rowsInView, calendarEntryViewRect;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
 
 - (NSMutableArray*)addViewsBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
     self.captures = [self fetchCapturesBetweenDates:_startdate and:_endDate];
+    self.captureIndex = 0;
     NSMutableArray* initialDayViews = [NSMutableArray arrayWithCapacity:self.viewCount * self.rowsInView];
     for (int i = 0; i < self.viewCount; i++) {
         [initialDayViews addObjectsFromArray:[self addViewRows]];
@@ -67,16 +70,17 @@
 }
 
 - (NSMutableArray*)addDayViewsForRow {
-    NSInteger captureIndex = 0;
     NSMutableArray* rowViews = [NSMutableArray arrayWithCapacity:self.daysInRow];
     for (int j = 0; j < self.daysInRow; j++) {
         UIImage* thumbnail = nil;
-        NSString* oldestDay = [self julianDay:self.oldestDate];
-        Capture* capture= [self.captures objectAtIndex:captureIndex];
+        NSString* oldestDay = [self day:self.oldestDate];
+        Capture* capture= [self.captures objectAtIndex:self.captureIndex];
         NSString* captureDay = capture.createdAtDay;
         if ([captureDay isEqualToString:oldestDay]) {
             thumbnail = capture.thumbnail;
-            captureIndex++;
+            if (self.captureIndex < [self.captures count] - 1) {
+                self.captureIndex++;
+            }
         }
         [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate andPhoto:thumbnail]];
         self.oldestDate = [self incrementDate:self.oldestDate by:-1];
@@ -128,9 +132,6 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSSortDescriptor* sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate];
     [fetchRequest setPredicate:predicate];
     
@@ -141,7 +142,8 @@
 	}
     
     NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.createdAtDay"];
-    NSArray* aggregatedResults = [days mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
+    NSArray* sortedDays = [days sortedArrayUsingFunction:descendingSort context:NULL];
+    NSArray* aggregatedResults = [sortedDays mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
         NSString* day = _obj;
         NSArray* dayValues = [fetchResults filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"createdAtDay == %@", day]];
         NSDate* latestDate = [dayValues valueForKeyPath:@"@max.createdAt"];
@@ -151,18 +153,26 @@
     return aggregatedResults;
 }
 
+NSInteger descendingSort(id num1, id num2, void* context) {
+    int v1 = [num1 intValue];
+    int v2 = [num2 intValue];
+    if (v1 > v2) {
+        return NSOrderedAscending;
+    } else if (v1 < v2) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
+}
+
 - (void)updateLatestCapture {
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];    
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate];
-    [fetchRequest setPredicate:predicate];
-    
-    NSError* error = nil;
-	__block NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	if (fetchResults == nil) {
-		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
+//    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+//    
+//    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+//    [fetchRequest setEntity:entity];
+//    
+//    NSSortDescriptor* sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
+//    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
 }
 
 #pragma mark -
@@ -192,7 +202,7 @@
     return self.calendarEntryViewRect;
 }
 
-- (NSString*)julianDay:(NSDate*)_date {
+- (NSString*)day:(NSDate*)_date {
     return [self.julianDayFormatter stringFromDate:_date];
 }
 

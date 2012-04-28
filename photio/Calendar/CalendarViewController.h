@@ -25,12 +25,13 @@
 @property(nonatomic, assign) NSInteger                  viewCount;
 @property(nonatomic, assign) NSInteger                  daysInRow;
 @property(nonatomic, assign) NSInteger                  totalDays;
+@property(nonatomic, assign) NSInteger                  captureIndex;
 @property(nonatomic, assign) NSInteger                  rowsInView;
 @property(nonatomic, assign) CGRect                     calendarEntryViewRect;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (CGRect)calendarImageThumbnailRect;
-- (NSString*)julianDay:(NSDate*)_date;
+- (NSString*)day:(NSDate*)_date;
 
 @end
