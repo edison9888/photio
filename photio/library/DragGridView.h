@@ -30,6 +30,7 @@
 + (id)withFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<DragGridViewDelegate>)_delegate rows:(NSMutableArray*)_rows andRelativeView:(UIView*)_relativeView;
 - (void)scrollToTop;
+- (void)resetRows:(NSMutableArray*)_rows;
 
 @end
 

@@ -13,7 +13,7 @@
 #import "NSArray+Extensions.h"
 
 #define CALENDAR_DAYS_IN_ROW                3
-#define CALENDAR_VIEW_COUNT                 10
+#define CALENDAR_VIEW_COUNT                 5
 #define CALENDAR_MONTH_YEAR_VIEW_HEIGHT     25.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,12 +74,14 @@ NSInteger descendingSort(id num1, id num2, void *context);
     for (int j = 0; j < self.daysInRow; j++) {
         UIImage* thumbnail = nil;
         NSString* oldestDay = [self day:self.oldestDate];
-        Capture* capture= [self.captures objectAtIndex:self.captureIndex];
-        NSString* captureDay = capture.createdAtDay;
-        if ([captureDay isEqualToString:oldestDay]) {
-            thumbnail = capture.thumbnail;
-            if (self.captureIndex < [self.captures count] - 1) {
-                self.captureIndex++;
+        if ([self.captures count] > 0) {            
+            Capture* capture= [self.captures objectAtIndex:self.captureIndex];
+            NSString* captureDay = capture.createdAtDay;
+            if ([captureDay isEqualToString:oldestDay]) {
+                thumbnail = capture.thumbnail;
+                if (self.captureIndex < [self.captures count] - 1) {
+                    self.captureIndex++;
+                }
             }
         }
         [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate andPhoto:thumbnail]];
@@ -136,7 +138,7 @@ NSInteger descendingSort(id num1, id num2, void *context);
     [fetchRequest setPredicate:predicate];
     
     NSError* error = nil;
-	__block NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
 	if (fetchResults == nil) {
 		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
@@ -166,13 +168,17 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 - (void)updateLatestCapture {
-//    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-//    
-//    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-//    [fetchRequest setEntity:entity];
-//    
-//    NSSortDescriptor* sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-//    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    NSSortDescriptor* sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    [fetchRequest setEntity:entity];   
+    [fetchRequest setFetchLimit:1];
+    NSError* error;
+	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	if (fetchResults == nil) {
+		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+	}
 }
 
 #pragma mark -
@@ -213,7 +219,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [super viewDidLoad];
     CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
     NSDate* endDate = [NSDate date];
-    NSDate* startDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow)];
+    NSDate* startDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow*self.viewCount)];
     self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect delegate:self startDate:startDate andEndDate:endDate];
     [self.view addSubview:self.monthAndYearView];
     CGRect dragGridRect = CGRectMake(0.0, CALENDAR_MONTH_YEAR_VIEW_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
@@ -245,7 +251,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 #pragma mark DragGridViewDelegate
 
 - (NSArray*)needBottomRows:(NSInteger)_row {
-    return [self addViewsBetweenDates:[self incrementDate:[NSDate date] by:-_row*self.daysInRow] and:[self incrementDate:[NSDate date] by:-self.daysInRow*(_row + self.rowsInView)]];
+    return [self addViewsBetweenDates:[self incrementDate:[NSDate date] by:-_row*self.daysInRow] and:[self incrementDate:[NSDate date] by:-self.daysInRow*(_row + self.viewCount*self.rowsInView)]];
 }
 
 - (void)removedBottomRow:(NSArray*)_row {

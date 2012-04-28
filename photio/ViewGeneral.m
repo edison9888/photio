@@ -444,8 +444,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)saveImageLater:(ImageInspectView*)_imageInspectView {
-    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" 
-                                                               inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
     capture.latitude  = _imageInspectView.latitude;
     capture.longitude = _imageInspectView.longitude;
     capture.createdAt = _imageInspectView.createdAt;

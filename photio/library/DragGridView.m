@@ -22,8 +22,8 @@
 - (void)initRowParams:(NSMutableArray*)_rows;
 - (void)setContentSize;
 - (void)buildLoadingView;
-- (NSMutableArray*)createRows:(NSArray*)_rows withOffSet:(NSInteger)_offset;
-- (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex withOffSet:(NSInteger)_offset;
+- (NSMutableArray*)createRows:(NSArray*)_rows;
+- (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex;
 - (CGRect)rect:(CGRect)_rect withYOffset:(NSInteger)_offset;
 - (void)addTopRows:(NSArray*)_rows;
 - (void)addBottomRows:(NSArray *)_rows;
@@ -73,15 +73,15 @@
 }
 
 
-- (NSMutableArray*)createRows:(NSArray*)_rows withOffSet:(NSInteger)_offset {
+- (NSMutableArray*)createRows:(NSArray*)_rows {
     NSMutableArray* dragRows = [NSMutableArray arrayWithCapacity:10];
     for (int i = 0; i < [_rows count]; i++) {
-        [dragRows addObject:[self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:_offset]];
+        [dragRows addObject:[self createRow:[_rows objectAtIndex:i] atIndex:i]];
     }
     return dragRows;
 }
 
-- (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex withOffSet:(NSInteger)_offset {
+- (DragRowView*)createRow:(NSArray*)_row atIndex:(NSInteger)_rowIndex {
     CGRect rowFrame = CGRectMake(0.0, _rowIndex  * self.rowHeight, self.frame.size.width, self.rowHeight);
     DragRowView* dragRow = [DragRowView withFrame:rowFrame andItems:_row];
     [self.rowContainerView addSubview:dragRow];
@@ -95,8 +95,7 @@
 
 - (void)addTopRows:(NSArray*)_rows {
     for (int i = 0; i < [_rows count]; i++) {
-        NSInteger offset = -(i * self.rowHeight);
-        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i withOffSet:offset];
+        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:i];
         [self.rowViews insertObject:dragView atIndex:0];
     }
 }
@@ -104,7 +103,7 @@
 - (void)addBottomRows:(NSArray *)_rows {
     NSInteger totalRows = [self.rowViews count];
     for (int i = 0; i < [_rows count]; i++) {
-        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:(i + totalRows) withOffSet:0];
+        DragRowView* dragView = [self createRow:[_rows objectAtIndex:i] atIndex:(i + totalRows)];
         [self.rowViews addObject:dragView];
     }
     [self setContentSize];
@@ -202,7 +201,7 @@
         self.rowBuffer = 0;
         self.bouncing = NO;
         [self initRowParams:_rows];
-        self.rowViews = [self createRows:_rows withOffSet:0];
+        self.rowViews = [self createRows:_rows];
         [self setContentSize];
     }
     return self;
@@ -220,13 +219,18 @@
      ];
 }
 
+- (void)resetRows:(NSMutableArray*)_rows {
+    self.rowViews = [self createRows:_rows];
+}
+
 #pragma mark -
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView*)_scrollView {
-    NSInteger rowsFromBottom = [self.rowViews count] - self.topRow;
+    NSInteger totalRows = [self.rowViews count];
+    NSInteger rowsFromBottom = totalRows - self.topRow;
     if (rowsFromBottom < self.rowBuffer && !self.bouncing) {
-        [self addBottomRows:[self.delegate needBottomRows:self.topRow]];
+        [self addBottomRows:[self.delegate needBottomRows:totalRows]];
     } else if (rowsFromBottom > self.rowBuffer) {
         [self removeBottomRows:(rowsFromBottom - self.rowBuffer)];
     }
