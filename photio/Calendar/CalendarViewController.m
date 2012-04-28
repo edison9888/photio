@@ -224,11 +224,12 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [self initializeOldestDate];
     CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
     NSDate* endDate = [NSDate date];
-    NSDate* startDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow*self.viewCount)];
-    self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect delegate:self startDate:startDate andEndDate:endDate];
+    NSDate* gridStartDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow*self.viewCount)];
+    NSDate* monthAndYearViewStartDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow)];
+    self.monthAndYearView = [CalendarMonthAndYearView withFrame:yearMonthRect delegate:self startDate:monthAndYearViewStartDate andEndDate:endDate];
     [self.view addSubview:self.monthAndYearView];
     CGRect dragGridRect = CGRectMake(0.0, CALENDAR_MONTH_YEAR_VIEW_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
-    self.dragGridView = [DragGridView withFrame:dragGridRect delegate:self rows:[self addViewsBetweenDates:startDate and:endDate] andRelativeView:self.containerView];
+    self.dragGridView = [DragGridView withFrame:dragGridRect delegate:self rows:[self addViewsBetweenDates:gridStartDate and:endDate] andRelativeView:self.containerView];
     self.dragGridView.rowBuffer = self.rowsInView * self.viewCount;
     [self.view addSubview:self.dragGridView];
 }
