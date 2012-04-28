@@ -179,6 +179,9 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 	if (fetchResults == nil) {
 		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
+    Capture* capture = [fetchResults objectAtIndex:0];
+    CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
+    entryView.photoView.image = capture.thumbnail;
 }
 
 #pragma mark -

@@ -223,6 +223,11 @@
     self.rowViews = [self createRows:_rows];
 }
 
+- (NSArray*)rowViewAtIndex:(NSInteger)_index {
+    DragRowView* rowView = [self.rowViews objectAtIndex:_index];
+    return rowView.items;
+}
+
 #pragma mark -
 #pragma mark UIScrollViewDelegate
 
