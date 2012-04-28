@@ -12,7 +12,7 @@
 
 @class CalendarMonthAndYearView;
 
-@interface CalendarViewController : UIViewController <DragGridViewDelegate, CalendarMonthAndYearViewDelegate, NSFetchedResultsControllerDelegate> {
+@interface CalendarViewController : UIViewController <DragGridViewDelegate, CalendarMonthAndYearViewDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                    containerView;
@@ -32,7 +32,8 @@
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (CGRect)calendarImageThumbnailRect;
-- (NSString*)day:(NSDate*)_date;
+- (NSString*)dayIdentifier:(NSDate*)_date;
 - (void)loadCalendarViews;
+- (void)updateLatestCapture;
 
 @end

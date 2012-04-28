@@ -12,7 +12,6 @@
 
 @class CameraViewController;
 @class ImageInspectViewController;
-@class EntryViewController;
 @class CalendarViewController;
 @class LocalesViewController;
 
@@ -25,7 +24,6 @@
 @property(nonatomic, strong) NSManagedObjectContext*        managedObjectContext;
 @property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, strong) CameraViewController*          cameraViewController;
-@property(nonatomic, strong) EntryViewController*           entryViewController;
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
 @property(nonatomic, strong) LocalesViewController*         localesViewController;
 
@@ -38,11 +36,6 @@
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow;
 - (void)createViews:(UIView*)_containerView;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initEntryView:(UIView*)_containerView;
-- (void)entryViewPosition:(CGRect)_rect;
-- (void)entryViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initImageInspectView:(UIView*)_containerView;

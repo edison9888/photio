@@ -73,18 +73,20 @@ NSInteger descendingSort(id num1, id num2, void *context);
     NSMutableArray* rowViews = [NSMutableArray arrayWithCapacity:self.daysInRow];
     for (int j = 0; j < self.daysInRow; j++) {
         UIImage* thumbnail = nil;
-        NSString* oldestDay = [self day:self.oldestDate];
+        NSString* dayIdentifier;
+        NSString* oldestDayIdentifier = [self dayIdentifier:self.oldestDate];
         if ([self.captures count] > 0) {            
             Capture* capture= [self.captures objectAtIndex:self.captureIndex];
-            NSString* captureDay = capture.createdAtDay;
-            if ([captureDay isEqualToString:oldestDay]) {
+            NSString* captureDayIdentifier = capture.dayIdentifier;
+            if ([captureDayIdentifier isEqualToString:oldestDayIdentifier]) {
+                dayIdentifier = captureDayIdentifier;
                 thumbnail = capture.thumbnail;
                 if (self.captureIndex < [self.captures count] - 1) {
                     self.captureIndex++;
                 }
             }
         }
-        [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate andPhoto:thumbnail]];
+        [rowViews addObject:[CalendarEntryView withFrame:self.calendarEntryViewRect date:self.oldestDate dayIdentifier:dayIdentifier andPhoto:thumbnail]];
         self.oldestDate = [self incrementDate:self.oldestDate by:-1];
         self.totalDays++;
     }
@@ -119,23 +121,14 @@ NSInteger descendingSort(id num1, id num2, void *context);
     self.calendarEntryViewRect =  CGRectMake(0.0, 0.0, width, width);
 }
 
-- (void)addCaptureObserver {
-    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-    [capture addObserver:self forKeyPath:@"createdAt" options:NSKeyValueObservingOptionNew context:nil];
-}
-
 #pragma mark -
 #pragma mark CalendarViewController CoreData
 
 - (NSArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
 
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate];
-    [fetchRequest setPredicate:predicate];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];    
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate]];
     
     NSError* error = nil;
 	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -143,11 +136,11 @@ NSInteger descendingSort(id num1, id num2, void *context);
 		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
     
-    NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.createdAtDay"];
+    NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.dayIdentifier"];
     NSArray* sortedDays = [days sortedArrayUsingFunction:descendingSort context:NULL];
     NSArray* aggregatedResults = [sortedDays mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
         NSString* day = _obj;
-        NSArray* dayValues = [fetchResults filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"createdAtDay == %@", day]];
+        NSArray* dayValues = [fetchResults filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", day]];
         NSDate* latestDate = [dayValues valueForKeyPath:@"@max.createdAt"];
         return [[dayValues filteredArrayUsingPredicate:[NSPredicate predicateWithFormat: @"createdAt = %@", latestDate]] objectAtIndex:0];
     }];
@@ -167,23 +160,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     }
 }
 
-- (void)updateLatestCapture {
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-    NSSortDescriptor* sort = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    [fetchRequest setEntity:entity];   
-    [fetchRequest setFetchLimit:1];
-    NSError* error;
-	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	if (fetchResults == nil) {
-		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
-    Capture* capture = [fetchResults objectAtIndex:0];
-    CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
-    entryView.photoView.image = capture.thumbnail;
-}
-
 #pragma mark -
 #pragma mark CalendarViewController
 
@@ -201,7 +177,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
         [self initializeDateFormatters];
         [self initializeRowsInView];
         [self initializeCalendarEntryViewRect];
-        [self addCaptureObserver];
     }
     return self;
 }
@@ -210,7 +185,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     return self.calendarEntryViewRect;
 }
 
-- (NSString*)day:(NSDate*)_date {
+- (NSString*)dayIdentifier:(NSDate*)_date {
     return [self.julianDayFormatter stringFromDate:_date];
 }
 
@@ -234,6 +209,21 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [self.view addSubview:self.dragGridView];
 }
 
+- (void)updateLatestCapture {
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];   
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
+    [fetchRequest setFetchLimit:1];
+    NSError* error;
+	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	if (fetchResults == nil) {
+		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+	}
+    Capture* capture = [fetchResults objectAtIndex:0];
+    CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
+    entryView.photoView.image = capture.thumbnail;
+}
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -251,13 +241,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-#pragma mark -
-#pragma mark NSKeyValueObserving
-
-- (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context {
-    [self updateLatestCapture];
 }
 
 #pragma mark -

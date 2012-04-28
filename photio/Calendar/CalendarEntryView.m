@@ -22,13 +22,14 @@
 
 - (CGRect)calendarDateViewRect:(CGRect)_cotentFrame;
 - (void)initializeDateFormatters;
+- (void)openEntryView;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarEntryView
 
-@synthesize dayView, backgroundView, dayOfWeekView, photoView, dayFormatter, dayOfWeekFormatter, date;
+@synthesize dayView, backgroundView, dayOfWeekView, photoView, dayFormatter, dayOfWeekFormatter, date, dayIdentifier;
 
 #pragma mark -
 #pragma mark CalendarEntryView PrivatAPI
@@ -46,14 +47,17 @@
     [self.dayOfWeekFormatter setDateFormat:@"EEE"];
 }
 
+- (void)openEntryView {
+}
+
 #pragma mark -
 #pragma mark CalendarEntryView
 
-+ (id)withFrame:(CGRect)_frame date:(NSDate*)_date andPhoto:(UIImage*)_photo {
-    return [[CalendarEntryView alloc] initWithFrame:_frame date:_date andPhoto:_photo];
++ (id)withFrame:(CGRect)_frame date:(NSDate*)_date dayIdentifier:(NSString*)_dayIdentifier andPhoto:(UIImage*)_photo {
+    return [[CalendarEntryView alloc] initWithFrame:_frame date:_date dayIdentifier:_dayIdentifier andPhoto:_photo];
 }
 
-- (id)initWithFrame:(CGRect)_frame date:(NSDate*)_date andPhoto:(UIImage*)_photo {
+- (id)initWithFrame:(CGRect)_frame date:(NSDate*)_date dayIdentifier:(NSString*)_dayIdentifier andPhoto:(UIImage*)_photo {
     if ((self = [super initWithFrame:_frame])) {
         self.backgroundColor = [UIColor blackColor];
         [self initializeDateFormatters];
@@ -80,8 +84,32 @@
         [contentView addSubview:self.backgroundView];
         [contentView addSubview:self.dayView];
         [contentView addSubview:self.dayOfWeekView];
+        
+        UITapGestureRecognizer* openEntryViewGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openEntryView)];
+        openEntryViewGesture.numberOfTapsRequired = 1;
+        openEntryViewGesture.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:openEntryViewGesture];
     }
     return self;    
+}
+
+#pragma mark -
+#pragma mark EntriesViewControllerDelegates
+
+- (void)deleteEntry:(id)_entry {
+    
+}
+
+- (NSMutableArray*)loadEntries {
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", self.dayIdentifier]];
+    NSError* error;
+	NSMutableArray* fetchResults = [[[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
+	if (fetchResults == nil) {
+		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+	}
+    return fetchResults;
 }
 
 @end

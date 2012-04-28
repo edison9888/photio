@@ -14,7 +14,6 @@
 #import "Capture.h"
 #import "Image.h"
 
-#import "EntryViewController.h"
 #import "CalendarViewController.h"
 #import "LocalesViewController.h"
 
@@ -46,7 +45,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize notAnimating, managedObjectContext;
-@synthesize imageInspectViewController, cameraViewController, entryViewController, calendarViewController, localesViewController;
+@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
@@ -136,30 +135,10 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)createViews:(UIView*)_containerView {
-    [self initEntryView:_containerView];
     [self initImageInspectView:_containerView];
     [self initCameraView:_containerView];
     [self initCalendarView:_containerView];
     [self initLocalesView:_containerView];
-}
-
-#pragma mark - 
-#pragma mark EntryViewController
-
-- (void)initEntryView:(UIView*)_containerView {
-    if (self.entryViewController == nil) {
-        self.entryViewController = [EntryViewController inView:_containerView];
-    }
-    [self entryViewPosition:[self.class underWindow]];
-    [_containerView addSubview:self.entryViewController.view];
-}
-
-- (void)entryViewHidden:(BOOL)_hidden {
-    self.entryViewController.view.hidden = _hidden;
-}
-
-- (void)entryViewPosition:(CGRect)_rect {
-    self.entryViewController.view.frame = _rect;
 }
 
 #pragma mark - 
@@ -448,7 +427,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     capture.latitude  = _imageInspectView.latitude;
     capture.longitude = _imageInspectView.longitude;
     capture.createdAt = _imageInspectView.createdAt;
-    capture.createdAtDay = [self.calendarViewController day:_imageInspectView.createdAt];
+    capture.dayIdentifier = [self.calendarViewController dayIdentifier:_imageInspectView.createdAt];
     capture.thumbnail = [_imageInspectView.capture thumbnailImage:[self.calendarViewController calendarImageThumbnailRect].size.width];
     Image* image = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
 	image.image = _imageInspectView.capture;
@@ -457,6 +436,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (![[ViewGeneral instance].managedObjectContext save:&error]) {
 		[[[UIAlertView alloc] initWithTitle:@"Error Saving Photo" message:@"Your photo was not saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
+    [self.calendarViewController updateLatestCapture];
 }
 
 @end

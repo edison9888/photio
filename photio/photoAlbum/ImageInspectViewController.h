@@ -14,7 +14,6 @@
 
 @protocol ImageInspectViewControllerDelegate;
 @class ImageInspectView;
-@class DiagonalGestureRecognizer;
  
 @interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate, DiagonalGestureRecognizerDelegate> {
 }
@@ -27,7 +26,7 @@
 
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
 - (void)addImage:(UIImage*)_picture;
 - (BOOL)hasCaptures;
 
