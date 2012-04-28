@@ -8,6 +8,7 @@
 
 #import "PhotioAppDelegate.h"
 #import "ContainerViewController.h"
+#import "CalendarViewController.h"
 #import "ViewGeneral.h"
 
 @implementation PhotioAppDelegate
@@ -40,6 +41,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[ViewGeneral instance].calendarViewController loadCalendarViews];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

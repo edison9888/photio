@@ -201,7 +201,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
         [self initializeDateFormatters];
         [self initializeRowsInView];
         [self initializeCalendarEntryViewRect];
-        [self initializeOldestDate];
         [self addCaptureObserver];
     }
     return self;
@@ -215,11 +214,14 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     return [self.julianDayFormatter stringFromDate:_date];
 }
 
-#pragma mark -
-#pragma mark UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadCalendarViews {
+    if (self.dragGridView) {
+        [self.dragGridView removeFromSuperview];
+    }
+    if (self.monthAndYearView) {
+        [self.monthAndYearView removeFromSuperview];
+    }
+    [self initializeOldestDate];
     CGRect yearMonthRect = CGRectMake(0.0, 0.0, self.view.frame.size.width, CALENDAR_MONTH_YEAR_VIEW_HEIGHT);
     NSDate* endDate = [NSDate date];
     NSDate* startDate = [self incrementDate:[NSDate date] by:-(self.rowsInView*self.daysInRow*self.viewCount)];
@@ -229,6 +231,13 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     self.dragGridView = [DragGridView withFrame:dragGridRect delegate:self rows:[self addViewsBetweenDates:startDate and:endDate] andRelativeView:self.containerView];
     self.dragGridView.rowBuffer = self.rowsInView * self.viewCount;
     [self.view addSubview:self.dragGridView];
+}
+
+#pragma mark -
+#pragma mark UIViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 }
 
 - (void)viewDidUnload {
