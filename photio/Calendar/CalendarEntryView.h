@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntriesViewController.h"
+#import "EntriesView.h"
 
 @class CalendarDayView;
 @class CalendarDayBackgroundView;
 @class CalendarDayOfWeekView;
 
-@interface CalendarEntryView : UIView <EntriesViewControllerDelegate>
+@interface CalendarEntryView : UIView <EntriesViewDelegate>
 
 @property(nonatomic, strong) CalendarDayView*               dayView; 
 @property(nonatomic, strong) CalendarDayBackgroundView*     backgroundView;

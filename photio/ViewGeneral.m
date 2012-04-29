@@ -44,7 +44,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewGeneral
  
-@synthesize notAnimating, managedObjectContext, rootView;
+@synthesize notAnimating, managedObjectContext, containerView;
 @synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController;
 
 #pragma mark - 
@@ -135,7 +135,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)createViews:(UIView*)_containerView {
-    self.rootView = _containerView;
+    self.containerView = _containerView;
     [self initImageInspectView:_containerView];
     [self initCameraView:_containerView];
     [self initCalendarView:_containerView];

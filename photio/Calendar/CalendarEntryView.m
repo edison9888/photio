@@ -10,7 +10,10 @@
 #import "CalendarDayView.h"
 #import "CalendarDayOfWeekView.h"
 #import "CalendarDayBackgroundView.h"
-#import "EntriesViewController.h"
+#import "NSArray+Extensions.h"
+#import "ImageInspectView.h"
+#import "Capture.h"
+#import "Image.h"
 #import "ViewGeneral.h"
 
 #define CALENDAR_ENTRY_DATE_OFFSET_FACTOR     0.075f
@@ -50,7 +53,8 @@
 
 - (void)openEntryView {
     if (self.photoView.image) {
-        [EntriesViewController inView:[ViewGeneral instance].rootView withDelegate:self];
+        EntriesView* entries = [EntriesView withFrame:[ViewGeneral instance].containerView.frame andDelegate:self];
+        [[ViewGeneral instance].containerView addSubview:entries];
     }
 }
 
@@ -66,6 +70,7 @@
         self.backgroundColor = [UIColor blackColor];
         [self initializeDateFormatters];
         self.date = _date;
+        self.dayIdentifier = _dayIdentifier;
 
         CGRect contentFrame = CGRectMake(CALENDAR_ENTRY_BORDER, CALENDAR_ENTRY_BORDER, self.frame.size.width - CALENDAR_ENTRY_BORDER, self.frame.size.height - CALENDAR_ENTRY_BORDER);
         UIView* contentView = [[UIView alloc] initWithFrame:contentFrame];
@@ -102,8 +107,8 @@
 - (void)deleteEntry:(id)_entry {
 }
 
-- (void)didTap:(EntriesViewController*)_entries {
-    [_entries.view removeFromSuperview];
+- (void)didTap:(EntriesView*)_entries {
+    [_entries removeFromSuperview];
 }
 
 - (NSMutableArray*)loadEntries {
@@ -115,7 +120,11 @@
 	if (fetchResults == nil) {
 		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
-    return fetchResults;
+    NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx){
+        Capture* capture = _obj;
+        return [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame capture:capture.image.image andLocation:CLLocationCoordinate2DMake([capture.latitude doubleValue], [capture.longitude doubleValue])];
+    }];
+    return [entryViews mutableCopy];
 }
 
 @end

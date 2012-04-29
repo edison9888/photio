@@ -1,87 +1,67 @@
 //
-//  EntriesViewController.m
+//  EntriesView.m
 //  photio
 //
 //  Created by Troy Stribling on 2/19/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "EntriesViewController.h"
+#import "EntriesView.h"
+#import "StreamOfViews.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface EntriesViewController (PrivateAPI)
+@interface EntriesView (PrivateAPI)
 
 - (void)loadEntries;
+- (void)didSingleTap;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation EntriesViewController
+@implementation EntriesView
 
-@synthesize containerView, singleTap, delegate, entriesView, diagonalGestures, entries;
+@synthesize containerView, delegate, entriesStreamView, diagonalGestures;
 
 #pragma mark -
-#pragma mark EntriesViewController
+#pragma mark EntriesView
 
-+ (id)inView:(UIView*)_containerView withDelegate:(id<EntriesViewControllerDelegate>)_delegate {
-    return [[EntriesViewController alloc] initWithNibName:@"EntriesViewController" bundle:nil inView:_containerView withDelegate:_delegate];;
++ (id)withFrame:(CGRect)_frame andDelegate:(id<EntriesViewDelegate>)_delegate {
+    return [[EntriesView alloc] initWithFrame:_frame andDelegate:_delegate];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<EntriesViewControllerDelegate>)_delegate {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        self.containerView = _containerView;
+- (id)initWithFrame:(CGRect)_frame andDelegate:(id<EntriesViewDelegate>)_delegate {
+    if ((self = [super initWithFrame:_frame])) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.userInteractionEnabled = YES;
         self.delegate = _delegate;
-        [self.containerView addSubview:self.view];
+        self.entriesStreamView = [StreamOfViews withFrame:self.frame delegate:self relativeToView:self.containerView];
+        self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
+        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSingleTap)];
+        singleTap.numberOfTapsRequired = 1;
+        singleTap.numberOfTouchesRequired = 1;
+        [self.entriesStreamView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
+        [self.diagonalGestures requireGestureRecognizerToFail:singleTap];
+        [self addGestureRecognizer:singleTap];
+        [self addGestureRecognizer:self.diagonalGestures];
+        [self addSubview:self.entriesStreamView];
+        [self loadEntries];
     }
     return self;
 }
 
-- (IBAction)didSingleTap:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(didTap)]) {
-        [self.delegate didTap:self];
-    }
-}
-
 #pragma mark -
-#pragma mark EntriesViewController (PrivateAPI)
+#pragma mark EntriesView (PrivateAPI)
 
 - (void)loadEntries {
-    self.entries = [self.delegate loadEntries];
-    for (UIView* entryView in self.entries) {
-        [self.entriesView addView:entryView];
+    for (UIView* entryView in [self.delegate loadEntries]) {
+        [self.entriesStreamView addView:entryView];
     }
 }
 
-#pragma mark -
-#pragma mark UIViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.entriesView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
-    self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
-    [self.entriesView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
-    [self.view addSubview:self.entriesView];
-    [self loadEntries];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)didSingleTap {
+    if ([self.delegate respondsToSelector:@selector(didTap:)]) {
+        [self.delegate didTap:self];
+    }
 }
 
 #pragma mark -
