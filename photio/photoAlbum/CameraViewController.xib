@@ -44,6 +44,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="760511041"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
+						<array key="IBUIGestureRecognizers" id="0"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -57,9 +58,8 @@
 						<string key="NSFrame">{{100, 412}, {120, 60}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<array key="IBUIGestureRecognizers" id="0"/>
+						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
@@ -79,11 +79,11 @@
 				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUITapGestureRecognizer" id="848899834">
-				<bool key="IBUIDelaysTouchesEnded">NO</bool>
-			</object>
 			<object class="IBUITapGestureRecognizer" id="932958160">
 				<bool key="IBUIDelaysTouchesBegan">YES</bool>
+				<bool key="IBUIDelaysTouchesEnded">NO</bool>
+			</object>
+			<object class="IBUITapGestureRecognizer" id="848899834">
 				<bool key="IBUIDelaysTouchesEnded">NO</bool>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="729777438">
@@ -104,14 +104,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">flashView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="393904638"/>
-					</object>
-					<int key="connectionID">61</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">takePhotoView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="760511041"/>
@@ -120,11 +112,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">flashView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="393904638"/>
+					</object>
+					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">focusGesture</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="932958160"/>
 					</object>
-					<int key="connectionID">67</int>
+					<int key="connectionID">77</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -132,7 +132,7 @@
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="729777438"/>
 					</object>
-					<int key="connectionID">68</int>
+					<int key="connectionID">78</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -142,7 +142,7 @@
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
-					<int key="connectionID">64</int>
+					<int key="connectionID">73</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -152,7 +152,7 @@
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
-					<int key="connectionID">66</int>
+					<int key="connectionID">76</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -168,7 +168,7 @@
 						<reference key="source" ref="729777438"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
-					<int key="connectionID">60</int>
+					<int key="connectionID">72</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -178,7 +178,7 @@
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
-					<int key="connectionID">52</int>
+					<int key="connectionID">74</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -186,7 +186,7 @@
 						<reference key="source" ref="932958160"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
-					<int key="connectionID">65</int>
+					<int key="connectionID">71</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -220,6 +220,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">38</int>
 						<reference key="object" ref="393904638"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="142320705"/>
 						<string key="objectName">flash</string>
 					</object>
@@ -231,16 +232,16 @@
 						<string key="objectName">take photo</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="848899834"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">take photo</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">63</int>
 						<reference key="object" ref="932958160"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">auto focus</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">14</int>
+						<reference key="object" ref="848899834"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">take photo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
@@ -266,7 +267,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">68</int>
+			<int key="maxID">78</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -18,25 +18,28 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation EntriesViewController
 
-@synthesize containerView, delegate, entriesView, diagonalGestures, entries;
+@synthesize containerView, singleTap, delegate, entriesView, diagonalGestures, entries;
 
 #pragma mark -
 #pragma mark EntriesViewController
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<EntriesViewControllerDelegate>)_delegate {
-    return [[EntriesViewController alloc] initWithNibName:@"EntryViewController" bundle:nil inView:_containerView withDelegate:_delegate];;
+    return [[EntriesViewController alloc] initWithNibName:@"EntriesViewController" bundle:nil inView:_containerView withDelegate:_delegate];;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<EntriesViewControllerDelegate>)_delegate {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.delegate = _delegate;
-        self.view.frame = self.containerView.frame;
-        self.entriesView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
-        [self.entriesView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
-        self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
+        [self.containerView addSubview:self.view];
     }
     return self;
+}
+
+- (IBAction)didSingleTap:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(didTap)]) {
+        [self.delegate didTap:self];
+    }
 }
 
 #pragma mark -
@@ -54,6 +57,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.entriesView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
+    self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
+    [self.entriesView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
+    [self.view addSubview:self.entriesView];
     [self loadEntries];
 }
 

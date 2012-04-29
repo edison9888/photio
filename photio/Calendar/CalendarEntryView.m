@@ -10,6 +10,7 @@
 #import "CalendarDayView.h"
 #import "CalendarDayOfWeekView.h"
 #import "CalendarDayBackgroundView.h"
+#import "EntriesViewController.h"
 #import "ViewGeneral.h"
 
 #define CALENDAR_ENTRY_DATE_OFFSET_FACTOR     0.075f
@@ -48,6 +49,9 @@
 }
 
 - (void)openEntryView {
+    if (self.photoView.image) {
+        [EntriesViewController inView:[ViewGeneral instance].rootView withDelegate:self];
+    }
 }
 
 #pragma mark -
@@ -96,7 +100,10 @@
 #pragma mark EntriesViewControllerDelegates
 
 - (void)deleteEntry:(id)_entry {
-    
+}
+
+- (void)didTap:(EntriesViewController*)_entries {
+    [_entries.view removeFromSuperview];
 }
 
 - (NSMutableArray*)loadEntries {

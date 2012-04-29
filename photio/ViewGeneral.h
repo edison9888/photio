@@ -21,6 +21,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property(nonatomic, assign) BOOL                           notAnimating;
+@property(nonatomic, strong) UIView*                        rootView;
 @property(nonatomic, strong) NSManagedObjectContext*        managedObjectContext;
 @property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, strong) CameraViewController*          cameraViewController;

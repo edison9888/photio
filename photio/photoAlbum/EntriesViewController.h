@@ -17,14 +17,16 @@
 @interface EntriesViewController : UIViewController <StreamOfViewsDelegate, DiagonalGestureRecognizerDelegate> {
 }
 
-@property(nonatomic, weak)  UIView*                             containerView;
-@property(nonatomic, weak)  id<EntriesViewControllerDelegate>   delegate;
+@property(nonatomic, weak)   UIView*                            containerView;
+@property(nonatomic, weak)   id<EntriesViewControllerDelegate>  delegate;
+@property(nonatomic, strong) IBOutlet UIGestureRecognizer*      singleTap;
 @property(nonatomic, strong) DiagonalGestureRecognizer*         diagonalGestures;
 @property(nonatomic, strong) StreamOfViews*                     entriesView;
 @property(nonatomic, strong) NSMutableArray*                    entries;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<EntriesViewControllerDelegate>)_delegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<EntriesViewControllerDelegate>)_delegate;
+- (IBAction)didSingleTap:(id)sender;
 
 @end
 
@@ -43,5 +45,6 @@
 - (void)transitionDownFromEntries;
 - (void)didRemoveAllEntries;
 
+- (void)didTap:(EntriesViewController*)_entries;
 
 @end

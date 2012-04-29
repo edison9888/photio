@@ -38,7 +38,6 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.delegate = _delegate;
-        self.view.frame = self.containerView.frame;
         self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
         self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
         [self.imageView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
