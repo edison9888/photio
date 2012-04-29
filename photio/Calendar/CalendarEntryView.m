@@ -76,11 +76,10 @@
         self.dayOfWeekView = [CalendarDayOfWeekView withFrame:dayRect andDayOfWeek:dayOfWeek];
 
         [self addSubview:contentView];
-        if (_photo) {   
-            self.photoView = [[UIImageView alloc] initWithImage:_photo];
-            [contentView addSubview:self.photoView];
-        }
-
+        self.photoView = [[UIImageView alloc] initWithFrame:_frame];
+        self.photoView.image = _photo;
+        
+        [contentView addSubview:self.photoView];
         [contentView addSubview:self.backgroundView];
         [contentView addSubview:self.dayView];
         [contentView addSubview:self.dayOfWeekView];
