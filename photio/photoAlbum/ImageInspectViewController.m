@@ -48,8 +48,8 @@
     return self;
 }
 
-- (void)addImage:(UIImage*)_picture {
-    [self.imageView addView:[ImageInspectView withFrame:self.view.frame capture:_picture andLocation:[[self.locationManager location] coordinate]]];
+- (void)addImage:(UIImage*)_capture {
+    [self.imageView addView:[ImageInspectView cachedWithFrame:self.view.frame capture:_capture andLocation:[[self.locationManager location] coordinate]]];
 }
 
 - (BOOL)hasCaptures {

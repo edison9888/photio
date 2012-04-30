@@ -128,6 +128,10 @@
 }
 
 -(void)didDiagonalSwipe {
+    if ([self.delegate respondsToSelector:@selector(deleteEntry:)]) {
+        [self.delegate deleteEntry:[self.entriesStreamView displayedView]];
+        [self.entriesStreamView fadeDisplayedViewAndRemove];
+    }
 }
 
 @end

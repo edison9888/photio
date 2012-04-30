@@ -222,6 +222,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     Capture* capture = [fetchResults objectAtIndex:0];
     CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
     entryView.photoView.image = capture.thumbnail;
+    entryView.dayIdentifier = capture.dayIdentifier;
 }
 
 #pragma mark -

@@ -20,22 +20,27 @@
 @synthesize capture, latitude, longitude, createdAt;
 
 #pragma mark -
-#pragma mark ImageInspectViewController PrivateAPI
+#pragma mark ImageInspectView PrivateAPI
 
 #pragma mark -
-#pragma mark ImageInspectViewController
+#pragma mark ImageInspectView
 
 + (id)withFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
     return [[ImageInspectView alloc] initWithFrame:_frame capture:_capture andLocation:_location];
 }
 
++ (id)cachedWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
+    ImageInspectView* view = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture andLocation:_location];
+    view.capture = _capture;
+    return view;
+}
+
 - (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
     if ((self = [super initWithFrame:(CGRect)_frame])) {
-        self.capture = _capture;
         self.latitude = [NSNumber numberWithDouble:_location.latitude];
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = [NSDate date];
-        self.image = [self.capture scaleToSize:_frame.size];
+        self.image = [_capture scaleToSize:_frame.size];
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.clipsToBounds = YES;
     }

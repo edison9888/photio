@@ -104,7 +104,7 @@
 #pragma mark -
 #pragma mark EntriesViewControllerDelegates
 
-- (void)deleteEntry:(id)_entry {
+- (void)deleteEntry:(UIView*)_entry {
 }
 
 - (void)didTap:(EntriesView*)_entries {
