@@ -32,6 +32,7 @@
 @required
 
 - (void)deleteEntry:(id)_entry;
+- (void)didRemoveAllEntries:(EntriesView*)_entries;
 - (NSMutableArray*)loadEntries;
 
 @optional
@@ -40,7 +41,6 @@
 - (void)releaseEntries;
 - (void)transitionUpFromEntries;
 - (void)transitionDownFromEntries;
-- (void)didRemoveAllEntries;
 
 - (void)didTap:(EntriesView*)_entries;
 

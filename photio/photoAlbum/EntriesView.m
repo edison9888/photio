@@ -116,8 +116,8 @@
 }
 
 - (void)didRemoveAllEntries {
-    if ([self.delegate respondsToSelector:@selector(didRemoveAllEntries)]) {
-        [self.delegate didRemoveAllEntries];
+    if ([self.delegate respondsToSelector:@selector(didRemoveAllEntries:)]) {
+        [self.delegate didRemoveAllEntries:self];
     }
 }
 

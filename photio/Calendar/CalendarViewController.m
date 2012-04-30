@@ -128,13 +128,8 @@ NSInteger descendingSort(id num1, id num2, void *context);
 
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];    
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];    
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate]];
-    
-    NSError* error = nil;
-	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	if (fetchResults == nil) {
-		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate]];    
+    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     
     NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.dayIdentifier"];
     NSArray* sortedDays = [days sortedArrayUsingFunction:descendingSort context:NULL];
@@ -214,11 +209,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];   
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     [fetchRequest setFetchLimit:1];
-    NSError* error;
-	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	if (fetchResults == nil) {
-		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
+    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     Capture* capture = [fetchResults objectAtIndex:0];
     CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
     entryView.photoView.image = capture.thumbnail;

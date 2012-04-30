@@ -10,6 +10,7 @@
 #import "CalendarDayView.h"
 #import "CalendarDayOfWeekView.h"
 #import "CalendarDayBackgroundView.h"
+#import "CalendarViewController.h"
 #import "NSArray+Extensions.h"
 #import "ImageInspectView.h"
 #import "Capture.h"
@@ -110,17 +111,16 @@
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", imageEntry.createdAt]];
     fetchRequest.fetchLimit = 1;
-    NSError* error;
-    NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	if (fetchResults == nil) {
-		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
+    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     if ([fetchResults count] > 0) {
-        [[ViewGeneral instance].managedObjectContext deleteObject:[fetchResults objectAtIndex:0]];
+        Capture* capture = [fetchResults objectAtIndex:0];
+        [[ViewGeneral instance].managedObjectContext deleteObject:capture];
+        [[ViewGeneral instance] saveManagedObjectContext];
     }
+    [[ViewGeneral instance].calendarViewController updateLatestCapture];
 }
 
-- (void)didTap:(EntriesView*)_entries {
+- (void)didRemoveAllEntries:(EntriesView*)_entries {    
     [_entries removeFromSuperview];
 }
 
@@ -128,16 +128,16 @@
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", self.dayIdentifier]];
-    NSError* error;
-	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
-	if (fetchResults == nil) {
-		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
+    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx){
         Capture* capture = _obj;
         return [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
     }];
     return [entryViews mutableCopy];
+}
+
+- (void)didTap:(EntriesView*)_entries {
+    [_entries removeFromSuperview];
 }
 
 @end

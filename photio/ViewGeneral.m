@@ -142,6 +142,23 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initLocalesView:_containerView];
 }
 
+- (void)saveManagedObjectContext {
+    NSError *error = nil;
+    if (![[ViewGeneral instance].managedObjectContext save:&error]) {
+        [[[UIAlertView alloc] initWithTitle:@"Database Error" message:@"There was an error updating the database" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    }
+}
+
+- (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest {
+    NSError* error;
+    NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:_fetchRequest error:&error];
+    if (fetchResults == nil) {
+        [[[UIAlertView alloc] initWithTitle:@"Database Error" message:@"There was an error in retrieving data" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        abort();
+    }
+    return fetchResults;
+}
+
 #pragma mark - 
 #pragma mark ImageInspectViewController
 
@@ -442,11 +459,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     capture.thumbnail = [_imageInspectView.capture thumbnailImage:[self.calendarViewController calendarImageThumbnailRect].size.width];
     Image* image = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
 	image.image = _imageInspectView.capture;
-	capture.image = image;	
-	NSError *error = nil;
-    if (![[ViewGeneral instance].managedObjectContext save:&error]) {
-		[[[UIAlertView alloc] initWithTitle:@"Error Saving Photo" message:@"Your photo was not saved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-	}
+	capture.image = image;
+    [self saveManagedObjectContext];
     [self.calendarViewController updateLatestCapture];
 }
 

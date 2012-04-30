@@ -37,6 +37,8 @@
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow;
 - (void)createViews:(UIView*)_containerView;
+- (void)saveManagedObjectContext;
+- (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initImageInspectView:(UIView*)_containerView;
