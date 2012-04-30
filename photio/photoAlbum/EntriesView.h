@@ -31,7 +31,7 @@
 
 @required
 
-- (void)deleteEntry:(UIView*)_entry;
+- (void)deleteEntry:(id)_entry;
 - (NSMutableArray*)loadEntries;
 
 @optional

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class Capture;
+
 @interface ImageInspectView : UIImageView
 
 @property(nonatomic, strong) UIImage*   capture;
@@ -16,8 +18,8 @@
 @property(nonatomic, strong) NSNumber*  longitude;
 @property(nonatomic, strong) NSDate*    createdAt;
 
-+ (id)withFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location;
-- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location;
++ (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture;
 + (id)cachedWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location;
+- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date andLocation:(CLLocationCoordinate2D)_location;
 
 @end

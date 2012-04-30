@@ -104,7 +104,20 @@
 #pragma mark -
 #pragma mark EntriesViewControllerDelegates
 
-- (void)deleteEntry:(UIView*)_entry {
+- (void)deleteEntry:(id)_entry {
+    ImageInspectView* imageEntry = _entry;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", imageEntry.createdAt]];
+    fetchRequest.fetchLimit = 1;
+    NSError* error;
+    NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	if (fetchResults == nil) {
+		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+	}
+    if ([fetchResults count] > 0) {
+        [[ViewGeneral instance].managedObjectContext deleteObject:[fetchResults objectAtIndex:0]];
+    }
 }
 
 - (void)didTap:(EntriesView*)_entries {
@@ -116,13 +129,13 @@
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", self.dayIdentifier]];
     NSError* error;
-	NSMutableArray* fetchResults = [[[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
+	NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:fetchRequest error:&error];
 	if (fetchResults == nil) {
 		[[[UIAlertView alloc] initWithTitle:@"Error Retrieving Photos" message:@"Your photos were not retrieved" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 	}
     NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx){
         Capture* capture = _obj;
-        return [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame capture:capture.image.image andLocation:CLLocationCoordinate2DMake([capture.latitude doubleValue], [capture.longitude doubleValue])];
+        return [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
     }];
     return [entryViews mutableCopy];
 }
