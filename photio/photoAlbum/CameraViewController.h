@@ -18,6 +18,7 @@
 @property (nonatomic, weak)   UIView*                           containerView;
 @property (nonatomic, strong) IBOutlet UIView*                  takePhotoView;
 @property (nonatomic, strong) IBOutlet UIView*                  flashView;
+@property (nonatomic, strong) IBOutlet UIGestureRecognizer*     continuousFocusGesture;
 @property (nonatomic, strong) IBOutlet UIGestureRecognizer*     focusGesture;
 @property (nonatomic, strong) IBOutlet UIGestureRecognizer*     flashGesture;
 @property (nonatomic, weak)   id <CameraViewControllerDelegate> delegate;
@@ -31,6 +32,7 @@
 - (IBAction)captureStillImage:(id)sender;
 - (IBAction)changeFlashMode:(id)sender;
 - (IBAction)autoFocus:(UIGestureRecognizer*)gestureRecognizer;
+- (IBAction)continuousFocus:(UIGestureRecognizer*)gestureRecognizer;
 - (void)continouslyAutoFocus;
 
 @end

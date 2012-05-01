@@ -36,7 +36,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @implementation CameraViewController
 
 @synthesize camera, containerView, transitionGestureRecognizer, delegate, captureVideoPreviewLayer,
-            takePhotoView, flashView, focusGesture, flashGesture;
+            takePhotoView, flashView, focusGesture, continuousFocusGesture, flashGesture;
 
 #pragma mark -
 #pragma mark UIView
@@ -124,6 +124,10 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         CGPoint convertedFocusPoint = [self convertToPointOfInterestFromViewCoordinates:tapPoint];
         [self.camera autoFocusAtPoint:convertedFocusPoint];
     }
+}
+
+- (IBAction)continuousFocus:(UIGestureRecognizer*)gestureRecognizer {
+    [self continouslyAutoFocus];
 }
 
 @end
