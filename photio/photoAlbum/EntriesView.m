@@ -115,7 +115,7 @@
     }
 }
 
-- (void)didRemoveAllEntries {
+- (void)didRemoveAllViews {
     if ([self.delegate respondsToSelector:@selector(didRemoveAllEntries:)]) {
         [self.delegate didRemoveAllEntries:self];
     }
@@ -129,8 +129,10 @@
 
 -(void)didDiagonalSwipe {
     if ([self.delegate respondsToSelector:@selector(deleteEntry:)]) {
-        [self.delegate deleteEntry:[self.entriesStreamView displayedView]];
+        id entry = [self.entriesStreamView displayedView];
         [self.entriesStreamView fadeDisplayedViewAndRemove];
+        [self.delegate deleteEntry:entry];
+
     }
 }
 
