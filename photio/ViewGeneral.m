@@ -343,10 +343,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark CameraViewControllerDelegate
 
 - (void)didCaptureImage:(UIImage*)_picture { 
-    if (self.notAnimating) {
-        self.notAnimating = NO;
-        [self.imageInspectViewController addImage:_picture];
-    }
+    [self.imageInspectViewController addImage:_picture];
 }
 
 - (void)didDragCameraRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity{

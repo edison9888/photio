@@ -21,6 +21,7 @@
 #define CALENDAR_ENTRY_DATE_SCALE_FACTOR      0.4f
 #define CALENDAR_ENTRY_BORDER                 4.0f
 #define CALENDAR_ASPECT_RATIO                 1.2
+#define ENTRY_VIEW_TRANSITION_DURATION        0.5
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarEntryView (PrivateAPI)
@@ -54,8 +55,15 @@
 
 - (void)openEntryView {
     if (self.photoView.image) {
-        EntriesView* entries = [EntriesView withFrame:[ViewGeneral instance].containerView.frame andDelegate:self];
+        __block EntriesView* entries = [EntriesView withFrame:[ViewGeneral instance].containerView.frame andDelegate:self];
+        entries.alpha = 0.0;
         [[ViewGeneral instance].containerView addSubview:entries];
+        [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
+            animations:^{
+                entries.alpha = 1.0;
+            } 
+            completion:nil
+         ];
     }
 }
 
@@ -137,7 +145,14 @@
 }
 
 - (void)didTap:(EntriesView*)_entries {
-    [_entries removeFromSuperview];
+    [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
+         animations:^{
+             _entries.alpha = 0.0;
+         } 
+         completion:^(BOOL _finished){
+             [_entries removeFromSuperview];
+         }
+     ];
 }
 
 @end
