@@ -10,6 +10,9 @@
 #import "Camera.h"
 #import "TransitionGestureRecognizer.h"
 
+#define CAMERA_NEW_PHOTO_TRANSITION     0.2f
+#define CAMERA_NEW_PHOTO_DELAY          0.0f
+
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @interface CameraViewController () <UIGestureRecognizerDelegate>
@@ -20,6 +23,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (CGPoint)convertToPointOfInterestFromViewCoordinates:(CGPoint)viewCoordinates;
 - (void)setFlashImage;
 - (void)toggleCamera;
+- (void)snapShutter;
 
 @end
 
@@ -95,6 +99,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 }
 
 - (IBAction)captureStillImage:(id)sender {
+    [self snapShutter];
     [self.camera captureStillImage];
 }
 
@@ -125,6 +130,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI
+
 @implementation CameraViewController (PrivateAPI)
 
 - (CGPoint)convertToPointOfInterestFromViewCoordinates:(CGPoint)viewCoordinates  {
@@ -211,6 +217,32 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 - (void)toggleCamera {
     [self.camera toggleCamera];
     [self continouslyAutoFocus];
+}
+
+- (void)snapShutter {
+    __block UIView* shutter = [[UIImageView alloc] initWithFrame:self.view.frame];
+    shutter.backgroundColor = [UIColor blackColor];
+    shutter.alpha = 0.0;
+    [self.view addSubview:shutter];
+    [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
+        delay:CAMERA_NEW_PHOTO_DELAY
+        options:UIViewAnimationOptionCurveEaseOut
+        animations:^{
+            shutter.alpha = 1.0;
+        }
+        completion:^(BOOL _finished){
+            [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION 
+                delay:0.0 
+                options:UIViewAnimationOptionCurveEaseOut 
+                animations:^{
+                    shutter.alpha = 0.0;
+                }
+                completion:^(BOOL _finished) {
+                    [shutter removeFromSuperview];
+                }
+            ];
+         }
+     ];
 }
 
 @end

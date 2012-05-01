@@ -21,8 +21,6 @@
 #define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
 #define RELEASE_ANIMATION_SPEED                         150.0f
 #define VIEW_MIN_SPACING                                25
-#define CAMERA_NEW_PHOTO_TRANSITION                     0.2f
-#define CAMERA_NEW_PHOTO_DELAY                          0.0f
 #define SAVE_IMAGE_DELAY                                0.65f
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -348,30 +346,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (self.notAnimating) {
         self.notAnimating = NO;
         [self.imageInspectViewController addImage:_picture];
-        __block UIView* shutter = [[UIImageView alloc] initWithFrame:self.cameraViewController.view.frame];
-        shutter.backgroundColor = [UIColor blackColor];
-        shutter.alpha = 0.0;
-        [self.cameraViewController.view addSubview:shutter];
-        [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
-            delay:CAMERA_NEW_PHOTO_DELAY
-            options:UIViewAnimationOptionCurveEaseOut
-            animations:^{
-                shutter.alpha = 1.0;
-            }
-            completion:^(BOOL _finished){
-                [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION 
-                    delay:0.0 
-                    options:UIViewAnimationOptionCurveEaseOut 
-                    animations:^{
-                        shutter.alpha = 0.0;
-                    }
-                    completion:^(BOOL _finished) {
-                        [shutter removeFromSuperview];
-                        self.notAnimating = YES;
-                   }
-                ];
-            }
-        ];
     }
 }
 

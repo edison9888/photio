@@ -210,10 +210,15 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     [fetchRequest setFetchLimit:1];
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
-    Capture* capture = [fetchResults objectAtIndex:0];
     CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
-    entryView.photoView.image = capture.thumbnail;
-    entryView.dayIdentifier = capture.dayIdentifier;
+    if ([fetchResults count] > 0) {
+        Capture* capture = [fetchResults objectAtIndex:0];
+        entryView.photoView.image = capture.thumbnail;
+        entryView.dayIdentifier = capture.dayIdentifier;
+    } else {
+        entryView.photoView.image = nil;
+        entryView.dayIdentifier = nil;
+    }
 }
 
 #pragma mark -
