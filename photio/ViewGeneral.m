@@ -22,6 +22,7 @@
 #define RELEASE_ANIMATION_SPEED                         150.0f
 #define VIEW_MIN_SPACING                                25
 #define SAVE_IMAGE_DELAY                                0.65f
+#define OPEN_SHUTTER_TRANSITION                         2.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
@@ -42,7 +43,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @implementation ViewGeneral
  
-@synthesize notAnimating, managedObjectContext, containerView;
+@synthesize notAnimating, managedObjectContext, containerView, shutter;
 @synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController;
 
 #pragma mark - 
@@ -89,6 +90,13 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)saveImageToPhotoAlbum:(UIImage*)_image {
     ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
     [library writeImageToSavedPhotosAlbum:[_image CGImage] orientation:(ALAssetOrientation)[_image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error){}];
+}
+
+- (void)addShutter {
+    self.shutter = [[UIImageView alloc] initWithFrame:self.containerView.frame];
+    self.shutter.backgroundColor = [UIColor blackColor];
+    self.shutter.alpha = 0.0;
+    [self.containerView addSubview:self.shutter];
 }
 
 #pragma mark - 
@@ -138,6 +146,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initCameraView:_containerView];
     [self initCalendarView:_containerView];
     [self initLocalesView:_containerView];
+    [self addShutter];
 }
 
 - (void)saveManagedObjectContext {
@@ -155,6 +164,19 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         abort();
     }
     return fetchResults;
+}
+
+- (void)openShutter {
+    [UIView animateWithDuration:OPEN_SHUTTER_TRANSITION
+        delay:0.0
+        options:UIViewAnimationOptionCurveEaseOut
+        animations:^{
+            self.shutter.alpha = 0.0;
+        }
+        completion:^(BOOL _finished) {
+            [self.shutter removeFromSuperview];
+        }
+    ];
 }
 
 #pragma mark - 

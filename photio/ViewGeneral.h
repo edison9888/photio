@@ -22,6 +22,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property(nonatomic, assign) BOOL                           notAnimating;
 @property(nonatomic, strong) UIView*                        containerView;
+@property(nonatomic, strong) UIView*                        shutter;
 @property(nonatomic, strong) NSManagedObjectContext*        managedObjectContext;
 @property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, strong) CameraViewController*          cameraViewController;
@@ -39,6 +40,7 @@
 - (void)createViews:(UIView*)_containerView;
 - (void)saveManagedObjectContext;
 - (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
+- (void)openShutter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initImageInspectView:(UIView*)_containerView;

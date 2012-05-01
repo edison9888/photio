@@ -10,8 +10,7 @@
 #import "Camera.h"
 #import "TransitionGestureRecognizer.h"
 
-#define CAMERA_NEW_PHOTO_TRANSITION     0.2f
-#define CAMERA_NEW_PHOTO_DELAY          0.0f
+#define CAMERA_SHUTTER_TRANSITION     0.2f
 
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
@@ -228,14 +227,14 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
     shutter.backgroundColor = [UIColor blackColor];
     shutter.alpha = 0.0;
     [self.view addSubview:shutter];
-    [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION
-        delay:CAMERA_NEW_PHOTO_DELAY
+    [UIView animateWithDuration:CAMERA_SHUTTER_TRANSITION
+        delay:0.0
         options:UIViewAnimationOptionCurveEaseOut
         animations:^{
             shutter.alpha = 1.0;
         }
         completion:^(BOOL _finished){
-            [UIView animateWithDuration:CAMERA_NEW_PHOTO_TRANSITION 
+            [UIView animateWithDuration:CAMERA_SHUTTER_TRANSITION 
                 delay:0.0 
                 options:UIViewAnimationOptionCurveEaseOut 
                 animations:^{
