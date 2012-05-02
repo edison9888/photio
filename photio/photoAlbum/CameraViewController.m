@@ -9,6 +9,7 @@
 #import "CameraViewController.h"
 #import "Camera.h"
 #import "TransitionGestureRecognizer.h"
+#import "ViewGeneral.h"
 
 #define CAMERA_SHUTTER_TRANSITION     0.2f
 
@@ -69,6 +70,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [self.camera setFlashMode:AVCaptureFlashModeOff];
         self.takePhotoView.hidden = NO;
     }
+    [[ViewGeneral instance] openShutter];
     [super viewDidLoad];
 }
 

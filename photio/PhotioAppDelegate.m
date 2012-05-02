@@ -28,7 +28,6 @@
     self.viewController = [[ContainerViewController alloc] initWithNibName:@"ContainerViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    [[ViewGeneral instance] openShutter];
     return YES;
 }
 

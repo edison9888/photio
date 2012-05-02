@@ -34,19 +34,19 @@
     CGFloat xOffset = 10.0/320.0;
     CGFloat yOffset = 2.0/30.0;
     CGSize monthSize = CGSizeMake(100.0/320.0, 25.0/30.0);
-    CGRect startMonthRect = CGRectMake(xOffset*self.frame.size.width, yOffset*self.frame.size.height, monthSize.width*self.frame.size.width, monthSize.height*self.frame.size.height);
+    CGRect startMonthRect = CGRectMake((1.0-xOffset-monthSize.width)*self.frame.size.width, yOffset*self.frame.size.height, monthSize.width*self.frame.size.width, monthSize.height*self.frame.size.height);
     self.startMonthLabel = [[UILabel alloc] initWithFrame:startMonthRect];
     self.startMonthLabel.textColor = [UIColor grayColor];
     self.startMonthLabel.backgroundColor = [UIColor blackColor];
-    self.startMonthLabel.textAlignment = UITextAlignmentLeft;
+    self.startMonthLabel.textAlignment = UITextAlignmentRight;
     [self addSubview:self.startMonthLabel];
     self.startMonthLabel.font = self.font;
 
     xOffset = 5.0/320.0;
-    CGRect endMonthRect = CGRectMake((1.0-xOffset-monthSize.width)*self.frame.size.width, yOffset*self.frame.size.height, monthSize.width*self.frame.size.width, monthSize.height*self.frame.size.height);
+    CGRect endMonthRect = CGRectMake(xOffset*self.frame.size.width, yOffset*self.frame.size.height, monthSize.width*self.frame.size.width, monthSize.height*self.frame.size.height);
     self.endMonthLabel = [[UILabel alloc] initWithFrame:endMonthRect];
     self.endMonthLabel.textColor = [UIColor grayColor];
-    self.endMonthLabel.textAlignment = UITextAlignmentRight;
+    self.endMonthLabel.textAlignment = UITextAlignmentLeft;
     self.endMonthLabel.backgroundColor = [UIColor blackColor];
     [self addSubview:self.endMonthLabel];
     self.endMonthLabel.font = self.font;
@@ -90,15 +90,15 @@
 }
 
 - (void)updateStartDate:(NSDate*)_startDate andEndDate:(NSDate*)_endDate {
-    NSString* startMonth = [self.monthFormatter stringFromDate:_startDate];
-    self.startMonthLabel.text = startMonth;
     NSString* endMonth = [self.monthFormatter stringFromDate:_endDate];
-    if ([startMonth isEqualToString:endMonth]) {
-        self.endMonthLabel.text = NULL;
+    self.endMonthLabel.text = endMonth;
+    NSString* startMonth = [self.monthFormatter stringFromDate:_startDate];
+    if ([endMonth isEqualToString:startMonth]) {
+        self.startMonthLabel.text = NULL;
     } else {
-        self.endMonthLabel.text = endMonth;
+        self.startMonthLabel.text = startMonth;
     }
-    NSString* year = [self.yearFormatter stringFromDate:_startDate];
+    NSString* year = [self.yearFormatter stringFromDate:_endDate];
     self.yearLabel.text = year;
 }
 

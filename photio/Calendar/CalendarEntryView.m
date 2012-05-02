@@ -125,7 +125,7 @@
         [[ViewGeneral instance].managedObjectContext deleteObject:capture];
         [[ViewGeneral instance] saveManagedObjectContext];
     }
-    [[ViewGeneral instance].calendarViewController updateLatestCapture];
+    [[ViewGeneral instance].calendarViewController updateCaptureWithDate:imageEntry.createdAt];
 }
 
 - (void)didRemoveAllEntries:(EntriesView*)_entries {    

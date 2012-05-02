@@ -22,7 +22,8 @@
 #define RELEASE_ANIMATION_SPEED                         150.0f
 #define VIEW_MIN_SPACING                                25
 #define SAVE_IMAGE_DELAY                                0.65f
-#define OPEN_SHUTTER_TRANSITION                         2.0
+#define OPEN_SHUTTER_TRANSITION                         0.25
+#define OPEN_SHUTTER_DELAY                              1.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;
@@ -168,7 +169,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)openShutter {
     [UIView animateWithDuration:OPEN_SHUTTER_TRANSITION
-        delay:0.0
+        delay:OPEN_SHUTTER_DELAY
         options:UIViewAnimationOptionCurveEaseOut
         animations:^{
             self.shutter.alpha = 0.0;
@@ -454,7 +455,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 	image.image = _imageInspectView.capture;
 	capture.image = image;
     [self saveManagedObjectContext];
-    [self.calendarViewController updateLatestCapture];
+    [self.calendarViewController updateCaptureWithDate:[NSDate date]];
 }
 
 @end

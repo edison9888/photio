@@ -204,10 +204,11 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [self.view addSubview:self.dragGridView];
 }
 
-- (void)updateLatestCapture {
+- (void)updateCaptureWithDate:(NSDate*)_date {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];   
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier=%@", [self dayIdentifier:_date]]];
     [fetchRequest setFetchLimit:1];
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
@@ -254,7 +255,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 - (void)topRowChanged:(NSInteger)_row {
-    [self.monthAndYearView updateStartDate:[self incrementDate:[NSDate date] by:-_row*self.daysInRow] andEndDate:[self incrementDate:[NSDate date] by:-self.daysInRow*(_row + self.rowsInView)]];
+    [self.monthAndYearView updateStartDate:[self incrementDate:[NSDate date] by:-self.daysInRow*(_row + self.rowsInView)] andEndDate:[self incrementDate:[NSDate date] by:-_row*self.daysInRow]];
 }
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
