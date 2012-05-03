@@ -49,12 +49,22 @@
     return self;
 }
 
+- (NSInteger)entryCount {
+    return [self.entriesStreamView.streamOfViews count];
+}
+
+- (void)addEntry:(UIView*)_entry {
+    [self.entriesStreamView addView:_entry];
+}
+
 #pragma mark -
 #pragma mark EntriesView (PrivateAPI)
 
 - (void)loadEntries {
-    for (UIView* entryView in [self.delegate loadEntries]) {
-        [self.entriesStreamView addView:entryView];
+    if ([self.delegate respondsToSelector:@selector(loadEntries)]) {
+        for (UIView* entryView in [self.delegate loadEntries]) {
+            [self.entriesStreamView addView:entryView];
+        }
     }
 }
 
@@ -125,15 +135,19 @@
 #pragma mark DiagonalGestrureRecognizerDelegate
 
 -(void)didCheck {
+    if ([self.delegate respondsToSelector:@selector(saveEntry:)]) {
+        id entry = [self.entriesStreamView displayedView];
+        [self.entriesStreamView moveDisplayedViewDownAndRemove];
+        [self.delegate saveEntry:entry];
+    }
 }
 
 -(void)didDiagonalSwipe {
+    id entry = [self.entriesStreamView displayedView];
     if ([self.delegate respondsToSelector:@selector(deleteEntry:)]) {
-        id entry = [self.entriesStreamView displayedView];
-        [self.entriesStreamView fadeDisplayedViewAndRemove];
         [self.delegate deleteEntry:entry];
-
     }
+    [self.entriesStreamView fadeDisplayedViewAndRemove];
 }
 
 @end

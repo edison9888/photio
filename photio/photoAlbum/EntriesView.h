@@ -24,18 +24,19 @@
 
 + (id)withFrame:(CGRect)_frame andDelegate:(id<EntriesViewDelegate>)_delegate;
 - (id)initWithFrame:(CGRect)frame andDelegate:(id<EntriesViewDelegate>)_delegate;
+- (NSInteger)entryCount;
+- (void)addEntry:(UIView*)_entry;
 
 @end
 
 @protocol EntriesViewDelegate <NSObject>
 
-@required
+@optional
 
-- (void)deleteEntry:(id)_entry;
+- (void)deleteEntry:(UIView*)_entry;
+- (void)saveEntry:(UIView*)_entry;
 - (void)didRemoveAllEntries:(EntriesView*)_entries;
 - (NSMutableArray*)loadEntries;
-
-@optional
 
 - (void)dragEntries:(CGPoint)_drag;
 - (void)releaseEntries;

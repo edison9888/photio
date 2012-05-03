@@ -25,7 +25,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize imageView, containerView, delegate, diagonalGestures, locationManager;
+@synthesize entriesView, containerView, delegate, locationManager;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -38,22 +38,19 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.delegate = _delegate;
-        self.imageView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
-        self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
-        [self.imageView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
-        [self.view addGestureRecognizer:self.diagonalGestures];
-        [self.view addSubview:self.imageView];
+        self.entriesView = [EntriesView withFrame:self.view.frame andDelegate:self];
+        [self.view addSubview:self.entriesView];
         [[self locationManager] startUpdatingLocation];
     }
     return self;
 }
 
 - (void)addImage:(UIImage*)_capture {
-    [self.imageView addView:[ImageInspectView cachedWithFrame:self.view.frame capture:_capture andLocation:[[self.locationManager location] coordinate]]];
+    [self.entriesView addEntry:[ImageInspectView cachedWithFrame:self.view.frame capture:_capture andLocation:[[self.locationManager location] coordinate]]];
 }
 
 - (BOOL)hasCaptures {
-    return [self.imageView.streamOfViews count] > 0;
+    return [self.entriesView entryCount] > 0;
 }
 
 #pragma mark -
@@ -118,76 +115,43 @@
 }
 
 #pragma mark -
-#pragma mark StreamOfViewsDelegate
+#pragma mark EntriesViewDelegate
 
-- (void)didDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+- (void)dragEntries:(CGPoint)_drag {    
     if ([self.delegate respondsToSelector:@selector(dragInspectImage:)]) {
         [self.delegate dragInspectImage:_drag];
     }
 }
 
-- (void)didDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    if ([self.delegate respondsToSelector:@selector(dragInspectImage:)]) {
-        [self.delegate dragInspectImage:_drag];
-    }
-}
-
-- (void)didReleaseUp:(CGPoint)_location {
+- (void)releaseEntries {    
     if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
         [self.delegate releaseInspectImage];
     }
 }
 
-- (void)didReleaseDown:(CGPoint)_location {
-    if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
-        [self.delegate releaseInspectImage];
-    }
-}
-
-- (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+- (void)transitionUpFromEntries {    
     if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
         [self.delegate transitionFromInspectImage];
     }
 }
 
-- (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
+- (void)transitionDownFromEntries {
     if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
         [self.delegate releaseInspectImage];
     }
 }
 
-- (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+- (void)didRemoveAllEntries:(EntriesView*)_entries {
     if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
         [self.delegate transitionFromInspectImage];
     }
 }
 
-- (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-    if ([self.delegate respondsToSelector:@selector(releaseInspectImage)]) {
-        [self.delegate releaseInspectImage];
-    }
-}
-
-- (void)didRemoveAllViews {
-    if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
-        [self.delegate transitionFromInspectImage];
-    }
-}
-
-#pragma mark -
-#pragma mark DiagonalGestrureRecognizerDelegate
-
--(void)didCheck {
-    ImageInspectView* displayedView = (ImageInspectView*)[self.imageView displayedView];
-    [self.imageView moveDisplayedViewDownAndRemove];
+-(void)saveEntry:(UIView*)_entry {
+    ImageInspectView* displayedView = (ImageInspectView*)_entry;
     if ([self.delegate respondsToSelector:@selector(saveImage:)]) {
         [self.delegate saveImage:displayedView];
     }
 }
-
--(void)didDiagonalSwipe {
-    [self.imageView fadeDisplayedViewAndRemove];
-}
-
 
 @end

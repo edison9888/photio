@@ -11,17 +11,17 @@
 #import "TransitionGestureRecognizer.h"
 #import "StreamOfViews.h"
 #import "DiagonalGestureRecognizer.h"
+#import "EntriesView.h"
 
 @protocol ImageInspectViewControllerDelegate;
 @class ImageInspectView;
  
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, StreamOfViewsDelegate, CLLocationManagerDelegate, DiagonalGestureRecognizerDelegate> {
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, EntriesViewDelegate, CLLocationManagerDelegate, DiagonalGestureRecognizerDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                                containerView;
 @property(nonatomic, weak)   id<ImageInspectViewControllerDelegate> delegate;
-@property(nonatomic, strong) DiagonalGestureRecognizer*             diagonalGestures;
-@property(nonatomic, strong) StreamOfViews*                         imageView;
+@property(nonatomic, strong) EntriesView*                           entriesView;
 @property(nonatomic, strong) CLLocationManager*                     locationManager;
 
 

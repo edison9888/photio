@@ -113,8 +113,8 @@
 #pragma mark -
 #pragma mark EntriesViewControllerDelegates
 
-- (void)deleteEntry:(id)_entry {
-    ImageInspectView* imageEntry = _entry;
+- (void)deleteEntry:(UIView*)_entry {
+    ImageInspectView* imageEntry = (ImageInspectView*)_entry;
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", imageEntry.createdAt]];
