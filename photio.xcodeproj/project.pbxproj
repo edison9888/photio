@@ -60,6 +60,8 @@
 		05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E4C21E1552233600C7266E /* ImageEditViewController.xib */; };
 		05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C223155224D400C7266E /* ImageMetaDataEditView.m */; };
 		05E4C2271552259800C7266E /* ImageEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C2261552259800C7266E /* ImageEditView.m */; };
+		05E4C22D1553772900C7266E /* ImageEditCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C22C1553772700C7266E /* ImageEditCommentView.m */; };
+		05E4C230155377D900C7266E /* ImageMetaDataToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C22F155377D900C7266E /* ImageMetaDataToolView.m */; };
 		05EE0E8715366ACF00E5E541 /* DiagonalGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */; };
 		05FA4933154C7FA5005C097A /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FA4932154C7FA5005C097A /* Capture.m */; };
 /* End PBXBuildFile section */
@@ -153,6 +155,10 @@
 		05E4C223155224D400C7266E /* ImageMetaDataEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetaDataEditView.m; path = photio/PhotoAlbum/ImageMetaDataEditView.m; sourceTree = SOURCE_ROOT; };
 		05E4C2251552259800C7266E /* ImageEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditView.h; path = photio/PhotoAlbum/ImageEditView.h; sourceTree = SOURCE_ROOT; };
 		05E4C2261552259800C7266E /* ImageEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditView.m; path = photio/PhotoAlbum/ImageEditView.m; sourceTree = SOURCE_ROOT; };
+		05E4C22B1553772700C7266E /* ImageEditCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditCommentView.h; path = photio/PhotoAlbum/ImageEditCommentView.h; sourceTree = SOURCE_ROOT; };
+		05E4C22C1553772700C7266E /* ImageEditCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditCommentView.m; path = photio/PhotoAlbum/ImageEditCommentView.m; sourceTree = SOURCE_ROOT; };
+		05E4C22E155377D800C7266E /* ImageMetaDataToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetaDataToolView.h; path = photio/PhotoAlbum/ImageMetaDataToolView.h; sourceTree = SOURCE_ROOT; };
+		05E4C22F155377D900C7266E /* ImageMetaDataToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetaDataToolView.m; path = photio/PhotoAlbum/ImageMetaDataToolView.m; sourceTree = SOURCE_ROOT; };
 		05EE0E8515366ACF00E5E541 /* DiagonalGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagonalGestureRecognizer.h; sourceTree = "<group>"; };
 		05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagonalGestureRecognizer.m; sourceTree = "<group>"; };
 		05FA4931154C7FA5005C097A /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
@@ -338,6 +344,8 @@
 				050CF14F14F9A27D00A31059 /* CameraViewController.xib */,
 				05AF480D154DCCAE0099576A /* EntriesView.h */,
 				05AF480E154DCCAE0099576A /* EntriesView.m */,
+				05E4C22B1553772700C7266E /* ImageEditCommentView.h */,
+				05E4C22C1553772700C7266E /* ImageEditCommentView.m */,
 				05E4C21C1552233500C7266E /* ImageEditViewController.h */,
 				05E4C21D1552233600C7266E /* ImageEditViewController.m */,
 				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
@@ -350,6 +358,8 @@
 				05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */,
 				05E4C222155224D400C7266E /* ImageMetaDataEditView.h */,
 				05E4C223155224D400C7266E /* ImageMetaDataEditView.m */,
+				05E4C22E155377D800C7266E /* ImageMetaDataToolView.h */,
+				05E4C22F155377D900C7266E /* ImageMetaDataToolView.m */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
@@ -475,6 +485,8 @@
 				05E4C21F1552233600C7266E /* ImageEditViewController.m in Sources */,
 				05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */,
 				05E4C2271552259800C7266E /* ImageEditView.m in Sources */,
+				05E4C22D1553772900C7266E /* ImageEditCommentView.m in Sources */,
+				05E4C230155377D900C7266E /* ImageMetaDataToolView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

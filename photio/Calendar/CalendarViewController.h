@@ -35,6 +35,6 @@
 - (NSString*)dayIdentifier:(NSDate*)_date;
 - (void)loadCalendarViews;
 - (void)updateCaptureWithDate:(NSDate*)_date;
-- (NSDate*)roundDate:(NSDate*)_date;
+- (NSDate*)floorDate:(NSDate*)_date;
 
 @end

@@ -1,28 +1,20 @@
 //
-//  ImageMetaDataEditView.m
+//  ImageEditCommentView.m
 //  photio
 //
-//  Created by Troy Stribling on 5/2/12.
+//  Created by Troy Stribling on 5/3/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "ImageMetaDataEditView.h"
+#import "ImageEditCommentView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ImageMetaDataEditView (PrivateAPI)
+@interface ImageEditCommentView (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ImageMetaDataEditView
-
-@synthesize imageEditCommentView, imageMetaDataToolsView;
-
-#pragma mark -
-#pragma mark ImageMetaDataEditView (PrivateAPI)
-
-#pragma mark -
-#pragma mark ImageMetaDataEditView
+@implementation ImageEditCommentView
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

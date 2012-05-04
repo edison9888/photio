@@ -106,7 +106,7 @@ NSInteger descendingSort(id num1, id num2, void *context);
 
 
 - (void)initializeOldestDate {
-    self.oldestDate = [self roundDate:[NSDate date]];
+    self.oldestDate = [self floorDate:[NSDate date]];
 }
 
 - (void)initializeRowsInView {
@@ -211,7 +211,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [fetchRequest setFetchLimit:1];    
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     CalendarEntryView* firstEntryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
-    NSTimeInterval deltaDate = [[self roundDate:firstEntryView.date] timeIntervalSinceDate:[self roundDate:_date]] / (3600.0 * 24.0);
+    NSTimeInterval deltaDate = [[self floorDate:firstEntryView.date] timeIntervalSinceDate:[self floorDate:_date]] / (3600.0 * 24.0);
     NSInteger entryRow = deltaDate / self.rowsInView;
     NSInteger entryColumn = (NSInteger)deltaDate - entryRow * self.rowsInView;
     CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:entryRow] objectAtIndex:entryColumn];
@@ -226,7 +226,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     }
 }
 
-- (NSDate*)roundDate:(NSDate*)_date {
+- (NSDate*)floorDate:(NSDate*)_date {
     NSDateComponents* comps = [self.calendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:_date];
     return [self.calendar dateFromComponents:comps];
 }

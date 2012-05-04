@@ -1,28 +1,26 @@
 //
-//  ImageMetaDataEditView.m
+//  ImageMetaDataToolView.m
 //  photio
 //
-//  Created by Troy Stribling on 5/2/12.
+//  Created by Troy Stribling on 5/3/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "ImageMetaDataEditView.h"
+#import "ImageMetaDataToolView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ImageMetaDataEditView (PrivateAPI)
+@interface ImageMetaDataToolView (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ImageMetaDataEditView
-
-@synthesize imageEditCommentView, imageMetaDataToolsView;
+@implementation ImageMetaDataToolView
 
 #pragma mark -
-#pragma mark ImageMetaDataEditView (PrivateAPI)
+#pragma mark ImageMetaDataToolView (PrivateAPI)
 
 #pragma mark -
-#pragma mark ImageMetaDataEditView
+#pragma mark ImageMetaDataToolView
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -30,5 +28,6 @@
     }
     return self;
 }
+
 
 @end
