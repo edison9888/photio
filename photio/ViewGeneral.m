@@ -455,7 +455,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 	image.image = _imageInspectView.capture;
 	capture.image = image;
     [self saveManagedObjectContext];
-    [self.calendarViewController updateCaptureWithDate:[NSDate date]];
+    [self.calendarViewController updateCaptureWithDate:capture.createdAt];
 }
 
 @end

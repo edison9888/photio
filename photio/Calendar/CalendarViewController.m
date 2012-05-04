@@ -106,8 +106,7 @@ NSInteger descendingSort(id num1, id num2, void *context);
 
 
 - (void)initializeOldestDate {
-    NSDateComponents* comps = [self.calendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:[NSDate date]];
-    self.oldestDate = [self.calendar dateFromComponents:comps];
+    self.oldestDate = [self roundDate:[NSDate date]];
 }
 
 - (void)initializeRowsInView {
@@ -209,17 +208,27 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];   
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier=%@", [self dayIdentifier:_date]]];
-    [fetchRequest setFetchLimit:1];
+    [fetchRequest setFetchLimit:1];    
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
-    CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
+    CalendarEntryView* firstEntryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
+    NSTimeInterval deltaDate = [[self roundDate:firstEntryView.date] timeIntervalSinceDate:[self roundDate:_date]] / (3600.0 * 24.0);
+    NSInteger entryRow = deltaDate / self.rowsInView;
+    NSInteger entryColumn = (NSInteger)deltaDate - entryRow * self.rowsInView;
+    CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:entryRow] objectAtIndex:entryColumn];
     if ([fetchResults count] > 0) {
         Capture* capture = [fetchResults objectAtIndex:0];
         entryView.photoView.image = capture.thumbnail;
         entryView.dayIdentifier = capture.dayIdentifier;
+        entryView.date = capture.createdAt;
     } else {
         entryView.photoView.image = nil;
         entryView.dayIdentifier = nil;
     }
+}
+
+- (NSDate*)roundDate:(NSDate*)_date {
+    NSDateComponents* comps = [self.calendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:_date];
+    return [self.calendar dateFromComponents:comps];
 }
 
 #pragma mark -
