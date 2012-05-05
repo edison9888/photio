@@ -13,7 +13,10 @@
 
 @interface ImageMetaDataEditView : UIView
 
+@property(nonatomic, strong) UIView*                    containerView;
 @property(nonatomic, strong) ImageEditCommentView*      imageEditCommentView;
 @property(nonatomic, strong) ImageMetaDataToolsView*    imageMetaDataToolsView;
-          
+ 
++ (id)inView:(UIView*)_containerView;
+
 @end

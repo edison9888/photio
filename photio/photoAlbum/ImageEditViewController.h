@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StreamOfViews.h"
 
-@interface ImageEditViewController : UIViewController
+@interface ImageEditViewController : UIViewController <StreamOfViewsDelegate>
+
+@property(nonatomic, strong) StreamOfViews* streamView;
+@property(nonatomic, strong) UIView*        containerView;
+
++ (id)inView:(UIView*)_containerView;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView;
 
 @end

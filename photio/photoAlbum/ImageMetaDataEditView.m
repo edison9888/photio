@@ -16,7 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
-@synthesize imageEditCommentView, imageMetaDataToolsView;
+@synthesize containerView, imageEditCommentView, imageMetaDataToolsView;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
@@ -24,9 +24,14 @@
 #pragma mark -
 #pragma mark ImageMetaDataEditView
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
++ (id)inView:(UIView*)_containerView {
+    return [[ImageMetaDataEditView alloc] initInView:(UIView*)_containerView];
+}
+
+- (id)initInView:(UIView*)_containerView {
+    self = [super initWithFrame:_containerView.frame];
     if (self) {
+        self.containerView = _containerView;
     }
     return self;
 }
