@@ -54,6 +54,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         
         CGRect bounds = [self.view bounds];
         [newCaptureVideoPreviewLayer setFrame:bounds];
+        newCaptureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         if ([newCaptureVideoPreviewLayer isOrientationSupported]) {
             [newCaptureVideoPreviewLayer setOrientation:AVCaptureVideoOrientationPortrait];
         }
@@ -354,6 +355,8 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 }
 
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
+    [self toggleCamera];
+    [self setFlashImage];
 }
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    

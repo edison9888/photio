@@ -89,7 +89,8 @@
     AVCaptureStillImageOutput* newStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary* outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
     [newStillImageOutput setOutputSettings:outputSettings];
-    AVCaptureSession *newCaptureSession = [[AVCaptureSession alloc] init];
+    AVCaptureSession* newCaptureSession = [[AVCaptureSession alloc] init];
+    [newCaptureSession setSessionPreset:AVCaptureSessionPresetPhoto];
     if ([newCaptureSession canAddInput:newVideoInput]) {
         [newCaptureSession addInput:newVideoInput];
     }
@@ -261,7 +262,7 @@
 
 - (AVCaptureDevice*) cameraWithPosition:(AVCaptureDevicePosition) position {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-    for (AVCaptureDevice *device in devices) {
+    for (AVCaptureDevice* device in devices) {
         if ([device position] == position) {
             return device;
         }
