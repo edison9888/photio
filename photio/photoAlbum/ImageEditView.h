@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class ImageEditControlView;
+
 @interface ImageEditView : UIView
 
-@property(nonatomic, strong) UIView*            containerView;
-@property(nonatomic, strong) IBOutlet UIView*   imageControlsView;
-@property(nonatomic, strong) IBOutlet UIView*   imageFiltersView;
+@property(nonatomic, strong) UIView*                            containerView;
+@property(nonatomic, strong) IBOutlet ImageEditControlView*     imageControlsView;
+@property(nonatomic, strong) IBOutlet ImageEditControlView*     imageFiltersView;
 
 + (id)inView:(UIView*)_containerView;
 

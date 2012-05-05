@@ -54,6 +54,7 @@
 		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
 		05CCEF9E15557711004FBD21 /* NSObject+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */; };
 		05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEFA115558EFB004FBD21 /* UIView+Extensions.m */; };
+		05CCEFA51555E0E9004FBD21 /* ImageEditControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */; };
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
@@ -146,6 +147,8 @@
 		05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+Extensions.m"; path = "photio/Library/NSObject+Extensions.m"; sourceTree = SOURCE_ROOT; };
 		05CCEFA015558EFB004FBD21 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extensions.h"; path = "photio/Library/UIView+Extensions.h"; sourceTree = SOURCE_ROOT; };
 		05CCEFA115558EFB004FBD21 /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extensions.m"; path = "photio/Library/UIView+Extensions.m"; sourceTree = SOURCE_ROOT; };
+		05CCEFA31555E0E8004FBD21 /* ImageEditControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditControlView.h; path = photio/PhotoAlbum/ImageEditControlView.h; sourceTree = SOURCE_ROOT; };
+		05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditControlView.m; path = photio/PhotoAlbum/ImageEditControlView.m; sourceTree = SOURCE_ROOT; };
 		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 				050CF14F14F9A27D00A31059 /* CameraViewController.xib */,
 				05AF480D154DCCAE0099576A /* EntriesView.h */,
 				05AF480E154DCCAE0099576A /* EntriesView.m */,
+				05CCEFA31555E0E8004FBD21 /* ImageEditControlView.h */,
+				05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */,
 				05E4C21C1552233500C7266E /* ImageEditViewController.h */,
 				05E4C21D1552233600C7266E /* ImageEditViewController.m */,
 				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
@@ -495,6 +500,7 @@
 				05E4C2271552259800C7266E /* ImageEditView.m in Sources */,
 				05CCEF9E15557711004FBD21 /* NSObject+Extensions.m in Sources */,
 				05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */,
+				05CCEFA51555E0E9004FBD21 /* ImageEditControlView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

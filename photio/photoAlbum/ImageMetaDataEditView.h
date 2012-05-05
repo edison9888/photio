@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class ImageEditCommentView;
-@class ImageMetaDataToolsView;
+@class ImageEditControlView;
 
 @interface ImageMetaDataEditView : UIView
 
-@property(nonatomic, strong) UIView*            containerView;
-@property(nonatomic, strong) IBOutlet UIView*   imageCommentView;
-@property(nonatomic, strong) IBOutlet UIView*   imageShareView;
+@property(nonatomic, strong) UIView*                            containerView;
+@property(nonatomic, strong) IBOutlet ImageEditControlView*     imageCommentView;
+@property(nonatomic, strong) IBOutlet ImageEditControlView*     imageShareView;
  
 + (id)inView:(UIView*)_containerView;
 - (IBAction)exportToCameraRoll:(id)sender;
