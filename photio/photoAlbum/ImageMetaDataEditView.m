@@ -7,6 +7,7 @@
 //
 
 #import "ImageMetaDataEditView.h"
+#import "UIView+Extensions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageMetaDataEditView (PrivateAPI)
@@ -16,7 +17,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
-@synthesize containerView, imageEditCommentView, imageMetaDataToolsView;
+@synthesize containerView, imageShareView, imageCommentView;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
@@ -25,15 +26,18 @@
 #pragma mark ImageMetaDataEditView
 
 + (id)inView:(UIView*)_containerView {
-    return [[ImageMetaDataEditView alloc] initInView:(UIView*)_containerView];
+    return [UIView loadView:[self class]];
 }
 
-- (id)initInView:(UIView*)_containerView {
-    self = [super initWithFrame:_containerView.frame];
+- (id)initWithCoder:(NSCoder *)coder { 
+    self = [super initWithCoder:coder];
     if (self) {
-        self.containerView = _containerView;
     }
     return self;
+}
+
+- (IBAction)exportToCameraRoll:(id)sender {
+    NSLog(@"Exporting Image");
 }
 
 @end

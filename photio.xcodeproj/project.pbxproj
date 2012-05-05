@@ -18,6 +18,8 @@
 		0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF81523EDA7002C62A0 /* flash-on@2x.png */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
+		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
+		058736BA15556941007A5654 /* ImageMetaDataEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B915556941007A5654 /* ImageMetaDataEditView.xib */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
 		058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058B4FB615196B1F0087F717 /* LocalesViewController.xib */; };
 		058B4FBC15196D840087F717 /* LocaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FBB15196D840087F717 /* LocaleView.m */; };
@@ -50,6 +52,8 @@
 		05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05C99EC914F0585C00D09F3E /* InfoPlist.strings */; };
 		05C99ECD14F0585C00D09F3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ECC14F0585C00D09F3E /* main.m */; };
 		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
+		05CCEF9E15557711004FBD21 /* NSObject+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */; };
+		05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEFA115558EFB004FBD21 /* UIView+Extensions.m */; };
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
@@ -60,8 +64,6 @@
 		05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E4C21E1552233600C7266E /* ImageEditViewController.xib */; };
 		05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C223155224D400C7266E /* ImageMetaDataEditView.m */; };
 		05E4C2271552259800C7266E /* ImageEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C2261552259800C7266E /* ImageEditView.m */; };
-		05E4C22D1553772900C7266E /* ImageEditCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C22C1553772700C7266E /* ImageEditCommentView.m */; };
-		05E4C230155377D900C7266E /* ImageMetaDataToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C22F155377D900C7266E /* ImageMetaDataToolView.m */; };
 		05EE0E8715366ACF00E5E541 /* DiagonalGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */; };
 		05FA4933154C7FA5005C097A /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FA4932154C7FA5005C097A /* Capture.m */; };
 /* End PBXBuildFile section */
@@ -84,6 +86,8 @@
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
 		0554A47E1503DDFE00B9C76D /* DragRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragRowView.m; sourceTree = "<group>"; };
+		058736B715556897007A5654 /* ImageEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditView.xib; path = photio/PhotoAlbum/ImageEditView.xib; sourceTree = SOURCE_ROOT; };
+		058736B915556941007A5654 /* ImageMetaDataEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageMetaDataEditView.xib; path = photio/PhotoAlbum/ImageMetaDataEditView.xib; sourceTree = SOURCE_ROOT; };
 		058B4FB415196B1F0087F717 /* LocalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalesViewController.h; sourceTree = "<group>"; };
 		058B4FB515196B1F0087F717 /* LocalesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalesViewController.m; sourceTree = "<group>"; };
 		058B4FB615196B1F0087F717 /* LocalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalesViewController.xib; sourceTree = "<group>"; };
@@ -138,6 +142,10 @@
 		05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "photio-Prefix.pch"; sourceTree = "<group>"; };
 		05C99ECF14F0585C00D09F3E /* PhotioAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotioAppDelegate.h; sourceTree = "<group>"; };
 		05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotioAppDelegate.m; sourceTree = "<group>"; };
+		05CCEF9C15557711004FBD21 /* NSObject+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+Extensions.h"; path = "photio/Library/NSObject+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+Extensions.m"; path = "photio/Library/NSObject+Extensions.m"; sourceTree = SOURCE_ROOT; };
+		05CCEFA015558EFB004FBD21 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extensions.h"; path = "photio/Library/UIView+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		05CCEFA115558EFB004FBD21 /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extensions.m"; path = "photio/Library/UIView+Extensions.m"; sourceTree = SOURCE_ROOT; };
 		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -155,10 +163,6 @@
 		05E4C223155224D400C7266E /* ImageMetaDataEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetaDataEditView.m; path = photio/PhotoAlbum/ImageMetaDataEditView.m; sourceTree = SOURCE_ROOT; };
 		05E4C2251552259800C7266E /* ImageEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditView.h; path = photio/PhotoAlbum/ImageEditView.h; sourceTree = SOURCE_ROOT; };
 		05E4C2261552259800C7266E /* ImageEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditView.m; path = photio/PhotoAlbum/ImageEditView.m; sourceTree = SOURCE_ROOT; };
-		05E4C22B1553772700C7266E /* ImageEditCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditCommentView.h; path = photio/PhotoAlbum/ImageEditCommentView.h; sourceTree = SOURCE_ROOT; };
-		05E4C22C1553772700C7266E /* ImageEditCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditCommentView.m; path = photio/PhotoAlbum/ImageEditCommentView.m; sourceTree = SOURCE_ROOT; };
-		05E4C22E155377D800C7266E /* ImageMetaDataToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageMetaDataToolView.h; path = photio/PhotoAlbum/ImageMetaDataToolView.h; sourceTree = SOURCE_ROOT; };
-		05E4C22F155377D900C7266E /* ImageMetaDataToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageMetaDataToolView.m; path = photio/PhotoAlbum/ImageMetaDataToolView.m; sourceTree = SOURCE_ROOT; };
 		05EE0E8515366ACF00E5E541 /* DiagonalGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagonalGestureRecognizer.h; sourceTree = "<group>"; };
 		05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagonalGestureRecognizer.m; sourceTree = "<group>"; };
 		05FA4931154C7FA5005C097A /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
@@ -241,12 +245,16 @@
 				0554A47E1503DDFE00B9C76D /* DragRowView.m */,
 				05AC025B1548CBCF00A29139 /* NSArray+Extensions.h */,
 				05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */,
+				05CCEF9C15557711004FBD21 /* NSObject+Extensions.h */,
+				05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */,
 				0542DAE4151FFD85002C62A0 /* StreamOfViews.h */,
 				0542DAE5151FFD85002C62A0 /* StreamOfViews.m */,
 				0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */,
 				0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */,
 				05B837711530C45100D99A40 /* UIImageToDataTransformer.h */,
 				05B837721530C45100D99A40 /* UIImageToDataTransformer.m */,
+				05CCEFA015558EFB004FBD21 /* UIView+Extensions.h */,
+				05CCEFA115558EFB004FBD21 /* UIView+Extensions.m */,
 			);
 			name = Library;
 			path = library;
@@ -344,13 +352,12 @@
 				050CF14F14F9A27D00A31059 /* CameraViewController.xib */,
 				05AF480D154DCCAE0099576A /* EntriesView.h */,
 				05AF480E154DCCAE0099576A /* EntriesView.m */,
-				05E4C22B1553772700C7266E /* ImageEditCommentView.h */,
-				05E4C22C1553772700C7266E /* ImageEditCommentView.m */,
 				05E4C21C1552233500C7266E /* ImageEditViewController.h */,
 				05E4C21D1552233600C7266E /* ImageEditViewController.m */,
 				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
 				05E4C2251552259800C7266E /* ImageEditView.h */,
 				05E4C2261552259800C7266E /* ImageEditView.m */,
+				058736B715556897007A5654 /* ImageEditView.xib */,
 				05B83718152E6C5F00D99A40 /* ImageInspectView.h */,
 				05B83719152E6C5F00D99A40 /* ImageInspectView.m */,
 				05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */,
@@ -358,8 +365,7 @@
 				05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */,
 				05E4C222155224D400C7266E /* ImageMetaDataEditView.h */,
 				05E4C223155224D400C7266E /* ImageMetaDataEditView.m */,
-				05E4C22E155377D800C7266E /* ImageMetaDataToolView.h */,
-				05E4C22F155377D900C7266E /* ImageMetaDataToolView.m */,
+				058736B915556941007A5654 /* ImageMetaDataEditView.xib */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
@@ -440,6 +446,8 @@
 				059772E9152798BA008F3A1B /* take-photo@2x.png in Resources */,
 				0590C748153B3D8F0065AB42 /* CalendarViewController.xib in Resources */,
 				05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */,
+				058736B815556898007A5654 /* ImageEditView.xib in Resources */,
+				058736BA15556941007A5654 /* ImageMetaDataEditView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,8 +493,8 @@
 				05E4C21F1552233600C7266E /* ImageEditViewController.m in Sources */,
 				05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */,
 				05E4C2271552259800C7266E /* ImageEditView.m in Sources */,
-				05E4C22D1553772900C7266E /* ImageEditCommentView.m in Sources */,
-				05E4C230155377D900C7266E /* ImageMetaDataToolView.m in Sources */,
+				05CCEF9E15557711004FBD21 /* NSObject+Extensions.m in Sources */,
+				05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,5 +16,6 @@
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView;
+- (IBAction)remove:(id)sender;
 
 @end

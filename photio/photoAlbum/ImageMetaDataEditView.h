@@ -13,10 +13,11 @@
 
 @interface ImageMetaDataEditView : UIView
 
-@property(nonatomic, strong) UIView*                    containerView;
-@property(nonatomic, strong) ImageEditCommentView*      imageEditCommentView;
-@property(nonatomic, strong) ImageMetaDataToolsView*    imageMetaDataToolsView;
+@property(nonatomic, strong) UIView*            containerView;
+@property(nonatomic, strong) IBOutlet UIView*   imageCommentView;
+@property(nonatomic, strong) IBOutlet UIView*   imageShareView;
  
 + (id)inView:(UIView*)_containerView;
+- (IBAction)exportToCameraRoll:(id)sender;
 
 @end

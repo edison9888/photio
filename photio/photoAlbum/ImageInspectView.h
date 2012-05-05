@@ -13,10 +13,10 @@
 
 @interface ImageInspectView : UIImageView
 
-@property(nonatomic, strong) UIImage*   capture;
-@property(nonatomic, strong) NSNumber*  latitude;
-@property(nonatomic, strong) NSNumber*  longitude;
-@property(nonatomic, strong) NSDate*    createdAt;
+@property(nonatomic, strong) UIImage*                   capture;
+@property(nonatomic, strong) NSNumber*                  latitude;
+@property(nonatomic, strong) NSNumber*                  longitude;
+@property(nonatomic, strong) NSDate*                    createdAt;
 
 + (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture;
 + (id)cachedWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location;

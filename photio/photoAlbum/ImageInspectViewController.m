@@ -38,8 +38,6 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.delegate = _delegate;
-        self.entriesView = [EntriesView withFrame:self.view.frame andDelegate:self];
-        [self.view addSubview:self.entriesView];
         [[self locationManager] startUpdatingLocation];
     }
     return self;
@@ -82,6 +80,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.entriesView = [EntriesView withFrame:self.view.frame andDelegate:self];
+    [self.view addSubview:self.entriesView];
 }
 
 - (void)viewDidUnload {

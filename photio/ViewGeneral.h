@@ -14,6 +14,8 @@
 @class ImageInspectViewController;
 @class CalendarViewController;
 @class LocalesViewController;
+@class ImageEditViewController;
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral : NSObject <CameraViewControllerDelegate, ImageInspectViewControllerDelegate> {
@@ -28,6 +30,7 @@
 @property(nonatomic, strong) CameraViewController*          cameraViewController;
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
 @property(nonatomic, strong) LocalesViewController*         localesViewController;
+@property(nonatomic, strong) ImageEditViewController*       imageEditViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewGeneral*)instance;
@@ -61,6 +64,11 @@
 - (void)initLocalesView:(UIView*)_containerView;
 - (void)localesViewPosition:(CGRect)_rec;
 - (void)localesViewHidden:(BOOL)_hidden;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initImageEditView:(UIView*)_containerView;
+- (void)imageEditViewPosition:(CGRect)_rec;
+- (void)imageEditViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCalendarToCamera;

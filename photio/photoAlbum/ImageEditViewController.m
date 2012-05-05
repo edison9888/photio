@@ -34,17 +34,23 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.containerView = _containerView;
-        self.streamView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:_containerView];
     }
     return self;
+}
+
+- (IBAction)remove:(id)sender {
+    [self.view removeFromSuperview];
 }
 
 #pragma mark -
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
+    self.streamView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
     [self.streamView addView:[ImageEditView inView:self.view]];
     [self.streamView addView:[ImageMetaDataEditView inView:self.view]];
+    self.streamView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.streamView];
     [super viewDidLoad];
 }
 

@@ -263,25 +263,25 @@
 						<int key="objectID">63</int>
 						<reference key="object" ref="932958160"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">auto focus</string>
+						<string key="objectName">Auto Focus</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
 						<reference key="object" ref="848899834"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">take photo</string>
+						<string key="objectName">Take Photo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
 						<reference key="object" ref="729777438"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">flash</string>
+						<string key="objectName">Flash</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">79</int>
 						<reference key="object" ref="406212486"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">continuous focus</string>
+						<string key="objectName">Continuous Focus</string>
 					</object>
 				</array>
 			</object>

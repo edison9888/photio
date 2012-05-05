@@ -10,7 +10,9 @@
 
 @interface ImageEditView : UIView
 
-@property(nonatomic, strong) UIView* containerView;
+@property(nonatomic, strong) UIView*            containerView;
+@property(nonatomic, strong) IBOutlet UIView*   imageControlsView;
+@property(nonatomic, strong) IBOutlet UIView*   imageFiltersView;
 
 + (id)inView:(UIView*)_containerView;
 

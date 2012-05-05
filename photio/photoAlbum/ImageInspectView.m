@@ -10,9 +10,12 @@
 #import "UIImage+Resize.h"
 #import "Capture.h"
 #import "Image.h"
+#import "ViewGeneral.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageInspectView (PrivateAPI)
+
+- (void)editImage;
 
 @end
 
@@ -23,6 +26,10 @@
 
 #pragma mark -
 #pragma mark ImageInspectView PrivateAPI
+
+- (void)editImage {
+    [[ViewGeneral instance] initImageEditView:self];
+}
 
 #pragma mark -
 #pragma mark ImageInspectView
@@ -46,6 +53,11 @@
         self.image = [_capture scaleToSize:_frame.size];
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.clipsToBounds = YES;
+        self.userInteractionEnabled = YES;
+        UITapGestureRecognizer* editImageGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImage)];
+        editImageGesture.numberOfTapsRequired = 2;
+        editImageGesture.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:editImageGesture];
     }
     return self;
 }

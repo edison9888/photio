@@ -11,6 +11,7 @@
 #import "ViewGeneral.h"
 #import "UIImage+Resize.h"
 #import "ImageInspectView.h"
+#import "ImageEditViewController.h"
 #import "Capture.h"
 #import "Image.h"
 
@@ -45,7 +46,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize notAnimating, managedObjectContext, containerView, shutter;
-@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController;
+@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, imageEditViewController;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
@@ -255,6 +256,24 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)localesViewPosition:(CGRect)_rect {
     self.localesViewController.view.frame = _rect;
+}
+
+#pragma mark - 
+#pragma mark ImageEditViewController
+
+- (void)initImageEditView:(UIView*)_containerView {
+    if (self.imageEditViewController == nil) {
+        self.imageEditViewController = [ImageEditViewController inView:_containerView];
+    }
+    [_containerView addSubview:self.imageEditViewController.view];
+}
+
+- (void)imageEditViewPosition:(CGRect)_rec {
+    self.imageEditViewController.view.frame = _rec;
+}
+
+- (void)imageEditViewHidden:(BOOL)_hidden {
+    self.imageEditViewController.view.hidden = _hidden;
 }
 
 #pragma mark - 

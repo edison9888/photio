@@ -7,6 +7,7 @@
 //
 
 #import "ImageEditView.h"
+#import "UIView+Extensions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditView (PrivateAPI)
@@ -16,7 +17,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditView
 
-@synthesize containerView;
+@synthesize containerView, imageControlsView, imageFiltersView;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
@@ -25,13 +26,12 @@
 #pragma mark ImageEditView
 
 + (id)inView:(UIView*)_containerView {
-    return [[ImageEditView alloc] initInView:(UIView*)_containerView];
+    return [UIView loadView:[self class]];
 }
 
-- (id)initInView:(UIView*)_containerView {
-    self = [super initWithFrame:_containerView.frame];
+- (id)initWithCoder:(NSCoder *)coder { 
+    self = [super initWithCoder:coder];
     if (self) {
-        self.containerView = _containerView;
     }
     return self;
 }
