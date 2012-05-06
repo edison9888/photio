@@ -57,6 +57,8 @@
 		05CCEFA51555E0E9004FBD21 /* ImageEditControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */; };
 		05CCEFB61555F459004FBD21 /* export.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB41555F459004FBD21 /* export.png */; };
 		05CCEFB71555F459004FBD21 /* export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB51555F459004FBD21 /* export@2x.png */; };
+		05CCEFBA1556302D004FBD21 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB81556302D004FBD21 /* twitter.png */; };
+		05CCEFBB1556302D004FBD21 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB91556302D004FBD21 /* twitter@2x.png */; };
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
@@ -153,6 +155,8 @@
 		05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditControlView.m; path = photio/PhotoAlbum/ImageEditControlView.m; sourceTree = SOURCE_ROOT; };
 		05CCEFB41555F459004FBD21 /* export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = export.png; path = photio/Images/export.png; sourceTree = SOURCE_ROOT; };
 		05CCEFB51555F459004FBD21 /* export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "export@2x.png"; path = "photio/Images/export@2x.png"; sourceTree = SOURCE_ROOT; };
+		05CCEFB81556302D004FBD21 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = photio/Images/twitter.png; sourceTree = SOURCE_ROOT; };
+		05CCEFB91556302D004FBD21 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter@2x.png"; path = "photio/Images/twitter@2x.png"; sourceTree = SOURCE_ROOT; };
 		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				059772E61527961B008F3A1B /* take-photo.png */,
 				0542DAF71523EDA7002C62A0 /* flash-on.png */,
 				0542DAF81523EDA7002C62A0 /* flash-on@2x.png */,
+				05CCEFB81556302D004FBD21 /* twitter.png */,
+				05CCEFB91556302D004FBD21 /* twitter@2x.png */,
 			);
 			name = Images;
 			path = images;
@@ -461,6 +467,8 @@
 				058736BA15556941007A5654 /* ImageMetaDataEditView.xib in Resources */,
 				05CCEFB61555F459004FBD21 /* export.png in Resources */,
 				05CCEFB71555F459004FBD21 /* export@2x.png in Resources */,
+				05CCEFBA1556302D004FBD21 /* twitter.png in Resources */,
+				05CCEFBB1556302D004FBD21 /* twitter@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

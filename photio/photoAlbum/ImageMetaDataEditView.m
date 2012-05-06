@@ -41,4 +41,8 @@
     NSLog(@"Exporting Image");
 }
 
+- (IBAction)tweet:(id)sender {
+    NSLog(@"Tweet Image");
+}
+
 @end

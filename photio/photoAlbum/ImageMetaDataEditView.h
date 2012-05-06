@@ -18,5 +18,6 @@
  
 + (id)inView:(UIView*)_containerView;
 - (IBAction)exportToCameraRoll:(id)sender;
+- (IBAction)tweet:(id)sender;
 
 @end
