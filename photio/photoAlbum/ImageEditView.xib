@@ -34,29 +34,29 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIView" id="808408338">
+					<object class="IBUIView" id="776201811">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 400}, {320, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="431726213">
+						<object class="NSColor" key="IBUIBackgroundColor" id="467765897">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
 						</object>
 						<float key="IBUIAlpha">0.5</float>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIView" id="969991118">
+					<object class="IBUIView" id="176773354">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{320, 60}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="808408338"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<reference key="IBUIBackgroundColor" ref="431726213"/>
+						<reference key="IBUIBackgroundColor" ref="467765897"/>
 						<float key="IBUIAlpha">0.5</float>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -65,7 +65,7 @@
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="969991118"/>
+				<reference key="NSNextKeyView" ref="176773354"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MCAwAA</bytes>
@@ -79,7 +79,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageFiltersView</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="808408338"/>
+						<reference key="destination" ref="776201811"/>
 					</object>
 					<int key="connectionID">8</int>
 				</object>
@@ -87,7 +87,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageControlsView</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="969991118"/>
+						<reference key="destination" ref="176773354"/>
 					</object>
 					<int key="connectionID">9</int>
 				</object>
@@ -104,8 +104,8 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="808408338"/>
-							<reference ref="969991118"/>
+							<reference ref="776201811"/>
+							<reference ref="176773354"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -122,13 +122,13 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">3</int>
-						<reference key="object" ref="808408338"/>
+						<reference key="object" ref="776201811"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Filters</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
-						<reference key="object" ref="969991118"/>
+						<reference key="object" ref="176773354"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Controls</string>
@@ -150,7 +150,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">19</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
