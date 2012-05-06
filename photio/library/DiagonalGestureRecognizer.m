@@ -42,7 +42,7 @@
 
 - (BOOL)diagonalSwipeFor:(CGFloat)_deltaX and:(CGFloat)_deltaY {
     if (!self.diagonalSwipe) {
-        CGFloat slope = fabsf(_deltaY / _deltaX);
+        CGFloat slope = (_deltaY / _deltaX);
         if (slope > DETECT_DIAGONAL_SWIPE_MIN_SLOPE && slope < DETECT_DIAGONAL_SWIPE_MAX_SLOPE) {
             self.diagonalSwipe = YES;
         }

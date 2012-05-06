@@ -22,6 +22,7 @@
         self.text = _dayOfWeek;
         self.font = [self.font fontWithSize:0.3*_frame.size.height];
         self.textColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

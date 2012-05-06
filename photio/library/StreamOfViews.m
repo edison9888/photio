@@ -10,7 +10,7 @@
 
 #define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
 #define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
-#define FADE_TRANSITION_DURATUION                       1.0f
+#define FADE_TRANSITION_DURATUION                       0.5f
 #define RELEASE_ANIMATION_SPEED                         150.0f
 #define VIEW_MIN_SPACING                                25
 #define REMOVE_DISPLAYED_VIEW_DOWN_DURATION             0.5
@@ -261,7 +261,7 @@
             options:UIViewAnimationOptionCurveEaseOut
             animations:^{
                 [self displayedView].alpha = 0.0;
-                [self displayedView].frame = CGRectMake(self.frame.size.width, self.frame.size.height, 0.0, 0.0);
+                [self displayedView].frame = CGRectMake(self.frame.size.width, self.frame.size.height, self.frame.size.width, self.frame.size.height);
             }
             completion:^(BOOL _finished) {
                 UIView* removedView = [self removeDisplayedView];
