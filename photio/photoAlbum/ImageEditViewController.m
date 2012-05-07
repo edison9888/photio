@@ -7,8 +7,6 @@
 //
 
 #import "ImageEditViewController.h"
-#import "ImageMetaDataEditView.h"
-#import "ImageEditView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditViewController (PrivateAPI)
@@ -18,7 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditViewController
 
-@synthesize containerView, streamView;
+@synthesize delegate, containerView, streamView, imageMetaDataEditView, imageEditView;
 
 #pragma mark -
 #pragma mark ImageEditViewController (PrivateAPI)
@@ -38,6 +36,14 @@
     return self;
 }
 
+- (void)updateComment:(NSString*)_comment {
+    [self.imageMetaDataEditView updateComment:_comment];
+}
+
+- (void)updateRating:(NSString*)_rating {
+    [self.imageMetaDataEditView updateRating:_rating];
+}
+
 - (IBAction)remove:(id)sender {
     [self.view removeFromSuperview];
 }
@@ -46,9 +52,11 @@
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
+    self.imageEditView = [ImageEditView inView:self.view withDelegate:self];
+    self.imageMetaDataEditView = [ImageMetaDataEditView inView:self.view withDelegate:self];
     self.streamView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
-    [self.streamView addView:[ImageEditView inView:self.view]];
-    [self.streamView addView:[ImageMetaDataEditView inView:self.view]];
+    [self.streamView addView:self.imageEditView];
+    [self.streamView addView:self.imageMetaDataEditView];
     self.streamView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.streamView];
     [super viewDidLoad];
@@ -91,5 +99,23 @@
 
 - (void)didRemoveAllViews {
 }
+
+#pragma mark -
+#pragma mark ImageMetaDataEditView
+
+- (void)exportToCameraRoll {
+    [self.delegate exportToCameraRoll];
+}
+
+- (void)saveComment:(NSString*)_comment {
+    [self.delegate saveComment:_comment];
+}
+
+- (void)saveRating:(NSString*)_rating {
+    [self.delegate saveRating:_rating];
+}
+
+#pragma mark -
+#pragma mark ImageEditView
 
 @end

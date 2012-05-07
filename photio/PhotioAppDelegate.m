@@ -53,7 +53,7 @@
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            [[[UIAlertView alloc] initWithTitle:@"Error Creating Database Contect" message:@"The application will close" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         } 

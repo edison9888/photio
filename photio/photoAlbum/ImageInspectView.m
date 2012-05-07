@@ -16,36 +16,47 @@
 @interface ImageInspectView (PrivateAPI)
 
 - (void)editImage;
+- (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectView
 
-@synthesize capture, latitude, longitude, createdAt;
+@synthesize capture, latitude, longitude, createdAt, comment, rating;
 
 #pragma mark -
 #pragma mark ImageInspectView PrivateAPI
 
 - (void)editImage {
-    [[ViewGeneral instance] initImageEditView:self];
+    ViewGeneral* viewGeneral = [ViewGeneral instance];
+    [viewGeneral initImageEditView:self];
+    viewGeneral.imageEditViewController.delegate = self;
+    [viewGeneral.imageEditViewController updateRating:self.rating];
+    [viewGeneral.imageEditViewController updateComment:self.comment];    
+}
+
+- (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
+    if (_error) {
+        [[[UIAlertView alloc] initWithTitle:[_error localizedDescription] message:[_error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
+    }
 }
 
 #pragma mark -
 #pragma mark ImageInspectView
 
 + (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture {
-    return [[ImageInspectView alloc] initWithFrame:_frame capture:_capture.image.image date:_capture.createdAt 
+    return [[ImageInspectView alloc] initWithFrame:_frame capture:_capture.image.image date:_capture.createdAt comment:_capture.comment rating:_capture.rating
                andLocation:CLLocationCoordinate2DMake([_capture.latitude doubleValue], [_capture.longitude doubleValue])];
 }
 
 + (id)cachedWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
-    ImageInspectView* view = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture date:[NSDate date] andLocation:_location];
+    ImageInspectView* view = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture date:[NSDate date] comment:nil rating:nil andLocation:_location];
     view.capture = _capture;
     return view;
 }
 
-- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date andLocation:(CLLocationCoordinate2D)_location {
+- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date comment:(NSString*)_comment rating:(NSString*)_rating andLocation:(CLLocationCoordinate2D)_location {
     if ((self = [super initWithFrame:(CGRect)_frame])) {
         self.latitude = [NSNumber numberWithDouble:_location.latitude];
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
@@ -60,6 +71,21 @@
         [self addGestureRecognizer:editImageGesture];
     }
     return self;
+}
+
+#pragma mark -
+#pragma mark ImageEditViewController
+
+- (void)exportToCameraRoll {
+    UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)saveComment:(NSString*)_comment {
+    
+}
+
+- (void)saveRating:(NSString*)_rating {
+    
 }
 
 @end

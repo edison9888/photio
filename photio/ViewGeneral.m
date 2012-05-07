@@ -154,7 +154,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)saveManagedObjectContext {
     NSError *error = nil;
     if (![[ViewGeneral instance].managedObjectContext save:&error]) {
-        [[[UIAlertView alloc] initWithTitle:@"Database Error" message:@"There was an error updating the database" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
     }
 }
 
@@ -162,7 +162,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     NSError* error;
     NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:_fetchRequest error:&error];
     if (fetchResults == nil) {
-        [[[UIAlertView alloc] initWithTitle:@"Database Error" message:@"There was an error in retrieving data" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
         abort();
     }
     return fetchResults;

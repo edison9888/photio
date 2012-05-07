@@ -8,6 +8,7 @@
 
 #import "ImageMetaDataEditView.h"
 #import "ImageEditControlView.h"
+#import "Capture.h"
 #import "UIView+Extensions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
-@synthesize containerView, imageShareView, imageCommentView;
+@synthesize delegate, containerView, imageShareView, imageCommentBorderView, imageCommentLabel, imageAddComment, imageRating, starred;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
@@ -26,8 +27,10 @@
 #pragma mark -
 #pragma mark ImageMetaDataEditView
 
-+ (id)inView:(UIView*)_containerView {
-    return [UIView loadView:[self class]];
++ (id)inView:(UIView*)_containerView withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate {
+    ImageMetaDataEditView* view = (ImageMetaDataEditView*)[UIView loadView:[self class]];
+    view.delegate = _delegate;
+    return view;
 }
 
 - (id)initWithCoder:(NSCoder *)coder { 
@@ -37,12 +40,43 @@
     return self;
 }
 
+- (void)updateComment:(NSString*)_comment {
+    if (_comment) {
+    } else {
+    }
+}
+
+- (void)updateRating:(NSString*)_rating {
+    if (_rating) {
+        self.starred = YES;
+    } else {
+        self.starred = YES;
+    }
+}
+
 - (IBAction)exportToCameraRoll:(id)sender {
-    NSLog(@"Exporting Image");
+    [self.delegate exportToCameraRoll];
 }
 
 - (IBAction)tweet:(id)sender {
     NSLog(@"Tweet Image");
+}
+
+- (IBAction)addComment:(id)sender {
+    NSLog(@"Add Comment");
+}
+
+- (IBAction)star:(id)sender {
+    if (self.starred) {
+        self.starred = NO;
+        self.imageRating.image = [UIImage imageNamed:@"whitestar.png"];
+        self.imageRating.alpha = 0.3;
+    } else {
+        self.starred = YES;
+        self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
+        self.imageRating.alpha = 0.5;
+    }
+    NSLog(@"Star");
 }
 
 @end

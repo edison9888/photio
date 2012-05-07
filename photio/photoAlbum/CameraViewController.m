@@ -259,11 +259,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)camera:(Camera*)_camera didFailWithError:(NSError *)error {
     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^(void) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason]
-                                     delegate:nil
-                                     cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title")
-                                     otherButtonTitles:nil];
-        [alertView show];
+        [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
     });
 }
 

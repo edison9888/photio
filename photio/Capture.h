@@ -2,7 +2,7 @@
 //  Capture.h
 //  photio
 //
-//  Created by Troy Stribling on 4/28/12.
+//  Created by Troy Stribling on 5/6/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -18,9 +18,18 @@
 @property (nonatomic, retain) NSString * dayIdentifier;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
+@property (nonatomic, retain) NSString * rating;
 @property (nonatomic, retain) id thumbnail;
 @property (nonatomic, retain) Image *image;
 @property (nonatomic, retain) Locale *locale;
-@property (nonatomic, retain) Tag *tag;
+@property (nonatomic, retain) NSSet *tag;
+@end
+
+@interface Capture (CoreDataGeneratedAccessors)
+
+- (void)addTagObject:(Tag *)value;
+- (void)removeTagObject:(Tag *)value;
+- (void)addTag:(NSSet *)values;
+- (void)removeTag:(NSSet *)values;
 
 @end

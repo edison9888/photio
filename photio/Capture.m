@@ -2,7 +2,7 @@
 //  Capture.m
 //  photio
 //
-//  Created by Troy Stribling on 4/28/12.
+//  Created by Troy Stribling on 5/6/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -10,8 +10,6 @@
 #import "Image.h"
 #import "Locale.h"
 #import "Tag.h"
-#import "UIImageToDataTransformer.h"
-
 
 
 @implementation Capture
@@ -21,16 +19,10 @@
 @dynamic dayIdentifier;
 @dynamic latitude;
 @dynamic longitude;
+@dynamic rating;
 @dynamic thumbnail;
 @dynamic image;
 @dynamic locale;
 @dynamic tag;
-
-//+ (void)initialize {
-//	if (self == [Capture class]) {
-//		UIImageToDataTransformer *transformer = [[UIImageToDataTransformer alloc] init];
-//		[NSValueTransformer setValueTransformer:transformer forName:@"UIImageToDataTransformer"];
-//	}
-//}
 
 @end

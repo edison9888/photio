@@ -18,7 +18,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditView
 
-@synthesize containerView, imageControlsView, imageFiltersView;
+@synthesize containerView, imageControlsView, imageFiltersView, delegate;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
@@ -26,8 +26,10 @@
 #pragma mark -
 #pragma mark ImageEditView
 
-+ (id)inView:(UIView*)_containerView {
-    return [UIView loadView:[self class]];
++ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate {
+    ImageEditView* view = (ImageEditView*)[UIView loadView:[self class]];
+    view.delegate = _delegate;
+    return view;
 }
 
 - (id)initWithCoder:(NSCoder *)coder { 
