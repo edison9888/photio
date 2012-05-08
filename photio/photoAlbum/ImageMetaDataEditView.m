@@ -74,7 +74,7 @@
     } else {
         self.starred = YES;
         self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
-        self.imageRating.alpha = 0.5;
+        self.imageRating.alpha = 0.75;
     }
     NSLog(@"Star");
 }

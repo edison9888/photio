@@ -69,8 +69,8 @@
 }
 
 - (void)didSingleTap {
-    if ([self.delegate respondsToSelector:@selector(didTap:)]) {
-        [self.delegate didTap:self];
+    if ([self.delegate respondsToSelector:@selector(didSingleTap:)]) {
+        [self.delegate singleTapGesture:self];
     }
 }
 

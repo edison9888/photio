@@ -16,6 +16,8 @@
 @interface ImageEditViewController : UIViewController <StreamOfViewsDelegate, ImageEditViewDelegate, ImageMetaDataEditViewDelegate>
 
 @property(nonatomic, weak)   id<ImageEditViewControllerDelegate>    delegate;
+@property(nonatomic, strong) IBOutlet UIGestureRecognizer*          removeGesture;
+@property(nonatomic, strong) IBOutlet UIGestureRecognizer*          singleTapGesture;
 @property(nonatomic, strong) StreamOfViews*                         streamView;
 @property(nonatomic, strong) UIView*                                containerView;
 @property(nonatomic, strong) ImageMetaDataEditView*                 imageMetaDataEditView;
@@ -26,10 +28,17 @@
 - (void)updateComment:(NSString*)_comment;
 - (void)updateRating:(NSString*)_rating;
 - (IBAction)remove:(id)sender;
+- (IBAction)singleTap:(id)sender;
 
 @end
 
 @protocol ImageEditViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)singleTapGesture;
+
+@required
 
 - (void)exportToCameraRoll;
 - (void)saveComment:(NSString*)_comment;

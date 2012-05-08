@@ -111,7 +111,7 @@
 }
 
 #pragma mark -
-#pragma mark EntriesViewControllerDelegates
+#pragma mark EntriesViewDelegate
 
 - (void)deleteEntry:(UIView*)_entry {
     ImageInspectView* imageEntry = (ImageInspectView*)_entry;
@@ -144,7 +144,7 @@
     return [entryViews mutableCopy];
 }
 
-- (void)didTap:(EntriesView*)_entries {
+- (void)singleTapGesture:(EntriesView*)_entries {
     [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
          animations:^{
              _entries.alpha = 0.0;

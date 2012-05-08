@@ -16,7 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditViewController
 
-@synthesize delegate, containerView, streamView, imageMetaDataEditView, imageEditView;
+@synthesize delegate, removeGesture, singleTapGesture, containerView, streamView, imageMetaDataEditView, imageEditView;
 
 #pragma mark -
 #pragma mark ImageEditViewController (PrivateAPI)
@@ -32,6 +32,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.containerView = _containerView;
+        [self.singleTapGesture requireGestureRecognizerToFail:self.removeGesture];
     }
     return self;
 }
@@ -46,6 +47,12 @@
 
 - (IBAction)remove:(id)sender {
     [self.view removeFromSuperview];
+}
+
+- (IBAction)singleTap:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(singleTapGesture)]) {
+        [self.delegate singleTapGesture];
+    }
 }
 
 #pragma mark -
