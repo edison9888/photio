@@ -36,7 +36,7 @@
 
 @optional
 
-- (void)singleTapGesture;
+- (void)didSingleTap;
 
 @required
 

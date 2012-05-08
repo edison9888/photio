@@ -32,7 +32,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.containerView = _containerView;
-        [self.singleTapGesture requireGestureRecognizerToFail:self.removeGesture];
     }
     return self;
 }
@@ -51,7 +50,7 @@
 
 - (IBAction)singleTap:(id)sender {
     if ([self.delegate respondsToSelector:@selector(singleTapGesture)]) {
-        [self.delegate singleTapGesture];
+        [self.delegate didSingleTap];
     }
 }
 
@@ -59,6 +58,7 @@
 #pragma mark UIViewController
 
 - (void)viewDidLoad {
+    [self.singleTapGesture requireGestureRecognizerToFail:self.removeGesture];
     self.imageEditView = [ImageEditView inView:self.view withDelegate:self];
     self.imageMetaDataEditView = [ImageMetaDataEditView inView:self.view withDelegate:self];
     self.streamView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
