@@ -33,6 +33,6 @@
 
 @optional
 
-- (void)didSingleTap;
+- (void)didSingleTapImage;
 
 @end

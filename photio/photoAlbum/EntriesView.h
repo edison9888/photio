@@ -43,6 +43,6 @@
 - (void)transitionUpFromEntries;
 - (void)transitionDownFromEntries;
 
-- (void)didSingleTap:(EntriesView*)_entries;
+- (void)didSingleTapEntries:(EntriesView*)_entries;
 
 @end

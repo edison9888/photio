@@ -63,15 +63,15 @@
 
 - (void)loadEntries {
     if ([self.delegate respondsToSelector:@selector(loadEntries)]) {
-        for (UIView* entryView in [self.delegate loadEntries]) {
-            [self.entriesStreamView addView:entryView];
+        for (ImageInspectView* entryView in [self.delegate loadEntries]) {
+            [self addEntry:entryView];
         }
     }
 }
 
 - (void)singleTapGesture {
-    if ([self.delegate respondsToSelector:@selector(didSingleTap:)]) {
-        [self.delegate didSingleTap:self];
+    if ([self.delegate respondsToSelector:@selector(didSingleTapEntries:)]) {
+        [self.delegate didSingleTapEntries:self];
     }
 }
 
@@ -154,7 +154,7 @@
 #pragma mark -
 #pragma mark ImageInspectViewDelegate
 
-- (void)didSingleTap {
+- (void)didSingleTapImage {
     [self singleTapGesture];
 }
 

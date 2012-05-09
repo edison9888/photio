@@ -49,8 +49,8 @@
 }
 
 - (IBAction)singleTap:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(singleTapGesture)]) {
-        [self.delegate didSingleTap];
+    if ([self.delegate respondsToSelector:@selector(singleTapImageEditGesture)]) {
+        [self.delegate singleTapImageEditGesture];
     }
 }
 

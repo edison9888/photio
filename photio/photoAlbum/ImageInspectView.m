@@ -43,9 +43,9 @@
     }
 }
 
-- (void)singleTapGesture {
-    if ([self.delegate respondsToSelector:@selector(didSingleTap)]) {
-        [self.delegate didSingleTap];
+- (void)singleTapImageGesture {
+    if ([self.delegate respondsToSelector:@selector(didSingleTapImage)]) {
+        [self.delegate didSingleTapImage];
     }
 }
 
@@ -76,7 +76,7 @@
         editImageGesture.numberOfTapsRequired = 2;
         editImageGesture.numberOfTouchesRequired = 1;
         [self addGestureRecognizer:editImageGesture];
-        UITapGestureRecognizer* sigleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGesture)];
+        UITapGestureRecognizer* sigleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapImageGesture)];
         sigleTapGesture.numberOfTapsRequired = 1;
         sigleTapGesture.numberOfTouchesRequired = 1;
         [self addGestureRecognizer:sigleTapGesture];

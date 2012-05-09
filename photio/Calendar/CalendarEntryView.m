@@ -146,7 +146,7 @@
     return [entryViews mutableCopy];
 }
 
-- (void)didSingleTap:(EntriesView*)_entries {
+- (void)didSingleTapEntries:(EntriesView*)_entries {
     [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
          animations:^{
              _entries.alpha = 0.0;
