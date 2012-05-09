@@ -10,11 +10,11 @@
 #import "TransitionGestureRecognizer.h"
 #import "DiagonalGestureRecognizer.h"
 #import "StreamOfViews.h"
+#import "ImageInspectView.h"
 
-@class ImageInspectView;
 @protocol EntriesViewDelegate;
 
-@interface EntriesView : UIView <StreamOfViewsDelegate, DiagonalGestureRecognizerDelegate> {
+@interface EntriesView : UIView <StreamOfViewsDelegate, DiagonalGestureRecognizerDelegate, ImageInspectViewDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                            containerView;
@@ -25,7 +25,7 @@
 + (id)withFrame:(CGRect)_frame andDelegate:(id<EntriesViewDelegate>)_delegate;
 - (id)initWithFrame:(CGRect)frame andDelegate:(id<EntriesViewDelegate>)_delegate;
 - (NSInteger)entryCount;
-- (void)addEntry:(UIView*)_entry;
+- (void)addEntry:(ImageInspectView*)_entry;
 
 @end
 
@@ -43,6 +43,6 @@
 - (void)transitionUpFromEntries;
 - (void)transitionDownFromEntries;
 
-- (void)singleTapGesture:(EntriesView*)_entries;
+- (void)didSingleTap:(EntriesView*)_entries;
 
 @end

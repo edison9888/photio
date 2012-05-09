@@ -139,12 +139,14 @@
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx){
         Capture* capture = _obj;
-        return [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
+        ImageInspectView* imageView = [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
+        imageView.delegate = self;
+        return imageView;
     }];
     return [entryViews mutableCopy];
 }
 
-- (void)singleTapGesture:(EntriesView*)_entries {
+- (void)didSingleTap:(EntriesView*)_entries {
     [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
          animations:^{
              _entries.alpha = 0.0;

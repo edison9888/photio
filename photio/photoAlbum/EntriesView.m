@@ -13,7 +13,7 @@
 @interface EntriesView (PrivateAPI)
 
 - (void)loadEntries;
-- (void)didSingleTap;
+- (void)singleTapGesture;
 
 @end
 
@@ -36,7 +36,7 @@
         self.delegate = _delegate;
         self.entriesStreamView = [StreamOfViews withFrame:self.frame delegate:self relativeToView:self.containerView];
         self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
-        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSingleTap)];
+        UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGesture)];
         singleTap.numberOfTapsRequired = 1;
         singleTap.numberOfTouchesRequired = 1;
         [self.entriesStreamView.transitionGestureRecognizer.gestureRecognizer requireGestureRecognizerToFail:self.diagonalGestures];
@@ -53,7 +53,8 @@
     return [self.entriesStreamView.streamOfViews count];
 }
 
-- (void)addEntry:(UIView*)_entry {
+- (void)addEntry:(ImageInspectView*)_entry {
+    _entry.delegate = self;
     [self.entriesStreamView addView:_entry];
 }
 
@@ -68,9 +69,9 @@
     }
 }
 
-- (void)didSingleTap {
+- (void)singleTapGesture {
     if ([self.delegate respondsToSelector:@selector(didSingleTap:)]) {
-        [self.delegate singleTapGesture:self];
+        [self.delegate didSingleTap:self];
     }
 }
 
@@ -148,6 +149,13 @@
         [self.delegate deleteEntry:entry];
     }
     [self.entriesStreamView fadeDisplayedViewAndRemove];
+}
+
+#pragma mark -
+#pragma mark ImageInspectViewDelegate
+
+- (void)didSingleTap {
+    [self singleTapGesture];
 }
 
 @end

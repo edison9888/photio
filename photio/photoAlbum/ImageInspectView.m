@@ -17,13 +17,14 @@
 
 - (void)editImage;
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context;
+- (void)singleTapGesture;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectView
 
-@synthesize capture, latitude, longitude, createdAt, comment, rating;
+@synthesize delegate, capture, latitude, longitude, createdAt, comment, rating;
 
 #pragma mark -
 #pragma mark ImageInspectView PrivateAPI
@@ -39,6 +40,12 @@
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
     if (_error) {
         [[[UIAlertView alloc] initWithTitle:[_error localizedDescription] message:[_error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
+    }
+}
+
+- (void)singleTapGesture {
+    if ([self.delegate respondsToSelector:@selector(didSingleTap)]) {
+        [self.delegate didSingleTap];
     }
 }
 
@@ -69,6 +76,11 @@
         editImageGesture.numberOfTapsRequired = 2;
         editImageGesture.numberOfTouchesRequired = 1;
         [self addGestureRecognizer:editImageGesture];
+        UITapGestureRecognizer* sigleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGesture)];
+        sigleTapGesture.numberOfTapsRequired = 1;
+        sigleTapGesture.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:sigleTapGesture];
+        [sigleTapGesture requireGestureRecognizerToFail:editImageGesture];
     }
     return self;
 }
