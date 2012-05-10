@@ -19,7 +19,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
-@synthesize delegate, containerView, imageShareView, imageCommentBorderView, imageCommentLabel, imageAddComment, imageRating, starred;
+@synthesize delegate, containerView, commentViewController, imageShareView, imageCommentBorderView, imageCommentLabel, 
+            imageAddComment, imageRating, starred;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
@@ -63,7 +64,7 @@
 }
 
 - (IBAction)addComment:(id)sender {
-    NSLog(@"Add Comment");
+    self.commentViewController = [CommentViewController inView:self withDelegate:self andComment:nil];
 }
 
 - (IBAction)star:(id)sender {
@@ -77,6 +78,12 @@
         self.imageRating.alpha = 0.75;
     }
     NSLog(@"Star");
+}
+
+#pragma mark -
+#pragma mark CommentViewControllerDelegate
+
+- (void)saveComment:(NSString*)_comment {
 }
 
 @end

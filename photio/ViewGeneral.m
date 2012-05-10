@@ -11,10 +11,10 @@
 #import "ViewGeneral.h"
 #import "UIImage+Resize.h"
 #import "ImageInspectView.h"
-#import "ImageEditViewController.h"
 #import "Capture.h"
 #import "Image.h"
 
+#import "ImageEditViewController.h"
 #import "CalendarViewController.h"
 #import "LocalesViewController.h"
 

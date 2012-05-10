@@ -25,6 +25,8 @@
 		05809C9A15573EC900AF2079 /* yellowstar.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9615573EC900AF2079 /* yellowstar.png */; };
 		05809C9B15573EC900AF2079 /* yellowstar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9715573EC900AF2079 /* yellowstar@2x.png */; };
 		05809CA3155742FE00AF2079 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CA2155742FE00AF2079 /* Capture.m */; };
+		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
+		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
 		058736BA15556941007A5654 /* ImageMetaDataEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B915556941007A5654 /* ImageMetaDataEditView.xib */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
@@ -105,6 +107,9 @@
 		05809C9715573EC900AF2079 /* yellowstar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yellowstar@2x.png"; path = "photio/Images/yellowstar@2x.png"; sourceTree = SOURCE_ROOT; };
 		05809CA1155742FE00AF2079 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		05809CA2155742FE00AF2079 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
+		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
+		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
 		058736B715556897007A5654 /* ImageEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditView.xib; path = photio/PhotoAlbum/ImageEditView.xib; sourceTree = SOURCE_ROOT; };
 		058736B915556941007A5654 /* ImageMetaDataEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageMetaDataEditView.xib; path = photio/PhotoAlbum/ImageMetaDataEditView.xib; sourceTree = SOURCE_ROOT; };
 		058B4FB415196B1F0087F717 /* LocalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalesViewController.h; sourceTree = "<group>"; };
@@ -383,6 +388,9 @@
 				059772F31527D787008F3A1B /* CameraViewController.h */,
 				059772F41527D787008F3A1B /* CameraViewController.m */,
 				050CF14F14F9A27D00A31059 /* CameraViewController.xib */,
+				05809CAF155B3C6700AF2079 /* CommentViewController.h */,
+				05809CB0155B3C6700AF2079 /* CommentViewController.m */,
+				05809CB1155B3C6700AF2079 /* CommentViewController.xib */,
 				05AF480D154DCCAE0099576A /* EntriesView.h */,
 				05AF480E154DCCAE0099576A /* EntriesView.m */,
 				05CCEFA31555E0E8004FBD21 /* ImageEditControlView.h */,
@@ -493,6 +501,7 @@
 				05809C9915573EC900AF2079 /* whitestar@2x.png in Resources */,
 				05809C9A15573EC900AF2079 /* yellowstar.png in Resources */,
 				05809C9B15573EC900AF2079 /* yellowstar@2x.png in Resources */,
+				05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +550,7 @@
 				05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */,
 				05CCEFA51555E0E9004FBD21 /* ImageEditControlView.m in Sources */,
 				05809CA3155742FE00AF2079 /* Capture.m in Sources */,
+				05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

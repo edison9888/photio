@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommentViewController.h"
 
 @class ImageEditControlView;
 @class ImageEditCommentView;
 @class Capture;
 
 @protocol ImageMetaDataEditViewDelegate;
+@class CommentViewController;
 
-@interface ImageMetaDataEditView : UIView
+@interface ImageMetaDataEditView : UIView <CommentViewControllerDelegate>
 
 @property(nonatomic, weak)   id<ImageMetaDataEditViewDelegate>  delegate;
 @property(nonatomic, strong) UIView*                            containerView;
+@property(nonatomic, strong) CommentViewController*             commentViewController;
 @property(nonatomic, strong) IBOutlet ImageEditControlView*     imageCommentBorderView;
 @property(nonatomic, strong) IBOutlet ImageEditControlView*     imageShareView;
 @property(nonatomic, strong) IBOutlet UILabel*                  imageCommentLabel;
