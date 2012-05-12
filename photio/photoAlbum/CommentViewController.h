@@ -18,6 +18,8 @@
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<CommentViewControllerDelegate>)_delegate andComment:(NSString*)_comment;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView;
+- (IBAction)saveComment:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end
 

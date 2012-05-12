@@ -38,6 +38,12 @@
     return self;
 }
 
+- (IBAction)saveComment:(id)sender {
+}
+
+- (IBAction)cancel:(id)sender {
+}
+
 #pragma mark -
 #pragma mark UIViewController
 

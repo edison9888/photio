@@ -26,6 +26,8 @@
 @property(nonatomic, strong) IBOutlet UILabel*                  imageCommentLabel;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageAddComment;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageRating;
+@property(nonatomic, strong) IBOutlet UIImageView*              imageTwitter;
+@property(nonatomic, strong) IBOutlet UIImageView*              imageExport;
 @property(nonatomic, assign) BOOL                               starred;
  
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate;

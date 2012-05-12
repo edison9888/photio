@@ -27,6 +27,7 @@
 		05809CA3155742FE00AF2079 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CA2155742FE00AF2079 /* Capture.m */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
+		05809CB5155DE51200AF2079 /* comment-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB4155DE51200AF2079 /* comment-background.png */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
 		058736BA15556941007A5654 /* ImageMetaDataEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B915556941007A5654 /* ImageMetaDataEditView.xib */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
@@ -110,6 +111,7 @@
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
+		05809CB4155DE51200AF2079 /* comment-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comment-background.png"; path = "photio/Images/comment-background.png"; sourceTree = SOURCE_ROOT; };
 		058736B715556897007A5654 /* ImageEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditView.xib; path = photio/PhotoAlbum/ImageEditView.xib; sourceTree = SOURCE_ROOT; };
 		058736B915556941007A5654 /* ImageMetaDataEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageMetaDataEditView.xib; path = photio/PhotoAlbum/ImageMetaDataEditView.xib; sourceTree = SOURCE_ROOT; };
 		058B4FB415196B1F0087F717 /* LocalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalesViewController.h; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		05C59C2314F331A6009AC823 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05809CB4155DE51200AF2079 /* comment-background.png */,
 				05CCEFB41555F459004FBD21 /* export.png */,
 				05CCEFB51555F459004FBD21 /* export@2x.png */,
 				0542DAF71523EDA7002C62A0 /* flash-on.png */,
@@ -502,6 +505,7 @@
 				05809C9A15573EC900AF2079 /* yellowstar.png in Resources */,
 				05809C9B15573EC900AF2079 /* yellowstar@2x.png in Resources */,
 				05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */,
+				05809CB5155DE51200AF2079 /* comment-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

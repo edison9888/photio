@@ -14,16 +14,33 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageMetaDataEditView (PrivateAPI)
 
+- (void)hideShareView;
+- (void)showShareView;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
 @synthesize delegate, containerView, commentViewController, imageShareView, imageCommentBorderView, imageCommentLabel, 
-            imageAddComment, imageRating, starred;
+            imageAddComment, imageTwitter, imageExport, imageRating, starred;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
+
+- (void)hideShareView {
+    self.imageShareView.hidden = YES;
+    self.imageTwitter.hidden = YES;
+    self.imageExport.hidden = YES;
+    self.imageRating.hidden = YES;
+}
+
+- (void)showShareView {
+    self.imageShareView.hidden = NO;
+    self.imageTwitter.hidden = NO;
+    self.imageExport.hidden = NO;
+    self.imageRating.hidden = NO;
+}
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView
@@ -64,6 +81,7 @@
 }
 
 - (IBAction)addComment:(id)sender {
+    [self hideShareView];
     self.commentViewController = [CommentViewController inView:self withDelegate:self andComment:nil];
 }
 
