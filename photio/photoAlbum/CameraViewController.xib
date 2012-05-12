@@ -43,7 +43,7 @@
 						<string key="NSFrame">{{20, 20}, {45, 45}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="760511041"/>
+						<reference key="NSNextKeyView" ref="817738907"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -53,19 +53,37 @@
 							<string key="NSResourceName">flash-on.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="760511041">
+					<object class="IBUIView" id="817738907">
 						<reference key="NSNextResponder" ref="142320705"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{100, 412}, {120, 60}}</string>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{135, 410}, {60, 60}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="1031627593"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor" id="907045235">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
+						</object>
+						<float key="IBUIAlpha">0.30000001192092896</float>
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">take-photo.png</string>
+					</object>
+					<object class="IBUIView" id="1031627593">
+						<reference key="NSNextResponder" ref="142320705"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{135, 410}, {60, 60}}</string>
+						<reference key="NSSuperview" ref="142320705"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MAA</bytes>
 						</object>
+						<float key="IBUIAlpha">0.30000001192092896</float>
+						<reference key="IBUIGestureRecognizers" ref="0"/>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
@@ -73,18 +91,12 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="393904638"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MCAwAA</bytes>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="907045235"/>
 				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="932958160">
 				<bool key="IBUIDelaysTouchesBegan">YES</bool>
-				<bool key="IBUIDelaysTouchesEnded">NO</bool>
-			</object>
-			<object class="IBUITapGestureRecognizer" id="848899834">
 				<bool key="IBUIDelaysTouchesEnded">NO</bool>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="729777438">
@@ -93,6 +105,9 @@
 				<int key="IBUINumberOfTapsRequired">2</int>
 			</object>
 			<object class="IBUILongPressGestureRecognizer" id="406212486"/>
+			<object class="IBUITapGestureRecognizer" id="848899834">
+				<bool key="IBUIDelaysTouchesEnded">NO</bool>
+			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -103,14 +118,6 @@
 						<reference key="destination" ref="142320705"/>
 					</object>
 					<int key="connectionID">58</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">takePhotoView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="760511041"/>
-					</object>
-					<int key="connectionID">62</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -191,16 +198,6 @@
 					<int key="connectionID">72</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
-						<string key="label">gestureRecognizers</string>
-						<reference key="source" ref="760511041"/>
-						<reference key="destination" ref="848899834"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
-						<bool key="addsContentToExistingCollection">YES</bool>
-					</object>
-					<int key="connectionID">74</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">autoFocus:</string>
 						<reference key="source" ref="932958160"/>
@@ -215,6 +212,16 @@
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">81</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="1031627593"/>
+						<reference key="destination" ref="848899834"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">84</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -241,7 +248,8 @@
 						<reference key="object" ref="142320705"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="393904638"/>
-							<reference ref="760511041"/>
+							<reference ref="1031627593"/>
+							<reference ref="817738907"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -250,26 +258,13 @@
 						<reference key="object" ref="393904638"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="142320705"/>
-						<string key="objectName">flash</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">51</int>
-						<reference key="object" ref="760511041"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="142320705"/>
-						<string key="objectName">take photo</string>
+						<string key="objectName">Flash</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">63</int>
 						<reference key="object" ref="932958160"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Auto Focus</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="848899834"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Take Photo</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">40</int>
@@ -283,6 +278,25 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Continuous Focus</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">83</int>
+						<reference key="object" ref="1031627593"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="142320705"/>
+						<string key="objectName">Take Photo</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">14</int>
+						<reference key="object" ref="848899834"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Take Photo</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">85</int>
+						<reference key="object" ref="817738907"/>
+						<reference key="parent" ref="142320705"/>
+						<string key="objectName">Take Photo Border</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -294,15 +308,18 @@
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="63.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="83.CustomClassName">TakePhotoView</string>
+				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="85.CustomClassName">TakePhotoView</string>
+				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">82</int>
+			<int key="maxID">85</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -367,6 +384,14 @@
 						<string key="minorKey">./Classes/CameraViewController.h</string>
 					</object>
 				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TakePhotoView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TakePhotoView.h</string>
+					</object>
+				</object>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
@@ -377,10 +402,10 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="flash-on.png">{45, 45}</string>
-			<string key="take-photo.png">{120, 60}</string>
-		</dictionary>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">flash-on.png</string>
+			<string key="NS.object.0">{45, 45}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>

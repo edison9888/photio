@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class ImageEditControlView;
+@class ImageControlView;
 @protocol ImageEditViewDelegate;
 
 @interface ImageEditView : UIView
 
 @property(nonatomic, weak)   id<ImageEditViewDelegate>          delegate;
 @property(nonatomic, strong) UIView*                            containerView;
-@property(nonatomic, strong) IBOutlet ImageEditControlView*     imageControlsView;
-@property(nonatomic, strong) IBOutlet ImageEditControlView*     imageFiltersView;
+@property(nonatomic, strong) IBOutlet ImageControlView*         imageControlsView;
+@property(nonatomic, strong) IBOutlet ImageControlView*         imageFiltersView;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate;
 

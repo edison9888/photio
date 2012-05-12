@@ -8,22 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+@class ImageMetaDataEditView;
 @protocol CommentViewControllerDelegate;
 
 @interface CommentViewController : UIViewController
 
 @property(nonatomic, weak)      id<CommentViewControllerDelegate>   delegate;
-@property(nonatomic, weak)      UIView*                             containerView;
+@property(nonatomic, weak)      ImageMetaDataEditView*              metaDataEditView;
 @property(nonatomic, strong)    IBOutlet UITextView*                commentTextView;
+@property(nonatomic, strong)    IBOutlet UIView*                    backgroundView;
 
-+ (id)inView:(UIView*)_containerView withDelegate:(id<CommentViewControllerDelegate>)_delegate andComment:(NSString*)_comment;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView;
-- (IBAction)saveComment:(id)sender;
++ (id)inView:(ImageMetaDataEditView*)_containerView withDelegate:(id<CommentViewControllerDelegate>)_delegate andComment:(NSString*)_comment;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(ImageMetaDataEditView*)_containerView;
 - (IBAction)cancel:(id)sender;
+- (IBAction)done:(id)sender;
 
 @end
 
 @protocol CommentViewControllerDelegate <NSObject>
+
+@required
 
 - (void)saveComment:(NSString*)_comment;
 

@@ -93,11 +93,13 @@
 }
 
 - (void)saveComment:(NSString*)_comment {
-    
+    self.comment = _comment;
+    NSLog(@"%@", _comment);
 }
 
 - (void)saveRating:(NSString*)_rating {
-    
+    self.rating = _rating;
+    NSLog(@"%@", _rating);    
 }
 
 @end

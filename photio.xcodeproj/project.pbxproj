@@ -27,7 +27,7 @@
 		05809CA3155742FE00AF2079 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CA2155742FE00AF2079 /* Capture.m */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
-		05809CB5155DE51200AF2079 /* comment-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB4155DE51200AF2079 /* comment-background.png */; };
+		05809CBD155EE72900AF2079 /* TakePhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CBC155EE72800AF2079 /* TakePhotoView.m */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
 		058736BA15556941007A5654 /* ImageMetaDataEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B915556941007A5654 /* ImageMetaDataEditView.xib */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
@@ -39,8 +39,6 @@
 		0590C746153B3D8F0065AB42 /* CalendarEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C73F153B3D8F0065AB42 /* CalendarEntryView.m */; };
 		0590C747153B3D8F0065AB42 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C741153B3D8F0065AB42 /* CalendarViewController.m */; };
 		0590C748153B3D8F0065AB42 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590C742153B3D8F0065AB42 /* CalendarViewController.xib */; };
-		059772E71527961B008F3A1B /* take-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 059772E61527961B008F3A1B /* take-photo.png */; };
-		059772E9152798BA008F3A1B /* take-photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 059772E8152798BA008F3A1B /* take-photo@2x.png */; };
 		059772F51527D787008F3A1B /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F01527D787008F3A1B /* Camera.m */; };
 		059772F71527D787008F3A1B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* CameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
@@ -64,7 +62,7 @@
 		05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C99ED014F0585C00D09F3E /* PhotioAppDelegate.m */; };
 		05CCEF9E15557711004FBD21 /* NSObject+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */; };
 		05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEFA115558EFB004FBD21 /* UIView+Extensions.m */; };
-		05CCEFA51555E0E9004FBD21 /* ImageEditControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */; };
+		05CCEFA51555E0E9004FBD21 /* ImageControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CCEFA41555E0E8004FBD21 /* ImageControlView.m */; };
 		05CCEFB61555F459004FBD21 /* export.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB41555F459004FBD21 /* export.png */; };
 		05CCEFB71555F459004FBD21 /* export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB51555F459004FBD21 /* export@2x.png */; };
 		05CCEFBA1556302D004FBD21 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB81556302D004FBD21 /* twitter.png */; };
@@ -111,7 +109,8 @@
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
-		05809CB4155DE51200AF2079 /* comment-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comment-background.png"; path = "photio/Images/comment-background.png"; sourceTree = SOURCE_ROOT; };
+		05809CBB155EE72600AF2079 /* TakePhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TakePhotoView.h; path = photio/PhotoAlbum/TakePhotoView.h; sourceTree = SOURCE_ROOT; };
+		05809CBC155EE72800AF2079 /* TakePhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoView.m; path = photio/PhotoAlbum/TakePhotoView.m; sourceTree = SOURCE_ROOT; };
 		058736B715556897007A5654 /* ImageEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditView.xib; path = photio/PhotoAlbum/ImageEditView.xib; sourceTree = SOURCE_ROOT; };
 		058736B915556941007A5654 /* ImageMetaDataEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageMetaDataEditView.xib; path = photio/PhotoAlbum/ImageMetaDataEditView.xib; sourceTree = SOURCE_ROOT; };
 		058B4FB415196B1F0087F717 /* LocalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalesViewController.h; sourceTree = "<group>"; };
@@ -130,8 +129,6 @@
 		0590C740153B3D8F0065AB42 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		0590C741153B3D8F0065AB42 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		0590C742153B3D8F0065AB42 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
-		059772E61527961B008F3A1B /* take-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "take-photo.png"; sourceTree = "<group>"; };
-		059772E8152798BA008F3A1B /* take-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "take-photo@2x.png"; sourceTree = "<group>"; };
 		059772EF1527D787008F3A1B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		059772F01527D787008F3A1B /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		059772F31527D787008F3A1B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
@@ -172,8 +169,8 @@
 		05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+Extensions.m"; path = "photio/Library/NSObject+Extensions.m"; sourceTree = SOURCE_ROOT; };
 		05CCEFA015558EFB004FBD21 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extensions.h"; path = "photio/Library/UIView+Extensions.h"; sourceTree = SOURCE_ROOT; };
 		05CCEFA115558EFB004FBD21 /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extensions.m"; path = "photio/Library/UIView+Extensions.m"; sourceTree = SOURCE_ROOT; };
-		05CCEFA31555E0E8004FBD21 /* ImageEditControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditControlView.h; path = photio/PhotoAlbum/ImageEditControlView.h; sourceTree = SOURCE_ROOT; };
-		05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditControlView.m; path = photio/PhotoAlbum/ImageEditControlView.m; sourceTree = SOURCE_ROOT; };
+		05CCEFA31555E0E8004FBD21 /* ImageControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageControlView.h; path = photio/PhotoAlbum/ImageControlView.h; sourceTree = SOURCE_ROOT; };
+		05CCEFA41555E0E8004FBD21 /* ImageControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageControlView.m; path = photio/PhotoAlbum/ImageControlView.m; sourceTree = SOURCE_ROOT; };
 		05CCEFB41555F459004FBD21 /* export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = export.png; path = photio/Images/export.png; sourceTree = SOURCE_ROOT; };
 		05CCEFB51555F459004FBD21 /* export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "export@2x.png"; path = "photio/Images/export@2x.png"; sourceTree = SOURCE_ROOT; };
 		05CCEFB81556302D004FBD21 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = photio/Images/twitter.png; sourceTree = SOURCE_ROOT; };
@@ -293,15 +290,12 @@
 		05C59C2314F331A6009AC823 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				05809CB4155DE51200AF2079 /* comment-background.png */,
 				05CCEFB41555F459004FBD21 /* export.png */,
 				05CCEFB51555F459004FBD21 /* export@2x.png */,
 				0542DAF71523EDA7002C62A0 /* flash-on.png */,
 				0542DAF81523EDA7002C62A0 /* flash-on@2x.png */,
 				050855371557074100609C31 /* pencil.png */,
 				050855381557074100609C31 /* pencil@2x.png */,
-				059772E8152798BA008F3A1B /* take-photo@2x.png */,
-				059772E61527961B008F3A1B /* take-photo.png */,
 				05CCEFB81556302D004FBD21 /* twitter.png */,
 				05CCEFB91556302D004FBD21 /* twitter@2x.png */,
 				05809C9615573EC900AF2079 /* yellowstar.png */,
@@ -396,8 +390,8 @@
 				05809CB1155B3C6700AF2079 /* CommentViewController.xib */,
 				05AF480D154DCCAE0099576A /* EntriesView.h */,
 				05AF480E154DCCAE0099576A /* EntriesView.m */,
-				05CCEFA31555E0E8004FBD21 /* ImageEditControlView.h */,
-				05CCEFA41555E0E8004FBD21 /* ImageEditControlView.m */,
+				05CCEFA31555E0E8004FBD21 /* ImageControlView.h */,
+				05CCEFA41555E0E8004FBD21 /* ImageControlView.m */,
 				05E4C21C1552233500C7266E /* ImageEditViewController.h */,
 				05E4C21D1552233600C7266E /* ImageEditViewController.m */,
 				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
@@ -412,6 +406,8 @@
 				05E4C222155224D400C7266E /* ImageMetaDataEditView.h */,
 				05E4C223155224D400C7266E /* ImageMetaDataEditView.m */,
 				058736B915556941007A5654 /* ImageMetaDataEditView.xib */,
+				05809CBB155EE72600AF2079 /* TakePhotoView.h */,
+				05809CBC155EE72800AF2079 /* TakePhotoView.m */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
@@ -488,8 +484,6 @@
 				058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */,
 				0542DAF91523EDA7002C62A0 /* flash-on.png in Resources */,
 				0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */,
-				059772E71527961B008F3A1B /* take-photo.png in Resources */,
-				059772E9152798BA008F3A1B /* take-photo@2x.png in Resources */,
 				0590C748153B3D8F0065AB42 /* CalendarViewController.xib in Resources */,
 				05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */,
 				058736B815556898007A5654 /* ImageEditView.xib in Resources */,
@@ -505,7 +499,6 @@
 				05809C9A15573EC900AF2079 /* yellowstar.png in Resources */,
 				05809C9B15573EC900AF2079 /* yellowstar@2x.png in Resources */,
 				05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */,
-				05809CB5155DE51200AF2079 /* comment-background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,9 +545,10 @@
 				05E4C2271552259800C7266E /* ImageEditView.m in Sources */,
 				05CCEF9E15557711004FBD21 /* NSObject+Extensions.m in Sources */,
 				05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */,
-				05CCEFA51555E0E9004FBD21 /* ImageEditControlView.m in Sources */,
+				05CCEFA51555E0E9004FBD21 /* ImageControlView.m in Sources */,
 				05809CA3155742FE00AF2079 /* Capture.m in Sources */,
 				05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */,
+				05809CBD155EE72900AF2079 /* TakePhotoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
