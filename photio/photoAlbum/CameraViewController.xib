@@ -43,7 +43,7 @@
 						<string key="NSFrame">{{20, 20}, {45, 45}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="817738907"/>
+						<reference key="NSNextKeyView" ref="598459699"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -53,15 +53,14 @@
 							<string key="NSResourceName">flash-on.png</string>
 						</object>
 					</object>
-					<object class="IBUIView" id="817738907">
+					<object class="IBUIView" id="317669808">
 						<reference key="NSNextResponder" ref="142320705"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{135, 410}, {60, 60}}</string>
+						<string key="NSFrame">{{115, 410}, {90, 50}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1031627593"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="907045235">
+						<object class="NSColor" key="IBUIBackgroundColor" id="89384202">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -69,13 +68,13 @@
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIView" id="1031627593">
+					<object class="IBUIView" id="598459699">
 						<reference key="NSNextResponder" ref="142320705"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{135, 410}, {60, 60}}</string>
+						<string key="NSFrame">{{115, 410}, {90, 50}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="317669808"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -91,7 +90,7 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="393904638"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
-				<reference key="IBUIBackgroundColor" ref="907045235"/>
+				<reference key="IBUIBackgroundColor" ref="89384202"/>
 				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -216,7 +215,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
-						<reference key="source" ref="1031627593"/>
+						<reference key="source" ref="598459699"/>
 						<reference key="destination" ref="848899834"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
@@ -248,8 +247,8 @@
 						<reference key="object" ref="142320705"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="393904638"/>
-							<reference ref="1031627593"/>
-							<reference ref="817738907"/>
+							<reference ref="598459699"/>
+							<reference ref="317669808"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -279,13 +278,6 @@
 						<string key="objectName">Continuous Focus</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">83</int>
-						<reference key="object" ref="1031627593"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="142320705"/>
-						<string key="objectName">Take Photo</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
 						<reference key="object" ref="848899834"/>
 						<reference key="parent" ref="0"/>
@@ -293,9 +285,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">85</int>
-						<reference key="object" ref="817738907"/>
+						<reference key="object" ref="317669808"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="142320705"/>
 						<string key="objectName">Take Photo Border</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">83</int>
+						<reference key="object" ref="598459699"/>
+						<reference key="parent" ref="142320705"/>
+						<string key="objectName">Take Photo</string>
 					</object>
 				</array>
 			</object>

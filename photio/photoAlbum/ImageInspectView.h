@@ -25,7 +25,7 @@
 
 + (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture;
 + (id)cachedWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location;
-- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date comment:(NSString*)_comment rating:(NSString*)_rating andLocation:(CLLocationCoordinate2D)_location;
+- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date andLocation:(CLLocationCoordinate2D)_location;
 
 @end
 

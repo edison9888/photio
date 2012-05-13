@@ -53,17 +53,20 @@
 #pragma mark ImageInspectView
 
 + (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture {
-    return [[ImageInspectView alloc] initWithFrame:_frame capture:_capture.image.image date:_capture.createdAt comment:_capture.comment rating:_capture.rating
-               andLocation:CLLocationCoordinate2DMake([_capture.latitude doubleValue], [_capture.longitude doubleValue])];
+    ImageInspectView* imageView = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture.image.image date:_capture.createdAt 
+        andLocation:CLLocationCoordinate2DMake([_capture.latitude doubleValue], [_capture.longitude doubleValue])];
+    imageView.comment = _capture.comment;
+    imageView.rating = _capture.rating;
+    return  imageView;
 }
 
 + (id)cachedWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
-    ImageInspectView* view = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture date:[NSDate date] comment:nil rating:nil andLocation:_location];
+    ImageInspectView* view = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture date:[NSDate date] andLocation:_location];
     view.capture = _capture;
     return view;
 }
 
-- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date comment:(NSString*)_comment rating:(NSString*)_rating andLocation:(CLLocationCoordinate2D)_location {
+- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date andLocation:(CLLocationCoordinate2D)_location {
     if ((self = [super initWithFrame:(CGRect)_frame])) {
         self.latitude = [NSNumber numberWithDouble:_location.latitude];
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
@@ -94,12 +97,10 @@
 
 - (void)saveComment:(NSString*)_comment {
     self.comment = _comment;
-    NSLog(@"%@", _comment);
 }
 
 - (void)saveRating:(NSString*)_rating {
     self.rating = _rating;
-    NSLog(@"%@", _rating);    
 }
 
 @end
