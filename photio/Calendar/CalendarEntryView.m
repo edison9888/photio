@@ -29,6 +29,7 @@
 - (CGRect)calendarDateViewRect:(CGRect)_cotentFrame;
 - (void)initializeDateFormatters;
 - (void)openEntryView;
+- (Capture*)fetchCapture:(ImageInspectView*)_entry;
 
 @end
 
@@ -65,6 +66,19 @@
             completion:nil
          ];
     }
+}
+
+- (Capture*)fetchCapture:(ImageInspectView*)_entry {
+    Capture* capture = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", _entry.createdAt]];
+    fetchRequest.fetchLimit = 1;
+    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
+    if ([fetchResults count] > 0) {
+        capture = [fetchResults objectAtIndex:0];
+    }
+    return capture;
 }
 
 #pragma mark -
@@ -113,22 +127,16 @@
 #pragma mark -
 #pragma mark ImageEntriesViewDelegate
 
-- (void)deleteEntry:(UIView*)_entry {
-    ImageInspectView* imageEntry = (ImageInspectView*)_entry;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", imageEntry.createdAt]];
-    fetchRequest.fetchLimit = 1;
-    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
-    if ([fetchResults count] > 0) {
-        Capture* capture = [fetchResults objectAtIndex:0];
+- (void)deleteEntry:(ImageInspectView*)_entry {
+    Capture* capture = [self fetchCapture:_entry];
+    if (capture) {
         [[ViewGeneral instance].managedObjectContext deleteObject:capture];
         [[ViewGeneral instance] saveManagedObjectContext];
     }
-    [[ViewGeneral instance].calendarViewController updateCaptureWithDate:imageEntry.createdAt];
+    [[ViewGeneral instance].calendarViewController updateCaptureWithDate:_entry.createdAt];
 }
 
-- (void)didRemoveAllEntries:(ImageEntriesView*)_entries {    
+- (void)didRemoveAllEntries:(ImageInspectView*)_entries {    
     [_entries removeFromSuperview];
 }
 
@@ -157,7 +165,14 @@
      ];
 }
 
-- (void)didFinishEditing:(ImageInspectView*)_imageView {
+- (void)didFinishEditing:(ImageInspectView*)_entry {
+    Capture* capture = [self fetchCapture:_entry];
+    if (capture) {
+        capture.comment = _entry.comment;
+        capture.rating = _entry.rating;
+        [[ViewGeneral instance] saveManagedObjectContext];
+    }
+    [[ViewGeneral instance].calendarViewController updateCaptureWithDate:_entry.createdAt];
 }
 
 

@@ -147,10 +147,9 @@
     }
 }
 
--(void)saveEntry:(UIView*)_entry {
-    ImageInspectView* displayedView = (ImageInspectView*)_entry;
+-(void)saveEntry:(ImageInspectView*)_entry {
     if ([self.delegate respondsToSelector:@selector(saveImage:)]) {
-        [self.delegate saveImage:displayedView];
+        [self.delegate saveImage:_entry];
     }
 }
 

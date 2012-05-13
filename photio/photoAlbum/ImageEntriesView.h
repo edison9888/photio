@@ -33,8 +33,8 @@
 
 @optional
 
-- (void)deleteEntry:(UIView*)_entry;
-- (void)saveEntry:(UIView*)_entry;
+- (void)deleteEntry:(ImageInspectView*)_entry;
+- (void)saveEntry:(ImageInspectView*)_entry;
 - (void)didRemoveAllEntries:(ImageEntriesView*)_entries;
 - (NSMutableArray*)loadEntries;
 
@@ -44,6 +44,6 @@
 - (void)transitionDownFromEntries;
 
 - (void)didSingleTapEntries:(ImageEntriesView*)_entries;
-- (void)didFinishEditing:(ImageInspectView*)_imageView;
+- (void)didFinishEditing:(ImageInspectView*)_entry;
 
 @end
