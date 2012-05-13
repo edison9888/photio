@@ -16,7 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditViewController
 
-@synthesize delegate, removeGesture, singleTapGesture, containerView, streamView, imageMetaDataEditView, imageEditView;
+@synthesize delegate, removeGesture, singleTapGesture, containerView, streamView, imageMetaDataEditView, imageEditView, didEdit;
 
 #pragma mark -
 #pragma mark ImageEditViewController (PrivateAPI)
@@ -36,16 +36,17 @@
     return self;
 }
 
-- (void)updateComment:(NSString*)_comment {
+- (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating {
+    self.didEdit = NO;
     [self.imageMetaDataEditView updateComment:_comment];
-}
-
-- (void)updateRating:(NSString*)_rating {
     [self.imageMetaDataEditView updateRating:_rating];
 }
 
 - (IBAction)remove:(id)sender {
     [self.view removeFromSuperview];
+    if (self.didEdit) {
+        [self.delegate didFinishEditing];
+    }
 }
 
 - (IBAction)singleTap:(id)sender {
@@ -115,10 +116,12 @@
 }
 
 - (void)saveComment:(NSString*)_comment {
+    self.didEdit = YES;
     [self.delegate saveComment:_comment];
 }
 
 - (void)saveRating:(NSString*)_rating {
+    self.didEdit = YES;
     [self.delegate saveRating:_rating];
 }
 

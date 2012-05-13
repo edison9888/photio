@@ -22,11 +22,11 @@
 @property(nonatomic, strong) UIView*                                containerView;
 @property(nonatomic, strong) ImageMetaDataEditView*                 imageMetaDataEditView;
 @property(nonatomic, strong) ImageEditView*                         imageEditView;
+@property(nonatomic, assign) BOOL                                   didEdit;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView;
-- (void)updateComment:(NSString*)_comment;
-- (void)updateRating:(NSString*)_rating;
+- (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating;
 - (IBAction)remove:(id)sender;
 - (IBAction)singleTap:(id)sender;
 
@@ -43,5 +43,6 @@
 - (void)exportToCameraRoll;
 - (void)saveComment:(NSString*)_comment;
 - (void)saveRating:(NSString*)_rating;
+- (void)didFinishEditing;
 
 @end

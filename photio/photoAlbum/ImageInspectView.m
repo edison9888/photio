@@ -33,8 +33,7 @@
     ViewGeneral* viewGeneral = [ViewGeneral instance];
     [viewGeneral initImageEditView:self];
     viewGeneral.imageEditViewController.delegate = self;
-    [viewGeneral.imageEditViewController updateRating:self.rating];
-    [viewGeneral.imageEditViewController updateComment:self.comment];    
+    [viewGeneral.imageEditViewController updateComment:self.comment andRating:self.rating];    
 }
 
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
@@ -101,6 +100,12 @@
 
 - (void)saveRating:(NSString*)_rating {
     self.rating = _rating;
+}
+
+- (void)didFinishEditing {
+    if ([self.delegate respondsToSelector:@selector(didFinishEditing:)]) {
+        [self.delegate didFinishEditing:self];
+    }
 }
 
 @end

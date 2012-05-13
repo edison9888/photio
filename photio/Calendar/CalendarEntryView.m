@@ -55,7 +55,7 @@
 
 - (void)openEntryView {
     if (self.photoView.image) {
-        __block EntriesView* entries = [EntriesView withFrame:[ViewGeneral instance].containerView.frame andDelegate:self];
+        __block ImageEntriesView* entries = [ImageEntriesView withFrame:[ViewGeneral instance].containerView.frame andDelegate:self];
         entries.alpha = 0.0;
         [[ViewGeneral instance].containerView addSubview:entries];
         [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
@@ -111,7 +111,7 @@
 }
 
 #pragma mark -
-#pragma mark EntriesViewDelegate
+#pragma mark ImageEntriesViewDelegate
 
 - (void)deleteEntry:(UIView*)_entry {
     ImageInspectView* imageEntry = (ImageInspectView*)_entry;
@@ -128,7 +128,7 @@
     [[ViewGeneral instance].calendarViewController updateCaptureWithDate:imageEntry.createdAt];
 }
 
-- (void)didRemoveAllEntries:(EntriesView*)_entries {    
+- (void)didRemoveAllEntries:(ImageEntriesView*)_entries {    
     [_entries removeFromSuperview];
 }
 
@@ -146,7 +146,7 @@
     return [entryViews mutableCopy];
 }
 
-- (void)didSingleTapEntries:(EntriesView*)_entries {
+- (void)didSingleTapEntries:(ImageEntriesView*)_entries {
     [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
          animations:^{
              _entries.alpha = 0.0;
@@ -156,5 +156,9 @@
          }
      ];
 }
+
+- (void)didFinishEditing:(ImageInspectView*)_imageView {
+}
+
 
 @end

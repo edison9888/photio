@@ -19,19 +19,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CommentViewController
 
-@synthesize delegate, metaDataEditView, commentTextView, backgroundView;
+@synthesize delegate, metaDataEditView, commentTextView, containerView;
 
 #pragma mark -
 #pragma mark CommentViewController (PrivateAPI)
 
 - (void)addInputView {
-    __block CGRect oldFrame = self.backgroundView.frame;
-    self.backgroundView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
+    __block CGRect oldFrame = self.containerView.frame;
+    self.containerView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
     [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION 
          delay:0
          options:UIViewAnimationOptionCurveEaseOut
          animations:^{
-             self.backgroundView.frame = CGRectMake(0.0, 0.0, oldFrame.size.width, oldFrame.size.height);
+             self.containerView.frame = CGRectMake(0.0, 0.0, oldFrame.size.width, oldFrame.size.height);
              [self.commentTextView becomeFirstResponder];
          } 
          completion:^(BOOL _finished) {
@@ -40,10 +40,10 @@
 }
 
 - (void)removeInputView {
-    __block CGRect oldFrame = self.backgroundView.frame;
+    __block CGRect oldFrame = self.containerView.frame;
     [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION 
         animations:^{
-            self.backgroundView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
+            self.containerView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
             [self.commentTextView resignFirstResponder];
         } 
         completion:^(BOOL _finished) {

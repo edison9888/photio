@@ -34,5 +34,6 @@
 @optional
 
 - (void)didSingleTapImage;
+- (void)didFinishEditing:(ImageInspectView*)_imageView;
 
 @end

@@ -45,7 +45,7 @@
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
 		05AED9311531E7F500E277BE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED9301531E7F500E277BE /* Tag.m */; };
-		05AF480F154DCCAE0099576A /* EntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* EntriesView.m */; };
+		05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* ImageEntriesView.m */; };
 		05B2A7561533BBFC00499F6F /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B2A7551533BBFC00499F6F /* Image.m */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
@@ -140,8 +140,8 @@
 		05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
 		05AED92F1531E7F500E277BE /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		05AED9301531E7F500E277BE /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
-		05AF480D154DCCAE0099576A /* EntriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntriesView.h; path = photio/PhotoAlbum/EntriesView.h; sourceTree = SOURCE_ROOT; };
-		05AF480E154DCCAE0099576A /* EntriesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntriesView.m; path = photio/PhotoAlbum/EntriesView.m; sourceTree = SOURCE_ROOT; };
+		05AF480D154DCCAE0099576A /* ImageEntriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; name = ImageEntriesView.h; path = photio/PhotoAlbum/ImageEntriesView.h; sourceTree = SOURCE_ROOT; };
+		05AF480E154DCCAE0099576A /* ImageEntriesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEntriesView.m; path = photio/PhotoAlbum/ImageEntriesView.m; sourceTree = SOURCE_ROOT; };
 		05B2A7541533BBFC00499F6F /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
 		05B2A7551533BBFC00499F6F /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		05B83718152E6C5F00D99A40 /* ImageInspectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectView.h; sourceTree = "<group>"; };
@@ -388,8 +388,8 @@
 				05809CAF155B3C6700AF2079 /* CommentViewController.h */,
 				05809CB0155B3C6700AF2079 /* CommentViewController.m */,
 				05809CB1155B3C6700AF2079 /* CommentViewController.xib */,
-				05AF480D154DCCAE0099576A /* EntriesView.h */,
-				05AF480E154DCCAE0099576A /* EntriesView.m */,
+				05AF480D154DCCAE0099576A /* ImageEntriesView.h */,
+				05AF480E154DCCAE0099576A /* ImageEntriesView.m */,
 				05CCEFA31555E0E8004FBD21 /* ImageControlView.h */,
 				05CCEFA41555E0E8004FBD21 /* ImageControlView.m */,
 				05E4C21C1552233500C7266E /* ImageEditViewController.h */,
@@ -539,7 +539,7 @@
 				0590C747153B3D8F0065AB42 /* CalendarViewController.m in Sources */,
 				05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */,
 				05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */,
-				05AF480F154DCCAE0099576A /* EntriesView.m in Sources */,
+				05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */,
 				05E4C21F1552233600C7266E /* ImageEditViewController.m in Sources */,
 				05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */,
 				05E4C2271552259800C7266E /* ImageEditView.m in Sources */,

@@ -16,7 +16,7 @@
 @property(nonatomic, weak)      id<CommentViewControllerDelegate>   delegate;
 @property(nonatomic, weak)      ImageMetaDataEditView*              metaDataEditView;
 @property(nonatomic, strong)    IBOutlet UITextView*                commentTextView;
-@property(nonatomic, strong)    IBOutlet UIView*                    backgroundView;
+@property(nonatomic, strong)    IBOutlet UIView*                    containerView;
 
 + (id)inView:(ImageMetaDataEditView*)_containerView withDelegate:(id<CommentViewControllerDelegate>)_delegate andComment:(NSString*)_comment;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(ImageMetaDataEditView*)_containerView;

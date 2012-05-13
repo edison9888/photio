@@ -40,7 +40,7 @@
 					<object class="IBUIView" id="1050148250">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{320, 50}</string>
+						<string key="NSFrameSize">{320, 70}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="819504667"/>
@@ -52,32 +52,21 @@
 						<float key="IBUIAlpha">0.30000001192092896</float>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIImageView" id="492639227">
+					<object class="IBUIImageView" id="819504667">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{50, 5}, {40, 40}}</string>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrameSize">{70, 70}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="455134758"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<float key="IBUIAlpha">0.75</float>
-						<array key="IBUIGestureRecognizers" id="0"/>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">twitter.png</string>
+						<object class="NSColor" key="IBUIBackgroundColor" id="709729554">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
-					</object>
-					<object class="IBUIImageView" id="819504667">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 5}, {40, 40}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="492639227"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<float key="IBUIAlpha">0.75</float>
-						<reference key="IBUIGestureRecognizers" ref="0"/>
+						<int key="IBUIContentMode">4</int>
+						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
@@ -87,12 +76,14 @@
 					<object class="IBUIImageView" id="455134758">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{270, 5}, {40, 40}}</string>
+						<string key="NSFrame">{{250, 0}, {70, 70}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1057276013"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="709729554"/>
 						<float key="IBUIAlpha">0.30000001192092896</float>
+						<int key="IBUIContentMode">4</int>
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -170,14 +161,10 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="1050148250"/>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MCAwAA</bytes>
-				</object>
+				<reference key="IBUIBackgroundColor" ref="709729554"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="350372957"/>
-			<object class="IBUITapGestureRecognizer" id="351480423"/>
 			<object class="IBUITapGestureRecognizer" id="153184374"/>
 			<object class="IBUITapGestureRecognizer" id="58887955"/>
 		</array>
@@ -209,14 +196,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imageRating</string>
-						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="455134758"/>
-					</object>
-					<int key="connectionID">33</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageAddComment</string>
 						<reference key="source" ref="191373211"/>
 						<reference key="destination" ref="450492076"/>
@@ -233,11 +212,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imageTwitter</string>
+						<string key="label">imageRating</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="492639227"/>
+						<reference key="destination" ref="455134758"/>
 					</object>
-					<int key="connectionID">36</int>
+					<int key="connectionID">33</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -266,24 +245,6 @@
 						<reference key="destination" ref="191373211"/>
 					</object>
 					<int key="connectionID">12</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
-						<string key="label">gestureRecognizers</string>
-						<reference key="source" ref="492639227"/>
-						<reference key="destination" ref="351480423"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
-						<bool key="addsContentToExistingCollection">YES</bool>
-					</object>
-					<int key="connectionID">15</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">tweet:</string>
-						<reference key="source" ref="351480423"/>
-						<reference key="destination" ref="191373211"/>
-					</object>
-					<int key="connectionID">16</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -325,11 +286,10 @@
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="1050148250"/>
-							<reference ref="492639227"/>
-							<reference ref="819504667"/>
 							<reference ref="1057276013"/>
 							<reference ref="835981040"/>
 							<reference ref="450492076"/>
+							<reference ref="819504667"/>
 							<reference ref="455134758"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -366,24 +326,6 @@
 						<string key="objectName">Export</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="351480423"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Tweet</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">13</int>
-						<reference key="object" ref="492639227"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">Twitter</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">9</int>
-						<reference key="object" ref="819504667"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">Export</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
 						<reference key="object" ref="835981040"/>
 						<reference key="parent" ref="191373211"/>
@@ -397,13 +339,6 @@
 						<string key="objectName">Add Comment</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="455134758"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="191373211"/>
-						<string key="objectName">Star</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">28</int>
 						<reference key="object" ref="153184374"/>
 						<reference key="parent" ref="0"/>
@@ -415,6 +350,18 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Add Comment</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">9</int>
+						<reference key="object" ref="819504667"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Export</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">27</int>
+						<reference key="object" ref="455134758"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Star</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -424,8 +371,6 @@
 				<string key="1.CustomClassName">ImageMetaDataEditView</string>
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="18.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -441,7 +386,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">36</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -537,7 +482,6 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="export.png">{40, 40}</string>
 			<string key="pencil.png">{40, 40}</string>
-			<string key="twitter.png">{40, 40}</string>
 			<string key="whitestar.png">{40, 40}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>

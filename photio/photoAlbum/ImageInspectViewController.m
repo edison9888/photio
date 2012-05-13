@@ -80,7 +80,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.entriesView = [EntriesView withFrame:self.view.frame andDelegate:self];
+    self.entriesView = [ImageEntriesView withFrame:self.view.frame andDelegate:self];
     [self.view addSubview:self.entriesView];
 }
 
@@ -115,7 +115,7 @@
 }
 
 #pragma mark -
-#pragma mark EntriesViewDelegate
+#pragma mark ImageEntriesViewDelegate
 
 - (void)dragEntries:(CGPoint)_drag {    
     if ([self.delegate respondsToSelector:@selector(dragInspectImage:)]) {
@@ -141,7 +141,7 @@
     }
 }
 
-- (void)didRemoveAllEntries:(EntriesView*)_entries {
+- (void)didRemoveAllEntries:(ImageEntriesView*)_entries {
     if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
         [self.delegate transitionFromInspectImage];
     }
