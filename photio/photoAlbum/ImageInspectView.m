@@ -60,9 +60,8 @@
 }
 
 + (id)cachedWithFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
-    ImageInspectView* view = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture date:[NSDate date] andLocation:_location];
-    view.capture = _capture;
-    return view;
+    ImageInspectView* imageView = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture date:[NSDate date] andLocation:_location];
+    return imageView;
 }
 
 - (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date andLocation:(CLLocationCoordinate2D)_location {
@@ -70,6 +69,7 @@
         self.latitude = [NSNumber numberWithDouble:_location.latitude];
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = _date;
+        self.capture = _capture;
         self.image = [_capture scaleToSize:_frame.size];
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.clipsToBounds = YES;
