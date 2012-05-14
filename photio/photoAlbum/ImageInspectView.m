@@ -70,10 +70,19 @@
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = _date;
         self.capture = _capture;
-        self.image = [_capture scaleToSize:_frame.size];
+        UIImageOrientation imageOrientaion = _capture.imageOrientation;
+        if (imageOrientaion == UIImageOrientationDown || imageOrientaion == UIImageOrientationUp) {
+            CGFloat imageAspectRatio = _capture.size.height / _capture.size.width;
+            CGFloat scaledImageHeight = imageAspectRatio * self.frame.size.width;
+            CGSize scaledImageSize = CGSizeMake(self.frame.size.width, scaledImageHeight);
+            self.image = [_capture scaleToSize:scaledImageSize];
+        } else {
+            self.image = [_capture scaleToSize:_frame.size];
+        }
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
+        self.contentMode = UIViewContentModeCenter;
         UITapGestureRecognizer* editImageGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImage)];
         editImageGesture.numberOfTapsRequired = 2;
         editImageGesture.numberOfTouchesRequired = 1;
