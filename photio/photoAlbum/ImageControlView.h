@@ -10,4 +10,7 @@
 
 @interface ImageControlView : UIView
 
++ (id)withFrame:(CGRect)_frame;
+- (void)configureLayer;
+
 @end

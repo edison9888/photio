@@ -43,7 +43,14 @@
 }
 
 - (IBAction)remove:(id)sender {
-    [self.view removeFromSuperview];
+    [UIView animateWithDuration:IMAGE_EDIT_VIEW_DURATION 
+        animations:^{
+            self.view.alpha = 0.0;
+        }
+        completion:^(BOOL _finshed) {
+            [self.view removeFromSuperview];
+       }
+    ];
     if (self.didEdit) {
         [self.delegate didFinishEditing];
     }

@@ -44,7 +44,7 @@
 }
 
 - (void)addImage:(UIImage*)_capture {
-    [self.entriesView addEntry:[ImageInspectView cachedWithFrame:self.view.frame capture:_capture andLocation:[[self.locationManager location] coordinate]]];
+    [self.entriesView addEntry:[ImageInspectView withFrame:self.view.frame capture:_capture andLocation:[[self.locationManager location] coordinate]]];
 }
 
 - (BOOL)hasCaptures {

@@ -25,6 +25,8 @@
 #define SAVE_IMAGE_DELAY                                0.65f
 #define OPEN_SHUTTER_TRANSITION                         0.25
 #define OPEN_SHUTTER_DELAY                              1.0
+#define MAX_COMMENT_LINES                               5
+#define COMMENT_YOFFSET                                 15
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewGeneral* thisViewControllerGeneral = nil;

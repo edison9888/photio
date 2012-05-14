@@ -13,3 +13,5 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 #endif
+
+#define IMAGE_EDIT_VIEW_DURATION    0.5
