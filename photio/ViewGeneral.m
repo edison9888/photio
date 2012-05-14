@@ -17,6 +17,7 @@
 #import "ImageEditViewController.h"
 #import "CalendarViewController.h"
 #import "LocalesViewController.h"
+#import "ProgressView.h"
 
 #define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
 #define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
@@ -48,7 +49,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize notAnimating, managedObjectContext, containerView, shutter;
-@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, imageEditViewController;
+@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, imageEditViewController, progressView;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
@@ -217,6 +218,20 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         capture = [fetchResults objectAtIndex:0];
     }
     return capture;
+}
+
+#pragma mark - 
+#pragma mark ProgressView
+
+- (void)showProgressViewWithMessage:(NSString*)_progressMessage {
+    if (self.progressView == nil) {
+        self.progressView = [ProgressView progressView];
+    }
+    [self.progressView progressWithMessage:_progressMessage inView:self.containerView];
+}
+
+- (void)removeProgressView {
+    [self.progressView remove]; 
 }
 
 #pragma mark - 

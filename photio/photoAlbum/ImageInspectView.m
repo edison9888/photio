@@ -55,6 +55,7 @@
 }
 
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
+    [[ViewGeneral instance] removeProgressView];
     if (_error) {
         [[[UIAlertView alloc] initWithTitle:[_error localizedDescription] message:[_error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
     }
@@ -134,18 +135,18 @@
     if (self.comment) {
         CGSize commentSize = [self.comment sizeWithFont:[UIFont systemFontOfSize:20.0] constrainedToSize:CGSizeMake(self.frame.size.width - 2 * COMMENT_XOFFEST, self.frame.size.height) lineBreakMode:UILineBreakModeWordWrap];
         CGRect commentLabelRect = CGRectMake(COMMENT_XOFFEST, (self.frame.size.height - commentSize.height - COMMENT_YOFFSET), self.frame.size.width - 2 * COMMENT_XOFFEST, commentSize.height);
-        self.commentLabel = [[UILabel alloc] initWithFrame:commentLabelRect];
-        commentLabel.text = self.comment;
         CGRect commentViewRect = CGRectMake(0.0, self.frame.size.height - commentSize.height - 2 * COMMENT_YOFFSET, self.frame.size.width , commentSize.height + 2 * COMMENT_YOFFSET);
-        self.commentView = [ImageControlView withFrame:commentViewRect];
-        self.commentView.alpha = COMMENT_ALPHA;
-        self.commentView.backgroundColor = [UIColor blackColor];
+        self.commentLabel = [[UILabel alloc] initWithFrame:commentLabelRect];
+        self.commentLabel.text = self.comment;
         self.commentLabel.textColor = [UIColor whiteColor];
         self.commentLabel.font = [UIFont systemFontOfSize:20.0];
         self.commentLabel.backgroundColor = [UIColor clearColor];
         self.commentLabel.alpha = 2.0 * COMMENT_ALPHA;
         self.commentLabel.numberOfLines = 0;
         self.commentLabel.lineBreakMode = UILineBreakModeWordWrap;
+        self.commentView = [ImageControlView withFrame:commentViewRect];
+        self.commentView.alpha = COMMENT_ALPHA;
+        self.commentView.backgroundColor = [UIColor blackColor];
         [self addSubview:self.commentView];
         [self addSubview:self.commentLabel];
         UITapGestureRecognizer* commentTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeCommentView)];
@@ -159,6 +160,7 @@
 #pragma mark ImageEditViewController
 
 - (void)exportToCameraRoll {
+    [[ViewGeneral instance] showProgressViewWithMessage:@"Exporting to Camera Roll"];
     UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
 }
 

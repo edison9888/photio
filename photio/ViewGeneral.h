@@ -15,7 +15,7 @@
 @class CalendarViewController;
 @class LocalesViewController;
 @class ImageEditViewController;
-
+@class ProgressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @interface ViewGeneral : NSObject <CameraViewControllerDelegate, ImageInspectViewControllerDelegate> {
@@ -31,6 +31,7 @@
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
 @property(nonatomic, strong) LocalesViewController*         localesViewController;
 @property(nonatomic, strong) ImageEditViewController*       imageEditViewController;
+@property(nonatomic, strong) ProgressView*                  progressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewGeneral*)instance;
@@ -49,6 +50,10 @@
 - (Capture*)fetchCapture:(ImageInspectView*)_imageInspectView;
 - (void)saveManagedObjectContext;
 - (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showProgressViewWithMessage:(NSString*)_progressMessage;
+- (void)removeProgressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initImageInspectView:(UIView*)_containerView;
