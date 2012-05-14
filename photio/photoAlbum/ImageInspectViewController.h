@@ -39,6 +39,5 @@
 - (void)dragInspectImage:(CGPoint)_drag;
 - (void)releaseInspectImage;
 - (void)transitionFromInspectImage;
-- (void)saveImage:(ImageInspectView*)_imageInspectView;
 
 @end

@@ -148,9 +148,7 @@
 }
 
 -(void)saveEntry:(ImageInspectView*)_entry {
-    if ([self.delegate respondsToSelector:@selector(saveImage:)]) {
-        [self.delegate saveImage:_entry];
-    }
+    [[ViewGeneral instance] saveImage:_entry];
 }
 
 @end

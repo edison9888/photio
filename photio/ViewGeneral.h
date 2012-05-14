@@ -40,10 +40,15 @@
 + (CGRect)underWindow;
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow;
+
 - (void)createViews:(UIView*)_containerView;
+- (void)openShutter;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)saveImage:(ImageInspectView*)_imageInspectView;
+- (Capture*)fetchCapture:(ImageInspectView*)_imageInspectView;
 - (void)saveManagedObjectContext;
 - (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
-- (void)openShutter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initImageInspectView:(UIView*)_containerView;

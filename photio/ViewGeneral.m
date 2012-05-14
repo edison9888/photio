@@ -151,6 +151,22 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self addShutter];
 }
 
+- (void)openShutter {
+    [UIView animateWithDuration:OPEN_SHUTTER_TRANSITION
+        delay:OPEN_SHUTTER_DELAY
+        options:UIViewAnimationOptionCurveEaseOut
+        animations:^{
+            self.shutter.alpha = 0.0;
+        }
+        completion:^(BOOL _finished) {
+            [self.shutter removeFromSuperview];
+        }
+    ];
+}
+
+#pragma mark - 
+#pragma mark Core Data
+
 - (void)saveManagedObjectContext {
     NSError *error = nil;
     if (![[ViewGeneral instance].managedObjectContext save:&error]) {
@@ -168,17 +184,37 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return fetchResults;
 }
 
-- (void)openShutter {
-    [UIView animateWithDuration:OPEN_SHUTTER_TRANSITION
-        delay:OPEN_SHUTTER_DELAY
-        options:UIViewAnimationOptionCurveEaseOut
-        animations:^{
-            self.shutter.alpha = 0.0;
-        }
-        completion:^(BOOL _finished) {
-            [self.shutter removeFromSuperview];
-        }
-    ];
+- (void)saveImage:(ImageInspectView*)_imageInspectView {
+    [self performSelector:@selector(saveImageLater:) withObject:_imageInspectView afterDelay:SAVE_IMAGE_DELAY];
+}
+
+- (void)saveImageLater:(ImageInspectView*)_imageInspectView {
+    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:self.managedObjectContext];
+    capture.latitude  = _imageInspectView.latitude;
+    capture.longitude = _imageInspectView.longitude;
+    capture.createdAt = _imageInspectView.createdAt;
+    capture.dayIdentifier = [self.calendarViewController dayIdentifier:_imageInspectView.createdAt];
+    capture.comment = _imageInspectView.comment;
+    capture.rating = _imageInspectView.rating;
+    capture.thumbnail = [_imageInspectView.capture thumbnailImage:[self.calendarViewController calendarImageThumbnailRect].size.width];
+    Image* image = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:self.managedObjectContext];
+	image.image = _imageInspectView.capture;
+	capture.image = image;
+    [self saveManagedObjectContext];
+    [self.calendarViewController updateCaptureWithDate:capture.createdAt];
+}
+
+- (Capture*)fetchCapture:(ImageInspectView*)_imageInspectView {
+    Capture* capture = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", _imageInspectView.createdAt]];
+    fetchRequest.fetchLimit = 1;
+    NSArray* fetchResults = [self fetchFromManagedObjectContext:fetchRequest];
+    if ([fetchResults count] > 0) {
+        capture = [fetchResults objectAtIndex:0];
+    }
+    return capture;
 }
 
 #pragma mark - 
@@ -459,24 +495,5 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     ];    
 }
 
-- (void)saveImage:(ImageInspectView*)_imageInspectView {
-    [self performSelector:@selector(saveImageLater:) withObject:_imageInspectView afterDelay:SAVE_IMAGE_DELAY];
-}
-
-- (void)saveImageLater:(ImageInspectView*)_imageInspectView {
-    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-    capture.latitude  = _imageInspectView.latitude;
-    capture.longitude = _imageInspectView.longitude;
-    capture.createdAt = _imageInspectView.createdAt;
-    capture.dayIdentifier = [self.calendarViewController dayIdentifier:_imageInspectView.createdAt];
-    capture.comment = _imageInspectView.comment;
-    capture.rating = _imageInspectView.rating;
-    capture.thumbnail = [_imageInspectView.capture thumbnailImage:[self.calendarViewController calendarImageThumbnailRect].size.width];
-    Image* image = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
-	image.image = _imageInspectView.capture;
-	capture.image = image;
-    [self saveManagedObjectContext];
-    [self.calendarViewController updateCaptureWithDate:capture.createdAt];
-}
 
 @end

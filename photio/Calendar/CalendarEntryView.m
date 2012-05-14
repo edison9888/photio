@@ -29,7 +29,6 @@
 - (CGRect)calendarDateViewRect:(CGRect)_cotentFrame;
 - (void)initializeDateFormatters;
 - (void)openEntryView;
-- (Capture*)fetchCapture:(ImageInspectView*)_entry;
 
 @end
 
@@ -66,19 +65,6 @@
             completion:nil
          ];
     }
-}
-
-- (Capture*)fetchCapture:(ImageInspectView*)_entry {
-    Capture* capture = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", _entry.createdAt]];
-    fetchRequest.fetchLimit = 1;
-    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
-    if ([fetchResults count] > 0) {
-        capture = [fetchResults objectAtIndex:0];
-    }
-    return capture;
 }
 
 #pragma mark -
@@ -128,7 +114,7 @@
 #pragma mark ImageEntriesViewDelegate
 
 - (void)deleteEntry:(ImageInspectView*)_entry {
-    Capture* capture = [self fetchCapture:_entry];
+    Capture* capture = [[ViewGeneral instance] fetchCapture:_entry];
     if (capture) {
         [[ViewGeneral instance].managedObjectContext deleteObject:capture];
         [[ViewGeneral instance] saveManagedObjectContext];
@@ -144,6 +130,8 @@
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", self.dayIdentifier]];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
+    fetchRequest.fetchLimit = 5;
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx){
         Capture* capture = _obj;
@@ -166,7 +154,7 @@
 }
 
 - (void)didFinishEditing:(ImageInspectView*)_entry {
-    Capture* capture = [self fetchCapture:_entry];
+    Capture* capture = [[ViewGeneral instance] fetchCapture:_entry];
     if (capture) {
         capture.comment = _entry.comment;
         capture.rating = _entry.rating;
