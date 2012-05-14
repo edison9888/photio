@@ -132,10 +132,12 @@
 
 - (void)addCommentView {
     if (self.comment) {
-        CGSize commentSize = [self.comment sizeWithFont:[UIFont systemFontOfSize:20.0] constrainedToSize:self.frame.size lineBreakMode:UILineBreakModeWordWrap];
-        self.commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(COMMENT_XOFFEST, (self.frame.size.height - commentSize.height - COMMENT_YOFFSET), self.frame.size.width - 2 * COMMENT_XOFFEST, commentSize.height)];
+        CGSize commentSize = [self.comment sizeWithFont:[UIFont systemFontOfSize:20.0] constrainedToSize:CGSizeMake(self.frame.size.width - 2 * COMMENT_XOFFEST, self.frame.size.height) lineBreakMode:UILineBreakModeWordWrap];
+        CGRect commentLabelRect = CGRectMake(COMMENT_XOFFEST, (self.frame.size.height - commentSize.height - COMMENT_YOFFSET), self.frame.size.width - 2 * COMMENT_XOFFEST, commentSize.height);
+        self.commentLabel = [[UILabel alloc] initWithFrame:commentLabelRect];
         commentLabel.text = self.comment;
-        self.commentView = [ImageControlView withFrame:CGRectMake(0.0, self.frame.size.height - commentSize.height - 2 * COMMENT_YOFFSET, self.frame.size.width , commentSize.height + 2 * COMMENT_YOFFSET)];
+        CGRect commentViewRect = CGRectMake(0.0, self.frame.size.height - commentSize.height - 2 * COMMENT_YOFFSET, self.frame.size.width , commentSize.height + 2 * COMMENT_YOFFSET);
+        self.commentView = [ImageControlView withFrame:commentViewRect];
         self.commentView.alpha = COMMENT_ALPHA;
         self.commentView.backgroundColor = [UIColor blackColor];
         self.commentLabel.textColor = [UIColor whiteColor];

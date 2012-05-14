@@ -133,7 +133,7 @@
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     fetchRequest.fetchLimit = 5;
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
-    NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx){
+    NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
         Capture* capture = _obj;
         ImageInspectView* imageView = [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
         imageView.delegate = self;
