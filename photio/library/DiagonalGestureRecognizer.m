@@ -8,8 +8,8 @@
 
 #import "DiagonalGestureRecognizer.h"
 
-#define DETECT_DIAGONAL_SWIPE_MIN_SLOPE       0.5
-#define DETECT_DIAGONAL_SWIPE_MAX_SLOPE       4.0
+#define DETECT_DIAGONAL_SWIPE_MIN_SLOPE       0.25
+#define DETECT_DIAGONAL_SWIPE_MAX_SLOPE       8.0
 
 @interface DiagonalGestureRecognizer (PrivateAPI)
 
