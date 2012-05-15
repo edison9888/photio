@@ -13,7 +13,7 @@
 
 @protocol ImageEditViewControllerDelegate;
 
-@interface ImageEditViewController : UIViewController <StreamOfViewsDelegate, ImageEditViewDelegate, ImageMetaDataEditViewDelegate>
+@interface ImageEditViewController : UIViewController <StreamOfViewsDelegate, ImageEditViewDelegate, ImageMetaDataEditViewDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak)   id<ImageEditViewControllerDelegate>    delegate;
 @property(nonatomic, strong) IBOutlet UIGestureRecognizer*          removeGesture;

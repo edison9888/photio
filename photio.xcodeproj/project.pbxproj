@@ -30,6 +30,8 @@
 		05809CBD155EE72900AF2079 /* TakePhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CBC155EE72800AF2079 /* TakePhotoView.m */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
 		058736BA15556941007A5654 /* ImageMetaDataEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B915556941007A5654 /* ImageMetaDataEditView.xib */; };
+		058A48E415620959002199F7 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 058A48E315620959002199F7 /* CoreImage.framework */; };
+		058A48EC1562CD02002199F7 /* ParameterSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 058A48EB1562CD02002199F7 /* ParameterSliderView.m */; };
 		058B4FB715196B1F0087F717 /* LocalesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FB515196B1F0087F717 /* LocalesViewController.m */; };
 		058B4FB815196B1F0087F717 /* LocalesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058B4FB615196B1F0087F717 /* LocalesViewController.xib */; };
 		058B4FBC15196D840087F717 /* LocaleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 058B4FBB15196D840087F717 /* LocaleView.m */; };
@@ -115,6 +117,9 @@
 		05809CBC155EE72800AF2079 /* TakePhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TakePhotoView.m; path = photio/PhotoAlbum/TakePhotoView.m; sourceTree = SOURCE_ROOT; };
 		058736B715556897007A5654 /* ImageEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditView.xib; path = photio/PhotoAlbum/ImageEditView.xib; sourceTree = SOURCE_ROOT; };
 		058736B915556941007A5654 /* ImageMetaDataEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageMetaDataEditView.xib; path = photio/PhotoAlbum/ImageMetaDataEditView.xib; sourceTree = SOURCE_ROOT; };
+		058A48E315620959002199F7 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		058A48EA1562CD02002199F7 /* ParameterSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; name = ParameterSliderView.h; path = photio/Library/ParameterSliderView.h; sourceTree = SOURCE_ROOT; };
+		058A48EB1562CD02002199F7 /* ParameterSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParameterSliderView.m; path = photio/Library/ParameterSliderView.m; sourceTree = SOURCE_ROOT; };
 		058B4FB415196B1F0087F717 /* LocalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalesViewController.h; sourceTree = "<group>"; };
 		058B4FB515196B1F0087F717 /* LocalesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalesViewController.m; sourceTree = "<group>"; };
 		058B4FB615196B1F0087F717 /* LocalesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocalesViewController.xib; sourceTree = "<group>"; };
@@ -207,6 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				058A48E415620959002199F7 /* CoreImage.framework in Frameworks */,
 				05B8377B1530DA1300D99A40 /* CoreLocation.framework in Frameworks */,
 				05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */,
 				052AE17B1528941F005D57B1 /* AssetsLibrary.framework in Frameworks */,
@@ -280,6 +286,8 @@
 				05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */,
 				05CCEF9C15557711004FBD21 /* NSObject+Extensions.h */,
 				05CCEF9D15557711004FBD21 /* NSObject+Extensions.m */,
+				058A48EA1562CD02002199F7 /* ParameterSliderView.h */,
+				058A48EB1562CD02002199F7 /* ParameterSliderView.m */,
 				05B8BB2E1561A0C80023346F /* ProgressView.h */,
 				05B8BB2F1561A0C80023346F /* ProgressView.m */,
 				05B8BB311561A19A0023346F /* RoundedCornersView.h */,
@@ -320,6 +328,7 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
+				058A48E315620959002199F7 /* CoreImage.framework */,
 				05B8377A1530DA1200D99A40 /* CoreLocation.framework */,
 				05B8372715309FB400D99A40 /* CoreData.framework */,
 				052AE17F1528944F005D57B1 /* CoreVideo.framework */,
@@ -561,6 +570,7 @@
 				05809CBD155EE72900AF2079 /* TakePhotoView.m in Sources */,
 				05B8BB301561A0C80023346F /* ProgressView.m in Sources */,
 				05B8BB331561A19A0023346F /* RoundedCornersView.m in Sources */,
+				058A48EC1562CD02002199F7 /* ParameterSliderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

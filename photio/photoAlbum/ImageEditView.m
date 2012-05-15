@@ -8,6 +8,7 @@
 
 #import "ImageEditView.h"
 #import "ImageControlView.h"
+#import "ParameterSliderView.h"
 #import "UIView+Extensions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditView
 
-@synthesize containerView, imageControlsView, imageFiltersView, delegate;
+@synthesize containerView, parameterSlider, imageControlsView, imageFiltersView, delegate;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)

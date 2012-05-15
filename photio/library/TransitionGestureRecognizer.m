@@ -255,4 +255,7 @@
     self.gestureRecognizer.enabled = _enabled;
 }
 
+#pragma mark -
+#pragma mark UIGestureRecognizerDelegate
+
 @end

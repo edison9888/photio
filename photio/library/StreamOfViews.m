@@ -275,6 +275,15 @@
     }
 }
 
+- (void)reset {
+    NSInteger viewsToMove = self.inViewIndex;
+    for (int i = 0; i < viewsToMove; i++) {
+        [self leftView].frame = [self inWindow];
+        [self displayedView].frame = [self rightOfWindow];
+        self.inViewIndex = viewsToMove - (i + 1);
+    }
+}
+
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
 

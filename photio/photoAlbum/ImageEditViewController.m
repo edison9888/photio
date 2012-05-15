@@ -7,6 +7,8 @@
 //
 
 #import "ImageEditViewController.h"
+#import "ParameterSliderView.h"
+#import "NSObject+Extensions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditViewController (PrivateAPI)
@@ -16,7 +18,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditViewController
 
-@synthesize delegate, removeGesture, singleTapGesture, containerView, streamView, imageMetaDataEditView, imageEditView, didEdit;
+@synthesize delegate, removeGesture, singleTapGesture, containerView, streamView, 
+            imageMetaDataEditView, imageEditView, didEdit;
 
 #pragma mark -
 #pragma mark ImageEditViewController (PrivateAPI)
@@ -70,6 +73,7 @@
     self.imageEditView = [ImageEditView inView:self.view withDelegate:self];
     self.imageMetaDataEditView = [ImageMetaDataEditView inView:self.view withDelegate:self];
     self.streamView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
+    self.streamView.transitionGestureRecognizer.gestureRecognizer.delegate = self;
     [self.streamView addView:self.imageEditView];
     [self.streamView addView:self.imageMetaDataEditView];
     self.streamView.backgroundColor = [UIColor clearColor];
@@ -134,5 +138,15 @@
 
 #pragma mark -
 #pragma mark ImageEditView
+
+#pragma mark -
+#pragma mark UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
+    if ([touch.view isKindOfClass:[ParameterSliderView class]]) {
+        return NO;
+    }
+    return YES;
+}
 
 @end

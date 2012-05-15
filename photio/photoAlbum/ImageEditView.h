@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class ImageControlView;
+@class ParameterSliderView;
+
 @protocol ImageEditViewDelegate;
 
 @interface ImageEditView : UIView
 
 @property(nonatomic, weak)   id<ImageEditViewDelegate>          delegate;
 @property(nonatomic, strong) UIView*                            containerView;
+@property(nonatomic, strong) IBOutlet ParameterSliderView*      parameterSlider;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageControlsView;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageFiltersView;
 

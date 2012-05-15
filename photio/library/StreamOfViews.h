@@ -26,6 +26,7 @@
 - (UIView*)displayedView;
 - (void)moveDisplayedViewDownAndRemove;
 - (void)fadeDisplayedViewAndRemove;
+- (void)reset;
 
 @end
 

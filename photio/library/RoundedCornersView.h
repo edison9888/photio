@@ -11,6 +11,5 @@
 @interface RoundedCornersView : UIView
 
 + (id)withFrame:(CGRect)_frame;
-- (void)configureLayer;
 
 @end
