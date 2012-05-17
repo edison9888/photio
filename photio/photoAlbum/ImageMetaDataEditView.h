@@ -34,8 +34,6 @@
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate;
 - (void)updateComment:(NSString*)_comment;
 - (void)updateRating:(NSString*)_rating;
-- (void)hideShareView;
-- (void)showShareView;
 - (IBAction)exportToCameraRoll:(id)sender;
 - (IBAction)addComment:(id)sender;
 - (IBAction)star:(id)sender;

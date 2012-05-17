@@ -88,12 +88,6 @@
     }
 }
 
-- (void)showShareView {
-}
-
-- (void)hideShareView {
-}
-
 - (IBAction)exportToCameraRoll:(id)sender {
     [self.delegate exportToCameraRoll];
 }
@@ -103,7 +97,6 @@
 }
 
 - (IBAction)addComment:(id)sender {
-    [self hideShareView];
     self.commentViewController = [CommentViewController inView:self withDelegate:self andComment:nil];
     self.commentViewController.commentTextView.text = self.imageCommentLabel.text;
 }

@@ -9,7 +9,8 @@
 #import "CommentViewController.h"
 #import "ImageMetaDataEditView.h"
 
-#define COMMENT_VIEW_ANIMATION_DURATION     0.25
+#define COMMENT_VIEW_ANIMATION_SPEED     0.25/100.0
+#define SHARE_VIEW_ANIMATION_SPEED       0.125/100.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommentViewController (PrivateAPI)
@@ -25,30 +26,49 @@
 #pragma mark CommentViewController (PrivateAPI)
 
 - (void)addInputView {
+    CGRect shareViewRect = self.metaDataEditView.shareContainerView.frame;
     __block CGRect oldFrame = self.containerView.frame;
+    __block CGRect newShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
     self.containerView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
-    [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION 
+    [UIView animateWithDuration:SHARE_VIEW_ANIMATION_SPEED * oldFrame.size.height
          delay:0
          options:UIViewAnimationOptionCurveEaseOut
          animations:^{
-             self.containerView.frame = CGRectMake(0.0, 0.0, oldFrame.size.width, oldFrame.size.height);
-             [self.commentTextView becomeFirstResponder];
+             self.metaDataEditView.shareContainerView.frame = newShareViewRect;
          } 
          completion:^(BOOL _finished) {
+             [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_SPEED * oldFrame.size.height 
+                 delay:0
+                 options:UIViewAnimationOptionCurveEaseOut
+                  animations:^{
+                      self.containerView.frame = CGRectMake(0.0, 0.0, oldFrame.size.width, oldFrame.size.height);
+                      [self.commentTextView becomeFirstResponder];
+                  } 
+                  completion:^(BOOL _finished) {
+                  }
+             ];
          }
     ];
 }
 
 - (void)removeInputView {
+    CGRect shareViewRect = self.metaDataEditView.shareContainerView.frame;
     __block CGRect oldFrame = self.containerView.frame;
-    [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION 
+    __block CGRect newShareViewRect = CGRectMake(shareViewRect.origin.x, 0.0, shareViewRect.size.width, shareViewRect.size.height);
+    [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_SPEED * oldFrame.size.height 
         animations:^{
             self.containerView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
-            [self.commentTextView resignFirstResponder];
+           [self.commentTextView resignFirstResponder];
         } 
         completion:^(BOOL _finished) {
-            [self.view removeFromSuperview];
-            [self.metaDataEditView showShareView];
+            [UIView animateWithDuration:SHARE_VIEW_ANIMATION_SPEED * oldFrame.size.height
+             animations:^{
+                 self.metaDataEditView.shareContainerView.frame = newShareViewRect;
+             } 
+             completion:^(BOOL _finished) {
+                 [self.view removeFromSuperview];
+             }
+            ];    
         }
     ];    
 }
