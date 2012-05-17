@@ -9,7 +9,7 @@
 #import "ParameterSliderView.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define PARAMETER_VIEW_HEIGHT_SCALE     0.75
+#define PARAMETER_VIEW_HEIGHT_SCALE     0.5
 #define DEFAULT_MIN_VALUE               0.0
 #define DEFAULT_MAX_VALUE               1.0
 #define DEFAULT_INITIAL_VALUE           0.5
@@ -61,7 +61,7 @@
     self.parameterView = [[UIView alloc] initWithFrame:self.parameterViewFrame];
     self.parameterView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.parameterView];
-    self.parameterViewBorder = [[UIView alloc] initWithFrame:CGRectMake(-1.0, self.parameterView.frame.origin.y - 1.0, self.frame.size.width + 2.0, self.parameterView.frame.size.height + 1.0)];
+    self.parameterViewBorder = [[UIView alloc] initWithFrame:CGRectMake(-1.0, self.parameterView.frame.origin.y - 1.0, self.frame.size.width + 2.0, self.parameterView.frame.size.height + 2.0)];
     [self addSubview:self.parameterViewBorder];
     self.backgroundColor = [UIColor clearColor];
     self.minValue = DEFAULT_MIN_VALUE;
