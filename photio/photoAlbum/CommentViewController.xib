@@ -53,7 +53,7 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MAA</bytes>
 								</object>
-								<float key="IBUIAlpha">0.60000002384185791</float>
+								<float key="IBUIAlpha">0.69999998807907104</float>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUILabel" id="1032818767">
@@ -132,7 +132,6 @@
 								<string key="NSFrame">{{45, 69}, {230, 150}}</string>
 								<reference key="NSSuperview" ref="116696815"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="406429613"/>
 								<bool key="IBUIClipsSubviews">YES</bool>

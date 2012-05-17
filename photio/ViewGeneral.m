@@ -318,7 +318,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (self.imageEditViewController == nil) {
         self.imageEditViewController = [ImageEditViewController inView:_containerView];
     }
-    [_containerView addSubview:self.imageEditViewController.view];
+    [self.imageEditViewController showViews];
 }
 
 - (void)imageEditViewPosition:(CGRect)_rec {

@@ -19,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditView
 
-@synthesize containerView, parameterSlider, imageControlsView, imageFiltersView, delegate;
+@synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageControlsView, imageFiltersView;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
@@ -42,7 +42,7 @@
     return self;
 }
 
-- (void)addDefaultFilter {
+- (void)resetFilter {
     [self.delegate addedFilter:@"CISepiaTone"];
 }
 

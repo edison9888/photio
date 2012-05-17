@@ -11,14 +11,12 @@
 #import "Capture.h"
 #import "UIView+Extensions.h"
 
-#define MAX_COMMENT_LINES   5
-#define COMMENT_YOFFSET     15
-#define COMMENT_RECT        CGRectMake(20.0, 445.0, 280.0, 20.0)
+#define MAX_COMMENT_LINES               5
+#define COMMENT_YOFFSET                 15
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageMetaDataEditView (PrivateAPI)
 
-- (void)hideShareView;
 - (void)addCommentText:(NSString*)_comment;
 - (void)initializeCommentText;
 
@@ -28,38 +26,39 @@
 @implementation ImageMetaDataEditView
 
 @synthesize delegate, containerView, commentViewController, imageShareView, imageCommentBorderView, imageCommentLabel, 
-            imageAddComment, imageTwitter, imageExport, imageRating, starred;
+            commentContainerView, shareContainerView, imageAddComment, imageRating, starred, initialCommentContainerRect;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
 
-- (void)hideShareView {
-    self.imageShareView.hidden = YES;
-    self.imageTwitter.hidden = YES;
-    self.imageExport.hidden = YES;
-    self.imageRating.hidden = YES;
-}
-
 - (void)addCommentText:(NSString*)_comment {
     CGSize maxSize = CGSizeMake(self.imageCommentLabel.frame.size.width, MAX_COMMENT_LINES * self.imageCommentLabel.frame.size.height);
     CGSize commentSize = [_comment sizeWithFont:[UIFont systemFontOfSize:20.0] constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat commentYOffest = self.frame.size.height - commentSize.height - COMMENT_YOFFSET;
+    
+    CGFloat commentContainerBorderYOffset = self.frame.size.height - commentSize.height - 2.0 * COMMENT_YOFFSET;
+    CGRect commentContainerBorderRect = CGRectMake(0.0, commentContainerBorderYOffset, self.commentContainerView.frame.size.width, commentSize.height + 2.0 * COMMENT_YOFFSET);
+    self.commentContainerView.frame = commentContainerBorderRect;
+
+    CGFloat commentYOffest = self.commentContainerView.frame.size.height - commentSize.height - COMMENT_YOFFSET;
     CGRect commentRect = CGRectMake(self.imageCommentLabel.frame.origin.x, commentYOffest, self.imageCommentLabel.frame.size.width, commentSize.height);
     self.imageCommentLabel.frame = commentRect;
     self.imageCommentLabel.text = _comment;
-    CGFloat commentBorderYOffset = self.frame.size.height - commentSize.height - 2.0 * COMMENT_YOFFSET;
-    CGRect commentBorderRect = CGRectMake(0.0, commentBorderYOffset, self.frame.size.width, commentSize.height + 2.0 * COMMENT_YOFFSET);
+    
+    CGFloat commentBorderYOffset = self.commentContainerView.frame.size.height - commentSize.height - 2.0 * COMMENT_YOFFSET;
+    CGRect commentBorderRect = CGRectMake(0.0, commentBorderYOffset, self.commentContainerView.frame.size.width, commentSize.height + 2.0 * COMMENT_YOFFSET);
     self.imageCommentBorderView.frame = commentBorderRect;
+        
     self.imageAddComment.hidden = YES;
     self.imageCommentLabel.hidden = NO;
 }
 
 - (void)initializeCommentText {
-    self.imageCommentLabel.frame = COMMENT_RECT;
+    self.commentContainerView.frame = self.initialCommentContainerRect;
+    self.imageCommentBorderView.frame = CGRectMake(0.0, 0.0, self.commentContainerView.frame.size.width, self.commentContainerView.frame.size.height);
+    CGFloat commentHeight =  self.commentContainerView.frame.size.height - 2.0 * COMMENT_YOFFSET;
+    CGRect commentRect = CGRectMake(self.imageCommentLabel.frame.origin.x, COMMENT_YOFFSET, self.imageCommentLabel.frame.size.width, commentHeight);
+    self.imageCommentLabel.frame = commentRect;
     self.imageCommentLabel.text = NULL;
-    CGFloat commentBorderYOffset = self.frame.size.height - self.imageCommentLabel.frame.size.height - 2.0 * COMMENT_YOFFSET;
-    CGRect commentBorderRect = CGRectMake(0.0, commentBorderYOffset, self.frame.size.width, self.imageCommentLabel.frame.size.height + 2.0 * COMMENT_YOFFSET);
-    self.imageCommentBorderView.frame = commentBorderRect;
     self.imageAddComment.hidden = NO;
     self.imageCommentLabel.hidden = YES;
 }
@@ -71,13 +70,6 @@
     ImageMetaDataEditView* view = (ImageMetaDataEditView*)[UIView loadView:[self class]];
     view.delegate = _delegate;
     return view;
-}
-
-- (id)initWithCoder:(NSCoder *)coder { 
-    self = [super initWithCoder:coder];
-    if (self) {
-    }
-    return self;
 }
 
 - (void)updateComment:(NSString*)_comment {
@@ -97,10 +89,9 @@
 }
 
 - (void)showShareView {
-    self.imageShareView.hidden = NO;
-    self.imageTwitter.hidden = NO;
-    self.imageExport.hidden = NO;
-    self.imageRating.hidden = NO;
+}
+
+- (void)hideShareView {
 }
 
 - (IBAction)exportToCameraRoll:(id)sender {
@@ -129,6 +120,20 @@
         self.imageRating.alpha = 0.9;
         [self.delegate saveRating:@"1"];
     }
+}
+
+#pragma mark -
+#pragma mark UIView
+
+- (id)initWithCoder:(NSCoder *)coder { 
+    self = [super initWithCoder:coder];
+    if (self) {
+    }
+    return self;
+}
+
+- (void)didMoveToSuperview {
+    self.initialCommentContainerRect = self.commentContainerView.frame;
 }
 
 #pragma mark -

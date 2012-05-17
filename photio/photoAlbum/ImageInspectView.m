@@ -43,18 +43,10 @@
 - (void)editImage {
     [self.commentView removeFromSuperview];
     [self.commentLabel removeFromSuperview];
-    __block ViewGeneral* viewGeneral = [ViewGeneral instance];
+    ViewGeneral* viewGeneral = [ViewGeneral instance];
     [viewGeneral initImageEditView:self];
     [viewGeneral.imageEditViewController resetWithDelegate:self];
-    viewGeneral.imageEditViewController.view.alpha = 0.0;
     [viewGeneral.imageEditViewController updateComment:self.comment andRating:self.rating];
-    [UIView animateWithDuration:IMAGE_EDIT_VIEW_DURATION 
-        animations:^{
-            viewGeneral.imageEditViewController.view.alpha = 1.0;
-        }
-        completion:^(BOOL _finshed) {
-        }
-    ];
 }
 
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
@@ -71,16 +63,24 @@
 }
 
 - (void)removeCommentView {
+    __block CGRect commentLableRect = self.commentLabel.frame;
+    __block CGRect commentViewRect = self.commentView.frame;
     [UIView animateWithDuration:COMMENT_ANIMATION_DURATION 
         animations:^{
-            self.commentView.alpha = 0.0;
-            self.commentLabel.alpha = 0.0;
+            self.commentLabel.frame = CGRectMake(commentLableRect.origin.x, 
+                                                 self.frame.size.height, 
+                                                 commentLableRect.size.width, 
+                                                 commentLableRect.size.height);
+            self.commentView.frame = CGRectMake(commentViewRect.origin.x, 
+                                                self.frame.size.height, 
+                                                commentViewRect.size.width, 
+                                                commentViewRect.size.height);
         }
         completion:^(BOOL _finished) {
             [self.commentView removeFromSuperview];
             [self.commentLabel removeFromSuperview];
-            self.commentView.alpha = COMMENT_ALPHA;
-            self.commentLabel.alpha = 1.0;
+            self.commentLabel.frame = commentViewRect;
+            self.commentView.frame = commentViewRect;
         }
     ];
 }

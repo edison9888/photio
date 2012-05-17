@@ -26,16 +26,17 @@
 @property(nonatomic, strong) IBOutlet UILabel*                  imageCommentLabel;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageAddComment;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageRating;
-@property(nonatomic, strong) IBOutlet UIImageView*              imageTwitter;
-@property(nonatomic, strong) IBOutlet UIImageView*              imageExport;
+@property(nonatomic, strong) IBOutlet UIView*                   shareContainerView;
+@property(nonatomic, strong) IBOutlet UIView*                   commentContainerView;
 @property(nonatomic, assign) BOOL                               starred;
+@property(nonatomic, assign) CGRect                             initialCommentContainerRect;
  
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate;
 - (void)updateComment:(NSString*)_comment;
 - (void)updateRating:(NSString*)_rating;
+- (void)hideShareView;
 - (void)showShareView;
 - (IBAction)exportToCameraRoll:(id)sender;
-- (IBAction)tweet:(id)sender;
 - (IBAction)addComment:(id)sender;
 - (IBAction)star:(id)sender;
 

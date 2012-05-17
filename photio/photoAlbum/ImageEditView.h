@@ -18,12 +18,14 @@
 
 @property(nonatomic, weak)   id<ImageEditViewDelegate>          delegate;
 @property(nonatomic, strong) UIView*                            containerView;
+@property(nonatomic, strong) IBOutlet UIView*                   controlContainerView;
+@property(nonatomic, strong) IBOutlet UIView*                   filterContainerView;
 @property(nonatomic, strong) IBOutlet ParameterSliderView*      parameterSlider;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageControlsView;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageFiltersView;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate;
-- (void)addDefaultFilter;
+- (void)resetFilter;
 
 @end
 

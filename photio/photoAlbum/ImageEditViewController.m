@@ -10,6 +10,8 @@
 #import "ParameterSliderView.h"
 #import "NSObject+Extensions.h"
 
+#define SUBVIEW_ANIMATION_DURACTION     0.5
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditViewController (PrivateAPI)
 
@@ -46,14 +48,7 @@
 }
 
 - (IBAction)remove:(id)sender {
-    [UIView animateWithDuration:IMAGE_EDIT_VIEW_DURATION 
-        animations:^{
-            self.view.alpha = 0.0;
-        }
-        completion:^(BOOL _finshed) {
-            [self.view removeFromSuperview];
-       }
-    ];
+    [self hideViews];
     if (self.didEdit) {
         [self.delegate didFinishEditing];
     }
@@ -68,7 +63,62 @@
 - (void)resetWithDelegate:(id<ImageEditViewControllerDelegate>)_delegate {
     self.delegate = _delegate;
     [self.streamView reset];
-    [self.imageEditView addDefaultFilter];
+    [self.imageEditView resetFilter];
+}
+
+- (void)showViews {    
+    [self.containerView addSubview:self.view];
+
+    __block CGRect controlContainerRect = self.imageEditView.controlContainerView.frame;
+    __block CGRect filterContainerRect = self.imageEditView.filterContainerView.frame;
+    self.imageEditView.controlContainerView.frame = CGRectMake(controlContainerRect.origin.x, -controlContainerRect.size.height, controlContainerRect.size.width, controlContainerRect.size.height);
+    self.imageEditView.filterContainerView.frame = CGRectMake(filterContainerRect.origin.x, self.view.frame.size.height, filterContainerRect.size.width, filterContainerRect.size.height);
+    
+    __block CGRect shareContainerRect = self.imageMetaDataEditView.shareContainerView.frame;
+    __block CGRect commentContainerRect = self.imageMetaDataEditView.commentContainerView.frame;
+    CGRect initShareViewRect = CGRectMake(shareContainerRect.origin.x, -shareContainerRect.size.height, shareContainerRect.size.width, shareContainerRect.size.height);
+    CGRect initCommentRect = CGRectMake(commentContainerRect.origin.x, self.view.frame.size.height, commentContainerRect.size.width, commentContainerRect.size.height);
+    self.imageMetaDataEditView.shareContainerView.frame = initShareViewRect;
+    self.imageMetaDataEditView.commentContainerView.frame = initCommentRect;
+        
+    [UIView animateWithDuration:SUBVIEW_ANIMATION_DURACTION 
+        animations:^{
+            self.imageEditView.controlContainerView.frame = controlContainerRect;
+            self.imageEditView.filterContainerView.frame = filterContainerRect;
+            self.imageMetaDataEditView.shareContainerView.frame = shareContainerRect;
+            self.imageMetaDataEditView.commentContainerView.frame = commentContainerRect;
+        }
+        completion:^(BOOL _finished) {
+        }
+    ];
+}
+
+- (void)hideViews {
+    __block CGRect originalControlContainerRect = self.imageEditView.controlContainerView.frame;
+    __block CGRect originalFilterContainerRect = self.imageEditView.filterContainerView.frame;
+    __block CGRect controlContainerRect = CGRectMake(originalControlContainerRect.origin.x, -originalControlContainerRect.size.height, originalControlContainerRect.size.width, originalControlContainerRect.size.height);
+    __block CGRect filterContainerRect = CGRectMake(originalFilterContainerRect.origin.x, self.view.frame.size.height, originalFilterContainerRect.size.width, originalFilterContainerRect.size.height);
+    
+    __block CGRect originalShareContainerRect = self.imageMetaDataEditView.shareContainerView.frame;
+    __block CGRect originalCommentContainerRect = self.imageMetaDataEditView.commentContainerView.frame;
+    __block CGRect shareContainerRect = CGRectMake(originalShareContainerRect.origin.x, -originalShareContainerRect.size.height, originalShareContainerRect.size.width, originalShareContainerRect.size.height);
+    __block CGRect commentContainerRect = CGRectMake(originalCommentContainerRect.origin.x, self.view.frame.size.height, originalCommentContainerRect.size.width, originalCommentContainerRect.size.height);
+        
+    [UIView animateWithDuration:SUBVIEW_ANIMATION_DURACTION 
+        animations:^{
+            self.imageEditView.controlContainerView.frame = controlContainerRect;
+            self.imageEditView.filterContainerView.frame = filterContainerRect;
+            self.imageMetaDataEditView.shareContainerView.frame = shareContainerRect;
+            self.imageMetaDataEditView.commentContainerView.frame = commentContainerRect;
+        }
+        completion:^(BOOL _finished) {
+            self.imageEditView.controlContainerView.frame = originalControlContainerRect;
+            self.imageEditView.filterContainerView.frame = originalFilterContainerRect;
+            self.imageMetaDataEditView.shareContainerView.frame = originalShareContainerRect;
+            self.imageMetaDataEditView.commentContainerView.frame = originalCommentContainerRect;
+            [self.view removeFromSuperview];
+        }
+    ];
 }
 
 

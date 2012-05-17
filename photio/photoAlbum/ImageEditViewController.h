@@ -27,9 +27,12 @@
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView;
 - (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating;
-- (void)resetWithDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
 - (IBAction)remove:(id)sender;
 - (IBAction)singleTap:(id)sender;
+- (void)resetWithDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
+- (void)showViews;
+- (void)hideViews;
+
 
 @end
 
