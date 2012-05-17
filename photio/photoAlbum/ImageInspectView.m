@@ -12,12 +12,14 @@
 #import "Image.h"
 #import "ViewGeneral.h"
 #import "ImageControlView.h"
+#import "FilteredImage.h"
 
 #define MAX_COMMENT_LINES           5
 #define COMMENT_YOFFSET             15
 #define COMMENT_XOFFEST             20
 #define COMMENT_ANIMATION_DURATION  0.5
-#define COMMENT_ALPHA               0.3
+#define COMMENT_ALPHA               0.5
+#define COMMENT_LABEL_ALPHA         0.75
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageInspectView (PrivateAPI)
@@ -26,13 +28,14 @@
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context;
 - (void)singleTapGesture;
 - (void)removeCommentView;
+- (UIImage*)scaleImage:(UIImage*)_image;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectView
 
-@synthesize delegate, capture, commentView, commentLabel, latitude, longitude, createdAt, comment, rating;
+@synthesize delegate, capture, filter, commentView, commentLabel, latitude, longitude, createdAt, comment, rating;
 
 #pragma mark -
 #pragma mark ImageInspectView PrivateAPI
@@ -42,7 +45,7 @@
     [self.commentLabel removeFromSuperview];
     __block ViewGeneral* viewGeneral = [ViewGeneral instance];
     [viewGeneral initImageEditView:self];
-    viewGeneral.imageEditViewController.delegate = self;
+    [viewGeneral.imageEditViewController resetWithDelegate:self];
     viewGeneral.imageEditViewController.view.alpha = 0.0;
     [viewGeneral.imageEditViewController updateComment:self.comment andRating:self.rating];
     [UIView animateWithDuration:IMAGE_EDIT_VIEW_DURATION 
@@ -82,6 +85,20 @@
     ];
 }
 
+- (UIImage*)scaleImage:(UIImage*)_image {
+    UIImage* scaledImage = nil;
+    UIImageOrientation imageOrientaion = _image.imageOrientation;
+    if (imageOrientaion == UIImageOrientationDown || imageOrientaion == UIImageOrientationUp) {
+        CGFloat imageAspectRatio = _image.size.height / _image.size.width;
+        CGFloat scaledImageHeight = imageAspectRatio * self.frame.size.width;
+        CGSize scaledImageSize = CGSizeMake(self.frame.size.width, scaledImageHeight);
+        scaledImage = [_image scaleToSize:scaledImageSize];
+    } else {
+        scaledImage = [_image scaleToSize:self.frame.size];
+    }
+    return scaledImage;
+}
+
 #pragma mark -
 #pragma mark ImageInspectView
 
@@ -105,15 +122,7 @@
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = _date;
         self.capture = _capture;
-        UIImageOrientation imageOrientaion = _capture.imageOrientation;
-        if (imageOrientaion == UIImageOrientationDown || imageOrientaion == UIImageOrientationUp) {
-            CGFloat imageAspectRatio = _capture.size.height / _capture.size.width;
-            CGFloat scaledImageHeight = imageAspectRatio * self.frame.size.width;
-            CGSize scaledImageSize = CGSizeMake(self.frame.size.width, scaledImageHeight);
-            self.image = [_capture scaleToSize:scaledImageSize];
-        } else {
-            self.image = [_capture scaleToSize:_frame.size];
-        }
+        self.image = [self scaleImage:self.capture];
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
@@ -141,7 +150,7 @@
         self.commentLabel.textColor = [UIColor whiteColor];
         self.commentLabel.font = [UIFont systemFontOfSize:20.0];
         self.commentLabel.backgroundColor = [UIColor clearColor];
-        self.commentLabel.alpha = 2.0 * COMMENT_ALPHA;
+        self.commentLabel.alpha = COMMENT_LABEL_ALPHA;
         self.commentLabel.numberOfLines = 0;
         self.commentLabel.lineBreakMode = UILineBreakModeWordWrap;
         self.commentView = [ImageControlView withFrame:commentViewRect];
@@ -176,6 +185,14 @@
     if ([self.delegate respondsToSelector:@selector(didFinishEditing:)]) {
         [self.delegate didFinishEditing:self];
     }
+}
+
+- (void)addedFilter:(NSString*)_filterName {
+    self.filter = [FilteredImage filter:_filterName withImage:self.image];
+}
+
+- (void)filterValueChanged:(NSNumber*)_value forKey:(NSString*)_key {
+    self.image = [self scaleImage:[self.filter applyFilterForValue:_value andKey:_key]];
 }
 
 @end

@@ -65,6 +65,13 @@
     }
 }
 
+- (void)resetWithDelegate:(id<ImageEditViewControllerDelegate>)_delegate {
+    self.delegate = _delegate;
+    [self.streamView reset];
+    [self.imageEditView addDefaultFilter];
+}
+
+
 #pragma mark -
 #pragma mark UIViewController
 
@@ -120,7 +127,7 @@
 }
 
 #pragma mark -
-#pragma mark ImageMetaDataEditView
+#pragma mark ImageMetaDataEditViewDelegate
 
 - (void)exportToCameraRoll {
     [self.delegate exportToCameraRoll];
@@ -138,6 +145,14 @@
 
 #pragma mark -
 #pragma mark ImageEditView
+
+- (void)addedFilter:(NSString*)_filterName {
+    [self.delegate addedFilter:_filterName];
+}
+
+- (void)filterValueChanged:(NSNumber*)_value forKey:(NSString*)_key {
+    [self.delegate filterValueChanged:_value forKey:_key];
+}
 
 #pragma mark -
 #pragma mark UIGestureRecognizerDelegate

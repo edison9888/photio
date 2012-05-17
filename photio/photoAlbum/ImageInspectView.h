@@ -10,13 +10,16 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ImageEditViewController.h"
 
-@class Capture;
 @protocol ImageInspectViewDelegate;
+
+@class Capture;
+@class FilteredImage;
 
 @interface ImageInspectView : UIImageView <ImageEditViewControllerDelegate>
 
 @property(nonatomic, weak)   id<ImageInspectViewDelegate>   delegate;
 @property(nonatomic, strong) UIImage*                       capture;
+@property(nonatomic, strong) FilteredImage*                 filter;
 @property(nonatomic, strong) UIView*                        commentView;
 @property(nonatomic, strong) UILabel*                       commentLabel;
 @property(nonatomic, strong) NSNumber*                      latitude;

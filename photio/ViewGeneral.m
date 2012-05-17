@@ -318,7 +318,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if (self.imageEditViewController == nil) {
         self.imageEditViewController = [ImageEditViewController inView:_containerView];
     }
-    [self.imageEditViewController.streamView reset];
     [_containerView addSubview:self.imageEditViewController.view];
 }
 

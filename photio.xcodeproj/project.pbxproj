@@ -58,6 +58,7 @@
 		05B8BB301561A0C80023346F /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B8BB2F1561A0C80023346F /* ProgressView.m */; };
 		05B8BB331561A19A0023346F /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B8BB321561A19A0023346F /* RoundedCornersView.m */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
+		05C6050C156402AD00E02532 /* FilteredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C6050B156402AC00E02532 /* FilteredImage.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
 		05C99EC514F0585C00D09F3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC414F0585C00D09F3E /* CoreGraphics.framework */; };
@@ -118,7 +119,7 @@
 		058736B715556897007A5654 /* ImageEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditView.xib; path = photio/PhotoAlbum/ImageEditView.xib; sourceTree = SOURCE_ROOT; };
 		058736B915556941007A5654 /* ImageMetaDataEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageMetaDataEditView.xib; path = photio/PhotoAlbum/ImageMetaDataEditView.xib; sourceTree = SOURCE_ROOT; };
 		058A48E315620959002199F7 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		058A48EA1562CD02002199F7 /* ParameterSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; name = ParameterSliderView.h; path = photio/Library/ParameterSliderView.h; sourceTree = SOURCE_ROOT; };
+		058A48EA1562CD02002199F7 /* ParameterSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParameterSliderView.h; path = photio/Library/ParameterSliderView.h; sourceTree = SOURCE_ROOT; };
 		058A48EB1562CD02002199F7 /* ParameterSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParameterSliderView.m; path = photio/Library/ParameterSliderView.m; sourceTree = SOURCE_ROOT; };
 		058B4FB415196B1F0087F717 /* LocalesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalesViewController.h; sourceTree = "<group>"; };
 		058B4FB515196B1F0087F717 /* LocalesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalesViewController.m; sourceTree = "<group>"; };
@@ -166,6 +167,8 @@
 		05B8BB321561A19A0023346F /* RoundedCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoundedCornersView.m; path = photio/Library/RoundedCornersView.m; sourceTree = SOURCE_ROOT; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
+		05C6050A156402AC00E02532 /* FilteredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; name = FilteredImage.h; path = Filters/FilteredImage.h; sourceTree = "<group>"; };
+		05C6050B156402AC00E02532 /* FilteredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilteredImage.m; path = Filters/FilteredImage.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C99EC014F0585C00D09F3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05C99EC214F0585C00D09F3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -325,6 +328,15 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		05C6050E156402C400E02532 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				05C6050A156402AC00E02532 /* FilteredImage.h */,
+				05C6050B156402AC00E02532 /* FilteredImage.m */,
+			);
+			name = Filter;
+			sourceTree = "<group>";
+		};
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +375,7 @@
 		05C99EC614F0585C00D09F3E /* photio */ = {
 			isa = PBXGroup;
 			children = (
+				05C6050E156402C400E02532 /* Filter */,
 				0590C737153B3D8F0065AB42 /* Calendar */,
 				05B837701530C33700D99A40 /* Application */,
 				05C59C2314F331A6009AC823 /* Images */,
@@ -411,12 +424,12 @@
 				05AF480E154DCCAE0099576A /* ImageEntriesView.m */,
 				05CCEFA31555E0E8004FBD21 /* ImageControlView.h */,
 				05CCEFA41555E0E8004FBD21 /* ImageControlView.m */,
-				05E4C21C1552233500C7266E /* ImageEditViewController.h */,
-				05E4C21D1552233600C7266E /* ImageEditViewController.m */,
-				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
 				05E4C2251552259800C7266E /* ImageEditView.h */,
 				05E4C2261552259800C7266E /* ImageEditView.m */,
 				058736B715556897007A5654 /* ImageEditView.xib */,
+				05E4C21C1552233500C7266E /* ImageEditViewController.h */,
+				05E4C21D1552233600C7266E /* ImageEditViewController.m */,
+				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
 				05B83718152E6C5F00D99A40 /* ImageInspectView.h */,
 				05B83719152E6C5F00D99A40 /* ImageInspectView.m */,
 				05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */,
@@ -571,6 +584,7 @@
 				05B8BB301561A0C80023346F /* ProgressView.m in Sources */,
 				05B8BB331561A19A0023346F /* RoundedCornersView.m in Sources */,
 				058A48EC1562CD02002199F7 /* ParameterSliderView.m in Sources */,
+				05C6050C156402AD00E02532 /* FilteredImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

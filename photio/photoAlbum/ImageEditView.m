@@ -24,12 +24,14 @@
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
 
+
 #pragma mark -
 #pragma mark ImageEditView
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate {
     ImageEditView* view = (ImageEditView*)[UIView loadView:[self class]];
     view.delegate = _delegate;
+    view.parameterSlider.delegate = view;
     return view;
 }
 
@@ -38,6 +40,17 @@
     if (self) {
     }
     return self;
+}
+
+- (void)addDefaultFilter {
+    [self.delegate addedFilter:@"CISepiaTone"];
+}
+
+#pragma mark -
+#pragma mark ParameterSliderViewDelegate
+
+- (void)parameterSliderValueChanged:(ParameterSliderView *)_parameterSlider {
+    [self.delegate filterValueChanged:[NSNumber numberWithFloat:[_parameterSlider value]] forKey:@"inputIntensity"];
 }
 
 @end

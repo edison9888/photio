@@ -43,7 +43,7 @@
 						<string key="NSFrame">{{20, 20}, {45, 45}}</string>
 						<reference key="NSSuperview" ref="142320705"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="505773112"/>
+						<reference key="NSNextKeyView" ref="586824165"/>
 						<string key="NSReuseIdentifierKey">_NS:567</string>
 						<array key="IBUIGestureRecognizers" id="0"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -52,22 +52,6 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">flash-on.png</string>
 						</object>
-					</object>
-					<object class="IBUIView" id="505773112">
-						<reference key="NSNextResponder" ref="142320705"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{115, 420}, {90, 50}}</string>
-						<reference key="NSSuperview" ref="142320705"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="586824165"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="31323162">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MCAwAA</bytes>
-						</object>
-						<float key="IBUIAlpha">0.30000001192092896</float>
-						<reference key="IBUIGestureRecognizers" ref="0"/>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<object class="IBUIView" id="586824165">
 						<reference key="NSNextResponder" ref="142320705"/>
@@ -81,7 +65,7 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
 						</object>
-						<float key="IBUIAlpha">0.30000001192092896</float>
+						<float key="IBUIAlpha">0.5</float>
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -91,7 +75,10 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="393904638"/>
 				<string key="NSReuseIdentifierKey">_NS:196</string>
-				<reference key="IBUIBackgroundColor" ref="31323162"/>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MCAwAA</bytes>
+				</object>
 				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -249,7 +236,6 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="393904638"/>
 							<reference ref="586824165"/>
-							<reference ref="505773112"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -285,13 +271,6 @@
 						<string key="objectName">Take Photo</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">85</int>
-						<reference key="object" ref="505773112"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="142320705"/>
-						<string key="objectName">Take Photo Border</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">83</int>
 						<reference key="object" ref="586824165"/>
 						<reference key="parent" ref="142320705"/>
@@ -312,8 +291,6 @@
 				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="83.CustomClassName">TakePhotoView</string>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="85.CustomClassName">TakePhotoView</string>
-				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>

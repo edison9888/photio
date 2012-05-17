@@ -9,23 +9,29 @@
 #import "ParameterSliderView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define PARAMETER_VIEW_HEIGHT_SCALE     0.75
+#define DEFAULT_MIN_VALUE               0.0
+#define DEFAULT_MAX_VALUE               1.0
+#define DEFAULT_INITIAL_VALUE           0.5
+
 @interface ParameterSliderView (PrivateAPI)
 
 - (void)valueChanged;
-- (void)configureLayers;
+- (void)setUp;
+- (void)drawParameterViewBorder;
 
 @end
 
 @implementation ParameterSliderView
 
-@synthesize delegate, parameterView, panGesture, maxValue, minValue, initialValue, parameterViewSize;
+@synthesize delegate, parameterView, parameterViewBorder, panGesture, maxValue, minValue, initialValue, parameterViewFrame;
 
 #pragma mark -
 #pragma mark ParameterSlider PrivateAPI
 
 - (void)valueChanged:(UIPanGestureRecognizer*)_panGesture {
     CGPoint dragDelta = [_panGesture translationInView:self];
-    CGFloat newWidth = self.parameterViewSize.width + dragDelta.x;
+    CGFloat newWidth = self.parameterViewFrame.size.width + dragDelta.x;
     if (newWidth < 0.0) {
         newWidth = 0.0;
     } else if (newWidth > self.frame.size.width) {
@@ -34,20 +40,35 @@
     switch (_panGesture.state) {
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStateChanged:
-            self.parameterView.frame = CGRectMake(0.0, 0.0, newWidth, self.parameterViewSize.height);
-            [self.delegate valueChanged:self];
+            self.parameterView.frame = CGRectMake(0.0, self.parameterViewFrame.origin.y, newWidth, self.parameterViewFrame.size.height);
             break;
         case UIGestureRecognizerStateEnded:
-            self.parameterViewSize = self.parameterView.frame.size;
+            self.parameterViewFrame = self.parameterView.frame;
+            [self.delegate parameterSliderValueChanged:self];
             break;
         default:
             break;
     }
 }
 
-- (void)configureLayers {
-    self.layer.borderColor = self.parameterView.backgroundColor.CGColor;
-    self.layer.borderWidth = 1.0f;    
+- (void)setUp {
+    self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(valueChanged:)];
+    [self addGestureRecognizer:self.panGesture];
+    self.parameterViewFrame = CGRectMake(0.0, 
+                                         0.5 * self.frame.size.height * (1.0 - PARAMETER_VIEW_HEIGHT_SCALE), 
+                                         DEFAULT_INITIAL_VALUE * self.frame.size.width, 
+                                         PARAMETER_VIEW_HEIGHT_SCALE * self.frame.size.height);
+    self.parameterView = [[UIView alloc] initWithFrame:self.parameterViewFrame];
+    self.parameterView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:self.parameterView];
+    self.parameterViewBorder = [[UIView alloc] initWithFrame:CGRectMake(-1.0, self.parameterView.frame.origin.y - 1.0, self.frame.size.width + 2.0, self.parameterView.frame.size.height + 1.0)];
+    [self addSubview:self.parameterViewBorder];
+    self.backgroundColor = [UIColor clearColor];
+    self.minValue = DEFAULT_MIN_VALUE;
+    self.maxValue = DEFAULT_MAX_VALUE;
+    self.initialValue = DEFAULT_INITIAL_VALUE;
+    self.parameterViewBorder.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.parameterViewBorder.layer.borderWidth = 1.0f;    
 }
 
 #pragma mark -
@@ -55,30 +76,21 @@
 
 + (id)withFrame:(CGRect)_frame {
     ParameterSliderView* sliderView = [[ParameterSliderView alloc] initWithFrame:_frame];
-    [sliderView configureLayers];
+    [sliderView setUp];
     return sliderView;
 }
 
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {
-        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(valueChanged:)];
-        [self addGestureRecognizer:self.panGesture];
-        self.parameterViewSize = CGSizeMake(0.5 * self.frame.size.width, self.frame.size.height);
-        self.parameterView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.parameterViewSize.width, self.parameterViewSize.height)];
-        self.parameterView.backgroundColor = self.backgroundColor;
-        [self addSubview:self.parameterView];
-        self.backgroundColor = [UIColor clearColor];
-        self.minValue = 0.0;
-        self.maxValue = 1.0;
-        self.initialValue = 0.5;
-        [self configureLayers];
+        [self setUp];
     }
     return self;
 }
 
 - (CGFloat)value {
-    return 0.0;  
+    CGFloat parameterWidth = self.parameterViewFrame.size.width / self.frame.size.width;
+    return parameterWidth * (self.maxValue - self.minValue) + self.minValue;  
 }
 
 @end
