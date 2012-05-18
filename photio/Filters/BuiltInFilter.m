@@ -8,32 +8,21 @@
 
 #import "BuiltInFilter.h" 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface BuiltInFilter (PrivateAPI)
+
+- (UIImage*)applyFilterForAttributeValue:(id)_value;
+- (void)setFilteredImage:(UIImage*)_filteredImage;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation BuiltInFilter
 
-@synthesize context, filter, image;
+@synthesize context, filter, image, filterAttribute;
 
-+ (id)filter:(NSString*)_filterName withImage:(UIImage*)_image {
-    return [[BuiltInFilter alloc] initWithFilter:_filterName image:_image];
-}
-
-- (id)initWithFilter:(NSString*)_filterName image:(UIImage*)_image {
-    self = [super init];
-    if (self) {
-        self.context = [CIContext contextWithOptions:nil];
-        self.image = [[CIImage alloc] initWithImage:_image];
-        self.filter = [CIFilter filterWithName:_filterName keysAndValues:kCIInputImageKey, self.image, nil];
-    }
-    return self;
-}
-
-- (UIImage*)applyFilterForValue:(id)_value andKey:(NSString*)_key; {
-    [self.filter setValue:_value forKey:_key];
-    return [self outputImage];
-}
-
-- (void)setValue:(id)_value forKey:(NSString*)_key {
-    [self.filter setValue:_value forKey:_key];
-}
+#pragma mark -
+#pragma mark BuiltInFilter PrivateAPI
 
 - (UIImage*)outputImage {
     CIImage* outputImage = [self.filter outputImage];
@@ -43,5 +32,49 @@
     return outputUIImage;
 }
 
+- (void)setFilteredImage:(UIImage*)_filteredImage {
+    if (!self.image) {
+        self.image = [[CIImage alloc] initWithImage:_filteredImage];
+        [self.filter setValue:self.image forKey:@"inputImage"];
+    }
+}
+
+#pragma mark -
+#pragma mark BuiltInFilter
+
++ (id)filter:(NSString*)_filterName andAttribute:(NSString*)_attribute {
+    return [[BuiltInFilter alloc] initWithFilter:_filterName andAttribute:_attribute];
+}
+
+- (id)initWithFilter:(NSString*)_filterName andAttribute:(NSString*)_attribute {
+    self = [super init];
+    if (self) {
+        self.context = [CIContext contextWithOptions:nil];
+        self.filter = [CIFilter filterWithName:_filterName];
+        self.filterAttribute = _attribute;
+    }
+    return self;
+}
+
+#pragma mark -
+#pragma mark Filter
+
+- (CGFloat)sliderMaxValue {
+    
+}
+
+- (CGFloat)sliderMinValue {
+    
+}
+
+- (CGFloat)defaultValue {
+    
+}
+
+- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage ForAttributeValue:(id)_value {
+    [self setFilteredImage:_filteredImage];
+    [self.filter setValue:_value forKey:self.filterAttribute];
+    return [self outputImage];
+}
 
 @end

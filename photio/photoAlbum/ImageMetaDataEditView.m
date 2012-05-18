@@ -83,8 +83,10 @@
 - (void)updateRating:(NSString*)_rating {
     if (_rating) {
         self.starred = YES;
+        self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
+        self.imageRating.alpha = 0.9;
     } else {
-        self.starred = YES;
+        self.starred = NO;
     }
 }
 
@@ -106,7 +108,7 @@
         self.starred = NO;
         self.imageRating.image = [UIImage imageNamed:@"whitestar.png"];
         self.imageRating.alpha = 0.3;
-        [self.delegate saveRating:@"0"];
+        [self.delegate saveRating:nil];
     } else {
         self.starred = YES;
         self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];

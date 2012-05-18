@@ -76,6 +76,7 @@
 		05CFEF8E1566AB3900755519 /* FilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF8D1566AB3900755519 /* FilterFactory.m */; };
 		05CFEF911566BA8900755519 /* apply.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF8F1566BA8900755519 /* apply.png */; };
 		05CFEF921566BA8900755519 /* apply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF901566BA8900755519 /* apply@2x.png */; };
+		05CFEF951566EDB400755519 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF941566EDB300755519 /* Filter.m */; };
 		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
 		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
 		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
@@ -198,6 +199,8 @@
 		05CFEF8D1566AB3900755519 /* FilterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterFactory.m; path = Filters/FilterFactory.m; sourceTree = "<group>"; };
 		05CFEF8F1566BA8900755519 /* apply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apply.png; path = photio/Images/apply.png; sourceTree = SOURCE_ROOT; };
 		05CFEF901566BA8900755519 /* apply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apply@2x.png"; path = "photio/Images/apply@2x.png"; sourceTree = SOURCE_ROOT; };
+		05CFEF931566EDB300755519 /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter.h; path = Filters/Filter.h; sourceTree = "<group>"; };
+		05CFEF941566EDB300755519 /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter.m; path = Filters/Filter.m; sourceTree = "<group>"; };
 		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -344,6 +347,8 @@
 			children = (
 				05C6050A156402AC00E02532 /* BuiltInFilter.h */,
 				05C6050B156402AC00E02532 /* BuiltInFilter.m */,
+				05CFEF931566EDB300755519 /* Filter.h */,
+				05CFEF941566EDB300755519 /* Filter.m */,
 				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
 				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
 			);
@@ -603,6 +608,7 @@
 				058A48EC1562CD02002199F7 /* ParameterSliderView.m in Sources */,
 				05C6050C156402AD00E02532 /* BuiltInFilter.m in Sources */,
 				05CFEF8E1566AB3900755519 /* FilterFactory.m in Sources */,
+				05CFEF951566EDB400755519 /* Filter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

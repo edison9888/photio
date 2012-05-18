@@ -38,13 +38,13 @@
     if (self) {
         self.delegate = _delegate;
         self.containerView = _containerView;
+        self.didEdit = NO;
         [self.containerView addSubview:self.view];  
     }
     return self;
 }
 
 - (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating {
-    self.didEdit = NO;
     [self.imageMetaDataEditView updateComment:_comment];
     [self.imageMetaDataEditView updateRating:_rating];
 }

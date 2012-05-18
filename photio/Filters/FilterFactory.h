@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Filter;
+
 @interface FilterFactory : NSObject
+
++ (Filter*)filter:(NSString*)_filterName;
 
 @end

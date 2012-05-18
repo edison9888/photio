@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Filter.h"
 
-@interface BuiltInFilter : NSObject
+@interface BuiltInFilter : Filter
 
-@property(nonatomic, strong) CIContext*                 context;
-@property(nonatomic, strong) CIFilter*                  filter;
-@property(nonatomic, strong) CIImage*                   image;
+@property(nonatomic, strong) CIContext*     context;
+@property(nonatomic, strong) CIFilter*      filter;
+@property(nonatomic, strong) CIImage*       image;
+@property(nonatomic, strong) NSString*      filterAttribute;            
 
-+ (id)filter:(NSString*)_filterName withImage:(UIImage*)_image;
-- (id)initWithFilter:(NSString*)_filterName image:(UIImage*)_image;
-- (UIImage*)applyFilterForValue:(id)_value andKey:(NSString*)_key;
-- (void)setValue:(id)_value forKey:(NSString*)_key;
-- (UIImage*)outputImage;
++ (id)filter:(NSString*)_filterName andAttribute:(NSString*)_attribute ;
+- (id)initWithFilter:(NSString*)_filterName andAttribute:(NSString*)_attribute ;
 
 @end
 
