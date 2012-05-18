@@ -1,5 +1,5 @@
 //
-//  FilteredImage.h
+//  BuiltInFilter.h
 //  photio
 //
 //  Created by Troy Stribling on 5/16/12.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FilteredImage : NSObject
+@interface BuiltInFilter : NSObject
 
 @property(nonatomic, strong) CIContext*                 context;
 @property(nonatomic, strong) CIFilter*                  filter;

@@ -1,19 +1,19 @@
 //
-//  FilteredImage.m
+//  BuiltInFilter.m
 //  photio
 //
 //  Created by Troy Stribling on 5/16/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "FilteredImage.h" 
+#import "BuiltInFilter.h" 
 
-@implementation FilteredImage
+@implementation BuiltInFilter
 
 @synthesize context, filter, image;
 
 + (id)filter:(NSString*)_filterName withImage:(UIImage*)_image {
-    return [[FilteredImage alloc] initWithFilter:_filterName image:_image];
+    return [[BuiltInFilter alloc] initWithFilter:_filterName image:_image];
 }
 
 - (id)initWithFilter:(NSString*)_filterName image:(UIImage*)_image {

@@ -12,7 +12,6 @@
 #import "Image.h"
 #import "ViewGeneral.h"
 #import "ImageControlView.h"
-#import "FilteredImage.h"
 
 #define MAX_COMMENT_LINES           5
 #define COMMENT_YOFFSET             15
@@ -35,7 +34,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectView
 
-@synthesize delegate, capture, filter, commentView, commentLabel, latitude, longitude, createdAt, comment, rating;
+@synthesize delegate, imageEditViewController, capture, commentView, commentLabel, latitude, longitude, createdAt, comment, rating;
 
 #pragma mark -
 #pragma mark ImageInspectView PrivateAPI
@@ -43,10 +42,8 @@
 - (void)editImage {
     [self.commentView removeFromSuperview];
     [self.commentLabel removeFromSuperview];
-    ViewGeneral* viewGeneral = [ViewGeneral instance];
-    [viewGeneral initImageEditView:self];
-    [viewGeneral.imageEditViewController resetWithDelegate:self];
-    [viewGeneral.imageEditViewController updateComment:self.comment andRating:self.rating];
+    self.imageEditViewController = [ImageEditViewController inView:self withDelegate:self];
+    [self.imageEditViewController updateComment:self.comment andRating:self.rating];
 }
 
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
@@ -187,12 +184,7 @@
     }
 }
 
-- (void)addedFilter:(NSString*)_filterName {
-    self.filter = [FilteredImage filter:_filterName withImage:self.image];
-}
-
-- (void)filterValueChanged:(NSNumber*)_value forKey:(NSString*)_key {
-    self.image = [self scaleImage:[self.filter applyFilterForValue:_value andKey:_key]];
+- (void)applyFilters:(NSDictionary*)_filters {
 }
 
 @end

@@ -14,16 +14,27 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditView (PrivateAPI)
 
+- (void)filterParameters:(NSString*)_filterName;
+- (void)addFilter:(NSString*)_filterName withAttribute:(NSString*)_attributeName;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditView
 
-@synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageControlsView, imageFiltersView;
+@synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageControlsView, imageFiltersView,
+            filtersToApply, filtersLoaded, displayedFilter, displayedFilterClass, displayedFilterLoaded;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
 
+- (void)filterParameters:(NSString*)_filterName {
+    
+}
+
+- (void)addFilter:(NSString*)_filterName withAttribute:(NSString*)_attributeName {
+    
+}
 
 #pragma mark -
 #pragma mark ImageEditView
@@ -38,19 +49,16 @@
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {
+        self.filtersToApply = [NSMutableDictionary dictionaryWithCapacity:10];
+        self.filtersLoaded = [NSMutableDictionary dictionaryWithCapacity:10];
     }
     return self;
-}
-
-- (void)resetFilter {
-    [self.delegate addedFilter:@"CISepiaTone"];
 }
 
 #pragma mark -
 #pragma mark ParameterSliderViewDelegate
 
 - (void)parameterSliderValueChanged:(ParameterSliderView *)_parameterSlider {
-    [self.delegate filterValueChanged:[NSNumber numberWithFloat:[_parameterSlider value]] forKey:@"inputIntensity"];
 }
 
 @end

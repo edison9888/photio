@@ -159,7 +159,7 @@
 							<object class="IBUIImageView" id="450492076">
 								<reference key="NSNextResponder" ref="783864881"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{140, 5}, {40, 40}}</string>
+								<string key="NSFrame">{{135, 0}, {50, 50}}</string>
 								<reference key="NSSuperview" ref="783864881"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -527,9 +527,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="export.png">{40, 40}</string>
+			<string key="export.png">{70, 70}</string>
 			<string key="pencil.png">{40, 40}</string>
-			<string key="whitestar.png">{40, 40}</string>
+			<string key="whitestar.png">{70, 70}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>

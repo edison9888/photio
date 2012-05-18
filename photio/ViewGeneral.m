@@ -49,7 +49,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize notAnimating, managedObjectContext, containerView, shutter;
-@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, imageEditViewController, progressView;
+@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, progressView;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
@@ -309,24 +309,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)localesViewPosition:(CGRect)_rect {
     self.localesViewController.view.frame = _rect;
-}
-
-#pragma mark - 
-#pragma mark ImageEditViewController
-
-- (void)initImageEditView:(UIView*)_containerView {
-    if (self.imageEditViewController == nil) {
-        self.imageEditViewController = [ImageEditViewController inView:_containerView];
-    }
-    [self.imageEditViewController showViews];
-}
-
-- (void)imageEditViewPosition:(CGRect)_rec {
-    self.imageEditViewController.view.frame = _rec;
-}
-
-- (void)imageEditViewHidden:(BOOL)_hidden {
-    self.imageEditViewController.view.hidden = _hidden;
 }
 
 #pragma mark - 

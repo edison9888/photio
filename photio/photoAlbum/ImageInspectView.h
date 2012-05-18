@@ -13,13 +13,13 @@
 @protocol ImageInspectViewDelegate;
 
 @class Capture;
-@class FilteredImage;
+@class ImageEditViewController;
 
 @interface ImageInspectView : UIImageView <ImageEditViewControllerDelegate>
 
 @property(nonatomic, weak)   id<ImageInspectViewDelegate>   delegate;
+@property(nonatomic, strong) ImageEditViewController*       imageEditViewController;
 @property(nonatomic, strong) UIImage*                       capture;
-@property(nonatomic, strong) FilteredImage*                 filter;
 @property(nonatomic, strong) UIView*                        commentView;
 @property(nonatomic, strong) UILabel*                       commentLabel;
 @property(nonatomic, strong) NSNumber*                      latitude;

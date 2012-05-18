@@ -24,12 +24,11 @@
 @property(nonatomic, strong) ImageEditView*                         imageEditView;
 @property(nonatomic, assign) BOOL                                   didEdit;
 
-+ (id)inView:(UIView*)_containerView;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView;
++ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
 - (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating;
 - (IBAction)remove:(id)sender;
 - (IBAction)singleTap:(id)sender;
-- (void)resetWithDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
 - (void)showViews;
 - (void)hideViews;
 
@@ -48,7 +47,6 @@
 - (void)saveComment:(NSString*)_comment;
 - (void)saveRating:(NSString*)_rating;
 - (void)didFinishEditing;
-- (void)addedFilter:(NSString*)_filterName;
-- (void)filterValueChanged:(NSNumber*)_value forKey:(NSString*)_key;
+- (void)applyFilters:(NSDictionary*)_filters;
 
 @end

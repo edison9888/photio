@@ -23,9 +23,13 @@
 @property(nonatomic, strong) IBOutlet ParameterSliderView*      parameterSlider;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageControlsView;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageFiltersView;
+@property(nonatomic, strong) NSMutableDictionary*               filtersToApply;
+@property(nonatomic, strong) NSMutableDictionary*               filtersLoaded;
+@property(nonatomic, strong) NSString*                          displayedFilter;
+@property(nonatomic, strong) NSString*                          displayedFilterClass;
+@property(nonatomic, assign) BOOL                               displayedFilterLoaded;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate;
-- (void)resetFilter;
 
 @end
 
@@ -33,7 +37,6 @@
 
 @required
 
-- (void)addedFilter:(NSString*)_filterName;
-- (void)filterValueChanged:(NSNumber*)_value forKey:(NSString*)_key;
+- (void)applyFilters:(NSDictionary*)_filters;
 
 @end

@@ -29,14 +29,16 @@
 #pragma mark -
 #pragma mark ImageEditViewController
 
-+ (id)inView:(UIView*)_containerView {
-    return [[ImageEditViewController alloc] initWithNibName:@"ImageEditViewController" bundle:nil inView:_containerView];
++ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate {
+    return [[ImageEditViewController alloc] initWithNibName:@"ImageEditViewController" bundle:nil inView:_containerView withDelegate:_delegate];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.delegate = _delegate;
         self.containerView = _containerView;
+        [self.containerView addSubview:self.view];  
     }
     return self;
 }
@@ -58,12 +60,6 @@
     if ([self.delegate respondsToSelector:@selector(singleTapImageEditGesture)]) {
         [self.delegate singleTapImageEditGesture];
     }
-}
-
-- (void)resetWithDelegate:(id<ImageEditViewControllerDelegate>)_delegate {
-    self.delegate = _delegate;
-    [self.streamView reset];
-    [self.imageEditView resetFilter];
 }
 
 - (void)showViews {    
@@ -135,6 +131,7 @@
     [self.streamView addView:self.imageMetaDataEditView];
     self.streamView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.streamView];
+    [self showViews];
     [super viewDidLoad];
 }
 
@@ -196,12 +193,8 @@
 #pragma mark -
 #pragma mark ImageEditView
 
-- (void)addedFilter:(NSString*)_filterName {
-    [self.delegate addedFilter:_filterName];
-}
-
-- (void)filterValueChanged:(NSNumber*)_value forKey:(NSString*)_key {
-    [self.delegate filterValueChanged:_value forKey:_key];
+- (void)applyFilters:(NSDictionary*)_filters {
+    [self.delegate applyFilters:_filters];
 }
 
 #pragma mark -
