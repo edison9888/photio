@@ -12,7 +12,7 @@
 @interface BuiltInFilter (PrivateAPI)
 
 - (UIImage*)applyFilterForAttributeValue:(id)_value;
-- (void)setFilteredImage:(UIImage*)_filteredImage;
+- (UIImage*)outputImage;
 
 @end
 
@@ -60,18 +60,25 @@
 #pragma mark Filter
 
 - (CGFloat)sliderMaxValue {
-    
+    NSDictionary* filterAttributes = [self.filter attributes];
+    NSNumber* maxValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeSliderMax];
+    return [maxValue doubleValue];
 }
 
 - (CGFloat)sliderMinValue {
+    NSDictionary* filterAttributes = [self.filter attributes];
+    NSNumber* minValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeSliderMin];
+    return [minValue doubleValue];
+}
+
+- (CGFloat)sliderDefaultValue {
+    NSDictionary* filterAttributes = [self.filter attributes];
+    NSNumber* defaultValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeDefault];
+    return [defaultValue doubleValue];
     
 }
 
-- (CGFloat)defaultValue {
-    
-}
-
-- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage ForAttributeValue:(id)_value {
+- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage withAttributeValue:(id)_value {
     [self setFilteredImage:_filteredImage];
     [self.filter setValue:_value forKey:self.filterAttribute];
     return [self outputImage];

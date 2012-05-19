@@ -10,12 +10,15 @@
 #import "ImageControlView.h"
 #import "ParameterSliderView.h"
 #import "UIView+Extensions.h"
+#import "FilterFactory.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditView (PrivateAPI)
 
 - (void)filterParameters:(NSString*)_filterName;
 - (void)addFilter:(NSString*)_filterName withAttribute:(NSString*)_attributeName;
+- (void)removeFilter:(FilterType)_filterType;
+- (IBAction)applyFilter:(id)sender;
 
 @end
 
@@ -29,11 +32,19 @@
 #pragma mark ImageEditView (PrivateAPI)
 
 - (void)filterParameters:(NSString*)_filterName {
-    
 }
 
-- (void)addFilter:(NSString*)_filterName withAttribute:(NSString*)_attributeName {
-    
+- (void)addFilter:(FilterType)_filterType {
+    Filter* filter = [FilterFactory filter:_filterType];
+    self.parameterSlider.maxValue = [filter sliderMaxValue];
+    self.parameterSlider.minValue = [filter sliderMinValue];
+    self.parameterSlider.initialValue = [filter sliderDefaultValue];
+    [self.parameterSlider setUp];
+    [self.filtersToApply setObject:filter forKey:[NSNumber numberWithInt:_filterType]];
+}
+
+- (void)removeFilter:(FilterType)_filterType {
+    [self.filtersToApply removeObjectForKey:[NSNumber numberWithInt:_filterType]];
 }
 
 #pragma mark -
@@ -53,6 +64,14 @@
         self.filtersLoaded = [NSMutableDictionary dictionaryWithCapacity:10];
     }
     return self;
+}
+
+- (void)didMoveToSuperview {
+    [self addFilter:FilterTypeVibrance];
+}
+
+- (IBAction)applyFilter:(id)sender {
+    
 }
 
 #pragma mark -

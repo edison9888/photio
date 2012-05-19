@@ -17,7 +17,6 @@
 @interface ParameterSliderView (PrivateAPI)
 
 - (void)valueChanged;
-- (void)setUp;
 - (void)drawParameterViewBorder;
 
 @end
@@ -56,7 +55,7 @@
     [self addGestureRecognizer:self.panGesture];
     self.parameterViewFrame = CGRectMake(0.0, 
                                          0.5 * self.frame.size.height * (1.0 - PARAMETER_VIEW_HEIGHT_SCALE), 
-                                         DEFAULT_INITIAL_VALUE * self.frame.size.width, 
+                                         (self.initialValue - self.minValue) / (self.maxValue - self.minValue) * self.frame.size.width, 
                                          PARAMETER_VIEW_HEIGHT_SCALE * self.frame.size.height);
     self.parameterView = [[UIView alloc] initWithFrame:self.parameterViewFrame];
     self.parameterView.backgroundColor = [UIColor whiteColor];
@@ -64,9 +63,7 @@
     self.parameterViewBorder = [[UIView alloc] initWithFrame:CGRectMake(-1.0, self.parameterView.frame.origin.y - 1.0, self.frame.size.width + 2.0, self.parameterView.frame.size.height + 2.0)];
     [self addSubview:self.parameterViewBorder];
     self.backgroundColor = [UIColor clearColor];
-    self.minValue = DEFAULT_MIN_VALUE;
-    self.maxValue = DEFAULT_MAX_VALUE;
-    self.initialValue = DEFAULT_INITIAL_VALUE;
+    self.initialValue = self.initialValue;
     self.parameterViewBorder.layer.borderColor = [UIColor whiteColor].CGColor;
     self.parameterViewBorder.layer.borderWidth = 1.0f;    
 }
@@ -76,14 +73,12 @@
 
 + (id)withFrame:(CGRect)_frame {
     ParameterSliderView* sliderView = [[ParameterSliderView alloc] initWithFrame:_frame];
-    [sliderView setUp];
     return sliderView;
 }
 
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {
-        [self setUp];
     }
     return self;
 }

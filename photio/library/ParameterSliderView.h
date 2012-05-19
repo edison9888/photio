@@ -22,12 +22,12 @@
 @property(nonatomic, assign) CGRect                             parameterViewFrame;
 
 - (CGFloat)value;
+- (void)setUp;
 
 @end
 
 @protocol ParameterSliderViewDelegate
 
 -(void)parameterSliderValueChanged:(ParameterSliderView*)_parameterSlider;
-
 
 @end

@@ -72,7 +72,6 @@
 		05CCEFB71555F459004FBD21 /* export@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB51555F459004FBD21 /* export@2x.png */; };
 		05CCEFBA1556302D004FBD21 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB81556302D004FBD21 /* twitter.png */; };
 		05CCEFBB1556302D004FBD21 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CCEFB91556302D004FBD21 /* twitter@2x.png */; };
-		05CFEF81156574AE00755519 /* Filters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF80156574AE00755519 /* Filters.plist */; };
 		05CFEF8E1566AB3900755519 /* FilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF8D1566AB3900755519 /* FilterFactory.m */; };
 		05CFEF911566BA8900755519 /* apply.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF8F1566BA8900755519 /* apply.png */; };
 		05CFEF921566BA8900755519 /* apply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF901566BA8900755519 /* apply@2x.png */; };
@@ -194,7 +193,6 @@
 		05CCEFB51555F459004FBD21 /* export@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "export@2x.png"; path = "photio/Images/export@2x.png"; sourceTree = SOURCE_ROOT; };
 		05CCEFB81556302D004FBD21 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = photio/Images/twitter.png; sourceTree = SOURCE_ROOT; };
 		05CCEFB91556302D004FBD21 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "twitter@2x.png"; path = "photio/Images/twitter@2x.png"; sourceTree = SOURCE_ROOT; };
-		05CFEF80156574AE00755519 /* Filters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Filters.plist; sourceTree = "<group>"; };
 		05CFEF8C1566AB3900755519 /* FilterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterFactory.h; path = Filters/FilterFactory.h; sourceTree = "<group>"; };
 		05CFEF8D1566AB3900755519 /* FilterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterFactory.m; path = Filters/FilterFactory.m; sourceTree = "<group>"; };
 		05CFEF8F1566BA8900755519 /* apply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apply.png; path = photio/Images/apply.png; sourceTree = SOURCE_ROOT; };
@@ -422,7 +420,6 @@
 				05C99EC914F0585C00D09F3E /* InfoPlist.strings */,
 				05C99ECC14F0585C00D09F3E /* main.m */,
 				05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */,
-				05CFEF80156574AE00755519 /* Filters.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -550,7 +547,6 @@
 				05809C9A15573EC900AF2079 /* yellowstar.png in Resources */,
 				05809C9B15573EC900AF2079 /* yellowstar@2x.png in Resources */,
 				05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */,
-				05CFEF81156574AE00755519 /* Filters.plist in Resources */,
 				05CFEF911566BA8900755519 /* apply.png in Resources */,
 				05CFEF921566BA8900755519 /* apply@2x.png in Resources */,
 			);

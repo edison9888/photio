@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Filter.h"
 
-@class Filter;
+typedef enum {
+    FilterTypeVibrance
+} FilterType;
 
 @interface FilterFactory : NSObject
 
-+ (Filter*)filter:(NSString*)_filterName;
++ (Filter*)filter:(FilterType)_filterName;
 
 @end

@@ -11,8 +11,15 @@
 
 @implementation FilterFactory
 
-+ (Filter*)filter:(NSString*)_filterName {
++ (Filter*)filter:(FilterType)_filterType {
     Filter* filter = nil;
+    switch (_filterType) {
+        case FilterTypeVibrance:
+            filter = [BuiltInFilter filter:@"CIVibrance" andAttribute:@"inputAmount"];
+            break;
+        default:
+            break;
+    }
     return filter;
 }
 

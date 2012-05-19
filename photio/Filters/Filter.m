@@ -18,11 +18,11 @@
     return 0.0;
 }
 
-- (CGFloat)defaultValue {
+- (CGFloat)sliderDefaultValue {
     return 0.0;
 }
 
-- (UIImage*)outputImage {
+- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage withAttributeValue:(id)_value {
     return nil;
 }
 

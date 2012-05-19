@@ -62,14 +62,14 @@
 								<string key="NSFrame">{{85, 10}, {150, 50}}</string>
 								<reference key="NSSuperview" ref="788146834"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="88193169"/>
+								<reference key="NSNextKeyView" ref="470462510"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="272934719"/>
 								<float key="IBUIAlpha">0.80000001192092896</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
-							<object class="IBUIImageView" id="88193169">
+							<object class="IBUIImageView" id="470462510">
 								<reference key="NSNextResponder" ref="788146834"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{250, 0}, {70, 70}}</string>
@@ -107,7 +107,6 @@
 								<string key="NSFrameSize">{320, 80}</string>
 								<reference key="NSSuperview" ref="291228529"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="272934719"/>
 								<float key="IBUIAlpha">0.5</float>
@@ -130,7 +129,7 @@
 				<reference key="IBUIBackgroundColor" ref="951598384"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUITapGestureRecognizer" id="27027586"/>
+			<object class="IBUITapGestureRecognizer" id="302024177"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -177,12 +176,20 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
-						<reference key="source" ref="88193169"/>
-						<reference key="destination" ref="27027586"/>
+						<reference key="source" ref="470462510"/>
+						<reference key="destination" ref="302024177"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">38</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">applyFilter:</string>
+						<reference key="source" ref="302024177"/>
+						<reference key="destination" ref="191373211"/>
+					</object>
+					<int key="connectionID">42</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -219,7 +226,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="795070531"/>
 							<reference ref="370032146"/>
-							<reference ref="88193169"/>
+							<reference ref="470462510"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Controls Container</string>
@@ -253,14 +260,14 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
-						<reference key="object" ref="88193169"/>
+						<reference key="object" ref="470462510"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="788146834"/>
 						<string key="objectName">Apply Filter</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
-						<reference key="object" ref="27027586"/>
+						<reference key="object" ref="302024177"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Apply Filter</string>
 					</object>
@@ -288,7 +295,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">42</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -303,6 +310,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ImageEditView</string>
 					<string key="superclassName">UIView</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">applyFilter:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">applyFilter:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">applyFilter:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="controlContainerView">UIView</string>
 						<string key="filterContainerView">UIView</string>
