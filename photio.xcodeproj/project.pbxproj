@@ -16,6 +16,16 @@
 		050AF28C1568167B00EC6C13 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF28B1568167B00EC6C13 /* Tag.m */; };
 		050AF29215681AE600EC6C13 /* ImageFilterClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */; };
 		050AF29515681B1700EC6C13 /* ImageFilterClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF29415681B1600EC6C13 /* ImageFilterClassView.m */; };
+		050AF298156830F300EC6C13 /* color-adjust.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF296156830F300EC6C13 /* color-adjust.png */; };
+		050AF299156830F300EC6C13 /* color-adjust@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF297156830F300EC6C13 /* color-adjust@2x.png */; };
+		050AF2A21568423F00EC6C13 /* brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29A1568423F00EC6C13 /* brightness.png */; };
+		050AF2A31568423F00EC6C13 /* brightness@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29B1568423F00EC6C13 /* brightness@2x.png */; };
+		050AF2A41568423F00EC6C13 /* contrast.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29C1568423F00EC6C13 /* contrast.png */; };
+		050AF2A51568423F00EC6C13 /* contrast@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29D1568423F00EC6C13 /* contrast@2x.png */; };
+		050AF2A61568423F00EC6C13 /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29E1568423F00EC6C13 /* favorite.png */; };
+		050AF2A71568423F00EC6C13 /* favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29F1568423F00EC6C13 /* favorite@2x.png */; };
+		050AF2A81568423F00EC6C13 /* hue.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF2A01568423F00EC6C13 /* hue.png */; };
+		050AF2A91568423F00EC6C13 /* hue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AF2A11568423F00EC6C13 /* hue@2x.png */; };
 		050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CF12614F96A9100A31059 /* ContainerViewController.m */; };
 		050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF12714F96A9100A31059 /* ContainerViewController.xib */; };
 		050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF14F14F9A27D00A31059 /* CameraViewController.xib */; };
@@ -108,6 +118,16 @@
 		050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageFilterClassView.xib; path = photio/PhotoAlbum/ImageFilterClassView.xib; sourceTree = SOURCE_ROOT; };
 		050AF29315681B1600EC6C13 /* ImageFilterClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageFilterClassView.h; path = photio/PhotoAlbum/ImageFilterClassView.h; sourceTree = SOURCE_ROOT; };
 		050AF29415681B1600EC6C13 /* ImageFilterClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageFilterClassView.m; path = photio/PhotoAlbum/ImageFilterClassView.m; sourceTree = SOURCE_ROOT; };
+		050AF296156830F300EC6C13 /* color-adjust.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "color-adjust.png"; path = "photio/Images/color-adjust.png"; sourceTree = SOURCE_ROOT; };
+		050AF297156830F300EC6C13 /* color-adjust@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "color-adjust@2x.png"; path = "photio/Images/color-adjust@2x.png"; sourceTree = SOURCE_ROOT; };
+		050AF29A1568423F00EC6C13 /* brightness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brightness.png; path = photio/Images/brightness.png; sourceTree = SOURCE_ROOT; };
+		050AF29B1568423F00EC6C13 /* brightness@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "brightness@2x.png"; path = "photio/Images/brightness@2x.png"; sourceTree = SOURCE_ROOT; };
+		050AF29C1568423F00EC6C13 /* contrast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contrast.png; path = photio/Images/contrast.png; sourceTree = SOURCE_ROOT; };
+		050AF29D1568423F00EC6C13 /* contrast@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "contrast@2x.png"; path = "photio/Images/contrast@2x.png"; sourceTree = SOURCE_ROOT; };
+		050AF29E1568423F00EC6C13 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = favorite.png; path = photio/Images/favorite.png; sourceTree = SOURCE_ROOT; };
+		050AF29F1568423F00EC6C13 /* favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "favorite@2x.png"; path = "photio/Images/favorite@2x.png"; sourceTree = SOURCE_ROOT; };
+		050AF2A01568423F00EC6C13 /* hue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hue.png; path = photio/Images/hue.png; sourceTree = SOURCE_ROOT; };
+		050AF2A11568423F00EC6C13 /* hue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hue@2x.png"; path = "photio/Images/hue@2x.png"; sourceTree = SOURCE_ROOT; };
 		050CF12514F96A9100A31059 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
 		050CF12614F96A9100A31059 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		050CF12714F96A9100A31059 /* ContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerViewController.xib; sourceTree = "<group>"; };
@@ -333,18 +353,28 @@
 			children = (
 				05CFEF8F1566BA8900755519 /* apply.png */,
 				05CFEF901566BA8900755519 /* apply@2x.png */,
+				050AF29A1568423F00EC6C13 /* brightness.png */,
+				050AF29B1568423F00EC6C13 /* brightness@2x.png */,
+				050AF296156830F300EC6C13 /* color-adjust.png */,
+				050AF297156830F300EC6C13 /* color-adjust@2x.png */,
+				050AF29C1568423F00EC6C13 /* contrast.png */,
+				050AF29D1568423F00EC6C13 /* contrast@2x.png */,
 				05CCEFB41555F459004FBD21 /* export.png */,
 				05CCEFB51555F459004FBD21 /* export@2x.png */,
+				050AF29E1568423F00EC6C13 /* favorite.png */,
+				050AF29F1568423F00EC6C13 /* favorite@2x.png */,
 				0542DAF71523EDA7002C62A0 /* flash-on.png */,
 				0542DAF81523EDA7002C62A0 /* flash-on@2x.png */,
+				050AF2A01568423F00EC6C13 /* hue.png */,
+				050AF2A11568423F00EC6C13 /* hue@2x.png */,
 				050855371557074100609C31 /* pencil.png */,
 				050855381557074100609C31 /* pencil@2x.png */,
 				05CCEFB81556302D004FBD21 /* twitter.png */,
 				05CCEFB91556302D004FBD21 /* twitter@2x.png */,
-				05809C9615573EC900AF2079 /* yellowstar.png */,
-				05809C9715573EC900AF2079 /* yellowstar@2x.png */,
 				05809C9415573EC900AF2079 /* whitestar.png */,
 				05809C9515573EC900AF2079 /* whitestar@2x.png */,
+				05809C9615573EC900AF2079 /* yellowstar.png */,
+				05809C9715573EC900AF2079 /* yellowstar@2x.png */,
 			);
 			name = Images;
 			path = images;
@@ -555,6 +585,16 @@
 				05CFEF911566BA8900755519 /* apply.png in Resources */,
 				05CFEF921566BA8900755519 /* apply@2x.png in Resources */,
 				050AF29215681AE600EC6C13 /* ImageFilterClassView.xib in Resources */,
+				050AF298156830F300EC6C13 /* color-adjust.png in Resources */,
+				050AF299156830F300EC6C13 /* color-adjust@2x.png in Resources */,
+				050AF2A21568423F00EC6C13 /* brightness.png in Resources */,
+				050AF2A31568423F00EC6C13 /* brightness@2x.png in Resources */,
+				050AF2A41568423F00EC6C13 /* contrast.png in Resources */,
+				050AF2A51568423F00EC6C13 /* contrast@2x.png in Resources */,
+				050AF2A61568423F00EC6C13 /* favorite.png in Resources */,
+				050AF2A71568423F00EC6C13 /* favorite@2x.png in Resources */,
+				050AF2A81568423F00EC6C13 /* hue.png in Resources */,
+				050AF2A91568423F00EC6C13 /* hue@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

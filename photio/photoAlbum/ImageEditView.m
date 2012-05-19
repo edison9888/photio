@@ -81,7 +81,7 @@
 }
 
 - (void)didMoveToSuperview {
-    [self addFilter:FilterTypeVibrance];
+    [self addFilter:FilterTypeSaturation];
 }
 
 #pragma mark -

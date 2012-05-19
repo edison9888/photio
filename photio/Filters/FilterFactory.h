@@ -10,11 +10,11 @@
 #import "Filter.h"
 
 typedef enum {
-    FilterTypeVibrance
+    FilterTypeSaturation
 } FilterType;
 
 typedef enum {
-    FilterClassAjustment
+    FilterClassImageAjustmentControls
 } FilterClass;
 
 @interface FilterFactory : NSObject

@@ -28,9 +28,9 @@ static FilterFactory* thisFilterFactory = nil;
 #pragma mark FilterFactory PrivateApi
 
 + (NSDictionary*)filtersByClass {
-    NSArray* filterClassAdjustment = [NSArray arrayWithObjects:[NSNumber numberWithInt:FilterTypeVibrance], nil];
-    NSArray* filters = [NSArray arrayWithObjects:filterClassAdjustment, nil];
-    NSArray* filterClases = [NSArray arrayWithObjects:[NSNumber numberWithInt:FilterClassAjustment], nil];
+    NSArray* filterClassImageAjustmentControls = [NSArray arrayWithObjects:[NSNumber numberWithInt:FilterTypeSaturation], nil];
+    NSArray* filters = [NSArray arrayWithObjects:filterClassImageAjustmentControls, nil];
+    NSArray* filterClases = [NSArray arrayWithObjects:[NSNumber numberWithInt:FilterClassImageAjustmentControls], nil];
     return [NSDictionary dictionaryWithObjects:filters forKeys:filterClases];
 }
 
@@ -50,8 +50,8 @@ static FilterFactory* thisFilterFactory = nil;
 + (Filter*)filter:(FilterType)_filterType {
     Filter* filter = nil;
     switch (_filterType) {
-        case FilterTypeVibrance:
-            filter = [BuiltInFilter filter:@"CIVibrance" andAttribute:@"inputAmount"];
+        case FilterTypeSaturation:
+            filter = [BuiltInFilter filter:@"CIColorControls" andAttribute:@"inputSaturation"];
             break;
         default:
             break;
