@@ -12,6 +12,7 @@
 #import "Image.h"
 #import "ViewGeneral.h"
 #import "ImageControlView.h"
+#import "Filter.h"
 
 #define MAX_COMMENT_LINES           5
 #define COMMENT_YOFFSET             15
@@ -185,6 +186,20 @@
 }
 
 - (void)applyFilters:(NSDictionary*)_filters {
+    for (Filter* filter in [_filters allValues]) {
+        self.image = [self scaleImage:[filter applyFilterToImage:self.image]];
+    }
+}
+
+- (void)saveFilteredImage:(NSDictionary*)_filters {
+    for (Filter* filter in [_filters allValues]) {
+        self.capture = [filter applyFilterToImage:self.capture];
+    }
+    self.image = [self scaleImage:self.capture];
+}
+
+- (void)resetFilteredImage {
+    self.image = [self scaleImage:self.capture];    
 }
 
 @end

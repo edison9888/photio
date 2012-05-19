@@ -15,6 +15,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommentViewController (PrivateAPI)
 
+- (IBAction)cancel:(id)sender;
+- (IBAction)done:(id)sender;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +76,15 @@
     ];    
 }
 
+- (IBAction)cancel:(id)sender {
+    [self removeInputView];
+}
+
+- (IBAction)done:(id)sender {
+    [self.delegate saveComment:self.commentTextView.text];
+    [self removeInputView];
+}
+
 #pragma mark -
 #pragma mark CommentViewController
 
@@ -90,15 +102,6 @@
         self.metaDataEditView = _containerView;
     }
     return self;
-}
-
-- (IBAction)cancel:(id)sender {
-    [self removeInputView];
-}
-
-- (IBAction)done:(id)sender {
-    [self.delegate saveComment:self.commentTextView.text];
-    [self removeInputView];
 }
 
 #pragma mark -

@@ -1,5 +1,5 @@
 //
-//  Tag.h
+//  FilterUsage.h
 //  photio
 //
 //  Created by Troy Stribling on 5/19/12.
@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Capture;
 
-@interface Tag : NSManagedObject
+@interface FilterUsage : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * filterId;
 @property (nonatomic, retain) NSNumber * usageCount;
-@property (nonatomic, retain) Capture *capture;
+@property (nonatomic, retain) NSDate * lastUsed;
 
 @end

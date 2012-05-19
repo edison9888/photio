@@ -15,6 +15,7 @@
 @property(nonatomic, strong) CIFilter*      filter;
 @property(nonatomic, strong) CIImage*       image;
 @property(nonatomic, strong) NSString*      filterAttribute;
+@property(nonatomic, assign) BOOL           changedFilterAttribute;
 
 + (id)filter:(NSString*)_filterName andAttribute:(NSString*)_attribute ;
 - (id)initWithFilter:(NSString*)_filterName andAttribute:(NSString*)_attribute ;

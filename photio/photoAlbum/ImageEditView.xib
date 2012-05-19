@@ -46,7 +46,7 @@
 								<string key="NSFrameSize">{320, 70}</string>
 								<reference key="NSSuperview" ref="788146834"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="370032146"/>
+								<reference key="NSNextKeyView" ref="644011612"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="272934719">
 									<int key="NSColorSpace">3</int>
@@ -77,13 +77,25 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="291228529"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<float key="IBUIAlpha">0.80000001192092896</float>
+								<float key="IBUIAlpha">0.30000001192092896</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">apply.png</string>
 								</object>
+							</object>
+							<object class="IBUIImageView" id="644011612">
+								<reference key="NSNextResponder" ref="788146834"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrameSize">{70, 70}</string>
+								<reference key="NSSuperview" ref="788146834"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="370032146"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<reference key="IBUIGestureRecognizers" ref="0"/>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 70}</string>
@@ -130,17 +142,10 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="302024177"/>
+			<object class="IBUITapGestureRecognizer" id="581884737"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imageControlsView</string>
-						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="795070531"/>
-					</object>
-					<int key="connectionID">9</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">parameterSlider</string>
@@ -148,14 +153,6 @@
 						<reference key="destination" ref="370032146"/>
 					</object>
 					<int key="connectionID">25</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imageFiltersView</string>
-						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="651303621"/>
-					</object>
-					<int key="connectionID">8</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -174,6 +171,22 @@
 					<int key="connectionID">33</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageFilterClassView</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="644011612"/>
+					</object>
+					<int key="connectionID">45</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageSaveFilteredImageView</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="470462510"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="470462510"/>
@@ -185,11 +198,21 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">applyFilter:</string>
+						<string key="label">saveFilteredImage:</string>
 						<reference key="source" ref="302024177"/>
 						<reference key="destination" ref="191373211"/>
 					</object>
-					<int key="connectionID">42</int>
+					<int key="connectionID">49</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="644011612"/>
+						<reference key="destination" ref="581884737"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">47</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -227,6 +250,7 @@
 							<reference ref="795070531"/>
 							<reference ref="370032146"/>
 							<reference ref="470462510"/>
+							<reference ref="644011612"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Controls Container</string>
@@ -263,13 +287,26 @@
 						<reference key="object" ref="470462510"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="788146834"/>
-						<string key="objectName">Apply Filter</string>
+						<string key="objectName">Save Image</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
 						<reference key="object" ref="302024177"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">Apply Filter</string>
+						<string key="objectName">Save Image</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">44</int>
+						<reference key="object" ref="644011612"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="788146834"/>
+						<string key="objectName">Filter Class</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">46</int>
+						<reference key="object" ref="581884737"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Filter Class</string>
 					</object>
 				</array>
 			</object>
@@ -290,12 +327,14 @@
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.CustomClassName">ImageControlView</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="46.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">42</int>
+			<int key="maxID">49</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -310,22 +349,25 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ImageEditView</string>
 					<string key="superclassName">UIView</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">applyFilter:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">applyFilter:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">applyFilter:</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changeFilterClass:">id</string>
+						<string key="saveFilteredImage:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeFilterClass:">
+							<string key="name">changeFilterClass:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="saveFilteredImage:">
+							<string key="name">saveFilteredImage:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="controlContainerView">UIView</string>
 						<string key="filterContainerView">UIView</string>
-						<string key="imageControlsView">ImageControlView</string>
-						<string key="imageFiltersView">ImageControlView</string>
+						<string key="imageFilterClassView">UIImageView</string>
+						<string key="imageSaveFilteredImageView">UIImageView</string>
 						<string key="parameterSlider">ParameterSliderView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -337,13 +379,13 @@
 							<string key="name">filterContainerView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="imageControlsView">
-							<string key="name">imageControlsView</string>
-							<string key="candidateClassName">ImageControlView</string>
+						<object class="IBToOneOutletInfo" key="imageFilterClassView">
+							<string key="name">imageFilterClassView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="imageFiltersView">
-							<string key="name">imageFiltersView</string>
-							<string key="candidateClassName">ImageControlView</string>
+						<object class="IBToOneOutletInfo" key="imageSaveFilteredImageView">
+							<string key="name">imageSaveFilteredImageView</string>
+							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="parameterSlider">
 							<string key="name">parameterSlider</string>

@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		050855391557074100609C31 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855371557074100609C31 /* pencil.png */; };
 		0508553A1557074100609C31 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855381557074100609C31 /* pencil@2x.png */; };
+		050AF27B1567FFC100EC6C13 /* FilterUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF27A1567FFC100EC6C13 /* FilterUsage.m */; };
+		050AF2831568027700EC6C13 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF27E1568027700EC6C13 /* UIImage+Alpha.m */; };
+		050AF2841568027700EC6C13 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF2801568027700EC6C13 /* UIImage+Resize.m */; };
+		050AF2851568027700EC6C13 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF2821568027700EC6C13 /* UIImage+RoundedCorner.m */; };
+		050AF28C1568167B00EC6C13 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF28B1568167B00EC6C13 /* Tag.m */; };
+		050AF29215681AE600EC6C13 /* ImageFilterClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */; };
+		050AF29515681B1700EC6C13 /* ImageFilterClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF29415681B1600EC6C13 /* ImageFilterClassView.m */; };
 		050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CF12614F96A9100A31059 /* ContainerViewController.m */; };
 		050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF12714F96A9100A31059 /* ContainerViewController.xib */; };
 		050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF14F14F9A27D00A31059 /* CameraViewController.xib */; };
@@ -46,7 +53,6 @@
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
-		05AED9311531E7F500E277BE /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AED9301531E7F500E277BE /* Tag.m */; };
 		05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* ImageEntriesView.m */; };
 		05B2A7561533BBFC00499F6F /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B2A7551533BBFC00499F6F /* Image.m */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
@@ -76,9 +82,6 @@
 		05CFEF911566BA8900755519 /* apply.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF8F1566BA8900755519 /* apply.png */; };
 		05CFEF921566BA8900755519 /* apply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF901566BA8900755519 /* apply@2x.png */; };
 		05CFEF951566EDB400755519 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF941566EDB300755519 /* Filter.m */; };
-		05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436514F17503005FF6B0 /* UIImage+Alpha.m */; };
-		05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436714F17503005FF6B0 /* UIImage+Resize.m */; };
-		05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */; };
 		05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */; };
 		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
@@ -92,6 +95,19 @@
 /* Begin PBXFileReference section */
 		050855371557074100609C31 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil.png; path = photio/Images/pencil.png; sourceTree = SOURCE_ROOT; };
 		050855381557074100609C31 /* pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pencil@2x.png"; path = "photio/Images/pencil@2x.png"; sourceTree = SOURCE_ROOT; };
+		050AF2791567FFC100EC6C13 /* FilterUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterUsage.h; sourceTree = "<group>"; };
+		050AF27A1567FFC100EC6C13 /* FilterUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterUsage.m; sourceTree = "<group>"; };
+		050AF27D1568027700EC6C13 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "photio/PhotoAlbum/UIImage+Alpha.h"; sourceTree = SOURCE_ROOT; };
+		050AF27E1568027700EC6C13 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "photio/PhotoAlbum/UIImage+Alpha.m"; sourceTree = SOURCE_ROOT; };
+		050AF27F1568027700EC6C13 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "photio/PhotoAlbum/UIImage+Resize.h"; sourceTree = SOURCE_ROOT; };
+		050AF2801568027700EC6C13 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "photio/PhotoAlbum/UIImage+Resize.m"; sourceTree = SOURCE_ROOT; };
+		050AF2811568027700EC6C13 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "photio/PhotoAlbum/UIImage+RoundedCorner.h"; sourceTree = SOURCE_ROOT; };
+		050AF2821568027700EC6C13 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "photio/PhotoAlbum/UIImage+RoundedCorner.m"; sourceTree = SOURCE_ROOT; };
+		050AF28A1568167B00EC6C13 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		050AF28B1568167B00EC6C13 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageFilterClassView.xib; path = photio/PhotoAlbum/ImageFilterClassView.xib; sourceTree = SOURCE_ROOT; };
+		050AF29315681B1600EC6C13 /* ImageFilterClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageFilterClassView.h; path = photio/PhotoAlbum/ImageFilterClassView.h; sourceTree = SOURCE_ROOT; };
+		050AF29415681B1600EC6C13 /* ImageFilterClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageFilterClassView.m; path = photio/PhotoAlbum/ImageFilterClassView.m; sourceTree = SOURCE_ROOT; };
 		050CF12514F96A9100A31059 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
 		050CF12614F96A9100A31059 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		050CF12714F96A9100A31059 /* ContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerViewController.xib; sourceTree = "<group>"; };
@@ -150,8 +166,6 @@
 		05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthAndYearView.m; sourceTree = "<group>"; };
 		05AC025B1548CBCF00A29139 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
 		05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
-		05AED92F1531E7F500E277BE /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
-		05AED9301531E7F500E277BE /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		05AF480D154DCCAE0099576A /* ImageEntriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEntriesView.h; path = photio/PhotoAlbum/ImageEntriesView.h; sourceTree = SOURCE_ROOT; };
 		05AF480E154DCCAE0099576A /* ImageEntriesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEntriesView.m; path = photio/PhotoAlbum/ImageEntriesView.m; sourceTree = SOURCE_ROOT; };
 		05B2A7541533BBFC00499F6F /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -199,12 +213,6 @@
 		05CFEF901566BA8900755519 /* apply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apply@2x.png"; path = "photio/Images/apply@2x.png"; sourceTree = SOURCE_ROOT; };
 		05CFEF931566EDB300755519 /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter.h; path = Filters/Filter.h; sourceTree = "<group>"; };
 		05CFEF941566EDB300755519 /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter.m; path = Filters/Filter.m; sourceTree = "<group>"; };
-		05DE436414F17503005FF6B0 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
-		05DE436514F17503005FF6B0 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
-		05DE436614F17503005FF6B0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		05DE436714F17503005FF6B0 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		05DE436814F17503005FF6B0 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
-		05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectViewController.h; sourceTree = "<group>"; };
 		05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectViewController.m; sourceTree = "<group>"; };
 		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
@@ -265,14 +273,16 @@
 			isa = PBXGroup;
 			children = (
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
+				050AF2791567FFC100EC6C13 /* FilterUsage.h */,
+				050AF27A1567FFC100EC6C13 /* FilterUsage.m */,
 				05809CA1155742FE00AF2079 /* Capture.h */,
 				05809CA2155742FE00AF2079 /* Capture.m */,
 				05B2A7541533BBFC00499F6F /* Image.h */,
 				05B2A7551533BBFC00499F6F /* Image.m */,
-				05AED92F1531E7F500E277BE /* Tag.h */,
-				05AED9301531E7F500E277BE /* Tag.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
 				05B837781530C6B800D99A40 /* Locale.m */,
+				050AF28A1568167B00EC6C13 /* Tag.h */,
+				050AF28B1568167B00EC6C13 /* Tag.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -427,7 +437,6 @@
 		05C99EEB14F05A5500D09F3E /* PhotoAlbum */ = {
 			isa = PBXGroup;
 			children = (
-				05DE436314F17503005FF6B0 /* UIImage-categories */,
 				059772EF1527D787008F3A1B /* Camera.h */,
 				059772F01527D787008F3A1B /* Camera.m */,
 				059772F31527D787008F3A1B /* CameraViewController.h */,
@@ -454,24 +463,20 @@
 				05E4C222155224D400C7266E /* ImageMetaDataEditView.h */,
 				05E4C223155224D400C7266E /* ImageMetaDataEditView.m */,
 				058736B915556941007A5654 /* ImageMetaDataEditView.xib */,
+				050AF27D1568027700EC6C13 /* UIImage+Alpha.h */,
+				050AF27E1568027700EC6C13 /* UIImage+Alpha.m */,
+				050AF27F1568027700EC6C13 /* UIImage+Resize.h */,
+				050AF2801568027700EC6C13 /* UIImage+Resize.m */,
+				050AF2811568027700EC6C13 /* UIImage+RoundedCorner.h */,
+				050AF2821568027700EC6C13 /* UIImage+RoundedCorner.m */,
 				05809CBB155EE72600AF2079 /* TakePhotoView.h */,
 				05809CBC155EE72800AF2079 /* TakePhotoView.m */,
+				050AF29315681B1600EC6C13 /* ImageFilterClassView.h */,
+				050AF29415681B1600EC6C13 /* ImageFilterClassView.m */,
+				050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
-			sourceTree = "<group>";
-		};
-		05DE436314F17503005FF6B0 /* UIImage-categories */ = {
-			isa = PBXGroup;
-			children = (
-				05DE436414F17503005FF6B0 /* UIImage+Alpha.h */,
-				05DE436514F17503005FF6B0 /* UIImage+Alpha.m */,
-				05DE436614F17503005FF6B0 /* UIImage+Resize.h */,
-				05DE436714F17503005FF6B0 /* UIImage+Resize.m */,
-				05DE436814F17503005FF6B0 /* UIImage+RoundedCorner.h */,
-				05DE436914F17503005FF6B0 /* UIImage+RoundedCorner.m */,
-			);
-			path = "UIImage-categories";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,6 +554,7 @@
 				05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */,
 				05CFEF911566BA8900755519 /* apply.png in Resources */,
 				05CFEF921566BA8900755519 /* apply@2x.png in Resources */,
+				050AF29215681AE600EC6C13 /* ImageFilterClassView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,9 +567,6 @@
 			files = (
 				05C99ECD14F0585C00D09F3E /* main.m in Sources */,
 				05C99ED114F0585C00D09F3E /* PhotioAppDelegate.m in Sources */,
-				05DE436A14F17503005FF6B0 /* UIImage+Alpha.m in Sources */,
-				05DE436B14F17503005FF6B0 /* UIImage+Resize.m in Sources */,
-				05DE436C14F17503005FF6B0 /* UIImage+RoundedCorner.m in Sources */,
 				05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */,
 				05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */,
 				050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */,
@@ -579,7 +582,6 @@
 				05B837621530B5B500D99A40 /* photio.xcdatamodeld in Sources */,
 				05B837731530C45100D99A40 /* UIImageToDataTransformer.m in Sources */,
 				05B837791530C6B800D99A40 /* Locale.m in Sources */,
-				05AED9311531E7F500E277BE /* Tag.m in Sources */,
 				05B2A7561533BBFC00499F6F /* Image.m in Sources */,
 				05EE0E8715366ACF00E5E541 /* DiagonalGestureRecognizer.m in Sources */,
 				0590C743153B3D8F0065AB42 /* CalendarDayView.m in Sources */,
@@ -605,6 +607,12 @@
 				05C6050C156402AD00E02532 /* BuiltInFilter.m in Sources */,
 				05CFEF8E1566AB3900755519 /* FilterFactory.m in Sources */,
 				05CFEF951566EDB400755519 /* Filter.m in Sources */,
+				050AF27B1567FFC100EC6C13 /* FilterUsage.m in Sources */,
+				050AF2831568027700EC6C13 /* UIImage+Alpha.m in Sources */,
+				050AF2841568027700EC6C13 /* UIImage+Resize.m in Sources */,
+				050AF2851568027700EC6C13 /* UIImage+RoundedCorner.m in Sources */,
+				050AF28C1568167B00EC6C13 /* Tag.m in Sources */,
+				050AF29515681B1700EC6C13 /* ImageFilterClassView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

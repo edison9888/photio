@@ -19,6 +19,9 @@
 
 - (void)addCommentText:(NSString*)_comment;
 - (void)initializeCommentText;
+- (IBAction)exportToCameraRoll:(id)sender;
+- (IBAction)addComment:(id)sender;
+- (IBAction)star:(id)sender;
 
 @end
 
@@ -63,6 +66,29 @@
     self.imageCommentLabel.hidden = YES;
 }
 
+- (IBAction)exportToCameraRoll:(id)sender {
+    [self.delegate exportToCameraRoll];
+}
+
+- (IBAction)addComment:(id)sender {
+    self.commentViewController = [CommentViewController inView:self withDelegate:self andComment:nil];
+    self.commentViewController.commentTextView.text = self.imageCommentLabel.text;
+}
+
+- (IBAction)star:(id)sender {
+    if (self.starred) {
+        self.starred = NO;
+        self.imageRating.image = [UIImage imageNamed:@"whitestar.png"];
+        self.imageRating.alpha = 0.3;
+        [self.delegate saveRating:nil];
+    } else {
+        self.starred = YES;
+        self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
+        self.imageRating.alpha = 0.9;
+        [self.delegate saveRating:@"1"];
+    }
+}
+
 #pragma mark -
 #pragma mark ImageMetaDataEditView
 
@@ -87,33 +113,6 @@
         self.imageRating.alpha = 0.9;
     } else {
         self.starred = NO;
-    }
-}
-
-- (IBAction)exportToCameraRoll:(id)sender {
-    [self.delegate exportToCameraRoll];
-}
-
-- (IBAction)tweet:(id)sender {
-    NSLog(@"Tweet Image");
-}
-
-- (IBAction)addComment:(id)sender {
-    self.commentViewController = [CommentViewController inView:self withDelegate:self andComment:nil];
-    self.commentViewController.commentTextView.text = self.imageCommentLabel.text;
-}
-
-- (IBAction)star:(id)sender {
-    if (self.starred) {
-        self.starred = NO;
-        self.imageRating.image = [UIImage imageNamed:@"whitestar.png"];
-        self.imageRating.alpha = 0.3;
-        [self.delegate saveRating:nil];
-    } else {
-        self.starred = YES;
-        self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
-        self.imageRating.alpha = 0.9;
-        [self.delegate saveRating:@"1"];
     }
 }
 

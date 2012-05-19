@@ -19,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation BuiltInFilter
 
-@synthesize context, filter, image, filterAttribute;
+@synthesize context, filter, image, filterAttribute, changedFilterAttribute;
 
 #pragma mark -
 #pragma mark BuiltInFilter PrivateAPI
@@ -52,6 +52,7 @@
         self.context = [CIContext contextWithOptions:nil];
         self.filter = [CIFilter filterWithName:_filterName];
         self.filterAttribute = _attribute;
+        self.changedFilterAttribute = NO;
     }
     return self;
 }
@@ -72,15 +73,22 @@
 }
 
 - (CGFloat)sliderDefaultValue {
-    NSDictionary* filterAttributes = [self.filter attributes];
-    NSNumber* defaultValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeDefault];
-    return [defaultValue doubleValue];
-    
+    NSNumber* defaultValue = nil;
+    if (self.changedFilterAttribute) {
+        defaultValue = [self.filter valueForKey:self.filterAttribute];
+    } else {
+        NSDictionary* filterAttributes = [self.filter attributes];
+        defaultValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeDefault];
+    }    
+    return [defaultValue floatValue]; 
 }
 
-- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage withAttributeValue:(id)_value {
+- (void)setFilterValue:(CGFloat)_value {
+    [self.filter setValue:[NSNumber numberWithFloat:_value] forKey:self.filterAttribute];
+}
+
+- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage {
     [self setFilteredImage:_filteredImage];
-    [self.filter setValue:_value forKey:self.filterAttribute];
     return [self outputImage];
 }
 

@@ -20,8 +20,6 @@
 
 + (id)inView:(ImageMetaDataEditView*)_containerView withDelegate:(id<CommentViewControllerDelegate>)_delegate andComment:(NSString*)_comment;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(ImageMetaDataEditView*)_containerView;
-- (IBAction)cancel:(id)sender;
-- (IBAction)done:(id)sender;
 
 @end
 

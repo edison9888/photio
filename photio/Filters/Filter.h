@@ -13,6 +13,7 @@
 - (CGFloat)sliderMaxValue;
 - (CGFloat)sliderMinValue;
 - (CGFloat)sliderDefaultValue;
-- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage withAttributeValue:(id)_value;
+- (void)setFilterValue:(CGFloat)_value;
+- (UIImage*)applyFilterToImage:(UIImage*)_filteredImage;
 
 @end

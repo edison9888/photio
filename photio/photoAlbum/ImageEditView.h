@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ParameterSliderView.h"
+#import "FilterFactory.h"
 
 @class ImageControlView;
 @class ParameterSliderView;
@@ -21,13 +22,12 @@
 @property(nonatomic, strong) IBOutlet UIView*                   controlContainerView;
 @property(nonatomic, strong) IBOutlet UIView*                   filterContainerView;
 @property(nonatomic, strong) IBOutlet ParameterSliderView*      parameterSlider;
-@property(nonatomic, strong) IBOutlet ImageControlView*         imageControlsView;
-@property(nonatomic, strong) IBOutlet ImageControlView*         imageFiltersView;
+@property(nonatomic, strong) IBOutlet UIImageView*              imageSaveFilteredImageView;
+@property(nonatomic, strong) IBOutlet UIImageView*              imageFilterClassView;
 @property(nonatomic, strong) NSMutableDictionary*               filtersToApply;
-@property(nonatomic, strong) NSMutableDictionary*               filtersLoaded;
-@property(nonatomic, strong) NSString*                          displayedFilter;
-@property(nonatomic, strong) NSString*                          displayedFilterClass;
-@property(nonatomic, assign) BOOL                               displayedFilterLoaded;
+@property(nonatomic, assign) FilterType                         displayedFilter;
+@property(nonatomic, assign) FilterClass                        displayedFilterClass;
+@property(nonatomic, assign) BOOL                               filterModified;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate;
 
@@ -38,5 +38,6 @@
 @required
 
 - (void)applyFilters:(NSDictionary*)_filters;
+- (void)saveFilteredImage:(NSDictionary*)_filters;
 
 @end

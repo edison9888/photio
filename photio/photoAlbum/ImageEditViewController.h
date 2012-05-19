@@ -23,12 +23,11 @@
 @property(nonatomic, strong) ImageMetaDataEditView*                 imageMetaDataEditView;
 @property(nonatomic, strong) ImageEditView*                         imageEditView;
 @property(nonatomic, assign) BOOL                                   didEdit;
+@property(nonatomic, assign) BOOL                                   didNotSaveFilteredImage;
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
 - (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating;
-- (IBAction)remove:(id)sender;
-- (IBAction)singleTap:(id)sender;
 - (void)showViews;
 - (void)hideViews;
 
@@ -46,7 +45,9 @@
 - (void)exportToCameraRoll;
 - (void)saveComment:(NSString*)_comment;
 - (void)saveRating:(NSString*)_rating;
-- (void)didFinishEditing;
 - (void)applyFilters:(NSDictionary*)_filters;
+- (void)saveFilteredImage:(NSDictionary*)_filters;
+- (void)resetFilteredImage;
+- (void)didFinishEditing;
 
 @end

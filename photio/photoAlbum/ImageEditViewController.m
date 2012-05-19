@@ -15,13 +15,16 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditViewController (PrivateAPI)
 
+- (IBAction)remove:(id)sender;
+- (IBAction)singleTap:(id)sender;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditViewController
 
 @synthesize delegate, removeGesture, singleTapGesture, containerView, streamView, 
-            imageMetaDataEditView, imageEditView, didEdit;
+            imageMetaDataEditView, imageEditView, didEdit, didNotSaveFilteredImage;
 
 #pragma mark -
 #pragma mark ImageEditViewController (PrivateAPI)
@@ -39,6 +42,7 @@
         self.delegate = _delegate;
         self.containerView = _containerView;
         self.didEdit = NO;
+        self.didNotSaveFilteredImage = YES;
         [self.containerView addSubview:self.view];  
     }
     return self;
@@ -51,6 +55,9 @@
 
 - (IBAction)remove:(id)sender {
     [self hideViews];
+    if (self.didNotSaveFilteredImage) {
+        [self.delegate resetFilteredImage];
+    }
     if (self.didEdit) {
         [self.delegate didFinishEditing];
     }
@@ -195,6 +202,11 @@
 
 - (void)applyFilters:(NSDictionary*)_filters {
     [self.delegate applyFilters:_filters];
+}
+
+- (void)saveFilteredImage:(NSDictionary*)_filters {
+    self.didEdit = YES;
+    [self.delegate saveFilteredImage:_filters];
 }
 
 #pragma mark -

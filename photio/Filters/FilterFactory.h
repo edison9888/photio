@@ -13,8 +13,16 @@ typedef enum {
     FilterTypeVibrance
 } FilterType;
 
+typedef enum {
+    FilterClassAjustment
+} FilterClass;
+
 @interface FilterFactory : NSObject
 
+@property(nonatomic, strong) NSDictionary*  filtersByClass;
+
 + (Filter*)filter:(FilterType)_filterName;
+- (NSArray*)filterClassViews;
+- (NSArray*)filterViews:(FilterClass)_filterClass;
 
 @end

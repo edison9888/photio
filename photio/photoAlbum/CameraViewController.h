@@ -29,10 +29,6 @@
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (void)saveImage:(UIImage*)_image;
-- (IBAction)captureStillImage:(id)sender;
-- (IBAction)changeFlashMode:(id)sender;
-- (IBAction)autoFocus:(UIGestureRecognizer*)gestureRecognizer;
-- (IBAction)continuousFocus:(UIGestureRecognizer*)gestureRecognizer;
 - (void)continouslyAutoFocus;
 
 @end
