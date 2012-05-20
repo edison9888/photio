@@ -15,23 +15,27 @@ static FilterFactory* thisFilterFactory = nil;
 /////////////////////////////////////////////////////////////////////////////////////////
 @interface FilterFactory (PrivateAPI)
 
-+ (NSDictionary*)filtersByClass;
++ (NSArray*)loadFilterClasses;
++ (NSArray*)loadFilters;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation FilterFactory
 
-@synthesize filtersByClass;
+@synthesize filerClasses, filters;
 
 #pragma mark - 
 #pragma mark FilterFactory PrivateApi
 
-+ (NSDictionary*)filtersByClass {
-    NSArray* filterClassImageAjustmentControls = [NSArray arrayWithObjects:[NSNumber numberWithInt:FilterTypeSaturation], nil];
-    NSArray* filters = [NSArray arrayWithObjects:filterClassImageAjustmentControls, nil];
-    NSArray* filterClases = [NSArray arrayWithObjects:[NSNumber numberWithInt:FilterClassImageAjustmentControls], nil];
-    return [NSDictionary dictionaryWithObjects:filters forKeys:filterClases];
++ (NSArray*)loadFilterClasses {
+    NSString* filterClassFile = [[NSBundle  mainBundle] pathForResource:@"FilterClasses" ofType:@"plist"];
+    return [[NSDictionary dictionaryWithContentsOfFile:filterClassFile] objectForKey:@"filterClasses"];
+}
+
++ (NSArray*)loadFilters {
+    NSString* filtersFile = [[NSBundle  mainBundle] pathForResource:@"Filters" ofType:@"plist"];
+    return [[NSDictionary dictionaryWithContentsOfFile:filtersFile] objectForKey:@"filters"];
 }
 
 #pragma mark - 
@@ -40,8 +44,9 @@ static FilterFactory* thisFilterFactory = nil;
 + (FilterFactory*)instance {	
     @synchronized(self) {
         if (thisFilterFactory == nil) {
-            thisFilterFactory = [[self alloc] init]; 
-            thisFilterFactory.filtersByClass = [self filtersByClass];
+            thisFilterFactory = [[self alloc] init];
+            thisFilterFactory.filerClasses = [self loadFilterClasses];
+            thisFilterFactory.filters = [self loadFilters];
         }
     }
     return thisFilterFactory;
@@ -59,12 +64,16 @@ static FilterFactory* thisFilterFactory = nil;
     return filter;
 }
 
-- (NSArray*)filterClassViews {
-    return nil;
+- (NSDictionary*)defaultFilterClass {
+    return [self.filerClasses objectAtIndex:FilterClassImageAjustmentControls];
+}
+
+- (NSArray*)filterClasses {
+    return self.filerClasses;
 }
 
 - (NSArray*)filterViews:(FilterClass)_filterClass {
-    return nil;    
+    return [self.filters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"", [NSNumber numberWithInt:_filterClass]]];    
 }
 
 @end

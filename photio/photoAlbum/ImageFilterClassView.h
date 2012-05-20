@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageFilterClassView : UIView
+@class ImageEditView;
+
+@interface ImageFilterClassView : UIView <UITableViewDataSource, UITableViewDelegate>
+
+@property(nonatomic, weak)      ImageEditView*  imageEditView;
+@property(nonatomic, strong)    NSArray*        filterClasses;
+
++ (id)initInView:(ImageEditView*)_imageEditView;
 
 @end

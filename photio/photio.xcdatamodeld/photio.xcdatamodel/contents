@@ -12,10 +12,21 @@
         <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
         <relationship name="tag" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="capture" inverseEntity="Tag" syncable="YES"/>
     </entity>
+    <entity name="FilterClassUsage" representedClassName="FilterClassUsage" syncable="YES">
+        <attribute name="filterClassId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="filter" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FilterUsage" inverseName="filterClass" inverseEntity="FilterUsage" syncable="YES"/>
+    </entity>
     <entity name="FilterUsage" representedClassName="FilterUsage" syncable="YES">
         <attribute name="filterId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUsed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="purchased" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="filterClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FilterClassUsage" inverseName="filter" inverseEntity="FilterClassUsage" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -39,5 +50,6 @@
         <element name="Image" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Tag" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="FilterClassUsage" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>

@@ -31,7 +31,7 @@
 @property(nonatomic, assign) BOOL                               starred;
 @property(nonatomic, assign) CGRect                             initialCommentContainerRect;
  
-+ (id)inView:(UIView*)_containerView withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate;
++ (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate;
 - (void)updateComment:(NSString*)_comment;
 - (void)updateRating:(NSString*)_rating;
 

@@ -9,8 +9,8 @@
 #import "CommentViewController.h"
 #import "ImageMetaDataEditView.h"
 
-#define COMMENT_VIEW_ANIMATION_SPEED     0.25/100.0
-#define SHARE_VIEW_ANIMATION_SPEED       0.125/100.0
+#define COMMENT_VIEW_ANIMATION_DURATION    0.3
+#define EDIT_VIEW_ANIMATION_DURATION       0.2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommentViewController (PrivateAPI)
@@ -33,14 +33,14 @@
     __block CGRect oldFrame = self.containerView.frame;
     __block CGRect newShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
     self.containerView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
-    [UIView animateWithDuration:SHARE_VIEW_ANIMATION_SPEED * oldFrame.size.height
+    [UIView animateWithDuration:EDIT_VIEW_ANIMATION_DURATION
          delay:0
-         options:UIViewAnimationOptionCurveEaseOut
+         options:UIViewAnimationOptionCurveLinear
          animations:^{
              self.metaDataEditView.shareContainerView.frame = newShareViewRect;
          } 
          completion:^(BOOL _finished) {
-             [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_SPEED * oldFrame.size.height 
+             [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION
                  delay:0
                  options:UIViewAnimationOptionCurveEaseOut
                   animations:^{
@@ -58,18 +58,20 @@
     CGRect shareViewRect = self.metaDataEditView.shareContainerView.frame;
     __block CGRect oldFrame = self.containerView.frame;
     __block CGRect newShareViewRect = CGRectMake(shareViewRect.origin.x, 0.0, shareViewRect.size.width, shareViewRect.size.height);
-    [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_SPEED * oldFrame.size.height 
+    [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION 
+        delay:0
+        options:UIViewAnimationOptionCurveLinear
         animations:^{
             self.containerView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
            [self.commentTextView resignFirstResponder];
         } 
         completion:^(BOOL _finished) {
-            [UIView animateWithDuration:SHARE_VIEW_ANIMATION_SPEED * oldFrame.size.height
+            [self.view removeFromSuperview];
+            [UIView animateWithDuration:EDIT_VIEW_ANIMATION_DURATION
              animations:^{
                  self.metaDataEditView.shareContainerView.frame = newShareViewRect;
              } 
              completion:^(BOOL _finished) {
-                 [self.view removeFromSuperview];
              }
             ];    
         }

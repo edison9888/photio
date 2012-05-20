@@ -14,15 +14,17 @@ typedef enum {
 } FilterType;
 
 typedef enum {
+    FilterClassFavotites,
     FilterClassImageAjustmentControls
 } FilterClass;
 
 @interface FilterFactory : NSObject
 
-@property(nonatomic, strong) NSDictionary*  filtersByClass;
+@property(nonatomic, strong) NSArray*   filerClasses;
+@property(nonatomic, strong) NSArray*   filters;
 
 + (Filter*)filter:(FilterType)_filterName;
-- (NSArray*)filterClassViews;
-- (NSArray*)filterViews:(FilterClass)_filterClass;
++ (FilterFactory*)instance;
+- (NSDictionary*)defaultFilterClass;
 
 @end

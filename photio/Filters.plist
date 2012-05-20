@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>filters</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Brightness</string>
+			<key>imageFilename</key>
+			<string>brightness.png</string>
+			<key>filterClassId</key>
+			<integer>0</integer>
+			<key>purchased</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Contrast</string>
+			<key>imageFilename</key>
+			<string>contrast.png</string>
+			<key>filterClassId</key>
+			<integer>0</integer>
+			<key>purchased</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Color</string>
+			<key>imageFilename</key>
+			<string>hue.png</string>
+			<key>filterClassId</key>
+			<integer>0</integer>
+			<key>purchased</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Saturation</string>
+			<key>imageFilename</key>
+			<string>saturation.png</string>
+			<key>filterClassId</key>
+			<integer>0</integer>
+			<key>purchased</key>
+			<true/>
+		</dict>
+	</array>
+</dict>
+</plist>

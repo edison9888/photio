@@ -29,7 +29,7 @@
 @property(nonatomic, assign) FilterClass                        displayedFilterClass;
 @property(nonatomic, assign) BOOL                               filterModified;
 
-+ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate;
++ (id)withDelegate:(id<ImageEditViewDelegate>)_delegate;
 
 @end
 

@@ -10,7 +10,7 @@
 #import "ParameterSliderView.h"
 #import "NSObject+Extensions.h"
 
-#define SUBVIEW_ANIMATION_DURACTION     0.5
+#define SUBVIEW_ANIMATION_DURACTION     0.2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditViewController (PrivateAPI)
@@ -85,6 +85,8 @@
     self.imageMetaDataEditView.commentContainerView.frame = initCommentRect;
         
     [UIView animateWithDuration:SUBVIEW_ANIMATION_DURACTION 
+        delay:0.0
+        options:UIViewAnimationOptionCurveLinear
         animations:^{
             self.imageEditView.controlContainerView.frame = controlContainerRect;
             self.imageEditView.filterContainerView.frame = filterContainerRect;
@@ -108,6 +110,8 @@
     __block CGRect commentContainerRect = CGRectMake(originalCommentContainerRect.origin.x, self.view.frame.size.height, originalCommentContainerRect.size.width, originalCommentContainerRect.size.height);
         
     [UIView animateWithDuration:SUBVIEW_ANIMATION_DURACTION 
+        delay:0.0
+        options:UIViewAnimationOptionCurveLinear
         animations:^{
             self.imageEditView.controlContainerView.frame = controlContainerRect;
             self.imageEditView.filterContainerView.frame = filterContainerRect;
@@ -130,8 +134,8 @@
 
 - (void)viewDidLoad {
     [self.singleTapGesture requireGestureRecognizerToFail:self.removeGesture];
-    self.imageEditView = [ImageEditView inView:self.view withDelegate:self];
-    self.imageMetaDataEditView = [ImageMetaDataEditView inView:self.view withDelegate:self];
+    self.imageEditView = [ImageEditView withDelegate:self];
+    self.imageMetaDataEditView = [ImageMetaDataEditView withDelegate:self];
     self.streamView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
     self.streamView.transitionGestureRecognizer.gestureRecognizer.delegate = self;
     [self.streamView addView:self.imageEditView];

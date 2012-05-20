@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>filterClasses</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Favorites</string>
+			<key>imageFilename</key>
+			<string>favorite.png</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Image Adjustment</string>
+			<key>imageFilename</key>
+			<string>image-adjust.png</string>
+		</dict>
+	</array>
+</dict>
+</plist>

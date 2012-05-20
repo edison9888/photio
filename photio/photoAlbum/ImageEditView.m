@@ -9,6 +9,8 @@
 #import "ImageEditView.h"
 #import "ImageControlView.h"
 #import "ParameterSliderView.h"
+#import "FilterFactory.h"
+#import "ImageFilterClassView.h"
 #import "UIView+Extensions.h"
 
 #define SAVE_FILTERED_IMAGE_ALPHA               0.3
@@ -17,7 +19,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditView (PrivateAPI)
 
-- (void)filterParameters:(NSString*)_filterName;
 - (void)addFilter:(NSString*)_filterName withAttribute:(NSString*)_attributeName;
 - (void)removeFilter:(FilterType)_filterType;
 - (IBAction)saveFilteredImage:(id)sender;
@@ -34,9 +35,6 @@
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
 
-- (void)filterParameters:(NSString*)_filterName {
-}
-
 - (void)addFilter:(FilterType)_filterType {
     self.displayedFilter = _filterType;
     Filter* filter = [FilterFactory filter:_filterType];
@@ -52,7 +50,8 @@
 }
 
 - (IBAction)changeFilterClass:(id)sender {
-    
+    ImageFilterClassView* filterClassView = [ImageFilterClassView initInView:self];
+    [self addSubview:filterClassView];
 }
 
 - (IBAction)saveFilteredImage:(id)sender {
@@ -65,7 +64,7 @@
 #pragma mark -
 #pragma mark ImageEditView
 
-+ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewDelegate>)_delegate {
++ (id)withDelegate:(id<ImageEditViewDelegate>)_delegate {
     ImageEditView* view = (ImageEditView*)[UIView loadView:[self class]];
     view.delegate = _delegate;
     view.parameterSlider.delegate = view;
@@ -82,6 +81,9 @@
 
 - (void)didMoveToSuperview {
     [self addFilter:FilterTypeSaturation];
+    NSDictionary* filterClassInfo = [[FilterFactory instance] defaultFilterClass];
+    self.imageFilterClassView.image = [UIImage imageNamed:[filterClassInfo objectForKey:@"imageFilename"]];
+    self.displayedFilterClass = FilterClassImageAjustmentControls;
 }
 
 #pragma mark -

@@ -92,7 +92,7 @@
 #pragma mark -
 #pragma mark ImageMetaDataEditView
 
-+ (id)inView:(UIView*)_containerView withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate {
++ (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate {
     ImageMetaDataEditView* view = (ImageMetaDataEditView*)[UIView loadView:[self class]];
     view.delegate = _delegate;
     return view;
