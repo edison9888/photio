@@ -16,6 +16,7 @@
 @dynamic filterClassId;
 @dynamic usageCount;
 @dynamic imageName;
+@dynamic usageSpeed;
 @dynamic filter;
 
 @end

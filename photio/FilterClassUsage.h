@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSNumber * filterClassId;
 @property (nonatomic, retain) NSNumber * usageCount;
 @property (nonatomic, retain) NSString * imageName;
+@property (nonatomic, retain) NSNumber * usageSpeed;
 @property (nonatomic, retain) FilterUsage *filter;
 
 @end

@@ -18,6 +18,7 @@
 @dynamic name;
 @dynamic imageName;
 @dynamic purchased;
+@dynamic usageRate;
 @dynamic filterClass;
 
 @end

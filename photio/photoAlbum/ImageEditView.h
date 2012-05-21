@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ParameterSliderView.h"
 #import "FilterFactory.h"
+#import "ImageFiltersView.h"
 
 @class ImageControlView;
 @class ParameterSliderView;
 
 @protocol ImageEditViewDelegate;
 
-@interface ImageEditView : UIView <ParameterSliderViewDelegate>
+@interface ImageEditView : UIView <ParameterSliderViewDelegate, ImageFiltersViewDelegate>
 
 @property(nonatomic, weak)   id<ImageEditViewDelegate>          delegate;
 @property(nonatomic, strong) UIView*                            containerView;
@@ -24,6 +25,7 @@
 @property(nonatomic, strong) IBOutlet ParameterSliderView*      parameterSlider;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageSaveFilteredImageView;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageFilterClassView;
+@property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
 @property(nonatomic, strong) NSMutableDictionary*               filtersToApply;
 @property(nonatomic, assign) FilterType                         displayedFilter;
 @property(nonatomic, assign) FilterClass                        displayedFilterClass;

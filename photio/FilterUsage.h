@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * imageName;
 @property (nonatomic, retain) NSNumber * purchased;
+@property (nonatomic, retain) NSNumber * usageRate;
 @property (nonatomic, retain) FilterClassUsage *filterClass;
 
 @end

@@ -26,5 +26,7 @@ typedef enum {
 + (Filter*)filter:(FilterType)_filterName;
 + (FilterFactory*)instance;
 - (NSDictionary*)defaultFilterClass;
+- (NSArray*)filterClasses;
+- (NSArray*)filters:(FilterClass)_filterClass;
 
 @end

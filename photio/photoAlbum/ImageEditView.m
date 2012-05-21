@@ -30,7 +30,7 @@
 @implementation ImageEditView
 
 @synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageSaveFilteredImageView, imageFilterClassView,
-            filtersToApply, displayedFilter, displayedFilterClass, filterModified;
+            imageFiltersView, filtersToApply, displayedFilter, displayedFilterClass, filterModified;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
@@ -96,6 +96,13 @@
     self.imageSaveFilteredImageView.alpha = SAVE_FILTETRED_IMAGE_SELECTED_ALPHA;
     self.filterModified = YES;
     [self.delegate applyFilters:self.filtersToApply];
+}
+
+#pragma mark -
+#pragma mark ImageFiltersViewDelegate
+
+- (void)applyFilter:(FilterType)_filter {
+    
 }
 
 @end
