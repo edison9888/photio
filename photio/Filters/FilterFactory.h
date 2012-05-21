@@ -10,6 +10,9 @@
 #import "Filter.h"
 
 typedef enum {
+    FilterTypeBrightness,
+    FilterTypeContrast,
+    FilterTypeColor,
     FilterTypeSaturation
 } FilterType;
 

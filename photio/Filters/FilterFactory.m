@@ -73,7 +73,7 @@ static FilterFactory* thisFilterFactory = nil;
 }
 
 - (NSArray*)filters:(FilterClass)_filterClass {
-    return [self.filters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"", [NSNumber numberWithInt:_filterClass]]];    
+    return [self.filters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterClassId == %@", [NSNumber numberWithInt:_filterClass]]];    
 }
 
 @end

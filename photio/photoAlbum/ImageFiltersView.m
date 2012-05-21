@@ -12,8 +12,6 @@
 
 @interface ImageFiltersView (PrivateAPI)
 
-- (void)addFilterViews;
-
 @end
 
 @implementation ImageFiltersView
@@ -26,24 +24,16 @@
 #pragma mark -
 #pragma mark ImageFiltersView
 
-+ (id)withDelegate:(id<ImageFiltersViewDelegate>)_delegate andFilterClass:(FilterClass)_filterClass {
-    ImageFiltersView* view = (ImageFiltersView*)[UIView loadView:[self class]];
-    view.filtersViewDelegate = _delegate;
-    view.filterClass = _filterClass;
-    [view addFilterViews];
-    return view;
-}
-
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {
+        self.contentSize = self.frame.size;
     }
     return self;
 }
 
 - (void)didMoveToSuperview {
 }
-
 
 - (void)addFilterViews {
     NSArray* filters = [[FilterFactory instance] filters:self.filterClass];
@@ -52,7 +42,7 @@
     for (NSDictionary* filter in filters) {
         FilterImageView* filterImage = [FilterImageView withDelegate:self andFilter:filter];
         CGRect oldRect = filterImage.frame;
-        filterImage.frame = CGRectMake(oldRect.origin.x, oldRect.origin.y + totalWidth, oldRect.size.width, oldRect.size.height);
+        filterImage.frame = CGRectMake(oldRect.origin.x + totalWidth, oldRect.origin.y, oldRect.size.width, oldRect.size.height);
         totalWidth += filterImage.frame.size.width;
         filterType++;
         filterImage.filterType = filterType;

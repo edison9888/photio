@@ -84,6 +84,9 @@
     NSDictionary* filterClassInfo = [[FilterFactory instance] defaultFilterClass];
     self.imageFilterClassView.image = [UIImage imageNamed:[filterClassInfo objectForKey:@"imageFilename"]];
     self.displayedFilterClass = FilterClassImageAjustmentControls;
+    self.imageFiltersView.filtersViewDelegate = self;
+    self.imageFiltersView.filterClass = self.displayedFilterClass;
+    [self.imageFiltersView addFilterViews];
 }
 
 #pragma mark -

@@ -10,7 +10,7 @@
 			<key>imageFilename</key>
 			<string>brightness.png</string>
 			<key>filterClassId</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 		</dict>
@@ -20,7 +20,7 @@
 			<key>imageFilename</key>
 			<string>contrast.png</string>
 			<key>filterClassId</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 		</dict>
@@ -30,7 +30,7 @@
 			<key>imageFilename</key>
 			<string>hue.png</string>
 			<key>filterClassId</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 		</dict>
@@ -40,7 +40,17 @@
 			<key>imageFilename</key>
 			<string>saturation.png</string>
 			<key>filterClassId</key>
-			<integer>0</integer>
+			<integer>1</integer>
+			<key>purchased</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Vignette</string>
+			<key>imageFilename</key>
+			<string>vignette.png</string>
+			<key>filterClassId</key>
+			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 		</dict>

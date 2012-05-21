@@ -19,6 +19,8 @@
 @property(nonatomic, weak)      id<ImageFiltersViewDelegate>    filtersViewDelegate;
 @property(nonatomic, assign)    FilterClass                     filterClass;
 
+- (void)addFilterViews;
+
 @end
 
 @protocol ImageFiltersViewDelegate <NSObject>
