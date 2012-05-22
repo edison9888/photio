@@ -105,7 +105,7 @@
 }
 
 - (void)didMoveToSuperview {
-    self.filterClasses = [[FilterFactory instance] filerClasses];
+    self.filterClasses = [[FilterFactory instance] filterClasses];
     [self showView];
 }
 

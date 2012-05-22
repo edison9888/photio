@@ -5,16 +5,24 @@
 	<key>filterClasses</key>
 	<array>
 		<dict>
+			<key>filterClassId</key>
+			<integer>0</integer>
 			<key>name</key>
 			<string>Favorites</string>
 			<key>imageFilename</key>
 			<string>favorite.png</string>
+			<key>hidden</key>
+			<false/>
 		</dict>
 		<dict>
+			<key>filterClassId</key>
+			<integer>1</integer>
 			<key>name</key>
 			<string>Image Adjustment</string>
 			<key>imageFilename</key>
 			<string>image-adjust.png</string>
+			<key>hidden</key>
+			<false/>
 		</dict>
 	</array>
 </dict>

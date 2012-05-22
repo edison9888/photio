@@ -48,6 +48,7 @@
 - (Capture*)fetchCapture:(ImageInspectView*)_imageInspectView;
 - (void)saveManagedObjectContext;
 - (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
+- (NSUInteger)countFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showProgressViewWithMessage:(NSString*)_progressMessage;

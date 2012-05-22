@@ -23,8 +23,8 @@ typedef enum {
 
 @interface FilterFactory : NSObject
 
-@property(nonatomic, strong) NSArray*   filerClasses;
-@property(nonatomic, strong) NSArray*   filters;
+@property(nonatomic, strong) NSArray*   loadedFilerClasses;
+@property(nonatomic, strong) NSArray*   loadedFilters;
 
 + (Filter*)filter:(FilterType)_filterName;
 + (FilterFactory*)instance;

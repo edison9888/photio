@@ -8,6 +8,8 @@
 
 #import "FilterFactory.h"
 #import "BuiltInFilter.h"
+#import "ViewGeneral.h"
+#import "FilterClassUsage.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static FilterFactory* thisFilterFactory = nil;
@@ -23,7 +25,7 @@ static FilterFactory* thisFilterFactory = nil;
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation FilterFactory
 
-@synthesize filerClasses, filters;
+@synthesize loadedFilerClasses, loadedFilters;
 
 #pragma mark - 
 #pragma mark FilterFactory PrivateApi
@@ -45,8 +47,8 @@ static FilterFactory* thisFilterFactory = nil;
     @synchronized(self) {
         if (thisFilterFactory == nil) {
             thisFilterFactory = [[self alloc] init];
-            thisFilterFactory.filerClasses = [self loadFilterClasses];
-            thisFilterFactory.filters = [self loadFilters];
+            thisFilterFactory.loadedFilerClasses = [self loadFilterClasses];
+            thisFilterFactory.loadedFilters = [self loadFilters];
         }
     }
     return thisFilterFactory;
@@ -65,15 +67,25 @@ static FilterFactory* thisFilterFactory = nil;
 }
 
 - (NSDictionary*)defaultFilterClass {
-    return [self.filerClasses objectAtIndex:FilterClassImageAjustmentControls];
+    return [self.loadedFilerClasses objectAtIndex:FilterClassImageAjustmentControls];
 }
 
 - (NSArray*)filterClasses {
-    return self.filerClasses;
+    NSInteger loadedFilterClassCount = [self.loadedFilerClasses count];
+    NSFetchRequest* countFetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription* filterClassEntity = [NSEntityDescription entityForName:@"FilterClassUsage" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    [countFetchRequest setEntity:filterClassEntity];   
+    NSInteger filterClassCount = [[ViewGeneral instance] countFromManagedObjectContext:countFetchRequest]; 
+    if (filterClassCount < loadedFilterClassCount) {
+        for (int i = 0; i < (loadedFilterClassCount - filterClassCount); i++) {
+            FilterClassUsage* filterClass = (FilterClassUsage*)[NSEntityDescription insertNewObjectForEntityForName:@"FilterClassUsage" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+        }
+    }
+    return self.loadedFilerClasses;
 }
 
 - (NSArray*)filters:(FilterClass)_filterClass {
-    return [self.filters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterClassId == %@", [NSNumber numberWithInt:_filterClass]]];    
+    return [self.loadedFilters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterClassId == %@", [NSNumber numberWithInt:_filterClass]]];    
 }
 
 @end

@@ -187,6 +187,16 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return fetchResults;
 }
 
+- (NSUInteger)countFromManagedObjectContext:(NSFetchRequest*)_fetchRequest {
+    NSError* error;
+    NSUInteger count = [[ViewGeneral instance].managedObjectContext countForFetchRequest:_fetchRequest error:&error];
+    if (count == NSNotFound) {
+        [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
+        abort();
+    }
+    return count;
+}
+
 - (void)saveImage:(ImageInspectView*)_imageInspectView {
     [self performSelector:@selector(saveImageLater:) withObject:_imageInspectView afterDelay:SAVE_IMAGE_DELAY];
 }

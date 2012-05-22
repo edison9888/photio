@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Capture" representedClassName="Capture" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
@@ -14,6 +14,7 @@
     </entity>
     <entity name="FilterClassUsage" representedClassName="FilterClassUsage" syncable="YES">
         <attribute name="filterClassId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -22,6 +23,7 @@
     </entity>
     <entity name="FilterUsage" representedClassName="FilterUsage" syncable="YES">
         <attribute name="filterId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUsed" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,10 +50,10 @@
     </entity>
     <elements>
         <element name="Capture" positionX="160" positionY="192" width="128" height="195"/>
-        <element name="FilterUsage" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="FilterClassUsage" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="FilterUsage" positionX="160" positionY="192" width="128" height="180"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Tag" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="FilterClassUsage" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>
