@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Filter.h"
 
+@class FilterClassUsage;
+
 typedef enum {
     FilterTypeBrightness,
     FilterTypeContrast,
@@ -28,7 +30,7 @@ typedef enum {
 
 + (Filter*)filter:(FilterType)_filterName;
 + (FilterFactory*)instance;
-- (NSDictionary*)defaultFilterClass;
+- (FilterClassUsage*)defaultFilterClass;
 - (NSArray*)filterClasses;
 - (NSArray*)filters:(FilterClass)_filterClass;
 

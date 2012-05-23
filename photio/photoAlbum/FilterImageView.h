@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FilterFactory.h"
 
+@class FilterUsage;
 @protocol FilterImageViewDelegate;
 
 @interface FilterImageView : UIImageView
@@ -17,7 +18,7 @@
 @property(nonatomic, weak)      NSDictionary*               filter;
 @property(nonatomic, assign)    FilterType                  filterType;
 
-+ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(NSDictionary*)_filter;
++ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter;
 
 @end
 

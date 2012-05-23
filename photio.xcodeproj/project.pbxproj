@@ -71,9 +71,9 @@
 		059772F51527D787008F3A1B /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F01527D787008F3A1B /* Camera.m */; };
 		059772F71527D787008F3A1B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* CameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
-		059B7201156B101200D76D10 /* FilterUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B7200156B101200D76D10 /* FilterUsage.m */; };
-		059B7205156B105700D76D10 /* FilterClassUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B7204156B105700D76D10 /* FilterClassUsage.m */; };
+		059B720B156C757300D76D10 /* FilterClassUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 059B720A156C757300D76D10 /* FilterClassUsage.m */; };
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
+		05AB488F156C836800BF8C09 /* FilterUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB488E156C836800BF8C09 /* FilterUsage.m */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
 		05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* ImageEntriesView.m */; };
 		05B2A7561533BBFC00499F6F /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B2A7551533BBFC00499F6F /* Image.m */; };
@@ -207,12 +207,12 @@
 		059772F31527D787008F3A1B /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		059772F41527D787008F3A1B /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		059772F81527D7B5008F3A1B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		059B71FF156B101200D76D10 /* FilterUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterUsage.h; sourceTree = "<group>"; };
-		059B7200156B101200D76D10 /* FilterUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterUsage.m; sourceTree = "<group>"; };
-		059B7203156B105700D76D10 /* FilterClassUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterClassUsage.h; sourceTree = "<group>"; };
-		059B7204156B105700D76D10 /* FilterClassUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterClassUsage.m; sourceTree = "<group>"; };
+		059B7209156C757300D76D10 /* FilterClassUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterClassUsage.h; sourceTree = "<group>"; };
+		059B720A156C757300D76D10 /* FilterClassUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterClassUsage.m; sourceTree = "<group>"; };
 		05A0F0B7154354410082947D /* CalendarMonthAndYearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthAndYearView.h; sourceTree = "<group>"; };
 		05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthAndYearView.m; sourceTree = "<group>"; };
+		05AB488D156C836800BF8C09 /* FilterUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterUsage.h; sourceTree = "<group>"; };
+		05AB488E156C836800BF8C09 /* FilterUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterUsage.m; sourceTree = "<group>"; };
 		05AC025B1548CBCF00A29139 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
 		05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
 		05AF480D154DCCAE0099576A /* ImageEntriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEntriesView.h; path = photio/PhotoAlbum/ImageEntriesView.h; sourceTree = SOURCE_ROOT; };
@@ -362,10 +362,10 @@
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
 				05809CA1155742FE00AF2079 /* Capture.h */,
 				05809CA2155742FE00AF2079 /* Capture.m */,
-				059B7203156B105700D76D10 /* FilterClassUsage.h */,
-				059B7204156B105700D76D10 /* FilterClassUsage.m */,
-				059B71FF156B101200D76D10 /* FilterUsage.h */,
-				059B7200156B101200D76D10 /* FilterUsage.m */,
+				059B7209156C757300D76D10 /* FilterClassUsage.h */,
+				059B720A156C757300D76D10 /* FilterClassUsage.m */,
+				05AB488D156C836800BF8C09 /* FilterUsage.h */,
+				05AB488E156C836800BF8C09 /* FilterUsage.m */,
 				05B2A7541533BBFC00499F6F /* Image.h */,
 				05B2A7551533BBFC00499F6F /* Image.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
@@ -735,8 +735,8 @@
 				05250EC4156962B80060F993 /* UITableViewCell+Extensions.m in Sources */,
 				05250ED81569B4870060F993 /* ImageFiltersView.m in Sources */,
 				05250EE41569BBDE0060F993 /* FilterImageView.m in Sources */,
-				059B7201156B101200D76D10 /* FilterUsage.m in Sources */,
-				059B7205156B105700D76D10 /* FilterClassUsage.m in Sources */,
+				059B720B156C757300D76D10 /* FilterClassUsage.m in Sources */,
+				05AB488F156C836800BF8C09 /* FilterUsage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

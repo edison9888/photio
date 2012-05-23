@@ -2,7 +2,7 @@
 //  FilterClassUsage.h
 //  photio
 //
-//  Created by Troy Stribling on 5/21/12.
+//  Created by Troy Stribling on 5/22/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -14,11 +14,19 @@
 @interface FilterClassUsage : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * filterClassId;
-@property (nonatomic, retain) NSString * imageName;
+@property (nonatomic, retain) NSString * imageFilename;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * usageCount;
 @property (nonatomic, retain) NSNumber * usageSpeed;
 @property (nonatomic, retain) NSNumber * hidden;
-@property (nonatomic, retain) FilterUsage *filter;
+@property (nonatomic, retain) NSSet *filters;
+@end
+
+@interface FilterClassUsage (CoreDataGeneratedAccessors)
+
+- (void)addFiltersObject:(FilterUsage *)value;
+- (void)removeFiltersObject:(FilterUsage *)value;
+- (void)addFilters:(NSSet *)values;
+- (void)removeFilters:(NSSet *)values;
 
 @end

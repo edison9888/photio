@@ -7,6 +7,7 @@
 //
 
 #import "FilterImageView.h"
+#import "FilterUsage.h"
 
 @interface FilterImageView (PrivateAPI)
 
@@ -18,8 +19,8 @@
 
 @synthesize delegate, filterType, filter;
 
-+ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(NSDictionary*)_filter {
-    UIImage* filterImage = [UIImage imageNamed:[_filter objectForKey:@"imageFilename"]];
++ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter {
+    UIImage* filterImage = [UIImage imageNamed:_filter.imageFilename];
     FilterImageView* view = [[FilterImageView alloc] initWithImage:filterImage];
     view.delegate = _delegate;
     return view;

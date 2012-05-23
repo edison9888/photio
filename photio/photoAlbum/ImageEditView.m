@@ -12,6 +12,7 @@
 #import "FilterFactory.h"
 #import "ImageFilterClassView.h"
 #import "UIView+Extensions.h"
+#import "FilterClassUsage.h"
 
 #define SAVE_FILTERED_IMAGE_ALPHA               0.3
 #define SAVE_FILTETRED_IMAGE_SELECTED_ALPHA     0.8
@@ -81,8 +82,8 @@
 
 - (void)didMoveToSuperview {
     [self addFilter:FilterTypeSaturation];
-    NSDictionary* filterClassInfo = [[FilterFactory instance] defaultFilterClass];
-    self.imageFilterClassView.image = [UIImage imageNamed:[filterClassInfo objectForKey:@"imageFilename"]];
+    FilterClassUsage* filterClassInfo = [[FilterFactory instance] defaultFilterClass];
+    self.imageFilterClassView.image = [UIImage imageNamed:filterClassInfo.imageFilename];
     self.displayedFilterClass = FilterClassImageAjustmentControls;
     self.imageFiltersView.filtersViewDelegate = self;
     self.imageFiltersView.filterClass = self.displayedFilterClass;

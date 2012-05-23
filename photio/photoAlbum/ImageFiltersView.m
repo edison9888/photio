@@ -9,6 +9,7 @@
 #import "ImageFiltersView.h"
 #import "UIView+Extensions.h"
 #import "FilterImageView.h"
+#import "FilterUsage.h"
 
 @interface ImageFiltersView (PrivateAPI)
 
@@ -39,7 +40,7 @@
     NSArray* filters = [[FilterFactory instance] filters:self.filterClass];
     CGFloat totalWidth = 0.0;
     NSInteger filterType = 0;
-    for (NSDictionary* filter in filters) {
+    for (FilterUsage* filter in filters) {
         FilterImageView* filterImage = [FilterImageView withDelegate:self andFilter:filter];
         CGRect oldRect = filterImage.frame;
         filterImage.frame = CGRectMake(oldRect.origin.x + totalWidth, oldRect.origin.y, oldRect.size.width, oldRect.size.height);
