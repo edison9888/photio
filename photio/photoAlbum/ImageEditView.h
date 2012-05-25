@@ -13,6 +13,8 @@
 
 @class ImageControlView;
 @class ParameterSliderView;
+@class FilterClassUsage;
+@class FilterUsage;
 
 @protocol ImageEditViewDelegate;
 
@@ -27,8 +29,8 @@
 @property(nonatomic, strong) IBOutlet UIImageView*              imageFilterClassView;
 @property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
 @property(nonatomic, strong) NSMutableDictionary*               filtersToApply;
-@property(nonatomic, assign) FilterType                         displayedFilter;
-@property(nonatomic, assign) FilterClass                        displayedFilterClass;
+@property(nonatomic, assign) FilterUsage*                       displayedFilter;
+@property(nonatomic, assign) FilterClassUsage*                  displayedFilterClass;
 @property(nonatomic, assign) BOOL                               filterModified;
 
 + (id)withDelegate:(id<ImageEditViewDelegate>)_delegate;

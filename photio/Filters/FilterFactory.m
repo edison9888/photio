@@ -61,6 +61,8 @@ static FilterFactory* thisFilterFactory = nil;
             filterClass.filterClassId = [configuredFilterClass objectForKey:@"filterClassId"];
             filterClass.imageFilename = [configuredFilterClass objectForKey:@"imageFilename"];
             filterClass.hidden        = [configuredFilterClass objectForKey:@"hidden"];
+            filterClass.usageRate     = [NSNumber numberWithFloat:0.0];
+            filterClass.usageCount    = [NSNumber numberWithFloat:0.0];
             [viewGeneral saveManagedObjectContext];
         }
     }
@@ -90,6 +92,8 @@ static FilterFactory* thisFilterFactory = nil;
             filter.purchased           = [configuredFilter objectForKey:@"purchased"];
             filter.hidden              = [configuredFilter objectForKey:@"hidden"];
             filter.filterClass         = [self filterClass:[configuredFilter objectForKey:@"filterClassId"]];
+            filter.usageRate           = [NSNumber numberWithFloat:0.0];
+            filter.usageCount          = [NSNumber numberWithFloat:0.0];
             [viewGeneral saveManagedObjectContext];
         }
     }
@@ -111,11 +115,20 @@ static FilterFactory* thisFilterFactory = nil;
     return thisFilterFactory;
 }
 
-+ (Filter*)filter:(FilterType)_filterType {
++ (Filter*)filter:(FilterUsage*)_filter {
     Filter* filter = nil;
-    switch (_filterType) {
+    switch ([_filter.filterId intValue]) {
         case FilterTypeSaturation:
             filter = [BuiltInFilter filter:@"CIColorControls" andAttribute:@"inputSaturation"];
+            break;
+        case FilterTypeContrast:
+            filter = [BuiltInFilter filter:@"CIColorControls" andAttribute:@"inputContrast"];
+            break;
+        case FilterTypeBrightness:
+            filter = [BuiltInFilter filter:@"CIExposureAdjust" andAttribute:@"inputEV"];
+            break;
+        case FilterTypeColor:
+            filter = [BuiltInFilter filter:@"CIHueAdjust" andAttribute:@"inputAngle"];
             break;
         default:
             break;
@@ -127,12 +140,22 @@ static FilterFactory* thisFilterFactory = nil;
     return [self.loadedFilerClasses objectAtIndex:FilterClassImageAjustmentControls];
 }
 
+- (FilterUsage*)defaultFilter:(FilterClassUsage*)_filterClass {
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription* filterClassEntity = [NSEntityDescription entityForName:@"FilterUsage" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    [fetchRequest setEntity:filterClassEntity];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"usageRate" ascending:NO]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"filterClass.filterClassId=%@", _filterClass.filterClassId]];
+    [fetchRequest setFetchLimit:1];
+    return [[[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest] objectAtIndex:0];
+}
+
 - (NSArray*)filterClasses {
     return self.loadedFilerClasses;
 }
 
-- (NSArray*)filters:(FilterClass)_filterClass {
-    return [self.loadedFilters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterClass.filterClassId == %@", [NSNumber numberWithInt:_filterClass]]];    
+- (NSArray*)filters:(FilterClassUsage*)_filterClass {
+    return [self.loadedFilters filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"filterClass.filterClassId == %@", _filterClass.filterClassId]];    
 }
 
 @end

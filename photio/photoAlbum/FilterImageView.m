@@ -17,7 +17,7 @@
 
 @implementation FilterImageView
 
-@synthesize delegate, filterType, filter;
+@synthesize delegate, filter;
 
 + (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter {
     UIImage* filterImage = [UIImage imageNamed:_filter.imageFilename];
@@ -34,7 +34,7 @@
 }
 
 - (void)didSelect {
-    [self.delegate applyFilter:self.filterType];
+    [self.delegate applyFilter:self.filter];
 }
 
 @end

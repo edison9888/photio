@@ -13,11 +13,12 @@
 @protocol ImageFiltersViewDelegate;
 
 @class FilterClassUsage;
+@class FilterUsage;
 
 @interface ImageFiltersView : UIScrollView <FilterImageViewDelegate>
 
 @property(nonatomic, weak)      id<ImageFiltersViewDelegate>    filtersViewDelegate;
-@property(nonatomic, assign)    FilterClass                     filterClass;
+@property(nonatomic, assign)    FilterClassUsage*               filterClass;
 
 - (void)addFilterViews;
 
@@ -25,6 +26,6 @@
 
 @protocol ImageFiltersViewDelegate <NSObject>
 
-- (void)applyFilter:(FilterType)_filter;
+- (void)applyFilter:(FilterUsage*)_filter;
 
 @end

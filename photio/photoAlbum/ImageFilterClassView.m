@@ -12,6 +12,7 @@
 #import "UITableViewCell+Extensions.h"
 #import "UIView+Extensions.h"
 #import "FilterFactory.h"
+#import "FilterClassUsage.h"
 
 #define IMAGE_FILTER_CLASS_TABEL_CELL_HEIGHT    70.0
 #define FILTER_CLASS_VIEW_ANIMATION_DURATION    0.3
@@ -125,17 +126,17 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     ImageFilterClassCell* cell = (ImageFilterClassCell*)[UITableViewCell loadCell:[ImageFilterClassCell class]];
-    NSDictionary* filterClassInfo = [self.filterClasses objectAtIndex:indexPath.row];
-    cell.filterClassIcon.image = [UIImage imageNamed:[filterClassInfo objectForKey:@"imageFilename"]];
-    cell.filterClassLabel.text = [filterClassInfo objectForKey:@"name"];
+    FilterClassUsage* filterClassInfo = [self.filterClasses objectAtIndex:indexPath.row];
+    cell.filterClassIcon.image = [UIImage imageNamed:filterClassInfo.imageFilename];
+    cell.filterClassLabel.text = filterClassInfo.name;
     cell.filterClass = indexPath.row;
     return cell;
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    NSDictionary* filterClassInfo = [self.filterClasses objectAtIndex:indexPath.row];
-    self.imageEditView.imageFilterClassView.image = [UIImage imageNamed:[filterClassInfo objectForKey:@"imageFilename"]];
-    self.imageEditView.displayedFilterClass = indexPath.row;
+    FilterClassUsage* filterClassInfo = [self.filterClasses objectAtIndex:indexPath.row];
+    self.imageEditView.imageFilterClassView.image = [UIImage imageNamed:filterClassInfo.imageFilename];
+    self.imageEditView.displayedFilterClass = filterClassInfo;
     [self hideView];
 }
 

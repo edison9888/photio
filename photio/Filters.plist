@@ -60,20 +60,6 @@
 			<key>hidden</key>
 			<false/>
 		</dict>
-		<dict>
-			<key>filterId</key>
-			<integer>3</integer>
-			<key>name</key>
-			<string>Vignette</string>
-			<key>imageFilename</key>
-			<string>vignette.png</string>
-			<key>filterClassId</key>
-			<integer>1</integer>
-			<key>purchased</key>
-			<true/>
-			<key>hidden</key>
-			<false/>
-		</dict>
 	</array>
 </dict>
 </plist>

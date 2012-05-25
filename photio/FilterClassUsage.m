@@ -2,7 +2,7 @@
 //  FilterClassUsage.m
 //  photio
 //
-//  Created by Troy Stribling on 5/22/12.
+//  Created by Troy Stribling on 5/24/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -13,11 +13,11 @@
 @implementation FilterClassUsage
 
 @dynamic filterClassId;
+@dynamic hidden;
 @dynamic imageFilename;
 @dynamic name;
 @dynamic usageCount;
-@dynamic usageSpeed;
-@dynamic hidden;
+@dynamic usageRate;
 @dynamic filters;
 
 @end

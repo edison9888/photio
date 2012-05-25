@@ -15,8 +15,7 @@
 @interface FilterImageView : UIImageView
 
 @property(nonatomic, weak)      id<FilterImageViewDelegate> delegate;
-@property(nonatomic, weak)      NSDictionary*               filter;
-@property(nonatomic, assign)    FilterType                  filterType;
+@property(nonatomic, strong)    FilterUsage*                filter;
 
 + (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter;
 
@@ -24,6 +23,6 @@
 
 @protocol FilterImageViewDelegate <NSObject>
 
-- (void)applyFilter:(FilterType)_filter;
+- (void)applyFilter:(FilterUsage*)_filter;
 
 @end
