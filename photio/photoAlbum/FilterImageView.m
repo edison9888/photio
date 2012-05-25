@@ -23,14 +23,14 @@
     UIImage* filterImage = [UIImage imageNamed:_filter.imageFilename];
     FilterImageView* view = [[FilterImageView alloc] initWithImage:filterImage];
     view.delegate = _delegate;
+    UITapGestureRecognizer* selectGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelect)];
+    selectGesture.numberOfTapsRequired = 1;
+    selectGesture.numberOfTouchesRequired = 1;
+    [view addGestureRecognizer:selectGesture];
     return view;
 }
 
 - (void)didMoveToSuperview {
-    UITapGestureRecognizer* selectGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelect)];
-    selectGesture.numberOfTapsRequired = 1;
-    selectGesture.numberOfTouchesRequired = 1;
-    [self addGestureRecognizer:selectGesture];
 }
 
 - (void)didSelect {
