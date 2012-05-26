@@ -2,7 +2,7 @@
 //  Capture.h
 //  photio
 //
-//  Created by Troy Stribling on 5/6/12.
+//  Created by Troy Stribling on 5/25/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * rating;
 @property (nonatomic, retain) id thumbnail;
+@property (nonatomic, retain) NSNumber * cached;
 @property (nonatomic, retain) Image *image;
 @property (nonatomic, retain) Locale *locale;
 @property (nonatomic, retain) NSSet *tag;

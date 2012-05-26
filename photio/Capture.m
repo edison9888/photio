@@ -2,7 +2,7 @@
 //  Capture.m
 //  photio
 //
-//  Created by Troy Stribling on 5/6/12.
+//  Created by Troy Stribling on 5/25/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -21,6 +21,7 @@
 @dynamic longitude;
 @dynamic rating;
 @dynamic thumbnail;
+@dynamic cached;
 @dynamic image;
 @dynamic locale;
 @dynamic tag;
