@@ -15,7 +15,7 @@
 @class FilterClassUsage;
 @class FilterUsage;
 
-@interface ImageFiltersView : UIScrollView <FilterImageViewDelegate>
+@interface ImageFiltersView : UIScrollView <FilterImageViewDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak)      id<ImageFiltersViewDelegate>    filtersViewDelegate;
 @property(nonatomic, assign)    FilterClassUsage*               filterClass;
@@ -26,6 +26,6 @@
 
 @protocol ImageFiltersViewDelegate <NSObject>
 
-- (void)applyFilter:(FilterUsage*)_filter;
+- (void)selectedFilter:(FilterUsage*)_filter;
 
 @end

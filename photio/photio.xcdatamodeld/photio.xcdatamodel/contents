@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Capture" representedClassName="Capture" syncable="YES">
+        <attribute name="cached" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
@@ -49,7 +50,7 @@
         <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="tag" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Capture" positionX="160" positionY="192" width="128" height="195"/>
+        <element name="Capture" positionX="160" positionY="192" width="128" height="210"/>
         <element name="FilterClassUsage" positionX="160" positionY="192" width="128" height="150"/>
         <element name="FilterUsage" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="75"/>

@@ -204,19 +204,24 @@
 #pragma mark -
 #pragma mark ImageEditView
 
-- (void)applyFilters:(NSDictionary*)_filters {
-    [self.delegate applyFilters:_filters];
+- (void)applyFilter:(Filter*)_filter {
+    [self.delegate applyFilters:_filter];
 }
 
-- (void)saveFilteredImage:(NSDictionary*)_filters {
+- (void)saveFilteredImage:(Filter*)_filter {
     self.didEdit = YES;
-    [self.delegate saveFilteredImage:_filters];
+    [self.delegate saveFilteredImage:_filter];
+}
+
+-(void)resetFilteredImage {
+    [self.delegate resetFilteredImage];
 }
 
 #pragma mark -
 #pragma mark UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
+    NSLog(@"ImageEditViewController: %@", [touch.view className]);
     if ([touch.view isKindOfClass:[ParameterSliderView class]]) {
         return NO;
     }

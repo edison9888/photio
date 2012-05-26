@@ -6,11 +6,13 @@
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "FilterFactory.h"
-#import "BuiltInFilter.h"
 #import "ViewGeneral.h"
 #import "FilterClassUsage.h"
 #import "FilterUsage.h"
+
+#import "FilterFactory.h"
+#import "BuiltInFilter.h"
+#import "VignetteFilter.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static FilterFactory* thisFilterFactory = nil;
@@ -129,6 +131,9 @@ static FilterFactory* thisFilterFactory = nil;
             break;
         case FilterTypeColor:
             filter = [BuiltInFilter filter:@"CIHueAdjust" andAttribute:@"inputAngle"];
+            break;
+        case FilterTypeVignette:
+            filter = [VignetteFilter filter];
             break;
         default:
             break;

@@ -8,6 +8,7 @@
 
 #import "ImageFiltersView.h"
 #import "UIView+Extensions.h"
+#import "NSObject+Extensions.h"
 #import "FilterImageView.h"
 #import "FilterUsage.h"
 
@@ -43,6 +44,7 @@
         FilterImageView* filterImage = [FilterImageView withDelegate:self andFilter:filter];
         CGRect oldRect = filterImage.frame;
         filterImage.frame = CGRectMake(oldRect.origin.x + totalWidth, oldRect.origin.y, oldRect.size.width, oldRect.size.height);
+        self.panGestureRecognizer.delegate = self;
         totalWidth += filterImage.frame.size.width;
         filterImage.filter = filter;
         [self addSubview:filterImage];
@@ -53,8 +55,16 @@
 #pragma mark -
 #pragma mark FilterImageViewDelegate
 
-- (void)applyFilter:(FilterUsage*)_filter {
-    [self.filtersViewDelegate applyFilter:_filter];
+- (void)selectedFilter:(FilterUsage*)_filter {
+    [self.filtersViewDelegate selectedFilter:_filter];
+}
+
+#pragma mark -
+#pragma mark UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer*)_gestureRecognizer shouldReceiveTouch:(UITouch*)_touch {
+    NSLog(@"ImageFiltersView: %@", [_touch.view className]);
+    return YES;
 }
 
 @end

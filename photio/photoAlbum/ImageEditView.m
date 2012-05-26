@@ -14,6 +14,7 @@
 #import "UIView+Extensions.h"
 #import "FilterClassUsage.h"
 #import "FilterUsage.h"
+#import "Filter.h"
 
 #define SAVE_FILTERED_IMAGE_ALPHA               0.3
 #define SAVE_FILTETRED_IMAGE_SELECTED_ALPHA     0.8
@@ -21,8 +22,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditView (PrivateAPI)
 
-- (void)addFilter:(FilterUsage*)_filterType;
-- (void)removeFilter:(FilterType)_filterType;
+- (void)selectFilter:(FilterUsage*)_filterType;
 - (IBAction)saveFilteredImage:(id)sender;
 - (IBAction)changeFilterClass:(id)sender;
 
@@ -32,23 +32,19 @@
 @implementation ImageEditView
 
 @synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageSaveFilteredImageView, imageFilterClassView,
-            imageFiltersView, filtersToApply, displayedFilter, displayedFilterClass, filterModified;
+            imageFiltersView, filterToApply, displayedFilter, displayedFilterClass, filterModified;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
 
-- (void)addFilter:(FilterUsage*)_filter {
+- (void)selectFilter:(FilterUsage*)_filter {
     self.displayedFilter = _filter;
     Filter* filter = [FilterFactory filter:_filter];
     self.parameterSlider.maxValue = [filter sliderMaxValue];
     self.parameterSlider.minValue = [filter sliderMinValue];
     self.parameterSlider.initialValue = [filter sliderDefaultValue];
-    [self.parameterSlider setUp];
-    [self.filtersToApply setObject:filter forKey:_filter.filterId];
-}
-
-- (void)removeFilter:(FilterType)_filterType {
-    [self.filtersToApply removeObjectForKey:[NSNumber numberWithInt:_filterType]];
+    [self.parameterSlider setIntialValue];
+    self.filterToApply = filter;
 }
 
 - (IBAction)changeFilterClass:(id)sender {
@@ -59,7 +55,7 @@
 - (IBAction)saveFilteredImage:(id)sender {
     if (self.filterModified) {
         self.imageSaveFilteredImageView.alpha = SAVE_FILTERED_IMAGE_ALPHA;  
-        [self.delegate saveFilteredImage:self.filtersToApply];
+        [self.delegate saveFilteredImage:self.filterToApply];
     }
 }
 
@@ -76,7 +72,6 @@
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {
-        self.filtersToApply = [NSMutableDictionary dictionaryWithCapacity:10];
     }
     return self;
 }
@@ -84,7 +79,7 @@
 - (void)didMoveToSuperview {
     FilterFactory* filterFactory = [FilterFactory instance];
     self.displayedFilterClass = [filterFactory defaultFilterClass];
-    [self addFilter:[filterFactory defaultFilter:self.displayedFilterClass]];
+    [self selectFilter:[filterFactory defaultFilter:self.displayedFilterClass]];
     self.imageFilterClassView.image = [UIImage imageNamed:self.displayedFilterClass.imageFilename];
     self.imageFiltersView.filtersViewDelegate = self;
     self.imageFiltersView.filterClass = self.displayedFilterClass;
@@ -95,19 +90,19 @@
 #pragma mark ParameterSliderViewDelegate
 
 - (void)parameterSliderValueChanged:(ParameterSliderView *)_parameterSlider {
-    Filter* filter = [self.filtersToApply objectForKey:self.displayedFilter.filterId];
     CGFloat value = [_parameterSlider value];
-    [filter setFilterValue:value];
+    [self.filterToApply setFilterValue:value];
     self.imageSaveFilteredImageView.alpha = SAVE_FILTETRED_IMAGE_SELECTED_ALPHA;
     self.filterModified = YES;
-    [self.delegate applyFilters:self.filtersToApply];
+    [self.delegate applyFilter:self.filterToApply];
 }
 
 #pragma mark -
 #pragma mark ImageFiltersViewDelegate
 
-- (void)applyFilter:(FilterUsage*)_filter {
-    
+- (void)selectedFilter:(FilterUsage*)_filter {
+    [self.delegate resetFilteredImage];
+    [self selectFilter:_filter];
 }
 
 @end

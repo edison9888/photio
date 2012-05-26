@@ -19,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation BuiltInFilter
 
-@synthesize context, filter, image, filterAttribute, changedFilterAttribute;
+@synthesize context, image, filter, filterAttribute;
 
 #pragma mark -
 #pragma mark BuiltInFilter PrivateAPI
@@ -39,6 +39,7 @@
     }
 }
 
+
 #pragma mark -
 #pragma mark BuiltInFilter
 
@@ -49,10 +50,9 @@
 - (id)initWithFilter:(NSString*)_filterName andAttribute:(NSString*)_attribute {
     self = [super init];
     if (self) {
-        self.context = [CIContext contextWithOptions:nil];
+        self.context = [CIContext contextWithOptions:nil];        
         self.filter = [CIFilter filterWithName:_filterName];
         self.filterAttribute = _attribute;
-        self.changedFilterAttribute = NO;
     }
     return self;
 }
@@ -73,13 +73,8 @@
 }
 
 - (CGFloat)sliderDefaultValue {
-    NSNumber* defaultValue = nil;
-    if (self.changedFilterAttribute) {
-        defaultValue = [self.filter valueForKey:self.filterAttribute];
-    } else {
-        NSDictionary* filterAttributes = [self.filter attributes];
-        defaultValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeDefault];
-    }    
+    NSDictionary* filterAttributes = [self.filter attributes];
+    NSNumber* defaultValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeDefault];
     return [defaultValue floatValue]; 
 }
 

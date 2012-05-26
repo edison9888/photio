@@ -16,7 +16,8 @@ typedef enum {
     FilterTypeBrightness,
     FilterTypeContrast,
     FilterTypeColor,
-    FilterTypeSaturation
+    FilterTypeSaturation,
+    FilterTypeVignette
 } FilterType;
 
 typedef enum {

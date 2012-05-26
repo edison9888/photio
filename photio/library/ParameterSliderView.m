@@ -18,6 +18,7 @@
 
 - (void)valueChanged;
 - (void)drawParameterViewBorder;
+- (void)addSubviews;
 
 @end
 
@@ -50,13 +51,10 @@
     }
 }
 
-- (void)setUp {
+- (void)addSubviews {
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(valueChanged:)];
     [self addGestureRecognizer:self.panGesture];
-    self.parameterViewFrame = CGRectMake(0.0, 
-                                         0.5 * self.frame.size.height * (1.0 - PARAMETER_VIEW_HEIGHT_SCALE), 
-                                         (self.initialValue - self.minValue) / (self.maxValue - self.minValue) * self.frame.size.width, 
-                                         PARAMETER_VIEW_HEIGHT_SCALE * self.frame.size.height);
+    self.parameterViewFrame = CGRectMake(0.0, 0.5 * self.frame.size.height * (1.0 - PARAMETER_VIEW_HEIGHT_SCALE), 0.5 * self.frame.size.width, PARAMETER_VIEW_HEIGHT_SCALE * self.frame.size.height);
     self.parameterView = [[UIView alloc] initWithFrame:self.parameterViewFrame];
     self.parameterView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.parameterView];
@@ -66,6 +64,7 @@
     self.initialValue = self.initialValue;
     self.parameterViewBorder.layer.borderColor = [UIColor whiteColor].CGColor;
     self.parameterViewBorder.layer.borderWidth = 1.0f;    
+    
 }
 
 #pragma mark -
@@ -76,11 +75,28 @@
     return sliderView;
 }
 
-- (id)initWithCoder:(NSCoder *)coder { 
+- (id)initWithCoder:(NSCoder*)coder { 
     self = [super initWithCoder:coder];
     if (self) {
+        [self addSubviews];
     }
     return self;
+}
+
+- (id)initWithFrame:(CGRect)_frame { 
+    self = [super initWithFrame:_frame];
+    if (self) {
+        [self addSubviews];
+    }
+    return self;
+}
+
+- (void)setIntialValue {
+    self.parameterView.frame = CGRectMake(0.0, 
+                                          0.5 * self.frame.size.height * (1.0 - PARAMETER_VIEW_HEIGHT_SCALE), 
+                                          (self.initialValue - self.minValue) / (self.maxValue - self.minValue) * self.frame.size.width, 
+                                          PARAMETER_VIEW_HEIGHT_SCALE * self.frame.size.height);
+    self.parameterViewFrame = self.parameterView.frame;
 }
 
 - (CGFloat)value {

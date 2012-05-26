@@ -185,16 +185,12 @@
     }
 }
 
-- (void)applyFilters:(NSDictionary*)_filters {
-    for (Filter* filter in [_filters allValues]) {
-        self.image = [self scaleImage:[filter applyFilterToImage:self.image]];
-    }
+- (void)applyFilters:(Filter*)_filter {
+    self.image = [self scaleImage:[_filter applyFilterToImage:self.image]];
 }
 
-- (void)saveFilteredImage:(NSDictionary*)_filters {
-    for (Filter* filter in [_filters allValues]) {
-        self.capture = [filter applyFilterToImage:self.capture];
-    }
+- (void)saveFilteredImage:(Filter*)_filter {
+    self.capture = [_filter applyFilterToImage:self.capture];
     self.image = [self scaleImage:self.capture];
 }
 

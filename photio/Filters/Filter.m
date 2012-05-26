@@ -10,6 +10,14 @@
 
 @implementation Filter
 
+
+- (id)init {
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
+
 - (CGFloat)sliderMaxValue {
     return 1.0;
 }

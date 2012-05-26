@@ -10,6 +10,7 @@
 
 @interface Filter : NSObject
 
+
 - (CGFloat)sliderMaxValue;
 - (CGFloat)sliderMinValue;
 - (CGFloat)sliderDefaultValue;

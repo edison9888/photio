@@ -15,6 +15,7 @@
 @class ParameterSliderView;
 @class FilterClassUsage;
 @class FilterUsage;
+@class Filter;
 
 @protocol ImageEditViewDelegate;
 
@@ -28,7 +29,7 @@
 @property(nonatomic, strong) IBOutlet UIImageView*              imageSaveFilteredImageView;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageFilterClassView;
 @property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
-@property(nonatomic, strong) NSMutableDictionary*               filtersToApply;
+@property(nonatomic, strong) Filter*                            filterToApply;
 @property(nonatomic, assign) FilterUsage*                       displayedFilter;
 @property(nonatomic, assign) FilterClassUsage*                  displayedFilterClass;
 @property(nonatomic, assign) BOOL                               filterModified;
@@ -41,7 +42,8 @@
 
 @required
 
-- (void)applyFilters:(NSDictionary*)_filters;
-- (void)saveFilteredImage:(NSDictionary*)_filters;
+- (void)applyFilter:(Filter*)_filter;
+- (void)saveFilteredImage:(Filter*)_filter;
+- (void)resetFilteredImage;
 
 @end

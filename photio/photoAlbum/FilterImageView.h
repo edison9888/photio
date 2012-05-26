@@ -12,10 +12,11 @@
 @class FilterUsage;
 @protocol FilterImageViewDelegate;
 
-@interface FilterImageView : UIImageView
+@interface FilterImageView : UIImageView <UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak)      id<FilterImageViewDelegate> delegate;
 @property(nonatomic, strong)    FilterUsage*                filter;
+@property(nonatomic, strong)    UITapGestureRecognizer*     selectGesture;
 
 + (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter;
 
@@ -23,6 +24,6 @@
 
 @protocol FilterImageViewDelegate <NSObject>
 
-- (void)applyFilter:(FilterUsage*)_filter;
+- (void)selectedFilter:(FilterUsage*)_filter;
 
 @end

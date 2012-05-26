@@ -51,7 +51,6 @@
 		05809C9915573EC900AF2079 /* whitestar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9515573EC900AF2079 /* whitestar@2x.png */; };
 		05809C9A15573EC900AF2079 /* yellowstar.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9615573EC900AF2079 /* yellowstar.png */; };
 		05809C9B15573EC900AF2079 /* yellowstar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9715573EC900AF2079 /* yellowstar@2x.png */; };
-		05809CA3155742FE00AF2079 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CA2155742FE00AF2079 /* Capture.m */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		05809CBD155EE72900AF2079 /* TakePhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CBC155EE72800AF2079 /* TakePhotoView.m */; };
@@ -74,6 +73,7 @@
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
 		05AB4893156F1B1800BF8C09 /* FilterUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB4892156F1B1800BF8C09 /* FilterUsage.m */; };
 		05AB4896156F1B2800BF8C09 /* FilterClassUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB4895156F1B2800BF8C09 /* FilterClassUsage.m */; };
+		05AB489915707BB500BF8C09 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB489815707BB500BF8C09 /* Capture.m */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
 		05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* ImageEntriesView.m */; };
 		05B2A7561533BBFC00499F6F /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B2A7551533BBFC00499F6F /* Image.m */; };
@@ -107,6 +107,7 @@
 		05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */; };
 		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
+		05E3C33C15714CBA00F5F1A4 /* VignetteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */; };
 		05E4C21F1552233600C7266E /* ImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C21D1552233600C7266E /* ImageEditViewController.m */; };
 		05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E4C21E1552233600C7266E /* ImageEditViewController.xib */; };
 		05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C223155224D400C7266E /* ImageMetaDataEditView.m */; };
@@ -174,8 +175,6 @@
 		05809C9515573EC900AF2079 /* whitestar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "whitestar@2x.png"; path = "photio/Images/whitestar@2x.png"; sourceTree = SOURCE_ROOT; };
 		05809C9615573EC900AF2079 /* yellowstar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowstar.png; path = photio/Images/yellowstar.png; sourceTree = SOURCE_ROOT; };
 		05809C9715573EC900AF2079 /* yellowstar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yellowstar@2x.png"; path = "photio/Images/yellowstar@2x.png"; sourceTree = SOURCE_ROOT; };
-		05809CA1155742FE00AF2079 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
-		05809CA2155742FE00AF2079 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -213,6 +212,8 @@
 		05AB4892156F1B1800BF8C09 /* FilterUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterUsage.m; sourceTree = "<group>"; };
 		05AB4894156F1B2700BF8C09 /* FilterClassUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterClassUsage.h; sourceTree = "<group>"; };
 		05AB4895156F1B2800BF8C09 /* FilterClassUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterClassUsage.m; sourceTree = "<group>"; };
+		05AB489715707BB500BF8C09 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		05AB489815707BB500BF8C09 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		05AC025B1548CBCF00A29139 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
 		05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
 		05AF480D154DCCAE0099576A /* ImageEntriesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEntriesView.h; path = photio/PhotoAlbum/ImageEntriesView.h; sourceTree = SOURCE_ROOT; };
@@ -266,6 +267,8 @@
 		05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectViewController.m; sourceTree = "<group>"; };
 		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		05E3C33A15714CBA00F5F1A4 /* VignetteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VignetteFilter.h; path = Filters/VignetteFilter.h; sourceTree = "<group>"; };
+		05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VignetteFilter.m; path = Filters/VignetteFilter.m; sourceTree = "<group>"; };
 		05E4C21C1552233500C7266E /* ImageEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditViewController.h; path = photio/PhotoAlbum/ImageEditViewController.h; sourceTree = SOURCE_ROOT; };
 		05E4C21D1552233600C7266E /* ImageEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditViewController.m; path = photio/PhotoAlbum/ImageEditViewController.m; sourceTree = SOURCE_ROOT; };
 		05E4C21E1552233600C7266E /* ImageEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditViewController.xib; path = photio/PhotoAlbum/ImageEditViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -322,8 +325,6 @@
 		05250EAA156953620060F993 /* ImageAdjust */ = {
 			isa = PBXGroup;
 			children = (
-				05250EE51569FA720060F993 /* vignette.png */,
-				05250EE61569FA720060F993 /* vignette@2x.png */,
 				05250EAB156953620060F993 /* brightness.png */,
 				05250EAC156953620060F993 /* brightness@2x.png */,
 				05250EAD156953620060F993 /* contrast.png */,
@@ -332,6 +333,8 @@
 				05250EB0156953620060F993 /* hue@2x.png */,
 				05250EB1156953620060F993 /* saturation.png */,
 				05250EB2156953620060F993 /* saturation@2x.png */,
+				05250EE51569FA720060F993 /* vignette.png */,
+				05250EE61569FA720060F993 /* vignette@2x.png */,
 			);
 			path = ImageAdjust;
 			sourceTree = "<group>";
@@ -360,8 +363,8 @@
 			isa = PBXGroup;
 			children = (
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
-				05809CA1155742FE00AF2079 /* Capture.h */,
-				05809CA2155742FE00AF2079 /* Capture.m */,
+				05AB489715707BB500BF8C09 /* Capture.h */,
+				05AB489815707BB500BF8C09 /* Capture.m */,
 				05AB4894156F1B2700BF8C09 /* FilterClassUsage.h */,
 				05AB4895156F1B2800BF8C09 /* FilterClassUsage.m */,
 				05AB4891156F1B1800BF8C09 /* FilterUsage.h */,
@@ -452,6 +455,8 @@
 				05CFEF941566EDB300755519 /* Filter.m */,
 				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
 				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
+				05E3C33A15714CBA00F5F1A4 /* VignetteFilter.h */,
+				05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */,
 			);
 			name = Filters;
 			sourceTree = "<group>";
@@ -717,7 +722,6 @@
 				05CCEF9E15557711004FBD21 /* NSObject+Extensions.m in Sources */,
 				05CCEFA215558EFB004FBD21 /* UIView+Extensions.m in Sources */,
 				05CCEFA51555E0E9004FBD21 /* ImageControlView.m in Sources */,
-				05809CA3155742FE00AF2079 /* Capture.m in Sources */,
 				05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */,
 				05809CBD155EE72900AF2079 /* TakePhotoView.m in Sources */,
 				05B8BB301561A0C80023346F /* ProgressView.m in Sources */,
@@ -737,6 +741,8 @@
 				05250EE41569BBDE0060F993 /* FilterImageView.m in Sources */,
 				05AB4893156F1B1800BF8C09 /* FilterUsage.m in Sources */,
 				05AB4896156F1B2800BF8C09 /* FilterClassUsage.m in Sources */,
+				05AB489915707BB500BF8C09 /* Capture.m in Sources */,
+				05E3C33C15714CBA00F5F1A4 /* VignetteFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
