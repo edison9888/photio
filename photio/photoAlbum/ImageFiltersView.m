@@ -18,10 +18,32 @@
 
 @implementation ImageFiltersView
 
-@synthesize filtersViewDelegate, filterClass;
+@synthesize filtersViewDelegate, filterClass, contentView, contentViewFrame, panGestureRecognizer;
 
 #pragma mark -
 #pragma mark ImageFiltersView PrivayeAPI
+
+- (void)valueChanged:(UIPanGestureRecognizer*)_panGesture {
+    CGPoint dragDelta = [_panGesture translationInView:self];
+    CGFloat newXOffset = self.contentViewFrame.origin.x + dragDelta.x;
+    CGFloat minOffset = self.frame.size.width - self.contentView.frame.size.width;
+    if (newXOffset < minOffset) {
+        newXOffset = minOffset;
+    } else if (newXOffset > 0.0) {
+        newXOffset = 0.0;
+    }
+    switch (_panGesture.state) {
+        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateChanged:
+            self.contentView.frame = CGRectMake(newXOffset, self.contentViewFrame.origin.y, self.contentViewFrame.size.width, self.contentViewFrame.size.height);
+            break;
+        case UIGestureRecognizerStateEnded:
+            self.contentViewFrame = self.contentView.frame;
+            break;
+        default:
+            break;
+    }
+}
 
 #pragma mark -
 #pragma mark ImageFiltersView
@@ -29,7 +51,11 @@
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {
-        self.contentSize = self.frame.size;
+        self.clipsToBounds = YES;
+        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(valueChanged:)];
+        [self addGestureRecognizer:self.panGestureRecognizer];
+        self.contentViewFrame = CGRectMake(0.0, 0.0, self.frame.size.height, self.frame.size.height);
+        self.contentView = [[UIView alloc] initWithFrame:self.contentViewFrame];
     }
     return self;
 }
@@ -47,9 +73,11 @@
         self.panGestureRecognizer.delegate = self;
         totalWidth += filterImage.frame.size.width;
         filterImage.filter = filter;
-        [self addSubview:filterImage];
+        [self.contentView addSubview:filterImage];
     }
-    self.contentSize = CGSizeMake(totalWidth, self.frame.size.height);
+    self.contentViewFrame = CGRectMake(0.0, 0.0, totalWidth, self.frame.size.height);
+    self.contentView.frame = self.contentViewFrame;
+    [self addSubview:self.contentView];
 }
 
 #pragma mark -

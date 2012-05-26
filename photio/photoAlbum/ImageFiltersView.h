@@ -15,10 +15,13 @@
 @class FilterClassUsage;
 @class FilterUsage;
 
-@interface ImageFiltersView : UIScrollView <FilterImageViewDelegate, UIGestureRecognizerDelegate>
+@interface ImageFiltersView : UIView <FilterImageViewDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak)      id<ImageFiltersViewDelegate>    filtersViewDelegate;
 @property(nonatomic, assign)    FilterClassUsage*               filterClass;
+@property(nonatomic, strong)    UIView*                         contentView;
+@property(nonatomic, assign)    CGRect                          contentViewFrame;
+@property(nonatomic, strong)    UIPanGestureRecognizer*         panGestureRecognizer;
 
 - (void)addFilterViews;
 

@@ -13,12 +13,12 @@
 @synthesize filter;
 
 + (id)filter {
-    return [[VignetteFilter alloc] initWithFilter:@"CIVignette" andAttribute:@"inputInensity"];
+    return [[VignetteFilter alloc] initWithFilter:@"CIVignette" andAttribute:@"inputIntensity"];
 }
 
 - (void)setFilterValue:(CGFloat)_value {
-    [self.filter setValue:[NSNumber numberWithFloat:1.0] forKey:@"inputRadius"];
-    [self.filter setValue:[NSNumber numberWithFloat:_value] forKey:@"inputInensity"];
+    [self.filter setValue:[NSNumber numberWithFloat:2.0] forKey:@"inputRadius"];
+    [self.filter setValue:[NSNumber numberWithFloat:_value] forKey:@"inputIntensity"];
 }
 
 @end
