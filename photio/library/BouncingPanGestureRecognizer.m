@@ -8,8 +8,8 @@
 
 #import "BouncingPanGestureRecognizer.h"
 
-#define BOUNCE_FACTOR               0.1
-#define BOUNCE_ANIMATION_DURATION   0.5
+#define BOUNCE_FACTOR                   0.1
+#define BOUNCE_ANIMATION_DURATION       0.5
 
 @interface BouncingPanGestureRecognizer (PrivateAPI)
 
@@ -20,34 +20,31 @@
 
 @implementation BouncingPanGestureRecognizer
 
-@synthesize view, relativeView, panGestureRecognizer, viewFrame;
+@synthesize contentView, relativeView, panGestureRecognizer, contentViewFrame, minXOffset, bounce;
 
 #pragma mark -
 #pragma mark BouncingPanGestureRecognizer PrivateAPI
 
 - (void)touched:(UIPanGestureRecognizer*)_panGesture {
-    CGPoint velocity = [_panGesture velocityInView:self.relativeView];
     CGPoint dragDelta = [_panGesture translationInView:self.relativeView];
-    CGFloat newXOffset = self.viewFrame.origin.x + dragDelta.x;
-    CGFloat minOffset = self.relativeView.frame.size.width - self.view.frame.size.width;
-    CGFloat bounce = self.view.frame.size.width * BOUNCE_FACTOR;
-    if (newXOffset < minOffset - bounce) {
-        newXOffset = minOffset - bounce;
-    } else if (newXOffset > bounce) {
-        newXOffset = bounce;
+    CGFloat newXOffset = self.contentViewFrame.origin.x + dragDelta.x;
+    if (newXOffset < self.minXOffset - self.bounce) {
+        newXOffset = self.minXOffset - self.bounce;
+    } else if (newXOffset > self.bounce) {
+        newXOffset = self.bounce;
     }
     switch (_panGesture.state) {
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStateChanged:
-            self.view.frame = CGRectMake(newXOffset, self.viewFrame.origin.y, self.viewFrame.size.width, self.viewFrame.size.height);
+            self.contentView.frame = CGRectMake(newXOffset, self.contentViewFrame.origin.y, self.contentViewFrame.size.width, self.contentViewFrame.size.height);
             break;
         case UIGestureRecognizerStateEnded:
-            if (newXOffset < minOffset) {
-                [self animateViewToXPos:minOffset];
+            if (newXOffset < self.minXOffset) {
+                [self animateViewToXPos:self.minXOffset];
             } else if (newXOffset > 0.0) {
                 [self animateViewToXPos:0.0];
             }
-            self.viewFrame = self.view.frame;
+            self.contentViewFrame = self.contentView.frame;
             break;
         default:
             break;
@@ -55,12 +52,12 @@
 }
 
 - (void)animateViewToXPos:(CGFloat)_xpos {
-    self.viewFrame = CGRectMake(_xpos, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    self.contentViewFrame = CGRectMake(_xpos, self.contentView.frame.origin.y, self.contentView.frame.size.width, self.contentView.frame.size.height);
     [UIView animateWithDuration:BOUNCE_ANIMATION_DURATION 
         delay:0.0 
         options:UIViewAnimationCurveEaseOut
          animations:^{
-             self.view.frame = self.viewFrame;
+             self.contentView.frame = self.contentViewFrame;
          }
          completion:^(BOOL _finiahed) {
          }
@@ -76,11 +73,13 @@
 
 - (id)initInView:(UIView*)_view relativeToView:(UIView*)_relativeView {
     if (self = [super init]) {
-        self.view = _view;
-        self.viewFrame = self.view.frame;
+        self.contentView = _view;
+        self.contentViewFrame = self.contentView.frame;
         self.relativeView = _relativeView;
         self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(touched:)];
-        [self.view addGestureRecognizer:self.panGestureRecognizer];
+        [self.contentView addGestureRecognizer:self.panGestureRecognizer];
+        self.minXOffset = self.relativeView.frame.size.width - self.contentView.frame.size.width;
+        self.bounce = self.contentView.frame.size.width * BOUNCE_FACTOR;
     }
     return self;
 }

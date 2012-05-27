@@ -10,10 +10,12 @@
 
 @interface BouncingPanGestureRecognizer : NSObject
 
-@property (nonatomic, weak)   UIView*                           view;
+@property (nonatomic, weak)   UIView*                           contentView;
 @property (nonatomic, weak)   UIView*                           relativeView;
 @property (nonatomic, strong) UIPanGestureRecognizer*           panGestureRecognizer;
-@property (nonatomic, assign) CGRect                            viewFrame;
+@property (nonatomic, assign) CGRect                            contentViewFrame;
+@property (nonatomic, assign) CGFloat                           minXOffset;
+@property (nonatomic, assign) CGFloat                           bounce;
 
 + (id)inView:(UIView*)_view relativeToView:(UIView*)_relativeView;
 - (id)initInView:(UIView*)_view relativeToView:(UIView*)_relativeView;
