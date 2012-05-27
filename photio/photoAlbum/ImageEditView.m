@@ -13,6 +13,7 @@
 #import "ImageFilterClassView.h"
 #import "UIView+Extensions.h"
 #import "FilterClassUsage.h"
+#import "FilterImageView.h"
 #import "FilterUsage.h"
 #import "Filter.h"
 
@@ -22,7 +23,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEditView (PrivateAPI)
 
-- (void)selectFilter:(FilterUsage*)_filterType;
+- (void)selectFilter:(FilterImageView*)_filterImage;
 - (void)setFilterParameters;
 - (IBAction)saveFilteredImage:(id)sender;
 - (IBAction)changeFilterClass:(id)sender;
@@ -33,14 +34,14 @@
 @implementation ImageEditView
 
 @synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageSaveFilteredImageView, imageFilterClassView,
-            imageFiltersView, filterToApply, displayedFilter, displayedFilterClass, isInitialized;
+            imageFiltersView, filterToApply, displayedFilterImage, displayedFilterClass, isInitialized;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
 
-- (void)selectFilter:(FilterUsage*)_filter {
-    self.displayedFilter = _filter;
-    self.filterToApply = [FilterFactory filter:_filter];
+- (void)selectFilter:(FilterImageView*)_filterImage {
+    self.displayedFilterImage = _filterImage;
+    self.filterToApply = [FilterFactory filter:_filterImage.filter];
     [self setFilterParameters];
 }
 
@@ -61,7 +62,7 @@
     self.imageSaveFilteredImageView.userInteractionEnabled = NO;
     [self.delegate saveFilteredImage:self.filterToApply];
     [self.delegate resetFilteredImage];
-    [self selectFilter:self.displayedFilter];
+    [self selectFilter:self.displayedFilterImage];
 }
 
 #pragma mark -
@@ -88,11 +89,14 @@
         self.isInitialized = YES;
         FilterFactory* filterFactory = [FilterFactory instance];
         self.displayedFilterClass = [filterFactory defaultFilterClass];
-        [self selectFilter:[filterFactory defaultFilter:self.displayedFilterClass]];
         self.imageFilterClassView.image = [UIImage imageNamed:self.displayedFilterClass.imageFilename];
         self.imageFiltersView.filtersViewDelegate = self;
         self.imageFiltersView.filterClass = self.displayedFilterClass;
         [self.imageFiltersView addFilterViews];
+        FilterUsage* defaultFilter = [filterFactory defaultFilter:self.displayedFilterClass];
+        FilterImageView* defaultFilterImage = [self.imageFiltersView filterImageViewForFilter:defaultFilter];
+        [defaultFilterImage select];
+        [self selectFilter:defaultFilterImage];
     }
 }
 
@@ -110,9 +114,10 @@
 #pragma mark -
 #pragma mark ImageFiltersViewDelegate
 
-- (void)selectedFilter:(FilterUsage*)_filter {
+- (void)selectedFilter:(FilterImageView*)_filterImage {
+    [self.displayedFilterImage deselect];
     [self.delegate resetFilteredImage];
-    [self selectFilter:_filter];
+    [self selectFilter:_filterImage];
 }
 
 @end

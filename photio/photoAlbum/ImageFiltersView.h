@@ -22,8 +22,10 @@
 @property(nonatomic, assign)    FilterClassUsage*               filterClass;
 @property(nonatomic, strong)    UIView*                         contentView;
 @property(nonatomic, strong)    BouncingPanGestureRecognizer*   panGestureRecognizer;
+@property(nonatomic, strong)    NSMutableDictionary*            filterViews;
 
 - (void)addFilterViews;
+- (FilterImageView*)filterImageViewForFilter:(FilterUsage*)_filter;
 
 @end
 

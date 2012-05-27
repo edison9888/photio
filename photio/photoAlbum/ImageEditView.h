@@ -15,7 +15,7 @@
 @class ParameterSliderView;
 @class FilterClassUsage;
 @class FilterUsage;
-@class Filter;
+@class FilterImageView;
 
 @protocol ImageEditViewDelegate;
 
@@ -30,7 +30,7 @@
 @property(nonatomic, strong) IBOutlet UIImageView*              imageFilterClassView;
 @property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
 @property(nonatomic, strong) Filter*                            filterToApply;
-@property(nonatomic, assign) FilterUsage*                       displayedFilter;
+@property(nonatomic, assign) FilterImageView*                   displayedFilterImage;
 @property(nonatomic, assign) FilterClassUsage*                  displayedFilterClass;
 @property(nonatomic, assign) BOOL                               isInitialized;
 

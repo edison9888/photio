@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		050855391557074100609C31 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855371557074100609C31 /* pencil.png */; };
 		0508553A1557074100609C31 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855381557074100609C31 /* pencil@2x.png */; };
-		050AF2831568027700EC6C13 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF27E1568027700EC6C13 /* UIImage+Alpha.m */; };
-		050AF2841568027700EC6C13 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF2801568027700EC6C13 /* UIImage+Resize.m */; };
-		050AF2851568027700EC6C13 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF2821568027700EC6C13 /* UIImage+RoundedCorner.m */; };
 		050AF28C1568167B00EC6C13 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF28B1568167B00EC6C13 /* Tag.m */; };
 		050AF29215681AE600EC6C13 /* ImageFilterClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */; };
 		050AF29515681B1700EC6C13 /* ImageFilterClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF29415681B1600EC6C13 /* ImageFilterClassView.m */; };
@@ -105,6 +102,10 @@
 		05CFEF921566BA8900755519 /* apply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF901566BA8900755519 /* apply@2x.png */; };
 		05CFEF951566EDB400755519 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF941566EDB300755519 /* Filter.m */; };
 		05DDD9D91571B95C0034AF7C /* BouncingPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */; };
+		05DDD9E11572D9350034AF7C /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9DC1572D9340034AF7C /* UIImage+Alpha.m */; };
+		05DDD9E21572D9350034AF7C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9DE1572D9340034AF7C /* UIImage+Resize.m */; };
+		05DDD9E31572D9350034AF7C /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9E01572D9350034AF7C /* UIImage+RoundedCorner.m */; };
+		05DDD9E61572D9750034AF7C /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9E51572D9750034AF7C /* UIImage+Extensions.m */; };
 		05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */; };
 		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
@@ -119,12 +120,6 @@
 /* Begin PBXFileReference section */
 		050855371557074100609C31 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil.png; path = photio/Images/pencil.png; sourceTree = SOURCE_ROOT; };
 		050855381557074100609C31 /* pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pencil@2x.png"; path = "photio/Images/pencil@2x.png"; sourceTree = SOURCE_ROOT; };
-		050AF27D1568027700EC6C13 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "photio/PhotoAlbum/UIImage+Alpha.h"; sourceTree = SOURCE_ROOT; };
-		050AF27E1568027700EC6C13 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "photio/PhotoAlbum/UIImage+Alpha.m"; sourceTree = SOURCE_ROOT; };
-		050AF27F1568027700EC6C13 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "photio/PhotoAlbum/UIImage+Resize.h"; sourceTree = SOURCE_ROOT; };
-		050AF2801568027700EC6C13 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "photio/PhotoAlbum/UIImage+Resize.m"; sourceTree = SOURCE_ROOT; };
-		050AF2811568027700EC6C13 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "photio/PhotoAlbum/UIImage+RoundedCorner.h"; sourceTree = SOURCE_ROOT; };
-		050AF2821568027700EC6C13 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "photio/PhotoAlbum/UIImage+RoundedCorner.m"; sourceTree = SOURCE_ROOT; };
 		050AF28A1568167B00EC6C13 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		050AF28B1568167B00EC6C13 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageFilterClassView.xib; path = photio/PhotoAlbum/ImageFilterClassView.xib; sourceTree = SOURCE_ROOT; };
@@ -264,8 +259,16 @@
 		05CFEF901566BA8900755519 /* apply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apply@2x.png"; path = "photio/Images/apply@2x.png"; sourceTree = SOURCE_ROOT; };
 		05CFEF931566EDB300755519 /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter.h; path = Filters/Filter.h; sourceTree = "<group>"; };
 		05CFEF941566EDB300755519 /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter.m; path = Filters/Filter.m; sourceTree = "<group>"; };
-		05DDD9D71571B95C0034AF7C /* BouncingPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; name = BouncingPanGestureRecognizer.h; path = photio/Library/BouncingPanGestureRecognizer.h; sourceTree = SOURCE_ROOT; };
+		05DDD9D71571B95C0034AF7C /* BouncingPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncingPanGestureRecognizer.h; path = photio/Library/BouncingPanGestureRecognizer.h; sourceTree = SOURCE_ROOT; };
 		05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncingPanGestureRecognizer.m; path = photio/Library/BouncingPanGestureRecognizer.m; sourceTree = SOURCE_ROOT; };
+		05DDD9DB1572D9340034AF7C /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "photio/Library/UIImage+Alpha.h"; sourceTree = SOURCE_ROOT; };
+		05DDD9DC1572D9340034AF7C /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "photio/Library/UIImage+Alpha.m"; sourceTree = SOURCE_ROOT; };
+		05DDD9DD1572D9340034AF7C /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "photio/Library/UIImage+Resize.h"; sourceTree = SOURCE_ROOT; };
+		05DDD9DE1572D9340034AF7C /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "photio/Library/UIImage+Resize.m"; sourceTree = SOURCE_ROOT; };
+		05DDD9DF1572D9340034AF7C /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "photio/Library/UIImage+RoundedCorner.h"; sourceTree = SOURCE_ROOT; };
+		05DDD9E01572D9350034AF7C /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "photio/Library/UIImage+RoundedCorner.m"; sourceTree = SOURCE_ROOT; };
+		05DDD9E41572D9740034AF7C /* UIImage+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Extensions.h"; path = "photio/Library/UIImage+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		05DDD9E51572D9750034AF7C /* UIImage+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Extensions.m"; path = "photio/Library/UIImage+Extensions.m"; sourceTree = SOURCE_ROOT; };
 		05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectViewController.h; sourceTree = "<group>"; };
 		05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectViewController.m; sourceTree = "<group>"; };
 		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
@@ -416,6 +419,14 @@
 				0542DAE5151FFD85002C62A0 /* StreamOfViews.m */,
 				0529A7C51501D41900235B95 /* TransitionGestureRecognizer.h */,
 				0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */,
+				05DDD9DB1572D9340034AF7C /* UIImage+Alpha.h */,
+				05DDD9DC1572D9340034AF7C /* UIImage+Alpha.m */,
+				05DDD9E41572D9740034AF7C /* UIImage+Extensions.h */,
+				05DDD9E51572D9750034AF7C /* UIImage+Extensions.m */,
+				05DDD9DD1572D9340034AF7C /* UIImage+Resize.h */,
+				05DDD9DE1572D9340034AF7C /* UIImage+Resize.m */,
+				05DDD9DF1572D9340034AF7C /* UIImage+RoundedCorner.h */,
+				05DDD9E01572D9350034AF7C /* UIImage+RoundedCorner.m */,
 				05B837711530C45100D99A40 /* UIImageToDataTransformer.h */,
 				05B837721530C45100D99A40 /* UIImageToDataTransformer.m */,
 				05250EC2156962B80060F993 /* UITableViewCell+Extensions.h */,
@@ -580,12 +591,6 @@
 				058736B915556941007A5654 /* ImageMetaDataEditView.xib */,
 				05809CBB155EE72600AF2079 /* TakePhotoView.h */,
 				05809CBC155EE72800AF2079 /* TakePhotoView.m */,
-				050AF27D1568027700EC6C13 /* UIImage+Alpha.h */,
-				050AF27E1568027700EC6C13 /* UIImage+Alpha.m */,
-				050AF27F1568027700EC6C13 /* UIImage+Resize.h */,
-				050AF2801568027700EC6C13 /* UIImage+Resize.m */,
-				050AF2811568027700EC6C13 /* UIImage+RoundedCorner.h */,
-				050AF2821568027700EC6C13 /* UIImage+RoundedCorner.m */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
@@ -735,9 +740,6 @@
 				05C6050C156402AD00E02532 /* BuiltInFilter.m in Sources */,
 				05CFEF8E1566AB3900755519 /* FilterFactory.m in Sources */,
 				05CFEF951566EDB400755519 /* Filter.m in Sources */,
-				050AF2831568027700EC6C13 /* UIImage+Alpha.m in Sources */,
-				050AF2841568027700EC6C13 /* UIImage+Resize.m in Sources */,
-				050AF2851568027700EC6C13 /* UIImage+RoundedCorner.m in Sources */,
 				050AF28C1568167B00EC6C13 /* Tag.m in Sources */,
 				050AF29515681B1700EC6C13 /* ImageFilterClassView.m in Sources */,
 				05250E8D15686C150060F993 /* ImageFilterClassCell.m in Sources */,
@@ -749,6 +751,10 @@
 				05AB489915707BB500BF8C09 /* Capture.m in Sources */,
 				05E3C33C15714CBA00F5F1A4 /* VignetteFilter.m in Sources */,
 				05DDD9D91571B95C0034AF7C /* BouncingPanGestureRecognizer.m in Sources */,
+				05DDD9E11572D9350034AF7C /* UIImage+Alpha.m in Sources */,
+				05DDD9E21572D9350034AF7C /* UIImage+Resize.m in Sources */,
+				05DDD9E31572D9350034AF7C /* UIImage+RoundedCorner.m in Sources */,
+				05DDD9E61572D9750034AF7C /* UIImage+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

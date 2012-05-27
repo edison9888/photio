@@ -17,6 +17,9 @@
 @property(nonatomic, weak)      id<FilterImageViewDelegate> delegate;
 @property(nonatomic, strong)    FilterUsage*                filter;
 @property(nonatomic, strong)    UITapGestureRecognizer*     selectGesture;
+@property(nonatomic, assign)    BOOL                        selected;
+@property(nonatomic, strong)    UIImage*                    filterImage;
+@property(nonatomic, strong)    UIImage*                    selectedImage;
 
 + (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter;
 - (void)select;
@@ -26,6 +29,6 @@
 
 @protocol FilterImageViewDelegate <NSObject>
 
-- (void)selectedFilter:(FilterUsage*)_filter;
+- (void)selectedFilter:(FilterImageView*)_filter;
 
 @end
