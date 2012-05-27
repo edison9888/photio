@@ -134,14 +134,14 @@
 
 - (void)viewDidLoad {
     [self.singleTapGesture requireGestureRecognizerToFail:self.removeGesture];
-    self.imageEditView = [ImageEditView withDelegate:self];
-    self.imageMetaDataEditView = [ImageMetaDataEditView withDelegate:self];
     self.streamView = [StreamOfViews withFrame:self.view.frame delegate:self relativeToView:self.containerView];
     self.streamView.transitionGestureRecognizer.gestureRecognizer.delegate = self;
-    [self.streamView addView:self.imageEditView];
-    [self.streamView addView:self.imageMetaDataEditView];
     self.streamView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.streamView];
+    self.imageEditView = [ImageEditView withDelegate:self];
+    self.imageMetaDataEditView = [ImageMetaDataEditView withDelegate:self];
+    [self.streamView addView:self.imageEditView];
+    [self.streamView addView:self.imageMetaDataEditView];
     [self showViews];
     [super viewDidLoad];
 }

@@ -23,6 +23,7 @@
 @interface ImageEditView (PrivateAPI)
 
 - (void)selectFilter:(FilterUsage*)_filterType;
+- (void)setFilterParameters;
 - (IBAction)saveFilteredImage:(id)sender;
 - (IBAction)changeFilterClass:(id)sender;
 
@@ -32,19 +33,22 @@
 @implementation ImageEditView
 
 @synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageSaveFilteredImageView, imageFilterClassView,
-            imageFiltersView, filterToApply, displayedFilter, displayedFilterClass, filterModified;
+            imageFiltersView, filterToApply, displayedFilter, displayedFilterClass, isInitialized;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
 
 - (void)selectFilter:(FilterUsage*)_filter {
     self.displayedFilter = _filter;
-    Filter* filter = [FilterFactory filter:_filter];
-    self.parameterSlider.maxValue = [filter sliderMaxValue];
-    self.parameterSlider.minValue = [filter sliderMinValue];
-    self.parameterSlider.initialValue = [filter sliderDefaultValue];
-    [self.parameterSlider setIntialValue];
-    self.filterToApply = filter;
+    self.filterToApply = [FilterFactory filter:_filter];
+    [self setFilterParameters];
+}
+
+- (void)setFilterParameters {
+    self.parameterSlider.maxValue = [self.filterToApply sliderMaxValue];
+    self.parameterSlider.minValue = [self.filterToApply sliderMinValue];
+    self.parameterSlider.initialValue = [self.filterToApply sliderDefaultValue];
+    [self.parameterSlider setIntialValue];    
 }
 
 - (IBAction)changeFilterClass:(id)sender {
@@ -53,10 +57,11 @@
 }
 
 - (IBAction)saveFilteredImage:(id)sender {
-    if (self.filterModified) {
-        self.imageSaveFilteredImageView.alpha = SAVE_FILTERED_IMAGE_ALPHA;  
-        [self.delegate saveFilteredImage:self.filterToApply];
-    }
+    self.imageSaveFilteredImageView.alpha = SAVE_FILTERED_IMAGE_ALPHA; 
+    self.imageSaveFilteredImageView.userInteractionEnabled = NO;
+    [self.delegate saveFilteredImage:self.filterToApply];
+    [self.delegate resetFilteredImage];
+    [self selectFilter:self.displayedFilter];
 }
 
 #pragma mark -
@@ -72,18 +77,23 @@
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {
+        self.isInitialized = NO;
     }
     return self;
 }
 
 - (void)didMoveToSuperview {
-    FilterFactory* filterFactory = [FilterFactory instance];
-    self.displayedFilterClass = [filterFactory defaultFilterClass];
-    [self selectFilter:[filterFactory defaultFilter:self.displayedFilterClass]];
-    self.imageFilterClassView.image = [UIImage imageNamed:self.displayedFilterClass.imageFilename];
-    self.imageFiltersView.filtersViewDelegate = self;
-    self.imageFiltersView.filterClass = self.displayedFilterClass;
-    [self.imageFiltersView addFilterViews];
+    if (!self.isInitialized) {
+        self.imageSaveFilteredImageView.userInteractionEnabled = NO;
+        self.isInitialized = YES;
+        FilterFactory* filterFactory = [FilterFactory instance];
+        self.displayedFilterClass = [filterFactory defaultFilterClass];
+        [self selectFilter:[filterFactory defaultFilter:self.displayedFilterClass]];
+        self.imageFilterClassView.image = [UIImage imageNamed:self.displayedFilterClass.imageFilename];
+        self.imageFiltersView.filtersViewDelegate = self;
+        self.imageFiltersView.filterClass = self.displayedFilterClass;
+        [self.imageFiltersView addFilterViews];
+    }
 }
 
 #pragma mark -
@@ -93,7 +103,7 @@
     CGFloat value = [_parameterSlider value];
     [self.filterToApply setFilterValue:value];
     self.imageSaveFilteredImageView.alpha = SAVE_FILTETRED_IMAGE_SELECTED_ALPHA;
-    self.filterModified = YES;
+    self.imageSaveFilteredImageView.userInteractionEnabled = YES;
     [self.delegate applyFilter:self.filterToApply];
 }
 

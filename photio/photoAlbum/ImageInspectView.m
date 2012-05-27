@@ -182,6 +182,7 @@
 - (void)didFinishEditing {
     if ([self.delegate respondsToSelector:@selector(didFinishEditing:)]) {
         [self.delegate didFinishEditing:self];
+        self.imageEditViewController = nil;
     }
 }
 

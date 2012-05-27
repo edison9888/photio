@@ -116,9 +116,6 @@
     }
 }
 
-#pragma mark -
-#pragma mark UIView
-
 - (id)initWithCoder:(NSCoder *)coder { 
     self = [super initWithCoder:coder];
     if (self) {

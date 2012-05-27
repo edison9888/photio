@@ -42,7 +42,12 @@
     return self;
 }
 
-- (void)didMoveToSuperview {
+- (void)select {
+    
+}
+
+- (void)deselect {
+    
 }
 
 - (void)didSelect {

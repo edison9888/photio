@@ -32,7 +32,7 @@
 @property(nonatomic, strong) Filter*                            filterToApply;
 @property(nonatomic, assign) FilterUsage*                       displayedFilter;
 @property(nonatomic, assign) FilterClassUsage*                  displayedFilterClass;
-@property(nonatomic, assign) BOOL                               filterModified;
+@property(nonatomic, assign) BOOL                               isInitialized;
 
 + (id)withDelegate:(id<ImageEditViewDelegate>)_delegate;
 

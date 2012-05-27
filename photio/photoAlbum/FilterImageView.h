@@ -19,6 +19,8 @@
 @property(nonatomic, strong)    UITapGestureRecognizer*     selectGesture;
 
 + (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter;
+- (void)select;
+- (void)deselect;
 
 @end
 
