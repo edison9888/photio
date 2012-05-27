@@ -104,6 +104,7 @@
 		05CFEF911566BA8900755519 /* apply.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF8F1566BA8900755519 /* apply.png */; };
 		05CFEF921566BA8900755519 /* apply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF901566BA8900755519 /* apply@2x.png */; };
 		05CFEF951566EDB400755519 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF941566EDB300755519 /* Filter.m */; };
+		05DDD9D91571B95C0034AF7C /* BouncingPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */; };
 		05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */; };
 		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
@@ -263,6 +264,8 @@
 		05CFEF901566BA8900755519 /* apply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apply@2x.png"; path = "photio/Images/apply@2x.png"; sourceTree = SOURCE_ROOT; };
 		05CFEF931566EDB300755519 /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter.h; path = Filters/Filter.h; sourceTree = "<group>"; };
 		05CFEF941566EDB300755519 /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter.m; path = Filters/Filter.m; sourceTree = "<group>"; };
+		05DDD9D71571B95C0034AF7C /* BouncingPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; name = BouncingPanGestureRecognizer.h; path = photio/Library/BouncingPanGestureRecognizer.h; sourceTree = SOURCE_ROOT; };
+		05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncingPanGestureRecognizer.m; path = photio/Library/BouncingPanGestureRecognizer.m; sourceTree = SOURCE_ROOT; };
 		05DE436E14F1E51C005FF6B0 /* ImageInspectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInspectViewController.h; sourceTree = "<group>"; };
 		05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectViewController.m; sourceTree = "<group>"; };
 		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 		05C59C1F14F31EF8009AC823 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				05DDD9D71571B95C0034AF7C /* BouncingPanGestureRecognizer.h */,
+				05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */,
 				05EE0E8515366ACF00E5E541 /* DiagonalGestureRecognizer.h */,
 				05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */,
 				0554A4791503DDD000B9C76D /* DragGridView.h */,
@@ -743,6 +748,7 @@
 				05AB4896156F1B2800BF8C09 /* FilterClassUsage.m in Sources */,
 				05AB489915707BB500BF8C09 /* Capture.m in Sources */,
 				05E3C33C15714CBA00F5F1A4 /* VignetteFilter.m in Sources */,
+				05DDD9D91571B95C0034AF7C /* BouncingPanGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

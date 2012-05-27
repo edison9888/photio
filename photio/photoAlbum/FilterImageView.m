@@ -57,7 +57,6 @@
 #pragma mark UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
-    NSLog(@"FilterImageView: %@", [touch.view className]);
     return YES;
 }
 

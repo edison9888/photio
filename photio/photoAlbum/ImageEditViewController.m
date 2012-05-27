@@ -221,7 +221,6 @@
 #pragma mark UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
-    NSLog(@"ImageEditViewController: %@", [touch.view className]);
     if ([touch.view isKindOfClass:[ParameterSliderView class]]) {
         return NO;
     }

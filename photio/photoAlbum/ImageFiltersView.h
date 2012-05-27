@@ -14,14 +14,14 @@
 
 @class FilterClassUsage;
 @class FilterUsage;
+@class BouncingPanGestureRecognizer;
 
-@interface ImageFiltersView : UIView <FilterImageViewDelegate, UIGestureRecognizerDelegate>
+@interface ImageFiltersView : UIView <FilterImageViewDelegate>
 
 @property(nonatomic, weak)      id<ImageFiltersViewDelegate>    filtersViewDelegate;
 @property(nonatomic, assign)    FilterClassUsage*               filterClass;
 @property(nonatomic, strong)    UIView*                         contentView;
-@property(nonatomic, assign)    CGRect                          contentViewFrame;
-@property(nonatomic, strong)    UIPanGestureRecognizer*         panGestureRecognizer;
+@property(nonatomic, strong)    BouncingPanGestureRecognizer*   panGestureRecognizer;
 
 - (void)addFilterViews;
 

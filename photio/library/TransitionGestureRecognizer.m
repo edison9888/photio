@@ -14,6 +14,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TransitionGestureRecognizer (PrivateAPI)
 
+- (void)touched:(UIPanGestureRecognizer*)_recognizer;
 - (void)delegateDrag:(CGPoint)_delta from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)delegateRelease:(CGPoint)_location;
 - (void)delegateSwipe:(CGPoint)_location withVelocity:(CGPoint)_velocity;
@@ -32,6 +33,35 @@
 
 #pragma mark -
 #pragma mark TransitionGestureRecognizer PrivateAPI
+
+- (void)touched:(UIPanGestureRecognizer*)_recognizer {
+    CGPoint velocity = [_recognizer velocityInView:self.relativeView];
+    CGPoint touchPoint = [_recognizer locationInView:self.relativeView];
+    CGPoint delta = [self dragDelta:touchPoint];
+    switch (_recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+            [self determineDragDirection:velocity];
+            self.totalDragDistance = CGPointMake(0.0, 0.0);
+            self.lastTouch = touchPoint;
+            self.acceptTouches = YES;
+            break;
+        case UIGestureRecognizerStateChanged:
+            if (self.acceptTouches) {
+                self.totalDragDistance = CGPointMake(self.totalDragDistance.x + delta.x, self.totalDragDistance.y + delta.y);
+                [self detectedMaximumDrag] ? [self delegateReachedMaxDrag:delta from:touchPoint withVelocity:velocity] : [self delegateDrag:delta from:touchPoint withVelocity:velocity];
+                self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
+            }
+            break;
+        case UIGestureRecognizerStateEnded:
+            if (self.acceptTouches) {
+                [self detectedSwipe:velocity] ?  [self delegateSwipe:touchPoint withVelocity:velocity] : [self delegateRelease:touchPoint];
+                self.acceptTouches = NO;
+            }
+            break;
+        default:
+            break;
+    }
+}
 
 - (void)delegateDrag:(CGPoint)_delta from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     switch (self.dragDirection) {
@@ -216,35 +246,6 @@
         self.totalDragDistance = CGPointMake(0.0, 0.0);
     }
     return self;
-}
-
-- (void)touched:(UIPanGestureRecognizer*)_recognizer {
-    CGPoint velocity = [_recognizer velocityInView:self.relativeView];
-    CGPoint touchPoint = [_recognizer locationInView:self.relativeView];
-    CGPoint delta = [self dragDelta:touchPoint];
-    switch (_recognizer.state) {
-        case UIGestureRecognizerStateBegan:
-            [self determineDragDirection:velocity];
-            self.totalDragDistance = CGPointMake(0.0, 0.0);
-            self.lastTouch = touchPoint;
-            self.acceptTouches = YES;
-            break;
-        case UIGestureRecognizerStateChanged:
-            if (self.acceptTouches) {
-                self.totalDragDistance = CGPointMake(self.totalDragDistance.x + delta.x, self.totalDragDistance.y + delta.y);
-                [self detectedMaximumDrag] ? [self delegateReachedMaxDrag:delta from:touchPoint withVelocity:velocity] : [self delegateDrag:delta from:touchPoint withVelocity:velocity];
-                self.lastTouch = CGPointMake(touchPoint.x, touchPoint.y);
-            }
-            break;
-        case UIGestureRecognizerStateEnded:
-            if (self.acceptTouches) {
-                [self detectedSwipe:velocity] ?  [self delegateSwipe:touchPoint withVelocity:velocity] : [self delegateRelease:touchPoint];
-                self.acceptTouches = NO;
-            }
-            break;
-        default:
-            break;
-    }
 }
 
 - (BOOL)enabled {
