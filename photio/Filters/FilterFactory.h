@@ -13,9 +13,8 @@
 @class FilterUsage;
 
 typedef enum {
-    FilterTypeBrightness,
+    FilterTypeExposure,
     FilterTypeContrast,
-    FilterTypeColor,
     FilterTypeSaturation,
     FilterTypeVignette
 } FilterType;

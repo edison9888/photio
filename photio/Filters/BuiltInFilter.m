@@ -19,23 +19,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation BuiltInFilter
 
-@synthesize context, image, filter, filterAttribute;
+@synthesize image, filter, filterAttribute, filterAttributeValue;
 
 #pragma mark -
 #pragma mark BuiltInFilter PrivateAPI
 
 - (UIImage*)outputImage {
-    CIImage* outputImage = [self.filter outputImage];
-    CGImageRef cgImageRef = [self.context createCGImage:outputImage fromRect:[outputImage extent]];
-    UIImage* outputUIImage = [UIImage imageWithCGImage:cgImageRef];
-    CGImageRelease(cgImageRef);
-    return outputUIImage;
+    [self.filter setExposure:self.filterAttributeValue];
+    [self.image addTarget:self.filter];
+    [self.image processImage];
+    return [self.filter imageFromCurrentlyProcessedOutput];
 }
 
 - (void)setFilteredImage:(UIImage*)_filteredImage {
     if (!self.image) {
-        self.image = [[CIImage alloc] initWithImage:_filteredImage];
-        [self.filter setValue:self.image forKey:@"inputImage"];
+        self.image = [[GPUImagePicture alloc] initWithImage:_filteredImage];
     }
 }
 
@@ -43,16 +41,14 @@
 #pragma mark -
 #pragma mark BuiltInFilter
 
-+ (id)filter:(NSString*)_filterName andAttribute:(NSString*)_attribute {
-    return [[BuiltInFilter alloc] initWithFilter:_filterName andAttribute:_attribute];
++ (id)filter:(GPUImageFilter*)_filter withAttribute:(NSString*)_filterAttribute {
+    return [[BuiltInFilter alloc] initWithFilter:_filter andAttribute:_filterAttribute];
 }
 
-- (id)initWithFilter:(NSString*)_filterName andAttribute:(NSString*)_attribute {
+- (id)initWithFilter:(GPUImageFilter*)_filter andAttribute:(NSString*)_filterAttribute {
     self = [super init];
     if (self) {
-        self.context = [CIContext contextWithOptions:nil];        
-        self.filter = [CIFilter filterWithName:_filterName];
-        self.filterAttribute = _attribute;
+        self.filter = [[GPUImageExposureFilter alloc] init];
     }
     return self;
 }
@@ -61,25 +57,19 @@
 #pragma mark Filter
 
 - (CGFloat)sliderMaxValue {
-    NSDictionary* filterAttributes = [self.filter attributes];
-    NSNumber* maxValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeSliderMax];
-    return [maxValue doubleValue];
+    return 4.0;
 }
 
 - (CGFloat)sliderMinValue {
-    NSDictionary* filterAttributes = [self.filter attributes];
-    NSNumber* minValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeSliderMin];
-    return [minValue doubleValue];
+    return -4.0;
 }
 
 - (CGFloat)sliderDefaultValue {
-    NSDictionary* filterAttributes = [self.filter attributes];
-    NSNumber* defaultValue = [[filterAttributes objectForKey:self.filterAttribute] objectForKey:kCIAttributeDefault];
-    return [defaultValue floatValue]; 
+    return 0.0;
 }
 
 - (void)setFilterValue:(CGFloat)_value {
-    [self.filter setValue:[NSNumber numberWithFloat:_value] forKey:self.filterAttribute];
+    self.filterAttributeValue = _value;
 }
 
 - (UIImage*)applyFilterToImage:(UIImage*)_filteredImage {

@@ -8,7 +8,7 @@
 			<key>filterId</key>
 			<integer>0</integer>
 			<key>name</key>
-			<string>Brightness</string>
+			<string>Exposure</string>
 			<key>imageFilename</key>
 			<string>brightness.png</string>
 			<key>filterClassId</key>
@@ -36,20 +36,6 @@
 			<key>filterId</key>
 			<integer>2</integer>
 			<key>name</key>
-			<string>Color</string>
-			<key>imageFilename</key>
-			<string>hue.png</string>
-			<key>filterClassId</key>
-			<integer>1</integer>
-			<key>purchased</key>
-			<true/>
-			<key>hidden</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>filterId</key>
-			<integer>3</integer>
-			<key>name</key>
 			<string>Saturation</string>
 			<key>imageFilename</key>
 			<string>saturation.png</string>
@@ -62,7 +48,7 @@
 		</dict>
 		<dict>
 			<key>filterId</key>
-			<integer>4</integer>
+			<integer>3</integer>
 			<key>name</key>
 			<string>Vignette</string>
 			<key>imageFilename</key>

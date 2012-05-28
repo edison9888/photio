@@ -97,27 +97,24 @@
 - (UIImage *)resizedImage:(CGSize)newSize transform:(CGAffineTransform)transform drawTransposed:(BOOL)transpose interpolationQuality:(CGInterpolationQuality)quality {
     CGRect newRect = CGRectIntegral(CGRectMake(0, 0, newSize.width, newSize.height));
     CGRect transposedRect = CGRectMake(0, 0, newRect.size.height, newRect.size.width);
-    CGImageRef imageRef = self.CGImage;
     
-    // Build a context that's the same dimensions as the new size
-    CGContextRef bitmap = CGBitmapContextCreate(NULL, newRect.size.width, newRect.size.height, CGImageGetBitsPerComponent(imageRef), 0, CGImageGetColorSpace(imageRef), CGImageGetBitmapInfo(imageRef));
+    UIGraphicsBeginImageContext(newRect.size);
+    CGImageRef imageRef = self.CGImage;
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     // Rotate and/or flip the image if required by its orientation
-    CGContextConcatCTM(bitmap, transform);
+    CGContextConcatCTM(ctx, transform);
     
     // Set the quality level to use when rescaling
-    CGContextSetInterpolationQuality(bitmap, quality);
+    CGContextSetInterpolationQuality(ctx, quality);
     
     // Draw into the context; this scales the image
-    CGContextDrawImage(bitmap, transpose ? transposedRect : newRect, imageRef);
+    CGContextDrawImage(ctx, transpose ? transposedRect : newRect, imageRef);
     
     // Get the resized image from the context and a UIImage
-    CGImageRef newImageRef = CGBitmapContextCreateImage(bitmap);
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    // Clean up
-    CGContextRelease(bitmap);
-    CGImageRelease(newImageRef);
     
     return newImage;
 }
@@ -125,7 +122,8 @@
 // Returns an affine transform that takes into account the image orientation when drawing a scaled image
 - (CGAffineTransform)transformForOrientation:(CGSize)newSize {
     CGAffineTransform transform = CGAffineTransformIdentity;
-    
+    transform = CGAffineTransformTranslate(transform, 0.0, newSize.height);
+    transform = CGAffineTransformScale(transform, 1.0, -1.0);
     switch (self.imageOrientation) {
         case UIImageOrientationDown:           // EXIF = 3
         case UIImageOrientationDownMirrored:   // EXIF = 4

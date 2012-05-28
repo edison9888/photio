@@ -68,6 +68,8 @@
 		059772F71527D787008F3A1B /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* CameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
+		05AB05EA1573D3890087C47B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AB05E91573D3890087C47B /* OpenGLES.framework */; };
+		05AB05F01573D3E00087C47B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17F1528944F005D57B1 /* CoreVideo.framework */; };
 		05AB4893156F1B1800BF8C09 /* FilterUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB4892156F1B1800BF8C09 /* FilterUsage.m */; };
 		05AB4896156F1B2800BF8C09 /* FilterClassUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB4895156F1B2800BF8C09 /* FilterClassUsage.m */; };
 		05AB489915707BB500BF8C09 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB489815707BB500BF8C09 /* Capture.m */; };
@@ -229,6 +231,7 @@
 		059772F81527D7B5008F3A1B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		05A0F0B7154354410082947D /* CalendarMonthAndYearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthAndYearView.h; sourceTree = "<group>"; };
 		05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthAndYearView.m; sourceTree = "<group>"; };
+		05AB05E91573D3890087C47B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		05AB4891156F1B1800BF8C09 /* FilterUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterUsage.h; sourceTree = "<group>"; };
 		05AB4892156F1B1800BF8C09 /* FilterUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterUsage.m; sourceTree = "<group>"; };
 		05AB4894156F1B2700BF8C09 /* FilterClassUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterClassUsage.h; sourceTree = "<group>"; };
@@ -317,6 +320,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05AB05F01573D3E00087C47B /* CoreVideo.framework in Frameworks */,
+				05AB05EA1573D3890087C47B /* OpenGLES.framework in Frameworks */,
 				05E05B2A15730A11005FF6C1 /* libGPUImage.a in Frameworks */,
 				058A48E415620959002199F7 /* CoreImage.framework in Frameworks */,
 				05B8377B1530DA1300D99A40 /* CoreLocation.framework in Frameworks */,
@@ -507,6 +512,7 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
+				05AB05E91573D3890087C47B /* OpenGLES.framework */,
 				058A48E315620959002199F7 /* CoreImage.framework */,
 				05B8377A1530DA1200D99A40 /* CoreLocation.framework */,
 				05B8372715309FB400D99A40 /* CoreData.framework */,
@@ -862,7 +868,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "../GPUImage/framework/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E5BF5655-359D-425E-83FB-4A7126E4B5E6";
 				SDKROOT = iphoneos;
 			};
@@ -881,8 +890,11 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "../GPUImage/framework/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

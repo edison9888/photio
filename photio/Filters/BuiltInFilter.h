@@ -7,17 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GPUImage.h"
 #import "Filter.h"
 
 @interface BuiltInFilter : Filter
 
-@property(nonatomic, strong) CIContext*     context;
-@property(nonatomic, strong) CIImage*       image;
-@property(nonatomic, strong) CIFilter*      filter;
-@property(nonatomic, strong) NSString*      filterAttribute;
+@property(nonatomic, strong) GPUImagePicture*               image;
+//@property(nonatomic, strong) GPUImageOutput<GPUImageInput>* filter;
+@property(nonatomic, strong) GPUImageExposureFilter*        filter;
+@property(nonatomic, assign) NSString*                      filterAttribute;
+@property(nonatomic, assign) CGFloat                        filterAttributeValue;
 
-+ (id)filter:(NSString*)_filterName andAttribute:(NSString*)_attribute ;
-- (id)initWithFilter:(NSString*)_filterName andAttribute:(NSString*)_attribute ;
++ (id)filter:(GPUImageFilter*)_filter withAttribute:(NSString*)_filterAttribute;
+- (id)initWithFilter:(GPUImageFilter*)_filter andAttribute:(NSString*)_filterAttribute;
 
 @end
 

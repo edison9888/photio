@@ -120,20 +120,14 @@ static FilterFactory* thisFilterFactory = nil;
 + (Filter*)filter:(FilterUsage*)_filter {
     Filter* filter = nil;
     switch ([_filter.filterId intValue]) {
+        case FilterTypeExposure:
+            filter = [BuiltInFilter filter:[[GPUImageExposureFilter alloc] init] withAttribute:@"exposure"];
+            break;
         case FilterTypeSaturation:
-            filter = [BuiltInFilter filter:@"CIColorControls" andAttribute:@"inputSaturation"];
             break;
         case FilterTypeContrast:
-            filter = [BuiltInFilter filter:@"CIColorControls" andAttribute:@"inputContrast"];
-            break;
-        case FilterTypeBrightness:
-            filter = [BuiltInFilter filter:@"CIExposureAdjust" andAttribute:@"inputEV"];
-            break;
-        case FilterTypeColor:
-            filter = [BuiltInFilter filter:@"CIHueAdjust" andAttribute:@"inputAngle"];
             break;
         case FilterTypeVignette:
-            filter = [VignetteFilter filter];
             break;
         default:
             break;
