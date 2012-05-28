@@ -109,6 +109,7 @@
 		05DE437114F1E51D005FF6B0 /* ImageInspectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */; };
 		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
+		05E05B2A15730A11005FF6C1 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E05AF81573044E005FF6C1 /* libGPUImage.a */; };
 		05E3C33C15714CBA00F5F1A4 /* VignetteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */; };
 		05E4C21F1552233600C7266E /* ImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C21D1552233600C7266E /* ImageEditViewController.m */; };
 		05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E4C21E1552233600C7266E /* ImageEditViewController.xib */; };
@@ -116,6 +117,30 @@
 		05E4C2271552259800C7266E /* ImageEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C2261552259800C7266E /* ImageEditView.m */; };
 		05EE0E8715366ACF00E5E541 /* DiagonalGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05E05AF71573044E005FF6C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+		05E05AF91573044E005FF6C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A34414DDB1EC00852800;
+			remoteInfo = GPUImageTests;
+		};
+		05E05AFC157304B9005FF6C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		050855371557074100609C31 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil.png; path = photio/Images/pencil.png; sourceTree = SOURCE_ROOT; };
@@ -273,6 +298,7 @@
 		05DE436F14F1E51C005FF6B0 /* ImageInspectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInspectViewController.m; sourceTree = "<group>"; };
 		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		05E3C33A15714CBA00F5F1A4 /* VignetteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VignetteFilter.h; path = Filters/VignetteFilter.h; sourceTree = "<group>"; };
 		05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VignetteFilter.m; path = Filters/VignetteFilter.m; sourceTree = "<group>"; };
 		05E4C21C1552233500C7266E /* ImageEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditViewController.h; path = photio/PhotoAlbum/ImageEditViewController.h; sourceTree = SOURCE_ROOT; };
@@ -291,6 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05E05B2A15730A11005FF6C1 /* libGPUImage.a in Frameworks */,
 				058A48E415620959002199F7 /* CoreImage.framework in Frameworks */,
 				05B8377B1530DA1300D99A40 /* CoreLocation.framework in Frameworks */,
 				05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */,
@@ -505,6 +532,7 @@
 		05C99EBF14F0585C00D09F3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */,
 				05C99EC014F0585C00D09F3E /* UIKit.framework */,
 				05C99EC214F0585C00D09F3E /* Foundation.framework */,
 				05C99EC414F0585C00D09F3E /* CoreGraphics.framework */,
@@ -596,6 +624,15 @@
 			path = photoAlbum;
 			sourceTree = "<group>";
 		};
+		05E05AEF1573044E005FF6C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05E05AF81573044E005FF6C1 /* libGPUImage.a */,
+				05E05AFA1573044E005FF6C1 /* GPUImageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -610,6 +647,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				05E05AFD157304B9005FF6C1 /* PBXTargetDependency */,
 			);
 			name = photio;
 			productName = photio;
@@ -635,12 +673,35 @@
 			mainGroup = 05C99EB114F0585C00D09F3E;
 			productRefGroup = 05C99EBD14F0585C00D09F3E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 05E05AEF1573044E005FF6C1 /* Products */;
+					ProjectRef = 05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				05C99EBB14F0585C00D09F3E /* photio */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		05E05AF81573044E005FF6C1 /* libGPUImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGPUImage.a;
+			remoteRef = 05E05AF71573044E005FF6C1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05E05AFA1573044E005FF6C1 /* GPUImageTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GPUImageTests.octest;
+			remoteRef = 05E05AF91573044E005FF6C1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		05C99EBA14F0585C00D09F3E /* Resources */ = {
@@ -759,6 +820,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05E05AFD157304B9005FF6C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage;
+			targetProxy = 05E05AFC157304B9005FF6C1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		05C99EC914F0585C00D09F3E /* InfoPlist.strings */ = {

@@ -11,5 +11,6 @@
 @interface UIImage (Extensions)
 
 + (UIImage*)blankImage:(CGSize)_size;
++ (UIImage*)blankImage:(CGSize)_size withColor:(UIColor*)_color;
 
 @end

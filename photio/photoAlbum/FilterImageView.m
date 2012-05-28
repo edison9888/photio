@@ -36,15 +36,12 @@
     CIFilter* invertFilter = [CIFilter filterWithName:@"CIColorInvert"];
     [invertFilter setValue:[[CIImage alloc] initWithImage:self.filterImage] forKey:@"inputImage"];
     CIImage* outputImage = [invertFilter outputImage];
-    
-//    CIFilter* gradientFilter = [CIFilter filterWithName:@"CIGaussianGradient"];
-//    [gradientFilter setValue:outputImage forKey:@"inputImage"];
-    
+        
     CGImageRef cgImageRef = [context createCGImage:outputImage fromRect:[outputImage extent]];
     UIImage* outputUIImage = [UIImage imageWithCGImage:cgImageRef];
     CGImageRelease(cgImageRef);
     
-    return [UIImage blankImage:self.image.size];
+    return outputUIImage;
 }
 
 #pragma mark -
