@@ -11,7 +11,8 @@
 #import "NSObject+Extensions.h"
 #import "BouncingPanGestureRecognizer.h"
 #import "FilterImageView.h"
-#import "FilterUsage.h"
+#import "FilterFactory.h"
+#import "Filter.h"
 
 @interface ImageFiltersView (PrivateAPI)
 
@@ -19,7 +20,7 @@
 
 @implementation ImageFiltersView
 
-@synthesize filtersViewDelegate, filterClass, contentView, panGestureRecognizer, filterViews;
+@synthesize filtersViewDelegate, filterPalette, contentView, panGestureRecognizer, filterViews;
 
 #pragma mark -
 #pragma mark ImageFiltersView PrivayeAPI
@@ -41,9 +42,9 @@
 }
 
 - (void)addFilterViews {
-    NSArray* filters = [[FilterFactory instance] filters:self.filterClass];
+    NSArray* filters = [[FilterFactory instance] filtersForPalette:self.filterPalette];
     CGFloat totalWidth = 0.0;
-    for (FilterUsage* filter in filters) {
+    for (Filter* filter in filters) {
         FilterImageView* filterImage = [FilterImageView withDelegate:self andFilter:filter];
         CGRect oldRect = filterImage.frame;
         filterImage.frame = CGRectMake(oldRect.origin.x + totalWidth, oldRect.origin.y, oldRect.size.width, oldRect.size.height);
@@ -57,14 +58,14 @@
     self.panGestureRecognizer = [BouncingPanGestureRecognizer inView:self.contentView relativeToView:self];
 }
 
-- (FilterImageView*)filterImageViewForFilter:(FilterUsage*)_filter {
+- (FilterImageView*)filterImageViewForFilter:(Filter*)_filter {
     return [self.filterViews objectForKey:_filter.filterId];
 }
 
 #pragma mark -
 #pragma mark FilterImageViewDelegate
 
-- (void)selectedFilter:(FilterUsage*)_filter {
+- (void)selectedFilter:(Filter*)_filter {
     [self.filtersViewDelegate selectedFilter:_filter];
 }
 

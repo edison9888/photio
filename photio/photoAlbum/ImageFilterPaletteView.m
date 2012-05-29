@@ -1,36 +1,36 @@
 //
-//  ImageFilterClassView.m
+//  ImageFilterPaletteView.m
 //  photio
 //
 //  Created by Troy Stribling on 5/19/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "ImageFilterClassView.h"
-#import "ImageFilterClassCell.h"
+#import "ImageFilterPaletteView.h"
+#import "ImageFilterPaletteCell.h"
 #import "ImageEditView.h"
 #import "UITableViewCell+Extensions.h"
 #import "UIView+Extensions.h"
 #import "FilterFactory.h"
-#import "FilterClassUsage.h"
+#import "FilterPalette.h"
 
 #define IMAGE_FILTER_CLASS_TABEL_CELL_HEIGHT    70.0
 #define FILTER_CLASS_VIEW_ANIMATION_DURATION    0.3
 #define EDIT_VIEW_ANIMATION_DURATION            0.2
 
-@interface ImageFilterClassView (PrivayeAPI)
+@interface ImageFilterPaletteView (PrivayeAPI)
 
 - (void)showView;
 - (void)hideView;
 
 @end
 
-@implementation ImageFilterClassView
+@implementation ImageFilterPaletteView
 
-@synthesize imageEditView, filterClasses;
+@synthesize imageEditView, filterPalettes;
 
 #pragma mark -
-#pragma mark ImageFilterClassView (PrivateAPI)
+#pragma mark ImageFilterPaletteView (PrivateAPI)
 
 - (void)showView {
     CGRect controlViewRect = self.imageEditView.controlContainerView.frame;
@@ -87,12 +87,12 @@
 }
 
 #pragma mark -
-#pragma mark ImageFilterClassView
+#pragma mark ImageFilterPaletteView
 
 + (id)initInView:(ImageEditView*)_imageEditView {
-    ImageFilterClassView* filterClassView = (ImageFilterClassView*)[UIView loadView:[self class]]; 
-    filterClassView.imageEditView = _imageEditView;
-    return filterClassView;
+    ImageFilterPaletteView* filterPaletteView = (ImageFilterPaletteView*)[UIView loadView:[self class]]; 
+    filterPaletteView.imageEditView = _imageEditView;
+    return filterPaletteView;
 }
 
 #pragma mark -
@@ -106,7 +106,7 @@
 }
 
 - (void)didMoveToSuperview {
-    self.filterClasses = [[FilterFactory instance] filterClasses];
+    self.filterPalettes = [[FilterFactory instance] filterPalettes];
     [self showView];
 }
 
@@ -121,22 +121,22 @@
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.filterClasses count];
+    return [self.filterPalettes count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    ImageFilterClassCell* cell = (ImageFilterClassCell*)[UITableViewCell loadCell:[ImageFilterClassCell class]];
-    FilterClassUsage* filterClassInfo = [self.filterClasses objectAtIndex:indexPath.row];
-    cell.filterClassIcon.image = [UIImage imageNamed:filterClassInfo.imageFilename];
-    cell.filterClassLabel.text = filterClassInfo.name;
-    cell.filterClass = indexPath.row;
+    ImageFilterPaletteCell* cell = (ImageFilterPaletteCell*)[UITableViewCell loadCell:[ImageFilterPaletteCell class]];
+    FilterPalette* filterPaletteInfo = [self.filterPalettes objectAtIndex:indexPath.row];
+    cell.filterPaletteIcon.image = [UIImage imageNamed:filterPaletteInfo.imageFilename];
+    cell.filterPaletteLabel.text = filterPaletteInfo.name;
+    cell.filterPalette = [self.filterPalettes objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    FilterClassUsage* filterClassInfo = [self.filterClasses objectAtIndex:indexPath.row];
-    self.imageEditView.imageFilterClassView.image = [UIImage imageNamed:filterClassInfo.imageFilename];
-    self.imageEditView.displayedFilterClass = filterClassInfo;
+    FilterPalette* filterPaletteInfo = [self.filterPalettes objectAtIndex:indexPath.row];
+    self.imageEditView.imageFilterPaletteView.image = [UIImage imageNamed:filterPaletteInfo.imageFilename];
+    self.imageEditView.displayedFilterPalette = filterPaletteInfo;
     [self hideView];
 }
 

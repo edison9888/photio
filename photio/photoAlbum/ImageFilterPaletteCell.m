@@ -1,16 +1,17 @@
 //
-//  ImageFilterClassCell.m
+//  ImageFilterPaletteCell.m
 //  photio
 //
 //  Created by Troy Stribling on 5/19/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "ImageFilterClassCell.h"
+#import "ImageFilterPaletteCell.h"
+#import "FilterPalette.h"
 
-@implementation ImageFilterClassCell
+@implementation ImageFilterPaletteCell
 
-@synthesize filterClassIcon, filterClassLabel, filterClass;
+@synthesize filterPaletteIcon, filterPaletteLabel, filterPalette;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

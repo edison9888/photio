@@ -204,13 +204,13 @@
 #pragma mark -
 #pragma mark ImageEditView
 
-- (void)applyFilter:(Filter*)_filter {
-    [self.delegate applyFilters:_filter];
+- (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value {
+    [self.delegate applyFilter:_filter withValue:_value];
 }
 
-- (void)saveFilteredImage:(Filter*)_filter {
+- (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value {
     self.didEdit = YES;
-    [self.delegate saveFilteredImage:_filter];
+    [self.delegate saveFilteredImage:_filter withValue:_value];
 }
 
 -(void)resetFilteredImage {

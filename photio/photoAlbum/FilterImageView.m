@@ -7,7 +7,7 @@
 //
 
 #import "FilterImageView.h"
-#import "FilterUsage.h"
+#import "Filter.h"
 #import "NSObject+Extensions.h"
 #import "UIImage+Extensions.h"
 
@@ -47,7 +47,7 @@
 #pragma mark -
 #pragma mark FilterImageView
 
-+ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter {
++ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(Filter*)_filter {
     UIImage* filterImage = [UIImage imageNamed:_filter.imageFilename];
     FilterImageView* view = [[FilterImageView alloc] initWithImage:filterImage];
     view.delegate = _delegate;

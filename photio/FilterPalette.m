@@ -1,18 +1,18 @@
 //
-//  FilterClassUsage.m
+//  FilterPalette.m
 //  photio
 //
-//  Created by Troy Stribling on 5/24/12.
+//  Created by Troy Stribling on 5/28/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "FilterClassUsage.h"
-#import "FilterUsage.h"
+#import "FilterPalette.h"
+#import "Filter.h"
 
 
-@implementation FilterClassUsage
+@implementation FilterPalette
 
-@dynamic filterClassId;
+@dynamic filterPaletteId;
 @dynamic hidden;
 @dynamic imageFilename;
 @dynamic name;

@@ -1,5 +1,5 @@
 //
-//  ImageFilterClassView.h
+//  ImageFilterPaletteView.h
 //  photio
 //
 //  Created by Troy Stribling on 5/19/12.
@@ -10,10 +10,10 @@
 
 @class ImageEditView;
 
-@interface ImageFilterClassView : UIView <UITableViewDataSource, UITableViewDelegate>
+@interface ImageFilterPaletteView : UIView <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, weak)      ImageEditView*  imageEditView;
-@property(nonatomic, strong)    NSArray*        filterClasses;
+@property(nonatomic, strong)    NSArray*        filterPalettes;
 
 + (id)initInView:(ImageEditView*)_imageEditView;
 

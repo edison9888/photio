@@ -13,8 +13,8 @@
 
 @class ImageControlView;
 @class ParameterSliderView;
-@class FilterClassUsage;
-@class FilterUsage;
+@class FilterPalette;
+@class Filter;
 @class FilterImageView;
 
 @protocol ImageEditViewDelegate;
@@ -27,11 +27,10 @@
 @property(nonatomic, strong) IBOutlet UIView*                   filterContainerView;
 @property(nonatomic, strong) IBOutlet ParameterSliderView*      parameterSlider;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageSaveFilteredImageView;
-@property(nonatomic, strong) IBOutlet UIImageView*              imageFilterClassView;
+@property(nonatomic, strong) IBOutlet UIImageView*              imageFilterPaletteView;
 @property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
-@property(nonatomic, strong) Filter*                            filterToApply;
 @property(nonatomic, assign) FilterImageView*                   displayedFilterImage;
-@property(nonatomic, assign) FilterClassUsage*                  displayedFilterClass;
+@property(nonatomic, assign) FilterPalette*                     displayedFilterPalette;
 @property(nonatomic, assign) BOOL                               isInitialized;
 
 + (id)withDelegate:(id<ImageEditViewDelegate>)_delegate;
@@ -42,8 +41,8 @@
 
 @required
 
-- (void)applyFilter:(Filter*)_filter;
-- (void)saveFilteredImage:(Filter*)_filter;
+- (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value;
+- (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value;
 - (void)resetFilteredImage;
 
 @end

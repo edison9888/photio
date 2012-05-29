@@ -132,6 +132,7 @@
 								<string key="NSFrame">{{20, 0}, {280, 70}}</string>
 								<reference key="NSSuperview" ref="291228529"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="951598384"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -192,14 +193,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">imageFilterClassView</string>
-						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="644011612"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">imageSaveFilteredImageView</string>
 						<reference key="source" ref="191373211"/>
 						<reference key="destination" ref="470462510"/>
@@ -213,6 +206,14 @@
 						<reference key="destination" ref="552828439"/>
 					</object>
 					<int key="connectionID">53</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageFilterPaletteView</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="644011612"/>
+					</object>
+					<int key="connectionID">55</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -240,7 +241,7 @@
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
-					<int key="connectionID">47</int>
+					<int key="connectionID">54</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -337,18 +338,18 @@
 						<reference key="object" ref="644011612"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="788146834"/>
-						<string key="objectName">Filter Class</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">46</int>
-						<reference key="object" ref="581884737"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">Filter Class</string>
+						<string key="objectName">Filter Palette</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">51</int>
 						<reference key="object" ref="552828439"/>
 						<reference key="parent" ref="291228529"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">46</int>
+						<reference key="object" ref="581884737"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Filter Palette</string>
 					</object>
 				</array>
 			</object>
@@ -378,7 +379,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">53</int>
+			<int key="maxID">55</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -410,7 +411,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="controlContainerView">UIView</string>
 						<string key="filterContainerView">UIView</string>
-						<string key="imageFilterClassView">UIImageView</string>
+						<string key="imageFilterPaletteView">UIImageView</string>
 						<string key="imageFiltersView">ImageFiltersView</string>
 						<string key="imageSaveFilteredImageView">UIImageView</string>
 						<string key="parameterSlider">ParameterSliderView</string>
@@ -424,8 +425,8 @@
 							<string key="name">filterContainerView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="imageFilterClassView">
-							<string key="name">imageFilterClassView</string>
+						<object class="IBToOneOutletInfo" key="imageFilterPaletteView">
+							<string key="name">imageFilterPaletteView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="imageFiltersView">
@@ -448,7 +449,7 @@
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">ImageFiltersView</string>
-					<string key="superclassName">UIScrollView</string>
+					<string key="superclassName">UIView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ImageFiltersView.h</string>

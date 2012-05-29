@@ -10,15 +10,15 @@
 		050855391557074100609C31 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855371557074100609C31 /* pencil.png */; };
 		0508553A1557074100609C31 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855381557074100609C31 /* pencil@2x.png */; };
 		050AF28C1568167B00EC6C13 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF28B1568167B00EC6C13 /* Tag.m */; };
-		050AF29215681AE600EC6C13 /* ImageFilterClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */; };
-		050AF29515681B1700EC6C13 /* ImageFilterClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF29415681B1600EC6C13 /* ImageFilterClassView.m */; };
+		050AF29215681AE600EC6C13 /* ImageFilterPaletteView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050AF29115681AE600EC6C13 /* ImageFilterPaletteView.xib */; };
+		050AF29515681B1700EC6C13 /* ImageFilterPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF29415681B1600EC6C13 /* ImageFilterPaletteView.m */; };
 		050CF12814F96A9100A31059 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050CF12614F96A9100A31059 /* ContainerViewController.m */; };
 		050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF12714F96A9100A31059 /* ContainerViewController.xib */; };
 		050CF15014F9A27D00A31059 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF14F14F9A27D00A31059 /* CameraViewController.xib */; };
-		05250E8D15686C150060F993 /* ImageFilterClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05250E8C15686C150060F993 /* ImageFilterClassCell.m */; };
-		05250E9015686D690060F993 /* ImageFilterClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05250E8F15686D680060F993 /* ImageFilterClassCell.xib */; };
+		05250E8D15686C150060F993 /* ImageFilterPaletteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05250E8C15686C150060F993 /* ImageFilterPaletteCell.m */; };
+		05250E9015686D690060F993 /* ImageFilterPaletteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05250E8F15686D680060F993 /* ImageFilterPaletteCell.xib */; };
 		05250E92156878CD0060F993 /* Filters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E91156878CD0060F993 /* Filters.plist */; };
-		05250E9415687A690060F993 /* FilterClasses.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E9315687A690060F993 /* FilterClasses.plist */; };
+		05250E9415687A690060F993 /* FilterPalettes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E9315687A690060F993 /* FilterPalettes.plist */; };
 		05250EB3156953620060F993 /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EA5156953620060F993 /* favorite.png */; };
 		05250EB4156953620060F993 /* favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EA6156953620060F993 /* favorite@2x.png */; };
 		05250EB5156953620060F993 /* image-adjust.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EA7156953620060F993 /* image-adjust.png */; };
@@ -70,8 +70,8 @@
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
 		05AB05EA1573D3890087C47B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AB05E91573D3890087C47B /* OpenGLES.framework */; };
 		05AB05F01573D3E00087C47B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17F1528944F005D57B1 /* CoreVideo.framework */; };
-		05AB4893156F1B1800BF8C09 /* FilterUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB4892156F1B1800BF8C09 /* FilterUsage.m */; };
-		05AB4896156F1B2800BF8C09 /* FilterClassUsage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB4895156F1B2800BF8C09 /* FilterClassUsage.m */; };
+		05AB063C157441DA0087C47B /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB063B157441DA0087C47B /* Filter.m */; };
+		05AB063F157441E70087C47B /* FilterPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB063E157441E70087C47B /* FilterPalette.m */; };
 		05AB489915707BB500BF8C09 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AB489815707BB500BF8C09 /* Capture.m */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
 		05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* ImageEntriesView.m */; };
@@ -85,7 +85,6 @@
 		05B8BB301561A0C80023346F /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B8BB2F1561A0C80023346F /* ProgressView.m */; };
 		05B8BB331561A19A0023346F /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B8BB321561A19A0023346F /* RoundedCornersView.m */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
-		05C6050C156402AD00E02532 /* BuiltInFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C6050B156402AC00E02532 /* BuiltInFilter.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
 		05C99EC514F0585C00D09F3E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC414F0585C00D09F3E /* CoreGraphics.framework */; };
@@ -102,7 +101,6 @@
 		05CFEF8E1566AB3900755519 /* FilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF8D1566AB3900755519 /* FilterFactory.m */; };
 		05CFEF911566BA8900755519 /* apply.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF8F1566BA8900755519 /* apply.png */; };
 		05CFEF921566BA8900755519 /* apply@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CFEF901566BA8900755519 /* apply@2x.png */; };
-		05CFEF951566EDB400755519 /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CFEF941566EDB300755519 /* Filter.m */; };
 		05DDD9D91571B95C0034AF7C /* BouncingPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */; };
 		05DDD9E11572D9350034AF7C /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9DC1572D9340034AF7C /* UIImage+Alpha.m */; };
 		05DDD9E21572D9350034AF7C /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DDD9DE1572D9340034AF7C /* UIImage+Resize.m */; };
@@ -112,7 +110,6 @@
 		05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */; };
 		05DE439514F20064005FF6B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05DE439414F20064005FF6B0 /* QuartzCore.framework */; };
 		05E05B2A15730A11005FF6C1 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05E05AF81573044E005FF6C1 /* libGPUImage.a */; };
-		05E3C33C15714CBA00F5F1A4 /* VignetteFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */; };
 		05E4C21F1552233600C7266E /* ImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C21D1552233600C7266E /* ImageEditViewController.m */; };
 		05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E4C21E1552233600C7266E /* ImageEditViewController.xib */; };
 		05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C223155224D400C7266E /* ImageMetaDataEditView.m */; };
@@ -149,18 +146,18 @@
 		050855381557074100609C31 /* pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pencil@2x.png"; path = "photio/Images/pencil@2x.png"; sourceTree = SOURCE_ROOT; };
 		050AF28A1568167B00EC6C13 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
 		050AF28B1568167B00EC6C13 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
-		050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageFilterClassView.xib; path = photio/PhotoAlbum/ImageFilterClassView.xib; sourceTree = SOURCE_ROOT; };
-		050AF29315681B1600EC6C13 /* ImageFilterClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageFilterClassView.h; path = photio/PhotoAlbum/ImageFilterClassView.h; sourceTree = SOURCE_ROOT; };
-		050AF29415681B1600EC6C13 /* ImageFilterClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageFilterClassView.m; path = photio/PhotoAlbum/ImageFilterClassView.m; sourceTree = SOURCE_ROOT; };
+		050AF29115681AE600EC6C13 /* ImageFilterPaletteView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageFilterPaletteView.xib; path = photio/PhotoAlbum/ImageFilterPaletteView.xib; sourceTree = SOURCE_ROOT; };
+		050AF29315681B1600EC6C13 /* ImageFilterPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageFilterPaletteView.h; path = photio/PhotoAlbum/ImageFilterPaletteView.h; sourceTree = SOURCE_ROOT; };
+		050AF29415681B1600EC6C13 /* ImageFilterPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageFilterPaletteView.m; path = photio/PhotoAlbum/ImageFilterPaletteView.m; sourceTree = SOURCE_ROOT; };
 		050CF12514F96A9100A31059 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
 		050CF12614F96A9100A31059 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		050CF12714F96A9100A31059 /* ContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainerViewController.xib; sourceTree = "<group>"; };
 		050CF14F14F9A27D00A31059 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
-		05250E8B15686C150060F993 /* ImageFilterClassCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageFilterClassCell.h; path = photio/PhotoAlbum/ImageFilterClassCell.h; sourceTree = SOURCE_ROOT; };
-		05250E8C15686C150060F993 /* ImageFilterClassCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageFilterClassCell.m; path = photio/PhotoAlbum/ImageFilterClassCell.m; sourceTree = SOURCE_ROOT; };
-		05250E8F15686D680060F993 /* ImageFilterClassCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageFilterClassCell.xib; path = photio/PhotoAlbum/ImageFilterClassCell.xib; sourceTree = SOURCE_ROOT; };
+		05250E8B15686C150060F993 /* ImageFilterPaletteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageFilterPaletteCell.h; path = photio/PhotoAlbum/ImageFilterPaletteCell.h; sourceTree = SOURCE_ROOT; };
+		05250E8C15686C150060F993 /* ImageFilterPaletteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageFilterPaletteCell.m; path = photio/PhotoAlbum/ImageFilterPaletteCell.m; sourceTree = SOURCE_ROOT; };
+		05250E8F15686D680060F993 /* ImageFilterPaletteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageFilterPaletteCell.xib; path = photio/PhotoAlbum/ImageFilterPaletteCell.xib; sourceTree = SOURCE_ROOT; };
 		05250E91156878CD0060F993 /* Filters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Filters.plist; sourceTree = "<group>"; };
-		05250E9315687A690060F993 /* FilterClasses.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FilterClasses.plist; sourceTree = "<group>"; };
+		05250E9315687A690060F993 /* FilterPalettes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FilterPalettes.plist; sourceTree = "<group>"; };
 		05250EA5156953620060F993 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
 		05250EA6156953620060F993 /* favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite@2x.png"; sourceTree = "<group>"; };
 		05250EA7156953620060F993 /* image-adjust.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-adjust.png"; sourceTree = "<group>"; };
@@ -232,10 +229,10 @@
 		05A0F0B7154354410082947D /* CalendarMonthAndYearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthAndYearView.h; sourceTree = "<group>"; };
 		05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthAndYearView.m; sourceTree = "<group>"; };
 		05AB05E91573D3890087C47B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		05AB4891156F1B1800BF8C09 /* FilterUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterUsage.h; sourceTree = "<group>"; };
-		05AB4892156F1B1800BF8C09 /* FilterUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterUsage.m; sourceTree = "<group>"; };
-		05AB4894156F1B2700BF8C09 /* FilterClassUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterClassUsage.h; sourceTree = "<group>"; };
-		05AB4895156F1B2800BF8C09 /* FilterClassUsage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterClassUsage.m; sourceTree = "<group>"; };
+		05AB063A157441DA0087C47B /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
+		05AB063B157441DA0087C47B /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
+		05AB063D157441E70087C47B /* FilterPalette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterPalette.h; sourceTree = "<group>"; };
+		05AB063E157441E70087C47B /* FilterPalette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterPalette.m; sourceTree = "<group>"; };
 		05AB489715707BB500BF8C09 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		05AB489815707BB500BF8C09 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		05AC025B1548CBCF00A29139 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
@@ -259,8 +256,6 @@
 		05B8BB321561A19A0023346F /* RoundedCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoundedCornersView.m; path = photio/Library/RoundedCornersView.m; sourceTree = SOURCE_ROOT; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
-		05C6050A156402AC00E02532 /* BuiltInFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BuiltInFilter.h; path = Filters/BuiltInFilter.h; sourceTree = "<group>"; };
-		05C6050B156402AC00E02532 /* BuiltInFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BuiltInFilter.m; path = Filters/BuiltInFilter.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C99EC014F0585C00D09F3E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05C99EC214F0585C00D09F3E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -285,8 +280,6 @@
 		05CFEF8D1566AB3900755519 /* FilterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterFactory.m; path = Filters/FilterFactory.m; sourceTree = "<group>"; };
 		05CFEF8F1566BA8900755519 /* apply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apply.png; path = photio/Images/apply.png; sourceTree = SOURCE_ROOT; };
 		05CFEF901566BA8900755519 /* apply@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "apply@2x.png"; path = "photio/Images/apply@2x.png"; sourceTree = SOURCE_ROOT; };
-		05CFEF931566EDB300755519 /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Filter.h; path = Filters/Filter.h; sourceTree = "<group>"; };
-		05CFEF941566EDB300755519 /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Filter.m; path = Filters/Filter.m; sourceTree = "<group>"; };
 		05DDD9D71571B95C0034AF7C /* BouncingPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BouncingPanGestureRecognizer.h; path = photio/Library/BouncingPanGestureRecognizer.h; sourceTree = SOURCE_ROOT; };
 		05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BouncingPanGestureRecognizer.m; path = photio/Library/BouncingPanGestureRecognizer.m; sourceTree = SOURCE_ROOT; };
 		05DDD9DB1572D9340034AF7C /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "photio/Library/UIImage+Alpha.h"; sourceTree = SOURCE_ROOT; };
@@ -302,8 +295,6 @@
 		05DE437014F1E51C005FF6B0 /* ImageInspectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageInspectViewController.xib; sourceTree = "<group>"; };
 		05DE439414F20064005FF6B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = ../GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
-		05E3C33A15714CBA00F5F1A4 /* VignetteFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VignetteFilter.h; path = Filters/VignetteFilter.h; sourceTree = "<group>"; };
-		05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VignetteFilter.m; path = Filters/VignetteFilter.m; sourceTree = "<group>"; };
 		05E4C21C1552233500C7266E /* ImageEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditViewController.h; path = photio/PhotoAlbum/ImageEditViewController.h; sourceTree = SOURCE_ROOT; };
 		05E4C21D1552233600C7266E /* ImageEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditViewController.m; path = photio/PhotoAlbum/ImageEditViewController.m; sourceTree = SOURCE_ROOT; };
 		05E4C21E1552233600C7266E /* ImageEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditViewController.xib; path = photio/PhotoAlbum/ImageEditViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -403,10 +394,10 @@
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
 				05AB489715707BB500BF8C09 /* Capture.h */,
 				05AB489815707BB500BF8C09 /* Capture.m */,
-				05AB4894156F1B2700BF8C09 /* FilterClassUsage.h */,
-				05AB4895156F1B2800BF8C09 /* FilterClassUsage.m */,
-				05AB4891156F1B1800BF8C09 /* FilterUsage.h */,
-				05AB4892156F1B1800BF8C09 /* FilterUsage.m */,
+				05AB063A157441DA0087C47B /* Filter.h */,
+				05AB063B157441DA0087C47B /* Filter.m */,
+				05AB063D157441E70087C47B /* FilterPalette.h */,
+				05AB063E157441E70087C47B /* FilterPalette.m */,
 				05B2A7541533BBFC00499F6F /* Image.h */,
 				05B2A7551533BBFC00499F6F /* Image.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
@@ -497,14 +488,8 @@
 		05C6050E156402C400E02532 /* Filters */ = {
 			isa = PBXGroup;
 			children = (
-				05C6050A156402AC00E02532 /* BuiltInFilter.h */,
-				05C6050B156402AC00E02532 /* BuiltInFilter.m */,
-				05CFEF931566EDB300755519 /* Filter.h */,
-				05CFEF941566EDB300755519 /* Filter.m */,
 				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
 				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
-				05E3C33A15714CBA00F5F1A4 /* VignetteFilter.h */,
-				05E3C33B15714CBA00F5F1A4 /* VignetteFilter.m */,
 			);
 			name = Filters;
 			sourceTree = "<group>";
@@ -574,7 +559,7 @@
 		05C99EC714F0585C00D09F3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				05250E9315687A690060F993 /* FilterClasses.plist */,
+				05250E9315687A690060F993 /* FilterPalettes.plist */,
 				05250E91156878CD0060F993 /* Filters.plist */,
 				05C99EC914F0585C00D09F3E /* InfoPlist.strings */,
 				05C99ECC14F0585C00D09F3E /* main.m */,
@@ -607,12 +592,12 @@
 				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
 				05AF480D154DCCAE0099576A /* ImageEntriesView.h */,
 				05AF480E154DCCAE0099576A /* ImageEntriesView.m */,
-				05250E8B15686C150060F993 /* ImageFilterClassCell.h */,
-				05250E8C15686C150060F993 /* ImageFilterClassCell.m */,
-				05250E8F15686D680060F993 /* ImageFilterClassCell.xib */,
-				050AF29315681B1600EC6C13 /* ImageFilterClassView.h */,
-				050AF29415681B1600EC6C13 /* ImageFilterClassView.m */,
-				050AF29115681AE600EC6C13 /* ImageFilterClassView.xib */,
+				05250E8B15686C150060F993 /* ImageFilterPaletteCell.h */,
+				05250E8C15686C150060F993 /* ImageFilterPaletteCell.m */,
+				05250E8F15686D680060F993 /* ImageFilterPaletteCell.xib */,
+				050AF29315681B1600EC6C13 /* ImageFilterPaletteView.h */,
+				050AF29415681B1600EC6C13 /* ImageFilterPaletteView.m */,
+				050AF29115681AE600EC6C13 /* ImageFilterPaletteView.xib */,
 				05250ED61569B4850060F993 /* ImageFiltersView.h */,
 				05250ED71569B4860060F993 /* ImageFiltersView.m */,
 				05B83718152E6C5F00D99A40 /* ImageInspectView.h */,
@@ -738,10 +723,10 @@
 				05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */,
 				05CFEF911566BA8900755519 /* apply.png in Resources */,
 				05CFEF921566BA8900755519 /* apply@2x.png in Resources */,
-				050AF29215681AE600EC6C13 /* ImageFilterClassView.xib in Resources */,
-				05250E9015686D690060F993 /* ImageFilterClassCell.xib in Resources */,
+				050AF29215681AE600EC6C13 /* ImageFilterPaletteView.xib in Resources */,
+				05250E9015686D690060F993 /* ImageFilterPaletteCell.xib in Resources */,
 				05250E92156878CD0060F993 /* Filters.plist in Resources */,
-				05250E9415687A690060F993 /* FilterClasses.plist in Resources */,
+				05250E9415687A690060F993 /* FilterPalettes.plist in Resources */,
 				05250EB3156953620060F993 /* favorite.png in Resources */,
 				05250EB4156953620060F993 /* favorite@2x.png in Resources */,
 				05250EB5156953620060F993 /* image-adjust.png in Resources */,
@@ -804,24 +789,21 @@
 				05B8BB301561A0C80023346F /* ProgressView.m in Sources */,
 				05B8BB331561A19A0023346F /* RoundedCornersView.m in Sources */,
 				058A48EC1562CD02002199F7 /* ParameterSliderView.m in Sources */,
-				05C6050C156402AD00E02532 /* BuiltInFilter.m in Sources */,
 				05CFEF8E1566AB3900755519 /* FilterFactory.m in Sources */,
-				05CFEF951566EDB400755519 /* Filter.m in Sources */,
 				050AF28C1568167B00EC6C13 /* Tag.m in Sources */,
-				050AF29515681B1700EC6C13 /* ImageFilterClassView.m in Sources */,
-				05250E8D15686C150060F993 /* ImageFilterClassCell.m in Sources */,
+				050AF29515681B1700EC6C13 /* ImageFilterPaletteView.m in Sources */,
+				05250E8D15686C150060F993 /* ImageFilterPaletteCell.m in Sources */,
 				05250EC4156962B80060F993 /* UITableViewCell+Extensions.m in Sources */,
 				05250ED81569B4870060F993 /* ImageFiltersView.m in Sources */,
 				05250EE41569BBDE0060F993 /* FilterImageView.m in Sources */,
-				05AB4893156F1B1800BF8C09 /* FilterUsage.m in Sources */,
-				05AB4896156F1B2800BF8C09 /* FilterClassUsage.m in Sources */,
 				05AB489915707BB500BF8C09 /* Capture.m in Sources */,
-				05E3C33C15714CBA00F5F1A4 /* VignetteFilter.m in Sources */,
 				05DDD9D91571B95C0034AF7C /* BouncingPanGestureRecognizer.m in Sources */,
 				05DDD9E11572D9350034AF7C /* UIImage+Alpha.m in Sources */,
 				05DDD9E21572D9350034AF7C /* UIImage+Resize.m in Sources */,
 				05DDD9E31572D9350034AF7C /* UIImage+RoundedCorner.m in Sources */,
 				05DDD9E61572D9750034AF7C /* UIImage+Extensions.m in Sources */,
+				05AB063C157441DA0087C47B /* Filter.m in Sources */,
+				05AB063F157441E70087C47B /* FilterPalette.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

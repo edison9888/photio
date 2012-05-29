@@ -12,6 +12,7 @@
 #import "Image.h"
 #import "ViewGeneral.h"
 #import "ImageControlView.h"
+#import "FilterFactory.h"
 #import "Filter.h"
 
 #define MAX_COMMENT_LINES           5
@@ -35,7 +36,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectView
 
-@synthesize delegate, imageEditViewController, capture, commentView, commentLabel, latitude, longitude, createdAt, comment, rating;
+@synthesize delegate, imageEditViewController, capture, unfilteredImage, commentView, commentLabel, latitude, longitude, createdAt, comment, rating;
 
 #pragma mark -
 #pragma mark ImageInspectView PrivateAPI
@@ -120,7 +121,8 @@
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = _date;
         self.capture = _capture;
-        self.image = [self scaleImage:self.capture];
+        self.unfilteredImage = [self scaleImage:self.capture];
+        self.image = self.unfilteredImage;
         self.contentMode = UIViewContentModeScaleAspectFill;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
@@ -186,17 +188,19 @@
     }
 }
 
-- (void)applyFilters:(Filter*)_filter {
-    self.image = [self scaleImage:[_filter applyFilterToImage:self.image]];
+- (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value {
+    UIImage* filteredImage = [FilterFactory applyFilter:_filter withValue:_value toImage:self.unfilteredImage];
+    self.image = [self scaleImage:filteredImage];
 }
 
-- (void)saveFilteredImage:(Filter*)_filter {
-    self.capture = [_filter applyFilterToImage:self.capture];
-    self.image = [self scaleImage:self.capture];
+- (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value {
+    self.capture = [FilterFactory applyFilter:_filter withValue:_value toImage:self.capture];
+    self.unfilteredImage = [self scaleImage:self.capture];
+    self.image = self.unfilteredImage;
 }
 
 - (void)resetFilteredImage {
-    self.image = [self scaleImage:self.capture];    
+    self.image = self.unfilteredImage;    
 }
 
 @end

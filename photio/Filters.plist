@@ -8,15 +8,21 @@
 			<key>filterId</key>
 			<integer>0</integer>
 			<key>name</key>
-			<string>Exposure</string>
+			<string>Brigntness</string>
 			<key>imageFilename</key>
 			<string>brightness.png</string>
-			<key>filterClassId</key>
+			<key>filterPaletteId</key>
 			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 			<key>hidden</key>
 			<false/>
+			<key>defaultValue</key>
+			<integer>0</integer>
+			<key>minimumValue</key>
+			<integer>-1</integer>
+			<key>maximumValue</key>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>filterId</key>
@@ -25,12 +31,18 @@
 			<string>Contrast</string>
 			<key>imageFilename</key>
 			<string>contrast.png</string>
-			<key>filterClassId</key>
+			<key>filterPaletteId</key>
 			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 			<key>hidden</key>
 			<false/>
+			<key>defaultValue</key>
+			<integer>1</integer>
+			<key>minimumValue</key>
+			<integer>0</integer>
+			<key>maximumValue</key>
+			<integer>4</integer>
 		</dict>
 		<dict>
 			<key>filterId</key>
@@ -39,12 +51,18 @@
 			<string>Saturation</string>
 			<key>imageFilename</key>
 			<string>saturation.png</string>
-			<key>filterClassId</key>
+			<key>filterPaletteId</key>
 			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 			<key>hidden</key>
 			<false/>
+			<key>defaultValue</key>
+			<integer>1</integer>
+			<key>minimumValue</key>
+			<integer>0</integer>
+			<key>maximumValue</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>filterId</key>
@@ -53,12 +71,18 @@
 			<string>Vignette</string>
 			<key>imageFilename</key>
 			<string>vignette.png</string>
-			<key>filterClassId</key>
+			<key>filterPaletteId</key>
 			<integer>1</integer>
 			<key>purchased</key>
 			<true/>
 			<key>hidden</key>
 			<false/>
+			<key>defaultValue</key>
+			<real>0.75</real>
+			<key>minimumValue</key>
+			<real>0.5</real>
+			<key>maximumValue</key>
+			<real>0.9</real>
 		</dict>
 	</array>
 </dict>

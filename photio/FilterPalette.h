@@ -1,19 +1,19 @@
 //
-//  FilterClassUsage.h
+//  FilterPalette.h
 //  photio
 //
-//  Created by Troy Stribling on 5/24/12.
+//  Created by Troy Stribling on 5/28/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class FilterUsage;
+@class Filter;
 
-@interface FilterClassUsage : NSManagedObject
+@interface FilterPalette : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * filterClassId;
+@property (nonatomic, retain) NSNumber * filterPaletteId;
 @property (nonatomic, retain) NSNumber * hidden;
 @property (nonatomic, retain) NSString * imageFilename;
 @property (nonatomic, retain) NSString * name;
@@ -22,10 +22,10 @@
 @property (nonatomic, retain) NSSet *filters;
 @end
 
-@interface FilterClassUsage (CoreDataGeneratedAccessors)
+@interface FilterPalette (CoreDataGeneratedAccessors)
 
-- (void)addFiltersObject:(FilterUsage *)value;
-- (void)removeFiltersObject:(FilterUsage *)value;
+- (void)addFiltersObject:(Filter *)value;
+- (void)removeFiltersObject:(Filter *)value;
 - (void)addFilters:(NSSet *)values;
 - (void)removeFilters:(NSSet *)values;
 

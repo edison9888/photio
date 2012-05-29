@@ -45,8 +45,8 @@
 - (void)exportToCameraRoll;
 - (void)saveComment:(NSString*)_comment;
 - (void)saveRating:(NSString*)_rating;
-- (void)applyFilters:(Filter*)_filter;
-- (void)saveFilteredImage:(Filter*)_filter;
+- (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value;
+- (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value;
 - (void)resetFilteredImage;
 - (void)didFinishEditing;
 

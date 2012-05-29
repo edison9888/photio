@@ -9,19 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "FilterFactory.h"
 
-@class FilterUsage;
+@class Filter;
+
 @protocol FilterImageViewDelegate;
 
 @interface FilterImageView : UIImageView <UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak)      id<FilterImageViewDelegate> delegate;
-@property(nonatomic, strong)    FilterUsage*                filter;
+@property(nonatomic, strong)    Filter*                     filter;
 @property(nonatomic, strong)    UITapGestureRecognizer*     selectGesture;
 @property(nonatomic, assign)    BOOL                        selected;
 @property(nonatomic, strong)    UIImage*                    filterImage;
 @property(nonatomic, strong)    UIImage*                    selectedImage;
 
-+ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(FilterUsage*)_filter;
++ (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(Filter*)_filter;
 - (void)select;
 - (void)deselect;
 

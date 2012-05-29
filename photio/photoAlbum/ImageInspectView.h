@@ -20,6 +20,7 @@
 @property(nonatomic, weak)   id<ImageInspectViewDelegate>   delegate;
 @property(nonatomic, strong) ImageEditViewController*       imageEditViewController;
 @property(nonatomic, strong) UIImage*                       capture;
+@property(nonatomic, strong) UIImage*                       unfilteredImage;
 @property(nonatomic, strong) UIView*                        commentView;
 @property(nonatomic, strong) UILabel*                       commentLabel;
 @property(nonatomic, strong) NSNumber*                      latitude;

@@ -13,25 +13,28 @@
         <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
         <relationship name="tag" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="capture" inverseEntity="Tag" syncable="YES"/>
     </entity>
-    <entity name="FilterClassUsage" representedClassName="FilterClassUsage" syncable="YES">
-        <attribute name="filterClassId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="imageFilename" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="usageRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="filters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FilterUsage" inverseName="filterClass" inverseEntity="FilterUsage" syncable="YES"/>
-    </entity>
-    <entity name="FilterUsage" representedClassName="FilterUsage" syncable="YES">
+    <entity name="Filter" representedClassName="Filter" syncable="YES">
+        <attribute name="defaultValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="filterId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="imageFilename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUsed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="maximumValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minimumValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="purchased" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="usageRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="filterClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FilterClassUsage" inverseName="filters" inverseEntity="FilterClassUsage" syncable="YES"/>
+        <relationship name="filterPalette" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FilterPalette" inverseName="filters" inverseEntity="FilterPalette" syncable="YES"/>
+    </entity>
+    <entity name="FilterPalette" representedClassName="FilterPalette" syncable="YES">
+        <attribute name="filterPaletteId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="imageFilename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="usageRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="filters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Filter" inverseName="filterPalette" inverseEntity="Filter" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -51,8 +54,8 @@
     </entity>
     <elements>
         <element name="Capture" positionX="160" positionY="192" width="128" height="210"/>
-        <element name="FilterClassUsage" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="FilterUsage" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Tag" positionX="160" positionY="192" width="128" height="90"/>

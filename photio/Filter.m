@@ -1,16 +1,16 @@
 //
-//  FilterUsage.m
+//  Filter.m
 //  photio
 //
-//  Created by Troy Stribling on 5/24/12.
+//  Created by Troy Stribling on 5/28/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "FilterUsage.h"
-#import "FilterClassUsage.h"
+#import "Filter.h"
+#import "FilterPalette.h"
 
 
-@implementation FilterUsage
+@implementation Filter
 
 @dynamic filterId;
 @dynamic hidden;
@@ -20,6 +20,9 @@
 @dynamic purchased;
 @dynamic usageCount;
 @dynamic usageRate;
-@dynamic filterClass;
+@dynamic defaultValue;
+@dynamic minimumValue;
+@dynamic maximumValue;
+@dynamic filterPalette;
 
 @end

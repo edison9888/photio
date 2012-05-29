@@ -12,25 +12,25 @@
 
 @protocol ImageFiltersViewDelegate;
 
-@class FilterClassUsage;
-@class FilterUsage;
+@class FilterPalette;
+@class Filter;
 @class BouncingPanGestureRecognizer;
 
 @interface ImageFiltersView : UIView <FilterImageViewDelegate>
 
 @property(nonatomic, weak)      id<ImageFiltersViewDelegate>    filtersViewDelegate;
-@property(nonatomic, assign)    FilterClassUsage*               filterClass;
+@property(nonatomic, assign)    FilterPalette*                  filterPalette;
 @property(nonatomic, strong)    UIView*                         contentView;
 @property(nonatomic, strong)    BouncingPanGestureRecognizer*   panGestureRecognizer;
 @property(nonatomic, strong)    NSMutableDictionary*            filterViews;
 
 - (void)addFilterViews;
-- (FilterImageView*)filterImageViewForFilter:(FilterUsage*)_filter;
+- (FilterImageView*)filterImageViewForFilter:(Filter*)_filter;
 
 @end
 
 @protocol ImageFiltersViewDelegate <NSObject>
 
-- (void)selectedFilter:(FilterUsage*)_filter;
+- (void)selectedFilter:(Filter*)_filter;
 
 @end

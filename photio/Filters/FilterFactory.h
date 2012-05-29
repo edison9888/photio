@@ -7,33 +7,32 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Filter.h"
 
-@class FilterClassUsage;
-@class FilterUsage;
+@class FilterPalette;
+@class Filter;
 
 typedef enum {
-    FilterTypeExposure,
+    FilterTypeBrightness,
     FilterTypeContrast,
     FilterTypeSaturation,
     FilterTypeVignette
 } FilterType;
 
 typedef enum {
-    FilterClassFavotites,
-    FilterClassImageAjustmentControls
-} FilterClass;
+    FilterPaletteTypeFavotites,
+    FilterPaletteTypeImageAjustmentControls
+} FilterPaletteType;
 
 @interface FilterFactory : NSObject
 
-@property(nonatomic, strong) NSArray*   loadedFilerClasses;
+@property(nonatomic, strong) NSArray*   loadedFilterPalettes;
 @property(nonatomic, strong) NSArray*   loadedFilters;
 
-+ (Filter*)filter:(FilterUsage*)_filter;
++ (UIImage*)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value toImage:(UIImage*)_image;
 + (FilterFactory*)instance;
-- (FilterClassUsage*)defaultFilterClass;
-- (FilterUsage*)defaultFilter:(FilterClassUsage*)_filterClass;
-- (NSArray*)filterClasses;
-- (NSArray*)filters:(FilterClassUsage*)_filterClass;
+- (FilterPalette*)defaultFilterPalette;
+- (Filter*)defaultFilterForPalette:(FilterPalette*)_filterPalette;
+- (NSArray*)filterPalettes;
+- (NSArray*)filtersForPalette:(FilterPalette*)_filterPalette;
 
 @end
