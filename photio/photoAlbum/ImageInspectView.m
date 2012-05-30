@@ -30,6 +30,7 @@
 - (void)singleTapGesture;
 - (void)removeCommentView;
 - (UIImage*)scaleImage:(UIImage*)_image;
+- (UIImage*)captureToUpOrientation:(UIImage*)_image;
 
 @end
 
@@ -98,6 +99,33 @@
     return scaledImage;
 }
 
+- (UIImage*)captureToUpOrientation:(UIImage*)_image {
+    CGRect origRect = CGRectMake(0, 0, _image.size.width, _image.size.width);
+    CGRect transposedRect = CGRectMake(0, 0, _image.size.height, _image.size.width);
+    BOOL drawTransposed;
+    switch (_image.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationRight:
+            drawTransposed = YES;
+            break;            
+        default:
+            drawTransposed = NO;
+    }
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformTranslate(transform, 0.0, _image.size.height);
+    transform = CGAffineTransformScale(transform, 1.0, -1.0);
+    transform = CGAffineTransformTranslate(transform, 0.0, _image.size.height);
+    transform = CGAffineTransformRotate(transform, -M_PI_2);
+    UIGraphicsBeginImageContext(_image.size);
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        CGImageRef imageRef = _image.CGImage;
+        CGContextConcatCTM(ctx, transform);
+    CGContextDrawImage(ctx, drawTransposed ? transposedRect : origRect, imageRef);
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 #pragma mark -
 #pragma mark ImageInspectView
 
@@ -120,7 +148,7 @@
         self.latitude = [NSNumber numberWithDouble:_location.latitude];
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = _date;
-        self.capture = _capture;
+        self.capture = [self captureToUpOrientation:_capture];
         self.unfilteredImage = [self scaleImage:self.capture];
         self.image = self.unfilteredImage;
         self.contentMode = UIViewContentModeScaleAspectFill;
