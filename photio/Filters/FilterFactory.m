@@ -117,7 +117,7 @@ static FilterFactory* thisFilterFactory = nil;
     GPUImagePicture* filteredImage = [[GPUImagePicture alloc] initWithImage:_image];
     [filteredImage addTarget:_filter];
     [filteredImage processImage];
-    return [_filter imageFromCurrentlyProcessedOutput];
+    return [_filter imageFromCurrentlyProcessedOutputWithOrientation:_image.imageOrientation];
 }
 
 #pragma mark - 

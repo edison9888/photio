@@ -86,17 +86,17 @@
 }
 
 - (UIImage*)scaleImage:(UIImage*)_image {
-    UIImage* scaledImage = nil;
-    UIImageOrientation imageOrientaion = _image.imageOrientation;
-    if (imageOrientaion == UIImageOrientationDown || imageOrientaion == UIImageOrientationUp) {
-        CGFloat imageAspectRatio = _image.size.height / _image.size.width;
-        CGFloat scaledImageHeight = imageAspectRatio * self.frame.size.width;
-        CGSize scaledImageSize = CGSizeMake(self.frame.size.width, scaledImageHeight);
-        scaledImage = [_image scaleToSize:scaledImageSize];
-    } else {
-        scaledImage = [_image scaleToSize:self.frame.size];
+    CGFloat imageAspectRatio = _image.size.height / _image.size.width;
+    CGFloat scaledImageHeight = MAX(self.frame.size.width * imageAspectRatio, self.frame.size.height);
+    CGFloat scaledImageWidth = self.frame.size.width;
+    if (imageAspectRatio < 1.0) {
+        CGFloat screenAspectRatio = self.frame.size.height / self.frame.size.width;
+        scaledImageWidth = MIN(self.frame.size.height / imageAspectRatio, self.frame.size.width);
+        scaledImageHeight = scaledImageWidth * screenAspectRatio;
+//        scaledImageWidth = MAX(self.frame.size.width / imageAspectRatio, self.frame.size.width);
     }
-    return scaledImage;
+    CGSize scaledImageSize = CGSizeMake(scaledImageWidth, scaledImageHeight);
+    return [_image scaleToSize:scaledImageSize];
 }
 
 - (UIImage*)captureToUpOrientation:(UIImage*)_image {
@@ -114,13 +114,28 @@
     CGAffineTransform transform = CGAffineTransformIdentity;
     transform = CGAffineTransformTranslate(transform, 0.0, _image.size.height);
     transform = CGAffineTransformScale(transform, 1.0, -1.0);
-    transform = CGAffineTransformTranslate(transform, 0.0, _image.size.height);
-    transform = CGAffineTransformRotate(transform, -M_PI_2);
+    UIImageOrientation imageOrientation = _image.imageOrientation;
+    switch (_image.imageOrientation) {
+        case UIImageOrientationDown:
+            break;
+        case UIImageOrientationUp:
+            break;
+        case UIImageOrientationRight:
+            transform = CGAffineTransformTranslate(transform, 0.0, _image.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        case UIImageOrientationLeft:
+            transform = CGAffineTransformTranslate(transform, _image.size.width, 0.0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;            
+        default:
+            break;
+    }
     UIGraphicsBeginImageContext(_image.size);
         CGContextRef ctx = UIGraphicsGetCurrentContext();
         CGImageRef imageRef = _image.CGImage;
         CGContextConcatCTM(ctx, transform);
-    CGContextDrawImage(ctx, drawTransposed ? transposedRect : origRect, imageRef);
+        CGContextDrawImage(ctx, drawTransposed ? transposedRect : origRect, imageRef);
         UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
@@ -151,10 +166,9 @@
         self.capture = [self captureToUpOrientation:_capture];
         self.unfilteredImage = [self scaleImage:self.capture];
         self.image = self.unfilteredImage;
-        self.contentMode = UIViewContentModeScaleAspectFill;
+        self.contentMode = UIViewContentModeCenter;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
-        self.contentMode = UIViewContentModeCenter;
         UITapGestureRecognizer* editImageGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImage)];
         editImageGesture.numberOfTapsRequired = 2;
         editImageGesture.numberOfTouchesRequired = 1;
