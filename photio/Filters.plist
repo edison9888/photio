@@ -48,6 +48,66 @@
 			<key>filterId</key>
 			<integer>2</integer>
 			<key>name</key>
+			<string>Red</string>
+			<key>imageFilename</key>
+			<string>redColor.png</string>
+			<key>filterPaletteId</key>
+			<integer>1</integer>
+			<key>purchased</key>
+			<true/>
+			<key>hidden</key>
+			<false/>
+			<key>defaultValue</key>
+			<integer>1</integer>
+			<key>minimumValue</key>
+			<integer>0</integer>
+			<key>maximumValue</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>filterId</key>
+			<integer>3</integer>
+			<key>name</key>
+			<string>Green</string>
+			<key>imageFilename</key>
+			<string>geenColor.png</string>
+			<key>filterPaletteId</key>
+			<integer>1</integer>
+			<key>purchased</key>
+			<true/>
+			<key>hidden</key>
+			<false/>
+			<key>defaultValue</key>
+			<integer>1</integer>
+			<key>minimumValue</key>
+			<integer>0</integer>
+			<key>maximumValue</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>filterId</key>
+			<integer>4</integer>
+			<key>name</key>
+			<string>Blue</string>
+			<key>imageFilename</key>
+			<string>blueColor.png</string>
+			<key>filterPaletteId</key>
+			<integer>1</integer>
+			<key>purchased</key>
+			<true/>
+			<key>hidden</key>
+			<false/>
+			<key>defaultValue</key>
+			<integer>1</integer>
+			<key>minimumValue</key>
+			<integer>0</integer>
+			<key>maximumValue</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>filterId</key>
+			<integer>5</integer>
+			<key>name</key>
 			<string>Saturation</string>
 			<key>imageFilename</key>
 			<string>saturation.png</string>
@@ -66,7 +126,7 @@
 		</dict>
 		<dict>
 			<key>filterId</key>
-			<integer>3</integer>
+			<integer>6</integer>
 			<key>name</key>
 			<string>Vignette</string>
 			<key>imageFilename</key>

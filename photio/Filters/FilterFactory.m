@@ -30,6 +30,9 @@ static FilterFactory* thisFilterFactory = nil;
 @interface FilterFactory (Filters)
 
 + (UIImage*)applyBrightnessFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyContrastFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applySaturationFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyVignetteFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
 
 @end
 
@@ -163,10 +166,13 @@ static FilterFactory* thisFilterFactory = nil;
             outputImage = [self applyBrightnessFilterWithValue:_value toImage:_image];
             break;
         case FilterTypeSaturation:
+            outputImage = [self applySaturationFilterWithValue:_value toImage:_image];
             break;
         case FilterTypeContrast:
+            outputImage = [self applyContrastFilterWithValue:_value toImage:_image];
             break;
         case FilterTypeVignette:
+            outputImage = [self applyVignetteFilterWithValue:_value toImage:_image];
             break;
         default:
             break;
@@ -184,5 +190,22 @@ static FilterFactory* thisFilterFactory = nil;
     return [self outputImageForFilter:filter andImage:_image];
 }
 
++ (UIImage*)applyContrastFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    GPUImageContrastFilter* filter = [[GPUImageContrastFilter alloc] init];
+    [filter setContrast:[_value floatValue]];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applySaturationFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    GPUImageSaturationFilter* filter = [[GPUImageSaturationFilter alloc] init];
+    [filter setSaturation:[_value floatValue]];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyVignetteFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    GPUImageVignetteFilter* filter = [[GPUImageVignetteFilter alloc] init];
+    [filter setVignetteEnd:[_value floatValue]];
+    return [self outputImageForFilter:filter andImage:_image];
+}
 
 @end

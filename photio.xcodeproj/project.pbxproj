@@ -27,8 +27,6 @@
 		05250EB8156953620060F993 /* brightness@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EAC156953620060F993 /* brightness@2x.png */; };
 		05250EB9156953620060F993 /* contrast.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EAD156953620060F993 /* contrast.png */; };
 		05250EBA156953620060F993 /* contrast@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EAE156953620060F993 /* contrast@2x.png */; };
-		05250EBB156953620060F993 /* hue.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EAF156953620060F993 /* hue.png */; };
-		05250EBC156953620060F993 /* hue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EB0156953620060F993 /* hue@2x.png */; };
 		05250EBD156953620060F993 /* saturation.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EB1156953620060F993 /* saturation.png */; };
 		05250EBE156953620060F993 /* saturation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05250EB2156953620060F993 /* saturation@2x.png */; };
 		05250EC4156962B80060F993 /* UITableViewCell+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05250EC3156962B80060F993 /* UITableViewCell+Extensions.m */; };
@@ -84,6 +82,12 @@
 		05B8377B1530DA1300D99A40 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8377A1530DA1200D99A40 /* CoreLocation.framework */; };
 		05B8BB301561A0C80023346F /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B8BB2F1561A0C80023346F /* ProgressView.m */; };
 		05B8BB331561A19A0023346F /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B8BB321561A19A0023346F /* RoundedCornersView.m */; };
+		05C501861578641600CB3561 /* blueColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C501801578641600CB3561 /* blueColor.png */; };
+		05C501871578641600CB3561 /* blueColor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C501811578641600CB3561 /* blueColor@2x.png */; };
+		05C501881578641600CB3561 /* greenColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C501821578641600CB3561 /* greenColor.png */; };
+		05C501891578641600CB3561 /* greenColor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C501831578641600CB3561 /* greenColor@2x.png */; };
+		05C5018B1578641600CB3561 /* redColor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C501851578641600CB3561 /* redColor@2x.png */; };
+		05C5018D1578698E00CB3561 /* redColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C5018C1578698E00CB3561 /* redColor.png */; };
 		05C59C3D14F5D157009AC823 /* ViewGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C59C3C14F5D157009AC823 /* ViewGeneral.m */; };
 		05C99EC114F0585C00D09F3E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC014F0585C00D09F3E /* UIKit.framework */; };
 		05C99EC314F0585C00D09F3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C99EC214F0585C00D09F3E /* Foundation.framework */; };
@@ -166,8 +170,6 @@
 		05250EAC156953620060F993 /* brightness@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brightness@2x.png"; sourceTree = "<group>"; };
 		05250EAD156953620060F993 /* contrast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contrast.png; sourceTree = "<group>"; };
 		05250EAE156953620060F993 /* contrast@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contrast@2x.png"; sourceTree = "<group>"; };
-		05250EAF156953620060F993 /* hue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hue.png; sourceTree = "<group>"; };
-		05250EB0156953620060F993 /* hue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hue@2x.png"; sourceTree = "<group>"; };
 		05250EB1156953620060F993 /* saturation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saturation.png; sourceTree = "<group>"; };
 		05250EB2156953620060F993 /* saturation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saturation@2x.png"; sourceTree = "<group>"; };
 		05250EC2156962B80060F993 /* UITableViewCell+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+Extensions.h"; path = "photio/Library/UITableViewCell+Extensions.h"; sourceTree = SOURCE_ROOT; };
@@ -254,6 +256,12 @@
 		05B8BB2F1561A0C80023346F /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressView.m; path = photio/Library/ProgressView.m; sourceTree = SOURCE_ROOT; };
 		05B8BB311561A19A0023346F /* RoundedCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoundedCornersView.h; path = photio/Library/RoundedCornersView.h; sourceTree = SOURCE_ROOT; };
 		05B8BB321561A19A0023346F /* RoundedCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoundedCornersView.m; path = photio/Library/RoundedCornersView.m; sourceTree = SOURCE_ROOT; };
+		05C501801578641600CB3561 /* blueColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blueColor.png; path = photio/images/Filters/ImageAdjust/blueColor.png; sourceTree = SOURCE_ROOT; };
+		05C501811578641600CB3561 /* blueColor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blueColor@2x.png"; path = "photio/images/Filters/ImageAdjust/blueColor@2x.png"; sourceTree = SOURCE_ROOT; };
+		05C501821578641600CB3561 /* greenColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenColor.png; path = photio/images/Filters/ImageAdjust/greenColor.png; sourceTree = SOURCE_ROOT; };
+		05C501831578641600CB3561 /* greenColor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenColor@2x.png"; path = "photio/images/Filters/ImageAdjust/greenColor@2x.png"; sourceTree = SOURCE_ROOT; };
+		05C501851578641600CB3561 /* redColor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "redColor@2x.png"; path = "photio/images/Filters/ImageAdjust/redColor@2x.png"; sourceTree = SOURCE_ROOT; };
+		05C5018C1578698E00CB3561 /* redColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redColor.png; path = photio/images/Filters/ImageAdjust/redColor.png; sourceTree = SOURCE_ROOT; };
 		05C59C3B14F5D157009AC823 /* ViewGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewGeneral.h; sourceTree = "<group>"; };
 		05C59C3C14F5D157009AC823 /* ViewGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewGeneral.m; sourceTree = "<group>"; };
 		05C99EBC14F0585C00D09F3E /* photio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -354,12 +362,16 @@
 		05250EAA156953620060F993 /* ImageAdjust */ = {
 			isa = PBXGroup;
 			children = (
+				05C501801578641600CB3561 /* blueColor.png */,
+				05C501811578641600CB3561 /* blueColor@2x.png */,
 				05250EAB156953620060F993 /* brightness.png */,
 				05250EAC156953620060F993 /* brightness@2x.png */,
 				05250EAD156953620060F993 /* contrast.png */,
 				05250EAE156953620060F993 /* contrast@2x.png */,
-				05250EAF156953620060F993 /* hue.png */,
-				05250EB0156953620060F993 /* hue@2x.png */,
+				05C501821578641600CB3561 /* greenColor.png */,
+				05C501831578641600CB3561 /* greenColor@2x.png */,
+				05C5018C1578698E00CB3561 /* redColor.png */,
+				05C501851578641600CB3561 /* redColor@2x.png */,
 				05250EB1156953620060F993 /* saturation.png */,
 				05250EB2156953620060F993 /* saturation@2x.png */,
 				05250EE51569FA720060F993 /* vignette.png */,
@@ -497,15 +509,6 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
-				05AB05E91573D3890087C47B /* OpenGLES.framework */,
-				058A48E315620959002199F7 /* CoreImage.framework */,
-				05B8377A1530DA1200D99A40 /* CoreLocation.framework */,
-				05B8372715309FB400D99A40 /* CoreData.framework */,
-				052AE17F1528944F005D57B1 /* CoreVideo.framework */,
-				052AE17D1528943E005D57B1 /* CoreMedia.framework */,
-				052AE17A1528941F005D57B1 /* AssetsLibrary.framework */,
-				059772F81527D7B5008F3A1B /* AVFoundation.framework */,
-				05DE439414F20064005FF6B0 /* QuartzCore.framework */,
 				05C99EC614F0585C00D09F3E /* photio */,
 				05C99EBF14F0585C00D09F3E /* Frameworks */,
 				05C99EBD14F0585C00D09F3E /* Products */,
@@ -524,6 +527,15 @@
 			isa = PBXGroup;
 			children = (
 				05E05AEE1573044E005FF6C1 /* GPUImage.xcodeproj */,
+				05AB05E91573D3890087C47B /* OpenGLES.framework */,
+				058A48E315620959002199F7 /* CoreImage.framework */,
+				05B8377A1530DA1200D99A40 /* CoreLocation.framework */,
+				05B8372715309FB400D99A40 /* CoreData.framework */,
+				052AE17F1528944F005D57B1 /* CoreVideo.framework */,
+				052AE17D1528943E005D57B1 /* CoreMedia.framework */,
+				052AE17A1528941F005D57B1 /* AssetsLibrary.framework */,
+				059772F81527D7B5008F3A1B /* AVFoundation.framework */,
+				05DE439414F20064005FF6B0 /* QuartzCore.framework */,
 				05C99EC014F0585C00D09F3E /* UIKit.framework */,
 				05C99EC214F0585C00D09F3E /* Foundation.framework */,
 				05C99EC414F0585C00D09F3E /* CoreGraphics.framework */,
@@ -735,12 +747,16 @@
 				05250EB8156953620060F993 /* brightness@2x.png in Resources */,
 				05250EB9156953620060F993 /* contrast.png in Resources */,
 				05250EBA156953620060F993 /* contrast@2x.png in Resources */,
-				05250EBB156953620060F993 /* hue.png in Resources */,
-				05250EBC156953620060F993 /* hue@2x.png in Resources */,
 				05250EBD156953620060F993 /* saturation.png in Resources */,
 				05250EBE156953620060F993 /* saturation@2x.png in Resources */,
 				05250EE71569FA720060F993 /* vignette.png in Resources */,
 				05250EE81569FA720060F993 /* vignette@2x.png in Resources */,
+				05C501861578641600CB3561 /* blueColor.png in Resources */,
+				05C501871578641600CB3561 /* blueColor@2x.png in Resources */,
+				05C501881578641600CB3561 /* greenColor.png in Resources */,
+				05C501891578641600CB3561 /* greenColor@2x.png in Resources */,
+				05C5018B1578641600CB3561 /* redColor@2x.png in Resources */,
+				05C5018D1578698E00CB3561 /* redColor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
