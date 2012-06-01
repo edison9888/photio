@@ -30,7 +30,6 @@
 - (void)singleTapGesture;
 - (void)removeCommentView;
 - (UIImage*)scaleImage:(UIImage*)_image;
-- (UIImage*)captureToUpOrientation:(UIImage*)_image;
 
 @end
 
@@ -87,58 +86,13 @@
 
 - (UIImage*)scaleImage:(UIImage*)_image {
     CGFloat imageAspectRatio = _image.size.height / _image.size.width;
-    CGFloat scaledImageHeight = MAX(self.frame.size.width * imageAspectRatio, self.frame.size.height);
     CGFloat scaledImageWidth = self.frame.size.width;
+    CGFloat scaledImageHeight = MAX(scaledImageWidth * imageAspectRatio, self.frame.size.height);
     if (imageAspectRatio < 1.0) {
-        CGFloat screenAspectRatio = self.frame.size.height / self.frame.size.width;
-        scaledImageWidth = MIN(self.frame.size.height / imageAspectRatio, self.frame.size.width);
-        scaledImageHeight = scaledImageWidth * screenAspectRatio;
-//        scaledImageWidth = MAX(self.frame.size.width / imageAspectRatio, self.frame.size.width);
+        scaledImageHeight = imageAspectRatio * scaledImageWidth;
     }
     CGSize scaledImageSize = CGSizeMake(scaledImageWidth, scaledImageHeight);
     return [_image scaleToSize:scaledImageSize];
-}
-
-- (UIImage*)captureToUpOrientation:(UIImage*)_image {
-    CGRect origRect = CGRectMake(0, 0, _image.size.width, _image.size.width);
-    CGRect transposedRect = CGRectMake(0, 0, _image.size.height, _image.size.width);
-    BOOL drawTransposed;
-    switch (_image.imageOrientation) {
-        case UIImageOrientationLeft:
-        case UIImageOrientationRight:
-            drawTransposed = YES;
-            break;            
-        default:
-            drawTransposed = NO;
-    }
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformTranslate(transform, 0.0, _image.size.height);
-    transform = CGAffineTransformScale(transform, 1.0, -1.0);
-    UIImageOrientation imageOrientation = _image.imageOrientation;
-    switch (_image.imageOrientation) {
-        case UIImageOrientationDown:
-            break;
-        case UIImageOrientationUp:
-            break;
-        case UIImageOrientationRight:
-            transform = CGAffineTransformTranslate(transform, 0.0, _image.size.height);
-            transform = CGAffineTransformRotate(transform, -M_PI_2);
-            break;
-        case UIImageOrientationLeft:
-            transform = CGAffineTransformTranslate(transform, _image.size.width, 0.0);
-            transform = CGAffineTransformRotate(transform, M_PI_2);
-            break;            
-        default:
-            break;
-    }
-    UIGraphicsBeginImageContext(_image.size);
-        CGContextRef ctx = UIGraphicsGetCurrentContext();
-        CGImageRef imageRef = _image.CGImage;
-        CGContextConcatCTM(ctx, transform);
-        CGContextDrawImage(ctx, drawTransposed ? transposedRect : origRect, imageRef);
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
 }
 
 #pragma mark -
@@ -163,7 +117,7 @@
         self.latitude = [NSNumber numberWithDouble:_location.latitude];
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = _date;
-        self.capture = [self captureToUpOrientation:_capture];
+        self.capture = [_capture transformPhotoImage];
         self.unfilteredImage = [self scaleImage:self.capture];
         self.image = self.unfilteredImage;
         self.contentMode = UIViewContentModeCenter;

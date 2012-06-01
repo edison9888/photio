@@ -11,6 +11,8 @@
 @interface UIImage ()
 - (UIImage *)resizedImage:(CGSize)newSize transform:(CGAffineTransform)transform drawTransposed:(BOOL)transpose interpolationQuality:(CGInterpolationQuality)quality;
 - (CGAffineTransform)transformForOrientation:(CGSize)newSize;
+- (UIImage*)applyTransformToPhotoImage;
+- (BOOL)drawTransposedForOrientation:(UIImageOrientation)_imageOrientation;
 @end
 
 @implementation UIImage (Resize)
@@ -84,6 +86,41 @@
     
     return [self resizedImage:newSize interpolationQuality:quality];
 }
+
+// Returns image scaled to screen size
+- (UIImage*)scaleToSize:(CGSize)_cropSize {
+    CGFloat imageScaleFactor = _cropSize.height / self.size.height;
+    CGFloat imageScale = 1.0;
+    if([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        if ([[UIScreen mainScreen] scale] == 2.0) {
+            imageScale = 2.0;
+        }
+    }
+    UIImage* scaledImage = [self scaleBy:imageScale*imageScaleFactor andCropToSize:CGSizeMake(imageScale*_cropSize.width, imageScale*_cropSize.height)];
+    return [self.class imageWithCGImage:[scaledImage CGImage] scale:imageScale orientation:scaledImage.imageOrientation];;
+}
+
+- (UIImage*)transformPhotoImage {
+    UIImage* newImage = nil;
+    switch (self.imageOrientation) {
+        case UIImageOrientationDown:
+            newImage = self;
+            break;
+        case UIImageOrientationUp:
+            newImage = self;
+            break;
+        case UIImageOrientationRight:
+            newImage = [self applyTransformToPhotoImage];
+            break;
+        case UIImageOrientationLeft:
+            newImage = [self applyTransformToPhotoImage];
+            break;            
+        default:
+            break;
+    }
+    return newImage;
+}
+
 
 #pragma mark -
 #pragma mark Private helper methods
@@ -167,18 +204,52 @@
     return transform;
 }
 
-// Returns image scaled to screen size
-- (UIImage*)scaleToSize:(CGSize)_cropSize {
-    CGFloat imageScaleFactor = _cropSize.height / self.size.height;
-    CGFloat imageScale = 1.0;
-    if([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        if ([[UIScreen mainScreen] scale] == 2.0) {
-            imageScale = 2.0;
-         }
+- (UIImage*)applyTransformToPhotoImage {
+    UIImage* newImage = nil;
+    CGRect origRect = CGRectMake(0, 0, self.size.width, self.size.width);
+    CGRect transposedRect = CGRectMake(0, 0, self.size.height, self.size.width);
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformTranslate(transform, 0.0, self.size.height);
+    transform = CGAffineTransformScale(transform, 1.0, -1.0);
+    switch (self.imageOrientation) {
+        case UIImageOrientationDown:
+            break;
+        case UIImageOrientationUp:
+            break;
+        case UIImageOrientationRight:
+            transform = CGAffineTransformTranslate(transform, 0.0, self.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        case UIImageOrientationLeft:
+            transform = CGAffineTransformTranslate(transform, self.size.width, 0.0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;            
+        default:
+            break;
     }
-    UIImage* scaledImage = [self scaleBy:imageScale*imageScaleFactor andCropToSize:CGSizeMake(imageScale*_cropSize.width, imageScale*_cropSize.height)];
-    return [self.class imageWithCGImage:[scaledImage CGImage] scale:imageScale orientation:scaledImage.imageOrientation];;
+    UIGraphicsBeginImageContext(self.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGImageRef imageRef = self.CGImage;
+    CGContextConcatCTM(ctx, transform);
+    CGContextDrawImage(ctx, [self drawTransposedForOrientation:self.imageOrientation] ? transposedRect : origRect, imageRef);
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
+
+- (BOOL)drawTransposedForOrientation:(UIImageOrientation)_imageOrientation {
+    BOOL drawTransposed;
+    switch (_imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationRight:
+            drawTransposed = YES;
+            break;            
+        default:
+            drawTransposed = NO;
+    }
+    return drawTransposed;
+}
+
 
 #pragma clang diagnostic pop
 
