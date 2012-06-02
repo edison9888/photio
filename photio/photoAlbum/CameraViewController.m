@@ -46,7 +46,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 #pragma mark UIView
 
 - (void)viewDidLoad {
-    
 	if (self.camera == nil) {
 		self.camera = [[Camera alloc] init];		
 		self.camera.delegate = self;

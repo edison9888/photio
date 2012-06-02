@@ -43,6 +43,13 @@
 		0542DAFA1523EDA7002C62A0 /* flash-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542DAF81523EDA7002C62A0 /* flash-on@2x.png */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
+		0577D417157A64AC00BA4C52 /* FilteredCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */; };
+		0577D41A157A8F1A00BA4C52 /* capture-photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0577D418157A8F1A00BA4C52 /* capture-photo.png */; };
+		0577D41B157A8F1A00BA4C52 /* capture-photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0577D419157A8F1A00BA4C52 /* capture-photo@2x.png */; };
+		0577D421157AA9E800BA4C52 /* instant.png in Resources */ = {isa = PBXBuildFile; fileRef = 0577D41D157AA9E800BA4C52 /* instant.png */; };
+		0577D422157AA9E800BA4C52 /* instant@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0577D41E157AA9E800BA4C52 /* instant@2x.png */; };
+		0577D423157AA9E800BA4C52 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 0577D41F157AA9E800BA4C52 /* iphone.png */; };
+		0577D424157AA9E800BA4C52 /* iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0577D420157AA9E800BA4C52 /* iphone@2x.png */; };
 		05809C9815573EC900AF2079 /* whitestar.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9415573EC900AF2079 /* whitestar.png */; };
 		05809C9915573EC900AF2079 /* whitestar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9515573EC900AF2079 /* whitestar@2x.png */; };
 		05809C9A15573EC900AF2079 /* yellowstar.png in Resources */ = {isa = PBXBuildFile; fileRef = 05809C9615573EC900AF2079 /* yellowstar.png */; };
@@ -196,6 +203,13 @@
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
 		0554A47E1503DDFE00B9C76D /* DragRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragRowView.m; sourceTree = "<group>"; };
+		0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilteredCameraViewController.xib; sourceTree = "<group>"; };
+		0577D418157A8F1A00BA4C52 /* capture-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture-photo.png"; sourceTree = "<group>"; };
+		0577D419157A8F1A00BA4C52 /* capture-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture-photo@2x.png"; sourceTree = "<group>"; };
+		0577D41D157AA9E800BA4C52 /* instant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instant.png; sourceTree = "<group>"; };
+		0577D41E157AA9E800BA4C52 /* instant@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instant@2x.png"; sourceTree = "<group>"; };
+		0577D41F157AA9E800BA4C52 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
+		0577D420157AA9E800BA4C52 /* iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphone@2x.png"; sourceTree = "<group>"; };
 		05809C9415573EC900AF2079 /* whitestar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whitestar.png; path = photio/Images/whitestar.png; sourceTree = SOURCE_ROOT; };
 		05809C9515573EC900AF2079 /* whitestar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "whitestar@2x.png"; path = "photio/Images/whitestar@2x.png"; sourceTree = SOURCE_ROOT; };
 		05809C9615573EC900AF2079 /* yellowstar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowstar.png; path = photio/Images/yellowstar.png; sourceTree = SOURCE_ROOT; };
@@ -383,6 +397,17 @@
 			path = ImageAdjust;
 			sourceTree = "<group>";
 		};
+		0577D41C157AA9E800BA4C52 /* Cameras */ = {
+			isa = PBXGroup;
+			children = (
+				0577D41D157AA9E800BA4C52 /* instant.png */,
+				0577D41E157AA9E800BA4C52 /* instant@2x.png */,
+				0577D41F157AA9E800BA4C52 /* iphone.png */,
+				0577D420157AA9E800BA4C52 /* iphone@2x.png */,
+			);
+			path = Cameras;
+			sourceTree = "<group>";
+		};
 		0590C737153B3D8F0065AB42 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,10 +504,13 @@
 		05C59C2314F331A6009AC823 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0577D41C157AA9E800BA4C52 /* Cameras */,
 				05250EA4156953620060F993 /* FilterClasses */,
 				05250EA9156953620060F993 /* Filters */,
 				05CFEF8F1566BA8900755519 /* apply.png */,
 				05CFEF901566BA8900755519 /* apply@2x.png */,
+				0577D418157A8F1A00BA4C52 /* capture-photo.png */,
+				0577D419157A8F1A00BA4C52 /* capture-photo@2x.png */,
 				05CCEFB41555F459004FBD21 /* export.png */,
 				05CCEFB51555F459004FBD21 /* export@2x.png */,
 				0542DAF71523EDA7002C62A0 /* flash-on.png */,
@@ -597,6 +625,7 @@
 				05809CB1155B3C6700AF2079 /* CommentViewController.xib */,
 				050462CF1579A9080051818C /* FilteredCameraViewController.h */,
 				050462D01579A9080051818C /* FilteredCameraViewController.m */,
+				0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */,
 				05250EE21569BBDC0060F993 /* FilterImageView.h */,
 				05250EE31569BBDD0060F993 /* FilterImageView.m */,
 				05CCEFA31555E0E8004FBD21 /* ImageControlView.h */,
@@ -762,6 +791,13 @@
 				05C501891578641600CB3561 /* greenColor@2x.png in Resources */,
 				05C5018B1578641600CB3561 /* redColor@2x.png in Resources */,
 				05C5018D1578698E00CB3561 /* redColor.png in Resources */,
+				0577D417157A64AC00BA4C52 /* FilteredCameraViewController.xib in Resources */,
+				0577D41A157A8F1A00BA4C52 /* capture-photo.png in Resources */,
+				0577D41B157A8F1A00BA4C52 /* capture-photo@2x.png in Resources */,
+				0577D421157AA9E800BA4C52 /* instant.png in Resources */,
+				0577D422157AA9E800BA4C52 /* instant@2x.png in Resources */,
+				0577D423157AA9E800BA4C52 /* iphone.png in Resources */,
+				0577D424157AA9E800BA4C52 /* iphone@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

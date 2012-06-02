@@ -7,18 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CameraViewController.h"
+#import "FilteredCameraViewController.h"
 #import "ImageInspectViewController.h"
 
-@class CameraViewController;
 @class ImageInspectViewController;
 @class CalendarViewController;
 @class LocalesViewController;
-@class FilteredCameraViewController;
 @class ProgressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@interface ViewGeneral : NSObject <CameraViewControllerDelegate, ImageInspectViewControllerDelegate> {
+@interface ViewGeneral : NSObject <FilteredCameraViewControllerDelegate, ImageInspectViewControllerDelegate> {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -27,10 +25,9 @@
 @property(nonatomic, strong) UIView*                        shutter;
 @property(nonatomic, strong) NSManagedObjectContext*        managedObjectContext;
 @property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
-@property(nonatomic, strong) CameraViewController*          cameraViewController;
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
 @property(nonatomic, strong) LocalesViewController*         localesViewController;
-@property(nonatomic, strong) FilteredCameraViewController*  filteredCameraViewController;
+@property(nonatomic, strong) FilteredCameraViewController*  cameraViewController;
 @property(nonatomic, strong) ProgressView*                  progressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -41,6 +38,7 @@
 + (CGRect)underWindow;
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow;
++ (void)alertOnError:(NSError*)error;
 
 - (void)createViews:(UIView*)_containerView;
 - (void)openShutter;
@@ -60,11 +58,6 @@
 - (void)initImageInspectView:(UIView*)_containerView;
 - (void)imageInspectViewPosition:(CGRect)_rec;
 - (void)imageInspectViewHidden:(BOOL)_hidden;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initFilteredImageView:(UIView*)_containerView;
-- (void)filteredCameraViewHidden:(BOOL)_hidden;
-- (void)filteredCameraViewPosition:(CGRect)_rec;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initCameraView:(UIView*)_containerView;

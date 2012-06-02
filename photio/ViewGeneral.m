@@ -17,7 +17,6 @@
 #import "ImageEditViewController.h"
 #import "CalendarViewController.h"
 #import "LocalesViewController.h"
-#import "FilteredCameraViewController.h"
 #import "ProgressView.h"
 
 #define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
@@ -50,7 +49,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize notAnimating, managedObjectContext, containerView, shutter;
-@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, filteredCameraViewController,
+@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController,
             progressView;
 
 #pragma mark - 
@@ -147,6 +146,11 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return CGRectMake(screenBounds.size.width + VIEW_MIN_SPACING, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
 }
 
++ (void)alertOnError:(NSError*)error {
+    NSLog(@"Had and Error %@, %@", error, [error userInfo]);
+    [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];    
+}
+
 - (void)createViews:(UIView*)_containerView {
     self.containerView = _containerView;
     [self initImageInspectView:_containerView];
@@ -175,7 +179,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)saveManagedObjectContext {
     NSError *error = nil;
     if (![[ViewGeneral instance].managedObjectContext save:&error]) {
-        [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
+        [ViewGeneral alertOnError:error];
     }
 }
 
@@ -183,7 +187,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     NSError* error;
     NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:_fetchRequest error:&error];
     if (fetchResults == nil) {
-        [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
+        [ViewGeneral alertOnError:error];
         abort();
     }
     return fetchResults;
@@ -193,7 +197,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     NSError* error;
     NSUInteger count = [[ViewGeneral instance].managedObjectContext countForFetchRequest:_fetchRequest error:&error];
     if (count == NSNotFound) {
-        [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
+        [ViewGeneral alertOnError:error];
         abort();
     }
     return count;
@@ -266,30 +270,11 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
-#pragma mark FilteredCameraViewController
-
-- (void)initFilteredImageView:(UIView*)_containerView {
-    if (self.filteredCameraViewController == nil) {
-        self.filteredCameraViewController = [FilteredCameraViewController inView:_containerView];
-    } 
-    [self imageInspectViewPosition:[self.class overWindow]];
-    [_containerView addSubview:self.filteredCameraViewController.view];
-}
-
-- (void)filteredCameraViewHidden:(BOOL)_hidden {
-    self.filteredCameraViewController.view.hidden = _hidden;
-}
-
-- (void)filteredCameraViewPosition:(CGRect)_rect {
-    self.filteredCameraViewController.view.frame = _rect;
-}
-
-#pragma mark - 
 #pragma mark CameraViewController
 
 - (void)initCameraView:(UIView*)_containerView {
     if (self.cameraViewController == nil) {
-        self.cameraViewController = [CameraViewController inView:_containerView];
+        self.cameraViewController = [FilteredCameraViewController inView:_containerView];
     } 
     [self cameraViewPosition:[self.class inWindow]];
     self.cameraViewController.delegate = self;
@@ -346,7 +331,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Calendar To Camera
 
 - (void)transitionCalendarToCamera {
-    [self.cameraViewController continouslyAutoFocus];
     [self transition:[self horizontalTransitionDuration:self.calendarViewController.view.frame.origin.x] withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self calendarViewPosition:[self.class rightOfWindow]];
@@ -402,7 +386,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark Locales To Camera
 
 - (void)transitionLocalesToCamera {
-    [self.cameraViewController continouslyAutoFocus];
     [self transition:[self horizontalTransitionDuration:self.localesViewController.view.frame.origin.x] withAnimation:^{
         [self cameraViewPosition:[self.class inWindow]];
         [self localesViewPosition:[self.class leftOfWindow]];
@@ -454,54 +437,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self.imageInspectViewController addImage:_picture];
 }
 
-- (void)didDragCameraRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity{
-    [self dragCamera:_drag];    
-}
-
-- (void)didDragCameraLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragCamera:_drag];
-}
-
-- (void)didDragCameraDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self dragCameraToInspectImage:_drag];
-}
-
-- (void)didReleaseCameraRight:(CGPoint)_location {
-    [self releaseCamera];
-}
-
-- (void)didReleaseCameraLeft:(CGPoint)_location {
-    [self releaseCamera];
-}
-
-- (void)didReleaseCameraDown:(CGPoint)_location {
-    [self releaseCameraInspectImage];
-}
-
-- (void)didSwipeCameraRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self transitionCameraToLocales];    
-}
-
-- (void)didSwipeCameraLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self transitionCameraToCalendar];    
-}
-
-- (void)didSwipeCameraDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self transitionCameraToInspectImage];
-}
-
-- (void)didReachCameraMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self transitionCameraToLocales];    
-}
-
-- (void)didReachCameraMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self transitionCameraToCalendar];    
-}
-
-- (void)didReachCameraMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self transitionCameraToInspectImage];
-}
-
 #pragma mark -
 #pragma mark ImageInspectViewControllerDelegate
 
@@ -517,7 +452,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 - (void)transitionFromInspectImage {
-    [self.cameraViewController continouslyAutoFocus];
     [self transition:[self verticalTransitionDuration:self.imageInspectViewController.view.frame.origin.y] withAnimation:^{
             [self cameraViewPosition:[self.class inWindow]];
             [self imageInspectViewPosition:[self.class overWindow]];

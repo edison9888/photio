@@ -53,8 +53,7 @@
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            [ViewGeneral alertOnError:error];
             abort();
         } 
     }
