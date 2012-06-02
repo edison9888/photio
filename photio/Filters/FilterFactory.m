@@ -30,6 +30,9 @@ static FilterFactory* thisFilterFactory = nil;
 @interface FilterFactory (Filters)
 
 + (UIImage*)applyBrightnessFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyRedColorFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyGreenColorFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyBlueColorFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
 + (UIImage*)applyContrastFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
 + (UIImage*)applySaturationFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
 + (UIImage*)applyVignetteFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
@@ -165,6 +168,15 @@ static FilterFactory* thisFilterFactory = nil;
         case FilterTypeBrightness:
             outputImage = [self applyBrightnessFilterWithValue:_value toImage:_image];
             break;
+        case FilterTypeRedColor:
+            outputImage = [self applyRedColorFilterWithValue:_value toImage:_image];
+            break;
+        case FilterTypeGreenColor:
+            outputImage = [self applyGreenColorFilterWithValue:_value toImage:_image];
+            break;
+        case FilterTypeBlueColor:
+            outputImage = [self applyBlueColorFilterWithValue:_value toImage:_image];
+            break;
         case FilterTypeSaturation:
             outputImage = [self applySaturationFilterWithValue:_value toImage:_image];
             break;
@@ -205,6 +217,24 @@ static FilterFactory* thisFilterFactory = nil;
 + (UIImage*)applyVignetteFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
     GPUImageVignetteFilter* filter = [[GPUImageVignetteFilter alloc] init];
     [filter setVignetteEnd:[_value floatValue]];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyRedColorFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    GPUImageRGBFilter* filter = [[GPUImageRGBFilter alloc] init];
+    [filter setRed:[_value floatValue]];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyGreenColorFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    GPUImageRGBFilter* filter = [[GPUImageRGBFilter alloc] init];
+    [filter setGreen:[_value floatValue]];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyBlueColorFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    GPUImageRGBFilter* filter = [[GPUImageRGBFilter alloc] init];
+    [filter setBlue:[_value floatValue]];
     return [self outputImageForFilter:filter andImage:_image];
 }
 

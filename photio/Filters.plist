@@ -70,7 +70,7 @@
 			<key>name</key>
 			<string>Green</string>
 			<key>imageFilename</key>
-			<string>geenColor.png</string>
+			<string>greenColor.png</string>
 			<key>filterPaletteId</key>
 			<integer>1</integer>
 			<key>purchased</key>
