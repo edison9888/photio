@@ -119,6 +119,7 @@
         self.createdAt = _date;
         self.capture = _capture;
         self.unfilteredImage = [self scaleImage:self.capture];
+//        self.image = [UIImage imageWithCGImage:self.unfilteredImage.CGImage];
         self.image = self.unfilteredImage;
         self.contentMode = UIViewContentModeCenter;
         self.clipsToBounds = YES;
@@ -190,9 +191,8 @@
 }
 
 - (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value {
-    self.capture = [FilterFactory applyFilter:_filter withValue:_value toImage:self.capture];
-    self.unfilteredImage = [self scaleImage:self.capture];
-    self.image = self.unfilteredImage;
+    self.capture = [FilterFactory applyFilter:_filter withValue:_value toImage:[self.capture transformPhotoImage]];
+    self.unfilteredImage = self.image;
 }
 
 - (void)resetFilteredImage {

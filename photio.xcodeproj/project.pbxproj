@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050462D11579A9080051818C /* FilteredCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050462D01579A9080051818C /* FilteredCameraViewController.m */; };
 		050855391557074100609C31 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855371557074100609C31 /* pencil.png */; };
 		0508553A1557074100609C31 /* pencil@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 050855381557074100609C31 /* pencil@2x.png */; };
 		050AF28C1568167B00EC6C13 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 050AF28B1568167B00EC6C13 /* Tag.m */; };
@@ -146,6 +147,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050462CF1579A9080051818C /* FilteredCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilteredCameraViewController.h; sourceTree = "<group>"; };
+		050462D01579A9080051818C /* FilteredCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilteredCameraViewController.m; sourceTree = "<group>"; };
 		050855371557074100609C31 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil.png; path = photio/Images/pencil.png; sourceTree = SOURCE_ROOT; };
 		050855381557074100609C31 /* pencil@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pencil@2x.png"; path = "photio/Images/pencil@2x.png"; sourceTree = SOURCE_ROOT; };
 		050AF28A1568167B00EC6C13 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
@@ -592,6 +595,8 @@
 				05809CAF155B3C6700AF2079 /* CommentViewController.h */,
 				05809CB0155B3C6700AF2079 /* CommentViewController.m */,
 				05809CB1155B3C6700AF2079 /* CommentViewController.xib */,
+				050462CF1579A9080051818C /* FilteredCameraViewController.h */,
+				050462D01579A9080051818C /* FilteredCameraViewController.m */,
 				05250EE21569BBDC0060F993 /* FilterImageView.h */,
 				05250EE31569BBDD0060F993 /* FilterImageView.m */,
 				05CCEFA31555E0E8004FBD21 /* ImageControlView.h */,
@@ -820,6 +825,7 @@
 				05DDD9E61572D9750034AF7C /* UIImage+Extensions.m in Sources */,
 				05AB063C157441DA0087C47B /* Filter.m in Sources */,
 				05AB063F157441E70087C47B /* FilterPalette.m in Sources */,
+				050462D11579A9080051818C /* FilteredCameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

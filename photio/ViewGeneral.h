@@ -14,6 +14,7 @@
 @class ImageInspectViewController;
 @class CalendarViewController;
 @class LocalesViewController;
+@class FilteredCameraViewController;
 @class ProgressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -29,6 +30,7 @@
 @property(nonatomic, strong) CameraViewController*          cameraViewController;
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
 @property(nonatomic, strong) LocalesViewController*         localesViewController;
+@property(nonatomic, strong) FilteredCameraViewController*  filteredCameraViewController;
 @property(nonatomic, strong) ProgressView*                  progressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -58,6 +60,11 @@
 - (void)initImageInspectView:(UIView*)_containerView;
 - (void)imageInspectViewPosition:(CGRect)_rec;
 - (void)imageInspectViewHidden:(BOOL)_hidden;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initFilteredImageView:(UIView*)_containerView;
+- (void)filteredCameraViewHidden:(BOOL)_hidden;
+- (void)filteredCameraViewPosition:(CGRect)_rec;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initCameraView:(UIView*)_containerView;

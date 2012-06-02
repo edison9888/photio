@@ -17,6 +17,7 @@
 #import "ImageEditViewController.h"
 #import "CalendarViewController.h"
 #import "LocalesViewController.h"
+#import "FilteredCameraViewController.h"
 #import "ProgressView.h"
 
 #define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
@@ -49,7 +50,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize notAnimating, managedObjectContext, containerView, shutter;
-@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, progressView;
+@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController, filteredCameraViewController,
+            progressView;
 
 #pragma mark - 
 #pragma mark ViewGeneral PrivateApi
@@ -261,6 +263,25 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)imageInspectViewPosition:(CGRect)_rect {
     self.imageInspectViewController.view.frame = _rect;
+}
+
+#pragma mark - 
+#pragma mark FilteredCameraViewController
+
+- (void)initFilteredImageView:(UIView*)_containerView {
+    if (self.filteredCameraViewController == nil) {
+        self.filteredCameraViewController = [FilteredCameraViewController inView:_containerView];
+    } 
+    [self imageInspectViewPosition:[self.class overWindow]];
+    [_containerView addSubview:self.filteredCameraViewController.view];
+}
+
+- (void)filteredCameraViewHidden:(BOOL)_hidden {
+    self.filteredCameraViewController.view.hidden = _hidden;
+}
+
+- (void)filteredCameraViewPosition:(CGRect)_rect {
+    self.filteredCameraViewController.view.frame = _rect;
 }
 
 #pragma mark - 
