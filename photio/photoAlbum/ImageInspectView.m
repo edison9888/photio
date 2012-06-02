@@ -117,7 +117,7 @@
         self.latitude = [NSNumber numberWithDouble:_location.latitude];
         self.longitude = [NSNumber numberWithDouble:_location.longitude];
         self.createdAt = _date;
-        self.capture = [_capture transformPhotoImage];
+        self.capture = _capture;
         self.unfilteredImage = [self scaleImage:self.capture];
         self.image = self.unfilteredImage;
         self.contentMode = UIViewContentModeCenter;
