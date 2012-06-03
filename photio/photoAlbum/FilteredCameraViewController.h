@@ -12,14 +12,21 @@
 
 @protocol FilteredCameraViewControllerDelegate;
 
+@class ParameterSliderView;
+
 @interface FilteredCameraViewController : UIViewController <TransitionGestureRecognizerDelegate>
 
 @property(nonatomic, weak)      UIView*                                     containerView;
 @property(nonatomic, weak)      id<FilteredCameraViewControllerDelegate>    delegate;
 @property(nonatomic, strong)    IBOutlet UIGestureRecognizer*               captureImageGesture;
+@property(nonatomic, strong)    IBOutlet UIView*                            cameraControlsView;
+@property(nonatomic, strong)    IBOutlet UIView*                            cameraConfigView;
+@property(nonatomic, strong)    IBOutlet UIImageView*                       selectedCameraView;
+@property(nonatomic, strong)    IBOutlet UIImageView*                       autoAdjustView;
+@property(nonatomic, strong)    IBOutlet ParameterSliderView*               parameterView;
 @property(nonatomic, strong)    GPUImageStillCamera*                        stillCamera;
 @property(nonatomic, strong)    GPUImageOutput<GPUImageInput>*              filter;
-@property (nonatomic, strong)   TransitionGestureRecognizer*                transitionGestureRecognizer;
+@property(nonatomic, strong)    TransitionGestureRecognizer*                transitionGestureRecognizer;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;

@@ -1,13 +1,13 @@
 //
-//  CameraViewController.m
+//  NativeCameraViewController.m
 //  photio
 //
 //  Created by Troy Stribling on 3/2/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "CameraViewController.h"
-#import "Camera.h"
+#import "NativeCameraViewController.h"
+#import "NativeCamera.h"
 #import "TransitionGestureRecognizer.h"
 #import "ViewGeneral.h"
 
@@ -15,10 +15,10 @@
 
 static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
-@interface CameraViewController () <UIGestureRecognizerDelegate>
+@interface NativeCameraViewController () <UIGestureRecognizerDelegate>
 @end
 
-@interface CameraViewController (PrivateAPI)
+@interface NativeCameraViewController (PrivateAPI)
 
 - (CGPoint)convertToPointOfInterestFromViewCoordinates:(CGPoint)viewCoordinates;
 - (void)setFlashImage;
@@ -31,13 +31,13 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 @end
 
-@interface CameraViewController (CameraDelegate) <CameraDelegate>
+@interface NativeCameraViewController (CameraDelegate) <NativeCameraDelegate>
 @end
 
-@interface CameraViewController (TransitionGestureRecognizerDelegate) <TransitionGestureRecognizerDelegate>
+@interface NativeCameraViewController (TransitionGestureRecognizerDelegate) <TransitionGestureRecognizerDelegate>
 @end
 
-@implementation CameraViewController
+@implementation NativeCameraViewController
 
 @synthesize camera, containerView, transitionGestureRecognizer, delegate, captureVideoPreviewLayer,
             takePhotoView, flashView, focusGesture, continuousFocusGesture, flashGesture;
@@ -47,7 +47,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 - (void)viewDidLoad {
 	if (self.camera == nil) {
-		self.camera = [[Camera alloc] init];		
+		self.camera = [[NativeCamera alloc] init];		
 		self.camera.delegate = self;
 		[self.camera setupSession];
 
@@ -82,7 +82,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 #pragma mark CameraViewController
 
 + (id)inView:(UIView*)_containerView {
-    return [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil inView:_containerView];;
+    return [[NativeCameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil inView:_containerView];;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
@@ -108,7 +108,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 #pragma mark -
 #pragma mark CameraViewController PrivateAPI
 
-@implementation CameraViewController (PrivateAPI)
+@implementation NativeCameraViewController (PrivateAPI)
 
 - (CGPoint)convertToPointOfInterestFromViewCoordinates:(CGPoint)viewCoordinates  {
     CGPoint pointOfInterest = CGPointMake(.5f, .5f);
@@ -257,16 +257,16 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 @end
 
 #pragma mark -
-#pragma mark CameraViewController CameraDelegate
-@implementation CameraViewController (CameraDelegate)
+#pragma mark NativeCameraViewController NativeCameraDelegate
+@implementation NativeCameraViewController (NativeCameraDelegate)
 
-- (void)camera:(Camera*)_camera didFailWithError:(NSError *)error {
+- (void)camera:(NativeCamera*)_camera didFailWithError:(NSError *)error {
     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^(void) {
         [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
     });
 }
 
-- (void)camera:(Camera*)_camera didCaptureImage:(UIImage*)_image {
+- (void)camera:(NativeCamera*)_camera didCaptureImage:(UIImage*)_image {
     [self.delegate didCaptureImage:_image];
 }
 
@@ -274,7 +274,7 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
 
 #pragma mark -
 #pragma mark TransitionGestureRecognizerDelegate
-@implementation CameraViewController (TransitionGestureRecognizerDelegate)
+@implementation NativeCameraViewController (TransitionGestureRecognizerDelegate)
 
 - (void)didDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
     if ([self.delegate respondsToSelector:@selector(didDragCameraRight:from:withVelocity:)]) {

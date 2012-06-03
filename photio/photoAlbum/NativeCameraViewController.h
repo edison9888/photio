@@ -9,22 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "TransitionGestureRecognizer.h"
 
-@protocol CameraViewControllerDelegate;
-@class Camera, AVCamPreviewView, AVCaptureVideoPreviewLayer;
+@protocol NativeCameraViewControllerDelegate;
+@class NativeCamera, AVCamPreviewView, AVCaptureVideoPreviewLayer;
 
-@interface CameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface NativeCameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 }
 
-@property (nonatomic, weak)   UIView*                           containerView;
-@property (nonatomic, strong) IBOutlet UIView*                  takePhotoView;
-@property (nonatomic, strong) IBOutlet UIView*                  flashView;
-@property (nonatomic, strong) IBOutlet UIGestureRecognizer*     continuousFocusGesture;
-@property (nonatomic, strong) IBOutlet UIGestureRecognizer*     focusGesture;
-@property (nonatomic, strong) IBOutlet UIGestureRecognizer*     flashGesture;
-@property (nonatomic, weak)   id <CameraViewControllerDelegate> delegate;
-@property (nonatomic, strong) Camera*                           camera;
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer*       captureVideoPreviewLayer;
-@property (nonatomic, strong) TransitionGestureRecognizer*      transitionGestureRecognizer;
+@property (nonatomic, weak)   UIView*                                   containerView;
+@property (nonatomic, strong) IBOutlet UIView*                          takePhotoView;
+@property (nonatomic, strong) IBOutlet UIView*                          flashView;
+@property (nonatomic, strong) IBOutlet UIGestureRecognizer*             continuousFocusGesture;
+@property (nonatomic, strong) IBOutlet UIGestureRecognizer*             focusGesture;
+@property (nonatomic, strong) IBOutlet UIGestureRecognizer*             flashGesture;
+@property (nonatomic, weak)   id <NativeCameraViewControllerDelegate>   delegate;
+@property (nonatomic, strong) NativeCamera*                             camera;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer*               captureVideoPreviewLayer;
+@property (nonatomic, strong) TransitionGestureRecognizer*              transitionGestureRecognizer;
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
@@ -33,7 +33,7 @@
 
 @end
 
-@protocol CameraViewControllerDelegate <NSObject>
+@protocol NativeCameraViewControllerDelegate <NSObject>
 
 @required
 

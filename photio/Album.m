@@ -1,19 +1,19 @@
 //
-//  Tag.m
+//  Album.m
 //  photio
 //
-//  Created by Troy Stribling on 5/19/12.
+//  Created by Troy Stribling on 6/2/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "Tag.h"
+#import "Album.h"
 #import "Capture.h"
 
 
-@implementation Tag
+@implementation Album
 
 @dynamic name;
-@dynamic usageCount;
+@dynamic entries;
 @dynamic capture;
 
 @end

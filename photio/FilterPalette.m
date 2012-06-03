@@ -2,7 +2,7 @@
 //  FilterPalette.m
 //  photio
 //
-//  Created by Troy Stribling on 5/28/12.
+//  Created by Troy Stribling on 6/2/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 

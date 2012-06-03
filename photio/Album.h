@@ -1,8 +1,8 @@
 //
-//  Tag.h
+//  Album.h
 //  photio
 //
-//  Created by Troy Stribling on 5/19/12.
+//  Created by Troy Stribling on 6/2/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -11,10 +11,10 @@
 
 @class Capture;
 
-@interface Tag : NSManagedObject
+@interface Album : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * usageCount;
+@property (nonatomic, retain) NSNumber * name;
+@property (nonatomic, retain) NSNumber * entries;
 @property (nonatomic, retain) Capture *capture;
 
 @end

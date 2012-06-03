@@ -1,5 +1,5 @@
 //
-//  Camera.h
+//  NativeCamera.h
 //  photio
 //
 //  Created by Troy Stribling on 3/2/12.
@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-@protocol CameraDelegate;
+@protocol NativeCameraDelegate;
 
-@interface Camera : NSObject {
+@interface NativeCamera : NSObject {
 }
 
 @property (nonatomic, strong) AVCaptureSession*                 session;
@@ -21,7 +21,7 @@
 @property (nonatomic, assign) id                                deviceConnectedObserver;
 @property (nonatomic, assign) id                                deviceDisconnectedObserver;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier        backgroundRecordingID;
-@property (nonatomic, assign) id <CameraDelegate>               delegate;
+@property (nonatomic, assign) id <NativeCameraDelegate>         delegate;
 
 - (void)setupSession;
 - (void)captureStillImage;
@@ -36,11 +36,11 @@
 
 @end
 
-@protocol CameraDelegate <NSObject>
+@protocol NativeCameraDelegate <NSObject>
 
 @required
 
-- (void)camera:(Camera*)_camera didFailWithError:(NSError*)_error;
-- (void)camera:(Camera*)_camera didCaptureImage:(UIImage*)_image;
+- (void)camera:(NativeCamera*)_camera didFailWithError:(NSError*)_error;
+- (void)camera:(NativeCamera*)_camera didCaptureImage:(UIImage*)_image;
 
 @end

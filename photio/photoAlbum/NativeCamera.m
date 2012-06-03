@@ -1,17 +1,17 @@
 //
-//  Camera.m
+//  NativeCamera.m
 //  photio
 //
 //  Created by Troy Stribling on 3/2/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "Camera.h"
+#import "NativeCamera.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/CGImageProperties.h>
 
-@interface Camera (PrivateAPI)
+@interface NativeCamera (PrivateAPI)
 
 + (AVCaptureConnection*)connectionWithMediaType:(NSString*)_mediaType fromConnections:(NSArray*)_connections ;
 - (AVCaptureDevice*)cameraWithPosition:(AVCaptureDevicePosition)position;
@@ -24,8 +24,8 @@
 
 
 #pragma mark -
-#pragma mark Camera
-@implementation Camera
+#pragma mark NativeCamera
+@implementation NativeCamera
 
 @synthesize session, orientation, videoInput, stillImageOutput, deviceConnectedObserver, deviceDisconnectedObserver,
             backgroundRecordingID, delegate;
@@ -233,8 +233,8 @@
 
 
 #pragma mark -
-#pragma mark Camera PrivateAPI
-@implementation Camera (PrivateAPI)
+#pragma mark NativeCamera PrivateAPI
+@implementation NativeCamera (PrivateAPI)
 
 + (AVCaptureConnection*)connectionWithMediaType:(NSString*)_mediaType fromConnections:(NSArray*)_connections {
 	for (AVCaptureConnection *connection in _connections) {

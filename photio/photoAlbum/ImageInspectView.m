@@ -165,7 +165,7 @@
 #pragma mark ImageEditViewController
 
 - (void)exportToCameraRoll {
-    [[ViewGeneral instance] showProgressViewWithMessage:@"Exporting to Camera Roll"];
+    [[ViewGeneral instance] showProgressViewWithMessage:@"Saving to Camera Roll"];
     UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
 }
 

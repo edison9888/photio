@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Album" representedClassName="Album" syncable="YES">
+        <attribute name="entries" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="album" inverseEntity="Capture" syncable="YES"/>
+    </entity>
+    <entity name="Camera" representedClassName="Camera" syncable="YES">
+        <attribute name="autoAdjustEnabled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="cameraId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="hasAutoAdjust" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hasParameter" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="imageFilename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="maximumValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minimumValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="purchased" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="usageRate" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="cameraUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CameraUsed" inverseName="camera" inverseEntity="CameraUsed" syncable="YES"/>
+    </entity>
+    <entity name="CameraUsed" representedClassName="CameraUsed" syncable="YES">
+        <attribute name="autoAdjusted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="camera" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Camera" inverseName="cameraUsed" inverseEntity="Camera" syncable="YES"/>
+        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="cameraUsed" inverseEntity="Capture" syncable="YES"/>
+    </entity>
     <entity name="Capture" representedClassName="Capture" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
@@ -9,9 +36,11 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
+        <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
+        <relationship name="filterUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FilterUsed" inverseName="capture" inverseEntity="FilterUsed" syncable="YES"/>
         <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Image" inverseName="capture" inverseEntity="Image" syncable="YES"/>
         <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
-        <relationship name="tag" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="capture" inverseEntity="Tag" syncable="YES"/>
     </entity>
     <entity name="Filter" representedClassName="Filter" syncable="YES">
         <attribute name="defaultValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -26,6 +55,7 @@
         <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="usageRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="filterPalette" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="FilterPalette" inverseName="filters" inverseEntity="FilterPalette" syncable="YES"/>
+        <relationship name="filterUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FilterUsed" inverseName="filter" inverseEntity="FilterUsed" syncable="YES"/>
     </entity>
     <entity name="FilterPalette" representedClassName="FilterPalette" syncable="YES">
         <attribute name="filterPaletteId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -35,6 +65,11 @@
         <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="usageRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="filters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Filter" inverseName="filterPalette" inverseEntity="Filter" syncable="YES"/>
+    </entity>
+    <entity name="FilterUsed" representedClassName="FilterUsed" syncable="YES">
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="filterUsed" inverseEntity="Capture" syncable="YES"/>
+        <relationship name="filter" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Filter" inverseName="filterUsed" inverseEntity="Filter" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -47,17 +82,15 @@
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="captures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Capture" inverseName="locale" inverseEntity="Capture" syncable="YES"/>
     </entity>
-    <entity name="Tag" representedClassName="Tag" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="usageCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="tag" inverseEntity="Capture" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="Capture" positionX="160" positionY="192" width="128" height="210"/>
-        <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Capture" positionX="160" positionY="192" width="128" height="240"/>
         <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
+        <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="Tag" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Album" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Camera" positionX="160" positionY="192" width="128" height="255"/>
+        <element name="CameraUsed" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>
     </elements>
 </model>

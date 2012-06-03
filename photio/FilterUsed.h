@@ -1,5 +1,5 @@
 //
-//  Image.h
+//  FilterUsed.h
 //  photio
 //
 //  Created by Troy Stribling on 6/2/12.
@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Capture;
+@class Capture, Filter;
 
-@interface Image : NSManagedObject
+@interface FilterUsed : NSManagedObject
 
-@property (nonatomic, retain) id image;
+@property (nonatomic, retain) NSNumber * value;
+@property (nonatomic, retain) Filter *filter;
 @property (nonatomic, retain) Capture *capture;
 
 @end

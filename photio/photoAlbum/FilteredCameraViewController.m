@@ -7,6 +7,7 @@
 //
 
 #import "FilteredCameraViewController.h"
+#import "ParameterSliderView.h"
 #import "ViewGeneral.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
@@ -23,7 +24,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation FilteredCameraViewController
 
-@synthesize containerView, delegate, captureImageGesture, stillCamera, filter, transitionGestureRecognizer;
+@synthesize containerView, delegate, captureImageGesture, cameraControlsView, cameraConfigView, 
+            selectedCameraView, autoAdjustView, parameterView, stillCamera, filter, transitionGestureRecognizer;
 
 #pragma mark -
 #pragma mark FilteredCameraViewController PrivateAPI
