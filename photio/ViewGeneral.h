@@ -22,7 +22,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property(nonatomic, assign) BOOL                           notAnimating;
 @property(nonatomic, strong) UIView*                        containerView;
-@property(nonatomic, strong) UIView*                        shutter;
 @property(nonatomic, strong) NSManagedObjectContext*        managedObjectContext;
 @property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
@@ -41,7 +40,6 @@
 + (void)alertOnError:(NSError*)error;
 
 - (void)createViews:(UIView*)_containerView;
-- (void)openShutter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)saveImage:(ImageInspectView*)_imageInspectView;

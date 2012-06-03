@@ -7,7 +7,6 @@
 //
 
 #import "CameraFactory.h"
-#import "Camera.h"
 #import "FilteredCameraViewController.h"
 #import "ViewGeneral.h"
 
@@ -41,13 +40,13 @@ static CameraFactory* thisCameraFactory = nil;
     NSInteger configuredCameraCount = [configuredCameras count];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* cameraEntity = [NSEntityDescription entityForName:@"Cameras" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    NSEntityDescription* cameraEntity = [NSEntityDescription entityForName:@"Camera" inManagedObjectContext:viewGeneral.managedObjectContext];
     [fetchRequest setEntity:cameraEntity];   
     NSInteger cameraCount = [viewGeneral countFromManagedObjectContext:fetchRequest];
     
     if (cameraCount < configuredCameraCount) {
         for (int i = 0; i < (configuredCameraCount - cameraCount); i++) {
-            Camera* camera = (Camera*)[NSEntityDescription insertNewObjectForEntityForName:@"Camera" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+            Camera* camera = (Camera*)[NSEntityDescription insertNewObjectForEntityForName:@"Camera" inManagedObjectContext:viewGeneral.managedObjectContext];
             NSDictionary* configuredCamera = [configuredCameras objectAtIndex:(cameraCount + i)];
             camera.cameraId             = [configuredCamera objectForKey:@"cameraId"];
             camera.name                 = [configuredCamera objectForKey:@"name"];

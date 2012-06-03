@@ -11,7 +11,6 @@
 
 #import "ViewGeneral.h"
 #import "FilterPalette.h"
-#import "Filter.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static FilterFactory* thisFilterFactory = nil;
@@ -64,13 +63,13 @@ static FilterFactory* thisFilterFactory = nil;
     NSInteger configuredFilterClassCount = [configuredFilterClasses count];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* filterPaletteEntity = [NSEntityDescription entityForName:@"FilterPalette" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    NSEntityDescription* filterPaletteEntity = [NSEntityDescription entityForName:@"FilterPalette" inManagedObjectContext:viewGeneral.managedObjectContext];
     [fetchRequest setEntity:filterPaletteEntity];   
     NSInteger filterPaletteCount = [viewGeneral countFromManagedObjectContext:fetchRequest];
     
     if (filterPaletteCount < configuredFilterClassCount) {
         for (int i = 0; i < (configuredFilterClassCount - filterPaletteCount); i++) {
-            FilterPalette* filterPalette = (FilterPalette*)[NSEntityDescription insertNewObjectForEntityForName:@"FilterPalette" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+            FilterPalette* filterPalette = (FilterPalette*)[NSEntityDescription insertNewObjectForEntityForName:@"FilterPalette" inManagedObjectContext:viewGeneral.managedObjectContext];
             NSDictionary* configuredFilterClass = [configuredFilterClasses objectAtIndex:(filterPaletteCount + i)];
             filterPalette.name              = [configuredFilterClass objectForKey:@"name"];
             filterPalette.filterPaletteId   = [configuredFilterClass objectForKey:@"filterPaletteId"];
@@ -93,13 +92,13 @@ static FilterFactory* thisFilterFactory = nil;
     NSInteger configuredFilterCount = [configuredFilters count];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* filterEntity = [NSEntityDescription entityForName:@"Filter" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    NSEntityDescription* filterEntity = [NSEntityDescription entityForName:@"Filter" inManagedObjectContext:viewGeneral.managedObjectContext];
     [fetchRequest setEntity:filterEntity];   
     NSInteger filterCount = [viewGeneral countFromManagedObjectContext:fetchRequest];
 
     if (filterCount < configuredFilterCount) {
         for (int i = 0; i < (configuredFilterCount - filterCount); i++) {
-            Filter* filter = (Filter*)[NSEntityDescription insertNewObjectForEntityForName:@"Filter" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+            Filter* filter = (Filter*)[NSEntityDescription insertNewObjectForEntityForName:@"Filter" inManagedObjectContext:viewGeneral.managedObjectContext];
             NSDictionary* configuredFilter  = [configuredFilters objectAtIndex:(filterCount + i)];
             filter.name                = [configuredFilter objectForKey:@"name"];
             filter.filterId            = [configuredFilter objectForKey:@"filterId"];

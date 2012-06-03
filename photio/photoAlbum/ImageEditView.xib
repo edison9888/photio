@@ -95,6 +95,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="370032146"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<float key="IBUIAlpha">0.80000001192092896</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -132,7 +133,6 @@
 								<string key="NSFrame">{{20, 0}, {280, 70}}</string>
 								<reference key="NSSuperview" ref="291228529"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="951598384"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -245,11 +245,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">changeFilterClass:</string>
+						<string key="label">changeFilterPalette:</string>
 						<reference key="source" ref="581884737"/>
 						<reference key="destination" ref="191373211"/>
 					</object>
-					<int key="connectionID">50</int>
+					<int key="connectionID">56</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -379,7 +379,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">55</int>
+			<int key="maxID">56</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -395,12 +395,12 @@
 					<string key="className">ImageEditView</string>
 					<string key="superclassName">UIView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="changeFilterClass:">id</string>
+						<string key="changeFilterPalette:">id</string>
 						<string key="saveFilteredImage:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="changeFilterClass:">
-							<string key="name">changeFilterClass:</string>
+						<object class="IBActionInfo" key="changeFilterPalette:">
+							<string key="name">changeFilterPalette:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="saveFilteredImage:">

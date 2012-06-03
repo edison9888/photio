@@ -74,7 +74,6 @@ static void *AVCamFocusModeObserverContext = &AVCamFocusModeObserverContext;
         [self.camera setFlashMode:AVCaptureFlashModeOff];
         self.takePhotoView.hidden = NO;
     }
-    [[ViewGeneral instance] openShutter];
     [super viewDidLoad];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Filter.h"
 
 @class FilterPalette;
 @class Filter;

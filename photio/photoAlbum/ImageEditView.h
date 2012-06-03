@@ -10,6 +10,7 @@
 #import "ParameterSliderView.h"
 #import "FilterFactory.h"
 #import "ImageFiltersView.h"
+#import "ParameterSelectionView.h"
 
 @class ImageControlView;
 @class ParameterSliderView;
@@ -19,7 +20,7 @@
 
 @protocol ImageEditViewDelegate;
 
-@interface ImageEditView : UIView <ParameterSliderViewDelegate, ImageFiltersViewDelegate>
+@interface ImageEditView : UIView <ParameterSliderViewDelegate, ImageFiltersViewDelegate, ParameterSelectionViewDelegate>
 
 @property(nonatomic, weak)   id<ImageEditViewDelegate>          delegate;
 @property(nonatomic, strong) UIView*                            containerView;
@@ -29,6 +30,7 @@
 @property(nonatomic, strong) IBOutlet UIImageView*              imageSaveFilteredImageView;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageFilterPaletteView;
 @property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
+@property(nonatomic, strong) ParameterSelectionView*            filterPaletteSelectionView;
 @property(nonatomic, assign) FilterImageView*                   displayedFilterImage;
 @property(nonatomic, assign) FilterPalette*                     displayedFilterPalette;
 @property(nonatomic, assign) BOOL                               isInitialized;

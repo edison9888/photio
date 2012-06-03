@@ -61,15 +61,32 @@
 								<string key="NSFrame">{{125, 0}, {70, 70}}</string>
 								<reference key="NSSuperview" ref="976643160"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="920492631"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<float key="IBUIAlpha">0.60000002384185791</float>
 								<int key="IBUIContentMode">4</int>
 								<array key="IBUIGestureRecognizers" id="0"/>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">capture-photo.png</string>
+								</object>
+							</object>
+							<object class="IBUIImageView" id="920492631">
+								<reference key="NSNextResponder" ref="976643160"/>
+								<int key="NSvFlags">274</int>
+								<string key="NSFrame">{{250, 0}, {70, 70}}</string>
+								<reference key="NSSuperview" ref="976643160"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<float key="IBUIAlpha">0.60000002384185791</float>
+								<reference key="IBUIGestureRecognizers" ref="0"/>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">configuration.png</string>
 								</object>
 							</object>
 						</array>
@@ -121,6 +138,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="120025519"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<float key="IBUIAlpha">0.60000002384185791</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -133,6 +151,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="976643160"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<float key="IBUIAlpha">0.60000002384185791</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -159,11 +178,16 @@
 					</object>
 				</object>
 				<int key="IBUIContentMode">2</int>
+				<reference key="IBUIGestureRecognizers" ref="0"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITapGestureRecognizer" id="94398555"/>
 			<object class="IBUITapGestureRecognizer" id="460148142"/>
 			<object class="IBUITapGestureRecognizer" id="688574721"/>
+			<object class="IBUITapGestureRecognizer" id="789311612">
+				<int key="IBUINumberOfTapsRequired">2</int>
+			</object>
+			<object class="IBUITapGestureRecognizer" id="255396719"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -193,35 +217,45 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">cameraControlsView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="1073616536"/>
-					</object>
-					<int key="connectionID">18</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">parameterView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="120025519"/>
-					</object>
-					<int key="connectionID">28</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">autoAdjustView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="421423250"/>
-					</object>
-					<int key="connectionID">29</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">selectedCameraView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="501121767"/>
 					</object>
 					<int key="connectionID">30</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cameraControlsView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="976643160"/>
+					</object>
+					<int key="connectionID">31</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cameraParameterView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="120025519"/>
+					</object>
+					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cameraAutoAdjustView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="421423250"/>
+					</object>
+					<int key="connectionID">40</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="789311612"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">33</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -230,16 +264,6 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">7</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
-						<string key="label">gestureRecognizers</string>
-						<reference key="source" ref="976643160"/>
-						<reference key="destination" ref="94398555"/>
-						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
-						<bool key="addsContentToExistingCollection">YES</bool>
-					</object>
-					<int key="connectionID">13</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -270,6 +294,32 @@
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
 					<int key="connectionID">26</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">toggleCameraConfiguration:</string>
+						<reference key="source" ref="789311612"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">34</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="920492631"/>
+						<reference key="destination" ref="255396719"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">37</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">openApplicationConfiguration:</string>
+						<reference key="source" ref="255396719"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">38</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -307,6 +357,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="126275514"/>
 							<reference ref="574172698"/>
+							<reference ref="920492631"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Camera Controls Container</string>
@@ -317,13 +368,6 @@
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="976643160"/>
 						<string key="objectName">Camera Control Background</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">9</int>
-						<reference key="object" ref="574172698"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="976643160"/>
-						<string key="objectName">Capture Image</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
@@ -382,6 +426,31 @@
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Auto Adjust</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">9</int>
+						<reference key="object" ref="574172698"/>
+						<reference key="parent" ref="976643160"/>
+						<string key="objectName">Capture Image</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">32</int>
+						<reference key="object" ref="789311612"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Toggle Camera Configuratuin</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="920492631"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="976643160"/>
+						<string key="objectName">Application Configuration</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">36</int>
+						<reference key="object" ref="255396719"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Application Configuration</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -402,6 +471,9 @@
 				<string key="22.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="23.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="32.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="35.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -410,35 +482,43 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">30</int>
+			<int key="maxID">40</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">FilteredCameraViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">captureStillImage:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">captureStillImage:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="captureStillImage:">id</string>
+						<string key="openApplicationConfiguration:">id</string>
+						<string key="toggleCameraConfiguration:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="captureStillImage:">
 							<string key="name">captureStillImage:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="openApplicationConfiguration:">
+							<string key="name">openApplicationConfiguration:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleCameraConfiguration:">
+							<string key="name">toggleCameraConfiguration:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="autoAdjustView">UIImageView</string>
+						<string key="cameraAutoAdjustView">UIImageView</string>
 						<string key="cameraConfigView">UIView</string>
 						<string key="cameraControlsView">UIView</string>
+						<string key="cameraParameterView">ParameterSliderView</string>
 						<string key="captureImageGesture">UIGestureRecognizer</string>
-						<string key="parameterView">ParameterSliderView</string>
 						<string key="selectedCameraView">UIImageView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="autoAdjustView">
-							<string key="name">autoAdjustView</string>
+						<object class="IBToOneOutletInfo" key="cameraAutoAdjustView">
+							<string key="name">cameraAutoAdjustView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="cameraConfigView">
@@ -449,13 +529,13 @@
 							<string key="name">cameraControlsView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="cameraParameterView">
+							<string key="name">cameraParameterView</string>
+							<string key="candidateClassName">ParameterSliderView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="captureImageGesture">
 							<string key="name">captureImageGesture</string>
 							<string key="candidateClassName">UIGestureRecognizer</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="parameterView">
-							<string key="name">parameterView</string>
-							<string key="candidateClassName">ParameterSliderView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="selectedCameraView">
 							<string key="name">selectedCameraView</string>
@@ -501,10 +581,10 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">capture-photo.png</string>
-			<string key="NS.object.0">{70, 70}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="capture-photo.png">{70, 70}</string>
+			<string key="configuration.png">{70, 70}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>
