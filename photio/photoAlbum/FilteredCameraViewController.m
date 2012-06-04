@@ -13,7 +13,7 @@
 
 #define CAMERA_SHUTTER_TRANSITION     0.2f
 #define CAMERA_SHUTTER_DELAY          1.5f
-#define CAMERA_CONTROLS_TRANSITION    0.5f
+#define CAMERA_CONTROLS_TRANSITION    0.2f
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface FilteredCameraViewController (PrivateAPI)
@@ -26,17 +26,19 @@
 - (void)openShutter;
 - (void)closeShutter;
 - (void)openShutterOnStart;
+- (void)setCamera:(Camera*)_camera;
 - (IBAction)toggleCameraConfiguration:(id)_sender;
 - (IBAction)openApplicationConfiguration:(id)_sender;
-- (void)setUpCameraConfigView:(Camera*)_camera;
+- (IBAction)changeCamera:(id)sender;
+- (IBAction)toggleAutoAdjustment:(id)sender;
 
 @end
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation FilteredCameraViewController
 
-@synthesize containerView, delegate, captureImageGesture, cameraControlsView, cameraConfigView, 
-            selectedCameraView, cameraAutoAdjustView, cameraParameterView, stillCamera, filter, transitionGestureRecognizer,
+@synthesize containerView, delegate, cameraSelectionView, captureImageGesture, cameraControlsView, cameraConfigView, 
+            selectedCameraView, cameraAutoAdjustView, cameraParameterView, transitionGestureRecognizer,
             shutterView, cameraConfigIsShown, displayedCamera;
 
 #pragma mark -
@@ -44,8 +46,8 @@
 
 - (IBAction)captureStillImage:(id)sender {
     self.captureImageGesture.enabled = NO;
-    [self openShutter];
-    [self.stillCamera capturePhotoAsJPEGProcessedUpToFilter:self.filter withCompletionHandler:^(NSData* imageData, NSError* error){
+    [self closeShutter];
+    [[CameraFactory instance] captureStillImage:^(NSData* imageData, NSError* error) {
         if (error) {
             [ViewGeneral alertOnError:error];
         }
@@ -57,7 +59,7 @@
         }             
         runOnMainQueueWithoutDeadlocking(^{
             self.captureImageGesture.enabled = YES;
-            [self closeShutter];
+            [self openShutter];
         });
     }];
 }
@@ -120,34 +122,51 @@
     ];
 }
 
-- (void)openShutter {
+- (void)setCamera:(Camera*)_camera {
+    self.displayedCamera = _camera;
+    [CameraFactory setCamera:_camera forView:(GPUImageView*)self.view];
+    self.selectedCameraView.image = [UIImage imageNamed:_camera.imageFilename];
+    if ([_camera.hasAutoAdjust boolValue]) {
+        self.cameraAutoAdjustView.hidden = NO;
+    } else {
+        self.cameraAutoAdjustView.hidden = YES;
+    }
+    if ([_camera.hasParameter boolValue]) {
+        self.cameraParameterView.maxValue = [_camera.maximumValue floatValue];
+        self.cameraParameterView.minValue = [_camera.minimumValue floatValue];
+        self.cameraParameterView.initialValue = [_camera.value floatValue];
+        self.cameraParameterView.hidden = NO;
+    } else {
+        self.cameraParameterView.hidden = YES;
+    }
+}
+
+- (void)closeShutter {
     self.shutterView.alpha = 0.0;
     [self.view addSubview:self.shutterView];
     [UIView animateWithDuration:CAMERA_SHUTTER_TRANSITION
         delay:0.0
         options:UIViewAnimationOptionCurveEaseOut
         animations:^{
-          self.shutterView.alpha = 1.0;
+             self.shutterView.alpha = 1.0;
         }
         completion:^(BOOL _finished){
         }
     ];
 }
 
-- (void)closeShutter {
+- (void)openShutter {
     [UIView animateWithDuration:CAMERA_SHUTTER_TRANSITION 
         delay:0.0 
         options:UIViewAnimationOptionCurveEaseOut 
         animations:^{
-             self.shutterView.alpha = 0.0;
+            self.shutterView.alpha = 0.0;
         }
         completion:^(BOOL _finished) {
-            [self.shutterView removeFromSuperview];
+           [self.shutterView removeFromSuperview];
         }
-     ];
-
+    ];
 }
-
 - (void)openShutterOnStart {
     self.shutterView = [[UIImageView alloc] initWithFrame:self.view.frame];
     self.shutterView.backgroundColor = [UIColor blackColor];
@@ -179,22 +198,35 @@
     
 }
 
-- (void)setUpCameraConfigView:(Camera*)_camera {
-    self.displayedCamera = _camera;
-    self.selectedCameraView.image = [UIImage imageNamed:_camera.imageFilename];
-    if ([_camera.hasAutoAdjust boolValue]) {
-        self.cameraAutoAdjustView.hidden = NO;
-    } else {
-        self.cameraAutoAdjustView.hidden = YES;
-    }
-    if ([_camera.hasParameter boolValue]) {
-        self.cameraParameterView.maxValue = [_camera.maximumValue floatValue];
-        self.cameraParameterView.minValue = [_camera.minimumValue floatValue];
-        self.cameraParameterView.initialValue = [_camera.value floatValue];
-        self.cameraParameterView.hidden = NO;
-    } else {
-        self.cameraParameterView.hidden = YES;
-    }
+- (IBAction)toggleAutoAdjustment:(id)sender {
+    
+}
+
+- (IBAction)changeCamera:(id)sender {
+    CGRect configViewRect = self.cameraConfigView.frame;
+    CGRect controlsViewRect = self.cameraControlsView.frame;
+    __block CGRect showConfigViewRect = CGRectMake(configViewRect.origin.x, -configViewRect.size.height, configViewRect.size.width, configViewRect.size.height);
+    __block CGRect showControlViewRect = CGRectMake(controlsViewRect.origin.x, self.view.frame.size.height, controlsViewRect.size.width, controlsViewRect.size.height);
+    __block CGRect hideConfigViewRect = CGRectMake(configViewRect.origin.x, 0.0, configViewRect.size.width, configViewRect.size.height);
+    __block CGRect hideControlViewRect = CGRectMake(controlsViewRect.origin.x, self.view.frame.size.height - controlsViewRect.size.height, controlsViewRect.size.width, controlsViewRect.size.height);
+    self.cameraSelectionView = [ParameterSelectionView initInView:self.view 
+        withDelegate:self 
+        showAnimation:^{
+           self.cameraConfigView.frame = showConfigViewRect;
+           self.cameraControlsView.frame = showControlViewRect;
+        }
+        hideAnimation:^{
+            [UIView animateWithDuration:CAMERA_CONTROLS_TRANSITION
+                 animations:^{
+                     self.cameraConfigView.frame = hideConfigViewRect;
+                     self.cameraControlsView.frame = hideControlViewRect;
+                 } 
+                 completion:^(BOOL _finished) {
+                 }
+            ];
+        }
+        andTitle:@"Cameras"
+    ];
 }
 
 #pragma mark -
@@ -216,23 +248,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpCameraConfigView:[[CameraFactory instance] defaultCamera]];
     self.cameraConfigView.frame = CGRectMake(self.cameraConfigView.frame.origin.x, -self.cameraConfigView.frame.size.height, self.cameraConfigView.frame.size.width, self.cameraConfigView.frame.size.height);
     self.cameraControlsView.frame = CGRectMake(self.cameraControlsView.frame.origin.x, self.view.frame.size.height + self.cameraControlsView.frame.size.height, self.cameraControlsView.frame.size.width, self.cameraControlsView.frame.size.height);
     [self.cameraConfigView removeFromSuperview];
     [self openShutterOnStart];
-    self.stillCamera = [[GPUImageStillCamera alloc] init];
-    self.stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
-    self.filter = [[GPUImageGammaFilter alloc] init];
-//    self.filter = [[GPUImageSketchFilter alloc] init];
-//    [(GPUImageSketchFilter*)filter setTexelHeight:(1.0 / 1024.0)];
-//    [(GPUImageSketchFilter*)filter setTexelWidth:(1.0 / 768.0)];
-	[self.filter prepareForImageCapture];    
-    [self.stillCamera addTarget:filter];
-    GPUImageView* filterView = (GPUImageView*)self.view;
-    filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-    [self.filter addTarget:filterView];    
-    [self.stillCamera startCameraCapture];
+    GPUImageView* gpuImageView = (GPUImageView*)self.view;
+    gpuImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+    [self setCamera:[[CameraFactory instance] defaultCamera]];
 }
 
 - (void)viewDidUnload {
@@ -285,7 +307,7 @@
 }
 
 - (void)didSwipeUp:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [self.stillCamera rotateCamera];
+    [[CameraFactory instance].stillCamera rotateCamera];
 }
 
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -301,12 +323,29 @@
 }
 
 - (void)didReachMaxDragUp:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
-//    [self toggleCamera];
-//    [self setFlashImage];
+    [[CameraFactory instance].stillCamera rotateCamera];
 }
 
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    
     [[ViewGeneral instance] transitionCameraToInspectImage];
+}
+
+#pragma mark -
+#pragma mark ParameterSelectionViewDelegate
+
+- (NSArray*)loadParameters {
+    return [[CameraFactory instance] cameras];
+}
+
+- (void)configureParemeterCell:(ParameterSelectionCell*)_parameterCell withParameter:(id)_parameter {
+    _parameterCell.parameterIcon.image = [UIImage imageNamed:[_parameter valueForKey:@"imageFilename"]];
+    _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
+}
+
+- (void)selectedParameter:(id)_parameter {
+    self.selectedCameraView.image = [UIImage imageNamed:[_parameter valueForKey:@"imageFilename"]];
+    [self setCamera:_parameter];
+    [self.cameraSelectionView removeView];
 }
 
 @end

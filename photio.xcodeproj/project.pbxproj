@@ -641,11 +641,6 @@
 		05C99EEB14F05A5500D09F3E /* PhotoAlbum */ = {
 			isa = PBXGroup;
 			children = (
-				059772EF1527D787008F3A1B /* NativeCamera.h */,
-				059772F01527D787008F3A1B /* NativeCamera.m */,
-				059772F31527D787008F3A1B /* NativeCameraViewController.h */,
-				059772F41527D787008F3A1B /* NativeCameraViewController.m */,
-				050CF14F14F9A27D00A31059 /* NativeCameraViewController.xib */,
 				05809CAF155B3C6700AF2079 /* CommentViewController.h */,
 				05809CB0155B3C6700AF2079 /* CommentViewController.m */,
 				05809CB1155B3C6700AF2079 /* CommentViewController.xib */,
@@ -664,12 +659,6 @@
 				05E4C21E1552233600C7266E /* ImageEditViewController.xib */,
 				05AF480D154DCCAE0099576A /* ImageEntriesView.h */,
 				05AF480E154DCCAE0099576A /* ImageEntriesView.m */,
-				05250E8B15686C150060F993 /* ParameterSelectionCell.h */,
-				05250E8C15686C150060F993 /* ParameterSelectionCell.m */,
-				05250E8F15686D680060F993 /* ParameterSelectionCell.xib */,
-				050AF29315681B1600EC6C13 /* ParameterSelectionView.h */,
-				050AF29415681B1600EC6C13 /* ParameterSelectionView.m */,
-				050AF29115681AE600EC6C13 /* ParameterSelectionView.xib */,
 				05250ED61569B4850060F993 /* ImageFiltersView.h */,
 				05250ED71569B4860060F993 /* ImageFiltersView.m */,
 				05B83718152E6C5F00D99A40 /* ImageInspectView.h */,
@@ -680,6 +669,17 @@
 				05E4C222155224D400C7266E /* ImageMetaDataEditView.h */,
 				05E4C223155224D400C7266E /* ImageMetaDataEditView.m */,
 				058736B915556941007A5654 /* ImageMetaDataEditView.xib */,
+				059772EF1527D787008F3A1B /* NativeCamera.h */,
+				059772F01527D787008F3A1B /* NativeCamera.m */,
+				059772F31527D787008F3A1B /* NativeCameraViewController.h */,
+				059772F41527D787008F3A1B /* NativeCameraViewController.m */,
+				050CF14F14F9A27D00A31059 /* NativeCameraViewController.xib */,
+				05250E8B15686C150060F993 /* ParameterSelectionCell.h */,
+				05250E8C15686C150060F993 /* ParameterSelectionCell.m */,
+				05250E8F15686D680060F993 /* ParameterSelectionCell.xib */,
+				050AF29315681B1600EC6C13 /* ParameterSelectionView.h */,
+				050AF29415681B1600EC6C13 /* ParameterSelectionView.m */,
+				050AF29115681AE600EC6C13 /* ParameterSelectionView.xib */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;

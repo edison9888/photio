@@ -78,7 +78,6 @@
 								<string key="NSFrame">{{250, 0}, {70, 70}}</string>
 								<reference key="NSSuperview" ref="976643160"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.60000002384185791</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
@@ -140,7 +139,6 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.60000002384185791</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUIImageView" id="501121767">
@@ -153,7 +151,6 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.60000002384185791</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
@@ -297,6 +294,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">changeCamera:</string>
+						<reference key="source" ref="460148142"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">41</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">toggleAutoAdjustment:</string>
+						<reference key="source" ref="688574721"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">42</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">toggleCameraConfiguration:</string>
 						<reference key="source" ref="789311612"/>
 						<reference key="destination" ref="372490531"/>
@@ -418,13 +431,13 @@
 						<int key="objectID">23</int>
 						<reference key="object" ref="460148142"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">Selected Camera</string>
+						<string key="objectName">Change Camera</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
 						<reference key="object" ref="688574721"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">Auto Adjust</string>
+						<string key="objectName">Toggle Auto Adjust</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
@@ -436,7 +449,7 @@
 						<int key="objectID">32</int>
 						<reference key="object" ref="789311612"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">Toggle Camera Configuratuin</string>
+						<string key="objectName">Toggle Camera Configuration</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
@@ -482,7 +495,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">40</int>
+			<int key="maxID">42</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -491,7 +504,9 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="captureStillImage:">id</string>
+						<string key="changeCamera:">id</string>
 						<string key="openApplicationConfiguration:">id</string>
+						<string key="toggleAutoAdjustment:">id</string>
 						<string key="toggleCameraConfiguration:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -499,8 +514,16 @@
 							<string key="name">captureStillImage:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="changeCamera:">
+							<string key="name">changeCamera:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="openApplicationConfiguration:">
 							<string key="name">openApplicationConfiguration:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="toggleAutoAdjustment:">
+							<string key="name">toggleAutoAdjustment:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="toggleCameraConfiguration:">

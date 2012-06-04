@@ -17,17 +17,22 @@ static CameraFactory* thisCameraFactory = nil;
 @interface CameraFactory (PrivateAPI)
 
 + (NSArray*)loadCameras;
++ (void)setCamera:(FilteredCameraViewController*)_filteredCameraViewController filter:(GPUImageOutput<GPUImageInput>*)_filter;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////
 @interface CameraFactory (Cameras)
+
+- (void)setIPhoneCamera:(FilteredCameraViewController*)_filteredCameraViewController;
+- (void)setInstantCamera:(FilteredCameraViewController*)_filteredCameraViewController;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraFactory
 
-@synthesize loadedCameras;
+@synthesize loadedCameras, stillCamera, filter;
 
 #pragma mark -
 #pragma mark CameraFactory PrivayeApi
@@ -66,6 +71,41 @@ static CameraFactory* thisCameraFactory = nil;
     return [viewGeneral fetchFromManagedObjectContext:fetchRequest];    
 }
 
+- (void)setCameraFilter:(GPUImageOutput<GPUImageInput>*)_filter forView:(GPUImageView*)_imageView {
+    if (self.stillCamera) {
+        [self.stillCamera stopCameraCapture];
+        [self.stillCamera removeAllTargets];
+        [self.filter removeAllTargets];
+    }
+    self.stillCamera = [[GPUImageStillCamera alloc] init];
+    self.stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+    self.filter = _filter;
+    [self.filter prepareForImageCapture];    
+    [self.stillCamera addTarget:_filter];
+    [self.filter addTarget:_imageView];  
+    [self.stillCamera startCameraCapture];
+
+}
+
+- (void)captureStillImage:(void(^)(NSData* imageData, NSError* error))_completionHandler {
+    [self.stillCamera capturePhotoAsJPEGProcessedUpToFilter:self.filter withCompletionHandler:_completionHandler];
+}
+
+#pragma mark -
+#pragma mark CameraFactory (Cameras)
+
++ (void)setIPhoneCamera:(GPUImageView*)_imageView {
+    GPUImageGammaFilter* filter = [[GPUImageGammaFilter alloc] init];
+    [[self instance] setCameraFilter:filter forView:_imageView];
+}
+
++ (void)setInstantCamera:(GPUImageView*)_imageView {
+    GPUImageSketchFilter* filter = [[GPUImageSketchFilter alloc] init];
+    [filter setTexelHeight:(1.0 / 1024.0)];
+    [filter setTexelWidth:(1.0 / 768.0)];
+    [[self instance] setCameraFilter:filter forView:_imageView];
+}
+
 #pragma mark -
 #pragma mark CameraFactory
 
@@ -79,7 +119,17 @@ static CameraFactory* thisCameraFactory = nil;
     return thisCameraFactory;
 }
 
-+ (void)applyCamera:(Camera*)_camera toViewController:(FilteredCameraViewController*)_fileteredCameraViewController {
++ (void)setCamera:(Camera*)_camera forView:(GPUImageView*)_imageView {
+    switch ([_camera.cameraId intValue]) {
+        case CameraTypeIPhone:
+            [self setIPhoneCamera:_imageView];
+            break;
+        case CameraTypeInstant:
+            [self setInstantCamera:_imageView];
+            break;            
+        default:
+            break;
+    }
 }
 
 - (Camera*)defaultCamera {

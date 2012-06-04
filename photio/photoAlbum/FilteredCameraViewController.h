@@ -7,26 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParameterSelectionView.h"
 #import "TransitionGestureRecognizer.h"
-#import "GPUImage.h"
 
 @protocol FilteredCameraViewControllerDelegate;
 
 @class ParameterSliderView;
 @class Camera;
 
-@interface FilteredCameraViewController : UIViewController <TransitionGestureRecognizerDelegate>
+@interface FilteredCameraViewController : UIViewController <TransitionGestureRecognizerDelegate, ParameterSelectionViewDelegate>
 
 @property(nonatomic, weak)      UIView*                                     containerView;
 @property(nonatomic, weak)      id<FilteredCameraViewControllerDelegate>    delegate;
+@property(nonatomic, strong)    ParameterSelectionView*                     cameraSelectionView;
 @property(nonatomic, strong)    IBOutlet UIGestureRecognizer*               captureImageGesture;
 @property(nonatomic, strong)    IBOutlet UIView*                            cameraControlsView;
 @property(nonatomic, strong)    IBOutlet UIView*                            cameraConfigView;
 @property(nonatomic, strong)    IBOutlet UIImageView*                       selectedCameraView;
 @property(nonatomic, strong)    IBOutlet UIImageView*                       cameraAutoAdjustView;
 @property(nonatomic, strong)    IBOutlet ParameterSliderView*               cameraParameterView;
-@property(nonatomic, strong)    GPUImageStillCamera*                        stillCamera;
-@property(nonatomic, strong)    GPUImageOutput<GPUImageInput>*              filter;
 @property(nonatomic, strong)    TransitionGestureRecognizer*                transitionGestureRecognizer;
 @property(nonatomic, strong)    UIView*                                     shutterView;
 @property(nonatomic, assign)    BOOL                                        cameraConfigIsShown;
