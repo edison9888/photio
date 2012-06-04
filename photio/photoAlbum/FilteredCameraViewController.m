@@ -124,7 +124,7 @@
 
 - (void)setCamera:(Camera*)_camera {
     self.displayedCamera = _camera;
-    [CameraFactory setCamera:_camera forView:(GPUImageView*)self.view];
+    [[CameraFactory instance] setCamera:_camera forView:(GPUImageView*)self.view];
     self.selectedCameraView.image = [UIImage imageNamed:_camera.imageFilename];
     if ([_camera.hasAutoAdjust boolValue]) {
         self.cameraAutoAdjustView.hidden = NO;
