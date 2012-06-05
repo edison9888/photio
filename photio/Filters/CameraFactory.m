@@ -26,6 +26,7 @@ static CameraFactory* thisCameraFactory = nil;
 
 - (void)setIPhoneCamera:(GPUImageView*)_imageView;
 - (void)setInstantCamera:(GPUImageView*)_imageView;
+- (void)setPixelCamera:(GPUImageView*)_imageView;
 
 @end
 
@@ -114,7 +115,7 @@ static CameraFactory* thisCameraFactory = nil;
     [saturationFilter prepareForImageCapture];
     
     GPUImageRGBFilter* rgbFilter = [[GPUImageRGBFilter alloc] init];
-    [rgbFilter setBlue:0.];
+    [rgbFilter setBlue:0.85];
     [rgbFilter prepareForImageCapture];
     
     GPUImageVignetteFilter* vignetteFilter = [[GPUImageVignetteFilter alloc] init];
@@ -127,8 +128,36 @@ static CameraFactory* thisCameraFactory = nil;
     
     [saturationFilter addTarget:rgbFilter];
     [rgbFilter addTarget:vignetteFilter];
+    
     [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
+    
+    [self setCameraFilter:filterGroup forView:_imageView];
+}
+
+- (void)setPixelCamera:(GPUImageView*)_imageView {
+    GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
+
+    GPUImageToonFilter* toonFilter = [[GPUImageToonFilter alloc] init];
+    [toonFilter prepareForImageCapture];
+    
+    GPUImageGaussianBlurFilter* gaussianFilter = [[GPUImageGaussianBlurFilter alloc] init];
+    [gaussianFilter setBlurSize:1.5];
+    [gaussianFilter prepareForImageCapture];
+
+    GPUImagePixellateFilter* pixelFilter = [[GPUImagePixellateFilter alloc] init];
+    [pixelFilter setFractionalWidthOfAPixel:0.02];
+    [pixelFilter prepareForImageCapture];
+    
+    [filterGroup addFilter:toonFilter];
+    [filterGroup addFilter:gaussianFilter];
+    [filterGroup addFilter:pixelFilter];
+    
+    [toonFilter addTarget:gaussianFilter];
+    [gaussianFilter addTarget:pixelFilter];
+    
+    [filterGroup setInitialFilters:[NSArray arrayWithObject:toonFilter]];
+    [filterGroup setTerminalFilter:pixelFilter];
     
     [self setCameraFilter:filterGroup forView:_imageView];
 }
@@ -161,7 +190,10 @@ static CameraFactory* thisCameraFactory = nil;
             break;
         case CameraTypeInstant:
             [self setInstantCamera:_imageView];
-            break;            
+            break;  
+        case CameraTypePixel:
+            [self setPixelCamera:_imageView];
+            break;
         default:
             break;
     }
@@ -180,7 +212,7 @@ static CameraFactory* thisCameraFactory = nil;
 }
 
 - (Camera*)defaultCamera {
-    return [self.loadedCameras objectAtIndex:CameraTypeInstant];
+    return [self.loadedCameras objectAtIndex:CameraTypeIPhone];
 }
 
 - (NSArray*)cameras {

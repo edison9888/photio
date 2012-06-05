@@ -52,6 +52,30 @@
 			<key>purchased</key>
 			<true/>
 		</dict>
+		<dict>
+			<key>cameraId</key>
+			<integer>2</integer>
+			<key>name</key>
+			<string>PixelCam</string>
+			<key>hasParameter</key>
+			<true/>
+			<key>imageFilename</key>
+			<string>pixel.png</string>
+			<key>maximumValue</key>
+			<integer>1</integer>
+			<key>minumumVale</key>
+			<integer>0</integer>
+			<key>value</key>
+			<real>0.5</real>
+			<key>hasAutoAdjust</key>
+			<true/>
+			<key>autoAdjustEnabled</key>
+			<false/>
+			<key>hidden</key>
+			<false/>
+			<key>purchased</key>
+			<true/>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -15,7 +15,8 @@
 
 typedef enum {
     CameraTypeIPhone,
-    CameraTypeInstant
+    CameraTypeInstant,
+    CameraTypePixel
 } CameraType;
 
 @interface CameraFactory : NSObject
