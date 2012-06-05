@@ -108,20 +108,29 @@ static CameraFactory* thisCameraFactory = nil;
 
 - (void)setInstantCamera:(GPUImageView*)_imageView {
     GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
+    
     GPUImageSaturationFilter* saturationFilter = [[GPUImageSaturationFilter alloc] init];
     [saturationFilter setSaturation:0.4];
+    [saturationFilter prepareForImageCapture];
+    
     GPUImageRGBFilter* rgbFilter = [[GPUImageRGBFilter alloc] init];
-    [rgbFilter setRed:0.75];
+    [rgbFilter setBlue:0.];
+    [rgbFilter prepareForImageCapture];
+    
     GPUImageVignetteFilter* vignetteFilter = [[GPUImageVignetteFilter alloc] init];
-    [vignetteFilter setVignetteEnd:0.5];
+    [vignetteFilter setVignetteEnd:0.85];
+    [vignetteFilter prepareForImageCapture];
+    
     [filterGroup addFilter:saturationFilter];
     [filterGroup addFilter:rgbFilter];
     [filterGroup addFilter:vignetteFilter];
+    
     [saturationFilter addTarget:rgbFilter];
     [rgbFilter addTarget:vignetteFilter];
     [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
-    [self setCameraFilter:saturationFilter forView:_imageView];
+    
+    [self setCameraFilter:filterGroup forView:_imageView];
 }
 
 #pragma mark -
@@ -171,7 +180,7 @@ static CameraFactory* thisCameraFactory = nil;
 }
 
 - (Camera*)defaultCamera {
-    return [self.loadedCameras objectAtIndex:CameraTypeIPhone];
+    return [self.loadedCameras objectAtIndex:CameraTypeInstant];
 }
 
 - (NSArray*)cameras {
