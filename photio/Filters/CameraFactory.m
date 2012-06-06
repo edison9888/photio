@@ -27,6 +27,8 @@ static CameraFactory* thisCameraFactory = nil;
 - (void)setIPhoneCamera:(GPUImageView*)_imageView;
 - (void)setInstantCamera:(GPUImageView*)_imageView;
 - (void)setPixelCamera:(GPUImageView*)_imageView;
+- (void)setBoxCamera:(GPUImageView*)_imageView;
+- (void)setPlasticCamera:(GPUImageView*)_imageView;
 
 @end
 
@@ -34,6 +36,9 @@ static CameraFactory* thisCameraFactory = nil;
 @interface CameraFactory (ParameterValues)
 
 - (void)setInstantCameraParameterValue:(NSNumber*)_value;
+- (void)setPixelCameraParameterValue:(NSNumber*)_value;
+- (void)setBoxParameterValue:(NSNumber*)_value;
+- (void)setPlasticParameterValue:(NSNumber*)_value;
 
 @end
 
@@ -162,12 +167,74 @@ static CameraFactory* thisCameraFactory = nil;
     [self setCameraFilter:filterGroup forView:_imageView];
 }
 
+- (void)setBoxCamera:(GPUImageView*)_imageView {
+    GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
+    
+    GPUImageGrayscaleFilter* greyFilter = [[GPUImageGrayscaleFilter alloc] init];
+    [greyFilter prepareForImageCapture];
+    
+    GPUImageContrastFilter* contrastFilter = [[GPUImageContrastFilter alloc] init];
+    [contrastFilter setContrast:1.5];
+    [contrastFilter prepareForImageCapture];
+
+    GPUImageVignetteFilter* vignetteFilter = [[GPUImageVignetteFilter alloc] init];
+    [vignetteFilter setVignetteEnd:0.85];
+    [vignetteFilter prepareForImageCapture];
+
+    [filterGroup addFilter:greyFilter];
+    [filterGroup addFilter:contrastFilter];
+    [filterGroup addFilter:vignetteFilter];
+    
+    [greyFilter addTarget:vignetteFilter];
+    
+    [filterGroup setInitialFilters:[NSArray arrayWithObject:greyFilter]];
+    [filterGroup setTerminalFilter:vignetteFilter];
+    
+    [self setCameraFilter:filterGroup forView:_imageView];
+}
+
+- (void)setPlasticCamera:(GPUImageView*)_imageView {
+    GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
+
+    GPUImageSaturationFilter* saturationFilter = [[GPUImageSaturationFilter alloc] init];
+    [saturationFilter setSaturation:1.25];
+    [saturationFilter prepareForImageCapture];
+    
+    GPUImageContrastFilter* contrastFilter = [[GPUImageContrastFilter alloc] init];
+    [contrastFilter setContrast:1.5];
+    [contrastFilter prepareForImageCapture];
+
+    GPUImageVignetteFilter* vignetteFilter = [[GPUImageVignetteFilter alloc] init];
+    [vignetteFilter setVignetteEnd:0.8];
+    [vignetteFilter prepareForImageCapture];
+    
+    [filterGroup addFilter:saturationFilter];
+    [filterGroup addFilter:vignetteFilter];
+    
+    [saturationFilter addTarget:contrastFilter];
+    [contrastFilter addTarget:vignetteFilter];
+    
+    [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
+    [filterGroup setTerminalFilter:vignetteFilter];
+
+    [self setCameraFilter:filterGroup forView:_imageView];
+}
+
 #pragma mark -
 #pragma mark CameraFactory (ParameterValues)
 
-- (void)setInstantCameraParameterValue:(NSNumber*)_value {
-    
+- (void)setInstantCameraParameterValue:(NSNumber*)_value {    
 }
+
+- (void)setPixelCameraParameterValue:(NSNumber*)_value {    
+}
+
+- (void)setBoxParameterValue:(NSNumber*)_value {    
+}
+
+- (void)setPlasticParameterValue:(NSNumber*)_value {
+}
+
 
 #pragma mark -
 #pragma mark CameraFactory
@@ -194,6 +261,12 @@ static CameraFactory* thisCameraFactory = nil;
         case CameraTypePixel:
             [self setPixelCamera:_imageView];
             break;
+        case CameraTypeBox:
+            [self setBoxCamera:_imageView];
+            break;
+        case CameraTypePlastic:
+            [self setPlasticCamera:_imageView];
+            break;
         default:
             break;
     }
@@ -205,7 +278,13 @@ static CameraFactory* thisCameraFactory = nil;
             break;
         case CameraTypeInstant:
             [self setInstantCameraParameterValue:_value];
-            break;            
+            break; 
+        case CameraTypePixel:
+            break;
+        case CameraTypeBox:
+            break;
+        case CameraTypePlastic:
+            break;
         default:
             break;
     }

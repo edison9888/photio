@@ -17,6 +17,10 @@
 		050CF15014F9A27D00A31059 /* NativeCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050CF14F14F9A27D00A31059 /* NativeCameraViewController.xib */; };
 		0510A8E5157D9B1A00EC8F75 /* pixel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8E3157D9B1A00EC8F75 /* pixel.png */; };
 		0510A8E6157D9B1A00EC8F75 /* pixel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8E4157D9B1A00EC8F75 /* pixel@2x.png */; };
+		0510A8EB157EEDF000EC8F75 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8E7157EEDF000EC8F75 /* box.png */; };
+		0510A8EC157EEDF000EC8F75 /* box@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8E8157EEDF000EC8F75 /* box@2x.png */; };
+		0510A8ED157EEDF000EC8F75 /* plastic.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8E9157EEDF000EC8F75 /* plastic.png */; };
+		0510A8EE157EEDF000EC8F75 /* plastic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8EA157EEDF000EC8F75 /* plastic@2x.png */; };
 		05250E8D15686C150060F993 /* ParameterSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05250E8C15686C150060F993 /* ParameterSelectionCell.m */; };
 		05250E9015686D690060F993 /* ParameterSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05250E8F15686D680060F993 /* ParameterSelectionCell.xib */; };
 		05250E92156878CD0060F993 /* Filters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E91156878CD0060F993 /* Filters.plist */; };
@@ -175,6 +179,10 @@
 		050CF14F14F9A27D00A31059 /* NativeCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeCameraViewController.xib; sourceTree = "<group>"; };
 		0510A8E3157D9B1A00EC8F75 /* pixel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pixel.png; sourceTree = "<group>"; };
 		0510A8E4157D9B1A00EC8F75 /* pixel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pixel@2x.png"; sourceTree = "<group>"; };
+		0510A8E7157EEDF000EC8F75 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
+		0510A8E8157EEDF000EC8F75 /* box@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "box@2x.png"; sourceTree = "<group>"; };
+		0510A8E9157EEDF000EC8F75 /* plastic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plastic.png; sourceTree = "<group>"; };
+		0510A8EA157EEDF000EC8F75 /* plastic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plastic@2x.png"; sourceTree = "<group>"; };
 		05250E8B15686C150060F993 /* ParameterSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParameterSelectionCell.h; path = photio/PhotoAlbum/ParameterSelectionCell.h; sourceTree = SOURCE_ROOT; };
 		05250E8C15686C150060F993 /* ParameterSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParameterSelectionCell.m; path = photio/PhotoAlbum/ParameterSelectionCell.m; sourceTree = SOURCE_ROOT; };
 		05250E8F15686D680060F993 /* ParameterSelectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ParameterSelectionCell.xib; path = photio/PhotoAlbum/ParameterSelectionCell.xib; sourceTree = SOURCE_ROOT; };
@@ -419,12 +427,16 @@
 		0577D41C157AA9E800BA4C52 /* Cameras */ = {
 			isa = PBXGroup;
 			children = (
-				0510A8E3157D9B1A00EC8F75 /* pixel.png */,
-				0510A8E4157D9B1A00EC8F75 /* pixel@2x.png */,
+				0510A8E7157EEDF000EC8F75 /* box.png */,
+				0510A8E8157EEDF000EC8F75 /* box@2x.png */,
 				0577D41D157AA9E800BA4C52 /* instant.png */,
 				0577D41E157AA9E800BA4C52 /* instant@2x.png */,
 				0577D41F157AA9E800BA4C52 /* iphone.png */,
 				0577D420157AA9E800BA4C52 /* iphone@2x.png */,
+				0510A8E3157D9B1A00EC8F75 /* pixel.png */,
+				0510A8E4157D9B1A00EC8F75 /* pixel@2x.png */,
+				0510A8E9157EEDF000EC8F75 /* plastic.png */,
+				0510A8EA157EEDF000EC8F75 /* plastic@2x.png */,
 			);
 			path = Cameras;
 			sourceTree = "<group>";
@@ -833,6 +845,10 @@
 				0539BA59157BCA9C00A4A04B /* configuration@2x.png in Resources */,
 				0510A8E5157D9B1A00EC8F75 /* pixel.png in Resources */,
 				0510A8E6157D9B1A00EC8F75 /* pixel@2x.png in Resources */,
+				0510A8EB157EEDF000EC8F75 /* box.png in Resources */,
+				0510A8EC157EEDF000EC8F75 /* box@2x.png in Resources */,
+				0510A8ED157EEDF000EC8F75 /* plastic.png in Resources */,
+				0510A8EE157EEDF000EC8F75 /* plastic@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

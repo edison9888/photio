@@ -32,7 +32,7 @@
 			<key>cameraId</key>
 			<integer>1</integer>
 			<key>name</key>
-			<string>InstaCam</string>
+			<string>Instant</string>
 			<key>hasParameter</key>
 			<true/>
 			<key>imageFilename</key>
@@ -56,7 +56,7 @@
 			<key>cameraId</key>
 			<integer>2</integer>
 			<key>name</key>
-			<string>PixelCam</string>
+			<string>Pixel</string>
 			<key>hasParameter</key>
 			<true/>
 			<key>imageFilename</key>
@@ -64,6 +64,54 @@
 			<key>maximumValue</key>
 			<integer>1</integer>
 			<key>minumumVale</key>
+			<integer>0</integer>
+			<key>value</key>
+			<real>0.5</real>
+			<key>hasAutoAdjust</key>
+			<true/>
+			<key>autoAdjustEnabled</key>
+			<false/>
+			<key>hidden</key>
+			<false/>
+			<key>purchased</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cameraId</key>
+			<integer>3</integer>
+			<key>name</key>
+			<string>Box</string>
+			<key>imageFilename</key>
+			<string>box.png</string>
+			<key>hasParameter</key>
+			<true/>
+			<key>maximumValue</key>
+			<integer>1</integer>
+			<key>minimumValue</key>
+			<integer>0</integer>
+			<key>value</key>
+			<real>0.5</real>
+			<key>hasAutoAdjust</key>
+			<true/>
+			<key>autoAdjustEnabled</key>
+			<false/>
+			<key>hidden</key>
+			<false/>
+			<key>purchased</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cameraId</key>
+			<integer>4</integer>
+			<key>name</key>
+			<string>Plastic</string>
+			<key>imageFilename</key>
+			<string>plastic.png</string>
+			<key>hasParameter</key>
+			<true/>
+			<key>maximumValue</key>
+			<integer>1</integer>
+			<key>minimumValue</key>
 			<integer>0</integer>
 			<key>value</key>
 			<real>0.5</real>
