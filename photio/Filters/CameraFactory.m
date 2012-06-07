@@ -17,7 +17,7 @@ static CameraFactory* thisCameraFactory = nil;
 @interface CameraFactory (PrivateAPI)
 
 + (NSArray*)loadCameras;
-+ (void)setCamera:(FilteredCameraViewController*)_filteredCameraViewController filter:(GPUImageOutput<GPUImageInput>*)_filter;
+- (CGFloat)scaledFilterValue:(NSNumber*)_value;
 
 @end
 
@@ -114,6 +114,11 @@ static CameraFactory* thisCameraFactory = nil;
     [self.stillCamera capturePhotoAsJPEGProcessedUpToFilter:self.filter withCompletionHandler:_completionHandler];
 }
 
+- (CGFloat)scaledFilterValue:(NSNumber*)_value {
+    CGFloat parameterRange = [self.camera.maximumValue floatValue] - [self.camera.minimumValue floatValue];
+    return [_value floatValue ] / parameterRange;
+}
+
 #pragma mark -
 #pragma mark CameraFactory (Cameras)
 
@@ -135,7 +140,7 @@ static CameraFactory* thisCameraFactory = nil;
 }
 
 - (void)setPlasticCamera:(GPUImageView*)_imageView {
-    [self setCameraFilter:[self filterPixelCamera] forView:_imageView];
+    [self setCameraFilter:[self filterPlasticCamera] forView:_imageView];
 }
 
 #pragma mark -
@@ -148,6 +153,10 @@ static CameraFactory* thisCameraFactory = nil;
     [saturationFilter setSaturation:0.4];
     [saturationFilter prepareForImageCapture];
     
+    GPUImageContrastFilter* contrastFilter = [[GPUImageContrastFilter alloc] init];
+    [contrastFilter setContrast:1.5];
+    [contrastFilter prepareForImageCapture];
+    
     GPUImageRGBFilter* rgbFilter = [[GPUImageRGBFilter alloc] init];
     [rgbFilter setBlue:0.85];
     [rgbFilter prepareForImageCapture];
@@ -157,10 +166,12 @@ static CameraFactory* thisCameraFactory = nil;
     [vignetteFilter prepareForImageCapture];
     
     [filterGroup addFilter:saturationFilter];
+    [filterGroup addFilter:contrastFilter];
     [filterGroup addFilter:rgbFilter];
     [filterGroup addFilter:vignetteFilter];
     
     [saturationFilter addTarget:rgbFilter];
+    [rgbFilter addTarget:contrastFilter];
     [rgbFilter addTarget:vignetteFilter];
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
@@ -253,7 +264,12 @@ static CameraFactory* thisCameraFactory = nil;
 #pragma mark -
 #pragma mark CameraFactory (ParameterValues)
 
-- (void)setInstantCameraParameterValue:(NSNumber*)_value {    
+- (void)setInstantCameraParameterValue:(NSNumber*)_value {
+    CGFloat scaledValue = [self scaledFilterValue:_value];
+    CGFloat rgbValue = 2.0 * scaledValue;
+    GPUImageFilterGroup* filterGroup = (GPUImageFilterGroup*)self.filter;
+    GPUImageRGBFilter* rgbFilter = (GPUImageRGBFilter*)[filterGroup filterAtIndex:2];
+    [rgbFilter setRed:rgbValue];
 }
 
 - (void)setPixelCameraParameterValue:(NSNumber*)_value {    

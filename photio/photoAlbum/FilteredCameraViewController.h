@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ParameterSelectionView.h"
 #import "TransitionGestureRecognizer.h"
+#import "ParameterSliderView.h"
 
 @protocol FilteredCameraViewControllerDelegate;
 
 @class ParameterSliderView;
 @class Camera;
 
-@interface FilteredCameraViewController : UIViewController <TransitionGestureRecognizerDelegate, ParameterSelectionViewDelegate>
+@interface FilteredCameraViewController : UIViewController <TransitionGestureRecognizerDelegate, ParameterSelectionViewDelegate, ParameterSliderViewDelegate>
 
 @property(nonatomic, weak)      UIView*                                     containerView;
 @property(nonatomic, weak)      id<FilteredCameraViewControllerDelegate>    delegate;

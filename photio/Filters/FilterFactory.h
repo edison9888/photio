@@ -24,7 +24,9 @@ typedef enum {
 
 typedef enum {
     FilterPaletteTypeFavotites,
-    FilterPaletteTypeImageAjustmentControls
+    FilterPaletteTypeImageAjustmentControls,
+    FilterpaletteCameras,
+    FilterPaletteEffects
 } FilterPaletteType;
 
 @interface FilterFactory : NSObject

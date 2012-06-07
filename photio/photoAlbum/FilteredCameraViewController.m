@@ -242,6 +242,7 @@
         self.containerView = _containerView;
         self.transitionGestureRecognizer = [TransitionGestureRecognizer initWithDelegate:self inView:self.view relativeToView:self.containerView];
         self.cameraConfigIsShown = NO;
+        self.cameraParameterView.delegate = self;
     }
     return self;
 }
@@ -347,5 +348,13 @@
     [self setCamera:_parameter];
     [self.cameraSelectionView removeView];
 }
+
+#pragma mark -
+#pragma mark ParameterSliderViewDelegate
+
+-(void)parameterSliderValueChanged:(ParameterSliderView*)_parameterSlider {
+    [[CameraFactory instance] setCameraParmeterValue:[NSNumber numberWithFloat:[_parameterSlider value]]];
+}
+
 
 @end

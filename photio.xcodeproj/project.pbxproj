@@ -27,6 +27,8 @@
 		0510A8F715802EC000EC8F75 /* color-adjust@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8F315802EC000EC8F75 /* color-adjust@2x.png */; };
 		0510A8FA15802F1B00EC8F75 /* cameras.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8F815802F1B00EC8F75 /* cameras.png */; };
 		0510A8FB15802F1B00EC8F75 /* cameras@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8F915802F1B00EC8F75 /* cameras@2x.png */; };
+		0510A90915803CB200EC8F75 /* effects.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90715803CB200EC8F75 /* effects.png */; };
+		0510A90A15803CB200EC8F75 /* effects@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90815803CB200EC8F75 /* effects@2x.png */; };
 		05250E8D15686C150060F993 /* ParameterSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05250E8C15686C150060F993 /* ParameterSelectionCell.m */; };
 		05250E9015686D690060F993 /* ParameterSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05250E8F15686D680060F993 /* ParameterSelectionCell.xib */; };
 		05250E92156878CD0060F993 /* Filters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E91156878CD0060F993 /* Filters.plist */; };
@@ -191,6 +193,8 @@
 		0510A8F315802EC000EC8F75 /* color-adjust@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "color-adjust@2x.png"; sourceTree = "<group>"; };
 		0510A8F815802F1B00EC8F75 /* cameras.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cameras.png; sourceTree = "<group>"; };
 		0510A8F915802F1B00EC8F75 /* cameras@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameras@2x.png"; sourceTree = "<group>"; };
+		0510A90715803CB200EC8F75 /* effects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = effects.png; sourceTree = "<group>"; };
+		0510A90815803CB200EC8F75 /* effects@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effects@2x.png"; sourceTree = "<group>"; };
 		05250E8B15686C150060F993 /* ParameterSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParameterSelectionCell.h; path = photio/PhotoAlbum/ParameterSelectionCell.h; sourceTree = SOURCE_ROOT; };
 		05250E8C15686C150060F993 /* ParameterSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParameterSelectionCell.m; path = photio/PhotoAlbum/ParameterSelectionCell.m; sourceTree = SOURCE_ROOT; };
 		05250E8F15686D680060F993 /* ParameterSelectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ParameterSelectionCell.xib; path = photio/PhotoAlbum/ParameterSelectionCell.xib; sourceTree = SOURCE_ROOT; };
@@ -391,10 +395,12 @@
 			children = (
 				0510A8F815802F1B00EC8F75 /* cameras.png */,
 				0510A8F915802F1B00EC8F75 /* cameras@2x.png */,
-				0510A8F015802EC000EC8F75 /* favorite.png */,
-				0510A8F115802EC000EC8F75 /* favorite@2x.png */,
 				0510A8F215802EC000EC8F75 /* color-adjust.png */,
 				0510A8F315802EC000EC8F75 /* color-adjust@2x.png */,
+				0510A90715803CB200EC8F75 /* effects.png */,
+				0510A90815803CB200EC8F75 /* effects@2x.png */,
+				0510A8F015802EC000EC8F75 /* favorite.png */,
+				0510A8F115802EC000EC8F75 /* favorite@2x.png */,
 			);
 			path = FilterPalettes;
 			sourceTree = "<group>";
@@ -856,6 +862,8 @@
 				0510A8F715802EC000EC8F75 /* color-adjust@2x.png in Resources */,
 				0510A8FA15802F1B00EC8F75 /* cameras.png in Resources */,
 				0510A8FB15802F1B00EC8F75 /* cameras@2x.png in Resources */,
+				0510A90915803CB200EC8F75 /* effects.png in Resources */,
+				0510A90A15803CB200EC8F75 /* effects@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
