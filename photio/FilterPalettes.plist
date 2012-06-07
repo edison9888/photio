@@ -18,9 +18,29 @@
 			<key>filterPaletteId</key>
 			<integer>1</integer>
 			<key>name</key>
-			<string>Image Adjustment</string>
+			<string>Color Adjustment</string>
 			<key>imageFilename</key>
 			<string>image-adjust.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>filterPaletteID</key>
+			<integer>2</integer>
+			<key>name</key>
+			<string>Cameras</string>
+			<key>imageFilename</key>
+			<string>cameras.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>filterPaletteId</key>
+			<integer>3</integer>
+			<key>name</key>
+			<string>Effects</string>
+			<key>imageFilename</key>
+			<string>effects.png</string>
 			<key>hidden</key>
 			<false/>
 		</dict>

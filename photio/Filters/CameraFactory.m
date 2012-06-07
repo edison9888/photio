@@ -43,6 +43,16 @@ static CameraFactory* thisCameraFactory = nil;
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////
+@interface CameraFactory (Filters)
+
+- (GPUImageOutput<GPUImageInput>*)filterInstantCamera;
+- (GPUImageOutput<GPUImageInput>*)filtertPixelCamera;
+- (GPUImageOutput<GPUImageInput>*)filterBoxCamera;
+- (GPUImageOutput<GPUImageInput>*)filterPlasticCamera;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraFactory
 
 @synthesize loadedCameras, camera, stillCamera, filter;
@@ -113,6 +123,25 @@ static CameraFactory* thisCameraFactory = nil;
 }
 
 - (void)setInstantCamera:(GPUImageView*)_imageView {
+    [self setCameraFilter:[self filterInstantCamera] forView:_imageView];
+}
+
+- (void)setPixelCamera:(GPUImageView*)_imageView {
+    [self setCameraFilter:[self filterPixelCamera] forView:_imageView];
+}
+
+- (void)setBoxCamera:(GPUImageView*)_imageView {
+    [self setCameraFilter:[self filterBoxCamera] forView:_imageView];
+}
+
+- (void)setPlasticCamera:(GPUImageView*)_imageView {
+    [self setCameraFilter:[self filterPixelCamera] forView:_imageView];
+}
+
+#pragma mark -
+#pragma mark CameraFactory (Filters)
+
+- (GPUImageOutput<GPUImageInput>*)filterInstantCamera {
     GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
     
     GPUImageSaturationFilter* saturationFilter = [[GPUImageSaturationFilter alloc] init];
@@ -137,19 +166,19 @@ static CameraFactory* thisCameraFactory = nil;
     [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
     
-    [self setCameraFilter:filterGroup forView:_imageView];
+    return filterGroup;
 }
 
-- (void)setPixelCamera:(GPUImageView*)_imageView {
+- (GPUImageOutput<GPUImageInput>*)filterPixelCamera {
     GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
-
+    
     GPUImageToonFilter* toonFilter = [[GPUImageToonFilter alloc] init];
     [toonFilter prepareForImageCapture];
     
     GPUImageGaussianBlurFilter* gaussianFilter = [[GPUImageGaussianBlurFilter alloc] init];
     [gaussianFilter setBlurSize:1.5];
     [gaussianFilter prepareForImageCapture];
-
+    
     GPUImagePixellateFilter* pixelFilter = [[GPUImagePixellateFilter alloc] init];
     [pixelFilter setFractionalWidthOfAPixel:0.02];
     [pixelFilter prepareForImageCapture];
@@ -164,10 +193,10 @@ static CameraFactory* thisCameraFactory = nil;
     [filterGroup setInitialFilters:[NSArray arrayWithObject:toonFilter]];
     [filterGroup setTerminalFilter:pixelFilter];
     
-    [self setCameraFilter:filterGroup forView:_imageView];
+    return filterGroup;
 }
 
-- (void)setBoxCamera:(GPUImageView*)_imageView {
+- (GPUImageOutput<GPUImageInput>*)filterBoxCamera {
     GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
     
     GPUImageGrayscaleFilter* greyFilter = [[GPUImageGrayscaleFilter alloc] init];
@@ -176,11 +205,11 @@ static CameraFactory* thisCameraFactory = nil;
     GPUImageContrastFilter* contrastFilter = [[GPUImageContrastFilter alloc] init];
     [contrastFilter setContrast:1.5];
     [contrastFilter prepareForImageCapture];
-
+    
     GPUImageVignetteFilter* vignetteFilter = [[GPUImageVignetteFilter alloc] init];
     [vignetteFilter setVignetteEnd:0.85];
     [vignetteFilter prepareForImageCapture];
-
+    
     [filterGroup addFilter:greyFilter];
     [filterGroup addFilter:contrastFilter];
     [filterGroup addFilter:vignetteFilter];
@@ -190,12 +219,12 @@ static CameraFactory* thisCameraFactory = nil;
     [filterGroup setInitialFilters:[NSArray arrayWithObject:greyFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
     
-    [self setCameraFilter:filterGroup forView:_imageView];
+    return filterGroup;
 }
 
-- (void)setPlasticCamera:(GPUImageView*)_imageView {
+- (GPUImageOutput<GPUImageInput>*)filterPlasticCamera {
     GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
-
+    
     GPUImageSaturationFilter* saturationFilter = [[GPUImageSaturationFilter alloc] init];
     [saturationFilter setSaturation:1.25];
     [saturationFilter prepareForImageCapture];
@@ -203,7 +232,7 @@ static CameraFactory* thisCameraFactory = nil;
     GPUImageContrastFilter* contrastFilter = [[GPUImageContrastFilter alloc] init];
     [contrastFilter setContrast:1.5];
     [contrastFilter prepareForImageCapture];
-
+    
     GPUImageVignetteFilter* vignetteFilter = [[GPUImageVignetteFilter alloc] init];
     [vignetteFilter setVignetteEnd:0.8];
     [vignetteFilter prepareForImageCapture];
@@ -216,9 +245,10 @@ static CameraFactory* thisCameraFactory = nil;
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
-
-    [self setCameraFilter:filterGroup forView:_imageView];
+    
+    return filterGroup;
 }
+
 
 #pragma mark -
 #pragma mark CameraFactory (ParameterValues)
