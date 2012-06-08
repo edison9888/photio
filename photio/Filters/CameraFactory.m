@@ -17,6 +17,7 @@ static CameraFactory* thisCameraFactory = nil;
 @interface CameraFactory (PrivateAPI)
 
 + (NSArray*)loadCameras;
++ (NSDictionary*)loadCameraParemeters;
 - (CGFloat)scaledFilterValue:(NSNumber*)_value;
 
 @end
@@ -55,7 +56,7 @@ static CameraFactory* thisCameraFactory = nil;
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation CameraFactory
 
-@synthesize loadedCameras, camera, stillCamera, filter;
+@synthesize loadedCameras, loadedCameraParameters, camera, stillCamera, filter;
 
 #pragma mark -
 #pragma mark CameraFactory PrivayeApi
@@ -92,6 +93,11 @@ static CameraFactory* thisCameraFactory = nil;
     }
     
     return [viewGeneral fetchFromManagedObjectContext:fetchRequest];    
+}
+
++ (NSDictionary*)loadCameraParemeters {
+    NSString* cameraFile = [[NSBundle  mainBundle] pathForResource:@"CameraFilterParameters" ofType:@"plist"];
+    return [[NSDictionary dictionaryWithContentsOfFile:cameraFile] objectForKey:@"CameraFilterParameters"];
 }
 
 - (void)setCameraFilter:(GPUImageOutput<GPUImageInput>*)_filter forView:(GPUImageView*)_imageView {
@@ -290,6 +296,7 @@ static CameraFactory* thisCameraFactory = nil;
         if (thisCameraFactory == nil) {
             thisCameraFactory = [[self alloc] init];
             thisCameraFactory.loadedCameras = [self loadCameras];
+            thisCameraFactory.loadedCameraParameters = [self loadCameraParemeters];
         }
     }
     return thisCameraFactory;

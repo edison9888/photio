@@ -24,6 +24,7 @@ typedef enum {
 @interface CameraFactory : NSObject
 
 @property(nonatomic, strong) NSArray*                           loadedCameras;
+@property(nonatomic, strong) NSDictionary*                      loadedCameraParameters;
 @property(nonatomic, strong) Camera*                            camera;
 @property(nonatomic, strong) GPUImageStillCamera*               stillCamera;
 @property(nonatomic, strong) GPUImageOutput<GPUImageInput>*     filter;

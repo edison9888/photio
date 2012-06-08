@@ -29,6 +29,7 @@
 		0510A8FB15802F1B00EC8F75 /* cameras@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A8F915802F1B00EC8F75 /* cameras@2x.png */; };
 		0510A90915803CB200EC8F75 /* effects.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90715803CB200EC8F75 /* effects.png */; };
 		0510A90A15803CB200EC8F75 /* effects@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90815803CB200EC8F75 /* effects@2x.png */; };
+		0510A90C1581784400EC8F75 /* CameraFilterParameters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90B1581784400EC8F75 /* CameraFilterParameters.plist */; };
 		05250E8D15686C150060F993 /* ParameterSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05250E8C15686C150060F993 /* ParameterSelectionCell.m */; };
 		05250E9015686D690060F993 /* ParameterSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05250E8F15686D680060F993 /* ParameterSelectionCell.xib */; };
 		05250E92156878CD0060F993 /* Filters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E91156878CD0060F993 /* Filters.plist */; };
@@ -195,6 +196,7 @@
 		0510A8F915802F1B00EC8F75 /* cameras@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameras@2x.png"; sourceTree = "<group>"; };
 		0510A90715803CB200EC8F75 /* effects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = effects.png; sourceTree = "<group>"; };
 		0510A90815803CB200EC8F75 /* effects@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effects@2x.png"; sourceTree = "<group>"; };
+		0510A90B1581784400EC8F75 /* CameraFilterParameters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CameraFilterParameters.plist; sourceTree = "<group>"; };
 		05250E8B15686C150060F993 /* ParameterSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParameterSelectionCell.h; path = photio/PhotoAlbum/ParameterSelectionCell.h; sourceTree = SOURCE_ROOT; };
 		05250E8C15686C150060F993 /* ParameterSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParameterSelectionCell.m; path = photio/PhotoAlbum/ParameterSelectionCell.m; sourceTree = SOURCE_ROOT; };
 		05250E8F15686D680060F993 /* ParameterSelectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ParameterSelectionCell.xib; path = photio/PhotoAlbum/ParameterSelectionCell.xib; sourceTree = SOURCE_ROOT; };
@@ -663,6 +665,7 @@
 				05C99ECC14F0585C00D09F3E /* main.m */,
 				05C99EC814F0585C00D09F3E /* photio-Info.plist */,
 				05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */,
+				0510A90B1581784400EC8F75 /* CameraFilterParameters.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -864,6 +867,7 @@
 				0510A8FB15802F1B00EC8F75 /* cameras@2x.png in Resources */,
 				0510A90915803CB200EC8F75 /* effects.png in Resources */,
 				0510A90A15803CB200EC8F75 /* effects@2x.png in Resources */,
+				0510A90C1581784400EC8F75 /* CameraFilterParameters.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
