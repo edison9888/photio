@@ -20,10 +20,10 @@
 			</dict>
 			<key>GPUImageContrastFilter</key>
 			<dict>
-				<key>Cantrast</key>
+				<key>Contrast</key>
 				<dict>
 					<key>maximumValue</key>
-					<integer>4</integer>
+					<integer>2</integer>
 					<key>minimumValue</key>
 					<integer>0</integer>
 					<key>initialValue</key>
@@ -44,7 +44,7 @@
 				<key>Blue</key>
 				<dict>
 					<key>maximumValue</key>
-					<integer>2</integer>
+					<real>1.7</real>
 					<key>minimValue</key>
 					<integer>0</integer>
 					<key>initialValue</key>
@@ -104,7 +104,7 @@
 				<key>Contrast</key>
 				<dict>
 					<key>maximumValue</key>
-					<integer>4</integer>
+					<integer>2</integer>
 					<key>minumValue</key>
 					<integer>0</integer>
 					<key>initialValue</key>
@@ -143,7 +143,7 @@
 				<key>Contrast</key>
 				<dict>
 					<key>maximumValue</key>
-					<integer>4</integer>
+					<integer>2</integer>
 					<key>minimumValue</key>
 					<integer>0</integer>
 					<key>initialValue</key>

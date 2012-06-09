@@ -658,6 +658,7 @@
 		05C99EC714F0585C00D09F3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0510A90B1581784400EC8F75 /* CameraFilterParameters.plist */,
 				0539BA46157AF51D00A4A04B /* Cameras.plist */,
 				05250E9315687A690060F993 /* FilterPalettes.plist */,
 				05250E91156878CD0060F993 /* Filters.plist */,
@@ -665,7 +666,6 @@
 				05C99ECC14F0585C00D09F3E /* main.m */,
 				05C99EC814F0585C00D09F3E /* photio-Info.plist */,
 				05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */,
-				0510A90B1581784400EC8F75 /* CameraFilterParameters.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
