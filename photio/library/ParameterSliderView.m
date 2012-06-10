@@ -91,7 +91,7 @@
     return self;
 }
 
-- (void)setIntialValue {
+- (void)setParameterSliderValue {
     self.parameterView.frame = CGRectMake(0.0, 
                                           0.5 * self.frame.size.height * (1.0 - PARAMETER_VIEW_HEIGHT_SCALE), 
                                           (self.initialValue - self.minValue) / (self.maxValue - self.minValue) * self.frame.size.width, 

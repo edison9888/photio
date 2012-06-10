@@ -135,6 +135,7 @@
         self.cameraParameterView.maxValue = [_camera.maximumValue floatValue];
         self.cameraParameterView.minValue = [_camera.minimumValue floatValue];
         self.cameraParameterView.initialValue = [_camera.value floatValue];
+        [self.cameraParameterView setParameterSliderValue];
         self.cameraParameterView.hidden = NO;
     } else {
         self.cameraParameterView.hidden = YES;
@@ -353,7 +354,8 @@
 #pragma mark ParameterSliderViewDelegate
 
 -(void)parameterSliderValueChanged:(ParameterSliderView*)_parameterSlider {
-    [[CameraFactory instance] setCameraParmeterValue:[NSNumber numberWithFloat:[_parameterSlider value]]];
+    self.displayedCamera.value = [NSNumber numberWithFloat:[_parameterSlider value]];
+    [[CameraFactory instance] setCameraParmeterValue:self.displayedCamera.value];
 }
 
 

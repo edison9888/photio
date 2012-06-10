@@ -471,6 +471,7 @@ static CameraFactory* thisCameraFactory = nil;
         default:
             break;
     }
+    [self setCameraParmeterValue:_camera.value];
 }
 
 - (void)setCameraParmeterValue:(NSNumber*)_value {

@@ -48,7 +48,7 @@
     self.parameterSlider.maxValue = [self.displayedFilterImage.filter.maximumValue floatValue];
     self.parameterSlider.minValue = [self.displayedFilterImage.filter.minimumValue floatValue];
     self.parameterSlider.initialValue = [self.displayedFilterImage.filter.defaultValue floatValue];
-    [self.parameterSlider setIntialValue];    
+    [self.parameterSlider setParameterSliderValue];    
 }
 
 - (IBAction)changeFilterPalette:(id)sender {

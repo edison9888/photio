@@ -22,7 +22,7 @@
 @property(nonatomic, assign) CGRect                             parameterViewFrame;
 
 - (CGFloat)value;
-- (void)setIntialValue;
+- (void)setParameterSliderValue;
 
 @end
 
