@@ -226,7 +226,16 @@ static CameraFactory* thisCameraFactory = nil;
 
 - (NSDictionary*)boxParameterValues:(NSNumber*)_value {
     NSDictionary* parameters = [self.loadedCameraParameters objectForKey:@"Box"];
-    return parameters;    
+    
+    NSDictionary* rgbParameters = [parameters objectForKey:@"GPUImageRGBFilter"];
+    NSDictionary* blueParameters = [rgbParameters objectForKey:@"Blue"];
+    NSDictionary* greenParameters = [rgbParameters objectForKey:@"Green"];
+    NSDictionary* redParameters = [rgbParameters objectForKey:@"Red"];
+
+    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[self decreasingParameter:blueParameters fromValue:_value],
+                                                                         [self increasingParameter:greenParameters fromValue:_value],
+                                                                         [self increasingParameter:redParameters fromValue:_value], nil]
+                         forKeys:[NSArray arrayWithObjects:@"blue", @"green", @"red", nil]];
 }
 
 - (NSDictionary*)plasticParameterValues:(NSNumber*)_value {
@@ -275,10 +284,13 @@ static CameraFactory* thisCameraFactory = nil;
     
     NSDictionary* contrastParameters = [[parameters objectForKey:@"GPUImageContrastFilter"] objectForKey:@"Contrast"];
     NSDictionary* vignetteParameters = [[parameters objectForKey:@"GPUImageVignetteFilter"] objectForKey:@"VignetteEnd"];
+    NSDictionary* rgbParameters = [parameters objectForKey:@"GPUImageRGBFilter"];
+    NSDictionary* blueParameters = [rgbParameters objectForKey:@"Blue"];
     
     return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[contrastParameters objectForKey:@"initialValue"],
-                                                                         [vignetteParameters objectForKey:@"initialValue"], nil]
-                         forKeys:[NSArray arrayWithObjects:@"contrast", @"vignette", nil]];
+                                                                         [vignetteParameters objectForKey:@"initialValue"], 
+                                                                         [blueParameters objectForKey:@"initialValue"], nil]
+                         forKeys:[NSArray arrayWithObjects:@"contrast", @"vignette", @"blue", nil]];
     
 }
 
@@ -376,15 +388,22 @@ static CameraFactory* thisCameraFactory = nil;
     [contrastFilter setContrast:[[parameters objectForKey:@"contrast"] floatValue]];
     [contrastFilter prepareForImageCapture];
     
+    GPUImageRGBFilter* rgbFilter = [[GPUImageRGBFilter alloc] init];
+    [rgbFilter setBlue:[[parameters objectForKey:@"blue"] floatValue]];
+    [rgbFilter prepareForImageCapture];
+
     GPUImageVignetteFilter* vignetteFilter = [[GPUImageVignetteFilter alloc] init];
     [vignetteFilter setVignetteEnd:[[parameters objectForKey:@"vignette"] floatValue]];
     [vignetteFilter prepareForImageCapture];
     
     [filterGroup addFilter:greyFilter];
     [filterGroup addFilter:contrastFilter];
+    [filterGroup addFilter:rgbFilter];
     [filterGroup addFilter:vignetteFilter];
     
-    [greyFilter addTarget:vignetteFilter];
+    [greyFilter addTarget:contrastFilter];
+    [contrastFilter addTarget:rgbFilter];
+    [rgbFilter addTarget:vignetteFilter];
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:greyFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
@@ -450,6 +469,12 @@ static CameraFactory* thisCameraFactory = nil;
 }
 
 - (void)setBoxParameterValue:(NSNumber*)_value {    
+    NSDictionary* parameters = [self boxParameterValues:_value];
+    GPUImageFilterGroup* filterGroup = (GPUImageFilterGroup*)self.filter;
+    GPUImageRGBFilter* rgbFilter = (GPUImageRGBFilter*)[filterGroup filterAtIndex:2];
+    [rgbFilter setBlue:[[parameters objectForKey:@"blue"] floatValue]];
+    [rgbFilter setGreen:[[parameters objectForKey:@"green"] floatValue]];
+    [rgbFilter setRed:[[parameters objectForKey:@"red"] floatValue]];
 }
 
 - (void)setPlasticParameterValue:(NSNumber*)_value {
