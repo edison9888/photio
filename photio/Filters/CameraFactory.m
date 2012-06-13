@@ -135,33 +135,33 @@ static CameraFactory* thisCameraFactory = nil;
 }
 
 - (NSNumber*)increasingParameter:(NSDictionary*)_parameter fromValue:(NSNumber*)_value {
-    CGFloat mappedValue = 0.0;
-    CGFloat value =[_value floatValue];
+    CGFloat mappedValue = 0.0f;
+    CGFloat value = [_value floatValue];
     CGFloat initialValue = [[_parameter objectForKey:@"initialValue"] floatValue];
     CGFloat maximumValue = [[_parameter objectForKey:@"maximumValue"] floatValue];
     CGFloat minimumValue = [[_parameter objectForKey:@"minimumValue"] floatValue];
     CGFloat upperRange = (maximumValue - initialValue);
     CGFloat lowerRange = (initialValue - minimumValue);
-    if (value > 0.5) {
-        mappedValue = 2.0 * upperRange * (value - 0.5) + initialValue; 
+    if (value > 0.5f) {
+        mappedValue = 2.0f * upperRange * (value - 0.5f) + initialValue; 
     } else {
-        mappedValue = 2.0 * lowerRange * value + minimumValue; 
+        mappedValue = 2.0f * lowerRange * value + minimumValue; 
     }
     return [NSNumber numberWithFloat:mappedValue];
 }
 
 - (NSNumber*)decreasingParameter:(NSDictionary*)_parameter fromValue:(NSNumber*)_value {
-    CGFloat mappedValue = 0.0;
+    CGFloat mappedValue = 0.0f;
     CGFloat value =[_value floatValue];
     CGFloat initialValue = [[_parameter objectForKey:@"initialValue"] floatValue];
     CGFloat maximumValue = [[_parameter objectForKey:@"maximumValue"] floatValue];
     CGFloat minimumValue = [[_parameter objectForKey:@"minimumValue"] floatValue];
     CGFloat upperRange = (initialValue - minimumValue);
     CGFloat lowerRange = (maximumValue - initialValue);
-    if (value > 0.5) {
-        mappedValue = initialValue - 2.0 * upperRange * (value - 0.5); 
+    if (value > 0.5f) {
+        mappedValue = initialValue - 2.0f * upperRange * (value - 0.5f); 
     } else {
-        mappedValue = maximumValue -  2.0 * lowerRange * value; 
+        mappedValue = maximumValue -  2.0f * lowerRange * value; 
     }
     return [NSNumber numberWithFloat:mappedValue];
 }
@@ -169,32 +169,32 @@ static CameraFactory* thisCameraFactory = nil;
 
 // initial value is equal to maximum value
 - (NSNumber*)mirroredMaximumParameter:(NSDictionary*)_parameter fromValue:(NSNumber*)_value {
-    CGFloat mappedValue = 0.0;
-    CGFloat value =[_value floatValue];
+    CGFloat mappedValue = 0.0f;
+    CGFloat value = [_value floatValue];
     CGFloat initialValue = [[_parameter objectForKey:@"initialValue"] floatValue];
     CGFloat minimumValue = [[_parameter objectForKey:@"minimumValue"] floatValue];
     CGFloat range = (initialValue - minimumValue);
-    if (value > 0.5) {
-        mappedValue = initialValue - 2.0 * range * (value - 0.5); 
+    if (value > 0.5f) {
+        mappedValue = initialValue - 2.0f * range * (value - 0.5f); 
     } else {
-        mappedValue = initialValue - 2.0 * range * (0.5 - value); 
+        mappedValue = initialValue - 2.0f * range * (0.5f - value); 
     }
     return [NSNumber numberWithFloat:mappedValue];
 }
 
 // initial value is equal to minimum value
 - (NSNumber*)mirroredMinimumParameter:(NSDictionary*)_parameter fromValue:(NSNumber*)_value {
-    CGFloat newValue = 0.0;
+    CGFloat mappedValue = 0.0f;
     CGFloat value =[_value floatValue];
     CGFloat initialValue = [[_parameter objectForKey:@"initialValue"] floatValue];
     CGFloat maximumValue = [[_parameter objectForKey:@"maximumValue"] floatValue];
     CGFloat range = (maximumValue - initialValue);
-    if (value > 0.5) {
-        newValue = initialValue + 2.0 * range * (value - 0.5); 
+    if (value > 0.5f) {
+        mappedValue = initialValue + 2.0f * range * (value - 0.5f); 
     } else {
-        newValue = initialValue + 2.0 * range * (0.5 - value); 
+        mappedValue = initialValue + 2.0f * range * (0.5f - value); 
     }
-    return [NSNumber numberWithFloat:newValue];
+    return [NSNumber numberWithFloat:mappedValue];
 }
 
 
@@ -232,10 +232,13 @@ static CameraFactory* thisCameraFactory = nil;
     NSDictionary* greenParameters = [rgbParameters objectForKey:@"Green"];
     NSDictionary* redParameters = [rgbParameters objectForKey:@"Red"];
 
+    NSDictionary* vignetteParameters = [[parameters objectForKey:@"GPUImageVignetteFilter"] objectForKey:@"VignetteEnd"];
+    
     return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[self decreasingParameter:blueParameters fromValue:_value],
                                                                          [self increasingParameter:greenParameters fromValue:_value],
-                                                                         [self increasingParameter:redParameters fromValue:_value], nil]
-                         forKeys:[NSArray arrayWithObjects:@"blue", @"green", @"red", nil]];
+                                                                         [self increasingParameter:redParameters fromValue:_value],
+                                                                         [self mirroredMaximumParameter:vignetteParameters fromValue:_value], nil]
+                         forKeys:[NSArray arrayWithObjects:@"blue", @"green", @"red", @"vignette", nil]];
 }
 
 - (NSDictionary*)plasticParameterValues:(NSNumber*)_value {
@@ -252,18 +255,21 @@ static CameraFactory* thisCameraFactory = nil;
                                        forKeys:[NSArray arrayWithObjects:@"blue", @"green", @"red", nil]];
 }
 
+#pragma mark -
+#pragma mark CameraFactory (ParameterValues Initial Parameters)
+
 - (NSDictionary*)initialInstantCameraParameterValues {
     NSDictionary* parameters = [self.loadedCameraParameters objectForKey:@"Instant"];
     
     NSDictionary* contrastParameters = [[parameters objectForKey:@"GPUImageContrastFilter"] objectForKey:@"Contrast"];
+    NSDictionary* vignetteParameters = [[parameters objectForKey:@"GPUImageVignetteFilter"] objectForKey:@"VignetteEnd"];
     NSDictionary* rgbParameters = [parameters objectForKey:@"GPUImageRGBFilter"];
     NSDictionary* blueParameters = [rgbParameters objectForKey:@"Blue"];
     NSDictionary* saturationParameters = [[parameters objectForKey:@"GPUImageSaturationFilter"] objectForKey:@"Saturation"];
-    NSDictionary* vignetteParameters = [[parameters objectForKey:@"GPUImageVignetteFilter"] objectForKey:@"VignetteEnd"];
     
     return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[contrastParameters objectForKey:@"initialValue"],
                                                                          [blueParameters objectForKey:@"initialValue"],
-                                                                         [saturationParameters objectForKey:@"initialValue"], 
+                                                                         [saturationParameters objectForKey:@"initialValue"],
                                                                          [vignetteParameters objectForKey:@"initialValue"], nil]
                          forKeys:[NSArray arrayWithObjects:@"contrast", @"blue", @"saturation", @"vignette", nil]];
     
@@ -401,9 +407,9 @@ static CameraFactory* thisCameraFactory = nil;
     [filterGroup addFilter:rgbFilter];
     [filterGroup addFilter:vignetteFilter];
     
-    [greyFilter addTarget:contrastFilter];
-    [contrastFilter addTarget:rgbFilter];
-    [rgbFilter addTarget:vignetteFilter];
+    [greyFilter addTarget:rgbFilter];
+    [rgbFilter addTarget:contrastFilter];
+    [contrastFilter addTarget:vignetteFilter];
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:greyFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
@@ -475,6 +481,8 @@ static CameraFactory* thisCameraFactory = nil;
     [rgbFilter setBlue:[[parameters objectForKey:@"blue"] floatValue]];
     [rgbFilter setGreen:[[parameters objectForKey:@"green"] floatValue]];
     [rgbFilter setRed:[[parameters objectForKey:@"red"] floatValue]];
+    GPUImageVignetteFilter* vignetteFilter = (GPUImageVignetteFilter*)[filterGroup filterAtIndex:3];
+    [vignetteFilter setVignetteEnd:[[parameters objectForKey:@"vignette"] floatValue]];
 }
 
 - (void)setPlasticParameterValue:(NSNumber*)_value {
