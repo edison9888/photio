@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
+#import "GPUImage.h"
 #import "FilterImageView.h"
 #import "Filter.h"
 #import "NSObject+Extensions.h"
@@ -31,17 +32,11 @@
 }
 
 - (UIImage*)createSelectedImage {
-    CIContext* context = [CIContext contextWithOptions:nil];  
-    
-    CIFilter* invertFilter = [CIFilter filterWithName:@"CIColorInvert"];
-    [invertFilter setValue:[[CIImage alloc] initWithImage:self.filterImage] forKey:@"inputImage"];
-    CIImage* outputImage = [invertFilter outputImage];
-        
-    CGImageRef cgImageRef = [context createCGImage:outputImage fromRect:[outputImage extent]];
-    UIImage* outputUIImage = [UIImage imageWithCGImage:cgImageRef];
-    CGImageRelease(cgImageRef);
-    
-    return outputUIImage;
+    GPUImageFilter* colorOverlayfilter = [[GPUImageFilter alloc] initWithFragmentShaderFromFile:@"ColorOverlay"];
+    GPUImagePicture* filteredImage = [[GPUImagePicture alloc] initWithImage:self.filterImage];
+    [filteredImage addTarget:colorOverlayfilter];
+    [filteredImage processImage];
+    return [colorOverlayfilter imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation];
 }
 
 #pragma mark -

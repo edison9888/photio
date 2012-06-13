@@ -98,6 +98,7 @@
 		05AB05EA1573D3890087C47B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AB05E91573D3890087C47B /* OpenGLES.framework */; };
 		05AB05F01573D3E00087C47B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17F1528944F005D57B1 /* CoreVideo.framework */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
+		05AD069C15883D96006C973C /* ColorOverlay.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 05634C21158832D600F66333 /* ColorOverlay.fsh */; };
 		05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* ImageEntriesView.m */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
@@ -250,6 +251,7 @@
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
 		0554A47E1503DDFE00B9C76D /* DragRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragRowView.m; sourceTree = "<group>"; };
+		05634C21158832D600F66333 /* ColorOverlay.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ColorOverlay.fsh; sourceTree = "<group>"; };
 		0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilteredCameraViewController.xib; sourceTree = "<group>"; };
 		0577D418157A8F1A00BA4C52 /* capture-photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture-photo.png"; sourceTree = "<group>"; };
 		0577D419157A8F1A00BA4C52 /* capture-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture-photo@2x.png"; sourceTree = "<group>"; };
@@ -585,10 +587,11 @@
 		05C6050E156402C400E02532 /* Filters */ = {
 			isa = PBXGroup;
 			children = (
-				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
-				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
 				0539BA40157AE99600A4A04B /* CameraFactory.h */,
 				0539BA41157AE99600A4A04B /* CameraFactory.m */,
+				05634C21158832D600F66333 /* ColorOverlay.fsh */,
+				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
+				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
 			);
 			name = Filters;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05AD069C15883D96006C973C /* ColorOverlay.fsh in Resources */,
 				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
 				05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */,
 				050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */,
