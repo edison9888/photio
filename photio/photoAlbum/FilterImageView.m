@@ -32,11 +32,25 @@
 }
 
 - (UIImage*)createSelectedImage {
-    GPUImageFilter* colorOverlayfilter = [[GPUImageFilter alloc] initWithFragmentShaderFromFile:@"ColorOverlay"];
     GPUImagePicture* filteredImage = [[GPUImagePicture alloc] initWithImage:self.filterImage];
-    [filteredImage addTarget:colorOverlayfilter];
+    GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
+
+    GPUImageFilter* colorOverlayfilter = [[GPUImageFilter alloc] initWithFragmentShaderFromFile:@"WhiteColorOverlay"];
+    GPUImageGaussianBlurFilter* gaussainBlur = [[GPUImageGaussianBlurFilter alloc] init];
+    [gaussainBlur setBlurSize:1.5f];
+    
+    [filterGroup addFilter:colorOverlayfilter];
+    [filterGroup addFilter:gaussainBlur];
+    
+    [colorOverlayfilter addTarget:gaussainBlur];
+    
+    [filterGroup setInitialFilters:[NSArray arrayWithObject:colorOverlayfilter]];
+    [filterGroup setTerminalFilter:gaussainBlur];
+    
+    [filteredImage addTarget:filterGroup];
     [filteredImage processImage];
-    return [colorOverlayfilter imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation];
+    
+    return [filterGroup imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation];
 }
 
 #pragma mark -
