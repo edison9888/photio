@@ -95,6 +95,7 @@
 		059772F71527D787008F3A1B /* NativeCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* NativeCameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
 		05A0F0B9154354410082947D /* CalendarMonthAndYearView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */; };
+		05A34676158C47E900B692E4 /* FilterSelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A34675158C47E900B692E4 /* FilterSelectedView.m */; };
 		05AB05EA1573D3890087C47B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AB05E91573D3890087C47B /* OpenGLES.framework */; };
 		05AB05F01573D3E00087C47B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17F1528944F005D57B1 /* CoreVideo.framework */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
@@ -294,6 +295,8 @@
 		059772F81527D7B5008F3A1B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		05A0F0B7154354410082947D /* CalendarMonthAndYearView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMonthAndYearView.h; sourceTree = "<group>"; };
 		05A0F0B8154354410082947D /* CalendarMonthAndYearView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMonthAndYearView.m; sourceTree = "<group>"; };
+		05A34674158C47E900B692E4 /* FilterSelectedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSelectedView.h; sourceTree = "<group>"; };
+		05A34675158C47E900B692E4 /* FilterSelectedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSelectedView.m; sourceTree = "<group>"; };
 		05AB05E91573D3890087C47B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		05AC025B1548CBCF00A29139 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
 		05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
@@ -684,6 +687,8 @@
 				0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */,
 				05250EE21569BBDC0060F993 /* FilterImageView.h */,
 				05250EE31569BBDD0060F993 /* FilterImageView.m */,
+				05A34674158C47E900B692E4 /* FilterSelectedView.h */,
+				05A34675158C47E900B692E4 /* FilterSelectedView.m */,
 				05CCEFA31555E0E8004FBD21 /* ImageControlView.h */,
 				05CCEFA41555E0E8004FBD21 /* ImageControlView.m */,
 				05E4C2251552259800C7266E /* ImageEditView.h */,
@@ -939,6 +944,7 @@
 				0539BA3C157AE83E00A4A04B /* Image.m in Sources */,
 				0539BA42157AE99600A4A04B /* CameraFactory.m in Sources */,
 				0539BA4A157AF9D600A4A04B /* Camera.m in Sources */,
+				05A34676158C47E900B692E4 /* FilterSelectedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -39,7 +39,7 @@
 
 @synthesize containerView, delegate, cameraSelectionView, captureImageGesture, cameraControlsView, cameraConfigView, 
             selectedCameraView, cameraAutoAdjustView, cameraParameterView, transitionGestureRecognizer,
-            shutterView, cameraConfigIsShown, displayedCamera;
+            shutterView, cameraConfigIsShown;
 
 #pragma mark -
 #pragma mark FilteredCameraViewController PrivateAPI
@@ -123,7 +123,6 @@
 }
 
 - (void)setCamera:(Camera*)_camera {
-    self.displayedCamera = _camera;
     [[CameraFactory instance] setCamera:_camera forView:(GPUImageView*)self.view];
     self.selectedCameraView.image = [UIImage imageNamed:_camera.imageFilename];
     if ([_camera.hasAutoAdjust boolValue]) {
@@ -354,8 +353,7 @@
 #pragma mark ParameterSliderViewDelegate
 
 -(void)parameterSliderValueChanged:(ParameterSliderView*)_parameterSlider {
-    self.displayedCamera.value = [NSNumber numberWithFloat:[_parameterSlider value]];
-    [[CameraFactory instance] setCameraParmeterValue:self.displayedCamera.value];
+    [[CameraFactory instance] setCameraParmeterValue:[NSNumber numberWithFloat:[_parameterSlider value]]];
 }
 
 

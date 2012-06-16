@@ -533,6 +533,8 @@ static CameraFactory* thisCameraFactory = nil;
 }
 
 - (void)setCameraParmeterValue:(NSNumber*)_value {
+    self.camera.value = _value;
+    [[ViewGeneral instance] saveManagedObjectContext];
     switch ([self.camera.cameraId intValue]) {
         case CameraTypeIPhone:
             break;

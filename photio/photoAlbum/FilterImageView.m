@@ -11,6 +11,7 @@
 #import "Filter.h"
 #import "NSObject+Extensions.h"
 #import "UIImage+Extensions.h"
+#import "FilterSelectedView.h"
 
 @interface FilterImageView (PrivateAPI)
 
@@ -21,7 +22,7 @@
 
 @implementation FilterImageView
 
-@synthesize delegate, filter, selectGesture, selected, filterImage, selectedImage;
+@synthesize delegate, filter, selectGesture, selectedView;
 
 #pragma mark -
 #pragma mark FilterImageView PrivateAPI
@@ -29,35 +30,6 @@
 - (void)didSelect {
     [self select];
     [self.delegate selectedFilter:self];
-}
-
-- (UIImage*)createSelectedImage {
-    GPUImagePicture* bluredImage = [[GPUImagePicture alloc] initWithImage:self.filterImage];    
-    GPUImageFilterGroup* blurFilterGroup = [[GPUImageFilterGroup alloc] init];
-
-    GPUImageFilter* colorOverlayfilter = [[GPUImageFilter alloc] initWithFragmentShaderFromFile:@"WhiteColorOverlay"];
-    GPUImageGaussianBlurFilter* gaussainBlur = [[GPUImageGaussianBlurFilter alloc] init];
-    [gaussainBlur setBlurSize:3.0f];
-    
-    [blurFilterGroup addFilter:colorOverlayfilter];
-    [blurFilterGroup addFilter:gaussainBlur];
-    
-    [colorOverlayfilter addTarget:gaussainBlur];
-    
-    [blurFilterGroup setInitialFilters:[NSArray arrayWithObject:colorOverlayfilter]];
-    [blurFilterGroup setTerminalFilter:gaussainBlur];
-    
-    [bluredImage addTarget:blurFilterGroup];
-    [bluredImage processImage];
-    GPUImagePicture* bluredImageResult = [[GPUImagePicture alloc] initWithImage:[blurFilterGroup imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation]];
-    
-    GPUImageNormalBlendFilter* blendFilter = [[GPUImageNormalBlendFilter alloc] init];
-    GPUImagePicture* topImage = [[GPUImagePicture alloc] initWithImage:self.filterImage];
-    [bluredImageResult addTarget:blendFilter];
-    [topImage addTarget:blendFilter];
-    [topImage processImage];
-    
-    return [blendFilter imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation];
 }
 
 #pragma mark -
@@ -74,8 +46,8 @@
 - (id)initWithImage:(UIImage*)_image {
     self = [super initWithImage:_image];
     if (self) {
-        self.filterImage = _image;
-        self.selectedImage = [self createSelectedImage];
+        self.image = _image;
+        self.selectedView = [FilterSelectedView withFrame:CGRectMake(0.3*self.frame.size.width, 0.8f*self.frame.size.height, 0.4f*self.frame.size.width, 0.075f*self.frame.size.height)] ;
         self.userInteractionEnabled = YES;
         self.exclusiveTouch = NO;
         self.selectGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelect)];
@@ -83,19 +55,16 @@
         self.selectGesture.numberOfTouchesRequired = 1;
         self.selectGesture.delegate = self;
         [self addGestureRecognizer:self.selectGesture];
-        self.selected = NO;
     }
     return self;
 }
 
 - (void)select {
-    self.selected = YES;
-    self.image = self.selectedImage;
+    [self addSubview:self.selectedView];
 }
 
 - (void)deselect {
-    self.selected = NO;
-    self.image = self.filterImage;
+    [self.selectedView removeFromSuperview];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
