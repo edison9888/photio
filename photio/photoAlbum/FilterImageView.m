@@ -32,25 +32,32 @@
 }
 
 - (UIImage*)createSelectedImage {
-    GPUImagePicture* filteredImage = [[GPUImagePicture alloc] initWithImage:self.filterImage];
-    GPUImageFilterGroup* filterGroup = [[GPUImageFilterGroup alloc] init];
+    GPUImagePicture* bluredImage = [[GPUImagePicture alloc] initWithImage:self.filterImage];    
+    GPUImageFilterGroup* blurFilterGroup = [[GPUImageFilterGroup alloc] init];
 
     GPUImageFilter* colorOverlayfilter = [[GPUImageFilter alloc] initWithFragmentShaderFromFile:@"WhiteColorOverlay"];
     GPUImageGaussianBlurFilter* gaussainBlur = [[GPUImageGaussianBlurFilter alloc] init];
-    [gaussainBlur setBlurSize:1.5f];
+    [gaussainBlur setBlurSize:3.0f];
     
-    [filterGroup addFilter:colorOverlayfilter];
-    [filterGroup addFilter:gaussainBlur];
+    [blurFilterGroup addFilter:colorOverlayfilter];
+    [blurFilterGroup addFilter:gaussainBlur];
     
     [colorOverlayfilter addTarget:gaussainBlur];
     
-    [filterGroup setInitialFilters:[NSArray arrayWithObject:colorOverlayfilter]];
-    [filterGroup setTerminalFilter:gaussainBlur];
+    [blurFilterGroup setInitialFilters:[NSArray arrayWithObject:colorOverlayfilter]];
+    [blurFilterGroup setTerminalFilter:gaussainBlur];
     
-    [filteredImage addTarget:filterGroup];
-    [filteredImage processImage];
+    [bluredImage addTarget:blurFilterGroup];
+    [bluredImage processImage];
+    GPUImagePicture* bluredImageResult = [[GPUImagePicture alloc] initWithImage:[blurFilterGroup imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation]];
     
-    return [filterGroup imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation];
+    GPUImageNormalBlendFilter* blendFilter = [[GPUImageNormalBlendFilter alloc] init];
+    GPUImagePicture* topImage = [[GPUImagePicture alloc] initWithImage:self.filterImage];
+    [bluredImageResult addTarget:blendFilter];
+    [topImage addTarget:blendFilter];
+    [topImage processImage];
+    
+    return [blendFilter imageFromCurrentlyProcessedOutputWithOrientation:self.filterImage.imageOrientation];
 }
 
 #pragma mark -
