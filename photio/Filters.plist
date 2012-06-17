@@ -150,7 +150,7 @@
 			<key>name</key>
 			<string>Instant</string>
 			<key>imageFilename</key>
-			<string>instant.png</string>
+			<string>instant-filter.png</string>
 			<key>filterPaletteId</key>
 			<integer>2</integer>
 			<key>purchased</key>
@@ -170,7 +170,7 @@
 			<key>name</key>
 			<string>Pixel</string>
 			<key>imageFilename</key>
-			<string>pixel.png</string>
+			<string>pixel-filter.png</string>
 			<key>filterPaletteId</key>
 			<integer>2</integer>
 			<key>purchased</key>
@@ -190,7 +190,7 @@
 			<key>name</key>
 			<string>Box</string>
 			<key>imageFilename</key>
-			<string>box.png</string>
+			<string>box-filter.png</string>
 			<key>filterPaletteId</key>
 			<integer>2</integer>
 			<key>purchased</key>
@@ -210,7 +210,7 @@
 			<key>name</key>
 			<string>Plastic</string>
 			<key>imageFilename</key>
-			<string>plastic.png</string>
+			<string>plastic-filter.png</string>
 			<key>filterPaletteId</key>
 			<integer>2</integer>
 			<key>purchased</key>
