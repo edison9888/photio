@@ -132,7 +132,7 @@
 			<key>imageFilename</key>
 			<string>vignette.png</string>
 			<key>filterPaletteId</key>
-			<integer>1</integer>
+			<integer>3</integer>
 			<key>purchased</key>
 			<true/>
 			<key>hidden</key>

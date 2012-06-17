@@ -20,7 +20,7 @@
 
 @implementation ImageFiltersView
 
-@synthesize filtersViewDelegate, filterPalette, contentView, panGestureRecognizer, filterViews;
+@synthesize filtersViewDelegate, contentView, panGestureRecognizer, filterViews;
 
 #pragma mark -
 #pragma mark ImageFiltersView PrivayeAPI
@@ -41,8 +41,14 @@
 - (void)didMoveToSuperview {
 }
 
-- (void)addFilterViews {
-    NSArray* filters = [[FilterFactory instance] filtersForPalette:self.filterPalette];
+- (void)removeFilterViews {
+    for (UIView* filterView in self.contentView.subviews) {
+        [filterView removeFromSuperview];
+    }
+}
+
+- (void)addFilterViewsForFilterPalette:(FilterPalette*)_filterPalette {
+    NSArray* filters = [[FilterFactory instance] filtersForPalette:_filterPalette];
     CGFloat totalWidth = 0.0;
     for (Filter* filter in filters) {
         FilterImageView* filterImage = [FilterImageView withDelegate:self andFilter:filter];

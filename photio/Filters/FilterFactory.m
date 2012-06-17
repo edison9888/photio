@@ -7,6 +7,7 @@
 //
 
 #import "FilterFactory.h"
+#import "CameraFactory.h"
 #import "GPUImage.h"
 
 #import "ViewGeneral.h"
@@ -35,6 +36,10 @@ static FilterFactory* thisFilterFactory = nil;
 + (UIImage*)applyContrastFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
 + (UIImage*)applySaturationFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
 + (UIImage*)applyVignetteFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyInstantFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyPixelFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyBoxFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
++ (UIImage*)applyPlasticFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image;
 
 @end
 
@@ -185,6 +190,18 @@ static FilterFactory* thisFilterFactory = nil;
         case FilterTypeVignette:
             outputImage = [self applyVignetteFilterWithValue:_value toImage:_image];
             break;
+        case FilterTypeInstant:
+            outputImage = [self applyInstantFilterWithValue:_value toImage:_image];
+            break;
+        case FilterTypePixel:
+            outputImage = [self applyPixelFilterWithValue:_value toImage:_image];
+            break;
+        case FilterTypeBox:
+            outputImage = [self applyBoxFilterWithValue:_value toImage:_image];
+            break;
+        case FilterTypePlastic:
+            outputImage = [self applyPlasticFilterWithValue:_value toImage:_image];
+            break;
         default:
             break;
     }
@@ -234,6 +251,34 @@ static FilterFactory* thisFilterFactory = nil;
 + (UIImage*)applyBlueColorFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
     GPUImageRGBFilter* filter = [[GPUImageRGBFilter alloc] init];
     [filter setBlue:[_value floatValue]];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyInstantFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    CameraFactory* cameraFactory = [CameraFactory instance];
+    GPUImageOutput<GPUImageInput>* filter = [cameraFactory filterInstantCamera];
+    [cameraFactory setInstantCameraParameterValue:_value forFilter:filter];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyPixelFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    CameraFactory* cameraFactory = [CameraFactory instance];
+    GPUImageOutput<GPUImageInput>* filter = [cameraFactory filterPixelCamera];
+    [cameraFactory setInstantCameraParameterValue:_value forFilter:filter];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyBoxFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    CameraFactory* cameraFactory = [CameraFactory instance];
+    GPUImageOutput<GPUImageInput>* filter = [cameraFactory filterBoxCamera];
+    [cameraFactory setBoxCameraParameterValue:_value forFilter:filter];
+    return [self outputImageForFilter:filter andImage:_image];
+}
+
++ (UIImage*)applyPlasticFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
+    CameraFactory* cameraFactory = [CameraFactory instance];
+    GPUImageOutput<GPUImageInput>* filter = [cameraFactory filterPlasticCamera];
+    [cameraFactory setPlasticCameraParameterValue:_value forFilter:filter];
     return [self outputImageForFilter:filter andImage:_image];
 }
 

@@ -36,4 +36,14 @@ typedef enum {
 - (Camera*)defaultCamera;
 - (NSArray*)cameras;
 
+- (GPUImageOutput<GPUImageInput>*)filterInstantCamera;
+- (GPUImageOutput<GPUImageInput>*)filterPixelCamera;
+- (GPUImageOutput<GPUImageInput>*)filterBoxCamera;
+- (GPUImageOutput<GPUImageInput>*)filterPlasticCamera;
+
+- (void)setInstantCameraParameterValue:(NSNumber*)_value forFilter:(GPUImageOutput<GPUImageInput>*)_filter;
+- (void)setPixelCameraParameterValue:(NSNumber*)_value forFilter:(GPUImageOutput<GPUImageInput>*)_filter;
+- (void)setBoxCameraParameterValue:(NSNumber*)_value forFilter:(GPUImageOutput<GPUImageInput>*)_filter;
+- (void)setPlasticCameraParameterValue:(NSNumber*)_value forFilter:(GPUImageOutput<GPUImageInput>*)_filter;
+
 @end

@@ -27,6 +27,7 @@
 - (void)setFilterParameters;
 - (IBAction)saveFilteredImage:(id)sender;
 - (IBAction)changeFilterPalette:(id)sender;
+- (void)updateFilterViewsForFilterPalette:(FilterPalette*)_filterPalette;
 
 @end
 
@@ -34,7 +35,7 @@
 @implementation ImageEditView
 
 @synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageSaveFilteredImageView, imageFilterPaletteView,
-            imageFiltersView, filterPaletteSelectionView, displayedFilterImage, displayedFilterPalette, isInitialized;
+            imageFiltersView, filterPaletteSelectionView, displayedFilterImage, isInitialized;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
@@ -86,6 +87,15 @@
     [self selectFilter:self.displayedFilterImage];
 }
 
+- (void)updateFilterViewsForFilterPalette:(FilterPalette*)_filterPalette {
+    self.imageFilterPaletteView.image = [UIImage imageNamed:_filterPalette.imageFilename];
+    [self.imageFiltersView addFilterViewsForFilterPalette:_filterPalette];
+    Filter* defaultFilter = [[FilterFactory instance] defaultFilterForPalette:_filterPalette];
+    FilterImageView* defaultFilterImage = [self.imageFiltersView filterImageViewForFilter:defaultFilter];
+    [defaultFilterImage select];
+    [self selectFilter:defaultFilterImage];
+}
+
 #pragma mark -
 #pragma mark ImageEditView
 
@@ -108,16 +118,8 @@
     if (!self.isInitialized) {
         self.imageSaveFilteredImageView.userInteractionEnabled = NO;
         self.isInitialized = YES;
-        FilterFactory* filterFactory = [FilterFactory instance];
-        self.displayedFilterPalette = [filterFactory defaultFilterPalette];
-        self.imageFilterPaletteView.image = [UIImage imageNamed:self.displayedFilterPalette.imageFilename];
         self.imageFiltersView.filtersViewDelegate = self;
-        self.imageFiltersView.filterPalette = self.displayedFilterPalette;
-        [self.imageFiltersView addFilterViews];
-        Filter* defaultFilter = [filterFactory defaultFilterForPalette:self.displayedFilterPalette];
-        FilterImageView* defaultFilterImage = [self.imageFiltersView filterImageViewForFilter:defaultFilter];
-        [defaultFilterImage select];
-        [self selectFilter:defaultFilterImage];
+        [self updateFilterViewsForFilterPalette:[[FilterFactory instance] defaultFilterPalette]];
     }
 }
 
@@ -152,8 +154,9 @@
 }
 
 - (void)selectedParameter:(id)_parameter {
-    self.imageFilterPaletteView.image = [UIImage imageNamed:[_parameter valueForKey:@"imageFilename"]];
-    self.displayedFilterPalette = _parameter;
+    [self.imageFiltersView removeFilterViews];
+    FilterPalette* displayedFilterPalette = _parameter;
+    [self updateFilterViewsForFilterPalette:displayedFilterPalette];
     [self.filterPaletteSelectionView removeView];
 }
 

@@ -20,7 +20,7 @@
 			<key>name</key>
 			<string>Color Adjustment</string>
 			<key>imageFilename</key>
-			<string>image-adjust.png</string>
+			<string>color-adjust.png</string>
 			<key>hidden</key>
 			<false/>
 		</dict>

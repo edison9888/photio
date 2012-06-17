@@ -32,7 +32,6 @@
 @property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
 @property(nonatomic, strong) ParameterSelectionView*            filterPaletteSelectionView;
 @property(nonatomic, assign) FilterImageView*                   displayedFilterImage;
-@property(nonatomic, assign) FilterPalette*                     displayedFilterPalette;
 @property(nonatomic, assign) BOOL                               isInitialized;
 
 + (id)withDelegate:(id<ImageEditViewDelegate>)_delegate;

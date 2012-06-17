@@ -19,13 +19,13 @@
 @interface ImageFiltersView : UIView <FilterImageViewDelegate>
 
 @property(nonatomic, weak)      id<ImageFiltersViewDelegate>    filtersViewDelegate;
-@property(nonatomic, assign)    FilterPalette*                  filterPalette;
 @property(nonatomic, strong)    UIView*                         contentView;
 @property(nonatomic, strong)    BouncingPanGestureRecognizer*   panGestureRecognizer;
 @property(nonatomic, strong)    NSMutableDictionary*            filterViews;
 
-- (void)addFilterViews;
+- (void)addFilterViewsForFilterPalette:(FilterPalette*)_filterPalette;
 - (FilterImageView*)filterImageViewForFilter:(Filter*)_filter;
+- (void)removeFilterViews;
 
 @end
 
