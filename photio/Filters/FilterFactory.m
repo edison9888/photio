@@ -145,7 +145,7 @@ static FilterFactory* thisFilterFactory = nil;
 }
 
 - (FilterPalette*)defaultFilterPalette {
-    return [self.loadedFilterPalettes objectAtIndex:FilterPaletteTypeImageAjustmentControls];
+    return [self.loadedFilterPalettes objectAtIndex:FilterPaletteTypeColorAjustmentControls];
 }
 
 - (Filter*)defaultFilterForPalette:(FilterPalette*)_filterPalette {
@@ -264,7 +264,7 @@ static FilterFactory* thisFilterFactory = nil;
 + (UIImage*)applyPixelFilterWithValue:(NSNumber*)_value toImage:(UIImage*)_image {
     CameraFactory* cameraFactory = [CameraFactory instance];
     GPUImageOutput<GPUImageInput>* filter = [cameraFactory filterPixelCamera];
-    [cameraFactory setInstantCameraParameterValue:_value forFilter:filter];
+    [cameraFactory setPixelCameraParameterValue:_value forFilter:filter];
     return [self outputImageForFilter:filter andImage:_image];
 }
 

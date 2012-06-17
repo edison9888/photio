@@ -43,6 +43,7 @@
 - (void)selectFilter:(FilterImageView*)_filterImage {
     self.displayedFilterImage = _filterImage;
     [self setFilterParameters];
+    [self.delegate applyFilter:self.displayedFilterImage.filter withValue:self.displayedFilterImage.filter.defaultValue];
 }
 
 - (void)setFilterParameters {

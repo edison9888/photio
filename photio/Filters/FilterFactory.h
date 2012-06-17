@@ -24,12 +24,11 @@ typedef enum {
     FilterTypePixel,
     FilterTypeBox,
     FilterTypePlastic
-
 } FilterType;
 
 typedef enum {
     FilterPaletteTypeFavotites,
-    FilterPaletteTypeImageAjustmentControls,
+    FilterPaletteTypeColorAjustmentControls,
     FilterpaletteCameras,
     FilterPaletteEffects
 } FilterPaletteType;

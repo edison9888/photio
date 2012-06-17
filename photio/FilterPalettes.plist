@@ -25,7 +25,7 @@
 			<false/>
 		</dict>
 		<dict>
-			<key>filterPaletteID</key>
+			<key>filterPaletteId</key>
 			<integer>2</integer>
 			<key>name</key>
 			<string>Cameras</string>
