@@ -14,14 +14,31 @@
 #define MAX_COMMENT_LINES               5
 #define COMMENT_YOFFSET                 15
 
+typedef enum {
+    ServiceEditMode,
+    AlbumEditMode
+} EditMode;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageMetaDataEditView (PrivateAPI)
 
 - (void)addCommentText:(NSString*)_comment;
 - (void)initializeCommentText;
-- (IBAction)exportToCameraRoll:(id)sender;
+- (IBAction)showServices:(id)sender;
 - (IBAction)addComment:(id)sender;
 - (IBAction)star:(id)sender;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface ImageMetaDataEditView (Services)
+
+- (void)serviceCameraRoll;
+- (void)serviceEMail;
+- (void)serviceTwitter;
+- (void)serviceFacebook;
+- (void)serviceTumbler;
+- (void)serviceInstagram;
 
 @end
 
@@ -66,8 +83,7 @@
     self.imageCommentLabel.hidden = YES;
 }
 
-- (IBAction)exportToCameraRoll:(id)sender {
-    [self.delegate exportToCameraRoll];
+- (IBAction)showServices:(id)sender {
 }
 
 - (IBAction)addComment:(id)sender {
@@ -125,6 +141,33 @@
 
 - (void)didMoveToSuperview {
     self.initialCommentContainerRect = self.commentContainerView.frame;
+}
+
+#pragma mark -
+#pragma mark ImageMetaDataEditView (Services)
+
+- (void)serviceCameraRoll {
+    [self.delegate exportToCameraRoll];
+}
+
+- (void)serviceEMail {
+    
+}
+
+- (void)serviceTwitter {
+    
+}
+
+- (void)serviceFacebook {
+    
+}
+
+- (void)serviceTumbler {
+    
+}
+
+- (void)serviceInstagram {
+    
 }
 
 #pragma mark -

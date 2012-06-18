@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>services</key>
+	<array>
+		<dict>
+			<key>serviceId</key>
+			<integer>0</integer>
+			<key>name</key>
+			<string>Export To Camera Roll</string>
+			<key>imageFilename</key>
+			<string>camera-roll.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>serviceId</key>
+			<integer>1</integer>
+			<key>name</key>
+			<string>eMail</string>
+			<key>imageFilename</key>
+			<string>email.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>serviceId</key>
+			<integer>2</integer>
+			<key>name</key>
+			<string>Twitter</string>
+			<key>imageFilename</key>
+			<string>twitter.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>serviceId</key>
+			<integer>3</integer>
+			<key>name</key>
+			<string>Facebook</string>
+			<key>imageFilename</key>
+			<string>facebook.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>serviceId</key>
+			<integer>4</integer>
+			<key>name</key>
+			<string>Instagram</string>
+			<key>imageFilename</key>
+			<string>instagram.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>serviceId</key>
+			<integer>5</integer>
+			<key>name</key>
+			<string>Tumbler</string>
+			<key>imageFilename</key>
+			<string>tumbler.png</string>
+			<key>hidden</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -53,10 +53,10 @@
 						<float key="IBUIAlpha">0.69999998807907104</float>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIImageView" id="1040003400">
+					<object class="IBUIImageView" id="1047161194">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{250, 0}, {70, 70}}</string>
+						<string key="NSFrame">{{270, 0}, {50, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="182221607"/>
@@ -73,10 +73,10 @@
 					<object class="IBUILabel" id="58638721">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{70, 10}, {180, 50}}</string>
+						<string key="NSFrame">{{60, 5}, {200, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1040003400"/>
+						<reference key="NSNextKeyView" ref="1047161194"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="90209846">
 							<int key="NSColorSpace">3</int>
@@ -112,7 +112,7 @@
 					<object class="IBUITableView" id="182221607">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 70}, {320, 410}}</string>
+						<string key="NSFrame">{{0, 50}, {320, 430}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1034752946"/>
@@ -132,7 +132,7 @@
 					<object class="IBUIView" id="1034752946">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{1, 70}, {318, 1}}</string>
+						<string key="NSFrame">{{1, 50}, {318, 1}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -154,7 +154,7 @@
 				<reference key="IBUIBackgroundColor" ref="90209846"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUITapGestureRecognizer" id="298602819"/>
+			<object class="IBUITapGestureRecognizer" id="944464950"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -170,7 +170,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">addParameterView</string>
 						<reference key="source" ref="191373211"/>
-						<reference key="destination" ref="1040003400"/>
+						<reference key="destination" ref="1047161194"/>
 					</object>
 					<int key="connectionID">15</int>
 				</object>
@@ -193,8 +193,8 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
-						<reference key="source" ref="1040003400"/>
-						<reference key="destination" ref="298602819"/>
+						<reference key="source" ref="1047161194"/>
+						<reference key="destination" ref="944464950"/>
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
@@ -203,7 +203,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">addParemeter:</string>
-						<reference key="source" ref="298602819"/>
+						<reference key="source" ref="944464950"/>
 						<reference key="destination" ref="191373211"/>
 					</object>
 					<int key="connectionID">16</int>
@@ -225,7 +225,7 @@
 							<reference ref="182221607"/>
 							<reference ref="58638721"/>
 							<reference ref="1034752946"/>
-							<reference ref="1040003400"/>
+							<reference ref="1047161194"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Parameter View</string>
@@ -269,14 +269,14 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
-						<reference key="object" ref="1040003400"/>
+						<reference key="object" ref="1047161194"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Add</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">13</int>
-						<reference key="object" ref="298602819"/>
+						<reference key="object" ref="944464950"/>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Add</string>
 					</object>
@@ -357,7 +357,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">add.png</string>
-			<string key="NS.object.0">{70, 70}</string>
+			<string key="NS.object.0">{50, 50}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>

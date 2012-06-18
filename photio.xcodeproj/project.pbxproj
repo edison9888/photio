@@ -70,6 +70,10 @@
 		0579A8B4158EAE9500F5E85C /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8A8158EAE9500F5E85C /* twitter@2x.png */; };
 		0579A8B7158EB64000F5E85C /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8B5158EB64000F5E85C /* add.png */; };
 		0579A8B8158EB64000F5E85C /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8B6158EB64000F5E85C /* add@2x.png */; };
+		0579A8BE158ED49000F5E85C /* ServiceUsed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8BD158ED49000F5E85C /* ServiceUsed.m */; };
+		0579A8C0158ED4F900F5E85C /* Services.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8BF158ED4F900F5E85C /* Services.plist */; };
+		0579A8C5158ED9A500F5E85C /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8C4158ED9A500F5E85C /* Service.m */; };
+		0579A8C6158ED9F400F5E85C /* WhiteColorOverlay.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
@@ -133,7 +137,6 @@
 		05AB05EA1573D3890087C47B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AB05E91573D3890087C47B /* OpenGLES.framework */; };
 		05AB05F01573D3E00087C47B /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17F1528944F005D57B1 /* CoreVideo.framework */; };
 		05AC025D1548CBCF00A29139 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AC025C1548CBCF00A29139 /* NSArray+Extensions.m */; };
-		05AD069C15883D96006C973C /* WhiteColorOverlay.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 05634C21158832D600F66333 /* WhiteColorOverlay.fsh */; };
 		05AF480F154DCCAE0099576A /* ImageEntriesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05AF480E154DCCAE0099576A /* ImageEntriesView.m */; };
 		05B8371A152E6C5F00D99A40 /* ImageInspectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B83719152E6C5F00D99A40 /* ImageInspectView.m */; };
 		05B8372815309FB400D99A40 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B8372715309FB400D99A40 /* CoreData.framework */; };
@@ -260,7 +263,6 @@
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
 		0554A47E1503DDFE00B9C76D /* DragRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragRowView.m; sourceTree = "<group>"; };
-		05634C21158832D600F66333 /* WhiteColorOverlay.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = WhiteColorOverlay.fsh; sourceTree = "<group>"; };
 		0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilteredCameraViewController.xib; sourceTree = "<group>"; };
 		0577D41D157AA9E800BA4C52 /* instant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instant.png; sourceTree = "<group>"; };
 		0577D41E157AA9E800BA4C52 /* instant@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "instant@2x.png"; sourceTree = "<group>"; };
@@ -280,6 +282,12 @@
 		0579A8A8158EAE9500F5E85C /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
 		0579A8B5158EB64000F5E85C /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		0579A8B6158EB64000F5E85C /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
+		0579A8BC158ED49000F5E85C /* ServiceUsed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceUsed.h; sourceTree = "<group>"; };
+		0579A8BD158ED49000F5E85C /* ServiceUsed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceUsed.m; sourceTree = "<group>"; };
+		0579A8BF158ED4F900F5E85C /* Services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Services.plist; sourceTree = "<group>"; };
+		0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WhiteColorOverlay.fsh; path = Filters/WhiteColorOverlay.fsh; sourceTree = "<group>"; };
+		0579A8C3158ED9A500F5E85C /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Service.h; sourceTree = "<group>"; };
+		0579A8C4158ED9A500F5E85C /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Service.m; sourceTree = "<group>"; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -607,6 +615,8 @@
 			isa = PBXGroup;
 			children = (
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
+				0579A8C3158ED9A500F5E85C /* Service.h */,
+				0579A8C4158ED9A500F5E85C /* Service.m */,
 				0539BA1F157AE58F00A4A04B /* Album.h */,
 				0539BA20157AE58F00A4A04B /* Album.m */,
 				0539BA48157AF9D500A4A04B /* Camera.h */,
@@ -625,6 +635,8 @@
 				0539BA3B157AE83E00A4A04B /* Image.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
 				05B837781530C6B800D99A40 /* Locale.m */,
+				0579A8BC158ED49000F5E85C /* ServiceUsed.h */,
+				0579A8BD158ED49000F5E85C /* ServiceUsed.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -701,9 +713,9 @@
 			children = (
 				0539BA40157AE99600A4A04B /* CameraFactory.h */,
 				0539BA41157AE99600A4A04B /* CameraFactory.m */,
-				05634C21158832D600F66333 /* WhiteColorOverlay.fsh */,
 				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
 				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
+				0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */,
 			);
 			name = Filters;
 			sourceTree = "<group>";
@@ -781,6 +793,7 @@
 				05C99ECC14F0585C00D09F3E /* main.m */,
 				05C99EC814F0585C00D09F3E /* photio-Info.plist */,
 				05C99ECE14F0585C00D09F3E /* photio-Prefix.pch */,
+				0579A8BF158ED4F900F5E85C /* Services.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -918,7 +931,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05AD069C15883D96006C973C /* WhiteColorOverlay.fsh in Resources */,
+				0579A8C6158ED9F400F5E85C /* WhiteColorOverlay.fsh in Resources */,
 				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
 				05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */,
 				050CF12914F96A9100A31059 /* ContainerViewController.xib in Resources */,
@@ -1008,6 +1021,7 @@
 				0579A8B4158EAE9500F5E85C /* twitter@2x.png in Resources */,
 				0579A8B7158EB64000F5E85C /* add.png in Resources */,
 				0579A8B8158EB64000F5E85C /* add@2x.png in Resources */,
+				0579A8C0158ED4F900F5E85C /* Services.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1076,6 +1090,8 @@
 				0539BA42157AE99600A4A04B /* CameraFactory.m in Sources */,
 				0539BA4A157AF9D600A4A04B /* Camera.m in Sources */,
 				05A34676158C47E900B692E4 /* FilterSelectedView.m in Sources */,
+				0579A8BE158ED49000F5E85C /* ServiceUsed.m in Sources */,
+				0579A8C5158ED9A500F5E85C /* Service.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

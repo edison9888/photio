@@ -41,6 +41,7 @@
         <relationship name="filterUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FilterUsed" inverseName="capture" inverseEntity="FilterUsed" syncable="YES"/>
         <relationship name="image" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Image" inverseName="capture" inverseEntity="Image" syncable="YES"/>
         <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
+        <relationship name="serviceUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceUsed" inverseName="capture" inverseEntity="ServiceUsed" syncable="YES"/>
     </entity>
     <entity name="Filter" representedClassName="Filter" syncable="YES">
         <attribute name="defaultValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -82,15 +83,27 @@
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="captures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Capture" inverseName="locale" inverseEntity="Capture" syncable="YES"/>
     </entity>
+    <entity name="Service" representedClassName="Service" syncable="YES">
+        <attribute name="imageFilename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serviceId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="serviceUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceUsed" inverseName="service" inverseEntity="ServiceUsed" syncable="YES"/>
+    </entity>
+    <entity name="ServiceUsed" representedClassName="ServiceUsed" syncable="YES">
+        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="serviceUsed" inverseEntity="Capture" syncable="YES"/>
+        <relationship name="service" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Service" inverseName="serviceUsed" inverseEntity="Service" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Capture" positionX="160" positionY="192" width="128" height="240"/>
-        <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
-        <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="Image" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Album" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Camera" positionX="160" positionY="192" width="128" height="255"/>
         <element name="CameraUsed" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Capture" positionX="160" positionY="192" width="128" height="240"/>
+        <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
+        <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
         <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Image" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Service" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="ServiceUsed" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>
