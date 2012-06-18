@@ -22,14 +22,16 @@
 
 @implementation FilterImageView
 
-@synthesize delegate, filter, selectGesture, selectedView;
+@synthesize delegate, filter, selectGesture, selectedView, selected;
 
 #pragma mark -
 #pragma mark FilterImageView PrivateAPI
 
 - (void)didSelect {
-    [self select];
-    [self.delegate selectedFilter:self];
+    if (!self.selected) {
+        [self select];
+        [self.delegate selectedFilter:self];
+    }
 }
 
 #pragma mark -
@@ -48,6 +50,7 @@
     if (self) {
         self.image = _image;
         self.alpha = 0.6f;
+        self.selected = NO;
         self.selectedView = [FilterSelectedView withFrame:CGRectMake(0.3*self.frame.size.width, 0.8f*self.frame.size.height, 0.4f*self.frame.size.width, 0.075f*self.frame.size.height)] ;
         self.userInteractionEnabled = YES;
         self.exclusiveTouch = NO;
@@ -61,11 +64,17 @@
 }
 
 - (void)select {
-    [self addSubview:self.selectedView];
+    if (!self.selected) {
+        [self addSubview:self.selectedView];
+        self.selected = YES;
+    }
 }
 
 - (void)deselect {
-    [self.selectedView removeFromSuperview];
+    if (self.selected) {
+        [self.selectedView removeFromSuperview];
+        self.selected = NO;
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

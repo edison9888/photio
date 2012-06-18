@@ -161,5 +161,12 @@
     [self.filterPaletteSelectionView removeView];
 }
 
+- (BOOL)addParameters {
+    return NO;
+}
+
+- (void)addParameter {
+    
+}
 
 @end

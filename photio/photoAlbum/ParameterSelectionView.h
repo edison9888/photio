@@ -22,6 +22,7 @@ typedef void (^DisplayAnimation)();
 @property(nonatomic, weak)      id<ParameterSelectionViewDelegate>  delegate;
 @property(nonatomic, strong)    NSArray*                            parameters;
 @property(nonatomic, strong)    IBOutlet UILabel*                   titleLabel;
+@property(nonatomic, strong)    IBOutlet UIImageView*               addParameterView;
 
 + (id)initInView:(UIView*)_containerView withDelegate:(id<ParameterSelectionViewDelegate>)_delegate showAnimation:(DisplayAnimation)_showAnimation hideAnimation:(DisplayAnimation)_hideAnimation andTitle:(NSString*)_title;
 - (void)removeView;
@@ -35,5 +36,7 @@ typedef void (^DisplayAnimation)();
 - (NSArray*)loadParameters;
 - (void)configureParemeterCell:(ParameterSelectionCell*)_parameterCell withParameter:(id)_parameter;
 - (void)selectedParameter:(id)_parameter;
+- (BOOL)addParameters;
+- (void)addParameter;
 
 @end

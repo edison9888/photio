@@ -68,6 +68,8 @@
 		0579A8B2158EAE9500F5E85C /* tumbler@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8A6158EAE9500F5E85C /* tumbler@2x.png */; };
 		0579A8B3158EAE9500F5E85C /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8A7158EAE9500F5E85C /* twitter.png */; };
 		0579A8B4158EAE9500F5E85C /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8A8158EAE9500F5E85C /* twitter@2x.png */; };
+		0579A8B7158EB64000F5E85C /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8B5158EB64000F5E85C /* add.png */; };
+		0579A8B8158EB64000F5E85C /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8B6158EB64000F5E85C /* add@2x.png */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
@@ -276,6 +278,8 @@
 		0579A8A6158EAE9500F5E85C /* tumbler@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tumbler@2x.png"; sourceTree = "<group>"; };
 		0579A8A7158EAE9500F5E85C /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		0579A8A8158EAE9500F5E85C /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
+		0579A8B5158EB64000F5E85C /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		0579A8B6158EB64000F5E85C /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -546,6 +550,8 @@
 		059039AE158E6507008E0318 /* ImageEdit */ = {
 			isa = PBXGroup;
 			children = (
+				0579A8B5158EB64000F5E85C /* add.png */,
+				0579A8B6158EB64000F5E85C /* add@2x.png */,
 				059039AF158E6507008E0318 /* albums.png */,
 				059039B0158E6507008E0318 /* albums@2x.png */,
 				059039B1158E6507008E0318 /* apply.png */,
@@ -1000,6 +1006,8 @@
 				0579A8B2158EAE9500F5E85C /* tumbler@2x.png in Resources */,
 				0579A8B3158EAE9500F5E85C /* twitter.png in Resources */,
 				0579A8B4158EAE9500F5E85C /* twitter@2x.png in Resources */,
+				0579A8B7158EB64000F5E85C /* add.png in Resources */,
+				0579A8B8158EB64000F5E85C /* add@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

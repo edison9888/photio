@@ -20,6 +20,7 @@
 @property(nonatomic, strong)    Filter*                     filter;
 @property(nonatomic, strong)    UITapGestureRecognizer*     selectGesture;
 @property(nonatomic, strong)    FilterSelectedView*         selectedView;
+@property(nonatomic, assign)    BOOL                        selected;
 
 + (id)withDelegate:(id<FilterImageViewDelegate>)_delegate andFilter:(Filter*)_filter;
 - (void)select;

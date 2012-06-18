@@ -349,6 +349,14 @@
     [self.cameraSelectionView removeView];
 }
 
+- (BOOL)addParameters {
+    return NO;
+}
+
+- (void)addParameter {
+
+}
+
 #pragma mark -
 #pragma mark ParameterSliderViewDelegate
 

@@ -21,12 +21,13 @@
 
 - (void)showView;
 - (void)removeView;
+- (IBAction)addParameter:(id)sender;
 
 @end
 
 @implementation ParameterSelectionView
 
-@synthesize delegate, showAnimation, hideAnimation, parameters, titleLabel;
+@synthesize delegate, showAnimation, hideAnimation, parameters, titleLabel, addParameterView;
 
 #pragma mark -
 #pragma mark ImageFilterPaletteView (PrivateAPI)
@@ -49,6 +50,10 @@
             ];
          }
      ];
+}
+
+- (IBAction)addParameter:(id)sender {
+    [self.delegate addParameter];
 }
 
 #pragma mark -
@@ -91,6 +96,7 @@
 
 - (void)didMoveToSuperview {
     self.parameters = [self.delegate loadParameters];
+    self.addParameterView.hidden = ![self.delegate addParameters];
     self.frame = CGRectMake(self.frame.origin.x, - self.frame.size.height, self.frame.size.width, self.frame.size.height);
     [self showView];
 }

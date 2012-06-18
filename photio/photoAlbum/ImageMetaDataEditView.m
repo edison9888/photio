@@ -137,4 +137,27 @@
     }
 }
 
+#pragma mark -
+#pragma mark ParameterSelectionViewDelegate
+
+- (NSArray*)loadParameters {
+//    return [[FilterFactory instance] filterPalettes];
+    return nil;
+}
+
+- (void)configureParemeterCell:(ParameterSelectionCell*)_parameterCell withParameter:(id)_parameter {
+//    _parameterCell.parameterIcon.image = [UIImage imageNamed:[_parameter valueForKey:@"imageFilename"]];
+//    _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
+}
+
+- (void)selectedParameter:(id)_parameter {
+}
+
+- (BOOL)addParameters {
+    return YES;
+}
+
+- (void)addParameter {
+}
+
 @end

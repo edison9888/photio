@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CommentViewController.h"
+#import "ParameterSelectionView.h"
 
 @class ImageControlView;
 @class ImageEditCommentView;
@@ -16,7 +17,7 @@
 @protocol ImageMetaDataEditViewDelegate;
 @class CommentViewController;
 
-@interface ImageMetaDataEditView : UIView <CommentViewControllerDelegate>
+@interface ImageMetaDataEditView : UIView <CommentViewControllerDelegate, ParameterSelectionViewDelegate>
 
 @property(nonatomic, weak)   id<ImageMetaDataEditViewDelegate>  delegate;
 @property(nonatomic, strong) UIView*                            containerView;
