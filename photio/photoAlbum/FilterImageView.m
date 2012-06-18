@@ -47,6 +47,7 @@
     self = [super initWithImage:_image];
     if (self) {
         self.image = _image;
+        self.alpha = 0.6f;
         self.selectedView = [FilterSelectedView withFrame:CGRectMake(0.3*self.frame.size.width, 0.8f*self.frame.size.height, 0.4f*self.frame.size.width, 0.075f*self.frame.size.height)] ;
         self.userInteractionEnabled = YES;
         self.exclusiveTouch = NO;
