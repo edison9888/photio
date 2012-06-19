@@ -72,8 +72,9 @@
 		0579A8B8158EB64000F5E85C /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8B6158EB64000F5E85C /* add@2x.png */; };
 		0579A8BE158ED49000F5E85C /* ServiceUsed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8BD158ED49000F5E85C /* ServiceUsed.m */; };
 		0579A8C0158ED4F900F5E85C /* Services.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8BF158ED4F900F5E85C /* Services.plist */; };
-		0579A8C5158ED9A500F5E85C /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8C4158ED9A500F5E85C /* Service.m */; };
 		0579A8C6158ED9F400F5E85C /* WhiteColorOverlay.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */; };
+		0579A8C915900AD500F5E85C /* ServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8C815900AD400F5E85C /* ServiceManager.m */; };
+		0579A8CF1590170E00F5E85C /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8CE1590170E00F5E85C /* Service.m */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
@@ -286,8 +287,10 @@
 		0579A8BD158ED49000F5E85C /* ServiceUsed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceUsed.m; sourceTree = "<group>"; };
 		0579A8BF158ED4F900F5E85C /* Services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Services.plist; sourceTree = "<group>"; };
 		0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WhiteColorOverlay.fsh; path = Filters/WhiteColorOverlay.fsh; sourceTree = "<group>"; };
-		0579A8C3158ED9A500F5E85C /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Service.h; sourceTree = "<group>"; };
-		0579A8C4158ED9A500F5E85C /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Service.m; sourceTree = "<group>"; };
+		0579A8C715900AD400F5E85C /* ServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceManager.h; sourceTree = "<group>"; };
+		0579A8C815900AD400F5E85C /* ServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceManager.m; sourceTree = "<group>"; };
+		0579A8CD1590170E00F5E85C /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Service.h; sourceTree = "<group>"; };
+		0579A8CE1590170E00F5E85C /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Service.m; sourceTree = "<group>"; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -614,9 +617,9 @@
 		059772E415277EE1008F3A1B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0579A8CD1590170E00F5E85C /* Service.h */,
+				0579A8CE1590170E00F5E85C /* Service.m */,
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
-				0579A8C3158ED9A500F5E85C /* Service.h */,
-				0579A8C4158ED9A500F5E85C /* Service.m */,
 				0539BA1F157AE58F00A4A04B /* Album.h */,
 				0539BA20157AE58F00A4A04B /* Album.m */,
 				0539BA48157AF9D500A4A04B /* Camera.h */,
@@ -842,6 +845,8 @@
 				050AF29315681B1600EC6C13 /* ParameterSelectionView.h */,
 				050AF29415681B1600EC6C13 /* ParameterSelectionView.m */,
 				050AF29115681AE600EC6C13 /* ParameterSelectionView.xib */,
+				0579A8C715900AD400F5E85C /* ServiceManager.h */,
+				0579A8C815900AD400F5E85C /* ServiceManager.m */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
@@ -1091,7 +1096,8 @@
 				0539BA4A157AF9D600A4A04B /* Camera.m in Sources */,
 				05A34676158C47E900B692E4 /* FilterSelectedView.m in Sources */,
 				0579A8BE158ED49000F5E85C /* ServiceUsed.m in Sources */,
-				0579A8C5158ED9A500F5E85C /* Service.m in Sources */,
+				0579A8C915900AD500F5E85C /* ServiceManager.m in Sources */,
+				0579A8CF1590170E00F5E85C /* Service.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

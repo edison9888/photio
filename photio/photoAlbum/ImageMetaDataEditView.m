@@ -14,11 +14,6 @@
 #define MAX_COMMENT_LINES               5
 #define COMMENT_YOFFSET                 15
 
-typedef enum {
-    ServiceEditMode,
-    AlbumEditMode
-} EditMode;
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageMetaDataEditView (PrivateAPI)
 
@@ -46,7 +41,8 @@ typedef enum {
 @implementation ImageMetaDataEditView
 
 @synthesize delegate, containerView, commentViewController, imageShareView, imageCommentBorderView, imageCommentLabel, 
-            commentContainerView, shareContainerView, imageAddComment, imageRating, starred, initialCommentContainerRect;
+            commentContainerView, shareContainerView, imageAddComment, imageRating, starred, initialCommentContainerRect,
+            editMode;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
@@ -84,6 +80,14 @@ typedef enum {
 }
 
 - (IBAction)showServices:(id)sender {
+    switch (self.editMode) {
+        case EditModeService:
+            break;
+        case EditModeAlbum:
+            break;
+        default:
+            break;
+    }
 }
 
 - (IBAction)addComment:(id)sender {
@@ -147,7 +151,6 @@ typedef enum {
 #pragma mark ImageMetaDataEditView (Services)
 
 - (void)serviceCameraRoll {
-    [self.delegate exportToCameraRoll];
 }
 
 - (void)serviceEMail {
@@ -184,23 +187,65 @@ typedef enum {
 #pragma mark ParameterSelectionViewDelegate
 
 - (NSArray*)loadParameters {
-//    return [[FilterFactory instance] filterPalettes];
-    return nil;
+    switch (self.editMode) {
+        case EditModeService:
+            return nil;
+            break;
+        case EditModeAlbum:
+            return nil;
+            break;
+        default:
+            return nil;
+            break;
+    }
 }
 
 - (void)configureParemeterCell:(ParameterSelectionCell*)_parameterCell withParameter:(id)_parameter {
+    switch (self.editMode) {
+        case EditModeService:
+            break;
+        case EditModeAlbum:
+            break;
+        default:
+            break;
+    }
 //    _parameterCell.parameterIcon.image = [UIImage imageNamed:[_parameter valueForKey:@"imageFilename"]];
 //    _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
 }
 
 - (void)selectedParameter:(id)_parameter {
+    switch (self.editMode) {
+        case EditModeService:
+            break;
+        case EditModeAlbum:
+            break;
+        default:
+            break;
+    }
 }
 
 - (BOOL)addParameters {
-    return YES;
+    switch (self.editMode) {
+        case EditModeService:
+            return NO;
+            break;
+        case EditModeAlbum:
+            return YES;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)addParameter {
+    switch (self.editMode) {
+        case EditModeService:
+            break;
+        case EditModeAlbum:
+            break;
+        default:
+            break;
+    }
 }
 
 @end

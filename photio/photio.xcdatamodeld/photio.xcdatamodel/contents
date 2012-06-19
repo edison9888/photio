@@ -84,9 +84,12 @@
         <relationship name="captures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Capture" inverseName="locale" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <entity name="Service" representedClassName="Service" syncable="YES">
+        <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="imageFilename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serviceId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="usageRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="serviceUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceUsed" inverseName="service" inverseEntity="ServiceUsed" syncable="YES"/>
     </entity>
     <entity name="ServiceUsed" representedClassName="ServiceUsed" syncable="YES">
@@ -103,7 +106,7 @@
         <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="Service" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Service" positionX="160" positionY="192" width="128" height="150"/>
         <element name="ServiceUsed" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

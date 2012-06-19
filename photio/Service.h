@@ -2,7 +2,7 @@
 //  Service.h
 //  photio
 //
-//  Created by Troy Stribling on 6/17/12.
+//  Created by Troy Stribling on 6/18/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -16,6 +16,9 @@
 @property (nonatomic, retain) NSNumber * serviceId;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * imageFilename;
+@property (nonatomic, retain) NSNumber * usageCount;
+@property (nonatomic, retain) NSNumber * usageRate;
+@property (nonatomic, retain) NSNumber * hidden;
 @property (nonatomic, retain) NSSet *serviceUsed;
 @end
 

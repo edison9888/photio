@@ -17,6 +17,12 @@
 @protocol ImageMetaDataEditViewDelegate;
 @class CommentViewController;
 
+typedef enum {
+    EditModeService,
+    EditModeAlbum
+} EditMode;
+
+
 @interface ImageMetaDataEditView : UIView <CommentViewControllerDelegate, ParameterSelectionViewDelegate>
 
 @property(nonatomic, weak)   id<ImageMetaDataEditViewDelegate>  delegate;
@@ -31,6 +37,7 @@
 @property(nonatomic, strong) IBOutlet UIView*                   commentContainerView;
 @property(nonatomic, assign) BOOL                               starred;
 @property(nonatomic, assign) CGRect                             initialCommentContainerRect;
+@property(nonatomic, assign) EditMode                           editMode;
  
 + (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate;
 - (void)updateComment:(NSString*)_comment;
