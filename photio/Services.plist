@@ -8,7 +8,7 @@
 			<key>serviceId</key>
 			<integer>0</integer>
 			<key>name</key>
-			<string>Export To Camera Roll</string>
+			<string>Camera Roll</string>
 			<key>imageFilename</key>
 			<string>camera-roll.png</string>
 			<key>hidden</key>
@@ -18,7 +18,7 @@
 			<key>serviceId</key>
 			<integer>1</integer>
 			<key>name</key>
-			<string>eMail</string>
+			<string>Email</string>
 			<key>imageFilename</key>
 			<string>email.png</string>
 			<key>hidden</key>

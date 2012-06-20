@@ -9,10 +9,13 @@
 #import "ImageMetaDataEditView.h"
 #import "ImageControlView.h"
 #import "Capture.h"
+#import "ParameterSelectionView.h"
+#import "ServiceManager.h"
 #import "UIView+Extensions.h"
 
-#define MAX_COMMENT_LINES               5
-#define COMMENT_YOFFSET                 15
+#define MAX_COMMENT_LINES                   5
+#define COMMENT_YOFFSET                     15
+#define PARAMETER_VIEW_ANIMATION_DURATION   0.2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageMetaDataEditView (PrivateAPI)
@@ -20,6 +23,7 @@
 - (void)addCommentText:(NSString*)_comment;
 - (void)initializeCommentText;
 - (IBAction)showServices:(id)sender;
+- (IBAction)showAlbums:(id)sender;
 - (IBAction)addComment:(id)sender;
 - (IBAction)star:(id)sender;
 
@@ -40,7 +44,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
-@synthesize delegate, containerView, commentViewController, imageShareView, imageCommentBorderView, imageCommentLabel, 
+@synthesize delegate, containerView, commentViewController, paramterSelectionView, imageShareView, imageCommentBorderView, imageCommentLabel, 
             commentContainerView, shareContainerView, imageAddComment, imageRating, starred, initialCommentContainerRect,
             editMode;
 
@@ -79,15 +83,36 @@
     self.imageCommentLabel.hidden = YES;
 }
 
+- (IBAction)showAlbums:(id)sender {
+    self.editMode = EditModeAlbum;
+}
+
 - (IBAction)showServices:(id)sender {
-    switch (self.editMode) {
-        case EditModeService:
-            break;
-        case EditModeAlbum:
-            break;
-        default:
-            break;
-    }
+    self.editMode = EditModeService;
+    CGRect shareViewRect = self.shareContainerView.frame;
+    CGRect commentViewRect = self.commentContainerView.frame;
+    __block CGRect showShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
+    __block CGRect showCommentViewRect = CGRectMake(commentViewRect.origin.x, self.frame.size.height, commentViewRect.size.width, commentViewRect.size.height);
+    __block CGRect hideShareViewRect = CGRectMake(shareViewRect.origin.x, 0.0, shareViewRect.size.width, shareViewRect.size.height);
+    __block CGRect hideCommentViewRect = CGRectMake(commentViewRect.origin.x, self.frame.size.height - commentViewRect.size.height, commentViewRect.size.width, commentViewRect.size.height);
+    self.paramterSelectionView = [ParameterSelectionView initInView:self 
+                                     withDelegate:self 
+                                     showAnimation:^{
+                                         self.shareContainerView.frame = showShareViewRect;
+                                         self.commentContainerView.frame = showCommentViewRect;
+                                     }
+                                     hideAnimation:^{
+                                         [UIView animateWithDuration:PARAMETER_VIEW_ANIMATION_DURATION
+                                             animations:^{
+                                                 self.shareContainerView.frame = hideShareViewRect;
+                                                 self.commentContainerView.frame = hideCommentViewRect;
+                                             } 
+                                            completion:^(BOOL _finished) {
+                                            }
+                                         ];
+                                     }
+                                     andTitle:@"Export"
+                                 ];
 }
 
 - (IBAction)addComment:(id)sender {
@@ -189,7 +214,7 @@
 - (NSArray*)loadParameters {
     switch (self.editMode) {
         case EditModeService:
-            return nil;
+            return [[ServiceManager instance] services];
             break;
         case EditModeAlbum:
             return nil;
@@ -203,14 +228,14 @@
 - (void)configureParemeterCell:(ParameterSelectionCell*)_parameterCell withParameter:(id)_parameter {
     switch (self.editMode) {
         case EditModeService:
+            _parameterCell.parameterIcon.image = [UIImage imageNamed:[_parameter valueForKey:@"imageFilename"]];
+            _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
             break;
         case EditModeAlbum:
             break;
         default:
             break;
     }
-//    _parameterCell.parameterIcon.image = [UIImage imageNamed:[_parameter valueForKey:@"imageFilename"]];
-//    _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
 }
 
 - (void)selectedParameter:(id)_parameter {
@@ -222,6 +247,7 @@
         default:
             break;
     }
+    [self.paramterSelectionView removeView];
 }
 
 - (BOOL)addParameters {

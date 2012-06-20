@@ -86,6 +86,7 @@
 								<reference key="NSNextKeyView" ref="455134758"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.80000001192092896</float>
+								<reference key="IBUIGestureRecognizers" ref="0"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -208,6 +209,7 @@
 			<object class="IBUITapGestureRecognizer" id="153184374"/>
 			<object class="IBUITapGestureRecognizer" id="58887955"/>
 			<object class="IBUITapGestureRecognizer" id="350372957"/>
+			<object class="IBUITapGestureRecognizer" id="434180203"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -321,6 +323,24 @@
 					</object>
 					<int key="connectionID">30</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="526128205"/>
+						<reference key="destination" ref="434180203"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showAlbums:</string>
+						<reference key="source" ref="434180203"/>
+						<reference key="destination" ref="191373211"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -431,7 +451,14 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">44</int>
 						<reference key="object" ref="526128205"/>
+						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="70067292"/>
+						<string key="objectName">Album</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">46</int>
+						<reference key="object" ref="434180203"/>
+						<reference key="parent" ref="0"/>
 						<string key="objectName">Album</string>
 					</object>
 				</array>
@@ -455,13 +482,14 @@
 				<string key="4.CustomClassName">ImageControlView</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="46.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">45</int>
+			<int key="maxID">48</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -478,12 +506,17 @@
 					<string key="superclassName">UIView</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="addComment:">id</string>
+						<string key="showAlbums:">id</string>
 						<string key="showServices:">id</string>
 						<string key="star:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="addComment:">
 							<string key="name">addComment:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="showAlbums:">
+							<string key="name">showAlbums:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showServices:">

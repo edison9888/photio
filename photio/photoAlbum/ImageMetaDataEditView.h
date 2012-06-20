@@ -13,6 +13,7 @@
 @class ImageControlView;
 @class ImageEditCommentView;
 @class Capture;
+@class ParameterSelectionView;
 
 @protocol ImageMetaDataEditViewDelegate;
 @class CommentViewController;
@@ -28,6 +29,7 @@ typedef enum {
 @property(nonatomic, weak)   id<ImageMetaDataEditViewDelegate>  delegate;
 @property(nonatomic, strong) UIView*                            containerView;
 @property(nonatomic, strong) CommentViewController*             commentViewController;
+@property(nonatomic, strong) ParameterSelectionView*            paramterSelectionView;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageCommentBorderView;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageShareView;
 @property(nonatomic, strong) IBOutlet UILabel*                  imageCommentLabel;
