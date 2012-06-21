@@ -22,6 +22,7 @@
 
 - (void)addCommentText:(NSString*)_comment;
 - (void)initializeCommentText;
+- (void)showParametersWithTitle:(NSString*)_title;
 - (IBAction)showServices:(id)sender;
 - (IBAction)showAlbums:(id)sender;
 - (IBAction)addComment:(id)sender;
@@ -85,16 +86,19 @@
 
 - (IBAction)showAlbums:(id)sender {
     self.editMode = EditModeAlbum;
+    [self showParametersWithTitle:@"Albums"];
 }
 
 - (IBAction)showServices:(id)sender {
     self.editMode = EditModeService;
+    [self showParametersWithTitle:@"Export"];
+}
+
+- (void)showParametersWithTitle:(NSString*)_title  {
     CGRect shareViewRect = self.shareContainerView.frame;
     CGRect commentViewRect = self.commentContainerView.frame;
     __block CGRect showShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
     __block CGRect showCommentViewRect = CGRectMake(commentViewRect.origin.x, self.frame.size.height, commentViewRect.size.width, commentViewRect.size.height);
-    __block CGRect hideShareViewRect = CGRectMake(shareViewRect.origin.x, 0.0, shareViewRect.size.width, shareViewRect.size.height);
-    __block CGRect hideCommentViewRect = CGRectMake(commentViewRect.origin.x, self.frame.size.height - commentViewRect.size.height, commentViewRect.size.width, commentViewRect.size.height);
     self.paramterSelectionView = [ParameterSelectionView initInView:self 
                                      withDelegate:self 
                                      showAnimation:^{
@@ -102,16 +106,8 @@
                                          self.commentContainerView.frame = showCommentViewRect;
                                      }
                                      hideAnimation:^{
-                                         [UIView animateWithDuration:PARAMETER_VIEW_ANIMATION_DURATION
-                                             animations:^{
-                                                 self.shareContainerView.frame = hideShareViewRect;
-                                                 self.commentContainerView.frame = hideCommentViewRect;
-                                             } 
-                                            completion:^(BOOL _finished) {
-                                            }
-                                         ];
                                      }
-                                     andTitle:@"Export"
+                                     andTitle:_title
                                  ];
 }
 
@@ -172,30 +168,19 @@
     self.initialCommentContainerRect = self.commentContainerView.frame;
 }
 
-#pragma mark -
-#pragma mark ImageMetaDataEditView (Services)
-
-- (void)serviceCameraRoll {
-}
-
-- (void)serviceEMail {
-    
-}
-
-- (void)serviceTwitter {
-    
-}
-
-- (void)serviceFacebook {
-    
-}
-
-- (void)serviceTumbler {
-    
-}
-
-- (void)serviceInstagram {
-    
+- (void)showControls {
+    CGRect shareViewRect = self.shareContainerView.frame;
+    CGRect commentViewRect = self.commentContainerView.frame;
+    __block CGRect showShareViewRect = CGRectMake(shareViewRect.origin.x, 0.0, shareViewRect.size.width, shareViewRect.size.height);
+    __block CGRect showCommentViewRect = CGRectMake(commentViewRect.origin.x, self.frame.size.height - commentViewRect.size.height, commentViewRect.size.width, commentViewRect.size.height);
+    [UIView animateWithDuration:PARAMETER_VIEW_ANIMATION_DURATION
+        animations:^{
+            self.shareContainerView.frame = showShareViewRect;
+            self.commentContainerView.frame = showCommentViewRect;
+        } 
+        completion:^(BOOL _finished) {
+        }
+    ];
 }
 
 #pragma mark -
@@ -219,9 +204,6 @@
         case EditModeAlbum:
             return nil;
             break;
-        default:
-            return nil;
-            break;
     }
 }
 
@@ -233,18 +215,15 @@
             break;
         case EditModeAlbum:
             break;
-        default:
-            break;
     }
 }
 
 - (void)selectedParameter:(id)_parameter {
     switch (self.editMode) {
         case EditModeService:
+            [self.delegate useService:(Service*)_parameter inViewController:self];
             break;
         case EditModeAlbum:
-            break;
-        default:
             break;
     }
     [self.paramterSelectionView removeView];
@@ -258,8 +237,6 @@
         case EditModeAlbum:
             return YES;
             break;
-        default:
-            break;
     }
 }
 
@@ -268,8 +245,6 @@
         case EditModeService:
             break;
         case EditModeAlbum:
-            break;
-        default:
             break;
     }
 }

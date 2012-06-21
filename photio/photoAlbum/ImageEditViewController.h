@@ -42,7 +42,7 @@
 
 @required
 
-- (void)exportToCameraRoll;
+- (void)useService:(Service*)_service inViewController:(id)_viewController;
 - (void)saveComment:(NSString*)_comment;
 - (void)saveRating:(NSString*)_rating;
 - (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value;

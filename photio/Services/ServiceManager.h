@@ -17,11 +17,14 @@ typedef enum {
     ServiceTypeTumbler
 } ServiceType;
 
+@class Service;
+
 @interface ServiceManager : NSObject
 
 @property(nonatomic, strong) NSArray* loadedServices;
 
 + (ServiceManager*)instance;
 - (NSArray*)services;
+- (void)useService:(Service*)_service withCapture:(UIImage*)_capture inViewController:(id)_viewController;
 
 @end

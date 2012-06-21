@@ -187,8 +187,8 @@
 #pragma mark -
 #pragma mark ImageMetaDataEditViewDelegate
 
-- (void)exportToCameraRoll {
-    [self.delegate exportToCameraRoll];
+- (void)useService:(Service*)_service inViewController:(id)_viewController {
+    [self.delegate useService:_service inViewController:_viewController];
 }
 
 - (void)saveComment:(NSString*)_comment {

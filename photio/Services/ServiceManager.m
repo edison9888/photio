@@ -9,6 +9,7 @@
 #import "ServiceManager.h"
 #import "ViewGeneral.h"
 #import "Service.h"
+#import "Capture.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static ServiceManager* thisServiceManager = nil;
@@ -17,6 +18,13 @@ static ServiceManager* thisServiceManager = nil;
 @interface ServiceManager (PrivateAPI)
 
 + (NSArray*)loadServices;
+- (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context;
+- (void)useServiceCameraRoll:(Service*)_service withCapture:(UIImage*)_capture;
+- (void)useServiceEMail:(Service*)_service withCapture:(UIImage*)_capture;
+- (void)useServiceTwitter:(Service*)_service withCapture:(UIImage*)_capture;
+- (void)useServiceFacebook:(Service*)_service withCapture:(UIImage*)_capture;
+- (void)useServiceTumbler:(Service*)_service withCapture:(UIImage*)_capture;
+- (void)useServiceInstagram:(Service*)_service withCapture:(UIImage*)_capture;
 
 @end
 
@@ -26,7 +34,7 @@ static ServiceManager* thisServiceManager = nil;
 @synthesize loadedServices;
 
 #pragma mark - 
-#pragma mark ServiceManager
+#pragma mark ServiceManager Private
 
 + (NSArray*)loadServices {
     ViewGeneral* viewGeneral = [ViewGeneral instance];
@@ -57,6 +65,33 @@ static ServiceManager* thisServiceManager = nil;
     return [viewGeneral fetchFromManagedObjectContext:fetchRequest];    
 }
 
+- (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
+    [[ViewGeneral instance] removeProgressView];
+    if (_error) {
+        [[[UIAlertView alloc] initWithTitle:[_error localizedDescription] message:[_error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
+    }
+}
+
+- (void)useServiceCameraRoll:(Service*)_service withCapture:(UIImage*)_capture {
+    [[ViewGeneral instance] showProgressViewWithMessage:@"Saving to Camera Roll"];
+    UIImageWriteToSavedPhotosAlbum(_capture, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)useServiceEMail:(Service*)_service withCapture:(UIImage*)_capture {    
+}
+
+- (void)useServiceTwitter:(Service*)_service withCapture:(UIImage*)_capture {
+}
+
+- (void)useServiceFacebook:(Service*)_service withCapture:(UIImage*)_capture {
+}
+
+- (void)useServiceTumbler:(Service*)_service withCapture:(UIImage*)_capture {
+}
+
+- (void)useServiceInstagram:(Service*)_service withCapture:(UIImage*)_capture {
+}
+
 #pragma mark - 
 #pragma mark ServiceManager
 
@@ -72,6 +107,29 @@ static ServiceManager* thisServiceManager = nil;
 
 - (NSArray*)services {
     return self.loadedServices;
+}
+
+- (void)useService:(Service*)_service withCapture:(UIImage*)_capture inViewController:(id)_viewController {
+    switch ([_service.serviceId intValue]) {
+        case ServiceTypeCameraRoll:
+            [self useServiceCameraRoll:_service withCapture:_capture];
+            break;
+        case ServiceTypeEMail:
+            [self useServiceEMail:_service withCapture:_capture];
+            break;
+        case ServiceTypeTwitter:
+            [self useServiceTwitter:_service withCapture:_capture];
+            break;
+        case ServiceTypeFacebook:
+            [self useServiceFacebook:_service withCapture:_capture];
+            break;
+        case ServiceTypeInstagram:
+            [self useServiceInstagram:_service withCapture:_capture];
+            break;
+        case ServiceTypeTumbler:
+            [self useServiceTumbler:_service withCapture:_capture];
+            break;
+    }
 }
 
 @end

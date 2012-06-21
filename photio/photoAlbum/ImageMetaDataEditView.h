@@ -13,6 +13,7 @@
 @class ImageControlView;
 @class ImageEditCommentView;
 @class Capture;
+@class Service;
 @class ParameterSelectionView;
 
 @protocol ImageMetaDataEditViewDelegate;
@@ -51,8 +52,8 @@ typedef enum {
 
 @required
 
-- (void)exportToCameraRoll;
 - (void)saveComment:(NSString*)_comment;
 - (void)saveRating:(NSString*)_rating;
+- (void)useService:(Service*)_service inViewController:(id)_viewController;
 
 @end

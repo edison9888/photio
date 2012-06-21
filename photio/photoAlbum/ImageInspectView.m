@@ -9,6 +9,8 @@
 #import "ImageInspectView.h"
 #import "UIImage+Resize.h"
 #import "Capture.h"
+#import "Service.h"
+#import "ServiceManager.h"
 #import "Image.h"
 #import "ViewGeneral.h"
 #import "ImageControlView.h"
@@ -26,7 +28,6 @@
 @interface ImageInspectView (PrivateAPI)
 
 - (void)editImage;
-- (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context;
 - (void)singleTapGesture;
 - (void)removeCommentView;
 - (UIImage*)scaleImage:(UIImage*)_image;
@@ -46,13 +47,6 @@
     [self.commentLabel removeFromSuperview];
     self.imageEditViewController = [ImageEditViewController inView:self withDelegate:self];
     [self.imageEditViewController updateComment:self.comment andRating:self.rating];
-}
-
-- (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
-    [[ViewGeneral instance] removeProgressView];
-    if (_error) {
-        [[[UIAlertView alloc] initWithTitle:[_error localizedDescription] message:[_error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
-    }
 }
 
 - (void)singleTapImageGesture {
@@ -164,9 +158,8 @@
 #pragma mark -
 #pragma mark ImageEditViewController
 
-- (void)exportToCameraRoll {
-    [[ViewGeneral instance] showProgressViewWithMessage:@"Saving to Camera Roll"];
-    UIImageWriteToSavedPhotosAlbum(self.capture, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
+- (void)useService:(Service*)_service inViewController:(id)_viewController {
+    [[ServiceManager instance] useService:_service withCapture:self.capture inViewController:_viewController];
 }
 
 - (void)saveComment:(NSString*)_comment {
