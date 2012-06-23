@@ -154,8 +154,8 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     return [self.calendarViewController calendarImageThumbnailRect];
 }
 
-- (void)updateCalendarWithCapture:(Capture*)_capture {
-    [self.calendarViewController updateEntryWithDate:_capture.createdAt];
+- (void)updateCalendarEntryWithDate:(NSDate*)_date {
+    [self.calendarViewController updateEntryWithDate:_date];
 }
 
 #pragma mark - 

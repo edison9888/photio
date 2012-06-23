@@ -57,7 +57,7 @@ static CaptureManager* thisCaptureManager;
 + (void)saveCapture:(Capture*)_capture {
     ViewGeneral* viewGeneral = [ViewGeneral instance];
     [viewGeneral saveManagedObjectContext];
-    [viewGeneral updateCalendarWithCapture:_capture];
+    [viewGeneral updateCalendarEntryWithDate:_capture.createdAt];
 }
 
 + (Capture*)createCaptureWithImage:(UIImage*)_capturedImage scaledToFrame:(CGRect)_frame {
@@ -84,7 +84,6 @@ static CaptureManager* thisCaptureManager;
 	capture.displayedImage = displayedImage;
     
     [viewGeneral saveManagedObjectContext];
-    [viewGeneral updateCalendarWithCapture:capture];
     return capture;
 }
 
@@ -102,9 +101,11 @@ static CaptureManager* thisCaptureManager;
 }
 
 + (void)deleteCapture:(Capture*)_capture; {
+    NSDate* createdAt = _capture.createdAt;
     ViewGeneral* viewGeneral = [ViewGeneral instance];
     [viewGeneral.managedObjectContext deleteObject:_capture];
     [viewGeneral saveManagedObjectContext];
+    [viewGeneral updateCalendarEntryWithDate:createdAt];
 }
 
 + (Capture*)applyFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture {
