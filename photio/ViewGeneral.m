@@ -10,8 +10,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ViewGeneral.h"
 #import "UIImage+Resize.h"
-#import "ImageInspectView.h"
 #import "Capture.h"
+#import "CaptureManager.h"
 #import "Image.h"
 
 #import "ImageEditViewController.h"
@@ -41,7 +41,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (CGFloat)horizontaltReleaseDuration:(CGFloat)_offset;
 - (CGFloat)verticalTransitionDuration:(CGFloat)_offset;
 - (CGFloat)horizontalTransitionDuration:(CGFloat)_offset;
-- (void)saveImageLater:(ImageInspectView*)_imageInspectView;
 
 @end
 
@@ -53,7 +52,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
             progressView;
 
 #pragma mark - 
-#pragma mark ViewGeneral PrivateApi
+#pragma mark ViewGeneral PrivateAPI
 
 - (void)transition:(CGFloat)_duration withAnimation:(void(^)(void))_animation {
     if (self.notAnimating) {
@@ -91,11 +90,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (CGFloat)horizontalTransitionDuration:(CGFloat)_offset {
     CGRect screenBounds = [self.class screenBounds];
     return (screenBounds.size.width  - abs(_offset)) / HORIZONTAL_TRANSITION_ANIMATION_SPEED;    
-}
-
-- (void)saveImageToPhotoAlbum:(UIImage*)_image {
-    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-    [library writeImageToSavedPhotosAlbum:[_image CGImage] orientation:(ALAssetOrientation)[_image imageOrientation] completionBlock:^(NSURL *assetURL, NSError *error){}];
 }
 
 #pragma mark - 
@@ -152,6 +146,18 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initLocalesView:_containerView];
 }
 
+- (NSString*)dayIdentifier:(NSDate*)_date {
+    return [self.calendarViewController dayIdentifier:_date];
+}
+
+- (CGRect)calendarImageThumbnailRect {
+    return [self.calendarViewController calendarImageThumbnailRect];
+}
+
+- (void)updateCalendarWithCapture:(Capture*)_capture {
+    [self.calendarViewController updateEntryWithDate:_capture.createdAt];
+}
+
 #pragma mark - 
 #pragma mark Core Data
 
@@ -180,39 +186,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
         abort();
     }
     return count;
-}
-
-- (void)saveImage:(ImageInspectView*)_imageInspectView {
-    [self performSelector:@selector(saveImageLater:) withObject:_imageInspectView afterDelay:SAVE_IMAGE_DELAY];
-}
-
-- (void)saveImageLater:(ImageInspectView*)_imageInspectView {
-    Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:self.managedObjectContext];
-    capture.latitude  = _imageInspectView.latitude;
-    capture.longitude = _imageInspectView.longitude;
-    capture.createdAt = _imageInspectView.createdAt;
-    capture.dayIdentifier = [self.calendarViewController dayIdentifier:_imageInspectView.createdAt];
-    capture.comment = _imageInspectView.comment;
-    capture.rating = _imageInspectView.rating;
-    capture.thumbnail = [_imageInspectView.capture thumbnailImage:[self.calendarViewController calendarImageThumbnailRect].size.width];
-    Image* image = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:self.managedObjectContext];
-	image.image = _imageInspectView.capture;
-	capture.image = image;
-    [self saveManagedObjectContext];
-    [self.calendarViewController updateCaptureWithDate:capture.createdAt];
-}
-
-- (Capture*)fetchCapture:(ImageInspectView*)_imageInspectView {
-    Capture* capture = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", _imageInspectView.createdAt]];
-    fetchRequest.fetchLimit = 1;
-    NSArray* fetchResults = [self fetchFromManagedObjectContext:fetchRequest];
-    if ([fetchResults count] > 0) {
-        capture = [fetchResults objectAtIndex:0];
-    }
-    return capture;
 }
 
 #pragma mark - 
@@ -412,8 +385,9 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark -
 #pragma mark CameraViewControllerDelegate
 
-- (void)didCaptureImage:(UIImage*)_picture { 
-    [self.imageInspectViewController addImage:_picture];
+- (void)didCaptureImage:(UIImage*)_picture {
+    Capture* capture = [CaptureManager createCaptureWithImage:_picture scaledToFrame:self.containerView.frame];
+    [self.imageInspectViewController addCapture:capture];
 }
 
 #pragma mark -

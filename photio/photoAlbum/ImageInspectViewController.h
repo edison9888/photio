@@ -7,27 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 #import "TransitionGestureRecognizer.h"
 #import "StreamOfViews.h"
 #import "DiagonalGestureRecognizer.h"
 #import "ImageEntriesView.h"
 
 @protocol ImageInspectViewControllerDelegate;
-@class ImageInspectView;
+@class ImageEntryView;
  
-@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, ImageEntriesViewDelegate, CLLocationManagerDelegate, DiagonalGestureRecognizerDelegate> {
+@interface ImageInspectViewController : UIViewController <UIImagePickerControllerDelegate, ImageEntriesViewDelegate, DiagonalGestureRecognizerDelegate> {
 }
 
 @property(nonatomic, weak)   UIView*                                containerView;
 @property(nonatomic, weak)   id<ImageInspectViewControllerDelegate> delegate;
 @property(nonatomic, strong) ImageEntriesView*                      entriesView;
-@property(nonatomic, strong) CLLocationManager*                     locationManager;
 
 
 + (id)inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageInspectViewControllerDelegate>)_delegate;
-- (void)addImage:(UIImage*)_picture;
+- (void)addCapture:(Capture*)_capture;
 - (BOOL)hasCaptures;
 
 @end

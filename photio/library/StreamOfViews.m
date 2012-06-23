@@ -253,7 +253,7 @@
     }
 }
 
-- (void)fadeDisplayedViewAndRemove {
+- (void)moveDisplayedViewDiagonallyAndRemove {
     if (self.notAnimating) {
         self.notAnimating = NO;
         [UIView animateWithDuration:FADE_TRANSITION_DURATUION

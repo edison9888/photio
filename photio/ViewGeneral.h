@@ -40,10 +40,11 @@
 + (void)alertOnError:(NSError*)error;
 
 - (void)createViews:(UIView*)_containerView;
+- (NSString*)dayIdentifier:(NSDate*)_date;
+- (CGRect)calendarImageThumbnailRect;
+- (void)updateCalendarWithCapture:(Capture*)_capture;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)saveImage:(ImageInspectView*)_imageInspectView;
-- (Capture*)fetchCapture:(ImageInspectView*)_imageInspectView;
 - (void)saveManagedObjectContext;
 - (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
 - (NSUInteger)countFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;

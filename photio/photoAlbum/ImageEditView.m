@@ -34,8 +34,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditView
 
-@synthesize delegate, containerView, controlContainerView, filterContainerView, parameterSlider, imageSaveFilteredImageView, imageFilterPaletteView,
-            imageFiltersView, filterPaletteSelectionView, displayedFilterImage, isInitialized;
+@synthesize delegate, containerView, filterPaletteSelectionView, capture, controlContainerView, filterContainerView, parameterSlider, imageSaveFilteredImageView, imageFilterPaletteView,
+            imageFiltersView, displayedFilterImage, isInitialized;
 
 #pragma mark -
 #pragma mark ImageEditView (PrivateAPI)
@@ -100,9 +100,10 @@
 #pragma mark -
 #pragma mark ImageEditView
 
-+ (id)withDelegate:(id<ImageEditViewDelegate>)_delegate {
++ (id)withDelegate:(id<ImageEditViewDelegate>)_delegate andCapture:(Capture*)_capture {
     ImageEditView* view = (ImageEditView*)[UIView loadView:[self class]];
     view.delegate = _delegate;
+    view.capture = _capture;
     view.parameterSlider.delegate = view;
     return view;
 }
@@ -166,7 +167,6 @@
 }
 
 - (void)addParameter {
-    
 }
 
 @end

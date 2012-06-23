@@ -25,7 +25,7 @@
 - (void)addView:(UIView*)_view;
 - (UIView*)displayedView;
 - (void)moveDisplayedViewDownAndRemove;
-- (void)fadeDisplayedViewAndRemove;
+- (void)moveDisplayedViewDiagonallyAndRemove;
 - (void)reset;
 
 @end

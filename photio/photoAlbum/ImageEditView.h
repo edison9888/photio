@@ -15,7 +15,7 @@
 @class ImageControlView;
 @class ParameterSliderView;
 @class FilterPalette;
-@class Filter;
+@class Capture;
 @class FilterImageView;
 
 @protocol ImageEditViewDelegate;
@@ -24,17 +24,18 @@
 
 @property(nonatomic, weak)   id<ImageEditViewDelegate>          delegate;
 @property(nonatomic, strong) UIView*                            containerView;
+@property(nonatomic, strong) ParameterSelectionView*            filterPaletteSelectionView;
+@property(nonatomic, strong) Capture*                           capture;
 @property(nonatomic, strong) IBOutlet UIView*                   controlContainerView;
 @property(nonatomic, strong) IBOutlet UIView*                   filterContainerView;
 @property(nonatomic, strong) IBOutlet ParameterSliderView*      parameterSlider;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageSaveFilteredImageView;
 @property(nonatomic, strong) IBOutlet UIImageView*              imageFilterPaletteView;
 @property(nonatomic, strong) IBOutlet ImageFiltersView*         imageFiltersView;
-@property(nonatomic, strong) ParameterSelectionView*            filterPaletteSelectionView;
 @property(nonatomic, assign) FilterImageView*                   displayedFilterImage;
 @property(nonatomic, assign) BOOL                               isInitialized;
 
-+ (id)withDelegate:(id<ImageEditViewDelegate>)_delegate;
++ (id)withDelegate:(id<ImageEditViewDelegate>)_delegate andCapture:(Capture*)_capture;
 
 @end
 

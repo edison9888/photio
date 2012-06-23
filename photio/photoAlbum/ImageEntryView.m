@@ -1,16 +1,17 @@
 //
-//  ImageInspectView.m
+//  ImageEntryView.m
 //  photio
 //
 //  Created by Troy Stribling on 4/5/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
-#import "ImageInspectView.h"
+#import "ImageEntryView.h"
 #import "UIImage+Resize.h"
 #import "Capture.h"
 #import "Service.h"
 #import "ServiceManager.h"
+#import "CaptureManager.h"
 #import "Image.h"
 #import "ViewGeneral.h"
 #import "ImageControlView.h"
@@ -25,7 +26,7 @@
 #define COMMENT_LABEL_ALPHA         0.75
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ImageInspectView (PrivateAPI)
+@interface ImageEntryView (PrivateAPI)
 
 - (void)editImage;
 - (void)singleTapGesture;
@@ -35,18 +36,17 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ImageInspectView
+@implementation ImageEntryView
 
-@synthesize delegate, imageEditViewController, capture, unfilteredImage, commentView, commentLabel, latitude, longitude, createdAt, comment, rating;
+@synthesize delegate, imageEditViewController, capture, commentView, commentLabel;
 
 #pragma mark -
-#pragma mark ImageInspectView PrivateAPI
+#pragma mark ImageEntryView PrivateAPI
 
 - (void)editImage {
     [self.commentView removeFromSuperview];
     [self.commentLabel removeFromSuperview];
-    self.imageEditViewController = [ImageEditViewController inView:self withDelegate:self];
-    [self.imageEditViewController updateComment:self.comment andRating:self.rating];
+    self.imageEditViewController = [ImageEditViewController inView:self withDelegate:self andCapture:self.capture];
 }
 
 - (void)singleTapImageGesture {
@@ -79,44 +79,24 @@
 }
 
 - (UIImage*)scaleImage:(UIImage*)_image {
-    CGFloat imageAspectRatio = _image.size.height / _image.size.width;
-    CGFloat scaledImageWidth = self.frame.size.width;
-    CGFloat scaledImageHeight = MAX(scaledImageWidth * imageAspectRatio, self.frame.size.height);
-    if (imageAspectRatio < 1.0) {
-        scaledImageHeight = imageAspectRatio * scaledImageWidth;
-    }
-    CGSize scaledImageSize = CGSizeMake(scaledImageWidth, scaledImageHeight);
-    return [_image scaleToSize:scaledImageSize];
+    return [CaptureManager scaleImage:_image toFrame:self.frame];
 }
 
 #pragma mark -
-#pragma mark ImageInspectView
+#pragma mark ImageEntryView
 
 + (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture {
-    ImageInspectView* imageView = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture.image.image date:_capture.createdAt 
-        andLocation:CLLocationCoordinate2DMake([_capture.latitude doubleValue], [_capture.longitude doubleValue])];
-    imageView.comment = _capture.comment;
-    [imageView addCommentView];
-    imageView.rating = _capture.rating;
-    return  imageView;
+    return  [[ImageEntryView alloc] initWithFrame:_frame andCapture:_capture];
 }
 
-+ (id)withFrame:(CGRect)_frame capture:(UIImage*)_capture andLocation:(CLLocationCoordinate2D)_location {
-    ImageInspectView* imageView = [[ImageInspectView alloc] initWithFrame:_frame capture:_capture date:[NSDate date] andLocation:_location];
-    return imageView;
-}
-
-- (id)initWithFrame:(CGRect)_frame capture:(UIImage*)_capture date:(NSDate*)_date andLocation:(CLLocationCoordinate2D)_location {
+- (id)initWithFrame:(CGRect)_frame andCapture:(Capture*)_capture {
     if ((self = [super initWithFrame:(CGRect)_frame])) {
-        self.latitude = [NSNumber numberWithDouble:_location.latitude];
-        self.longitude = [NSNumber numberWithDouble:_location.longitude];
-        self.createdAt = _date;
         self.capture = _capture;
-        self.unfilteredImage = [self scaleImage:self.capture];
-        self.image = self.unfilteredImage;
         self.contentMode = UIViewContentModeCenter;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
+        UIImage* displayedImage = self.capture.displayedImage.image;
+        self.image = [UIImage imageWithCGImage:[self scaleImage:displayedImage].CGImage scale:displayedImage.scale orientation:displayedImage.imageOrientation];
         UITapGestureRecognizer* editImageGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImage)];
         editImageGesture.numberOfTapsRequired = 2;
         editImageGesture.numberOfTouchesRequired = 1;
@@ -131,12 +111,12 @@
 }
 
 - (void)addCommentView {
-    if (self.comment) {
-        CGSize commentSize = [self.comment sizeWithFont:[UIFont systemFontOfSize:20.0] constrainedToSize:CGSizeMake(self.frame.size.width - 2 * COMMENT_XOFFEST, self.frame.size.height) lineBreakMode:UILineBreakModeWordWrap];
+    if (self.capture.comment) {
+        CGSize commentSize = [self.capture.comment sizeWithFont:[UIFont systemFontOfSize:20.0] constrainedToSize:CGSizeMake(self.frame.size.width - 2 * COMMENT_XOFFEST, self.frame.size.height) lineBreakMode:UILineBreakModeWordWrap];
         CGRect commentLabelRect = CGRectMake(COMMENT_XOFFEST, (self.frame.size.height - commentSize.height - COMMENT_YOFFSET), self.frame.size.width - 2 * COMMENT_XOFFEST, commentSize.height);
         CGRect commentViewRect = CGRectMake(0.0, self.frame.size.height - commentSize.height - 2 * COMMENT_YOFFSET, self.frame.size.width , commentSize.height + 2 * COMMENT_YOFFSET);
         self.commentLabel = [[UILabel alloc] initWithFrame:commentLabelRect];
-        self.commentLabel.text = self.comment;
+        self.commentLabel.text = self.capture.comment;
         self.commentLabel.textColor = [UIColor whiteColor];
         self.commentLabel.font = [UIFont systemFontOfSize:20.0];
         self.commentLabel.backgroundColor = [UIColor clearColor];
@@ -158,37 +138,21 @@
 #pragma mark -
 #pragma mark ImageEditViewController
 
-- (void)useService:(Service*)_service inViewController:(id)_viewController {
-    [[ServiceManager instance] useService:_service withCapture:self.capture inViewController:_viewController];
-}
-
-- (void)saveComment:(NSString*)_comment {
-    self.comment = _comment;
-}
-
-- (void)saveRating:(NSString*)_rating {
-    self.rating = _rating;
-}
-
-- (void)didFinishEditing {
-    if ([self.delegate respondsToSelector:@selector(didFinishEditing:)]) {
-        [self.delegate didFinishEditing:self];
-        self.imageEditViewController = nil;
-    }
-}
 
 - (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value {
-    UIImage* filteredImage = [FilterFactory applyFilter:_filter withValue:_value toImage:self.unfilteredImage];
+    UIImage* displayedImage = self.capture.displayedImage.image;
+    UIImage* filteredImage = [FilterFactory applyFilter:_filter withValue:_value toImage:displayedImage];
     self.image = [self scaleImage:filteredImage];
 }
 
 - (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value {
-    self.capture = [FilterFactory applyFilter:_filter withValue:_value toImage:[self.capture transformPhotoImage]];
-    self.unfilteredImage = self.image;
+    self.capture.displayedImage.image = [UIImage imageWithCGImage:[self scaleImage:self.image].CGImage scale:self.image.scale orientation:self.image.imageOrientation];
+    [CaptureManager saveCapture:capture];
 }
 
 - (void)resetFilteredImage {
-    self.image = self.unfilteredImage;    
+    UIImage* displayedImage = self.capture.displayedImage.image;
+    self.image = [UIImage imageWithCGImage:[self scaleImage:displayedImage].CGImage scale:displayedImage.scale orientation:displayedImage.imageOrientation];
 }
 
 @end

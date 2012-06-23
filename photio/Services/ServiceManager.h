@@ -18,6 +18,7 @@ typedef enum {
 } ServiceType;
 
 @class Service;
+@class Capture;
 
 @interface ServiceManager : NSObject
 
@@ -25,6 +26,6 @@ typedef enum {
 
 + (ServiceManager*)instance;
 - (NSArray*)services;
-- (void)useService:(Service*)_service withCapture:(UIImage*)_capture inViewController:(id)_viewController;
+- (void)useService:(Service*)_service withCapture:(Capture*)_capture;
 
 @end

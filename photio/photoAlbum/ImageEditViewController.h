@@ -12,22 +12,21 @@
 #import "ImageEditView.h"
 
 @protocol ImageEditViewControllerDelegate;
+@class Capture;
 
 @interface ImageEditViewController : UIViewController <StreamOfViewsDelegate, ImageEditViewDelegate, ImageMetaDataEditViewDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, weak)   id<ImageEditViewControllerDelegate>    delegate;
-@property(nonatomic, strong) IBOutlet UIGestureRecognizer*          removeGesture;
-@property(nonatomic, strong) IBOutlet UIGestureRecognizer*          singleTapGesture;
 @property(nonatomic, strong) StreamOfViews*                         streamView;
 @property(nonatomic, strong) UIView*                                containerView;
 @property(nonatomic, strong) ImageMetaDataEditView*                 imageMetaDataEditView;
 @property(nonatomic, strong) ImageEditView*                         imageEditView;
-@property(nonatomic, assign) BOOL                                   didEdit;
-@property(nonatomic, assign) BOOL                                   didNotSaveFilteredImage;
+@property(nonatomic, strong) Capture*                               capture;
+@property(nonatomic, strong) IBOutlet UIGestureRecognizer*          removeGesture;
+@property(nonatomic, strong) IBOutlet UIGestureRecognizer*          singleTapGesture;
 
-+ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate;
-- (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating;
++ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate andCapture:(Capture*)_capture;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil inView:(UIView*)_containerView delegate:(id<ImageEditViewControllerDelegate>)_delegate andCapture:(Capture*)_capture;
 - (void)showViews;
 - (void)hideViews;
 
@@ -42,12 +41,8 @@
 
 @required
 
-- (void)useService:(Service*)_service inViewController:(id)_viewController;
-- (void)saveComment:(NSString*)_comment;
-- (void)saveRating:(NSString*)_rating;
 - (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value;
 - (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value;
 - (void)resetFilteredImage;
-- (void)didFinishEditing;
 
 @end

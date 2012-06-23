@@ -203,7 +203,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     [self.view addSubview:self.dragGridView];
 }
 
-- (void)updateCaptureWithDate:(NSDate*)_date {
+- (void)updateEntryWithDate:(NSDate*)_date {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];   
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];

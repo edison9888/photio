@@ -12,8 +12,9 @@
 #import "CalendarDayBackgroundView.h"
 #import "CalendarViewController.h"
 #import "NSArray+Extensions.h"
-#import "ImageInspectView.h"
+#import "ImageEntryView.h"
 #import "Capture.h"
+#import "CaptureManager.h"
 #import "Image.h"
 #import "ViewGeneral.h"
 
@@ -113,16 +114,11 @@
 #pragma mark -
 #pragma mark ImageEntriesViewDelegate
 
-- (void)deleteEntry:(ImageInspectView*)_entry {
-    Capture* capture = [[ViewGeneral instance] fetchCapture:_entry];
-    if (capture) {
-        [[ViewGeneral instance].managedObjectContext deleteObject:capture];
-        [[ViewGeneral instance] saveManagedObjectContext];
-    }
-    [[ViewGeneral instance].calendarViewController updateCaptureWithDate:_entry.createdAt];
+- (void)deleteEntry:(ImageEntryView*)_entry {
+    [CaptureManager deleteCapture:_entry.capture];
 }
 
-- (void)didRemoveAllEntries:(ImageInspectView*)_entries {    
+- (void)didRemoveAllEntries:(ImageEntriesView*)_entries {    
     [_entries removeFromSuperview];
 }
 
@@ -135,7 +131,7 @@
     NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
     NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
         Capture* capture = _obj;
-        ImageInspectView* imageView = [ImageInspectView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
+        ImageEntryView* imageView = [ImageEntryView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
         imageView.delegate = self;
         return imageView;
     }];
@@ -153,14 +149,8 @@
      ];
 }
 
-- (void)didFinishEditing:(ImageInspectView*)_entry {
-    Capture* capture = [[ViewGeneral instance] fetchCapture:_entry];
-    if (capture) {
-        capture.comment = _entry.comment;
-        capture.rating = _entry.rating;
-        [[ViewGeneral instance] saveManagedObjectContext];
-    }
-    [[ViewGeneral instance].calendarViewController updateCaptureWithDate:_entry.createdAt];
+- (void)didFinishEditing:(ImageEntryView*)_entry {
+    [CaptureManager saveCapture:_entry.capture];
 }
 
 

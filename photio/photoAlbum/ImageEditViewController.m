@@ -9,6 +9,8 @@
 #import "ImageEditViewController.h"
 #import "ParameterSliderView.h"
 #import "NSObject+Extensions.h"
+#import "Capture.h"
+#import "CaptureManager.h"
 
 #define SUBVIEW_ANIMATION_DURACTION     0.2
 
@@ -23,8 +25,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEditViewController
 
-@synthesize delegate, removeGesture, singleTapGesture, containerView, streamView, 
-            imageMetaDataEditView, imageEditView, didEdit, didNotSaveFilteredImage;
+@synthesize delegate, streamView, containerView, imageMetaDataEditView, imageEditView, capture,  
+            removeGesture, singleTapGesture;
 
 #pragma mark -
 #pragma mark ImageEditViewController (PrivateAPI)
@@ -32,35 +34,24 @@
 #pragma mark -
 #pragma mark ImageEditViewController
 
-+ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate {
-    return [[ImageEditViewController alloc] initWithNibName:@"ImageEditViewController" bundle:nil inView:_containerView withDelegate:_delegate];
++ (id)inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate andCapture:(Capture*)_capture {
+    return [[ImageEditViewController alloc] initWithNibName:@"ImageEditViewController" bundle:nil inView:_containerView delegate:_delegate andCapture:_capture];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView withDelegate:(id<ImageEditViewControllerDelegate>)_delegate {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView delegate:(id<ImageEditViewControllerDelegate>)_delegate andCapture:(Capture *)_capture {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.delegate = _delegate;
+        self.capture = _capture;
         self.containerView = _containerView;
-        self.didEdit = NO;
-        self.didNotSaveFilteredImage = YES;
         [self.containerView addSubview:self.view];  
     }
     return self;
 }
 
-- (void)updateComment:(NSString*)_comment andRating:(NSString*)_rating {
-    [self.imageMetaDataEditView updateComment:_comment];
-    [self.imageMetaDataEditView updateRating:_rating];
-}
-
 - (IBAction)remove:(id)sender {
     [self hideViews];
-    if (self.didNotSaveFilteredImage) {
-        [self.delegate resetFilteredImage];
-    }
-    if (self.didEdit) {
-        [self.delegate didFinishEditing];
-    }
+    [self.delegate resetFilteredImage];
 }
 
 - (IBAction)singleTap:(id)sender {
@@ -138,8 +129,8 @@
     self.streamView.transitionGestureRecognizer.gestureRecognizer.delegate = self;
     self.streamView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.streamView];
-    self.imageEditView = [ImageEditView withDelegate:self];
-    self.imageMetaDataEditView = [ImageMetaDataEditView withDelegate:self];
+    self.imageEditView = [ImageEditView withDelegate:self andCapture:self.capture];
+    self.imageMetaDataEditView = [ImageMetaDataEditView withDelegate:self andCapture:self.capture];
     [self.streamView addView:self.imageEditView];
     [self.streamView addView:self.imageMetaDataEditView];
     [self showViews];
@@ -187,20 +178,6 @@
 #pragma mark -
 #pragma mark ImageMetaDataEditViewDelegate
 
-- (void)useService:(Service*)_service inViewController:(id)_viewController {
-    [self.delegate useService:_service inViewController:_viewController];
-}
-
-- (void)saveComment:(NSString*)_comment {
-    self.didEdit = YES;
-    [self.delegate saveComment:_comment];
-}
-
-- (void)saveRating:(NSString*)_rating {
-    self.didEdit = YES;
-    [self.delegate saveRating:_rating];
-}
-
 #pragma mark -
 #pragma mark ImageEditView
 
@@ -209,7 +186,6 @@
 }
 
 - (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value {
-    self.didEdit = YES;
     [self.delegate saveFilteredImage:_filter withValue:_value];
 }
 

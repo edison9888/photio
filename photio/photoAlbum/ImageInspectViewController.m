@@ -7,9 +7,10 @@
 //
 
 #import "ImageInspectViewController.h"
-#import "ImageInspectView.h"
+#import "ImageEntryView.h"
 #import "UIImage+Resize.h"
 #import "Capture.h"
+#import "CaptureManager.h"
 #import "ViewGeneral.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +18,7 @@
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 - (void)loadFile:(NSString*)_fileName;
-- (void)saveCapture:(ImageInspectView*)_selectedView;
+- (void)saveCapture:(ImageEntryView*)_selectedView;
 - (CLLocationManager*)locationManager;
 
 @end
@@ -25,7 +26,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageInspectViewController
 
-@synthesize entriesView, containerView, delegate, locationManager;
+@synthesize entriesView, containerView, delegate;
 
 #pragma mark -
 #pragma mark ImageInspectViewController
@@ -38,13 +39,12 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.delegate = _delegate;
-        [[self locationManager] startUpdatingLocation];
     }
     return self;
 }
 
-- (void)addImage:(UIImage*)_capture {
-    [self.entriesView addEntry:[ImageInspectView withFrame:self.view.frame capture:_capture andLocation:[[self.locationManager location] coordinate]]];
+- (void)addCapture:(Capture*)_capture {
+    [self.entriesView addEntry:[ImageEntryView withFrame:self.view.frame andCapture:_capture]];
 }
 
 - (BOOL)hasCaptures {
@@ -65,16 +65,6 @@
     }
 }
 
-- (CLLocationManager*)locationManager {
-    if (locationManager != nil) {
-		return locationManager;
-	}	
-	locationManager = [[CLLocationManager alloc] init];
-	[locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
-	[locationManager setDelegate:self];	
-	return locationManager;
-}
-
 #pragma mark -
 #pragma mark UIViewController
 
@@ -86,8 +76,6 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-    self.locationManager = nil;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -145,10 +133,6 @@
     if ([self.delegate respondsToSelector:@selector(transitionFromInspectImage)]) {
         [self.delegate transitionFromInspectImage];
     }
-}
-
--(void)saveEntry:(ImageInspectView*)_entry {
-    [[ViewGeneral instance] saveImage:_entry];
 }
 
 @end

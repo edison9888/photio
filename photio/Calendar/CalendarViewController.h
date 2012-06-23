@@ -34,7 +34,7 @@
 - (CGRect)calendarImageThumbnailRect;
 - (NSString*)dayIdentifier:(NSDate*)_date;
 - (void)loadCalendarViews;
-- (void)updateCaptureWithDate:(NSDate*)_date;
+- (void)updateEntryWithDate:(NSDate*)_date;
 - (NSDate*)floorDate:(NSDate*)_date;
 
 @end

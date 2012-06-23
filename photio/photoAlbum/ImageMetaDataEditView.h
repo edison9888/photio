@@ -31,6 +31,7 @@ typedef enum {
 @property(nonatomic, strong) UIView*                            containerView;
 @property(nonatomic, strong) CommentViewController*             commentViewController;
 @property(nonatomic, strong) ParameterSelectionView*            paramterSelectionView;
+@property(nonatomic, strong) Capture*                           capture;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageCommentBorderView;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageShareView;
 @property(nonatomic, strong) IBOutlet UILabel*                  imageCommentLabel;
@@ -38,22 +39,15 @@ typedef enum {
 @property(nonatomic, strong) IBOutlet UIImageView*              imageRating;
 @property(nonatomic, strong) IBOutlet UIView*                   shareContainerView;
 @property(nonatomic, strong) IBOutlet UIView*                   commentContainerView;
-@property(nonatomic, assign) BOOL                               starred;
 @property(nonatomic, assign) CGRect                             initialCommentContainerRect;
 @property(nonatomic, assign) EditMode                           editMode;
  
-+ (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate;
-- (void)updateComment:(NSString*)_comment;
-- (void)updateRating:(NSString*)_rating;
++ (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate andCapture:(Capture*)_capture;
 
 @end
 
 @protocol ImageMetaDataEditViewDelegate <NSObject>
 
 @required
-
-- (void)saveComment:(NSString*)_comment;
-- (void)saveRating:(NSString*)_rating;
-- (void)useService:(Service*)_service inViewController:(id)_viewController;
 
 @end

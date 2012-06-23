@@ -8,6 +8,7 @@
 
 #import "ImageEntriesView.h"
 #import "StreamOfViews.h"
+#import "CaptureManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEntriesView (PrivateAPI)
@@ -53,7 +54,7 @@
     return [self.entriesStreamView.streamOfViews count];
 }
 
-- (void)addEntry:(ImageInspectView*)_entry {
+- (void)addEntry:(ImageEntryView*)_entry {
     _entry.delegate = self;
     [self.entriesStreamView addView:_entry];
 }
@@ -63,7 +64,7 @@
 
 - (void)loadEntries {
     if ([self.delegate respondsToSelector:@selector(loadEntries)]) {
-        for (ImageInspectView* entryView in [self.delegate loadEntries]) {
+        for (ImageEntryView* entryView in [self.delegate loadEntries]) {
             [self addEntry:entryView];
         }
     }
@@ -136,32 +137,22 @@
 #pragma mark DiagonalGestrureRecognizerDelegate
 
 -(void)didCheck {
-    if ([self.delegate respondsToSelector:@selector(saveEntry:)]) {
-        id entry = [self.entriesStreamView displayedView];
-        [self.entriesStreamView moveDisplayedViewDownAndRemove];
-        [self.delegate saveEntry:entry];
-    }
+    ImageEntryView* entry = (ImageEntryView*)[self.entriesStreamView displayedView];
+    [CaptureManager saveCapture:entry.capture];
+    [self.entriesStreamView moveDisplayedViewDownAndRemove];
 }
 
 -(void)didDiagonalSwipe {
-    id entry = [self.entriesStreamView displayedView];
-    if ([self.delegate respondsToSelector:@selector(deleteEntry:)]) {
-        [self.delegate deleteEntry:entry];
-    }
-    [self.entriesStreamView fadeDisplayedViewAndRemove];
+    ImageEntryView* entry = (ImageEntryView*)[self.entriesStreamView displayedView];
+    [CaptureManager deleteCapture:entry.capture];
+    [self.entriesStreamView moveDisplayedViewDiagonallyAndRemove];
 }
 
 #pragma mark -
-#pragma mark ImageInspectViewDelegate
+#pragma mark ImageEntryViewDelegate
 
 - (void)didSingleTapImage {
     [self singleTapGesture];
-}
-
-- (void)didFinishEditing:(ImageInspectView*)_imageView {
-    if ([self.delegate respondsToSelector:@selector(didFinishEditing:)]) {
-        [self.delegate didFinishEditing:_imageView];
-    }
 }
 
 @end

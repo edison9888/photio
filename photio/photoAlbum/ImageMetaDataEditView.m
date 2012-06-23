@@ -9,6 +9,7 @@
 #import "ImageMetaDataEditView.h"
 #import "ImageControlView.h"
 #import "Capture.h"
+#import "CaptureManager.h"
 #import "ParameterSelectionView.h"
 #import "ServiceManager.h"
 #import "UIView+Extensions.h"
@@ -17,9 +18,16 @@
 #define COMMENT_YOFFSET                     15
 #define PARAMETER_VIEW_ANIMATION_DURATION   0.2
 
+typedef enum {
+    ImageRatingUnstarred,
+    ImageRatingStarred
+} ImageRating;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageMetaDataEditView (PrivateAPI)
 
+- (void)updateStar;
+- (void)updateComment;
 - (void)addCommentText:(NSString*)_comment;
 - (void)initializeCommentText;
 - (void)showParametersWithTitle:(NSString*)_title;
@@ -31,26 +39,36 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ImageMetaDataEditView (Services)
-
-- (void)serviceCameraRoll;
-- (void)serviceEMail;
-- (void)serviceTwitter;
-- (void)serviceFacebook;
-- (void)serviceTumbler;
-- (void)serviceInstagram;
-
-@end
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
-@synthesize delegate, containerView, commentViewController, paramterSelectionView, imageShareView, imageCommentBorderView, imageCommentLabel, 
-            commentContainerView, shareContainerView, imageAddComment, imageRating, starred, initialCommentContainerRect,
+@synthesize delegate, containerView, commentViewController, paramterSelectionView, capture, imageShareView, imageCommentBorderView, imageCommentLabel, 
+            commentContainerView, shareContainerView, imageAddComment, imageRating, initialCommentContainerRect,
             editMode;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
+
+- (void)updateStar {
+    switch ([self.capture.rating intValue]) {
+        case ImageRatingUnstarred:
+            self.imageRating.image = [UIImage imageNamed:@"whitestar.png"];
+            self.imageRating.alpha = 0.3;
+            break;
+        case ImageRatingStarred:
+            self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
+            self.imageRating.alpha = 0.9;
+            break;            
+    }
+    [CaptureManager saveCapture:self.capture];
+}
+
+- (void)updateComment {
+    if (self.capture.comment) {
+        [self addCommentText:self.capture.comment];
+    } else {
+        [self initializeCommentText];
+    }
+}
 
 - (void)addCommentText:(NSString*)_comment {
     CGSize maxSize = CGSizeMake(self.imageCommentLabel.frame.size.width, MAX_COMMENT_LINES * self.imageCommentLabel.frame.size.height);
@@ -117,44 +135,29 @@
 }
 
 - (IBAction)star:(id)sender {
-    if (self.starred) {
-        self.starred = NO;
-        self.imageRating.image = [UIImage imageNamed:@"whitestar.png"];
-        self.imageRating.alpha = 0.3;
-        [self.delegate saveRating:nil];
-    } else {
-        self.starred = YES;
-        self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
-        self.imageRating.alpha = 0.9;
-        [self.delegate saveRating:@"1"];
+    switch ([self.capture.rating intValue]) {
+        case ImageRatingUnstarred:
+            self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
+            self.imageRating.alpha = 0.9;
+            self.capture.rating = [NSNumber numberWithInt:ImageRatingStarred];
+            break;
+        case ImageRatingStarred:
+            self.imageRating.image = [UIImage imageNamed:@"whitestar.png"];
+            self.imageRating.alpha = 0.3;
+            self.capture.rating = [NSNumber numberWithInt:ImageRatingUnstarred];
+            break;            
     }
+    [CaptureManager saveCapture:self.capture];
 }
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView
 
-+ (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate {
++ (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate andCapture:(Capture *)_capture {
     ImageMetaDataEditView* view = (ImageMetaDataEditView*)[UIView loadView:[self class]];
+    view.capture = _capture;
     view.delegate = _delegate;
     return view;
-}
-
-- (void)updateComment:(NSString*)_comment {
-    if (_comment) {
-        [self addCommentText:_comment];
-    } else {
-        [self initializeCommentText];
-    }
-}
-
-- (void)updateRating:(NSString*)_rating {
-    if (_rating) {
-        self.starred = YES;
-        self.imageRating.image = [UIImage imageNamed:@"yellowstar.png"];
-        self.imageRating.alpha = 0.9;
-    } else {
-        self.starred = NO;
-    }
 }
 
 - (id)initWithCoder:(NSCoder *)coder { 
@@ -166,6 +169,8 @@
 
 - (void)didMoveToSuperview {
     self.initialCommentContainerRect = self.commentContainerView.frame;
+    [self updateComment];
+    [self updateStar];
 }
 
 - (void)showControls {
@@ -188,9 +193,12 @@
 
 - (void)saveComment:(NSString*)_comment {
     if ([_comment length] > 0) {
-        [self.delegate saveComment:_comment];
-        [self addCommentText:_comment];
+        self.capture.comment = _comment;
+    } else {
+        self.capture.comment = nil;
     }
+    [self updateComment];
+    [CaptureManager saveCapture:self.capture];
 }
 
 #pragma mark -
@@ -221,7 +229,7 @@
 - (void)selectedParameter:(id)_parameter {
     switch (self.editMode) {
         case EditModeService:
-            [self.delegate useService:(Service*)_parameter inViewController:self];
+            [[ServiceManager instance] useService:(Service*)_parameter withCapture:self.capture];
             break;
         case EditModeAlbum:
             break;
