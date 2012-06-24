@@ -111,7 +111,7 @@
         <element name="Album" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Camera" positionX="160" positionY="192" width="128" height="255"/>
         <element name="CameraUsed" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="Capture" positionX="160" positionY="192" width="128" height="255"/>
+        <element name="Capture" positionX="160" positionY="192" width="128" height="240"/>
         <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
         <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
         <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>

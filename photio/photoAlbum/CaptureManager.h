@@ -30,5 +30,6 @@
 + (Image*)fetchFullSizeImageForCapture:(Capture*)_capture;
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture;
 + (NSUInteger)countFullSizeImages;
++ (NSUInteger)countDisplayImages;
 
 @end

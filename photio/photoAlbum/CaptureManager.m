@@ -108,6 +108,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     
     Image* displayedImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:contextManager.mainObjectContext];
 	displayedImage.image = [self scaleImage:_capturedImage toFrame:_frame];
+    displayedImage.imageId = [NSNumber numberWithInt:0];
 	capture.displayedImage = displayedImage;
 
     NSInteger fullSizeImageId = 1000.0f*[NSDate timeIntervalSinceReferenceDate];
@@ -220,7 +221,15 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Image" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"imageId != nil"]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"imageId != 0"]];
+    return [contextManager count:fetchRequest];
+}
+
++ (NSUInteger)countDisplayImages {
+    DataContextManager* contextManager = [DataContextManager instance];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Image" inManagedObjectContext:contextManager.mainObjectContext]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"imageId == 0"]];
     return [contextManager count:fetchRequest];
 }
 

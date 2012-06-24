@@ -77,11 +77,11 @@
 		0579A8DC15954F4C00F5E85C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8DB15954F4C00F5E85C /* LocationManager.m */; };
 		0579A8DF15956E1300F5E85C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8DE15956E1300F5E85C /* Location.m */; };
 		0579A8E215956E3300F5E85C /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8E115956E3300F5E85C /* Path.m */; };
-		0579A8FA15965EC100F5E85C /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8F915965EC000F5E85C /* Image.m */; };
 		0579A903159660EA00F5E85C /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A902159660EA00F5E85C /* Capture.m */; };
 		0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A9051596D65400F5E85C /* SaturationCameraFilter.m */; };
 		0579A91215977EF600F5E85C /* PassThrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0579A91015977CE700F5E85C /* PassThrough.fsh */; };
 		0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A91415979B5C00F5E85C /* DataContextManager.m */; };
+		0579A9181597D15E00F5E85C /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A9171597D15D00F5E85C /* Image.m */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
@@ -302,8 +302,6 @@
 		0579A8DE15956E1300F5E85C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		0579A8E015956E3300F5E85C /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
 		0579A8E115956E3300F5E85C /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Path.m; sourceTree = "<group>"; };
-		0579A8F815965EC000F5E85C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		0579A8F915965EC000F5E85C /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		0579A901159660E800F5E85C /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		0579A902159660EA00F5E85C /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		0579A9041596D65400F5E85C /* SaturationCameraFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaturationCameraFilter.h; path = Filters/SaturationCameraFilter.h; sourceTree = "<group>"; };
@@ -311,6 +309,8 @@
 		0579A91015977CE700F5E85C /* PassThrough.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PassThrough.fsh; path = Filters/PassThrough.fsh; sourceTree = "<group>"; };
 		0579A91315979B5C00F5E85C /* DataContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataContextManager.h; path = photio/Library/DataContextManager.h; sourceTree = SOURCE_ROOT; };
 		0579A91415979B5C00F5E85C /* DataContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataContextManager.m; path = photio/Library/DataContextManager.m; sourceTree = SOURCE_ROOT; };
+		0579A9161597D15D00F5E85C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		0579A9171597D15D00F5E85C /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -646,6 +646,7 @@
 		059772E415277EE1008F3A1B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
 				0539BA1F157AE58F00A4A04B /* Album.h */,
 				0539BA20157AE58F00A4A04B /* Album.m */,
 				0539BA48157AF9D500A4A04B /* Camera.h */,
@@ -660,15 +661,14 @@
 				0539BA35157AE7F700A4A04B /* FilterPalette.m */,
 				0539BA37157AE81F00A4A04B /* FilterUsed.h */,
 				0539BA38157AE81F00A4A04B /* FilterUsed.m */,
-				0579A8F815965EC000F5E85C /* Image.h */,
-				0579A8F915965EC000F5E85C /* Image.m */,
+				0579A9161597D15D00F5E85C /* Image.h */,
+				0579A9171597D15D00F5E85C /* Image.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
 				05B837781530C6B800D99A40 /* Locale.m */,
 				0579A8DD15956E1300F5E85C /* Location.h */,
 				0579A8DE15956E1300F5E85C /* Location.m */,
 				0579A8E015956E3300F5E85C /* Path.h */,
 				0579A8E115956E3300F5E85C /* Path.m */,
-				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
 				0579A8CD1590170E00F5E85C /* Service.h */,
 				0579A8CE1590170E00F5E85C /* Service.m */,
 				0579A8BC158ED49000F5E85C /* ServiceUsed.h */,
@@ -1142,10 +1142,10 @@
 				0579A8DC15954F4C00F5E85C /* LocationManager.m in Sources */,
 				0579A8DF15956E1300F5E85C /* Location.m in Sources */,
 				0579A8E215956E3300F5E85C /* Path.m in Sources */,
-				0579A8FA15965EC100F5E85C /* Image.m in Sources */,
 				0579A903159660EA00F5E85C /* Capture.m in Sources */,
 				0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */,
 				0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */,
+				0579A9181597D15E00F5E85C /* Image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -78,7 +78,7 @@ static ServiceManager* thisServiceManager = nil;
 - (void)useServiceCameraRoll:(Service*)_service withCapture:(Capture*)_capture {
     [[ViewGeneral instance] showProgressViewWithMessage:@"Saving to Camera Roll"];
     Image* fullSizeImage = [CaptureManager fetchFullSizeImageForCapture:_capture];
-    UIImageWriteToSavedPhotosAlbum(fullSizeImage.image, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
+    UIImageWriteToSavedPhotosAlbum((UIImage*)fullSizeImage.image, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)useServiceEMail:(Service*)_service withCapture:(Capture*)_capture {    
