@@ -388,6 +388,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 - (void)didCaptureImage:(UIImage*)_picture {
     Capture* capture = [CaptureManager createCaptureWithImage:_picture scaledToFrame:self.containerView.frame];
     [self.imageInspectViewController addCapture:capture];
+    [CaptureManager createFullSizeImage:_picture forCapture:capture];
 }
 
 #pragma mark -

@@ -341,6 +341,7 @@ static CameraFactory* thisCameraFactory = nil;
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
+    [filterGroup prepareForImageCapture];
     
     return filterGroup;
 }
@@ -369,7 +370,8 @@ static CameraFactory* thisCameraFactory = nil;
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:gaussianFilter]];
     [filterGroup setTerminalFilter:pixelFilter];
-    
+    [filterGroup prepareForImageCapture];
+   
     return filterGroup;
 }
 
@@ -403,6 +405,7 @@ static CameraFactory* thisCameraFactory = nil;
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:greyFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
+    [filterGroup prepareForImageCapture];
     
     return filterGroup;
 }
@@ -438,6 +441,7 @@ static CameraFactory* thisCameraFactory = nil;
     
     [filterGroup setInitialFilters:[NSArray arrayWithObject:saturationFilter]];
     [filterGroup setTerminalFilter:vignetteFilter];
+    [filterGroup prepareForImageCapture];
     
     return filterGroup;
 }

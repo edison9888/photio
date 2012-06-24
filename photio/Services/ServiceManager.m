@@ -8,6 +8,7 @@
 
 #import "ServiceManager.h"
 #import "ViewGeneral.h"
+#import "CaptureManager.h"
 #import "Service.h"
 #import "Capture.h"
 #import "Image.h"
@@ -75,7 +76,8 @@ static ServiceManager* thisServiceManager = nil;
 
 - (void)useServiceCameraRoll:(Service*)_service withCapture:(Capture*)_capture {
     [[ViewGeneral instance] showProgressViewWithMessage:@"Saving to Camera Roll"];
-    UIImageWriteToSavedPhotosAlbum(_capture.displayedImage.image, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
+    Image* fullSizeImage = [CaptureManager fetchFullSizeImageForCapture:_capture];
+    UIImageWriteToSavedPhotosAlbum(fullSizeImage.image, self, @selector(finishedSavingToCameraRoll::didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)useServiceEMail:(Service*)_service withCapture:(Capture*)_capture {    

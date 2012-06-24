@@ -23,6 +23,8 @@ static CaptureManager* thisCaptureManager;
 /////////////////////////////////////////////////////////////////////////////////////////
 @interface CaptureManager (PrivateAPI)
 
+- (void)createFullSizeImageLater:(NSArray*)_args;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +32,16 @@ static CaptureManager* thisCaptureManager;
 
 #pragma mark - 
 #pragma mark CaptureManager PrivateAPI
+
+- (void)createFullSizeImageLater:(NSArray*)_args {
+    UIImage* capturedImage = [_args objectAtIndex:0];
+    Capture* capture = [_args objectAtIndex:1];
+    ViewGeneral* viewGeneral = [ViewGeneral instance];
+    Image* fullSizeImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:viewGeneral.managedObjectContext];
+	fullSizeImage.image = capturedImage;
+    fullSizeImage.imageId = capture.fullSizeImageId;
+    [viewGeneral saveManagedObjectContext];
+}
 
 #pragma mark - 
 #pragma mark CaptureManager
@@ -61,11 +73,12 @@ static CaptureManager* thisCaptureManager;
 }
 
 + (Capture*)createCaptureWithImage:(UIImage*)_capturedImage scaledToFrame:(CGRect)_frame {
+    NSDate* createdAt = [NSDate date];
     CLLocationCoordinate2D currentLocation = [[[LocationManager instance] location] coordinate];
     ViewGeneral* viewGeneral = [ViewGeneral instance];
     Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:viewGeneral.managedObjectContext];
 
-    capture.createdAt = [NSDate date];
+    capture.createdAt = createdAt;
     capture.dayIdentifier = [viewGeneral dayIdentifier:capture.createdAt];
     capture.thumbnail = [_capturedImage thumbnailImage:[viewGeneral calendarImageThumbnailRect].size.width];
     capture.cached = [NSNumber numberWithBool:YES];
@@ -75,16 +88,20 @@ static CaptureManager* thisCaptureManager;
     location.longitude = [NSNumber numberWithDouble:currentLocation.longitude];
     capture.location = location;
     
-//    Image* fullSizeImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:viewGeneral.managedObjectContext];
-//	fullSizeImage.image = _capturedImage;
-//	capture.fullSizeImage = fullSizeImage;
-    
     Image* displayedImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:viewGeneral.managedObjectContext];
 	displayedImage.image = [self scaleImage:_capturedImage toFrame:_frame];
 	capture.displayedImage = displayedImage;
-    
+
+    NSInteger fullSizeImageId = 1000.0f*[NSDate timeIntervalSinceReferenceDate];
+    capture.fullSizeImageId = [NSNumber numberWithInt:fullSizeImageId];
     [viewGeneral saveManagedObjectContext];
-    return capture;
+
+    return [self fetchCaptureCreatedAt:createdAt];
+}
+
++ (void)createFullSizeImage:(UIImage*)_capturedImage forCapture:(Capture*)_capture {
+    NSArray* args = [NSArray arrayWithObjects:_capturedImage, _capture, nil];
+    [[self instance] performSelector:@selector(createFullSizeImageLater:) withObject:args afterDelay:1.0];
 }
 
 + (Capture*)fetchCaptureCreatedAt:(NSDate*)_createdAt {
@@ -100,6 +117,19 @@ static CaptureManager* thisCaptureManager;
     return capture;
 }
 
++ (Image*)fetchFullSizeImageForCapture:(Capture*)_capture {
+    Image* fullSizeImage = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Image" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"imageId == %@", _capture.fullSizeImageId]];
+    fetchRequest.fetchLimit = 1;
+    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
+    if ([fetchResults count] > 0) {
+        fullSizeImage = [fetchResults objectAtIndex:0];
+    }
+    return fullSizeImage;
+}
+
 + (void)deleteCapture:(Capture*)_capture; {
     NSDate* createdAt = _capture.createdAt;
     ViewGeneral* viewGeneral = [ViewGeneral instance];
@@ -108,11 +138,11 @@ static CaptureManager* thisCaptureManager;
     [viewGeneral updateCalendarEntryWithDate:createdAt];
 }
 
-+ (Capture*)applyFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture {
-//    UIImage* fullSizeImage = _capture.fullSizeImage.image;
-//    UIImage* filteredFullSizeImage = [FilterFactory applyFilter:_filter withValue:_value toImage:[fullSizeImage transformPhotoImage]];
-//    _capture.fullSizeImage.image = filteredFullSizeImage;
-    return _capture;
++ (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture {
+    Image* fullSizeImage = [self fetchFullSizeImageForCapture:_capture];
+    UIImage* unfilteredFullSizeImage = fullSizeImage.image;
+    fullSizeImage.image = [FilterFactory applyFilter:_filter withValue:_value toImage:unfilteredFullSizeImage];
+    [[ViewGeneral instance] saveManagedObjectContext];
 }
 
 @end
