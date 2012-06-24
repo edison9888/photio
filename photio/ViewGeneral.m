@@ -47,7 +47,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation ViewGeneral
  
-@synthesize notAnimating, managedObjectContext, containerView;
+@synthesize notAnimating, containerView;
 @synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController,
             progressView;
 
@@ -146,46 +146,12 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initLocalesView:_containerView];
 }
 
-- (NSString*)dayIdentifier:(NSDate*)_date {
-    return [self.calendarViewController dayIdentifier:_date];
-}
-
 - (CGRect)calendarImageThumbnailRect {
     return [self.calendarViewController calendarImageThumbnailRect];
 }
 
 - (void)updateCalendarEntryWithDate:(NSDate*)_date {
     [self.calendarViewController updateEntryWithDate:_date];
-}
-
-#pragma mark - 
-#pragma mark Core Data
-
-- (void)saveManagedObjectContext {
-    NSError *error = nil;
-    if (![[ViewGeneral instance].managedObjectContext save:&error]) {
-        [ViewGeneral alertOnError:error];
-    }
-}
-
-- (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest {
-    NSError* error;
-    NSArray* fetchResults = [[ViewGeneral instance].managedObjectContext executeFetchRequest:_fetchRequest error:&error];
-    if (fetchResults == nil) {
-        [ViewGeneral alertOnError:error];
-        abort();
-    }
-    return fetchResults;
-}
-
-- (NSUInteger)countFromManagedObjectContext:(NSFetchRequest*)_fetchRequest {
-    NSError* error;
-    NSUInteger count = [[ViewGeneral instance].managedObjectContext countForFetchRequest:_fetchRequest error:&error];
-    if (count == NSNotFound) {
-        [ViewGeneral alertOnError:error];
-        abort();
-    }
-    return count;
 }
 
 #pragma mark - 

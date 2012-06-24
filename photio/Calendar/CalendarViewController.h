@@ -21,7 +21,6 @@
 @property(nonatomic, strong) NSDate*                    oldestDate;
 @property(nonatomic, strong) DragGridView*              dragGridView;
 @property(nonatomic, strong) NSCalendar*                calendar;
-@property(nonatomic, strong) NSDateFormatter*           julianDayFormatter;
 @property(nonatomic, assign) NSInteger                  viewCount;
 @property(nonatomic, assign) NSInteger                  daysInRow;
 @property(nonatomic, assign) NSInteger                  totalDays;
@@ -32,7 +31,6 @@
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (CGRect)calendarImageThumbnailRect;
-- (NSString*)dayIdentifier:(NSDate*)_date;
 - (void)loadCalendarViews;
 - (void)updateEntryWithDate:(NSDate*)_date;
 - (NSDate*)floorDate:(NSDate*)_date;

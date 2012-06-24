@@ -10,7 +10,7 @@
 #import "CameraFactory.h"
 #import "GPUImage.h"
 
-#import "ViewGeneral.h"
+#import "DataContextManager.h"
 #import "FilterPalette.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -52,29 +52,30 @@ static FilterFactory* thisFilterFactory = nil;
 #pragma mark FilterFactory PrivateApi
 
 + (FilterPalette*)filterPalette:(NSNumber*)_filterPalette {
+    DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"FilterPalette" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"FilterPalette" inManagedObjectContext:contextManager.mainObjectContext]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"filterPaletteId == %@", _filterPalette]];
     [fetchRequest setFetchLimit:1];
-    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
+    NSArray* fetchResults = [contextManager fetch:fetchRequest];
     return [fetchResults objectAtIndex:0];
 }
 
 + (NSArray*)loadFilterPalettes {
-    ViewGeneral* viewGeneral = [ViewGeneral instance];
+    DataContextManager* contextManager = [DataContextManager instance];
     
     NSString* filterPaletteFile = [[NSBundle  mainBundle] pathForResource:@"FilterPalettes" ofType:@"plist"];
     NSArray* configuredFilterClasses = [[NSDictionary dictionaryWithContentsOfFile:filterPaletteFile] objectForKey:@"filterPalettes"];
     NSInteger configuredFilterClassCount = [configuredFilterClasses count];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* filterPaletteEntity = [NSEntityDescription entityForName:@"FilterPalette" inManagedObjectContext:viewGeneral.managedObjectContext];
+    NSEntityDescription* filterPaletteEntity = [NSEntityDescription entityForName:@"FilterPalette" inManagedObjectContext:contextManager.mainObjectContext];
     [fetchRequest setEntity:filterPaletteEntity];   
-    NSInteger filterPaletteCount = [viewGeneral countFromManagedObjectContext:fetchRequest];
+    NSInteger filterPaletteCount = [contextManager count:fetchRequest];
     
     if (filterPaletteCount < configuredFilterClassCount) {
         for (int i = 0; i < (configuredFilterClassCount - filterPaletteCount); i++) {
-            FilterPalette* filterPalette = (FilterPalette*)[NSEntityDescription insertNewObjectForEntityForName:@"FilterPalette" inManagedObjectContext:viewGeneral.managedObjectContext];
+            FilterPalette* filterPalette = (FilterPalette*)[NSEntityDescription insertNewObjectForEntityForName:@"FilterPalette" inManagedObjectContext:contextManager.mainObjectContext];
             NSDictionary* configuredFilterClass = [configuredFilterClasses objectAtIndex:(filterPaletteCount + i)];
             filterPalette.name              = [configuredFilterClass objectForKey:@"name"];
             filterPalette.filterPaletteId   = [configuredFilterClass objectForKey:@"filterPaletteId"];
@@ -82,28 +83,28 @@ static FilterFactory* thisFilterFactory = nil;
             filterPalette.hidden            = [configuredFilterClass objectForKey:@"hidden"];
             filterPalette.usageRate         = [NSNumber numberWithFloat:0.0];
             filterPalette.usageCount        = [NSNumber numberWithFloat:0.0];
-            [viewGeneral saveManagedObjectContext];
+            [contextManager save];
         }
     }
     
-    return [viewGeneral fetchFromManagedObjectContext:fetchRequest];
+    return [contextManager fetch:fetchRequest];
 }
 
 + (NSArray*)loadFilters {
-    ViewGeneral* viewGeneral = [ViewGeneral instance];
+    DataContextManager* contextManager = [DataContextManager instance];
 
     NSString* filtersFile = [[NSBundle  mainBundle] pathForResource:@"Filters" ofType:@"plist"];
     NSArray* configuredFilters = [[NSDictionary dictionaryWithContentsOfFile:filtersFile] objectForKey:@"filters"];
     NSInteger configuredFilterCount = [configuredFilters count];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* filterEntity = [NSEntityDescription entityForName:@"Filter" inManagedObjectContext:viewGeneral.managedObjectContext];
+    NSEntityDescription* filterEntity = [NSEntityDescription entityForName:@"Filter" inManagedObjectContext:contextManager.mainObjectContext];
     [fetchRequest setEntity:filterEntity];   
-    NSInteger filterCount = [viewGeneral countFromManagedObjectContext:fetchRequest];
+    NSInteger filterCount = [contextManager count:fetchRequest];
 
     if (filterCount < configuredFilterCount) {
         for (int i = 0; i < (configuredFilterCount - filterCount); i++) {
-            Filter* filter = (Filter*)[NSEntityDescription insertNewObjectForEntityForName:@"Filter" inManagedObjectContext:viewGeneral.managedObjectContext];
+            Filter* filter = (Filter*)[NSEntityDescription insertNewObjectForEntityForName:@"Filter" inManagedObjectContext:contextManager.mainObjectContext];
             NSDictionary* configuredFilter  = [configuredFilters objectAtIndex:(filterCount + i)];
             filter.name                = [configuredFilter objectForKey:@"name"];
             filter.filterId            = [configuredFilter objectForKey:@"filterId"];
@@ -116,11 +117,11 @@ static FilterFactory* thisFilterFactory = nil;
             filter.filterPalette       = [self filterPalette:[configuredFilter objectForKey:@"filterPaletteId"]];
             filter.usageRate           = [NSNumber numberWithFloat:0.0];
             filter.usageCount          = [NSNumber numberWithFloat:0.0];
-            [viewGeneral saveManagedObjectContext];
+            [contextManager save];
         }
     }
 
-    return [viewGeneral fetchFromManagedObjectContext:fetchRequest];
+    return [contextManager fetch:fetchRequest];
 }
 
 + (UIImage*)outputImageForFilter:(GPUImageOutput<GPUImageInput>*)_filter andImage:(UIImage*)_image {
@@ -149,13 +150,14 @@ static FilterFactory* thisFilterFactory = nil;
 }
 
 - (Filter*)defaultFilterForPalette:(FilterPalette*)_filterPalette {
+    DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* filterPaletteEntity = [NSEntityDescription entityForName:@"Filter" inManagedObjectContext:[ViewGeneral instance].managedObjectContext];
+    NSEntityDescription* filterPaletteEntity = [NSEntityDescription entityForName:@"Filter" inManagedObjectContext:contextManager.mainObjectContext];
     [fetchRequest setEntity:filterPaletteEntity];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"usageRate" ascending:NO]]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"filterPalette.filterPaletteId=%@", _filterPalette.filterPaletteId]];
     [fetchRequest setFetchLimit:1];
-    return [[[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest] objectAtIndex:0];
+    return [[contextManager fetch:fetchRequest] objectAtIndex:0];
 }
 
 - (NSArray*)filterPalettes {

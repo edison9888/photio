@@ -10,6 +10,8 @@
 #import "ContainerViewController.h"
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
+#import "DataContextManager.h"
+#import "LocationManager.h"
 
 @implementation PhotioAppDelegate
 
@@ -23,7 +25,8 @@
 #pragma mark PhotioAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	[ViewGeneral instance].managedObjectContext = [self managedObjectContext];
+	[DataContextManager instance].mainObjectContext = [self managedObjectContext];
+    [LocationManager instance];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.viewController = [[ContainerViewController alloc] initWithNibName:@"ContainerViewController" bundle:nil];
     self.window.rootViewController = self.viewController;

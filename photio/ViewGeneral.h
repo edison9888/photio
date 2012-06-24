@@ -22,7 +22,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property(nonatomic, assign) BOOL                           notAnimating;
 @property(nonatomic, strong) UIView*                        containerView;
-@property(nonatomic, strong) NSManagedObjectContext*        managedObjectContext;
 @property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
 @property(nonatomic, strong) LocalesViewController*         localesViewController;
@@ -40,14 +39,8 @@
 + (void)alertOnError:(NSError*)error;
 
 - (void)createViews:(UIView*)_containerView;
-- (NSString*)dayIdentifier:(NSDate*)_date;
 - (CGRect)calendarImageThumbnailRect;
 - (void)updateCalendarEntryWithDate:(NSDate*)_date;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)saveManagedObjectContext;
-- (NSArray*)fetchFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
-- (NSUInteger)countFromManagedObjectContext:(NSFetchRequest*)_fetchRequest;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showProgressViewWithMessage:(NSString*)_progressMessage;

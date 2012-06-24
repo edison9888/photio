@@ -123,12 +123,8 @@
 }
 
 - (NSMutableArray*)loadEntries {
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[[ViewGeneral instance] managedObjectContext]]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", self.dayIdentifier]];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
-    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
-    NSArray* entryViews = [fetchResults mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
+    NSArray* entries = [CaptureManager fetchCapturesWithDayIdentifier:self.dayIdentifier];
+    NSArray* entryViews = [entries mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
         Capture* capture = _obj;
         ImageEntryView* imageView = [ImageEntryView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
         imageView.delegate = self;

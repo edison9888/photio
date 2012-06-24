@@ -10,6 +10,7 @@
 #import "ViewGeneral.h"
 #import "CalendarEntryView.h"
 #import "Capture.h"
+#import "CaptureManager.h"
 #import "NSArray+Extensions.h"
 
 #define CALENDAR_DAYS_IN_ROW                3
@@ -23,7 +24,6 @@
 - (NSMutableArray*)addViewRows;
 - (NSMutableArray*)addDayViewsForRow;
 - (NSDate*)incrementDate:(NSDate*)_date by:(NSInteger)_interval;
-- (void)initializeDateFormatters;
 - (void)initializeCalendarRowsInView;
 - (void)initializeCalendarEntryViewRect;
 - (void)initializeOldestDate;
@@ -34,24 +34,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CalendarViewController (CoreData)
 
-- (NSMutableArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate;
 - (void)updateLatestCapture;
-
-NSInteger descendingSort(id num1, id num2, void *context);
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation CalendarViewController
 
-@synthesize containerView, monthAndYearView, oldestDate, julianDayFormatter, dragGridView, calendar, captures, 
+@synthesize containerView, monthAndYearView, oldestDate, dragGridView, calendar, captures, 
             viewCount, daysInRow, totalDays, captureIndex, rowsInView, calendarEntryViewRect;
 
 #pragma mark -
 #pragma mark CalendarViewController PrivateAPI
 
 - (NSMutableArray*)addViewsBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
-    self.captures = [self fetchCapturesBetweenDates:_startdate and:_endDate];
+    self.captures = [[CaptureManager fetchCaptureForEachDayBetweenDates:_startdate and:_endDate] mutableCopy];
     self.captureIndex = 0;
     NSMutableArray* initialDayViews = [NSMutableArray arrayWithCapacity:self.viewCount * self.rowsInView];
     for (int i = 0; i < self.viewCount; i++) {
@@ -74,7 +71,7 @@ NSInteger descendingSort(id num1, id num2, void *context);
     for (int j = 0; j < self.daysInRow; j++) {
         UIImage* thumbnail = nil;
         NSString* dayIdentifier;
-        NSString* oldestDayIdentifier = [self dayIdentifier:self.oldestDate];
+        NSString* oldestDayIdentifier = [CaptureManager dayIdentifier:self.oldestDate];
         if ([self.captures count] > 0) {            
             Capture* capture= [self.captures objectAtIndex:self.captureIndex];
             NSString* captureDayIdentifier = capture.dayIdentifier;
@@ -91,11 +88,6 @@ NSInteger descendingSort(id num1, id num2, void *context);
         self.totalDays++;
     }
     return rowViews;
-}
-
-- (void)initializeDateFormatters {
-    self.julianDayFormatter = [[NSDateFormatter alloc] init];
-    [self.julianDayFormatter setDateFormat:@"g"];
 }
 
 - (NSDate*)incrementDate:(NSDate*)_date by:(NSInteger)_interval {
@@ -121,40 +113,6 @@ NSInteger descendingSort(id num1, id num2, void *context);
 }
 
 #pragma mark -
-#pragma mark CalendarViewController CoreData
-
-- (NSArray*)fetchCapturesBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
-
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];    
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];    
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate]];    
-    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
-    
-    NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.dayIdentifier"];
-    NSArray* sortedDays = [days sortedArrayUsingFunction:descendingSort context:NULL];
-    NSArray* aggregatedResults = [sortedDays mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
-        NSString* day = _obj;
-        NSArray* dayValues = [fetchResults filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", day]];
-        NSDate* latestDate = [dayValues valueForKeyPath:@"@max.createdAt"];
-        return [[dayValues filteredArrayUsingPredicate:[NSPredicate predicateWithFormat: @"createdAt = %@", latestDate]] objectAtIndex:0];
-    }];
-    
-    return aggregatedResults;
-}
-
-NSInteger descendingSort(id num1, id num2, void* context) {
-    int v1 = [num1 intValue];
-    int v2 = [num2 intValue];
-    if (v1 > v2) {
-        return NSOrderedAscending;
-    } else if (v1 < v2) {
-        return NSOrderedDescending;
-    } else {
-        return NSOrderedSame;
-    }
-}
-
-#pragma mark -
 #pragma mark CalendarViewController
 
 + (id)inView:(UIView*)_containerView {
@@ -168,7 +126,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
         self.daysInRow = CALENDAR_DAYS_IN_ROW;
         self.viewCount = CALENDAR_VIEW_COUNT;
         self.totalDays = 0;
-        [self initializeDateFormatters];
         [self initializeRowsInView];
         [self initializeCalendarEntryViewRect];
     }
@@ -177,10 +134,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 
 - (CGRect)calendarImageThumbnailRect {
     return self.calendarEntryViewRect;
-}
-
-- (NSString*)dayIdentifier:(NSDate*)_date {
-    return [self.julianDayFormatter stringFromDate:_date];
 }
 
 - (void)loadCalendarViews {
@@ -204,19 +157,13 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 - (void)updateEntryWithDate:(NSDate*)_date {
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:[ViewGeneral instance].managedObjectContext]];   
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier==%@", [self dayIdentifier:_date]]];
-    [fetchRequest setFetchLimit:1];    
-    NSArray* fetchResults = [[ViewGeneral instance] fetchFromManagedObjectContext:fetchRequest];
+    Capture* capture = [CaptureManager fetchCaptureWithDayIdentifierCreatedAt:_date];
     CalendarEntryView* firstEntryView = [[self.dragGridView rowViewAtIndex:0] objectAtIndex:0];
     NSTimeInterval deltaDate = [[self floorDate:firstEntryView.date] timeIntervalSinceDate:[self floorDate:_date]] / (3600.0 * 24.0);
     NSInteger entryRow = deltaDate / self.rowsInView;
     NSInteger entryColumn = (NSInteger)deltaDate - entryRow * self.rowsInView;
     CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:entryRow] objectAtIndex:entryColumn];
-    if ([fetchResults count] > 0) {
-        Capture* capture = [fetchResults objectAtIndex:0];
+    if (capture) {
         entryView.photoView.image = capture.thumbnail;
         entryView.dayIdentifier = capture.dayIdentifier;
         entryView.date = capture.createdAt;

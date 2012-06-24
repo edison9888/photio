@@ -81,6 +81,7 @@
 		0579A903159660EA00F5E85C /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A902159660EA00F5E85C /* Capture.m */; };
 		0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A9051596D65400F5E85C /* SaturationCameraFilter.m */; };
 		0579A91215977EF600F5E85C /* PassThrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0579A91015977CE700F5E85C /* PassThrough.fsh */; };
+		0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A91415979B5C00F5E85C /* DataContextManager.m */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
@@ -308,6 +309,8 @@
 		0579A9041596D65400F5E85C /* SaturationCameraFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaturationCameraFilter.h; path = Filters/SaturationCameraFilter.h; sourceTree = "<group>"; };
 		0579A9051596D65400F5E85C /* SaturationCameraFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SaturationCameraFilter.m; path = Filters/SaturationCameraFilter.m; sourceTree = "<group>"; };
 		0579A91015977CE700F5E85C /* PassThrough.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PassThrough.fsh; path = Filters/PassThrough.fsh; sourceTree = "<group>"; };
+		0579A91315979B5C00F5E85C /* DataContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataContextManager.h; path = photio/Library/DataContextManager.h; sourceTree = SOURCE_ROOT; };
+		0579A91415979B5C00F5E85C /* DataContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataContextManager.m; path = photio/Library/DataContextManager.m; sourceTree = SOURCE_ROOT; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -688,6 +691,8 @@
 			children = (
 				05DDD9D71571B95C0034AF7C /* BouncingPanGestureRecognizer.h */,
 				05DDD9D81571B95C0034AF7C /* BouncingPanGestureRecognizer.m */,
+				0579A91315979B5C00F5E85C /* DataContextManager.h */,
+				0579A91415979B5C00F5E85C /* DataContextManager.m */,
 				05EE0E8515366ACF00E5E541 /* DiagonalGestureRecognizer.h */,
 				05EE0E8615366ACF00E5E541 /* DiagonalGestureRecognizer.m */,
 				0554A4791503DDD000B9C76D /* DragGridView.h */,
@@ -750,10 +755,10 @@
 				0539BA41157AE99600A4A04B /* CameraFactory.m */,
 				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
 				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
-				0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */,
+				0579A91015977CE700F5E85C /* PassThrough.fsh */,
 				0579A9041596D65400F5E85C /* SaturationCameraFilter.h */,
 				0579A9051596D65400F5E85C /* SaturationCameraFilter.m */,
-				0579A91015977CE700F5E85C /* PassThrough.fsh */,
+				0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */,
 			);
 			name = Filters;
 			sourceTree = "<group>";
@@ -1140,6 +1145,7 @@
 				0579A8FA15965EC100F5E85C /* Image.m in Sources */,
 				0579A903159660EA00F5E85C /* Capture.m in Sources */,
 				0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */,
+				0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

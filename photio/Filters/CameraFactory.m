@@ -9,7 +9,7 @@
 #import "CameraFactory.h"
 #import "FilteredCameraViewController.h"
 #import "SaturationCameraFilter.h"
-#import "ViewGeneral.h"
+#import "DataContextManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static CameraFactory* thisCameraFactory = nil;
@@ -62,20 +62,20 @@ static CameraFactory* thisCameraFactory = nil;
 #pragma mark CameraFactory PrivayeApi
 
 + (NSArray*)loadCameras {
-    ViewGeneral* viewGeneral = [ViewGeneral instance];
+    DataContextManager* contextManager = [DataContextManager instance];
     
     NSString* cameraFile = [[NSBundle  mainBundle] pathForResource:@"Cameras" ofType:@"plist"];
     NSArray* configuredCameras = [[NSDictionary dictionaryWithContentsOfFile:cameraFile] objectForKey:@"cameras"];
     NSInteger configuredCameraCount = [configuredCameras count];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* cameraEntity = [NSEntityDescription entityForName:@"Camera" inManagedObjectContext:viewGeneral.managedObjectContext];
+    NSEntityDescription* cameraEntity = [NSEntityDescription entityForName:@"Camera" inManagedObjectContext:contextManager.mainObjectContext];
     [fetchRequest setEntity:cameraEntity];   
-    NSInteger cameraCount = [viewGeneral countFromManagedObjectContext:fetchRequest];
+    NSInteger cameraCount = [contextManager count:fetchRequest];
     
     if (cameraCount < configuredCameraCount) {
         for (int i = 0; i < (configuredCameraCount - cameraCount); i++) {
-            Camera* camera = (Camera*)[NSEntityDescription insertNewObjectForEntityForName:@"Camera" inManagedObjectContext:viewGeneral.managedObjectContext];
+            Camera* camera = (Camera*)[NSEntityDescription insertNewObjectForEntityForName:@"Camera" inManagedObjectContext:contextManager.mainObjectContext];
             NSDictionary* configuredCamera = [configuredCameras objectAtIndex:(cameraCount + i)];
             camera.cameraId             = [configuredCamera objectForKey:@"cameraId"];
             camera.name                 = [configuredCamera objectForKey:@"name"];
@@ -88,11 +88,11 @@ static CameraFactory* thisCameraFactory = nil;
             camera.autoAdjustEnabled    = [configuredCamera objectForKey:@"autoAdjustEnabled"];
             camera.hidden               = [configuredCamera objectForKey:@"hidden"];
             camera.purchased            = [configuredCamera objectForKey:@"purchased"];
-            [viewGeneral saveManagedObjectContext];
+            [contextManager save];
         }
     }
     
-    return [viewGeneral fetchFromManagedObjectContext:fetchRequest];    
+    return [contextManager fetch:fetchRequest];    
 }
 
 + (NSDictionary*)loadCameraParemeters {
@@ -448,7 +448,7 @@ static CameraFactory* thisCameraFactory = nil;
 
 - (void)setCameraParmeterValue:(NSNumber*)_value {
     self.camera.value = _value;
-    [[ViewGeneral instance] saveManagedObjectContext];
+    [[DataContextManager instance] save];
     switch ([self.camera.cameraId intValue]) {
         case CameraTypeIPhone:
             break;

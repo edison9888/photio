@@ -9,6 +9,7 @@
 #import "ServiceManager.h"
 #import "ViewGeneral.h"
 #import "CaptureManager.h"
+#import "DataContextManager.h"
 #import "Service.h"
 #import "Capture.h"
 #import "Image.h"
@@ -39,20 +40,20 @@ static ServiceManager* thisServiceManager = nil;
 #pragma mark ServiceManager Private
 
 + (NSArray*)loadServices {
-    ViewGeneral* viewGeneral = [ViewGeneral instance];
+    DataContextManager* contextManager = [DataContextManager instance];
     
     NSString* serviceFile = [[NSBundle  mainBundle] pathForResource:@"Services" ofType:@"plist"];
     NSArray* configuredServices = [[NSDictionary dictionaryWithContentsOfFile:serviceFile] objectForKey:@"services"];
     NSInteger configuredServicesCount = [configuredServices count];
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription* serviceEntity = [NSEntityDescription entityForName:@"Service" inManagedObjectContext:viewGeneral.managedObjectContext];
+    NSEntityDescription* serviceEntity = [NSEntityDescription entityForName:@"Service" inManagedObjectContext:contextManager.mainObjectContext];
     [fetchRequest setEntity:serviceEntity];   
-    NSInteger serviceCount = [viewGeneral countFromManagedObjectContext:fetchRequest];
+    NSInteger serviceCount = [contextManager count:fetchRequest];
     
     if (serviceCount < configuredServicesCount) {
         for (int i = 0; i < (configuredServicesCount - serviceCount); i++) {
-            Service* service = (Service*)[NSEntityDescription insertNewObjectForEntityForName:@"Service" inManagedObjectContext:viewGeneral.managedObjectContext];
+            Service* service = (Service*)[NSEntityDescription insertNewObjectForEntityForName:@"Service" inManagedObjectContext:contextManager.mainObjectContext];
             NSDictionary* configuredService = [configuredServices objectAtIndex:(serviceCount + i)];
             service.name              = [configuredService objectForKey:@"name"];
             service.serviceId         = [configuredService objectForKey:@"serviceId"];
@@ -60,11 +61,11 @@ static ServiceManager* thisServiceManager = nil;
             service.hidden            = [configuredService objectForKey:@"hidden"];
             service.usageRate         = [NSNumber numberWithFloat:0.0];
             service.usageCount        = [NSNumber numberWithFloat:0.0];
-            [viewGeneral saveManagedObjectContext];
+            [contextManager save];
         }
     }
     
-    return [viewGeneral fetchFromManagedObjectContext:fetchRequest];    
+    return [contextManager fetch:fetchRequest];    
 }
 
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
