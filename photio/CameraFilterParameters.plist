@@ -102,6 +102,18 @@
 		</dict>
 		<key>Box</key>
 		<dict>
+			<key>GPUImageSaturationFilter</key>
+			<dict>
+				<key>Saturation</key>
+				<dict>
+					<key>maximumValue</key>
+					<integer>2</integer>
+					<key>minmumValue</key>
+					<integer>0</integer>
+					<key>initialValue</key>
+					<real>0</real>
+				</dict>
+			</dict>
 			<key>GPUImageContrastFilter</key>
 			<dict>
 				<key>Contrast</key>

@@ -79,6 +79,8 @@
 		0579A8E215956E3300F5E85C /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8E115956E3300F5E85C /* Path.m */; };
 		0579A8FA15965EC100F5E85C /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8F915965EC000F5E85C /* Image.m */; };
 		0579A903159660EA00F5E85C /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A902159660EA00F5E85C /* Capture.m */; };
+		0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A9051596D65400F5E85C /* SaturationCameraFilter.m */; };
+		0579A91215977EF600F5E85C /* PassThrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0579A91015977CE700F5E85C /* PassThrough.fsh */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
@@ -303,6 +305,9 @@
 		0579A8F915965EC000F5E85C /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		0579A901159660E800F5E85C /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		0579A902159660EA00F5E85C /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		0579A9041596D65400F5E85C /* SaturationCameraFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaturationCameraFilter.h; path = Filters/SaturationCameraFilter.h; sourceTree = "<group>"; };
+		0579A9051596D65400F5E85C /* SaturationCameraFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SaturationCameraFilter.m; path = Filters/SaturationCameraFilter.m; sourceTree = "<group>"; };
+		0579A91015977CE700F5E85C /* PassThrough.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PassThrough.fsh; path = Filters/PassThrough.fsh; sourceTree = "<group>"; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -746,6 +751,9 @@
 				05CFEF8C1566AB3900755519 /* FilterFactory.h */,
 				05CFEF8D1566AB3900755519 /* FilterFactory.m */,
 				0579A8C1158ED59D00F5E85C /* WhiteColorOverlay.fsh */,
+				0579A9041596D65400F5E85C /* SaturationCameraFilter.h */,
+				0579A9051596D65400F5E85C /* SaturationCameraFilter.m */,
+				0579A91015977CE700F5E85C /* PassThrough.fsh */,
 			);
 			name = Filters;
 			sourceTree = "<group>";
@@ -964,6 +972,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0579A91215977EF600F5E85C /* PassThrough.fsh in Resources */,
 				0579A8C6158ED9F400F5E85C /* WhiteColorOverlay.fsh in Resources */,
 				05C99ECB14F0585C00D09F3E /* InfoPlist.strings in Resources */,
 				05DE437214F1E51D005FF6B0 /* ImageInspectViewController.xib in Resources */,
@@ -1130,6 +1139,7 @@
 				0579A8E215956E3300F5E85C /* Path.m in Sources */,
 				0579A8FA15965EC100F5E85C /* Image.m in Sources */,
 				0579A903159660EA00F5E85C /* Capture.m in Sources */,
+				0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
