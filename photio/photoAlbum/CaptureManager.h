@@ -12,11 +12,16 @@
 @class Filter;
 @class Image;
 
-@interface CaptureManager : NSObject 
+@interface CaptureManager : NSObject
+
+@property(nonatomic, assign) dispatch_queue_t fullSizeImageQueue;
 
 + (CaptureManager*)instance;
 + (UIImage*)scaleImage:(UIImage*)_image toFrame:(CGRect)_frame;
 + (NSString*)dayIdentifier:(NSDate*)_date;
+
+- (void)waitForFullSizeImageQueue;
+- (void)dispatchAsyncFullSizeImageQueue:(void(^)(void))_job;
 
 + (Capture*)createCaptureWithImage:(UIImage*)_capturedImage scaledToFrame:(CGRect)_frame;
 + (void)saveCapture:(Capture*)_capture;
@@ -26,7 +31,7 @@
 + (NSArray*)fetchCaptureForEachDayBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate;
 + (Capture*)fetchCaptureWithDayIdentifierCreatedAt:(NSDate*)_createdAt;
 
-+ (void)createFullSizeImage:(UIImage*)_capturedImage forCapture:(Capture*)_capture;
+- (void)createFullSizeImage:(UIImage*)_capturedImage forCapture:(Capture*)_capture;
 + (Image*)fetchFullSizeImageForCapture:(Capture*)_capture;
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture;
 + (NSUInteger)countFullSizeImages;

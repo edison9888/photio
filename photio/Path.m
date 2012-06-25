@@ -2,7 +2,7 @@
 //  Path.m
 //  photio
 //
-//  Created by Troy Stribling on 6/22/12.
+//  Created by Troy Stribling on 6/24/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 

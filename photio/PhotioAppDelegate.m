@@ -11,6 +11,7 @@
 #import "CalendarViewController.h"
 #import "ViewGeneral.h"
 #import "DataContextManager.h"
+#import "CaptureManager.h"
 #import "LocationManager.h"
 
 @implementation PhotioAppDelegate
@@ -35,6 +36,8 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    [[CaptureManager instance] waitForFullSizeImageQueue];
+    [self saveContext];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application { 
@@ -48,6 +51,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    [[CaptureManager instance] waitForFullSizeImageQueue];
     [self saveContext];
 }
 

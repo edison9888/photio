@@ -76,8 +76,6 @@
 		0579A8D61593FA0300F5E85C /* CaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8D51593FA0200F5E85C /* CaptureManager.m */; };
 		0579A8DC15954F4C00F5E85C /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8DB15954F4C00F5E85C /* LocationManager.m */; };
 		0579A8DF15956E1300F5E85C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8DE15956E1300F5E85C /* Location.m */; };
-		0579A8E215956E3300F5E85C /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A8E115956E3300F5E85C /* Path.m */; };
-		0579A903159660EA00F5E85C /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A902159660EA00F5E85C /* Capture.m */; };
 		0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A9051596D65400F5E85C /* SaturationCameraFilter.m */; };
 		0579A91215977EF600F5E85C /* PassThrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0579A91015977CE700F5E85C /* PassThrough.fsh */; };
 		0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A91415979B5C00F5E85C /* DataContextManager.m */; };
@@ -137,6 +135,8 @@
 		0590C746153B3D8F0065AB42 /* CalendarEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C73F153B3D8F0065AB42 /* CalendarEntryView.m */; };
 		0590C747153B3D8F0065AB42 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C741153B3D8F0065AB42 /* CalendarViewController.m */; };
 		0590C748153B3D8F0065AB42 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590C742153B3D8F0065AB42 /* CalendarViewController.xib */; };
+		059169841597EFFE0013C81D /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169831597EFFE0013C81D /* Capture.m */; };
+		059169871597F00E0013C81D /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169861597F00E0013C81D /* Path.m */; };
 		059772F51527D787008F3A1B /* NativeCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F01527D787008F3A1B /* NativeCamera.m */; };
 		059772F71527D787008F3A1B /* NativeCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* NativeCameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
@@ -300,10 +300,6 @@
 		0579A8DB15954F4C00F5E85C /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManager.m; path = photio/Library/LocationManager.m; sourceTree = SOURCE_ROOT; };
 		0579A8DD15956E1300F5E85C /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		0579A8DE15956E1300F5E85C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		0579A8E015956E3300F5E85C /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
-		0579A8E115956E3300F5E85C /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Path.m; sourceTree = "<group>"; };
-		0579A901159660E800F5E85C /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
-		0579A902159660EA00F5E85C /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		0579A9041596D65400F5E85C /* SaturationCameraFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaturationCameraFilter.h; path = Filters/SaturationCameraFilter.h; sourceTree = "<group>"; };
 		0579A9051596D65400F5E85C /* SaturationCameraFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SaturationCameraFilter.m; path = Filters/SaturationCameraFilter.m; sourceTree = "<group>"; };
 		0579A91015977CE700F5E85C /* PassThrough.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PassThrough.fsh; path = Filters/PassThrough.fsh; sourceTree = "<group>"; };
@@ -375,6 +371,10 @@
 		0590C740153B3D8F0065AB42 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		0590C741153B3D8F0065AB42 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		0590C742153B3D8F0065AB42 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
+		059169821597EFFE0013C81D /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		059169831597EFFE0013C81D /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		059169851597F00E0013C81D /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
+		059169861597F00E0013C81D /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Path.m; sourceTree = "<group>"; };
 		059772EF1527D787008F3A1B /* NativeCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeCamera.h; sourceTree = "<group>"; };
 		059772F01527D787008F3A1B /* NativeCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeCamera.m; sourceTree = "<group>"; };
 		059772F31527D787008F3A1B /* NativeCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeCameraViewController.h; sourceTree = "<group>"; };
@@ -653,8 +653,8 @@
 				0539BA49157AF9D600A4A04B /* Camera.m */,
 				0539BA2B157AE7A100A4A04B /* CameraUsed.h */,
 				0539BA2C157AE7A100A4A04B /* CameraUsed.m */,
-				0579A901159660E800F5E85C /* Capture.h */,
-				0579A902159660EA00F5E85C /* Capture.m */,
+				059169821597EFFE0013C81D /* Capture.h */,
+				059169831597EFFE0013C81D /* Capture.m */,
 				0539BA31157AE7D700A4A04B /* Filter.h */,
 				0539BA32157AE7D700A4A04B /* Filter.m */,
 				0539BA34157AE7F700A4A04B /* FilterPalette.h */,
@@ -667,8 +667,8 @@
 				05B837781530C6B800D99A40 /* Locale.m */,
 				0579A8DD15956E1300F5E85C /* Location.h */,
 				0579A8DE15956E1300F5E85C /* Location.m */,
-				0579A8E015956E3300F5E85C /* Path.h */,
-				0579A8E115956E3300F5E85C /* Path.m */,
+				059169851597F00E0013C81D /* Path.h */,
+				059169861597F00E0013C81D /* Path.m */,
 				0579A8CD1590170E00F5E85C /* Service.h */,
 				0579A8CE1590170E00F5E85C /* Service.m */,
 				0579A8BC158ED49000F5E85C /* ServiceUsed.h */,
@@ -1141,11 +1141,11 @@
 				0579A8D61593FA0300F5E85C /* CaptureManager.m in Sources */,
 				0579A8DC15954F4C00F5E85C /* LocationManager.m in Sources */,
 				0579A8DF15956E1300F5E85C /* Location.m in Sources */,
-				0579A8E215956E3300F5E85C /* Path.m in Sources */,
-				0579A903159660EA00F5E85C /* Capture.m in Sources */,
 				0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */,
 				0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */,
 				0579A9181597D15E00F5E85C /* Image.m in Sources */,
+				059169841597EFFE0013C81D /* Capture.m in Sources */,
+				059169871597F00E0013C81D /* Path.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

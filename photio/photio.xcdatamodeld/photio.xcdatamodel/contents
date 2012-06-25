@@ -29,19 +29,19 @@
     </entity>
     <entity name="Capture" representedClassName="Capture" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullSizeImageId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
-        <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
-        <relationship name="displayedImage" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="capture" inverseEntity="Image" syncable="YES"/>
-        <relationship name="filterUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FilterUsed" inverseName="capture" inverseEntity="FilterUsed" syncable="YES"/>
-        <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
-        <relationship name="location" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="capture" inverseEntity="Location" syncable="YES"/>
-        <relationship name="serviceUsed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ServiceUsed" inverseName="capture" inverseEntity="ServiceUsed" syncable="YES"/>
+        <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
+        <relationship name="displayedImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Image" inverseName="capture" inverseEntity="Image" syncable="YES"/>
+        <relationship name="filterUsed" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FilterUsed" inverseName="capture" inverseEntity="FilterUsed" syncable="YES"/>
+        <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
+        <relationship name="location" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Location" inverseName="capture" inverseEntity="Location" syncable="YES"/>
+        <relationship name="serviceUsed" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ServiceUsed" inverseName="capture" inverseEntity="ServiceUsed" syncable="YES"/>
     </entity>
     <entity name="Filter" representedClassName="Filter" syncable="YES">
         <attribute name="defaultValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -92,7 +92,7 @@
     </entity>
     <entity name="Path" representedClassName="Path" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="location" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="path" inverseEntity="Location" syncable="YES"/>
+        <relationship name="location" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Location" inverseName="path" inverseEntity="Location" syncable="YES"/>
     </entity>
     <entity name="Service" representedClassName="Service" syncable="YES">
         <attribute name="hidden" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -117,9 +117,9 @@
         <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Location" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Path" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Service" positionX="160" positionY="192" width="128" height="150"/>
         <element name="ServiceUsed" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="Path" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="Location" positionX="160" positionY="192" width="128" height="105"/>
     </elements>
 </model>

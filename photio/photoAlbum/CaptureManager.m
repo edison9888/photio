@@ -31,6 +31,8 @@ NSInteger descendingSort(id num1, id num2, void *context);
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation CaptureManager
 
+@synthesize fullSizeImageQueue;
+
 #pragma mark - 
 #pragma mark CaptureManager PrivateAPI
 
@@ -58,6 +60,14 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     return thisCaptureManager;
 }
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.fullSizeImageQueue = dispatch_queue_create("com.photio.fullSizeImage", NULL);
+    }
+    return self;
+}
+
 + (UIImage*)scaleImage:(UIImage*)_image toFrame:(CGRect)_frame {
     CGFloat imageAspectRatio = _image.size.height / _image.size.width;
     CGFloat scaledImageWidth = _frame.size.width;
@@ -76,6 +86,17 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 #pragma mark - 
+#pragma mark CaptureManager Queues
+
+- (void)waitForFullSizeImageQueue {
+    dispatch_sync(self.fullSizeImageQueue, ^{});
+}
+
+- (void)dispatchAsyncFullSizeImageQueue:(void(^)(void))_job {
+    dispatch_async(self.fullSizeImageQueue, _job);
+}
+
+#pragma mark - 
 #pragma mark Captures
 
 + (void)saveCapture:(Capture*)_capture {
@@ -84,8 +105,14 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 + (void)deleteCapture:(Capture*)_capture; {
+    DataContextManager* contextManager = [DataContextManager instance];
     NSDate* createdAt = _capture.createdAt;
-    [[DataContextManager instance] deleteObject:_capture];
+    Image* fullSizePhoto = [self fetchFullSizeImageForCapture:_capture];
+    if (fullSizePhoto) {
+        [contextManager.mainObjectContext deleteObject:fullSizePhoto];
+    }
+    [contextManager.mainObjectContext deleteObject:_capture];
+    [contextManager save];
     [[ViewGeneral instance] updateCalendarEntryWithDate:createdAt];
 }
 
@@ -178,6 +205,22 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 #pragma mark - 
 #pragma mark Full Size Images
 
+- (void)createFullSizeImage:(UIImage*)_capturedImage forCapture:(Capture*)_capture {
+    dispatch_async(self.fullSizeImageQueue, ^{
+        NSError *error = nil;
+        NSManagedObjectContext* requestMoc = [[DataContextManager instance] createContext];
+        NSNotificationCenter *notify = [NSNotificationCenter defaultCenter];
+        [notify addObserver:[DataContextManager instance] selector:@selector(mergeChangesWithMainContext:) name:NSManagedObjectContextDidSaveNotification object:requestMoc];        
+        Image* fullSizeImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:requestMoc];
+        fullSizeImage.image = _capturedImage;
+        fullSizeImage.imageId = _capture.fullSizeImageId;
+        if (![requestMoc save:&error]) {
+            [ViewGeneral alertOnError:error];
+        }
+    });
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 + (Image*)fetchFullSizeImageForCapture:(Capture*)_capture {
     Image* fullSizeImage = nil;
     DataContextManager* contextManager = [DataContextManager instance];
@@ -190,24 +233,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
         fullSizeImage = [fetchResults objectAtIndex:0];
     }
     return fullSizeImage;
-}
-
-+ (void)createFullSizeImage:(UIImage*)_capturedImage forCapture:(Capture*)_capture {
-    dispatch_queue_t request_queue = dispatch_queue_create("com.photio.createFullSizeImage", NULL);
-    dispatch_async(request_queue, ^{
-        NSError *error = nil;
-        NSManagedObjectContext* requestMoc = [[DataContextManager instance] createContext];
-        NSNotificationCenter *notify = [NSNotificationCenter defaultCenter];
-        [notify addObserver:[DataContextManager instance] selector:@selector(mergeChangesWithMainContext:) name:NSManagedObjectContextDidSaveNotification object:requestMoc];        
-        Image* fullSizeImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:requestMoc];
-        fullSizeImage.image = _capturedImage;
-        fullSizeImage.imageId = _capture.fullSizeImageId;
-        if (![requestMoc save:&error]) {
-            [ViewGeneral alertOnError:error];
-        }
-    });
-    dispatch_release(request_queue);
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture {
