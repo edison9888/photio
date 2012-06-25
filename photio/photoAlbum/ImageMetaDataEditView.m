@@ -229,7 +229,9 @@ typedef enum {
 - (void)selectedParameter:(id)_parameter {
     switch (self.editMode) {
         case EditModeService:
-            [[ServiceManager instance] useService:(Service*)_parameter withCapture:self.capture];
+            [[ServiceManager instance] useService:(Service*)_parameter withCapture:self.capture onComplete:^{
+                [self showControls];
+            }];
             break;
         case EditModeAlbum:
             break;

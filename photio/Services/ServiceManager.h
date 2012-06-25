@@ -20,12 +20,15 @@ typedef enum {
 @class Service;
 @class Capture;
 
+typedef void (^CompletionCallback)();
+
 @interface ServiceManager : NSObject
 
-@property(nonatomic, strong) NSArray* loadedServices;
+@property(readwrite, copy)   CompletionCallback     onComplete;
+@property(nonatomic, strong) NSArray*               loadedServices;
 
 + (ServiceManager*)instance;
 - (NSArray*)services;
-- (void)useService:(Service*)_service withCapture:(Capture*)_capture;
+- (void)useService:(Service*)_service withCapture:(Capture*)_capture onComplete:(CompletionCallback)_onComplete;
 
 @end

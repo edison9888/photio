@@ -34,7 +34,7 @@ static ServiceManager* thisServiceManager = nil;
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation ServiceManager
 
-@synthesize loadedServices;
+@synthesize loadedServices, onComplete;
 
 #pragma mark - 
 #pragma mark ServiceManager Private
@@ -70,6 +70,7 @@ static ServiceManager* thisServiceManager = nil;
 
 - (void)finishedSavingToCameraRoll:image:(UIImage*)_image didFinishSavingWithError:(NSError*)_error contextInfo:(void*)_context {
     [[ViewGeneral instance] removeProgressView];
+    self.onComplete();
     if (_error) {
         [[[UIAlertView alloc] initWithTitle:[_error localizedDescription] message:[_error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];
     }
@@ -113,7 +114,8 @@ static ServiceManager* thisServiceManager = nil;
     return self.loadedServices;
 }
 
-- (void)useService:(Service*)_service withCapture:(Capture*)_capture {
+- (void)useService:(Service*)_service withCapture:(Capture*)_capture onComplete:(CompletionCallback)_onComplete {
+    self.onComplete = _onComplete;
     switch ([_service.serviceId intValue]) {
         case ServiceTypeCameraRoll:
             [self useServiceCameraRoll:_service withCapture:_capture];
