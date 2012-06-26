@@ -107,10 +107,10 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 + (void)deleteCapture:(Capture*)_capture; {
     DataContextManager* contextManager = [DataContextManager instance];
     NSDate* createdAt = _capture.createdAt;
-    Image* fullSizePhoto = [self fetchFullSizeImageForCapture:_capture];
-    if (fullSizePhoto) {
-        [contextManager.mainObjectContext deleteObject:fullSizePhoto];
-    }
+//    Image* fullSizePhoto = [self fetchFullSizeImageForCapture:_capture];
+//    if (fullSizePhoto) {
+//        [contextManager.mainObjectContext deleteObject:fullSizePhoto];
+//    }
     [contextManager.mainObjectContext deleteObject:_capture];
     [contextManager save];
     [[ViewGeneral instance] updateCalendarEntryWithDate:createdAt];
@@ -138,8 +138,6 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     displayedImage.imageId = [NSNumber numberWithInt:0];
 	capture.displayedImage = displayedImage;
 
-    NSInteger fullSizeImageId = 1000.0f*[NSDate timeIntervalSinceReferenceDate];
-    capture.fullSizeImageId = [NSNumber numberWithInt:fullSizeImageId];
     [contextManager save];
 
     return [self fetchCaptureCreatedAt:createdAt];
@@ -207,39 +205,51 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 
 - (void)createFullSizeImage:(UIImage*)_capturedImage forCapture:(Capture*)_capture {
     dispatch_async(self.fullSizeImageQueue, ^{
-        NSError *error = nil;
-        NSManagedObjectContext* requestMoc = [[DataContextManager instance] createContext];
-        NSNotificationCenter *notify = [NSNotificationCenter defaultCenter];
-        [notify addObserver:[DataContextManager instance] selector:@selector(mergeChangesWithMainContext:) name:NSManagedObjectContextDidSaveNotification object:requestMoc];        
-        Image* fullSizeImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:requestMoc];
-        fullSizeImage.image = _capturedImage;
-        fullSizeImage.imageId = _capture.fullSizeImageId;
-        if (![requestMoc save:&error]) {
-            [ViewGeneral alertOnError:error];
-        }
+        NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@.jpg", _capture.createdAt];
+        NSString* jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
+        [UIImageJPEGRepresentation(_capturedImage, 1.0f) writeToFile:jpgPath atomically:YES];
+        NSError *error;
+        NSFileManager *fileMgr = [NSFileManager defaultManager];
+        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        NSLog(@"Documents directory: %@", [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:&error]);
     });
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    dispatch_async(self.fullSizeImageQueue, ^{
+//        NSError *error = nil;
+//        NSManagedObjectContext* requestMoc = [[DataContextManager instance] createContext];
+//        NSNotificationCenter *notify = [NSNotificationCenter defaultCenter];
+//        [notify addObserver:[DataContextManager instance] selector:@selector(mergeChangesWithMainContext:) name:NSManagedObjectContextDidSaveNotification object:requestMoc];        
+//        Image* fullSizeImage = [NSEntityDescription insertNewObjectForEntityForName:@"Image" inManagedObjectContext:requestMoc];
+//        fullSizeImage.image = _capturedImage;
+//        fullSizeImage.imageId = _capture.fullSizeImageId;
+//        if (![requestMoc save:&error]) {
+//            [ViewGeneral alertOnError:error];
+//        }
+//    });
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-+ (Image*)fetchFullSizeImageForCapture:(Capture*)_capture {
-    Image* fullSizeImage = nil;
-    DataContextManager* contextManager = [DataContextManager instance];
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Image" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"imageId == %@", _capture.fullSizeImageId]];
-    fetchRequest.fetchLimit = 1;
-    NSArray* fetchResults = [contextManager fetch:fetchRequest];
-    if ([fetchResults count] > 0) {
-        fullSizeImage = [fetchResults objectAtIndex:0];
-    }
-    return fullSizeImage;
++ (UIImage*)fetchFullSizeImageForCapture:(Capture*)_capture {
+    NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@.jpg", _capture.createdAt];
+    NSString* jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
+    return [UIImage imageWithContentsOfFile:jpgPath];
+
+//    DataContextManager* contextManager = [DataContextManager instance];
+//    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+//    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Image" inManagedObjectContext:contextManager.mainObjectContext]];
+//    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"imageId == %@", [_capture objectID]]];
+//    fetchRequest.fetchLimit = 1;
+//    NSArray* fetchResults = [contextManager fetch:fetchRequest];
+//    if ([fetchResults count] > 0) {
+//        fullSizeImage = [fetchResults objectAtIndex:0];
+//    }
+//    return fullSizeImage;
 }
 
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture {
-    Image* fullSizeImage = [self fetchFullSizeImageForCapture:_capture];
-    UIImage* unfilteredFullSizeImage = fullSizeImage.image;
-    fullSizeImage.image = [FilterFactory applyFilter:_filter withValue:_value toImage:unfilteredFullSizeImage];
-    [[DataContextManager instance] save];
+//    Image* fullSizeImage = [self fetchFullSizeImageForCapture:_capture];
+//    UIImage* unfilteredFullSizeImage = fullSizeImage.image;
+//    fullSizeImage.image = [FilterFactory applyFilter:_filter withValue:_value toImage:unfilteredFullSizeImage];
+//    [[DataContextManager instance] save];
 }
 
 + (NSUInteger)countFullSizeImages {

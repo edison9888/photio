@@ -32,7 +32,6 @@
         <attribute name="comment" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="fullSizeImageId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
