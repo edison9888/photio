@@ -36,7 +36,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [[CaptureManager instance] waitForFullSizeImageQueue];
+    [[CaptureManager instance] waitForCaptureImageQueue];
     [self saveContext];
 }
 
@@ -51,7 +51,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[CaptureManager instance] waitForFullSizeImageQueue];
+    [[CaptureManager instance] waitForCaptureImageQueue];
     [self saveContext];
 }
 

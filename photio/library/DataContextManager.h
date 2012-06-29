@@ -13,11 +13,19 @@
 @property(nonatomic, strong) NSManagedObjectContext*    mainObjectContext;
 
 + (DataContextManager*)instance;
-- (void)save;
-- (void)deleteObject:(NSManagedObject*)_object;
-- (NSArray*)fetch:(NSFetchRequest*)_fetchRequest;
-- (NSUInteger)count:(NSFetchRequest*)_fetchRequest;
 - (NSManagedObjectContext*)createContext;
 - (void)mergeChangesWithMainContext:(NSNotification*)notification;
+
+- (void)save;
+- (void)saveInContext:(NSManagedObjectContext*)_context;
+
+- (void)deleteObject:(NSManagedObject*)_object;
+- (void)deleteObject:(NSManagedObject*)_object inContext:(NSManagedObjectContext*)_context;
+
+- (NSUInteger)count:(NSFetchRequest*)_fetchRequest;
+- (NSUInteger)count:(NSFetchRequest*)_fetchRequest inContext:(NSManagedObjectContext*)_context;
+
+- (NSArray*)fetch:(NSFetchRequest*)_fetchRequest;
+- (NSArray*)fetch:(NSFetchRequest*)_fetchRequest inContext:(NSManagedObjectContext*)_context;
 
 @end

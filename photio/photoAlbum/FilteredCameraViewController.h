@@ -38,8 +38,4 @@
 
 @protocol FilteredCameraViewControllerDelegate <NSObject>
 
-@required
-
-- (void)didCaptureImage:(UIImage*)_image;
-
 @end

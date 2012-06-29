@@ -38,38 +38,6 @@ static DataContextManager* thisDataContextManager;
     return thisDataContextManager;
 }
 
-- (void)save {
-    NSError *error = nil;
-    if (![self.mainObjectContext save:&error]) {
-        [ViewGeneral alertOnError:error];
-    }
-}
-
-- (void)deleteObject:(NSManagedObject*)_object {
-    [self.mainObjectContext deleteObject:_object];
-    [self save];    
-}
-
-- (NSArray*)fetch:(NSFetchRequest*)_fetchRequest {
-    NSError* error;
-    NSArray* fetchResults = [self.mainObjectContext executeFetchRequest:_fetchRequest error:&error];
-    if (fetchResults == nil) {
-        [ViewGeneral alertOnError:error];
-        abort();
-    }
-    return fetchResults;
-}
-
-- (NSUInteger)count:(NSFetchRequest*)_fetchRequest {
-    NSError* error;
-    NSUInteger count = [self.mainObjectContext countForFetchRequest:_fetchRequest error:&error];
-    if (count == NSNotFound) {
-        [ViewGeneral alertOnError:error];
-        abort();
-    }
-    return count;
-}
-
 - (NSManagedObjectContext*)createContext {
     PhotioAppDelegate* theDelegate = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext* newMoc = [[NSManagedObjectContext alloc] init];
@@ -80,6 +48,54 @@ static DataContextManager* thisDataContextManager;
 
 - (void)mergeChangesWithMainContext:(NSNotification*)notification  {
     [self.mainObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:YES];
+}
+
+- (void)save {
+    [self saveInContext:self.mainObjectContext];
+}
+
+- (void)saveInContext:(NSManagedObjectContext*)_context {
+    NSError *error = nil;
+    if (![_context save:&error]) {
+        [ViewGeneral alertOnError:error];
+    }
+}
+
+- (void)deleteObject:(NSManagedObject*)_object {
+    [self deleteObject:_object inContext:self.mainObjectContext];
+}
+
+- (void)deleteObject:(NSManagedObject*)_object inContext:(NSManagedObjectContext*)_context {
+    [_context deleteObject:_object];
+    [self saveInContext:_context];    
+}
+
+- (NSUInteger)count:(NSFetchRequest*)_fetchRequest {
+    return [self count:_fetchRequest inContext:self.mainObjectContext]; 
+}
+
+- (NSUInteger)count:(NSFetchRequest*)_fetchRequest inContext:(NSManagedObjectContext*)_context {
+    NSError* error;
+    NSUInteger count = [_context countForFetchRequest:_fetchRequest error:&error];
+    if (count == NSNotFound) {
+        [ViewGeneral alertOnError:error];
+        abort();
+    }
+    return count;
+}
+
+- (NSArray*)fetch:(NSFetchRequest*)_fetchRequest {
+    return [self fetch:_fetchRequest inContext:self.mainObjectContext];
+}
+
+- (NSArray*)fetch:(NSFetchRequest*)_fetchRequest inContext:(NSManagedObjectContext*)_context {
+    NSError* error;
+    NSArray* fetchResults = [_context executeFetchRequest:_fetchRequest error:&error];
+    if (fetchResults == nil) {
+        [ViewGeneral alertOnError:error];
+        abort();
+    }
+    return fetchResults;
 }
 
 @end

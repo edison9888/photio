@@ -12,7 +12,7 @@
 #import "UIImage+Resize.h"
 #import "Capture.h"
 #import "CaptureManager.h"
-#import "Image.h"
+#import "ImageDisplay.h"
 
 #import "ImageEditViewController.h"
 #import "CalendarViewController.h"
@@ -152,6 +152,10 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 - (void)updateCalendarEntryWithDate:(NSDate*)_date {
     [self.calendarViewController updateEntryWithDate:_date];
+}
+
+- (void)addCapture:(Capture*)_capture {
+    [self.imageInspectViewController addCapture:_capture];
 }
 
 #pragma mark - 
@@ -346,15 +350,6 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     if ([self.imageInspectViewController hasCaptures]) {
         [self drag:_drag view:self.cameraViewController.view];
     }
-}
-
-#pragma mark -
-#pragma mark CameraViewControllerDelegate
-
-- (void)didCaptureImage:(UIImage*)_picture {
-    Capture* capture = [CaptureManager createCaptureWithImage:_picture scaledToFrame:self.containerView.frame];
-    [self.imageInspectViewController addCapture:capture];
-    [[CaptureManager instance] createFullSizeImage:_picture forCapture:capture];
 }
 
 #pragma mark -

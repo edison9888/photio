@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UIImageJPEGDataTransformer : NSObject
+@interface UIImageJPEGDataTransformer : NSValueTransformer
 
 @end

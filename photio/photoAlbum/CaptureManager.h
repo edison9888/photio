@@ -10,31 +10,33 @@
 
 @class Capture;
 @class Filter;
-@class Image;
 
 @interface CaptureManager : NSObject
 
-@property(nonatomic, assign) dispatch_queue_t fullSizeImageQueue;
+@property(nonatomic, assign) dispatch_queue_t captureImageQueue;
 
 + (CaptureManager*)instance;
 + (UIImage*)scaleImage:(UIImage*)_image toFrame:(CGRect)_frame;
 + (NSString*)dayIdentifier:(NSDate*)_date;
 
-- (void)waitForFullSizeImageQueue;
-- (void)dispatchAsyncFullSizeImageQueue:(void(^)(void))_job;
-
-+ (Capture*)createCaptureWithImage:(UIImage*)_capturedImage scaledToFrame:(CGRect)_frame;
 + (void)saveCapture:(Capture*)_capture;
 + (void)deleteCapture:(Capture*)_capture;
+
 + (Capture*)fetchCaptureCreatedAt:(NSDate*)_createdAt;
++ (Capture*)fetchCaptureCreatedAt:(NSDate*)_createdAt inContext:(NSManagedObjectContext*)_context;
 + (NSArray*)fetchCapturesWithDayIdentifier:(NSString*)_dayIdentifier;
 + (NSArray*)fetchCaptureForEachDayBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate;
 + (Capture*)fetchCaptureWithDayIdentifierCreatedAt:(NSDate*)_createdAt;
 
-- (void)createFullSizeImage:(UIImage*)_capturedImage forCapture:(Capture*)_capture;
 + (UIImage*)fetchFullSizeImageForCapture:(Capture*)_capture;
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture;
+
 + (NSUInteger)countFullSizeImages;
 + (NSUInteger)countDisplayImages;
+
+- (void)createCaptureInBackgroundForImage:(UIImage*)_capturedImage;
+- (void)waitForCaptureImageQueue;
+- (void)dispatchAsyncCaptureImageQueue:(void(^)(void))_job;
+
 
 @end

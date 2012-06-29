@@ -12,7 +12,6 @@
 #import "DataContextManager.h"
 #import "Service.h"
 #import "Capture.h"
-#import "Image.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static ServiceManager* thisServiceManager = nil;

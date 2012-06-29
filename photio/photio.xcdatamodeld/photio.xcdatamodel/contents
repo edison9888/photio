@@ -33,14 +33,14 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="thumbnail" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
         <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
-        <relationship name="displayedImage" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Image" inverseName="capture" inverseEntity="Image" syncable="YES"/>
+        <relationship name="displayImage" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ImageDisplay" inverseName="capture" inverseEntity="ImageDisplay" syncable="YES"/>
         <relationship name="filterUsed" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FilterUsed" inverseName="capture" inverseEntity="FilterUsed" syncable="YES"/>
         <relationship name="locale" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Locale" inverseName="captures" inverseEntity="Locale" syncable="YES"/>
         <relationship name="location" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Location" inverseName="capture" inverseEntity="Location" syncable="YES"/>
         <relationship name="serviceUsed" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ServiceUsed" inverseName="capture" inverseEntity="ServiceUsed" syncable="YES"/>
+        <relationship name="thumbnail" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ImageThumbnail" inverseName="capture" inverseEntity="ImageThumbnail" syncable="YES"/>
     </entity>
     <entity name="Filter" representedClassName="Filter" syncable="YES">
         <attribute name="defaultValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -71,10 +71,13 @@
         <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="filterUsed" inverseEntity="Capture" syncable="YES"/>
         <relationship name="filter" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Filter" inverseName="filterUsed" inverseEntity="Filter" syncable="YES"/>
     </entity>
-    <entity name="Image" representedClassName="Image" syncable="YES">
+    <entity name="ImageDisplay" representedClassName="ImageDisplay" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="imageId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="displayedImage" inverseEntity="Capture" syncable="YES"/>
+        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="displayImage" inverseEntity="Capture" syncable="YES"/>
+    </entity>
+    <entity name="ImageThumbnail" representedClassName="ImageThumbnail" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="thumbnail" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <entity name="Locale" representedClassName="Locale" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
@@ -114,11 +117,12 @@
         <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
         <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
         <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Image" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Location" positionX="160" positionY="192" width="128" height="105"/>
         <element name="Path" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Service" positionX="160" positionY="192" width="128" height="150"/>
         <element name="ServiceUsed" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="ImageThumbnail" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="ImageDisplay" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

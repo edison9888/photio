@@ -79,7 +79,6 @@
 		0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A9051596D65400F5E85C /* SaturationCameraFilter.m */; };
 		0579A91215977EF600F5E85C /* PassThrough.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0579A91015977CE700F5E85C /* PassThrough.fsh */; };
 		0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A91415979B5C00F5E85C /* DataContextManager.m */; };
-		0579A9181597D15E00F5E85C /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579A9171597D15D00F5E85C /* Image.m */; };
 		05809CB2155B3C6800AF2079 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05809CB0155B3C6700AF2079 /* CommentViewController.m */; };
 		05809CB3155B3C6800AF2079 /* CommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05809CB1155B3C6700AF2079 /* CommentViewController.xib */; };
 		058736B815556898007A5654 /* ImageEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058736B715556897007A5654 /* ImageEditView.xib */; };
@@ -136,9 +135,12 @@
 		0590C747153B3D8F0065AB42 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0590C741153B3D8F0065AB42 /* CalendarViewController.m */; };
 		0590C748153B3D8F0065AB42 /* CalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0590C742153B3D8F0065AB42 /* CalendarViewController.xib */; };
 		059169871597F00E0013C81D /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169861597F00E0013C81D /* Path.m */; };
-		059169921599483D0013C81D /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169911599483D0013C81D /* Capture.m */; };
 		059169951599515B0013C81D /* UIImageJPEGDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169941599515B0013C81D /* UIImageJPEGDataTransformer.m */; };
 		05916998159952F40013C81D /* UIImagePNGDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05916997159952F30013C81D /* UIImagePNGDataTransformer.m */; };
+		0591699B159AA1A70013C81D /* ImageJPEG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0591699A159AA1A70013C81D /* ImageJPEG.m */; };
+		059169BA159BE8F20013C81D /* ImageThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169B9159BE8F10013C81D /* ImageThumbnail.m */; };
+		059169BD159BE94B0013C81D /* ImageDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169BC159BE94B0013C81D /* ImageDisplay.m */; };
+		059169E8159BF9CC0013C81D /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169E7159BF9CC0013C81D /* Capture.m */; };
 		059772F51527D787008F3A1B /* NativeCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F01527D787008F3A1B /* NativeCamera.m */; };
 		059772F71527D787008F3A1B /* NativeCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F41527D787008F3A1B /* NativeCameraViewController.m */; };
 		059772F91527D7B5008F3A1B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 059772F81527D7B5008F3A1B /* AVFoundation.framework */; };
@@ -307,8 +309,6 @@
 		0579A91015977CE700F5E85C /* PassThrough.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = PassThrough.fsh; path = Filters/PassThrough.fsh; sourceTree = "<group>"; };
 		0579A91315979B5C00F5E85C /* DataContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataContextManager.h; path = photio/Library/DataContextManager.h; sourceTree = SOURCE_ROOT; };
 		0579A91415979B5C00F5E85C /* DataContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataContextManager.m; path = photio/Library/DataContextManager.m; sourceTree = SOURCE_ROOT; };
-		0579A9161597D15D00F5E85C /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		0579A9171597D15D00F5E85C /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		05809CAF155B3C6700AF2079 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = photio/PhotoAlbum/CommentViewController.h; sourceTree = SOURCE_ROOT; };
 		05809CB0155B3C6700AF2079 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = photio/PhotoAlbum/CommentViewController.m; sourceTree = SOURCE_ROOT; };
 		05809CB1155B3C6700AF2079 /* CommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CommentViewController.xib; path = photio/PhotoAlbum/CommentViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -375,12 +375,18 @@
 		0590C742153B3D8F0065AB42 /* CalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarViewController.xib; sourceTree = "<group>"; };
 		059169851597F00E0013C81D /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
 		059169861597F00E0013C81D /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Path.m; sourceTree = "<group>"; };
-		059169901599483D0013C81D /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
-		059169911599483D0013C81D /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		059169931599515B0013C81D /* UIImageJPEGDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageJPEGDataTransformer.h; sourceTree = "<group>"; };
 		059169941599515B0013C81D /* UIImageJPEGDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageJPEGDataTransformer.m; sourceTree = "<group>"; };
 		05916996159952F30013C81D /* UIImagePNGDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePNGDataTransformer.h; sourceTree = "<group>"; };
 		05916997159952F30013C81D /* UIImagePNGDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePNGDataTransformer.m; sourceTree = "<group>"; };
+		05916999159AA1A70013C81D /* ImageJPEG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageJPEG.h; sourceTree = "<group>"; };
+		0591699A159AA1A70013C81D /* ImageJPEG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageJPEG.m; sourceTree = "<group>"; };
+		059169B8159BE8F10013C81D /* ImageThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageThumbnail.h; sourceTree = "<group>"; };
+		059169B9159BE8F10013C81D /* ImageThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageThumbnail.m; sourceTree = "<group>"; };
+		059169BB159BE94B0013C81D /* ImageDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDisplay.h; sourceTree = "<group>"; };
+		059169BC159BE94B0013C81D /* ImageDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDisplay.m; sourceTree = "<group>"; };
+		059169E6159BF9CC0013C81D /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		059169E7159BF9CC0013C81D /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		059772EF1527D787008F3A1B /* NativeCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeCamera.h; sourceTree = "<group>"; };
 		059772F01527D787008F3A1B /* NativeCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeCamera.m; sourceTree = "<group>"; };
 		059772F31527D787008F3A1B /* NativeCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeCameraViewController.h; sourceTree = "<group>"; };
@@ -652,23 +658,27 @@
 		059772E415277EE1008F3A1B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				059169E6159BF9CC0013C81D /* Capture.h */,
+				059169E7159BF9CC0013C81D /* Capture.m */,
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
+				059169BB159BE94B0013C81D /* ImageDisplay.h */,
+				059169BC159BE94B0013C81D /* ImageDisplay.m */,
+				059169B8159BE8F10013C81D /* ImageThumbnail.h */,
+				059169B9159BE8F10013C81D /* ImageThumbnail.m */,
 				0539BA1F157AE58F00A4A04B /* Album.h */,
 				0539BA20157AE58F00A4A04B /* Album.m */,
 				0539BA48157AF9D500A4A04B /* Camera.h */,
 				0539BA49157AF9D600A4A04B /* Camera.m */,
 				0539BA2B157AE7A100A4A04B /* CameraUsed.h */,
 				0539BA2C157AE7A100A4A04B /* CameraUsed.m */,
-				059169901599483D0013C81D /* Capture.h */,
-				059169911599483D0013C81D /* Capture.m */,
 				0539BA31157AE7D700A4A04B /* Filter.h */,
 				0539BA32157AE7D700A4A04B /* Filter.m */,
 				0539BA34157AE7F700A4A04B /* FilterPalette.h */,
 				0539BA35157AE7F700A4A04B /* FilterPalette.m */,
 				0539BA37157AE81F00A4A04B /* FilterUsed.h */,
 				0539BA38157AE81F00A4A04B /* FilterUsed.m */,
-				0579A9161597D15D00F5E85C /* Image.h */,
-				0579A9171597D15D00F5E85C /* Image.m */,
+				05916999159AA1A70013C81D /* ImageJPEG.h */,
+				0591699A159AA1A70013C81D /* ImageJPEG.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
 				05B837781530C6B800D99A40 /* Locale.m */,
 				0579A8DD15956E1300F5E85C /* Location.h */,
@@ -1153,11 +1163,13 @@
 				0579A8DF15956E1300F5E85C /* Location.m in Sources */,
 				0579A9061596D65400F5E85C /* SaturationCameraFilter.m in Sources */,
 				0579A91515979B5C00F5E85C /* DataContextManager.m in Sources */,
-				0579A9181597D15E00F5E85C /* Image.m in Sources */,
 				059169871597F00E0013C81D /* Path.m in Sources */,
-				059169921599483D0013C81D /* Capture.m in Sources */,
 				059169951599515B0013C81D /* UIImageJPEGDataTransformer.m in Sources */,
 				05916998159952F40013C81D /* UIImagePNGDataTransformer.m in Sources */,
+				0591699B159AA1A70013C81D /* ImageJPEG.m in Sources */,
+				059169BA159BE8F20013C81D /* ImageThumbnail.m in Sources */,
+				059169BD159BE94B0013C81D /* ImageDisplay.m in Sources */,
+				059169E8159BF9CC0013C81D /* Capture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

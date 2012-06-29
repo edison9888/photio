@@ -15,7 +15,7 @@
 #import "ImageEntryView.h"
 #import "Capture.h"
 #import "CaptureManager.h"
-#import "Image.h"
+#import "ImageThumbnail.h"
 #import "ViewGeneral.h"
 
 #define CALENDAR_ENTRY_DATE_OFFSET_FACTOR     0.075f

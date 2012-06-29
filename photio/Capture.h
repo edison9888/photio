@@ -2,14 +2,14 @@
 //  Capture.h
 //  photio
 //
-//  Created by Troy Stribling on 6/25/12.
+//  Created by Troy Stribling on 6/27/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Album, CameraUsed, FilterUsed, Image, Locale, Location, ServiceUsed;
+@class Album, CameraUsed, FilterUsed, ImageDisplay, ImageThumbnail, Locale, Location, ServiceUsed;
 
 @interface Capture : NSManagedObject
 
@@ -18,14 +18,14 @@
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * dayIdentifier;
 @property (nonatomic, retain) NSNumber * rating;
-@property (nonatomic, retain) id thumbnail;
 @property (nonatomic, retain) NSSet *album;
 @property (nonatomic, retain) CameraUsed *cameraUsed;
-@property (nonatomic, retain) Image *displayedImage;
 @property (nonatomic, retain) NSSet *filterUsed;
 @property (nonatomic, retain) Locale *locale;
 @property (nonatomic, retain) Location *location;
 @property (nonatomic, retain) NSSet *serviceUsed;
+@property (nonatomic, retain) ImageThumbnail *thumbnail;
+@property (nonatomic, retain) ImageDisplay *displayImage;
 @end
 
 @interface Capture (CoreDataGeneratedAccessors)

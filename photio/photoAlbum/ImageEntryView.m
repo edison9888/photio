@@ -12,7 +12,7 @@
 #import "Service.h"
 #import "ServiceManager.h"
 #import "CaptureManager.h"
-#import "Image.h"
+#import "ImageDisplay.h"
 #import "ViewGeneral.h"
 #import "ImageControlView.h"
 #import "FilterFactory.h"
@@ -95,8 +95,8 @@
         self.contentMode = UIViewContentModeCenter;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;
-        UIImage* displayedImage = self.capture.displayedImage.image;
-        self.image = [UIImage imageWithCGImage:[self scaleImage:displayedImage].CGImage scale:displayedImage.scale orientation:displayedImage.imageOrientation];
+        UIImage* displayImage = self.capture.displayImage.image;
+        self.image = [UIImage imageWithCGImage:[self scaleImage:displayImage].CGImage scale:displayImage.scale orientation:displayImage.imageOrientation];
         UITapGestureRecognizer* editImageGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImage)];
         editImageGesture.numberOfTapsRequired = 2;
         editImageGesture.numberOfTouchesRequired = 1;
@@ -140,19 +140,19 @@
 
 
 - (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value {
-    UIImage* displayedImage = self.capture.displayedImage.image;
-    UIImage* filteredImage = [FilterFactory applyFilter:_filter withValue:_value toImage:displayedImage];
+    UIImage* displayImage = self.capture.displayImage.image;
+    UIImage* filteredImage = [FilterFactory applyFilter:_filter withValue:_value toImage:displayImage];
     self.image = [self scaleImage:filteredImage];
 }
 
 - (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value {
-    self.capture.displayedImage.image = [UIImage imageWithCGImage:[self scaleImage:self.image].CGImage scale:self.image.scale orientation:self.image.imageOrientation];
+    self.capture.displayImage.image = [UIImage imageWithCGImage:[self scaleImage:self.image].CGImage scale:self.image.scale orientation:self.image.imageOrientation];
     [CaptureManager saveCapture:capture];
 }
 
 - (void)resetFilteredImage {
-    UIImage* displayedImage = self.capture.displayedImage.image;
-    self.image = [UIImage imageWithCGImage:[self scaleImage:displayedImage].CGImage scale:displayedImage.scale orientation:displayedImage.imageOrientation];
+    UIImage* displayImage = self.capture.displayImage.image;
+    self.image = [UIImage imageWithCGImage:[self scaleImage:displayImage].CGImage scale:displayImage.scale orientation:displayImage.imageOrientation];
 }
 
 @end

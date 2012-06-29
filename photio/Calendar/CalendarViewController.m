@@ -10,6 +10,7 @@
 #import "ViewGeneral.h"
 #import "CalendarEntryView.h"
 #import "Capture.h"
+#import "ImageThumbnail.h"
 #import "CaptureManager.h"
 #import "NSArray+Extensions.h"
 
@@ -77,7 +78,7 @@
             NSString* captureDayIdentifier = capture.dayIdentifier;
             if ([captureDayIdentifier isEqualToString:oldestDayIdentifier]) {
                 dayIdentifier = captureDayIdentifier;
-                thumbnail = capture.thumbnail;
+                thumbnail = capture.thumbnail.image;
                 if (self.captureIndex < [self.captures count] - 1) {
                     self.captureIndex++;
                 }
@@ -164,7 +165,7 @@
     NSInteger entryColumn = (NSInteger)deltaDate - entryRow * self.rowsInView;
     CalendarEntryView* entryView = [[self.dragGridView rowViewAtIndex:entryRow] objectAtIndex:entryColumn];
     if (capture) {
-        entryView.photoView.image = capture.thumbnail;
+        entryView.photoView.image = capture.thumbnail.image;
         entryView.dayIdentifier = capture.dayIdentifier;
         entryView.date = capture.createdAt;
     } else {
