@@ -33,7 +33,7 @@ NSInteger descendingSort(id num1, id num2, void *context);
 /////////////////////////////////////////////////////////////////////////////////////////
 @implementation CaptureManager
 
-@synthesize captureImageQueue;
+@synthesize captureImageQueue, fullSizeImageQueue;
 
 #pragma mark - 
 #pragma mark CaptureManager PrivateAPI
@@ -92,7 +92,8 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 - (id)init {
     self = [super init];
     if (self) {
-        self.captureImageQueue = dispatch_queue_create("com.photio.fullSizeImage", NULL);
+        self.captureImageQueue = dispatch_queue_create("com.photio.captureImage", NULL);
+        self.fullSizeImageQueue = dispatch_queue_create("com.photio.fullSizeImage", NULL);
     }
     return self;
 }
@@ -125,6 +126,19 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     dispatch_async(self.captureImageQueue, _job);
 }
 
+- (void)waitForFullSizeImageQueue {
+    dispatch_sync(self.fullSizeImageQueue, ^{});    
+}
+
+- (void)dispatchAsyncFullSizeImageQueue:(void(^)(void))_job {
+    dispatch_async(self.fullSizeImageQueue, _job);
+}
+
+- (void)waitForQueues {
+    [self waitForCaptureImageQueue];
+    [self waitForFullSizeImageQueue];
+}
+
 #pragma mark - 
 #pragma mark Captures
 
@@ -153,9 +167,11 @@ NSInteger descendingSort(id num1, id num2, void* context) {
             [[ViewGeneral instance] addCapture:[self.class fetchCaptureCreatedAt:createdAt]];
         });
 
-        NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@.jpg", capture.createdAt];
-        NSString* jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
-        [UIImageJPEGRepresentation(_capturedImage, 1.0f) writeToFile:jpgPath atomically:YES];
+        dispatch_async(self.fullSizeImageQueue, ^{
+            NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@.jpg", capture.createdAt];
+            NSString* jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
+            [UIImageJPEGRepresentation(_capturedImage, 1.0f) writeToFile:jpgPath atomically:YES];
+        });
     });
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

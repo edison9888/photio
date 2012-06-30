@@ -14,6 +14,7 @@
 @interface CaptureManager : NSObject
 
 @property(nonatomic, assign) dispatch_queue_t captureImageQueue;
+@property(nonatomic, assign) dispatch_queue_t fullSizeImageQueue;
 
 + (CaptureManager*)instance;
 + (UIImage*)scaleImage:(UIImage*)_image toFrame:(CGRect)_frame;
@@ -37,6 +38,8 @@
 - (void)createCaptureInBackgroundForImage:(UIImage*)_capturedImage;
 - (void)waitForCaptureImageQueue;
 - (void)dispatchAsyncCaptureImageQueue:(void(^)(void))_job;
-
+- (void)waitForFullSizeImageQueue;
+- (void)dispatchAsyncFullSizeImageQueue:(void(^)(void))_job;
+- (void)waitForQueues;
 
 @end

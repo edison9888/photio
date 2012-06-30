@@ -35,8 +35,12 @@
     return YES;
 }
 
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+    [[CaptureManager instance] waitForQueues];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [[CaptureManager instance] waitForCaptureImageQueue];
+    [[CaptureManager instance] waitForQueues];
     [self saveContext];
 }
 
@@ -51,7 +55,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [[CaptureManager instance] waitForCaptureImageQueue];
+    [[CaptureManager instance] waitForQueues];
     [self saveContext];
 }
 
