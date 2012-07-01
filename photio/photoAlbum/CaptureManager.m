@@ -27,6 +27,8 @@ static CaptureManager* thisCaptureManager;
 
 NSInteger descendingSort(id num1, id num2, void *context);
 - (Capture*)createCaptureWithImage:(UIImage*)_capturedImage inContext:(NSManagedObjectContext*)_context;
++ (void)showDocuments;
++ (NSString*)fullSizeImagePathForCapture:(Capture*)_captue;
 
 @end
 
@@ -59,6 +61,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     capture.createdAt = createdAt;
     capture.dayIdentifier = [self.class dayIdentifier:capture.createdAt];
     capture.cached = [NSNumber numberWithBool:YES];
+    capture.fullSizeImageFilename = [self.class fullSizeImagePathForCapture:capture];
 
     ImageThumbnail* thumbnail = [NSEntityDescription insertNewObjectForEntityForName:@"ImageThumbnail" inManagedObjectContext:contextManager.mainObjectContext];
     thumbnail.image = [_capturedImage thumbnailImage:[[ViewGeneral instance] calendarImageThumbnailRect].size.width];;
@@ -75,6 +78,19 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 
     [contextManager save];
     return capture;
+}
+
++ (void)showDocuments {
+    NSError* error;
+    NSFileManager* fileMgr = [NSFileManager defaultManager];
+    NSString* documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSLog(@"Documents directory: %@", [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:&error]);
+}
+
++ (NSString*)fullSizeImagePathForCapture:(Capture*)_captue {
+    int photoId = arc4random() % 10000;
+    NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@-%@.jpg", _captue.createdAt, [NSNumber numberWithInt:photoId]];
+    return [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
 }
 
 #pragma mark - 
@@ -148,6 +164,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 + (void)deleteCapture:(Capture*)_capture; {
+    [self deleteFullSizeImageForCapture:_capture];
     DataContextManager* contextManager = [DataContextManager instance];
     NSDate* createdAt = _capture.createdAt;
     [contextManager.mainObjectContext deleteObject:_capture];
@@ -168,9 +185,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
         });
 
         dispatch_async(self.fullSizeImageQueue, ^{
-            NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@.jpg", capture.createdAt];
-            NSString* jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
-            [UIImageJPEGRepresentation(_capturedImage, 1.0f) writeToFile:jpgPath atomically:YES];
+            [UIImageJPEGRepresentation(_capturedImage, 1.0f) writeToFile:capture.fullSizeImageFilename atomically:YES];
         });
     });
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -241,27 +256,20 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 #pragma mark Full Size Images
 
 + (UIImage*)fetchFullSizeImageForCapture:(Capture*)_capture {
-    NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@.jpg", _capture.createdAt];
-    NSString* jpgPath = [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
-    return [UIImage imageWithContentsOfFile:jpgPath];
+    return [UIImage imageWithContentsOfFile:_capture.fullSizeImageFilename];
+}
+
++ (void)deleteFullSizeImageForCapture:(Capture*)_capture {
+    [self showDocuments];
+    NSError* error;
+    NSFileManager* fileMgr = [NSFileManager defaultManager];
+    if ([fileMgr removeItemAtPath:_capture.fullSizeImageFilename error:&error] != YES) {
+        [ViewGeneral alertOnError:error];
+    }
+    [self showDocuments];
 }
 
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture {
-}
-
-+ (NSUInteger)countFullSizeImages {
-    DataContextManager* contextManager = [DataContextManager instance];
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"ImageJPEG" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"imageId != 0"]];
-    return [contextManager count:fetchRequest];
-}
-
-+ (NSUInteger)countDisplayImages {
-    DataContextManager* contextManager = [DataContextManager instance];
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:@"ImageDisplay" inManagedObjectContext:contextManager.mainObjectContext]];
-    return [contextManager count:fetchRequest];
 }
 
 @end

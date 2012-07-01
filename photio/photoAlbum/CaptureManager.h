@@ -30,10 +30,8 @@
 + (Capture*)fetchCaptureWithDayIdentifierCreatedAt:(NSDate*)_createdAt;
 
 + (UIImage*)fetchFullSizeImageForCapture:(Capture*)_capture;
++ (void)deleteFullSizeImageForCapture:(Capture*)_capture;
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture;
-
-+ (NSUInteger)countFullSizeImages;
-+ (NSUInteger)countDisplayImages;
 
 - (void)createCaptureInBackgroundForImage:(UIImage*)_capturedImage;
 - (void)waitForCaptureImageQueue;

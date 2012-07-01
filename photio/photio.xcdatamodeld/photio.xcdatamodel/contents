@@ -32,6 +32,7 @@
         <attribute name="comment" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fullSizeImageFilename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
         <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
@@ -117,12 +118,12 @@
         <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
         <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
         <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="ImageDisplay" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="ImageThumbnail" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Locale" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Location" positionX="160" positionY="192" width="128" height="105"/>
         <element name="Path" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Service" positionX="160" positionY="192" width="128" height="150"/>
         <element name="ServiceUsed" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="ImageThumbnail" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="ImageDisplay" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>
