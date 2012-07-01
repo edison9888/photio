@@ -57,11 +57,12 @@
 - (void)openEntryView {
     if (self.photoView.image) {
         __block ImageEntriesView* entries = [ImageEntriesView withFrame:[ViewGeneral instance].containerView.frame andDelegate:self];
-        entries.alpha = 0.0;
+        __block CGRect origEntriesRect = entries.frame;
+        entries.frame = CGRectMake(origEntriesRect.origin.x, -origEntriesRect.size.height, origEntriesRect.size.width, origEntriesRect.size.height);
         [[ViewGeneral instance].containerView addSubview:entries];
         [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
             animations:^{
-                entries.alpha = 1.0;
+                entries.frame = origEntriesRect;
             } 
             completion:nil
          ];
@@ -127,16 +128,16 @@
     NSArray* entryViews = [entries mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
         Capture* capture = _obj;
         ImageEntryView* imageView = [ImageEntryView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
-        imageView.delegate = self;
         return imageView;
     }];
     return [entryViews mutableCopy];
 }
 
 - (void)didSingleTapEntries:(ImageEntriesView*)_entries {
+    __block CGRect newRect = CGRectMake(_entries.frame.origin.x, -_entries.frame.size.height, _entries.frame.size.width, _entries.frame.size.height);
     [UIView animateWithDuration:ENTRY_VIEW_TRANSITION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseOut 
          animations:^{
-             _entries.alpha = 0.0;
+             _entries.frame= newRect;
          } 
          completion:^(BOOL _finished){
              [_entries removeFromSuperview];

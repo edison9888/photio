@@ -13,7 +13,7 @@
 @class CalendarDayBackgroundView;
 @class CalendarDayOfWeekView;
 
-@interface CalendarEntryView : UIView <ImageEntriesViewDelegate, ImageEntryViewDelegate>
+@interface CalendarEntryView : UIView <ImageEntriesViewDelegate>
 
 @property(nonatomic, strong) CalendarDayView*               dayView; 
 @property(nonatomic, strong) CalendarDayBackgroundView*     backgroundView;
