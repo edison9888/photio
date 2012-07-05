@@ -2,7 +2,7 @@
 //  Capture.h
 //  photio
 //
-//  Created by Troy Stribling on 7/1/12.
+//  Created by Troy Stribling on 7/4/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * dayIdentifier;
 @property (nonatomic, retain) NSNumber * rating;
-@property (nonatomic, retain) NSString * fullSizeImageFilename;
+@property (nonatomic, retain) NSNumber * captureId;
 @property (nonatomic, retain) NSSet *album;
 @property (nonatomic, retain) CameraUsed *cameraUsed;
 @property (nonatomic, retain) ImageDisplay *displayImage;

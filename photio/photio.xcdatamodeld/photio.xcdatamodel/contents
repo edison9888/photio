@@ -29,10 +29,10 @@
     </entity>
     <entity name="Capture" representedClassName="Capture" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="captureId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="fullSizeImageFilename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
         <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
@@ -114,7 +114,7 @@
         <element name="Album" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Camera" positionX="160" positionY="192" width="128" height="255"/>
         <element name="CameraUsed" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="Capture" positionX="160" positionY="192" width="128" height="240"/>
+        <element name="Capture" positionX="160" positionY="192" width="128" height="255"/>
         <element name="Filter" positionX="160" positionY="192" width="128" height="225"/>
         <element name="FilterPalette" positionX="160" positionY="192" width="128" height="150"/>
         <element name="FilterUsed" positionX="160" positionY="192" width="128" height="90"/>

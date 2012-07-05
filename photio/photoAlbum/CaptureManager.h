@@ -23,9 +23,10 @@
 + (void)saveCapture:(Capture*)_capture;
 + (void)deleteCapture:(Capture*)_capture;
 
-+ (Capture*)fetchCaptureCreatedAt:(NSDate*)_createdAt;
-+ (Capture*)fetchCaptureCreatedAt:(NSDate*)_createdAt inContext:(NSManagedObjectContext*)_context;
++ (Capture*)fetchCaptureWithId:(NSNumber*)_captureId;
++ (Capture*)fetchCaptureWithId:(NSNumber*)_captureId inContext:(NSManagedObjectContext*)_context;
 + (NSArray*)fetchCapturesWithDayIdentifier:(NSString*)_dayIdentifier;
++ (NSArray*)fetchCapturesWithDayIdentifier:(NSString*)_dayIdentifier betweenDates:(NSDate*)_startdate and:(NSDate*)_endDate;
 + (NSArray*)fetchCaptureForEachDayBetweenDates:(NSDate*)_startdate and:(NSDate*)_endDate;
 + (Capture*)fetchCaptureWithDayIdentifierCreatedAt:(NSDate*)_createdAt;
 

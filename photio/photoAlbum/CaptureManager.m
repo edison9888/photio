@@ -57,11 +57,12 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     CLLocationCoordinate2D currentLocation = [[[LocationManager instance] location] coordinate];
     DataContextManager* contextManager = [DataContextManager instance];
     Capture* capture = (Capture*)[NSEntityDescription insertNewObjectForEntityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext];
-
+    
     capture.createdAt = createdAt;
+    capture.captureId = [NSNumber numberWithLongLong:(long long)(100.0f * [NSDate timeIntervalSinceReferenceDate])];
+
     capture.dayIdentifier = [self.class dayIdentifier:capture.createdAt];
     capture.cached = [NSNumber numberWithBool:YES];
-    capture.fullSizeImageFilename = [self.class fullSizeImagePathForCapture:capture];
 
     ImageThumbnail* thumbnail = [NSEntityDescription insertNewObjectForEntityForName:@"ImageThumbnail" inManagedObjectContext:contextManager.mainObjectContext];
     thumbnail.image = [_capturedImage thumbnailImage:[[ViewGeneral instance] calendarImageThumbnailRect].size.width];;
@@ -88,8 +89,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 + (NSString*)fullSizeImagePathForCapture:(Capture*)_captue {
-    int photoId = arc4random() % 10000;
-    NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@-%@.jpg", _captue.createdAt, [NSNumber numberWithInt:photoId]];
+    NSString* imageFilename = [NSString stringWithFormat:@"Documents/%@.jpg", _captue.captureId];
     return [NSHomeDirectory() stringByAppendingPathComponent:imageFilename]; 
 }
 
@@ -179,28 +179,27 @@ NSInteger descendingSort(id num1, id num2, void* context) {
         [notify addObserver:[DataContextManager instance] selector:@selector(mergeChangesWithMainContext:) name:NSManagedObjectContextDidSaveNotification object:requestMoc];        
         
         Capture* capture = [self createCaptureWithImage:_capturedImage inContext:requestMoc];
-        NSDate* createdAt = capture.createdAt;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[ViewGeneral instance] addCapture:[self.class fetchCaptureCreatedAt:createdAt]];
+            [[ViewGeneral instance] addCapture:[self.class fetchCaptureWithId:capture.captureId]];
         });
 
         dispatch_async(self.fullSizeImageQueue, ^{
-            [UIImageJPEGRepresentation(_capturedImage, 1.0f) writeToFile:capture.fullSizeImageFilename atomically:YES];
+            [UIImageJPEGRepresentation(_capturedImage, 1.0f) writeToFile:[self.class fullSizeImagePathForCapture:capture] atomically:YES];
         });
     });
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-+ (Capture*)fetchCaptureCreatedAt:(NSDate*)_createdAt {
-    return [self fetchCaptureCreatedAt:_createdAt inContext:[DataContextManager instance].mainObjectContext];
++ (Capture*)fetchCaptureWithId:(NSNumber*)_captureId {
+    return [self fetchCaptureWithId:_captureId inContext:[DataContextManager instance].mainObjectContext];
 }
 
-+ (Capture*)fetchCaptureCreatedAt:(NSDate*)_createdAt inContext:(NSManagedObjectContext*)_context {
++ (Capture*)fetchCaptureWithId:(NSNumber*)_captureId inContext:(NSManagedObjectContext*)_context {
     Capture* capture = nil;
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt == %@", _createdAt]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"captureId == %@", _captureId]];
     fetchRequest.fetchLimit = 1;
     NSArray* fetchResults = [contextManager fetch:fetchRequest];
     if ([fetchResults count] > 0) {
@@ -214,6 +213,15 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", _dayIdentifier]];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
+    return [contextManager fetch:fetchRequest];
+}
+
++ (NSArray*)fetchCapturesWithDayIdentifier:(NSString*)_dayIdentifier betweenDates:(NSDate*)_startdate and:(NSDate*)_endDate {
+    DataContextManager* contextManager = [DataContextManager instance];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (createdAt BETWEEN {%@, %@})", _dayIdentifier, _startdate, _endDate]];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     return [contextManager fetch:fetchRequest];
 }
@@ -256,14 +264,14 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 #pragma mark Full Size Images
 
 + (UIImage*)fetchFullSizeImageForCapture:(Capture*)_capture {
-    return [UIImage imageWithContentsOfFile:_capture.fullSizeImageFilename];
+    return [UIImage imageWithContentsOfFile:[self fullSizeImagePathForCapture:_capture]];
 }
 
 + (void)deleteFullSizeImageForCapture:(Capture*)_capture {
     [self showDocuments];
     NSError* error;
     NSFileManager* fileMgr = [NSFileManager defaultManager];
-    if ([fileMgr removeItemAtPath:_capture.fullSizeImageFilename error:&error] != YES) {
+    if ([fileMgr removeItemAtPath:[self fullSizeImagePathForCapture:_capture] error:&error] != YES) {
         [ViewGeneral alertOnError:error];
     }
     [self showDocuments];

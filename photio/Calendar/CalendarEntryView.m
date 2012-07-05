@@ -125,12 +125,7 @@
 
 - (NSMutableArray*)loadEntries {
     NSArray* entries = [CaptureManager fetchCapturesWithDayIdentifier:self.dayIdentifier];
-    NSArray* entryViews = [entries mapObjectsUsingBlock:^id(id _obj, NSUInteger _idx) {
-        Capture* capture = _obj;
-        ImageEntryView* imageView = [ImageEntryView withFrame:[ViewGeneral instance].containerView.frame andCapture:capture];
-        return imageView;
-    }];
-    return [entryViews mutableCopy];
+    return [entries mutableCopy];
 }
 
 - (void)didSingleTapEntries:(ImageEntriesView*)_entries {
@@ -148,6 +143,5 @@
 - (void)didFinishEditing:(ImageEntryView*)_entry {
     [CaptureManager saveCapture:_entry.capture];
 }
-
 
 @end

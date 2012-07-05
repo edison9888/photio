@@ -21,11 +21,16 @@
 @property(nonatomic, weak)   id<ImageEntriesViewDelegate>       delegate;
 @property(nonatomic, strong) DiagonalGestureRecognizer*         diagonalGestures;
 @property(nonatomic, strong) StreamOfViews*                     entriesStreamView;
+@property(nonatomic, strong) NSMutableArray*                    entries;
+@property(nonatomic, assign) NSInteger                          inViewIndex;
+@property(nonatomic, assign) NSInteger                          leftMostIndex;
+@property(nonatomic, assign) NSInteger                          rightMostIndex;
 
 + (id)withFrame:(CGRect)_frame andDelegate:(id<ImageEntriesViewDelegate>)_delegate;
 - (id)initWithFrame:(CGRect)frame andDelegate:(id<ImageEntriesViewDelegate>)_delegate;
 - (NSInteger)entryCount;
-- (void)addEntry:(ImageEntryView*)_entry;
+- (void)addCaptureToRight:(Capture*)_capture;
+- (void)addCaptureToLeft:(Capture*)_capture;
 
 @end
 

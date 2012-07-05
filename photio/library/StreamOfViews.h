@@ -22,7 +22,10 @@
 
 + (id)withFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView;
 - (id)initWithFrame:(CGRect)_frame delegate:(id<StreamOfViewsDelegate>)_delegate relativeToView:(UIView*)_relativeView;
-- (void)addView:(UIView*)_view;
+- (void)addViewToRight:(UIView*)_view;
+- (void)addViewToLeft:(UIView*)_view;
+- (void)removeFirstView;
+- (void)removeLastView;
 - (UIView*)displayedView;
 - (void)moveDisplayedViewDownAndRemove;
 - (void)moveDisplayedViewDiagonallyAndRemove;
@@ -45,5 +48,7 @@
 - (void)didSwipeDown:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didReachMaxDragDown:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity;
 - (void)didRemoveAllViews;
+- (void)didMoveRight;
+- (void)didMoveLeft;
 
 @end

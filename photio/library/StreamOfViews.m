@@ -92,6 +92,9 @@
             }
             completion:^(BOOL _finished) {
                 self.inViewIndex++;
+                if ([self.delegate respondsToSelector:@selector(didMoveLeft)]) {
+                    [self.delegate didMoveLeft];
+                }
                 self.notAnimating = YES;
             }
          ];
@@ -110,6 +113,9 @@
             }
             completion:^(BOOL _finished) {
                 self.inViewIndex--;
+                if ([self.delegate respondsToSelector:@selector(didMoveRight)]) {
+                    [self.delegate didMoveRight];
+                }
                 self.notAnimating = YES;
             }
         ];
@@ -118,14 +124,14 @@
 
 - (UIView*)removeDisplayedView {
     UIView* viewToRemove = [self displayedView];
-    [self.streamOfViews removeObjectAtIndex:self.inViewIndex];
+    [self.streamOfViews removeObject:viewToRemove];
     [viewToRemove removeFromSuperview];
     if ([self.streamOfViews count] == 0) {
         if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
             [self.delegate didRemoveAllViews];
         }
         viewToRemove = nil;
-    } else if ((self.inViewIndex == [self.streamOfViews count]) && self.inViewIndex != 0) {
+    } else if (self.inViewIndex == [self.streamOfViews count] && self.inViewIndex != 0) {
         self.inViewIndex--;
     }
     return viewToRemove;
@@ -218,14 +224,48 @@
     return self;
 }
 
-- (void)addView:(UIView*)_view {
-    if ([self.streamOfViews count] > 0) {
-        UIView* currentView = [self.streamOfViews objectAtIndex:self.inViewIndex];
-        currentView.frame = [self rightOfWindow];
+- (void)addViewToRight:(UIView*)_view {
+    NSInteger viewCount = [self.streamOfViews count];
+    if (viewCount > 0) {
+        _view.frame = [self rightOfWindow];
+    } else {
+        _view.frame = [self inWindow];
     }
-    _view.frame = [self inWindow];
     [self addSubview:_view];
-    [self.streamOfViews insertObject:_view atIndex:self.inViewIndex];
+    [self.streamOfViews addObject:_view];
+}
+
+- (void)addViewToLeft:(UIView*)_view {
+    NSInteger viewCount = [self.streamOfViews count];
+    if (viewCount > 0) {
+        self.inViewIndex++;
+        _view.frame = [self leftOfWindow];
+    } else {
+        _view.frame = [self inWindow];
+    }
+    [self addSubview:_view];
+    [self.streamOfViews insertObject:_view atIndex:0];
+}
+
+- (void)removeFirstView {
+    if ([self.streamOfViews count] > 0) {
+        [self.streamOfViews removeObjectAtIndex:0];
+        self.inViewIndex--;
+        if ([self.streamOfViews count] == 0) {
+            if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
+                [self.delegate didRemoveAllViews];
+            }
+        }
+    }
+}
+
+- (void)removeLastView {
+    [self.streamOfViews removeLastObject];
+    if ([self.streamOfViews count] == 0) {
+        if ([self.delegate respondsToSelector:@selector(didRemoveAllViews)]) {
+            [self.delegate didRemoveAllViews];
+        }
+    }
 }
 
 - (UIView*)displayedView {

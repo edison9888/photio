@@ -44,7 +44,7 @@
 }
 
 - (void)addCapture:(Capture*)_capture {
-    [self.entriesView addEntry:[ImageEntryView withFrame:self.view.frame andCapture:_capture]];
+    [self.entriesView addCaptureToRight:_capture];
 }
 
 - (BOOL)hasCaptures {

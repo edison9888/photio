@@ -8,20 +8,33 @@
 
 #import "ImageEntriesView.h"
 #import "StreamOfViews.h"
+#import "DataContextManager.h"
+#import "Capture.h"
 #import "CaptureManager.h"
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#define LOADED_ENTRIES_BUFFER   1
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEntriesView (PrivateAPI)
 
-- (void)loadEntries;
+- (void)loadEntryDates;
 - (void)singleTapGesture;
+- (void)loadCapture:(Capture*)_capture;
+- (void)moveLeft;
+- (void)moveRight;
+- (BOOL)canAddRightView;
+- (BOOL)canRemoveRightView;
+- (BOOL)canAddLeftView;
+- (BOOL)canRemoveLeftView;
+- (void)removeEntry:(ImageEntryView*)_entry;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEntriesView
 
-@synthesize containerView, delegate, entriesStreamView, diagonalGestures;
+@synthesize containerView, delegate, entriesStreamView, diagonalGestures, entries, inViewIndex, leftMostIndex, rightMostIndex;
 
 #pragma mark -
 #pragma mark ImageEntriesView
@@ -35,6 +48,7 @@
         self.backgroundColor = [UIColor whiteColor];
         self.userInteractionEnabled = YES;
         self.delegate = _delegate;
+        self.entries = [NSMutableArray arrayWithCapacity:10];
         self.entriesStreamView = [StreamOfViews withFrame:self.frame delegate:self relativeToView:self.containerView];
         self.diagonalGestures = [DiagonalGestureRecognizer initWithDelegate:self];
         UITapGestureRecognizer* singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGesture)];
@@ -45,28 +59,53 @@
         [self addGestureRecognizer:singleTap];
         [self addGestureRecognizer:self.diagonalGestures];
         [self addSubview:self.entriesStreamView];
-        [self loadEntries];
+        self.inViewIndex = 0;
+        self.leftMostIndex = 0;
+        self.rightMostIndex = 0;
     }
     return self;
 }
 
 - (NSInteger)entryCount {
-    return [self.entriesStreamView.streamOfViews count];
+    return [self.entries count];
 }
 
-- (void)addEntry:(ImageEntryView*)_entry {
-    _entry.delegate = self;
-    [self.entriesStreamView addView:_entry];
+- (void)addCaptureToRight:(Capture*)_capture {
+    NSInteger rightWidth = self.rightMostIndex - self.inViewIndex;
+    if (rightWidth < LOADED_ENTRIES_BUFFER) {
+        if ([self entryCount] > 0) {
+            self.rightMostIndex++;
+        }
+        [self.entriesStreamView addViewToRight:[ImageEntryView withFrame:self.frame andCapture:_capture]];
+    } else {
+        [[DataContextManager instance].mainObjectContext refreshObject:_capture mergeChanges:NO];
+    }
+    [self.entries addObject:_capture];
+}
+
+- (void)addCaptureToLeft:(Capture*)_capture {
+    NSInteger leftWidth = self.inViewIndex - self.leftMostIndex;
+    if (leftWidth < LOADED_ENTRIES_BUFFER) {
+        if (self.inViewIndex > LOADED_ENTRIES_BUFFER) {
+            self.leftMostIndex++;
+        }
+        if ([self.entries count] > 0) {
+            self.inViewIndex++;
+            self.rightMostIndex++;
+        }
+        [self.entriesStreamView addViewToLeft:[ImageEntryView withFrame:self.frame andCapture:_capture]];
+    } else {
+        [[DataContextManager instance].mainObjectContext refreshObject:_capture mergeChanges:NO];
+    }
+    [self.entries insertObject:_capture atIndex:0];
 }
 
 #pragma mark -
 #pragma mark ImageEntriesView (PrivateAPI)
 
 - (void)loadEntries {
-    if ([self.delegate respondsToSelector:@selector(loadEntries)]) {
-        for (ImageEntryView* entryView in [self.delegate loadEntries]) {
-            [self addEntry:entryView];
-        }
+    if ([self.delegate respondsToSelector:@selector(loadEntryDates)]) {
+        self.entries = [self.delegate loadEntries];
     }
 }
 
@@ -75,6 +114,67 @@
         [self.delegate didSingleTapEntries:self];
     }
 }
+
+- (void)moveLeft {
+    if ([self canAddRightView]) {
+        self.rightMostIndex++;
+        Capture* capture = [self.entries objectAtIndex:self.rightMostIndex];
+        [self.entriesStreamView addViewToRight:[ImageEntryView withFrame:self.frame andCapture:capture]];
+    }
+    if ([self canRemoveLeftView]) {
+        [self.entriesStreamView removeFirstView];
+        Capture* capture = [self.entries objectAtIndex:self.leftMostIndex];
+        [[DataContextManager instance].mainObjectContext refreshObject:capture mergeChanges:NO];
+        self.leftMostIndex++;
+    }
+}
+
+- (void)moveRight {
+    if ([self canAddLeftView]) {
+        self.leftMostIndex--;
+        Capture* capture = [self.entries objectAtIndex:self.leftMostIndex];
+        [self.entriesStreamView addViewToLeft:[ImageEntryView withFrame:self.frame andCapture:capture]];
+    }
+    if ([self canRemoveRightView]) {
+        [self.entriesStreamView removeLastView];
+        Capture* capture = [self.entries objectAtIndex:self.rightMostIndex];
+        [[DataContextManager instance].mainObjectContext refreshObject:capture mergeChanges:NO];
+        self.rightMostIndex--;
+    }
+}
+
+- (BOOL)canAddRightView {
+    NSInteger rightWidth = self.rightMostIndex - self.inViewIndex;
+    return (self.rightMostIndex < [self entryCount] - 1 && rightWidth < LOADED_ENTRIES_BUFFER);
+}
+
+- (BOOL)canRemoveRightView {
+    NSInteger rightWidth = self.rightMostIndex - self.inViewIndex;
+    return (self.rightMostIndex > 0 && rightWidth > LOADED_ENTRIES_BUFFER);
+}
+
+- (BOOL)canAddLeftView {
+    NSInteger leftWidth = self.inViewIndex - self.leftMostIndex;
+    return (self.leftMostIndex > 0 && leftWidth < LOADED_ENTRIES_BUFFER); 
+}
+
+- (BOOL)canRemoveLeftView {
+    NSInteger leftWidth = self.inViewIndex - self.leftMostIndex;
+    return (self.leftMostIndex < [self entryCount] - 1 && leftWidth > LOADED_ENTRIES_BUFFER); 
+}
+
+- (void)removeEntry:(ImageEntryView*)_entry {
+    [self.entries removeObject:_entry.capture];
+    if (self.inViewIndex == self.rightMostIndex && self.inViewIndex != 0) {
+        self.inViewIndex--;
+    }
+    if (self.rightMostIndex > 0) {
+        self.rightMostIndex--;
+    }
+    [self moveLeft];
+    [self moveRight];
+}
+
 
 #pragma mark -
 #pragma mark StreamOfViewsDelegate
@@ -133,6 +233,16 @@
     }
 }
 
+- (void)didMoveRight {
+    self.inViewIndex--;
+    [self moveRight];
+}
+
+- (void)didMoveLeft {
+    self.inViewIndex++;
+    [self moveLeft];
+}
+
 #pragma mark -
 #pragma mark DiagonalGestrureRecognizerDelegate
 
@@ -140,12 +250,14 @@
     ImageEntryView* entry = (ImageEntryView*)[self.entriesStreamView displayedView];
     [CaptureManager saveCapture:entry.capture];
     [self.entriesStreamView moveDisplayedViewDownAndRemove];
+    [self removeEntry:entry];
 }
 
 -(void)didDiagonalSwipe {
     ImageEntryView* entry = (ImageEntryView*)[self.entriesStreamView displayedView];
     [CaptureManager deleteCapture:entry.capture];
     [self.entriesStreamView moveDisplayedViewDiagonallyAndRemove];
+    [self removeEntry:entry];
 }
 
 #pragma mark -
