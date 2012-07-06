@@ -8,10 +8,9 @@
 
 #import "StreamOfViews.h"
 
-#define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
-#define VERTICAL_TRANSITION_ANIMATION_SPEED             600.0f
+#define HORIZONTAL_TRANSITION_ANIMATION_SPEED           750.0f
 #define FADE_TRANSITION_DURATUION                       0.5f
-#define RELEASE_ANIMATION_SPEED                         150.0f
+#define RELEASE_ANIMATION_SPEED                         400.0f
 #define VIEW_MIN_SPACING                                25
 #define REMOVE_DISPLAYED_VIEW_DOWN_DURATION             0.5
 
@@ -28,9 +27,7 @@
 - (BOOL)canMoveLeft;
 - (BOOL)canMoveRight;
 - (CGFloat)horizontalReleaseDuration;
-- (CGFloat)verticalReleaseDuration;
 - (CGFloat)horizontalTransitionDuration;
-- (CGFloat)verticalTransitionDuration;
 - (CGFloat)removeTransitionDuration;
 - (CGRect)inWindow;
 - (CGRect)leftOfWindow;
@@ -85,7 +82,7 @@
         self.notAnimating = NO;
         [UIView animateWithDuration:[self horizontalTransitionDuration]
             delay:0
-            options:UIViewAnimationOptionCurveEaseOut
+            options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionAllowUserInteraction
             animations:^{
                 [self rightView].frame = [self inWindow];
                 [self displayedView].frame = [self leftOfWindow];
@@ -106,7 +103,7 @@
         self.notAnimating = NO;
         [UIView animateWithDuration:[self horizontalTransitionDuration]
             delay:0
-            options:UIViewAnimationOptionCurveEaseOut
+            options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionAllowUserInteraction
             animations:^{
                 [self leftView].frame = [self inWindow];
                 [self displayedView].frame = [self rightOfWindow];
@@ -165,19 +162,9 @@
     return abs(viewItem.frame.origin.x) / RELEASE_ANIMATION_SPEED;    
 }
 
-- (CGFloat)verticalReleaseDuration  {
-    UIView* viewItem = [self displayedView];
-    return abs(viewItem.frame.origin.y) / RELEASE_ANIMATION_SPEED;    
-}
-
 - (CGFloat)horizontalTransitionDuration {
     UIView* viewItem = [self displayedView];
     return (self.frame.size.width - abs(viewItem.frame.origin.x)) / HORIZONTAL_TRANSITION_ANIMATION_SPEED;    
-}
-
-- (CGFloat)verticalTransitionDuration {
-    UIView* viewItem = [self displayedView];
-    return (self.frame.size.height - abs(viewItem.frame.origin.y)) / VERTICAL_TRANSITION_ANIMATION_SPEED;    
 }
 
 - (CGFloat)removeTransitionDuration {
