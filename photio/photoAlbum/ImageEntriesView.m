@@ -18,8 +18,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageEntriesView (PrivateAPI)
 
-- (void)loadEntryDates;
-- (void)singleTapGesture;
 - (void)loadCapture:(Capture*)_capture;
 - (void)moveLeft;
 - (void)moveRight;
@@ -28,6 +26,7 @@
 - (BOOL)canAddLeftView;
 - (BOOL)canRemoveLeftView;
 - (void)removeEntry:(ImageEntryView*)_entry;
+- (void)loadEntries;
 
 @end
 
@@ -59,6 +58,7 @@
         [self addGestureRecognizer:singleTap];
         [self addGestureRecognizer:self.diagonalGestures];
         [self addSubview:self.entriesStreamView];
+        [self loadEntries];
         self.inViewIndex = 0;
         self.leftMostIndex = 0;
         self.rightMostIndex = 0;
@@ -76,7 +76,7 @@
         if ([self entryCount] > 0) {
             self.rightMostIndex++;
         }
-        [self.entriesStreamView addViewToRight:[ImageEntryView withFrame:self.frame andCapture:_capture]];
+        [self.entriesStreamView addViewToRight:[ImageEntryView withFrame:self.frame capture:_capture andDelegate:self]];
     } else {
         [[DataContextManager instance].mainObjectContext refreshObject:_capture mergeChanges:NO];
     }
@@ -93,7 +93,7 @@
             self.inViewIndex++;
             self.rightMostIndex++;
         }
-        [self.entriesStreamView addViewToLeft:[ImageEntryView withFrame:self.frame andCapture:_capture]];
+        [self.entriesStreamView addViewToLeft:[ImageEntryView withFrame:self.frame capture:_capture andDelegate:self]];
     } else {
         [[DataContextManager instance].mainObjectContext refreshObject:_capture mergeChanges:NO];
     }
@@ -103,23 +103,14 @@
 #pragma mark -
 #pragma mark ImageEntriesView (PrivateAPI)
 
-- (void)loadEntries {
-    if ([self.delegate respondsToSelector:@selector(loadEntryDates)]) {
-        self.entries = [self.delegate loadEntries];
-    }
-}
-
-- (void)singleTapGesture {
-    if ([self.delegate respondsToSelector:@selector(didSingleTapEntries:)]) {
-        [self.delegate didSingleTapEntries:self];
-    }
-}
+#pragma mark -
+#pragma mark ImageEntriesView (View Management)
 
 - (void)moveLeft {
     if ([self canAddRightView]) {
         self.rightMostIndex++;
         Capture* capture = [self.entries objectAtIndex:self.rightMostIndex];
-        [self.entriesStreamView addViewToRight:[ImageEntryView withFrame:self.frame andCapture:capture]];
+        [self.entriesStreamView addViewToRight:[ImageEntryView withFrame:self.frame capture:capture andDelegate:self]];
     }
     if ([self canRemoveLeftView]) {
         [self.entriesStreamView removeFirstView];
@@ -133,7 +124,7 @@
     if ([self canAddLeftView]) {
         self.leftMostIndex--;
         Capture* capture = [self.entries objectAtIndex:self.leftMostIndex];
-        [self.entriesStreamView addViewToLeft:[ImageEntryView withFrame:self.frame andCapture:capture]];
+        [self.entriesStreamView addViewToLeft:[ImageEntryView withFrame:self.frame capture:capture andDelegate:self]];
     }
     if ([self canRemoveRightView]) {
         [self.entriesStreamView removeLastView];
@@ -175,6 +166,23 @@
     [self moveRight];
 }
 
+- (void)loadEntries {
+    if ([self.delegate respondsToSelector:@selector(loadEntries)]) {
+        self.entries = [self.delegate loadEntries];
+        for (int i = 0; i < [self.entries count]; i++) {
+            Capture* capture = [self.entries objectAtIndex:i];
+            NSInteger rightWidth = self.rightMostIndex - self.inViewIndex;
+            if (rightWidth < LOADED_ENTRIES_BUFFER) {
+                if (i > 0) {
+                    self.rightMostIndex++;
+                }
+                [self.entriesStreamView addViewToRight:[ImageEntryView withFrame:self.frame capture:capture andDelegate:self]];
+            } else {
+                [[DataContextManager instance].mainObjectContext refreshObject:capture mergeChanges:NO];
+            }
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark StreamOfViewsDelegate
@@ -264,7 +272,9 @@
 #pragma mark ImageEntryViewDelegate
 
 - (void)didSingleTapImage {
-    [self singleTapGesture];
+    if ([self.delegate respondsToSelector:@selector(didSingleTapEntries:)]) {
+        [self.delegate didSingleTapEntries:self];
+    }
 }
 
 @end

@@ -85,13 +85,14 @@
 #pragma mark -
 #pragma mark ImageEntryView
 
-+ (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture {
-    return  [[ImageEntryView alloc] initWithFrame:_frame andCapture:_capture];
++ (id)withFrame:(CGRect)_frame capture:(Capture*)_capture andDelegate:(id<ImageEntryViewDelegate>)_delegate {
+    return  [[ImageEntryView alloc] initWithFrame:_frame capture:_capture andDelegate:_delegate];
 }
 
-- (id)initWithFrame:(CGRect)_frame andCapture:(Capture*)_capture {
+- (id)initWithFrame:(CGRect)_frame capture:(Capture*)_capture andDelegate:(id<ImageEntryViewDelegate>)_delegate {
     if ((self = [super initWithFrame:(CGRect)_frame])) {
         self.capture = _capture;
+        self.delegate = _delegate;
         self.contentMode = UIViewContentModeCenter;
         self.clipsToBounds = YES;
         self.userInteractionEnabled = YES;

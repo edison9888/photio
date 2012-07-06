@@ -23,8 +23,8 @@
 @property(nonatomic, strong) UIView*                        commentView;
 @property(nonatomic, strong) UILabel*                       commentLabel;
 
-+ (id)withFrame:(CGRect)_frame andCapture:(Capture*)_capture;
-- (id)initWithFrame:(CGRect)_frame andCapture:(Capture*)_capture;
++ (id)withFrame:(CGRect)_frame capture:(Capture*)_capture andDelegate:(id<ImageEntryViewDelegate>)_delegate;
+- (id)initWithFrame:(CGRect)_frame capture:(Capture*)_capture andDelegate:(id<ImageEntryViewDelegate>)_delegate;
 - (void)addCommentView;;
 
 @end
