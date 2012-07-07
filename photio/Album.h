@@ -9,12 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Capture;
 
 @interface Album : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * captureCount;
-@property (nonatomic, retain) NSNumber * name;
-@property (nonatomic, retain) Capture *capture;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSSet *capture;
+@end
+
+@interface Album (CoreDataGeneratedAccessors)
+
+- (void)addCaptureObject:(NSManagedObject *)value;
+- (void)removeCaptureObject:(NSManagedObject *)value;
+- (void)addCapture:(NSSet *)values;
+- (void)removeCapture:(NSSet *)values;
 
 @end

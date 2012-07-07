@@ -2,7 +2,11 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Album" representedClassName="Album" syncable="YES">
         <attribute name="captureCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="capture" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AlbumCapture" inverseName="album" inverseEntity="AlbumCapture" syncable="YES"/>
+    </entity>
+    <entity name="AlbumCapture" representedClassName="AlbumCapture" syncable="YES">
+        <relationship name="album" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
         <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="album" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <entity name="Camera" representedClassName="Camera" syncable="YES">
@@ -34,7 +38,7 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="capture" inverseEntity="Album" syncable="YES"/>
+        <relationship name="album" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AlbumCapture" inverseName="capture" inverseEntity="AlbumCapture" syncable="YES"/>
         <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
         <relationship name="displayImage" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ImageDisplay" inverseName="capture" inverseEntity="ImageDisplay" syncable="YES"/>
         <relationship name="filterUsed" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FilterUsed" inverseName="capture" inverseEntity="FilterUsed" syncable="YES"/>
@@ -125,5 +129,6 @@
         <element name="Path" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Service" positionX="160" positionY="192" width="128" height="150"/>
         <element name="ServiceUsed" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="AlbumCapture" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

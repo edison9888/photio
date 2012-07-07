@@ -46,9 +46,10 @@
 		0539BA47157AF51D00A4A04B /* Cameras.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0539BA46157AF51D00A4A04B /* Cameras.plist */; };
 		0539BA4A157AF9D600A4A04B /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0539BA49157AF9D600A4A04B /* Camera.m */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
-		0543260015A49ED0004AA547 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 054325FF15A49ED0004AA547 /* Capture.m */; };
 		0543265C15A7CFBF004AA547 /* AlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543265B15A7CFBF004AA547 /* AlbumManager.m */; };
-		0543265F15A7D750004AA547 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543265E15A7D750004AA547 /* Album.m */; };
+		0543266515A7E757004AA547 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543266415A7E757004AA547 /* Capture.m */; };
+		0543266815A7E766004AA547 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543266715A7E766004AA547 /* Album.m */; };
+		0543266B15A7E776004AA547 /* AlbumCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543266A15A7E776004AA547 /* AlbumCapture.m */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		0577D417157A64AC00BA4C52 /* FilteredCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */; };
@@ -265,12 +266,14 @@
 		0539BA49157AF9D600A4A04B /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
 		0542DAE4151FFD85002C62A0 /* StreamOfViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamOfViews.h; sourceTree = "<group>"; };
 		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
-		054325FE15A49ED0004AA547 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
-		054325FF15A49ED0004AA547 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		0543265A15A7CFBF004AA547 /* AlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumManager.h; sourceTree = "<group>"; };
 		0543265B15A7CFBF004AA547 /* AlbumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumManager.m; sourceTree = "<group>"; };
-		0543265D15A7D750004AA547 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		0543265E15A7D750004AA547 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		0543266315A7E757004AA547 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		0543266415A7E757004AA547 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		0543266615A7E766004AA547 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		0543266715A7E766004AA547 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		0543266915A7E776004AA547 /* AlbumCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCapture.h; sourceTree = "<group>"; };
+		0543266A15A7E776004AA547 /* AlbumCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCapture.m; sourceTree = "<group>"; };
 		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
@@ -659,10 +662,12 @@
 			isa = PBXGroup;
 			children = (
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
-				0543265D15A7D750004AA547 /* Album.h */,
-				0543265E15A7D750004AA547 /* Album.m */,
-				054325FE15A49ED0004AA547 /* Capture.h */,
-				054325FF15A49ED0004AA547 /* Capture.m */,
+				0543266915A7E776004AA547 /* AlbumCapture.h */,
+				0543266A15A7E776004AA547 /* AlbumCapture.m */,
+				0543266615A7E766004AA547 /* Album.h */,
+				0543266715A7E766004AA547 /* Album.m */,
+				0543266315A7E757004AA547 /* Capture.h */,
+				0543266415A7E757004AA547 /* Capture.m */,
 				0539BA48157AF9D500A4A04B /* Camera.h */,
 				0539BA49157AF9D600A4A04B /* Camera.m */,
 				0539BA2B157AE7A100A4A04B /* CameraUsed.h */,
@@ -863,6 +868,8 @@
 		05C99EEB14F05A5500D09F3E /* PhotoAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				0543265A15A7CFBF004AA547 /* AlbumManager.h */,
+				0543265B15A7CFBF004AA547 /* AlbumManager.m */,
 				0579A8D41593FA0100F5E85C /* CaptureManager.h */,
 				0579A8D51593FA0200F5E85C /* CaptureManager.m */,
 				05809CAF155B3C6700AF2079 /* CommentViewController.h */,
@@ -906,8 +913,6 @@
 				050AF29315681B1600EC6C13 /* ParameterSelectionView.h */,
 				050AF29415681B1600EC6C13 /* ParameterSelectionView.m */,
 				050AF29115681AE600EC6C13 /* ParameterSelectionView.xib */,
-				0543265A15A7CFBF004AA547 /* AlbumManager.h */,
-				0543265B15A7CFBF004AA547 /* AlbumManager.m */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
@@ -1167,9 +1172,10 @@
 				05916998159952F40013C81D /* UIImagePNGDataTransformer.m in Sources */,
 				059169BA159BE8F20013C81D /* ImageThumbnail.m in Sources */,
 				059169BD159BE94B0013C81D /* ImageDisplay.m in Sources */,
-				0543260015A49ED0004AA547 /* Capture.m in Sources */,
 				0543265C15A7CFBF004AA547 /* AlbumManager.m in Sources */,
-				0543265F15A7D750004AA547 /* Album.m in Sources */,
+				0543266515A7E757004AA547 /* Capture.m in Sources */,
+				0543266815A7E766004AA547 /* Album.m in Sources */,
+				0543266B15A7E776004AA547 /* AlbumCapture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

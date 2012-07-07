@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class Capture;
+
 @interface AlbumManager : NSObject
 
 + (AlbumManager*)instance;
 + (NSArray*)albums;
++ (void)createAlbumNamed:(NSString*)_albumName;
++ (void)addCapture:(Capture*)_capture;
++ (void)removeCapture:(Capture*)_capture;
 
 @end

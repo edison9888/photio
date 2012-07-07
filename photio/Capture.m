@@ -2,12 +2,11 @@
 //  Capture.m
 //  photio
 //
-//  Created by Troy Stribling on 7/4/12.
+//  Created by Troy Stribling on 7/6/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
 #import "Capture.h"
-#import "Album.h"
 #import "CameraUsed.h"
 #import "FilterUsed.h"
 #import "ImageDisplay.h"
@@ -20,11 +19,11 @@
 @implementation Capture
 
 @dynamic cached;
+@dynamic captureId;
 @dynamic comment;
 @dynamic createdAt;
 @dynamic dayIdentifier;
 @dynamic rating;
-@dynamic captureId;
 @dynamic album;
 @dynamic cameraUsed;
 @dynamic displayImage;

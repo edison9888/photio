@@ -8,6 +8,8 @@
 
 #import "AlbumManager.h"
 #import "DataContextManager.h"
+#import "Album.h"
+#import "Capture.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static AlbumManager* thisAlbumManager = nil;
@@ -40,6 +42,21 @@ static AlbumManager* thisAlbumManager = nil;
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"album" inManagedObjectContext:contextManager.mainObjectContext]];
     return [contextManager fetch:fetchRequest];
+}
+
++ (void)createAlbumNamed:(NSString*)_albumName {
+    DataContextManager* contextManager = [DataContextManager instance];
+    Album* album = (Album*)[NSEntityDescription insertNewObjectForEntityForName:@"Album" inManagedObjectContext:contextManager.mainObjectContext];
+    album.name = _albumName;
+    [contextManager save];
+}
+
++ (void)addCapture:(Capture*)_capture {
+    
+}
+
++ (void)removeCapture:(Capture*)_capture {
+    
 }
 
 @end
