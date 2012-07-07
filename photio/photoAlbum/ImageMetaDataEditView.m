@@ -13,6 +13,7 @@
 #import "ParameterSelectionView.h"
 #import "ServiceManager.h"
 #import "UIView+Extensions.h"
+#import "AlbumManager.h"
 
 #define MAX_COMMENT_LINES                   5
 #define COMMENT_YOFFSET                     15
@@ -41,9 +42,9 @@ typedef enum {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageMetaDataEditView
 
-@synthesize delegate, containerView, commentViewController, paramterSelectionView, capture, imageShareView, imageCommentBorderView, imageCommentLabel, 
+@synthesize delegate, containerView, commentViewController, paramterSelectionView, capture, albums, imageShareView, imageCommentBorderView, imageCommentLabel, 
             commentContainerView, shareContainerView, imageAddComment, imageRating, initialCommentContainerRect,
-            editMode;
+            editMode, canceling;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
@@ -113,6 +114,7 @@ typedef enum {
 }
 
 - (void)showParametersWithTitle:(NSString*)_title  {
+    self.canceling = NO;
     CGRect shareViewRect = self.shareContainerView.frame;
     CGRect commentViewRect = self.commentContainerView.frame;
     __block CGRect showShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
@@ -124,6 +126,9 @@ typedef enum {
                                          self.commentContainerView.frame = showCommentViewRect;
                                      }
                                      hideAnimation:^{
+                                         if (self.canceling) {
+                                            [self showControls];
+                                         }
                                      }
                                      andTitle:_title
                                  ];
@@ -210,7 +215,8 @@ typedef enum {
             return [[ServiceManager instance] services];
             break;
         case EditModeAlbum:
-            return nil;
+            self.albums = [AlbumManager fetchAlbumsForCapture:self.capture];
+            return [AlbumManager albums];
             break;
     }
 }
@@ -222,6 +228,7 @@ typedef enum {
             _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
             break;
         case EditModeAlbum:
+            _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
             break;
     }
 }
@@ -236,6 +243,11 @@ typedef enum {
         case EditModeAlbum:
             break;
     }
+    [self.paramterSelectionView removeView];
+}
+
+- (void)cancel {
+    self.canceling = YES;
     [self.paramterSelectionView removeView];
 }
 

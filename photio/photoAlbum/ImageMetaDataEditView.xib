@@ -87,7 +87,6 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.80000001192092896</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
@@ -453,13 +452,13 @@
 						<reference key="object" ref="526128205"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="70067292"/>
-						<string key="objectName">Album</string>
+						<string key="objectName">Albums</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">46</int>
 						<reference key="object" ref="434180203"/>
 						<reference key="parent" ref="0"/>
-						<string key="objectName">Album</string>
+						<string key="objectName">Albums</string>
 					</object>
 				</array>
 			</object>

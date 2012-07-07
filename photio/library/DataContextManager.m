@@ -98,4 +98,18 @@ static DataContextManager* thisDataContextManager;
     return fetchResults;
 }
 
+- (id)fetchFirst:(NSFetchRequest*)_fetchRequest {
+    return [self fetchFirst:_fetchRequest inContext:self.mainObjectContext];
+}
+
+- (id)fetchFirst:(NSFetchRequest*)_fetchRequest inContext:(NSManagedObjectContext*)_context {
+    id fetchResult = nil;
+    _fetchRequest.fetchLimit = 1;
+    NSArray* fetchResults = [self fetch:_fetchRequest inContext:_context];
+    if ([fetchResults count] > 0) {
+        fetchResult = [fetchResults objectAtIndex:0];
+    }
+    return fetchResult;
+}
+
 @end

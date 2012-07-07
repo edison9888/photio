@@ -28,4 +28,7 @@
 - (NSArray*)fetch:(NSFetchRequest*)_fetchRequest;
 - (NSArray*)fetch:(NSFetchRequest*)_fetchRequest inContext:(NSManagedObjectContext*)_context;
 
+- (id)fetchFirst:(NSFetchRequest*)_fetchRequest;
+- (id)fetchFirst:(NSFetchRequest*)_fetchRequest inContext:(NSManagedObjectContext*)_context;
+
 @end

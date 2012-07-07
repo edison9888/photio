@@ -22,6 +22,7 @@
 - (void)showView;
 - (void)removeView;
 - (IBAction)addParameter:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end
 
@@ -54,6 +55,10 @@
 
 - (IBAction)addParameter:(id)sender {
     [self.delegate addParameter];
+}
+
+- (IBAction)cancel:(id)sender {
+    [self.delegate cancel];
 }
 
 #pragma mark -

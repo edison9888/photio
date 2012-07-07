@@ -195,24 +195,18 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 + (Capture*)fetchCaptureWithId:(NSNumber*)_captureId inContext:(NSManagedObjectContext*)_context {
-    Capture* capture = nil;
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"captureId == %@", _captureId]];
-    fetchRequest.fetchLimit = 1;
-    NSArray* fetchResults = [contextManager fetch:fetchRequest];
-    if ([fetchResults count] > 0) {
-        capture = [fetchResults objectAtIndex:0];
-    }
-    return capture;
+    return [contextManager fetchFirst:fetchRequest];
 }
 
 + (NSArray*)fetchCapturesWithDayIdentifier:(NSString*)_dayIdentifier {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (cached = %@)", _dayIdentifier, [NSNumber numberWithBool:NO]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (cached == %@)", _dayIdentifier, [NSNumber numberWithBool:NO]]];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     return [contextManager fetch:fetchRequest];
 }
@@ -241,25 +235,19 @@ NSInteger descendingSort(id num1, id num2, void* context) {
         NSString* day = _obj;
         NSArray* dayValues = [fetchResults filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", day]];
         NSDate* latestDate = [dayValues valueForKeyPath:@"@max.createdAt"];
-        return [[dayValues filteredArrayUsingPredicate:[NSPredicate predicateWithFormat: @"createdAt = %@", latestDate]] objectAtIndex:0];
+        return [[dayValues filteredArrayUsingPredicate:[NSPredicate predicateWithFormat: @"createdAt == %@", latestDate]] objectAtIndex:0];
     }];
     
     return aggregatedResults;
 }
 
 + (Capture*)fetchCaptureWithDayIdentifierCreatedAt:(NSDate*)_createdAt {
-    Capture* capture = nil;
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];   
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier==%@", [self dayIdentifier:_createdAt]]];
-    [fetchRequest setFetchLimit:1];    
-    NSArray* fetchResults = [contextManager fetch:fetchRequest];
-    if ([fetchResults count] > 0) {
-        capture = [fetchResults objectAtIndex:0];
-    }
-    return capture;
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", [self dayIdentifier:_createdAt]]];
+    return [contextManager fetchFirst:fetchRequest];
 }
 
 #pragma mark - 

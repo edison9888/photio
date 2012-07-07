@@ -47,9 +47,11 @@
 		0539BA4A157AF9D600A4A04B /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0539BA49157AF9D600A4A04B /* Camera.m */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
 		0543265C15A7CFBF004AA547 /* AlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543265B15A7CFBF004AA547 /* AlbumManager.m */; };
-		0543266515A7E757004AA547 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543266415A7E757004AA547 /* Capture.m */; };
-		0543266815A7E766004AA547 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543266715A7E766004AA547 /* Album.m */; };
-		0543266B15A7E776004AA547 /* AlbumCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543266A15A7E776004AA547 /* AlbumCapture.m */; };
+		0543267415A8A6D9004AA547 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543267315A8A6D8004AA547 /* Capture.m */; };
+		0543267715A8A6E9004AA547 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543267615A8A6E9004AA547 /* Album.m */; };
+		0543267A15A8A6FA004AA547 /* AlbumCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543267915A8A6FA004AA547 /* AlbumCapture.m */; };
+		0543267D15A8BC68004AA547 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0543267B15A8BC68004AA547 /* cancel.png */; };
+		0543267E15A8BC68004AA547 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0543267C15A8BC68004AA547 /* cancel@2x.png */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		0577D417157A64AC00BA4C52 /* FilteredCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */; };
@@ -268,12 +270,14 @@
 		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
 		0543265A15A7CFBF004AA547 /* AlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumManager.h; sourceTree = "<group>"; };
 		0543265B15A7CFBF004AA547 /* AlbumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumManager.m; sourceTree = "<group>"; };
-		0543266315A7E757004AA547 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
-		0543266415A7E757004AA547 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
-		0543266615A7E766004AA547 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		0543266715A7E766004AA547 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
-		0543266915A7E776004AA547 /* AlbumCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCapture.h; sourceTree = "<group>"; };
-		0543266A15A7E776004AA547 /* AlbumCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCapture.m; sourceTree = "<group>"; };
+		0543267215A8A6D8004AA547 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		0543267315A8A6D8004AA547 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		0543267515A8A6E9004AA547 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		0543267615A8A6E9004AA547 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
+		0543267815A8A6FA004AA547 /* AlbumCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCapture.h; sourceTree = "<group>"; };
+		0543267915A8A6FA004AA547 /* AlbumCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCapture.m; sourceTree = "<group>"; };
+		0543267B15A8BC68004AA547 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		0543267C15A8BC68004AA547 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
 		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
@@ -611,6 +615,8 @@
 				059039B0158E6507008E0318 /* albums@2x.png */,
 				059039B1158E6507008E0318 /* apply.png */,
 				059039B2158E6507008E0318 /* apply@2x.png */,
+				0543267B15A8BC68004AA547 /* cancel.png */,
+				0543267C15A8BC68004AA547 /* cancel@2x.png */,
 				059039B3158E6507008E0318 /* export.png */,
 				059039B4158E6507008E0318 /* export@2x.png */,
 				059039B5158E6507008E0318 /* pencil.png */,
@@ -662,16 +668,16 @@
 			isa = PBXGroup;
 			children = (
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
-				0543266915A7E776004AA547 /* AlbumCapture.h */,
-				0543266A15A7E776004AA547 /* AlbumCapture.m */,
-				0543266615A7E766004AA547 /* Album.h */,
-				0543266715A7E766004AA547 /* Album.m */,
-				0543266315A7E757004AA547 /* Capture.h */,
-				0543266415A7E757004AA547 /* Capture.m */,
+				0543267515A8A6E9004AA547 /* Album.h */,
+				0543267615A8A6E9004AA547 /* Album.m */,
+				0543267815A8A6FA004AA547 /* AlbumCapture.h */,
+				0543267915A8A6FA004AA547 /* AlbumCapture.m */,
 				0539BA48157AF9D500A4A04B /* Camera.h */,
 				0539BA49157AF9D600A4A04B /* Camera.m */,
 				0539BA2B157AE7A100A4A04B /* CameraUsed.h */,
 				0539BA2C157AE7A100A4A04B /* CameraUsed.m */,
+				0543267215A8A6D8004AA547 /* Capture.h */,
+				0543267315A8A6D8004AA547 /* Capture.m */,
 				0539BA31157AE7D700A4A04B /* Filter.h */,
 				0539BA32157AE7D700A4A04B /* Filter.m */,
 				0539BA34157AE7F700A4A04B /* FilterPalette.h */,
@@ -1094,6 +1100,8 @@
 				0579A8B7158EB64000F5E85C /* add.png in Resources */,
 				0579A8B8158EB64000F5E85C /* add@2x.png in Resources */,
 				0579A8C0158ED4F900F5E85C /* Services.plist in Resources */,
+				0543267D15A8BC68004AA547 /* cancel.png in Resources */,
+				0543267E15A8BC68004AA547 /* cancel@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,9 +1181,9 @@
 				059169BA159BE8F20013C81D /* ImageThumbnail.m in Sources */,
 				059169BD159BE94B0013C81D /* ImageDisplay.m in Sources */,
 				0543265C15A7CFBF004AA547 /* AlbumManager.m in Sources */,
-				0543266515A7E757004AA547 /* Capture.m in Sources */,
-				0543266815A7E766004AA547 /* Album.m in Sources */,
-				0543266B15A7E776004AA547 /* AlbumCapture.m in Sources */,
+				0543267415A8A6D9004AA547 /* Capture.m in Sources */,
+				0543267715A8A6E9004AA547 /* Album.m in Sources */,
+				0543267A15A8A6FA004AA547 /* AlbumCapture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

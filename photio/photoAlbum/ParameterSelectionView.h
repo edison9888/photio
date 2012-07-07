@@ -36,6 +36,7 @@ typedef void (^DisplayAnimation)();
 - (NSArray*)loadParameters;
 - (void)configureParemeterCell:(ParameterSelectionCell*)_parameterCell withParameter:(id)_parameter;
 - (void)selectedParameter:(id)_parameter;
+- (void)cancel;
 - (BOOL)addParameters;
 - (void)addParameter;
 

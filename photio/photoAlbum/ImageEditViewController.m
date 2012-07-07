@@ -131,8 +131,8 @@
     [self.view addSubview:self.streamView];
     self.imageEditView = [ImageEditView withDelegate:self andCapture:self.capture];
     self.imageMetaDataEditView = [ImageMetaDataEditView withDelegate:self andCapture:self.capture];
-    [self.streamView addViewToRight:self.imageEditView];
     [self.streamView addViewToRight:self.imageMetaDataEditView];
+    [self.streamView addViewToRight:self.imageEditView];
     [self showViews];
     [super viewDidLoad];
 }

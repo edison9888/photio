@@ -9,13 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @class Capture;
+@class Album;
 
 @interface AlbumManager : NSObject
 
 + (AlbumManager*)instance;
 + (NSArray*)albums;
 + (void)createAlbumNamed:(NSString*)_albumName;
-+ (void)addCapture:(Capture*)_capture;
-+ (void)removeCapture:(Capture*)_capture;
++ (void)addCapture:(Capture*)_capture toAlbum:(Album*)_album;
++ (void)removeCapture:(Capture*)_capture fromAlbum:(Album*)_album;
++ (Album*)fetchAlbumNamed:(NSString*)_name;
++ (NSArray*)fetchCapturesForAlbum:(Album*)_album;
++ (NSArray*)fetchCapturesForAlbum:(Album *)_album withLimit:(NSInteger)_limit;
++ (NSArray*)fetchAlbumsForCapture:(Capture*)_capture;
 
 @end

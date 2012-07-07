@@ -351,6 +351,10 @@
     return NO;
 }
 
+- (void)cancel {
+    [self.cameraSelectionView removeView];
+}
+
 - (void)addParameter {
 
 }

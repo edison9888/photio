@@ -32,6 +32,7 @@ typedef enum {
 @property(nonatomic, strong) CommentViewController*             commentViewController;
 @property(nonatomic, strong) ParameterSelectionView*            paramterSelectionView;
 @property(nonatomic, strong) Capture*                           capture;
+@property(nonatomic, strong) NSArray*                           albums;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageCommentBorderView;
 @property(nonatomic, strong) IBOutlet ImageControlView*         imageShareView;
 @property(nonatomic, strong) IBOutlet UILabel*                  imageCommentLabel;
@@ -41,6 +42,7 @@ typedef enum {
 @property(nonatomic, strong) IBOutlet UIView*                   commentContainerView;
 @property(nonatomic, assign) CGRect                             initialCommentContainerRect;
 @property(nonatomic, assign) EditMode                           editMode;
+@property(nonatomic, assign) BOOL                               canceling;
  
 + (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate andCapture:(Capture*)_capture;
 
