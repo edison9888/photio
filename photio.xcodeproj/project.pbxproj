@@ -52,6 +52,8 @@
 		0543267A15A8A6FA004AA547 /* AlbumCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543267915A8A6FA004AA547 /* AlbumCapture.m */; };
 		0543267D15A8BC68004AA547 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 0543267B15A8BC68004AA547 /* cancel.png */; };
 		0543267E15A8BC68004AA547 /* cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0543267C15A8BC68004AA547 /* cancel@2x.png */; };
+		0543268C15A8D982004AA547 /* AddParemeterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543268B15A8D982004AA547 /* AddParemeterView.m */; };
+		0543268E15A8DA8C004AA547 /* AddParameterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0543268D15A8DA8B004AA547 /* AddParameterView.xib */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		0577D417157A64AC00BA4C52 /* FilteredCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */; };
@@ -278,6 +280,9 @@
 		0543267915A8A6FA004AA547 /* AlbumCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCapture.m; sourceTree = "<group>"; };
 		0543267B15A8BC68004AA547 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		0543267C15A8BC68004AA547 /* cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancel@2x.png"; sourceTree = "<group>"; };
+		0543268A15A8D982004AA547 /* AddParemeterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddParemeterView.h; sourceTree = "<group>"; };
+		0543268B15A8D982004AA547 /* AddParemeterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddParemeterView.m; sourceTree = "<group>"; };
+		0543268D15A8DA8B004AA547 /* AddParameterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddParameterView.xib; path = photio/PhotoAlbum/AddParameterView.xib; sourceTree = SOURCE_ROOT; };
 		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
@@ -874,6 +879,9 @@
 		05C99EEB14F05A5500D09F3E /* PhotoAlbum */ = {
 			isa = PBXGroup;
 			children = (
+				0543268D15A8DA8B004AA547 /* AddParameterView.xib */,
+				0543268A15A8D982004AA547 /* AddParemeterView.h */,
+				0543268B15A8D982004AA547 /* AddParemeterView.m */,
 				0543265A15A7CFBF004AA547 /* AlbumManager.h */,
 				0543265B15A7CFBF004AA547 /* AlbumManager.m */,
 				0579A8D41593FA0100F5E85C /* CaptureManager.h */,
@@ -1102,6 +1110,7 @@
 				0579A8C0158ED4F900F5E85C /* Services.plist in Resources */,
 				0543267D15A8BC68004AA547 /* cancel.png in Resources */,
 				0543267E15A8BC68004AA547 /* cancel@2x.png in Resources */,
+				0543268E15A8DA8C004AA547 /* AddParameterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,6 +1193,7 @@
 				0543267415A8A6D9004AA547 /* Capture.m in Sources */,
 				0543267715A8A6E9004AA547 /* Album.m in Sources */,
 				0543267A15A8A6FA004AA547 /* AlbumCapture.m in Sources */,
+				0543268C15A8D982004AA547 /* AddParemeterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
