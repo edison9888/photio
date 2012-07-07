@@ -212,7 +212,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"dayIdentifier == %@", _dayIdentifier]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (cached = %@)", _dayIdentifier, [NSNumber numberWithBool:NO]]];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     return [contextManager fetch:fetchRequest];
 }
@@ -221,7 +221,8 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (createdAt BETWEEN {%@, %@})", _dayIdentifier, _startdate, _endDate]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (createdAt BETWEEN {%@, %@}) AND (cached = %@)", 
+                                _dayIdentifier, _startdate, _endDate, [NSNumber numberWithBool:NO]]];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     return [contextManager fetch:fetchRequest];
 }
@@ -230,7 +231,8 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];    
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];    
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"createdAt BETWEEN {%@, %@}", _startdate, _endDate]];    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(createdAt BETWEEN {%@, %@}) AND (cached = %@)", 
+                                _startdate, _endDate, [NSNumber numberWithBool:NO]]];    
     NSArray* fetchResults = [contextManager fetch:fetchRequest];
     
     NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.dayIdentifier"];
@@ -268,13 +270,11 @@ NSInteger descendingSort(id num1, id num2, void* context) {
 }
 
 + (void)deleteFullSizeImageForCapture:(Capture*)_capture {
-    [self showDocuments];
     NSError* error;
     NSFileManager* fileMgr = [NSFileManager defaultManager];
     if ([fileMgr removeItemAtPath:[self fullSizeImagePathForCapture:_capture] error:&error] != YES) {
         [ViewGeneral alertOnError:error];
     }
-    [self showDocuments];
 }
 
 + (void)applyFilterToFullSizeImage:(Filter*)_filter withValue:(NSNumber*)_value toCapture:(Capture*)_capture {

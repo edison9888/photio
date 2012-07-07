@@ -2,7 +2,7 @@
 //  Album.h
 //  photio
 //
-//  Created by Troy Stribling on 6/2/12.
+//  Created by Troy Stribling on 7/6/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 
 @interface Album : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * captureCount;
 @property (nonatomic, retain) NSNumber * name;
-@property (nonatomic, retain) NSNumber * entries;
 @property (nonatomic, retain) Capture *capture;
 
 @end

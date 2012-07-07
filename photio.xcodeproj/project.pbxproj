@@ -38,7 +38,6 @@
 		0529A7C71501D41900235B95 /* TransitionGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A7C61501D41900235B95 /* TransitionGestureRecognizer.m */; };
 		052AE17B1528941F005D57B1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17A1528941F005D57B1 /* AssetsLibrary.framework */; };
 		052AE17E1528943E005D57B1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052AE17D1528943E005D57B1 /* CoreMedia.framework */; };
-		0539BA21157AE58F00A4A04B /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 0539BA20157AE58F00A4A04B /* Album.m */; };
 		0539BA2D157AE7A100A4A04B /* CameraUsed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0539BA2C157AE7A100A4A04B /* CameraUsed.m */; };
 		0539BA33157AE7D700A4A04B /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0539BA32157AE7D700A4A04B /* Filter.m */; };
 		0539BA36157AE7F700A4A04B /* FilterPalette.m in Sources */ = {isa = PBXBuildFile; fileRef = 0539BA35157AE7F700A4A04B /* FilterPalette.m */; };
@@ -48,6 +47,8 @@
 		0539BA4A157AF9D600A4A04B /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 0539BA49157AF9D600A4A04B /* Camera.m */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
 		0543260015A49ED0004AA547 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 054325FF15A49ED0004AA547 /* Capture.m */; };
+		0543265C15A7CFBF004AA547 /* AlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543265B15A7CFBF004AA547 /* AlbumManager.m */; };
+		0543265F15A7D750004AA547 /* Album.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543265E15A7D750004AA547 /* Album.m */; };
 		0554A47B1503DDD000B9C76D /* DragGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47A1503DDD000B9C76D /* DragGridView.m */; };
 		0554A47F1503DDFE00B9C76D /* DragRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0554A47E1503DDFE00B9C76D /* DragRowView.m */; };
 		0577D417157A64AC00BA4C52 /* FilteredCameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0577D416157A64AC00BA4C52 /* FilteredCameraViewController.xib */; };
@@ -138,7 +139,6 @@
 		059169871597F00E0013C81D /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169861597F00E0013C81D /* Path.m */; };
 		059169951599515B0013C81D /* UIImageJPEGDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169941599515B0013C81D /* UIImageJPEGDataTransformer.m */; };
 		05916998159952F40013C81D /* UIImagePNGDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05916997159952F30013C81D /* UIImagePNGDataTransformer.m */; };
-		0591699B159AA1A70013C81D /* ImageJPEG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0591699A159AA1A70013C81D /* ImageJPEG.m */; };
 		059169BA159BE8F20013C81D /* ImageThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169B9159BE8F10013C81D /* ImageThumbnail.m */; };
 		059169BD159BE94B0013C81D /* ImageDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 059169BC159BE94B0013C81D /* ImageDisplay.m */; };
 		059772F51527D787008F3A1B /* NativeCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 059772F01527D787008F3A1B /* NativeCamera.m */; };
@@ -250,8 +250,6 @@
 		052AE17A1528941F005D57B1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		052AE17D1528943E005D57B1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		052AE17F1528944F005D57B1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		0539BA1F157AE58F00A4A04B /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
-		0539BA20157AE58F00A4A04B /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		0539BA2B157AE7A100A4A04B /* CameraUsed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraUsed.h; sourceTree = "<group>"; };
 		0539BA2C157AE7A100A4A04B /* CameraUsed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraUsed.m; sourceTree = "<group>"; };
 		0539BA31157AE7D700A4A04B /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
@@ -269,6 +267,10 @@
 		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
 		054325FE15A49ED0004AA547 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
 		054325FF15A49ED0004AA547 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
+		0543265A15A7CFBF004AA547 /* AlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumManager.h; sourceTree = "<group>"; };
+		0543265B15A7CFBF004AA547 /* AlbumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumManager.m; sourceTree = "<group>"; };
+		0543265D15A7D750004AA547 /* Album.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Album.h; sourceTree = "<group>"; };
+		0543265E15A7D750004AA547 /* Album.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Album.m; sourceTree = "<group>"; };
 		0554A4791503DDD000B9C76D /* DragGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragGridView.h; sourceTree = "<group>"; };
 		0554A47A1503DDD000B9C76D /* DragGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragGridView.m; sourceTree = "<group>"; };
 		0554A47D1503DDFE00B9C76D /* DragRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragRowView.h; sourceTree = "<group>"; };
@@ -381,8 +383,6 @@
 		059169941599515B0013C81D /* UIImageJPEGDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageJPEGDataTransformer.m; sourceTree = "<group>"; };
 		05916996159952F30013C81D /* UIImagePNGDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImagePNGDataTransformer.h; sourceTree = "<group>"; };
 		05916997159952F30013C81D /* UIImagePNGDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImagePNGDataTransformer.m; sourceTree = "<group>"; };
-		05916999159AA1A70013C81D /* ImageJPEG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageJPEG.h; sourceTree = "<group>"; };
-		0591699A159AA1A70013C81D /* ImageJPEG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageJPEG.m; sourceTree = "<group>"; };
 		059169B8159BE8F10013C81D /* ImageThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageThumbnail.h; sourceTree = "<group>"; };
 		059169B9159BE8F10013C81D /* ImageThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageThumbnail.m; sourceTree = "<group>"; };
 		059169BB159BE94B0013C81D /* ImageDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDisplay.h; sourceTree = "<group>"; };
@@ -659,10 +659,10 @@
 			isa = PBXGroup;
 			children = (
 				05B837601530B5B500D99A40 /* photio.xcdatamodeld */,
+				0543265D15A7D750004AA547 /* Album.h */,
+				0543265E15A7D750004AA547 /* Album.m */,
 				054325FE15A49ED0004AA547 /* Capture.h */,
 				054325FF15A49ED0004AA547 /* Capture.m */,
-				0539BA1F157AE58F00A4A04B /* Album.h */,
-				0539BA20157AE58F00A4A04B /* Album.m */,
 				0539BA48157AF9D500A4A04B /* Camera.h */,
 				0539BA49157AF9D600A4A04B /* Camera.m */,
 				0539BA2B157AE7A100A4A04B /* CameraUsed.h */,
@@ -675,8 +675,6 @@
 				0539BA38157AE81F00A4A04B /* FilterUsed.m */,
 				059169BB159BE94B0013C81D /* ImageDisplay.h */,
 				059169BC159BE94B0013C81D /* ImageDisplay.m */,
-				05916999159AA1A70013C81D /* ImageJPEG.h */,
-				0591699A159AA1A70013C81D /* ImageJPEG.m */,
 				059169B8159BE8F10013C81D /* ImageThumbnail.h */,
 				059169B9159BE8F10013C81D /* ImageThumbnail.m */,
 				05B837771530C6B800D99A40 /* Locale.h */,
@@ -908,6 +906,8 @@
 				050AF29315681B1600EC6C13 /* ParameterSelectionView.h */,
 				050AF29415681B1600EC6C13 /* ParameterSelectionView.m */,
 				050AF29115681AE600EC6C13 /* ParameterSelectionView.xib */,
+				0543265A15A7CFBF004AA547 /* AlbumManager.h */,
+				0543265B15A7CFBF004AA547 /* AlbumManager.m */,
 			);
 			name = PhotoAlbum;
 			path = photoAlbum;
@@ -1147,7 +1147,6 @@
 				05DDD9E31572D9350034AF7C /* UIImage+RoundedCorner.m in Sources */,
 				05DDD9E61572D9750034AF7C /* UIImage+Extensions.m in Sources */,
 				050462D11579A9080051818C /* FilteredCameraViewController.m in Sources */,
-				0539BA21157AE58F00A4A04B /* Album.m in Sources */,
 				0539BA2D157AE7A100A4A04B /* CameraUsed.m in Sources */,
 				0539BA33157AE7D700A4A04B /* Filter.m in Sources */,
 				0539BA36157AE7F700A4A04B /* FilterPalette.m in Sources */,
@@ -1166,10 +1165,11 @@
 				059169871597F00E0013C81D /* Path.m in Sources */,
 				059169951599515B0013C81D /* UIImageJPEGDataTransformer.m in Sources */,
 				05916998159952F40013C81D /* UIImagePNGDataTransformer.m in Sources */,
-				0591699B159AA1A70013C81D /* ImageJPEG.m in Sources */,
 				059169BA159BE8F20013C81D /* ImageThumbnail.m in Sources */,
 				059169BD159BE94B0013C81D /* ImageDisplay.m in Sources */,
 				0543260015A49ED0004AA547 /* Capture.m in Sources */,
+				0543265C15A7CFBF004AA547 /* AlbumManager.m in Sources */,
+				0543265F15A7D750004AA547 /* Album.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

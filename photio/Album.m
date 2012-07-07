@@ -2,7 +2,7 @@
 //  Album.m
 //  photio
 //
-//  Created by Troy Stribling on 6/2/12.
+//  Created by Troy Stribling on 7/6/12.
 //  Copyright (c) 2012 imaginaryProducts. All rights reserved.
 //
 
@@ -12,8 +12,8 @@
 
 @implementation Album
 
+@dynamic captureCount;
 @dynamic name;
-@dynamic entries;
 @dynamic capture;
 
 @end

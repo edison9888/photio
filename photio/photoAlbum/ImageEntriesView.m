@@ -256,6 +256,7 @@
 
 -(void)didCheck {
     ImageEntryView* entry = (ImageEntryView*)[self.entriesStreamView displayedView];
+    entry.capture.cached = [NSNumber numberWithBool:NO];
     [CaptureManager saveCapture:entry.capture];
     [self.entriesStreamView moveDisplayedViewDownAndRemove];
     [self removeEntry:entry];
