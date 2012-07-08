@@ -44,7 +44,7 @@ typedef enum {
 
 @synthesize delegate, containerView, commentViewController, paramterSelectionView, capture, albums, imageShareView, imageCommentBorderView, imageCommentLabel, 
             commentContainerView, shareContainerView, imageAddComment, imageRating, initialCommentContainerRect,
-            editMode, canceling;
+            editMode, exiting;
 
 #pragma mark -
 #pragma mark ImageMetaDataEditView (PrivateAPI)
@@ -114,7 +114,7 @@ typedef enum {
 }
 
 - (void)showParametersWithTitle:(NSString*)_title  {
-    self.canceling = NO;
+    self.exiting = NO;
     CGRect shareViewRect = self.shareContainerView.frame;
     CGRect commentViewRect = self.commentContainerView.frame;
     __block CGRect showShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
@@ -126,7 +126,7 @@ typedef enum {
                                          self.commentContainerView.frame = showCommentViewRect;
                                      }
                                      hideAnimation:^{
-                                         if (self.canceling) {
+                                         if (self.exiting) {
                                             [self showControls];
                                          }
                                      }
@@ -228,7 +228,13 @@ typedef enum {
             _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
             break;
         case EditModeAlbum:
+            _parameterCell.parameterIcon.image = [UIImage imageNamed:@"select-album"];
             _parameterCell.parameterLabel.text = [_parameter valueForKey:@"name"];
+            if ([self.albums containsObject:_parameter]) {
+                _parameterCell.parameterIcon.alpha = 0.55;
+            } else {
+                _parameterCell.parameterIcon.alpha = 0.15;
+            }
             break;
     }
 }
@@ -239,19 +245,26 @@ typedef enum {
             [[ServiceManager instance] useService:(Service*)_parameter withCapture:self.capture onComplete:^{
                 [self showControls];
             }];
+            [self.paramterSelectionView removeView];
             break;
         case EditModeAlbum:
+            if ([self.albums containsObject:_parameter]) {
+                [AlbumManager removeCapture:self.capture fromAlbum:_parameter];
+            } else {
+                [AlbumManager addCapture:self.capture toAlbum:_parameter];
+            }
+            [self.paramterSelectionView loadParameters];
+            [self.paramterSelectionView reloadData];
             break;
     }
+}
+
+- (void)done {
+    self.exiting = YES;
     [self.paramterSelectionView removeView];
 }
 
-- (void)cancel {
-    self.canceling = YES;
-    [self.paramterSelectionView removeView];
-}
-
-- (BOOL)addParameters {
+- (BOOL)canEdit {
     switch (self.editMode) {
         case EditModeService:
             return NO;
@@ -262,11 +275,12 @@ typedef enum {
     }
 }
 
-- (void)addParameter {
+- (void)addParameterNamed:(NSString *)_name {
     switch (self.editMode) {
         case EditModeService:
             break;
         case EditModeAlbum:
+            [AlbumManager createAlbumNamed:_name];
             break;
     }
 }

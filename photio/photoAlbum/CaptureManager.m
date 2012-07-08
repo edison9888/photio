@@ -206,7 +206,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (cached == %@)", _dayIdentifier, [NSNumber numberWithBool:NO]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@)", _dayIdentifier]];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     return [contextManager fetch:fetchRequest];
 }
@@ -215,8 +215,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (createdAt BETWEEN {%@, %@}) AND (cached = %@)", 
-                                _dayIdentifier, _startdate, _endDate, [NSNumber numberWithBool:NO]]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(dayIdentifier == %@) AND (createdAt BETWEEN {%@, %@})", _dayIdentifier, _startdate, _endDate]];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO]]];
     return [contextManager fetch:fetchRequest];
 }
@@ -225,8 +224,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     DataContextManager* contextManager = [DataContextManager instance];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];    
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"Capture" inManagedObjectContext:contextManager.mainObjectContext]];    
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(createdAt BETWEEN {%@, %@}) AND (cached = %@)", 
-                                _startdate, _endDate, [NSNumber numberWithBool:NO]]];    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(createdAt BETWEEN {%@, %@})", _startdate, _endDate]];    
     NSArray* fetchResults = [contextManager fetch:fetchRequest];
     
     NSArray* days = [fetchResults valueForKeyPath:@"@distinctUnionOfObjects.dayIdentifier"];

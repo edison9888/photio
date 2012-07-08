@@ -30,14 +30,17 @@
 
 - (void)addInputView {
     CGRect shareViewRect = self.metaDataEditView.shareContainerView.frame;
+    CGRect commentViewRect = self.metaDataEditView.commentContainerView.frame;
     __block CGRect oldFrame = self.containerView.frame;
     __block CGRect newShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
+    __block CGRect newCommentViewRect = CGRectMake(commentViewRect.origin.x, self.metaDataEditView.frame.size.height, commentViewRect.size.width, commentViewRect.size.height);
     self.containerView.frame = CGRectMake(oldFrame.origin.x, (oldFrame.origin.y - oldFrame.size.height), oldFrame.size.width, oldFrame.size.height);
     [UIView animateWithDuration:EDIT_VIEW_ANIMATION_DURATION
          delay:0
          options:UIViewAnimationOptionCurveLinear
          animations:^{
              self.metaDataEditView.shareContainerView.frame = newShareViewRect;
+             self.metaDataEditView.commentContainerView.frame = newCommentViewRect;
          } 
          completion:^(BOOL _finished) {
              [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION
@@ -56,8 +59,10 @@
 
 - (void)removeInputView {
     CGRect shareViewRect = self.metaDataEditView.shareContainerView.frame;
+    CGRect commentViewRect = self.metaDataEditView.commentContainerView.frame;
     __block CGRect oldFrame = self.containerView.frame;
     __block CGRect newShareViewRect = CGRectMake(shareViewRect.origin.x, 0.0, shareViewRect.size.width, shareViewRect.size.height);
+    __block CGRect newCommentViewRect = CGRectMake(commentViewRect.origin.x, self.metaDataEditView.frame.size.height - commentViewRect.size.height, commentViewRect.size.width, commentViewRect.size.height);
     [UIView animateWithDuration:COMMENT_VIEW_ANIMATION_DURATION 
         delay:0
         options:UIViewAnimationOptionCurveLinear
@@ -70,6 +75,7 @@
             [UIView animateWithDuration:EDIT_VIEW_ANIMATION_DURATION
              animations:^{
                  self.metaDataEditView.shareContainerView.frame = newShareViewRect;
+                 self.metaDataEditView.commentContainerView.frame = newCommentViewRect;
              } 
              completion:^(BOOL _finished) {
              }

@@ -32,7 +32,7 @@
         <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="cameraUsed" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <entity name="Capture" representedClassName="Capture" syncable="YES">
-        <attribute name="cached" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="cached" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="captureId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
@@ -116,6 +116,7 @@
     </entity>
     <elements>
         <element name="Album" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="AlbumCapture" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Camera" positionX="160" positionY="192" width="128" height="255"/>
         <element name="CameraUsed" positionX="160" positionY="192" width="128" height="105"/>
         <element name="Capture" positionX="160" positionY="192" width="128" height="255"/>
@@ -129,6 +130,5 @@
         <element name="Path" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Service" positionX="160" positionY="192" width="128" height="150"/>
         <element name="ServiceUsed" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="AlbumCapture" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

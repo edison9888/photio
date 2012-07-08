@@ -7,6 +7,7 @@
 //
 
 #import "ParameterSelectionView.h"
+#import "AddParameterView.h"
 #import "ImageEditView.h"
 #import "UITableViewCell+Extensions.h"
 #import "UIView+Extensions.h"
@@ -22,16 +23,16 @@
 - (void)showView;
 - (void)removeView;
 - (IBAction)addParameter:(id)sender;
-- (IBAction)cancel:(id)sender;
+- (IBAction)done:(id)sender;
 
 @end
 
 @implementation ParameterSelectionView
 
-@synthesize delegate, showAnimation, hideAnimation, parameters, titleLabel, addParameterView;
+@synthesize delegate, showAnimation, hideAnimation, containerView, parameters, titleLabel, addParameterView, parameterListView, doneView;
 
 #pragma mark -
-#pragma mark ImageFilterPaletteView (PrivateAPI)
+#pragma mark ParameterSelectionView (PrivateAPI)
 
 - (void)showView {
     __block CGRect oldFrame = self.frame;
@@ -54,15 +55,15 @@
 }
 
 - (IBAction)addParameter:(id)sender {
-    [self.delegate addParameter];
+    [AddParameterView initInView:self.containerView withParameterSelectionView:self];
 }
 
-- (IBAction)cancel:(id)sender {
-    [self.delegate cancel];
+- (IBAction)done:(id)sender {
+    [self.delegate done];
 }
 
 #pragma mark -
-#pragma mark ImageFilterPaletteView
+#pragma mark ParameterSelectionView
 
 + (id)initInView:(UIView*)_containerView withDelegate:(id<ParameterSelectionViewDelegate>)_delegate showAnimation:(DisplayAnimation)_showAnimation hideAnimation:(DisplayAnimation)_hideAnimation andTitle:(NSString*)_title {
     ParameterSelectionView* parameterView = (ParameterSelectionView*)[UIView loadView:[self class]];
@@ -70,6 +71,7 @@
     parameterView.delegate = _delegate;
     parameterView.showAnimation = _showAnimation;
     parameterView.hideAnimation = _hideAnimation;
+    parameterView.containerView = _containerView;
     [_containerView addSubview:parameterView];
     return parameterView;
 }
@@ -89,6 +91,14 @@
     ];    
 }
 
+- (void)loadParameters {
+    self.parameters = [self.delegate loadParameters];
+}
+
+- (void)reloadData {
+    [self.parameterListView reloadData];    
+}
+
 #pragma mark -
 #pragma mark UIView
 
@@ -100,8 +110,13 @@
 }
 
 - (void)didMoveToSuperview {
-    self.parameters = [self.delegate loadParameters];
-    self.addParameterView.hidden = ![self.delegate addParameters];
+    [self loadParameters];
+    if ([self.delegate canEdit]) {
+        self.doneView.image = [UIImage imageNamed:@"apply"];
+        self.addParameterView.hidden = NO;
+    } else {
+        self.addParameterView.hidden = YES;
+    }
     self.frame = CGRectMake(self.frame.origin.x, - self.frame.size.height, self.frame.size.width, self.frame.size.height);
     [self showView];
 }

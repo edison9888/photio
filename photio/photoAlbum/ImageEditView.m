@@ -162,11 +162,11 @@
     [self.filterPaletteSelectionView removeView];
 }
 
-- (void)cancel {
+- (void)done {
     [self.filterPaletteSelectionView removeView];
 }
 
-- (BOOL)addParameters {
+- (BOOL)canEdit {
     return NO;
 }
 

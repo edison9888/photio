@@ -1,5 +1,5 @@
 //
-//  AddParemeterView.h
+//  AddParameterView.h
 //  photio
 //
 //  Created by Troy Stribling on 7/7/12.
@@ -10,10 +10,12 @@
 
 @class ParameterSelectionView;
 
-@interface AddParemeterView : UIView
+@interface AddParameterView : UIView
 
 @property(nonatomic, weak)   ParameterSelectionView*    parameterSelectionView;
 @property(nonatomic, strong) IBOutlet UITextField*      textField;
-@property(nonatomic, strong) IBOutlet UIView*           containerView;
+@property(nonatomic, strong) IBOutlet UIView*           textContainerView;
+
++ (id)initInView:(UIView*)_containerView withParameterSelectionView:(ParameterSelectionView*)_parameterSelectionView;
 
 @end

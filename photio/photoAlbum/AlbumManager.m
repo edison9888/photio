@@ -65,7 +65,7 @@ static AlbumManager* thisAlbumManager = nil;
     DataContextManager* contextManager = [DataContextManager instance];
     NSSet* captures = _album.captures;
     NSArray* filteredCaptures = [[captures filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"capture.captureId == %@", _capture.captureId]] allObjects];
-    if ([filteredCaptures count] > 1) {
+    if ([filteredCaptures count] > 0) {
         AlbumCapture* albumCapture = [filteredCaptures objectAtIndex:0];
         [contextManager.mainObjectContext deleteObject:albumCapture];
         [contextManager save];
@@ -103,7 +103,7 @@ static AlbumManager* thisAlbumManager = nil;
 + (NSArray*)fetchAlbumsForCapture:(Capture*)_capture {
     return [[_capture.albums allObjects] mapObjectsUsingBlock:^id(id _object, NSUInteger _idx) {
         AlbumCapture* albumCapture = _object;
-        return albumCapture.capture;
+        return albumCapture.album;
     }];
 }
 

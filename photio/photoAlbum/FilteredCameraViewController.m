@@ -347,11 +347,11 @@
     [self.cameraSelectionView removeView];
 }
 
-- (BOOL)addParameters {
+- (BOOL)canEdit {
     return NO;
 }
 
-- (void)cancel {
+- (void)done {
     [self.cameraSelectionView removeView];
 }
 

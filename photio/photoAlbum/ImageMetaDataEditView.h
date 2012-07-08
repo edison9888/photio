@@ -42,7 +42,7 @@ typedef enum {
 @property(nonatomic, strong) IBOutlet UIView*                   commentContainerView;
 @property(nonatomic, assign) CGRect                             initialCommentContainerRect;
 @property(nonatomic, assign) EditMode                           editMode;
-@property(nonatomic, assign) BOOL                               canceling;
+@property(nonatomic, assign) BOOL                               exiting;
  
 + (id)withDelegate:(id<ImageMetaDataEditViewDelegate>)_delegate andCapture:(Capture*)_capture;
 

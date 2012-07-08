@@ -27,6 +27,7 @@
 - (BOOL)canRemoveLeftView;
 - (void)removeEntry:(ImageEntryView*)_entry;
 - (void)loadEntries;
+- (void)singleTapGesture;
 
 @end
 
@@ -98,6 +99,9 @@
         [[DataContextManager instance].mainObjectContext refreshObject:_capture mergeChanges:NO];
     }
     [self.entries insertObject:_capture atIndex:0];
+}
+
+- (void)singleTapGesture {
 }
 
 #pragma mark -

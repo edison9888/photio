@@ -29,7 +29,7 @@
 @interface ImageEntryView (PrivateAPI)
 
 - (void)editImage;
-- (void)singleTapGesture;
+- (void)singleTapImageGesture;
 - (void)removeCommentView;
 - (UIImage*)scaleImage:(UIImage*)_image;
 

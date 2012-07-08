@@ -59,7 +59,7 @@
 							<object class="IBUIView" id="810743972">
 								<reference key="NSNextResponder" ref="116696815"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{35, 59}, {250, 170}}</string>
+								<string key="NSFrame">{{35, 69}, {250, 170}}</string>
 								<reference key="NSSuperview" ref="116696815"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="696439077"/>
@@ -73,10 +73,10 @@
 							<object class="IBUITextView" id="696439077">
 								<reference key="NSNextResponder" ref="116696815"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{45, 69}, {230, 150}}</string>
+								<string key="NSFrame">{{45, 79}, {230, 150}}</string>
 								<reference key="NSSuperview" ref="116696815"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="634038391"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="406429613"/>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -94,21 +94,21 @@
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">1</int>
-									<double key="pointSize">20</double>
+									<double key="pointSize">21</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica</string>
-									<double key="NSSize">20</double>
+									<double key="NSSize">21</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="296298991">
 								<reference key="NSNextResponder" ref="116696815"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{10, 0}, {50, 50}}</string>
+								<string key="NSFrame">{{10, 0}, {70, 70}}</string>
 								<reference key="NSSuperview" ref="116696815"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="634038391"/>
+								<reference key="NSNextKeyView" ref="810743972"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.60000002384185791</float>
 								<array key="IBUIGestureRecognizers" id="0"/>
@@ -121,10 +121,9 @@
 							<object class="IBUIImageView" id="634038391">
 								<reference key="NSNextResponder" ref="116696815"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{250, 0}, {50, 50}}</string>
+								<string key="NSFrame">{{240, 0}, {70, 70}}</string>
 								<reference key="NSSuperview" ref="116696815"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="810743972"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<float key="IBUIAlpha">0.60000002384185791</float>
 								<reference key="IBUIGestureRecognizers" ref="0"/>
@@ -385,7 +384,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="apply.png">{70, 70}</string>
-			<string key="cancel.png">{50, 50}</string>
+			<string key="cancel.png">{70, 70}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
