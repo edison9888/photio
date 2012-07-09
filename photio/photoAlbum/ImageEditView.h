@@ -46,5 +46,6 @@
 - (void)applyFilter:(Filter*)_filter withValue:(NSNumber*)_value;
 - (void)saveFilteredImage:(Filter*)_filter withValue:(NSNumber*)_value;
 - (void)resetFilteredImage;
+- (void)touchEnabled:(BOOL)_enabled;
 
 @end

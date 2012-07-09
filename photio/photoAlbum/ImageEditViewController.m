@@ -119,6 +119,13 @@
     ];
 }
 
+- (BOOL)touchEnbaled {
+    return [self.streamView enabled];
+}
+
+- (void)touchEnbaled:(BOOL)_enabled {
+    [self.streamView enabled:_enabled];
+}
 
 #pragma mark -
 #pragma mark UIViewController
@@ -177,6 +184,11 @@
 
 #pragma mark -
 #pragma mark ImageMetaDataEditViewDelegate
+
+- (void)touchEnabled:(BOOL)_enabled {
+    [self.streamView enabled:_enabled];
+    [self.delegate touchEnabled:_enabled];
+}
 
 #pragma mark -
 #pragma mark ImageEditView

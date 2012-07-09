@@ -15,6 +15,10 @@
 
 - (BOOL)diagonalSwipeFor:(CGFloat)_deltaX and:(CGFloat)_deltaY;
 - (void)diagonalStateInit;
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event;
+- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event;
+- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event;
+- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event;
 
 @end
 

@@ -145,4 +145,13 @@
     [self.delegate selectedParameter:[self.parameters objectAtIndex:indexPath.row]];    
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
+	if (editingStyle == UITableViewCellEditingStyleDelete) { 
+	} 
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.delegate canEdit];
+}
+
 @end

@@ -115,6 +115,7 @@ typedef enum {
 
 - (void)showParametersWithTitle:(NSString*)_title  {
     self.exiting = NO;
+    [self.delegate touchEnabled:NO];
     CGRect shareViewRect = self.shareContainerView.frame;
     CGRect commentViewRect = self.commentContainerView.frame;
     __block CGRect showShareViewRect = CGRectMake(shareViewRect.origin.x, -shareViewRect.size.height, shareViewRect.size.width, shareViewRect.size.height);
@@ -129,6 +130,7 @@ typedef enum {
                                          if (self.exiting) {
                                             [self showControls];
                                          }
+                                         [self.delegate touchEnabled:YES];
                                      }
                                      andTitle:_title
                                  ];

@@ -16,8 +16,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ImageInspectViewController (PrivateAPI)
 
-- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
-- (void)loadFile:(NSString*)_fileName;
 - (void)saveCapture:(ImageEntryView*)_selectedView;
 - (CLLocationManager*)locationManager;
 
@@ -53,17 +51,6 @@
 
 #pragma mark -
 #pragma mark ImageInspectViewController (PrivateAPI)
-
-- (void)loadFile:(NSString*)_fileName {
-    NSString* pngPath = [NSHomeDirectory() stringByAppendingPathComponent:_fileName];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:pngPath]) {
-    }
-}
-
-- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
-    if (error != NULL) {
-    }
-}
 
 #pragma mark -
 #pragma mark UIViewController

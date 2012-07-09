@@ -44,7 +44,7 @@
 @synthesize delegate, transitionGestureRecognizer, streamOfViews, inViewIndex, notAnimating;
 
 #pragma mark -
-#pragma mark StreamOfViews PrivatAPI
+#pragma mark StreamOfViews (PrivatAPI)
 
 - (UIView*)leftView {
     return [self.streamOfViews objectAtIndex:(self.inViewIndex - 1)];
@@ -309,6 +309,14 @@
         [self displayedView].frame = [self rightOfWindow];
         self.inViewIndex = viewsToMove - (i + 1);
     }
+}
+
+- (BOOL)enabled {
+    return [self.transitionGestureRecognizer enabled];
+}
+
+- (void)enabled:(BOOL)_enabled {
+    [self.transitionGestureRecognizer enabled:_enabled];
 }
 
 #pragma mark -

@@ -52,4 +52,6 @@ typedef enum {
 
 @required
 
+- (void)touchEnabled:(BOOL)_enabled;
+
 @end

@@ -34,5 +34,6 @@
 @optional
 
 - (void)didSingleTapImage;
+- (void)touchEnabled:(BOOL)_enabled;
 
 @end

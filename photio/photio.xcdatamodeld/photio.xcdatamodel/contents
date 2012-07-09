@@ -2,7 +2,7 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Album" representedClassName="Album" syncable="YES">
         <attribute name="captureCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
         <relationship name="captures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AlbumCapture" inverseName="album" inverseEntity="AlbumCapture" syncable="YES"/>
     </entity>
     <entity name="AlbumCapture" representedClassName="AlbumCapture" syncable="YES">
@@ -33,10 +33,10 @@
     </entity>
     <entity name="Capture" representedClassName="Capture" syncable="YES">
         <attribute name="cached" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
-        <attribute name="captureId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="captureId" optional="YES" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="dayIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dayIdentifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="albums" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AlbumCapture" inverseName="capture" inverseEntity="AlbumCapture" syncable="YES"/>
         <relationship name="cameraUsed" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="CameraUsed" inverseName="capture" inverseEntity="CameraUsed" syncable="YES"/>
@@ -85,10 +85,10 @@
         <relationship name="capture" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Capture" inverseName="thumbnail" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <entity name="Locale" representedClassName="Locale" syncable="YES">
-        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <relationship name="captures" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Capture" inverseName="locale" inverseEntity="Capture" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">

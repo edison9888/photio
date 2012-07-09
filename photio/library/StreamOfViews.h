@@ -30,6 +30,8 @@
 - (void)moveDisplayedViewDownAndRemove;
 - (void)moveDisplayedViewDiagonallyAndRemove;
 - (void)reset;
+- (BOOL)enabled;
+- (void)enabled:(BOOL)_enabled;
 
 @end
 

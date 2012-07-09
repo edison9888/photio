@@ -282,4 +282,9 @@
     }
 }
 
+- (void)touchEnabled:(BOOL)_enabled {
+    [self.entriesStreamView enabled:_enabled];
+    self.diagonalGestures.enabled = _enabled;
+}
+
 @end

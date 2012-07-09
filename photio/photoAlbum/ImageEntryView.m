@@ -156,4 +156,8 @@
     self.image = [UIImage imageWithCGImage:[self scaleImage:displayImage].CGImage scale:displayImage.scale orientation:displayImage.imageOrientation];
 }
 
+- (void)touchEnabled:(BOOL)_enabled {
+    [self.delegate touchEnabled:_enabled];
+}
+
 @end
