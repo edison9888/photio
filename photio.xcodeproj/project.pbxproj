@@ -49,6 +49,8 @@
 		053B278C15A9F595005D3B4C /* ParameterSelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 053B278615A9F595005D3B4C /* ParameterSelectionView.xib */; };
 		053B278F15AA218C005D3B4C /* select-album.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B278D15AA218C005D3B4C /* select-album.png */; };
 		053B279015AA218C005D3B4C /* select-album@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B278E15AA218C005D3B4C /* select-album@2x.png */; };
+		053B279615AA8255005D3B4C /* delete-parameter.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B279415AA8255005D3B4C /* delete-parameter.png */; };
+		053B279715AA8255005D3B4C /* delete-parameter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B279515AA8255005D3B4C /* delete-parameter@2x.png */; };
 		0542DAE6151FFD85002C62A0 /* StreamOfViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542DAE5151FFD85002C62A0 /* StreamOfViews.m */; };
 		0543265C15A7CFBF004AA547 /* AlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543265B15A7CFBF004AA547 /* AlbumManager.m */; };
 		0543267415A8A6D9004AA547 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543267315A8A6D8004AA547 /* Capture.m */; };
@@ -275,6 +277,8 @@
 		053B278615A9F595005D3B4C /* ParameterSelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ParameterSelectionView.xib; path = photio/Library/ParameterSelectionView.xib; sourceTree = SOURCE_ROOT; };
 		053B278D15AA218C005D3B4C /* select-album.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-album.png"; sourceTree = "<group>"; };
 		053B278E15AA218C005D3B4C /* select-album@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-album@2x.png"; sourceTree = "<group>"; };
+		053B279415AA8255005D3B4C /* delete-parameter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-parameter.png"; sourceTree = "<group>"; };
+		053B279515AA8255005D3B4C /* delete-parameter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-parameter@2x.png"; sourceTree = "<group>"; };
 		0542DAE4151FFD85002C62A0 /* StreamOfViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamOfViews.h; sourceTree = "<group>"; };
 		0542DAE5151FFD85002C62A0 /* StreamOfViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamOfViews.m; sourceTree = "<group>"; };
 		0543265A15A7CFBF004AA547 /* AlbumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumManager.h; sourceTree = "<group>"; };
@@ -626,6 +630,8 @@
 				059039B2158E6507008E0318 /* apply@2x.png */,
 				0543267B15A8BC68004AA547 /* cancel.png */,
 				0543267C15A8BC68004AA547 /* cancel@2x.png */,
+				053B279415AA8255005D3B4C /* delete-parameter.png */,
+				053B279515AA8255005D3B4C /* delete-parameter@2x.png */,
 				059039B3158E6507008E0318 /* export.png */,
 				059039B4158E6507008E0318 /* export@2x.png */,
 				059039B5158E6507008E0318 /* pencil.png */,
@@ -1119,6 +1125,8 @@
 				053B278C15A9F595005D3B4C /* ParameterSelectionView.xib in Resources */,
 				053B278F15AA218C005D3B4C /* select-album.png in Resources */,
 				053B279015AA218C005D3B4C /* select-album@2x.png in Resources */,
+				053B279615AA8255005D3B4C /* delete-parameter.png in Resources */,
+				053B279715AA8255005D3B4C /* delete-parameter@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

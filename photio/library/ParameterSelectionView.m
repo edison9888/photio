@@ -22,6 +22,7 @@
 
 - (void)showView;
 - (void)removeView;
+- (void)deleteCell:(UIGestureRecognizer*)gestureRecognizer;
 - (IBAction)addParameter:(id)sender;
 - (IBAction)done:(id)sender;
 
@@ -60,6 +61,14 @@
 
 - (IBAction)done:(id)sender {
     [self.delegate done];
+}
+
+- (void)deleteCell:(UIGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        UITableViewCell* cell = (UITableViewCell*)gestureRecognizer.view;
+        NSIndexPath* indexPath = [self.parameterListView indexPathForCell:cell];
+        [self.parameterListView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    }
 }
 
 #pragma mark -
@@ -138,20 +147,16 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     ParameterSelectionCell* cell = (ParameterSelectionCell*)[UITableViewCell loadCell:[ParameterSelectionCell class]];
     [self.delegate configureParemeterCell:cell withParameter:[self.parameters objectAtIndex:indexPath.row]];
+    if ([self.delegate canEdit]) {
+        UISwipeGestureRecognizer* swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(deleteCell:)];
+        [swipeGesture setDirection:UISwipeGestureRecognizerDirectionRight];
+        [cell addGestureRecognizer:swipeGesture];
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     [self.delegate selectedParameter:[self.parameters objectAtIndex:indexPath.row]];    
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
-	if (editingStyle == UITableViewCellEditingStyleDelete) { 
-	} 
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.delegate canEdit];
 }
 
 @end
