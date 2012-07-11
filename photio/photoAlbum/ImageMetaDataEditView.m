@@ -287,4 +287,14 @@ typedef enum {
     }
 }
 
+- (void)deleteParameter:(id)_parameter {
+    switch (self.editMode) {
+        case EditModeService:
+            break;
+        case EditModeAlbum:
+            [AlbumManager deleteAlbum:_parameter];
+            break;
+    }
+}
+
 @end

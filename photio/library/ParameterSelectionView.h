@@ -46,6 +46,7 @@ typedef void (^DisplayAnimation)();
 
 @optional
 
+- (void)deleteParameter:(id)_parameter;
 - (void)addParameterNamed:(NSString*)_name;
 
 @end

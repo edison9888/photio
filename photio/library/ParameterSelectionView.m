@@ -23,6 +23,7 @@
 - (void)showView;
 - (void)removeView;
 - (void)deleteCell:(UIGestureRecognizer*)gestureRecognizer;
+- (void)deleteParameterAtIndexPath:(NSIndexPath*)_indexPath;
 - (IBAction)addParameter:(id)sender;
 - (IBAction)done:(id)sender;
 
@@ -67,8 +68,15 @@
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
         UITableViewCell* cell = (UITableViewCell*)gestureRecognizer.view;
         NSIndexPath* indexPath = [self.parameterListView indexPathForCell:cell];
-        [self.parameterListView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+        [self deleteParameterAtIndexPath:indexPath];
     }
+}
+
+- (void)deleteParameterAtIndexPath:(NSIndexPath*)_indexPath {
+    [self.delegate deleteParameter:[self.parameters objectAtIndex:_indexPath.row]];
+    [self loadParameters];
+    [self.parameterListView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_indexPath] withRowAnimation:YES];
+    
 }
 
 #pragma mark -

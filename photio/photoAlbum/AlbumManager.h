@@ -16,6 +16,7 @@
 + (AlbumManager*)instance;
 + (NSArray*)albums;
 + (void)createAlbumNamed:(NSString*)_albumName;
++ (void)deleteAlbum:(Album*)_album;
 + (void)addCapture:(Capture*)_capture toAlbum:(Album*)_album;
 + (void)removeCapture:(Capture*)_capture fromAlbum:(Album*)_album;
 + (Album*)fetchAlbumNamed:(NSString*)_name;

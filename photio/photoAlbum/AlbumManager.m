@@ -53,6 +53,12 @@ static AlbumManager* thisAlbumManager = nil;
     [contextManager save];
 }
 
++ (void)deleteAlbum:(Album*)_album {
+    DataContextManager* contextManager = [DataContextManager instance];
+    [contextManager deleteObject:_album];
+    [contextManager save];
+}
+
 + (void)addCapture:(Capture*)_capture toAlbum:(Album*)_album {
     DataContextManager* contextManager = [DataContextManager instance];
     AlbumCapture* albumCapture = [NSEntityDescription insertNewObjectForEntityForName:@"AlbumCapture" inManagedObjectContext:contextManager.mainObjectContext];

@@ -173,4 +173,7 @@
 - (void)addParameter {
 }
 
+- (void)deleteParameter:(id)_parameter {    
+}
+
 @end
