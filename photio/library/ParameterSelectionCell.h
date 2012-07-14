@@ -8,9 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ParameterSelectionCellDelegate;
+
 @interface ParameterSelectionCell : UITableViewCell
 
-@property(nonatomic, strong) IBOutlet UIImageView*  parameterIcon;
-@property(nonatomic, strong) IBOutlet UILabel*      parameterLabel;
+@property(nonatomic, weak)   id<ParameterSelectionCellDelegate> parameterCellDelegate;
+@property(nonatomic, strong) IBOutlet UIImageView*              parameterIcon;
+@property(nonatomic, strong) IBOutlet UILabel*                  parameterLabel;
+@property(nonatomic, strong) IBOutlet UIImageView*              parameterDeleteIcon;
+@property(nonatomic, assign) BOOL                               inEditMode;
+@property(nonatomic, assign) CGFloat                            parameterLabelWidth;
+
+- (void)enterEditMode;
+- (void)leaveEditMode;
+
+@end
+
+@protocol ParameterSelectionCellDelegate <NSObject>
+
+@required 
+
+- (void)didDeleteParameter:(ParameterSelectionCell*)_cell;
 
 @end

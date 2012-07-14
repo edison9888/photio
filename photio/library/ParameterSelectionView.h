@@ -15,7 +15,7 @@
 
 typedef void (^DisplayAnimation)();
 
-@interface ParameterSelectionView : UIView <UITableViewDataSource, UITableViewDelegate>
+@interface ParameterSelectionView : UIView <UITableViewDataSource, UITableViewDelegate, ParameterSelectionCellDelegate>
 
 @property(readwrite, copy)      DisplayAnimation                    showAnimation;
 @property(readwrite, copy)      DisplayAnimation                    hideAnimation;

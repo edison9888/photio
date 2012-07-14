@@ -66,17 +66,9 @@
 
 - (void)deleteCell:(UIGestureRecognizer*)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        UITableViewCell* cell = (UITableViewCell*)gestureRecognizer.view;
-        NSIndexPath* indexPath = [self.parameterListView indexPathForCell:cell];
-        [self deleteParameterAtIndexPath:indexPath];
+        ParameterSelectionCell* cell = (ParameterSelectionCell*)gestureRecognizer.view;
+        [cell enterEditMode];
     }
-}
-
-- (void)deleteParameterAtIndexPath:(NSIndexPath*)_indexPath {
-    [self.delegate deleteParameter:[self.parameters objectAtIndex:_indexPath.row]];
-    [self loadParameters];
-    [self.parameterListView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_indexPath] withRowAnimation:YES];
-    
 }
 
 #pragma mark -
@@ -159,12 +151,29 @@
         UISwipeGestureRecognizer* swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(deleteCell:)];
         [swipeGesture setDirection:UISwipeGestureRecognizerDirectionRight];
         [cell addGestureRecognizer:swipeGesture];
+        cell.parameterCellDelegate = self;
     }
+    cell.inEditMode = NO;
     return cell;
 }
 
-- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    [self.delegate selectedParameter:[self.parameters objectAtIndex:indexPath.row]];    
+- (void)tableView:(UITableView*)_tableView didSelectRowAtIndexPath:(NSIndexPath*)_indexPath {
+    ParameterSelectionCell* cell = (ParameterSelectionCell*)[_tableView cellForRowAtIndexPath:_indexPath];
+    if (cell.inEditMode) {
+        [cell leaveEditMode];
+    } else {
+        [self.delegate selectedParameter:[self.parameters objectAtIndex:_indexPath.row]];    
+    }
+}
+
+#pragma mark -
+#pragma mark ParameterSelectionCellDelegate
+
+- (void)didDeleteParameter:(ParameterSelectionCell *)_cell {
+    NSIndexPath* indexPath = [self.parameterListView indexPathForCell:_cell];
+    [self.delegate deleteParameter:[self.parameters objectAtIndex:indexPath.row]];
+    [self loadParameters];
+    [self.parameterListView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
 }
 
 @end
