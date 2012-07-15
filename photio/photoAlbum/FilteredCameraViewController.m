@@ -298,7 +298,7 @@
 }
 
 - (void)didSwipeRight:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionCameraToLocales];    
+    [[ViewGeneral instance] transitionCameraToAlbums];    
 }
 
 - (void)didSwipeLeft:(CGPoint)_location withVelocity:(CGPoint)_velocity {
@@ -314,7 +314,7 @@
 }
 
 - (void)didReachMaxDragRight:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {
-    [[ViewGeneral instance] transitionCameraToLocales];    
+    [[ViewGeneral instance] transitionCameraToAlbums];    
 }
 
 - (void)didReachMaxDragLeft:(CGPoint)_drag from:(CGPoint)_location withVelocity:(CGPoint)_velocity {    

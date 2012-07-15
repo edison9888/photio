@@ -12,7 +12,7 @@
 
 @class ImageInspectViewController;
 @class CalendarViewController;
-@class LocalesViewController;
+@class AlbumsViewController;
 @class ProgressView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@
 @property(nonatomic, strong) UIView*                        containerView;
 @property(nonatomic, strong) ImageInspectViewController*    imageInspectViewController;
 @property(nonatomic, strong) CalendarViewController*        calendarViewController;
-@property(nonatomic, strong) LocalesViewController*         localesViewController;
+@property(nonatomic, strong) AlbumsViewController*          albumsViewController;
 @property(nonatomic, strong) FilteredCameraViewController*  cameraViewController;
 @property(nonatomic, strong) ProgressView*                  progressView;
 
@@ -63,9 +63,9 @@
 - (void)calendarViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initLocalesView:(UIView*)_containerView;
-- (void)localesViewPosition:(CGRect)_rec;
-- (void)localesViewHidden:(BOOL)_hidden;
+//- (void)initAlbumsView:(UIView*)_containerView;
+//- (void)albumsViewPosition:(CGRect)_rec;
+//- (void)albumsViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCalendarToCamera;
@@ -78,12 +78,12 @@
 - (void)dragCamera:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)transitionCameraToLocales;
+- (void)transitionCameraToAlbums;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)transitionLocalesToCamera;
-- (void)releaseLocales;
-- (void)dragLocales:(CGPoint)_drag;
+- (void)transitionAlbumsToCamera;
+- (void)releaseAlbums;
+- (void)dragAlbums:(CGPoint)_drag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCameraToInspectImage;

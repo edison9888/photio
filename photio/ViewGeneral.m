@@ -16,7 +16,6 @@
 
 #import "ImageEditViewController.h"
 #import "CalendarViewController.h"
-#import "LocalesViewController.h"
 #import "ProgressView.h"
 
 #define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
@@ -48,7 +47,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 @implementation ViewGeneral
  
 @synthesize notAnimating, containerView;
-@synthesize imageInspectViewController, cameraViewController, calendarViewController, localesViewController,
+@synthesize imageInspectViewController, cameraViewController, calendarViewController, albumsViewController,
             progressView;
 
 #pragma mark - 
@@ -143,7 +142,7 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [self initImageInspectView:_containerView];
     [self initCameraView:_containerView];
     [self initCalendarView:_containerView];
-    [self initLocalesView:_containerView];
+//    [self initAlbumsView:_containerView];
 }
 
 - (CGRect)calendarImageThumbnailRect {
@@ -230,24 +229,23 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     self.calendarViewController.view.frame = _rect;
 }
 
-#pragma mark - 
-#pragma mark LocalesViewController
+#pragma mark - AlbumsViewController
 
-- (void)initLocalesView:(UIView*)_containerView {
-    if (self.localesViewController == nil) {
-        self.localesViewController = [LocalesViewController inView:_containerView];
-    } 
-    [self localesViewPosition:[self.class leftOfWindow]];
-    [_containerView addSubview:self.localesViewController.view];
-}
-
-- (void)localesViewHidden:(BOOL)_hidden {
-    self.localesViewController.view.hidden = _hidden;
-}
-
-- (void)localesViewPosition:(CGRect)_rect {
-    self.localesViewController.view.frame = _rect;
-}
+//- (void)initAlbumsView:(UIView*)_containerView {
+//    if (self.albumsViewController == nil) {
+//        self.albumsViewController = [AlbumsViewController inView:_containerView];
+//    } 
+//    [self albumsViewPosition:[self.class leftOfWindow]];
+//    [_containerView addSubview:self.albumsViewController.view];
+//}
+//
+//- (void)albumViewHidden:(BOOL)_hidden {
+//    self.albumsViewController.view.hidden = _hidden;
+//}
+//
+//- (void)albumsViewPosition:(CGRect)_rect {
+//    self.albumsViewController.view.frame = _rect;
+//}
 
 #pragma mark - 
 #pragma mark Calendar To Camera
@@ -296,35 +294,35 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 #pragma mark - 
 #pragma mark Camera To Locales
 
-- (void)transitionCameraToLocales {
-    [self transition:[self horizontalTransitionDuration:self.cameraViewController.view.frame.origin.x] withAnimation:^{
-            [self cameraViewPosition:[self.class rightOfWindow]];
-            [self localesViewPosition:[self.class inWindow]];
-        }
-    ];
-}
+//- (void)transitionCameraToAlbums {
+//    [self transition:[self horizontalTransitionDuration:self.cameraViewController.view.frame.origin.x] withAnimation:^{
+//            [self cameraViewPosition:[self.class rightOfWindow]];
+//            [self albumsViewPosition:[self.class inWindow]];
+//        }
+//    ];
+//}
 
 #pragma mark - 
 #pragma mark Locales To Camera
 
-- (void)transitionLocalesToCamera {
-    [self transition:[self horizontalTransitionDuration:self.localesViewController.view.frame.origin.x] withAnimation:^{
-        [self cameraViewPosition:[self.class inWindow]];
-        [self localesViewPosition:[self.class leftOfWindow]];
-    }
-     ];
-}
-
-- (void)releaseLocales {
-    [self transition:[self horizontaltReleaseDuration:self.localesViewController.view.frame.origin.x] withAnimation:^{
-            [self localesViewPosition:[self.class inWindow]];
-        }
-    ];    
-}
-
-- (void)dragLocales:(CGPoint)_drag {
-    [self drag:_drag view:self.localesViewController.view];
-}
+//- (void)transitionAlbumsToCamera {
+//    [self transition:[self horizontalTransitionDuration:self.albumsViewController.view.frame.origin.x] withAnimation:^{
+//        [self cameraViewPosition:[self.class inWindow]];
+//        [self albumsViewPosition:[self.class leftOfWindow]];
+//    }
+//     ];
+//}
+//
+//- (void)releaseAlbums {
+//    [self transition:[self horizontaltReleaseDuration:self.albumsViewController.view.frame.origin.x] withAnimation:^{
+//            [self localesViewPosition:[self.class inWindow]];
+//        }
+//    ];    
+//}
+//
+//- (void)dragAlbums:(CGPoint)_drag {
+//    [self drag:_drag view:self.albumsViewController.view];
+//}
 
 #pragma mark - 
 #pragma mark Camera To Inspect Image
