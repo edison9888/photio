@@ -30,7 +30,6 @@
 
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
-- (CGRect)calendarImageThumbnailRect;
 - (void)loadCalendarViews;
 - (void)updateEntryWithDate:(NSDate*)_date;
 - (NSDate*)floorDate:(NSDate*)_date;

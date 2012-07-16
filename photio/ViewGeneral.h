@@ -37,9 +37,9 @@
 + (CGRect)leftOfWindow;
 + (CGRect)rightOfWindow;
 + (void)alertOnError:(NSError*)error;
++ (CGRect)imageThumbnailRect;
 
 - (void)createViews:(UIView*)_containerView;
-- (CGRect)calendarImageThumbnailRect;
 - (void)updateCalendarEntryWithDate:(NSDate*)_date;
 - (void)addCapture:(Capture*)_capture;
 
@@ -63,9 +63,9 @@
 - (void)calendarViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)initAlbumsView:(UIView*)_containerView;
-//- (void)albumsViewPosition:(CGRect)_rec;
-//- (void)albumsViewHidden:(BOOL)_hidden;
+- (void)initAlbumsView:(UIView*)_containerView;
+- (void)albumsViewPosition:(CGRect)_rec;
+- (void)albumsViewHidden:(BOOL)_hidden;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)transitionCalendarToCamera;

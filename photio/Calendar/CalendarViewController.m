@@ -14,7 +14,6 @@
 #import "CaptureManager.h"
 #import "NSArray+Extensions.h"
 
-#define CALENDAR_DAYS_IN_ROW                3
 #define CALENDAR_VIEW_COUNT                 5
 #define CALENDAR_MONTH_YEAR_VIEW_HEIGHT     25.0
 
@@ -26,7 +25,6 @@
 - (NSMutableArray*)addDayViewsForRow;
 - (NSDate*)incrementDate:(NSDate*)_date by:(NSInteger)_interval;
 - (void)initializeCalendarRowsInView;
-- (void)initializeCalendarEntryViewRect;
 - (void)initializeOldestDate;
 - (void)addCaptureObserver;
 
@@ -108,11 +106,6 @@
     self.rowsInView = bounds.size.height / viewWidth;
 }
 
-- (void)initializeCalendarEntryViewRect {
-    CGFloat width = [[UIScreen mainScreen] bounds].size.width / self.daysInRow;
-    self.calendarEntryViewRect =  CGRectMake(0.0, 0.0, width, width);
-}
-
 #pragma mark -
 #pragma mark CalendarViewController
 
@@ -124,17 +117,13 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         self.containerView = _containerView;
-        self.daysInRow = CALENDAR_DAYS_IN_ROW;
+        self.daysInRow = THUMBNAILS_IN_ROW;
         self.viewCount = CALENDAR_VIEW_COUNT;
         self.totalDays = 0;
         [self initializeRowsInView];
-        [self initializeCalendarEntryViewRect];
+        self.calendarEntryViewRect = [ViewGeneral imageThumbnailRect];
     }
     return self;
-}
-
-- (CGRect)calendarImageThumbnailRect {
-    return self.calendarEntryViewRect;
 }
 
 - (void)loadCalendarViews {

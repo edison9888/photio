@@ -39,7 +39,7 @@
 @implementation DragGridView
 
 @synthesize delegate, transitionGestureRecognizer, rowViews, rowHeight, rowsInView,
-            rowContainerView, loadingView, loadingSpinnerView, deltaTime, topRow, rowBuffer, bouncing;
+            rowContainerView, loadingView, loadingSpinnerView, topRow, rowBuffer, bouncing;
 
 #pragma mark -
 #pragma mark DragGridView PrivatAPI

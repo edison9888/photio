@@ -16,6 +16,7 @@
 
 #import "ImageEditViewController.h"
 #import "CalendarViewController.h"
+#import "AlbumsViewController.h"
 #import "ProgressView.h"
 
 #define HORIZONTAL_TRANSITION_ANIMATION_SPEED           500.0f
@@ -27,6 +28,7 @@
 #define OPEN_SHUTTER_DELAY                              1.0
 #define MAX_COMMENT_LINES                               5
 #define COMMENT_YOFFSET                                 15
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 static ViewGeneral* thisViewControllerGeneral = nil;
@@ -137,16 +139,17 @@ static ViewGeneral* thisViewControllerGeneral = nil;
     [[[UIAlertView alloc] initWithTitle:[error localizedDescription] message:[error localizedFailureReason] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK button title") otherButtonTitles:nil] show];    
 }
 
++ (CGRect)imageThumbnailRect {
+    CGFloat width = [[UIScreen mainScreen] bounds].size.width / THUMBNAILS_IN_ROW;
+    return CGRectMake(0.0, 0.0, width, width);
+}
+
 - (void)createViews:(UIView*)_containerView {
     self.containerView = _containerView;
     [self initImageInspectView:_containerView];
     [self initCameraView:_containerView];
     [self initCalendarView:_containerView];
 //    [self initAlbumsView:_containerView];
-}
-
-- (CGRect)calendarImageThumbnailRect {
-    return [self.calendarViewController calendarImageThumbnailRect];
 }
 
 - (void)updateCalendarEntryWithDate:(NSDate*)_date {
@@ -231,21 +234,21 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 
 #pragma mark - AlbumsViewController
 
-//- (void)initAlbumsView:(UIView*)_containerView {
-//    if (self.albumsViewController == nil) {
-//        self.albumsViewController = [AlbumsViewController inView:_containerView];
-//    } 
-//    [self albumsViewPosition:[self.class leftOfWindow]];
-//    [_containerView addSubview:self.albumsViewController.view];
-//}
-//
-//- (void)albumViewHidden:(BOOL)_hidden {
-//    self.albumsViewController.view.hidden = _hidden;
-//}
-//
-//- (void)albumsViewPosition:(CGRect)_rect {
-//    self.albumsViewController.view.frame = _rect;
-//}
+- (void)initAlbumsView:(UIView*)_containerView {
+    if (self.albumsViewController == nil) {
+        self.albumsViewController = [AlbumsViewController inView:_containerView];
+    } 
+    [self albumsViewPosition:[self.class leftOfWindow]];
+    [_containerView addSubview:self.albumsViewController.view];
+}
+
+- (void)albumsViewHidden:(BOOL)_hidden {
+    self.albumsViewController.view.hidden = _hidden;
+}
+
+- (void)albumsViewPosition:(CGRect)_rect {
+    self.albumsViewController.view.frame = _rect;
+}
 
 #pragma mark - 
 #pragma mark Calendar To Camera
@@ -292,37 +295,37 @@ static ViewGeneral* thisViewControllerGeneral = nil;
 }
 
 #pragma mark - 
-#pragma mark Camera To Locales
+#pragma mark Camera To Albums
 
-//- (void)transitionCameraToAlbums {
-//    [self transition:[self horizontalTransitionDuration:self.cameraViewController.view.frame.origin.x] withAnimation:^{
-//            [self cameraViewPosition:[self.class rightOfWindow]];
-//            [self albumsViewPosition:[self.class inWindow]];
-//        }
-//    ];
-//}
+- (void)transitionCameraToAlbums {
+    [self transition:[self horizontalTransitionDuration:self.cameraViewController.view.frame.origin.x] withAnimation:^{
+            [self cameraViewPosition:[self.class rightOfWindow]];
+            [self albumsViewPosition:[self.class inWindow]];
+        }
+    ];
+}
 
 #pragma mark - 
-#pragma mark Locales To Camera
+#pragma mark Albums To Camera
 
-//- (void)transitionAlbumsToCamera {
-//    [self transition:[self horizontalTransitionDuration:self.albumsViewController.view.frame.origin.x] withAnimation:^{
-//        [self cameraViewPosition:[self.class inWindow]];
-//        [self albumsViewPosition:[self.class leftOfWindow]];
-//    }
-//     ];
-//}
-//
-//- (void)releaseAlbums {
-//    [self transition:[self horizontaltReleaseDuration:self.albumsViewController.view.frame.origin.x] withAnimation:^{
-//            [self localesViewPosition:[self.class inWindow]];
-//        }
-//    ];    
-//}
-//
-//- (void)dragAlbums:(CGPoint)_drag {
-//    [self drag:_drag view:self.albumsViewController.view];
-//}
+- (void)transitionAlbumsToCamera {
+    [self transition:[self horizontalTransitionDuration:self.albumsViewController.view.frame.origin.x] withAnimation:^{
+        [self cameraViewPosition:[self.class inWindow]];
+        [self albumsViewPosition:[self.class leftOfWindow]];
+    }
+     ];
+}
+
+- (void)releaseAlbums {
+    [self transition:[self horizontaltReleaseDuration:self.albumsViewController.view.frame.origin.x] withAnimation:^{
+            [self albumsViewPosition:[self.class inWindow]];
+        }
+    ];    
+}
+
+- (void)dragAlbums:(CGPoint)_drag {
+    [self drag:_drag view:self.albumsViewController.view];
+}
 
 #pragma mark - 
 #pragma mark Camera To Inspect Image

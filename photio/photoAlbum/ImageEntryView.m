@@ -38,7 +38,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation ImageEntryView
 
-@synthesize delegate, imageEditViewController, capture, commentView, commentLabel;
+@synthesize delegate, imageEditViewController, capture, commentView, commentLabel, editImageGesture, singleTapGesture;
 
 #pragma mark -
 #pragma mark ImageEntryView PrivateAPI
@@ -98,15 +98,15 @@
         self.userInteractionEnabled = YES;
         UIImage* displayImage = self.capture.displayImage.image;
         self.image = [UIImage imageWithCGImage:[self scaleImage:displayImage].CGImage scale:displayImage.scale orientation:displayImage.imageOrientation];
-        UITapGestureRecognizer* editImageGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImage)];
-        editImageGesture.numberOfTapsRequired = 2;
-        editImageGesture.numberOfTouchesRequired = 1;
-        [self addGestureRecognizer:editImageGesture];
-        UITapGestureRecognizer* sigleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapImageGesture)];
-        sigleTapGesture.numberOfTapsRequired = 1;
-        sigleTapGesture.numberOfTouchesRequired = 1;
-        [self addGestureRecognizer:sigleTapGesture];
-        [sigleTapGesture requireGestureRecognizerToFail:editImageGesture];
+        self.editImageGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editImage)];
+        self.editImageGesture.numberOfTapsRequired = 2;
+        self.editImageGesture.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:self.editImageGesture];
+        self.self.singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapImageGesture)];
+        self.singleTapGesture.numberOfTapsRequired = 1;
+        self.singleTapGesture.numberOfTouchesRequired = 1;
+        [self addGestureRecognizer:self.singleTapGesture];
+        [self.singleTapGesture requireGestureRecognizerToFail:self.editImageGesture];
     }
     return self;
 }
@@ -157,6 +157,8 @@
 }
 
 - (void)touchEnabled:(BOOL)_enabled {
+    self.editImageGesture.enabled = _enabled;
+    self.singleTapGesture.enabled = _enabled;
     [self.delegate touchEnabled:_enabled];
 }
 

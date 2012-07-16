@@ -22,6 +22,8 @@
 @property(nonatomic, strong) Capture*                       capture;
 @property(nonatomic, strong) UIView*                        commentView;
 @property(nonatomic, strong) UILabel*                       commentLabel;
+@property(nonatomic, strong) UITapGestureRecognizer*        editImageGesture;
+@property(nonatomic, strong) UITapGestureRecognizer*        singleTapGesture;
 
 + (id)withFrame:(CGRect)_frame capture:(Capture*)_capture andDelegate:(id<ImageEntryViewDelegate>)_delegate;
 - (id)initWithFrame:(CGRect)_frame capture:(Capture*)_capture andDelegate:(id<ImageEntryViewDelegate>)_delegate;

@@ -65,7 +65,7 @@ NSInteger descendingSort(id num1, id num2, void* context) {
     capture.cached = [NSNumber numberWithBool:YES];
 
     ImageThumbnail* thumbnail = [NSEntityDescription insertNewObjectForEntityForName:@"ImageThumbnail" inManagedObjectContext:contextManager.mainObjectContext];
-    thumbnail.image = [_capturedImage thumbnailImage:[[ViewGeneral instance] calendarImageThumbnailRect].size.width];;
+    thumbnail.image = [_capturedImage thumbnailImage:[ViewGeneral imageThumbnailRect].size.width];
     capture.thumbnail = thumbnail;
 
     ImageDisplay* displayImage = [NSEntityDescription insertNewObjectForEntityForName:@"ImageDisplay" inManagedObjectContext:contextManager.mainObjectContext];

@@ -21,7 +21,6 @@
 @property(nonatomic, strong)   UIActivityIndicatorView*        loadingSpinnerView;
 @property(nonatomic, strong)   NSMutableArray*                 rowViews;
 @property(nonatomic, assign)   CGFloat                         rowHeight;
-@property(nonatomic, assign)   CGFloat                         deltaTime;
 @property(nonatomic, assign)   NSInteger                       rowsInView;
 @property(nonatomic, assign)   NSInteger                       topRow;  
 @property(nonatomic, assign)   NSInteger                       rowBuffer;
@@ -38,10 +37,9 @@
 
 @required
 
-- (NSArray*)needBottomRows:(NSInteger)_row;
-
 @optional
 
+- (NSArray*)needBottomRows:(NSInteger)_row;
 - (NSArray*)needTopRows;
 - (void)removedTopRow:(NSArray*)_row;
 - (void)removedBottomRow:(NSArray*)_row;
