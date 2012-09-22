@@ -26,6 +26,8 @@
 		0510A90915803CB200EC8F75 /* effects.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90715803CB200EC8F75 /* effects.png */; };
 		0510A90A15803CB200EC8F75 /* effects@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90815803CB200EC8F75 /* effects@2x.png */; };
 		0510A90C1581784400EC8F75 /* CameraFilterParameters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0510A90B1581784400EC8F75 /* CameraFilterParameters.plist */; };
+		05159AAF160E4CF9008ABE61 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05159AAE160E4CF9008ABE61 /* icon.png */; };
+		05159AB1160E4D07008ABE61 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05159AB0160E4D07008ABE61 /* icon@2x.png */; };
 		05250E92156878CD0060F993 /* Filters.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E91156878CD0060F993 /* Filters.plist */; };
 		05250E9415687A690060F993 /* FilterPalettes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05250E9315687A690060F993 /* FilterPalettes.plist */; };
 		05250EC4156962B80060F993 /* UITableViewCell+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05250EC3156962B80060F993 /* UITableViewCell+Extensions.m */; };
@@ -240,6 +242,8 @@
 		0510A90715803CB200EC8F75 /* effects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = effects.png; sourceTree = "<group>"; };
 		0510A90815803CB200EC8F75 /* effects@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "effects@2x.png"; sourceTree = "<group>"; };
 		0510A90B1581784400EC8F75 /* CameraFilterParameters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CameraFilterParameters.plist; sourceTree = "<group>"; };
+		05159AAE160E4CF9008ABE61 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../icon.png; sourceTree = "<group>"; };
+		05159AB0160E4D07008ABE61 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../../icon@2x.png"; sourceTree = "<group>"; };
 		05250E91156878CD0060F993 /* Filters.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Filters.plist; sourceTree = "<group>"; };
 		05250E9315687A690060F993 /* FilterPalettes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FilterPalettes.plist; sourceTree = "<group>"; };
 		05250EC2156962B80060F993 /* UITableViewCell+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+Extensions.h"; path = "photio/Library/UITableViewCell+Extensions.h"; sourceTree = SOURCE_ROOT; };
@@ -749,6 +753,8 @@
 		05C59C2314F331A6009AC823 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05159AB0160E4D07008ABE61 /* icon@2x.png */,
+				05159AAE160E4CF9008ABE61 /* icon.png */,
 				0579A89C158EAE9500F5E85C /* Services */,
 				059039DC158E6543008E0318 /* CameraControls */,
 				0577D41C157AA9E800BA4C52 /* Cameras */,
@@ -1126,6 +1132,8 @@
 				053B279715AA8255005D3B4C /* delete-parameter@2x.png in Resources */,
 				05E078BF15B32D790005113C /* AlbumsViewController.xib in Resources */,
 				05E0833F160A692A0006924E /* Default-568h@2x.png in Resources */,
+				05159AAF160E4CF9008ABE61 /* icon.png in Resources */,
+				05159AB1160E4D07008ABE61 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
