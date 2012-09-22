@@ -186,6 +186,7 @@
 		05E078BA15B322420005113C /* UIImagePNGDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E078A515B322420005113C /* UIImagePNGDataTransformer.m */; };
 		05E078BE15B32D790005113C /* AlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E078BC15B32D790005113C /* AlbumsViewController.m */; };
 		05E078BF15B32D790005113C /* AlbumsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E078BD15B32D790005113C /* AlbumsViewController.xib */; };
+		05E0833F160A692A0006924E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E0833E160A692A0006924E /* Default-568h@2x.png */; };
 		05E4C21F1552233600C7266E /* ImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C21D1552233600C7266E /* ImageEditViewController.m */; };
 		05E4C2201552233600C7266E /* ImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E4C21E1552233600C7266E /* ImageEditViewController.xib */; };
 		05E4C224155224D400C7266E /* ImageMetaDataEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4C223155224D400C7266E /* ImageMetaDataEditView.m */; };
@@ -466,6 +467,7 @@
 		05E078BB15B32D790005113C /* AlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlbumsViewController.h; path = photio/PhotoAlbum/AlbumsViewController.h; sourceTree = SOURCE_ROOT; };
 		05E078BC15B32D790005113C /* AlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlbumsViewController.m; path = photio/PhotoAlbum/AlbumsViewController.m; sourceTree = SOURCE_ROOT; };
 		05E078BD15B32D790005113C /* AlbumsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AlbumsViewController.xib; path = photio/PhotoAlbum/AlbumsViewController.xib; sourceTree = SOURCE_ROOT; };
+		05E0833E160A692A0006924E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		05E4C21C1552233500C7266E /* ImageEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageEditViewController.h; path = photio/PhotoAlbum/ImageEditViewController.h; sourceTree = SOURCE_ROOT; };
 		05E4C21D1552233600C7266E /* ImageEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageEditViewController.m; path = photio/PhotoAlbum/ImageEditViewController.m; sourceTree = SOURCE_ROOT; };
 		05E4C21E1552233600C7266E /* ImageEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImageEditViewController.xib; path = photio/PhotoAlbum/ImageEditViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -776,6 +778,7 @@
 		05C99EB114F0585C00D09F3E = {
 			isa = PBXGroup;
 			children = (
+				05E0833E160A692A0006924E /* Default-568h@2x.png */,
 				05C99EC614F0585C00D09F3E /* photio */,
 				05C99EBF14F0585C00D09F3E /* Frameworks */,
 				05C99EBD14F0585C00D09F3E /* Products */,
@@ -1122,6 +1125,7 @@
 				053B279615AA8255005D3B4C /* delete-parameter.png in Resources */,
 				053B279715AA8255005D3B4C /* delete-parameter@2x.png in Resources */,
 				05E078BF15B32D790005113C /* AlbumsViewController.xib in Resources */,
+				05E0833F160A692A0006924E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,10 +1289,12 @@
 		05C99EDB14F0585C00D09F3E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: William Stribling (EP33FMNW27)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photio/photio-Prefix.pch";
 				INFOPLIST_FILE = "photio/photio-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "66BAC7CB-AF2C-48D4-B146-52131371EAE2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1296,10 +1302,12 @@
 		05C99EDC14F0585C00D09F3E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: William Stribling (EP33FMNW27)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "photio/photio-Prefix.pch";
 				INFOPLIST_FILE = "photio/photio-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "66BAC7CB-AF2C-48D4-B146-52131371EAE2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

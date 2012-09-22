@@ -243,13 +243,14 @@ typedef enum {
 
 - (void)selectedParameter:(id)_parameter {
     switch (self.editMode) {
-        case EditModeService:
+        case EditModeService: {
             [[ServiceManager instance] useService:(Service*)_parameter withCapture:self.capture onComplete:^{
                 [self showControls];
             }];
             [self.paramterSelectionView removeView];
             break;
-        case EditModeAlbum:
+        }
+        case EditModeAlbum: {
             if ([self.albums containsObject:_parameter]) {
                 [AlbumManager removeCapture:self.capture fromAlbum:_parameter];
             } else {
@@ -258,6 +259,7 @@ typedef enum {
             [self.paramterSelectionView loadParameters];
             [self.paramterSelectionView reloadData];
             break;
+        }
     }
 }
 
